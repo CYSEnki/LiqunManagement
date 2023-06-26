@@ -158,6 +158,23 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fontawesome-free\css\all.css" />
+    <Content Include="Content\fontawesome-free\css\all.min.css" />
+    <Content Include="Content\fontawesome-free\css\brands.css" />
+    <Content Include="Content\fontawesome-free\css\brands.min.css" />
+    <Content Include="Content\fontawesome-free\css\fontawesome.css" />
+    <Content Include="Content\fontawesome-free\css\fontawesome.min.css" />
+    <Content Include="Content\fontawesome-free\css\regular.css" />
+    <Content Include="Content\fontawesome-free\css\regular.min.css" />
+    <Content Include="Content\fontawesome-free\css\solid.css" />
+    <Content Include="Content\fontawesome-free\css\solid.min.css" />
+    <Content Include="Content\fontawesome-free\css\svg-with-js.css" />
+    <Content Include="Content\fontawesome-free\css\svg-with-js.min.css" />
+    <Content Include="Content\fontawesome-free\css\v4-shims.css" />
+    <Content Include="Content\fontawesome-free\css\v4-shims.min.css" />
+    <Content Include="Content\fontawesome-free\webfonts\fa-brands-400.svg" />
+    <Content Include="Content\fontawesome-free\webfonts\fa-regular-400.svg" />
+    <Content Include="Content\fontawesome-free\webfonts\fa-solid-900.svg" />
     <Content Include="Content\smartadmin-package-4.5.1\smartadmin-html-full\build\build-bundle.js" />
     <Content Include="Content\smartadmin-package-4.5.1\smartadmin-html-full\build\build-combine.js" />
     <Content Include="Content\smartadmin-package-4.5.1\smartadmin-html-full\build\build-dist.js" />
@@ -1620,6 +1637,20 @@
     <Content Include="Content\smartadmin-package-4.5.1\smartadmin-html-full\src\template\layouts\auth.hbs" />
     <Content Include="Content\smartadmin-package-4.5.1\smartadmin-html-full\src\template\layouts\blank-main.hbs" />
     <Content Include="Content\smartadmin-package-4.5.1\smartadmin-html-full\src\template\layouts\main.hbs" />
+    <Content Include="Content\fontawesome-free\webfonts\fa-brands-400.eot" />
+    <Content Include="Content\fontawesome-free\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\fontawesome-free\webfonts\fa-brands-400.woff" />
+    <Content Include="Content\fontawesome-free\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\fontawesome-free\webfonts\fa-regular-400.eot" />
+    <Content Include="Content\fontawesome-free\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\fontawesome-free\webfonts\fa-regular-400.woff" />
+    <Content Include="Content\fontawesome-free\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\fontawesome-free\webfonts\fa-solid-900.eot" />
+    <Content Include="Content\fontawesome-free\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\fontawesome-free\webfonts\fa-solid-900.woff" />
+    <Content Include="Content\fontawesome-free\webfonts\fa-solid-900.woff2" />
+    <None Include="Properties\PublishProfiles\LiqunManage - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\LiqunManage - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\LiqunManagement - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\LiqunManagement - FTP1.pubxml" />
     <None Include="Properties\PublishProfiles\LiqunManagement - FTP2.pubxml" />
@@ -1672,6 +1703,7 @@
     <Content Include="Views\Members\Register.cshtml" />
     <Content Include="Views\Members\RegisterResult.cshtml" />
     <Content Include="Views\Liqun\Index.cshtml" />
+    <Content Include="Views\Liqun\Form.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
