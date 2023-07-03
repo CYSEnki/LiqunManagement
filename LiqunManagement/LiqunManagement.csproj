@@ -1652,7 +1652,9 @@
     <Content Include="Content\fontawesome-free\webfonts\fa-solid-900.woff" />
     <Content Include="Content\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <None Include="Properties\PublishProfiles\LiqunManage - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\LiqunManage - FTP1.pubxml" />
     <None Include="Properties\PublishProfiles\LiqunManage - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\LiqunManage - Web Deploy1.pubxml" />
     <None Include="Properties\PublishProfiles\LiqunManagement - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\LiqunManagement - FTP1.pubxml" />
     <None Include="Properties\PublishProfiles\LiqunManagement - FTP2.pubxml" />

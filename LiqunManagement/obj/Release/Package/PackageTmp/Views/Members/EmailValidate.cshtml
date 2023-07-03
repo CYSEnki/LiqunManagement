@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Email驗證";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Email驗證</h2>
+@*顯示Email驗證結果訊息*@
+@ViewData["EmailValidate"]
+<br/>
+@*顯示登入與註冊連結*@
+@Html.ActionLink("去登入", "Login")  |  
+@Html.ActionLink("再註冊", "Register")
+
