@@ -135,6 +135,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AgentController.cs" />
+    <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LiqunController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
@@ -1703,7 +1705,8 @@
     <Content Include="Views\Members\Register.cshtml" />
     <Content Include="Views\Members\RegisterResult.cshtml" />
     <Content Include="Views\Liqun\Index.cshtml" />
-    <Content Include="Views\Liqun\Form.cshtml" />
+    <Content Include="Views\Agent\Form.cshtml" />
+    <Content Include="Views\Form\HomeObject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
