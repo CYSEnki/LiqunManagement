@@ -20,6 +20,7 @@
         font-weight: 600 !important;
     }
 </style>
+<link href="~/Content/select2/css/select2.min.css" rel="stylesheet" />
 
 <main id="js-page-content" role="main" class="page-content">
     <ol class="breadcrumb page-breadcrumb">
@@ -108,7 +109,7 @@
                                 <span class="text-danger">*</span>
                                 <div class="row">
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control" required>
+                                        <select class="custom-select form-control select2_city" required>
                                             <option value="" selected="">縣/市</option>
                                             <option value="1">One</option>
                                             <option value="2">Two</option>
@@ -783,7 +784,35 @@
 
 @section scripts
 {
+    <script src="~/Content/select2/js/select2.min.js"></script>
     <script type="text/javascript">
+        //select2
+        var data = [
+            {
+                id: 0,
+                text: 'enhancement'
+            },
+            {
+                id: 1,
+                text: 'bug'
+            },
+            {
+                id: 2,
+                text: 'duplicate'
+            },
+            {
+                id: 3,
+                text: 'invalid'
+            },
+            {
+                id: 4,
+                text: 'wontfix'
+            }
+        ];
+        $('.select2_city').select2({
+
+            placeholder: '縣/市'
+        })
 
         //validation
         // Example starter JavaScript for disabling form submissions if there are invalid fields

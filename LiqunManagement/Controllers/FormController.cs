@@ -18,5 +18,14 @@ namespace LiqunManagement.Controllers
         {
             return View();
         }
+
+        #region 找到Region下拉選單
+        public ActionResult DDLRegion()
+        {
+
+            return Json("");
+        }
+        #endregion
+
     }
 }

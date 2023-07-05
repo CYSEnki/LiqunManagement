@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "上傳臺灣地區路名";
+    Layout = "~/Views/Shared/smartadmin_Layout.cshtml";
+}
+
+<link href="~/Content/dropzone/dropzone.css" rel="stylesheet" />
+@*<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />*@
+
+<main id="js-page-content" role="main" class="page-content">
+    <form action="@Url.Action("UploadRegion", "Upload")" method="post" class="dropzone" id="my-dropzone">
+    </form>
+</main>
+
+@section scripts
+{
+    <script src="~/Content/dropzone/dropzone.js"></script>
+    @*<script src="~/Content/dropzone/dropzone.js.map"></script>*@
+
+    @*<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>*@
+    <script>
+        Dropzone.options.myGreatDropzone = { // camelized version of the `id`
+            paramName: "file", // The name that will be used to transfer the file
+            uploadMultiple: false,
+            maxFilesize: 2, // MB
+            maxFiles: 1,
+            accept: function (file, done) {
+                if (file.name == "justinbieber.jpg") {
+                    done("Naha, you don't.");
+                }
+                else { done(); }
+            }
+        };
+    </script>
+}
