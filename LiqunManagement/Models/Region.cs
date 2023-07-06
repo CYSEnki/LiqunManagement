@@ -10,7 +10,6 @@ namespace LiqunManagement.Models
     public partial class Region
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int RegionNo { get; set; }
 
         [StringLength(20)]

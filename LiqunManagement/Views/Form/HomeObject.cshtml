@@ -104,38 +104,30 @@
                                 <label class="form-label" for="simpleinput">特色</label>
                                 <input type="text" id="simpleinput" class="form-control">
                             </div>
+                            @*物件地址*@
                             <div class="form-group">
                                 <label class="form-label">物件地址</label>
                                 <span class="text-danger">*</span>
                                 <div class="row">
                                     <div class="col-lg-4 pt-3">
                                         <select class="custom-select form-control select2_city" required>
-                                            <option value="" selected="">縣/市</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                            <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
                                             請選擇縣/市
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control" required>
-                                            <option value="" selected="">鄉/鎮/市/區</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                        <select class="custom-select form-control select2_district" required>
+                                            <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
                                             請選擇鄉/鎮/市/區
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control" required>
-                                            <option value="" selected="">街/路</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                        <select class="custom-select form-control select2_road" required>
+                                            <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
                                             請選擇街/路
@@ -612,28 +604,28 @@
                                 </div>
                             </div>
                             @*是否有車位*@
-                        <div class="form-group mt-3">
-                            <label class="form-label">
-                                是否有車位
-                            </label>
-                            <div class="frame-wrap padding-top-ten pl-2">
-                                <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                    <input type="radio" class="custom-control-input" id="Inline1Radio6_1" name="Inline1Radio6" required>
-                                    <label class="custom-control-label" for="Inline1Radio6_1">無</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                    <input type="radio" class="custom-control-input" id="Inline1Radio6_2" name="Inline1Radio6" required>
-                                    <label class="custom-control-label" for="Inline1Radio6_2">汽車</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                    <input type="radio" class="custom-control-input" id="Inline1Radio6_3" name="Inline1Radio6" required>
-                                    <label class="custom-control-label" for="Inline1Radio6_3">機車</label>
-                                    <div class="invalid-feedback">
-                                        請選擇是否有車位
+                            <div class="form-group mt-3">
+                                <label class="form-label">
+                                    是否有車位
+                                </label>
+                                <div class="frame-wrap padding-top-ten pl-2">
+                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="Inline1Radio6_1" name="Inline1Radio6" required>
+                                        <label class="custom-control-label" for="Inline1Radio6_1">無</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="Inline1Radio6_2" name="Inline1Radio6" required>
+                                        <label class="custom-control-label" for="Inline1Radio6_2">汽車</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="Inline1Radio6_3" name="Inline1Radio6" required>
+                                        <label class="custom-control-label" for="Inline1Radio6_3">機車</label>
+                                        <div class="invalid-feedback">
+                                            請選擇是否有車位
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                             @*車位樣式*@
                             <div class="form-group mt-3">
                                 <label class="form-label">
@@ -786,37 +778,10 @@
 {
     <script src="~/Content/select2/js/select2.min.js"></script>
     <script type="text/javascript">
-        //select2
-        var data = [
-            {
-                id: 0,
-                text: 'enhancement'
-            },
-            {
-                id: 1,
-                text: 'bug'
-            },
-            {
-                id: 2,
-                text: 'duplicate'
-            },
-            {
-                id: 3,
-                text: 'invalid'
-            },
-            {
-                id: 4,
-                text: 'wontfix'
-            }
-        ];
-        $('.select2_city').select2({
-
-            placeholder: '縣/市'
-        })
 
         //validation
         // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function () {
+        $(function () {
             'use strict';
             window.addEventListener('load', function () {
                 // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -832,84 +797,120 @@
                     }, false);
                 });
             }, false);
-        })();
 
-        var example_gridsize = $("#example-gridsize");
+            //select2
+            //var data_city = [
+            //    { id: 1, text: '台北市'},
+            //    { id: 2, text: '新北市'},
+            //    { id: 3, text: '花蓮縣'},
+            //    { id: 4, text: '南投縣'},
+            //    { id: 5, text: '屏東縣'}
+            //];
+            var data_city = JSON.parse('@Html.Raw(Json.Encode(ViewBag.citylist))');
+            @*var data_city = '@ViewBag.citylist';*@
+            var data_district = [
+                { id: 1, text: '樹林區'},
+                { id: 2, text: '三重區'},
+                { id: 3, text: '士林區'},
+                { id: 4, text: '鶯歌區'},
+                { id: 5, text: '淡水區'}
+            ];
+            var data_road = [
+                { id: 1, text: '大雅路'},
+                { id: 2, text: '大觀路'},
+                { id: 3, text: '學勤路'},
+                { id: 4, text: '學府路'},
+                { id: 5, text: '學成路'}
+            ];
+            $('.select2_city').select2({
+                data: data_city,
+                placeholder: '縣/市',
+            });
+            $('.select2_district').select2({
+                data: data_district,
+                placeholder: '鄉/鎮/市/區',
+            });
+            $('.select2_road').select2({
+                data: data_road,
+                placeholder: '街道',
+            });
 
-        $("#gridrange").on("input change", function () {
-            //do something
-            example_gridsize.attr("placeholder", ".col-" + $(this).val());
-            example_gridsize.parent().removeClass().addClass("col-" + $(this).val())
-            console.log("col-" + $(this).val());
-        });
+            var example_gridsize = $("#example-gridsize");
 
-        //Check&Radio
-        $('#defaultIndeterminate').prop('indeterminate', true)
-        $('#Inline1Radio1').prop('indeterminate', true)
+            $("#gridrange").on("input change", function () {
+                //do something
+                example_gridsize.attr("placeholder", ".col-" + $(this).val());
+                example_gridsize.parent().removeClass().addClass("col-" + $(this).val())
+                console.log("col-" + $(this).val());
+            });
 
-        //var toggleCheckbox = function () {
-        //    $('#js-checkbox-toggle').toggleText('Change to CIRCLE', 'Change back to default');
-        //    $('.frame-wrap .custom-checkbox').toggleClass('custom-checkbox-circle');
-        //}
+            //Check&Radio
+            $('#defaultIndeterminate').prop('indeterminate', true)
+            $('#Inline1Radio1').prop('indeterminate', true)
 
-        var toggleRadio = function () {
-            $('#js-radio-toggle').toggleText('Change to ROUNDED', 'Change back to default');
-            $('.frame-wrap .custom-radio').toggleClass('custom-radio-rounded');
-        }
+            //var toggleCheckbox = function () {
+            //    $('#js-checkbox-toggle').toggleText('Change to CIRCLE', 'Change back to default');
+            //    $('.frame-wrap .custom-checkbox').toggleClass('custom-checkbox-circle');
+            //}
 
-        //radio監聽事件
-        //Inline1Radio3
-        $(document).ready(function () {
-            $('input[name="Inline1Radio3"]').change(function () {
-                // 獲取被點選的 radio 按鈕的值
-                var selectedValue = $(this).val();
-                $('input[name="Inline1Radio3"]').each(function () {
-                    var radioId = $(this).attr('id');
-                    // 檢查是否被點選
-                    if ($(this).is(':checked')) {
-                        // 根據不同的 id 做相應的處理
-                        debugger;
-                        if (radioId === 'Inline1Radio3_1') {
-                            //住宅用
-                            //上傳稅單
-                            $('#taxFile').prop('required', true);
-                            $('#taxFile').prop('disabled', false);
-                            $('#taxFile').prop('readonly', false);
-                            //其他
-                            $('#elsemainuse').prop('required', false);
-                            $('#elsemainuse').prop('disabled', true);
-                            $('#elsemainuse').prop('readonly', true);
+            var toggleRadio = function () {
+                $('#js-radio-toggle').toggleText('Change to ROUNDED', 'Change back to default');
+                $('.frame-wrap .custom-radio').toggleClass('custom-radio-rounded');
+            }
 
-                        } else if (radioId === 'Inline1Radio3_5') {
-                            //其他
-                            var fileInput = document.getElementById('taxFile');
-                            var filelable = document.getElementById('taxFileLable');
-                            fileInput.value = '';
-                            filelable.innerHTML = '';
-                            $('#taxFile').prop('required', false);
-                            $('#taxFile').prop('disabled', true);
-                            $('#taxFile').prop('readonly', true);
-                            $('#elsemainuse').prop('required', true);
-                            $('#elsemainuse').prop('disabled', false);
-                            $('#elsemainuse').prop('readonly', false);
+            //radio監聽事件
+            //Inline1Radio3
+            $(document).ready(function () {
+                $('input[name="Inline1Radio3"]').change(function () {
+                    // 獲取被點選的 radio 按鈕的值
+                    var selectedValue = $(this).val();
+                    $('input[name="Inline1Radio3"]').each(function () {
+                        var radioId = $(this).attr('id');
+                        // 檢查是否被點選
+                        if ($(this).is(':checked')) {
+                            // 根據不同的 id 做相應的處理
 
-                        } else {
-                            var fileInput = document.getElementById('taxFile');
-                            var filelable = document.getElementById('taxFileLable');
-                            fileInput.value = '';
-                            filelable.innerHTML = '';
-                            $('#taxFile').prop('required', false);
-                            $('#taxFile').prop('disabled', true);
-                            $('#taxFile').prop('readonly', true);
-                            $('#elsemainuse').prop('required', false);
-                            $('#elsemainuse').prop('disabled', true);
-                            $('#elsemainuse').prop('readonly', true);
+                            if (radioId === 'Inline1Radio3_1') {
+                                //住宅用; 不用上傳稅單
+                                $('#taxFile').prop('required', false);
+                                $('#taxFile').prop('disabled', true);
+                                $('#taxFile').prop('readonly', true);
+                                //其他
+                                $('#elsemainuse').prop('required', false);
+                                $('#elsemainuse').prop('disabled', true);
+                                $('#elsemainuse').prop('readonly', true);
 
+                            } else if (radioId === 'Inline1Radio3_5') {
+                                //其他; 要填寫欄位
+                                var fileInput = document.getElementById('taxFile');
+                                var filelable = document.getElementById('taxFileLable');
+                                fileInput.value = '';
+                                filelable.innerHTML = '';
+                                $('#taxFile').prop('required', true);
+                                $('#taxFile').prop('disabled', false);
+                                $('#taxFile').prop('readonly', false);
+                                $('#elsemainuse').prop('required', true);
+                                $('#elsemainuse').prop('disabled', false);
+                                $('#elsemainuse').prop('readonly', false);
+
+                            } else {
+                                var fileInput = document.getElementById('taxFile');
+                                var filelable = document.getElementById('taxFileLable');
+                                fileInput.value = '';
+                                filelable.innerHTML = '';
+                                $('#taxFile').prop('required', true);
+                                $('#taxFile').prop('disabled', false);
+                                $('#taxFile').prop('readonly', false);
+                                $('#elsemainuse').prop('required', false);
+                                $('#elsemainuse').prop('disabled', true);
+                                $('#elsemainuse').prop('readonly', true);
+                            }
                         }
-                    }
-                })
+                    })
+                });
             });
         });
+
 
 
 

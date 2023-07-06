@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LiqunManagement.Services;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +18,10 @@ namespace LiqunManagement.Controllers
 
         public ActionResult HomeObject()
         {
+            DDLServices ddlservices = new DDLServices();
+            var citylist = ddlservices.GetRegionDDL("city");
+            ViewBag.citylist = JsonConvert.SerializeObject(citylist);
+
             return View();
         }
 

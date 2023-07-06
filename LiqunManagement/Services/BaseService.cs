@@ -13,6 +13,8 @@ namespace LiqunManagement.Services
         //protected BoardModel Boarddb = new BoardModel();
         public MembersModel Memberdb = new MembersModel();
 
+        public LiqunModels Liqundb = new LiqunModels();
+
         public Logger logger;
 
         public BaseService()

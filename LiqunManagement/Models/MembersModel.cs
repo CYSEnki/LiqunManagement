@@ -13,7 +13,6 @@ namespace LiqunManagement.Models
         }
 
         public virtual DbSet<Members> Members { get; set; }
-        public virtual DbSet<Region> Region { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -31,18 +30,6 @@ namespace LiqunManagement.Models
 
             modelBuilder.Entity<Members>()
                 .Property(e => e.AuthCode)
-                .IsFixedLength();
-
-            modelBuilder.Entity<Region>()
-                .Property(e => e.CityCode)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Region>()
-                .Property(e => e.DistrictCode)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Region>()
-                .Property(e => e.RoadCode)
                 .IsFixedLength();
         }
     }
