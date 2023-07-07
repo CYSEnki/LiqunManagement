@@ -11,7 +11,21 @@ namespace LiqunManagement.Services
 {
     public class UploadService : BaseService
     {
-
+        #region 取得Region資料
+        public UploadViewModels GetRegionData()
+        {
+            var list = from Rlist in Liqundb.Region
+                        select new RegionViewModel
+                        {
+                            City = Rlist.City,
+                            District = Rlist.District,
+                            Road = Rlist.Road,
+                        };
+            UploadViewModels uploadviewmodels = new UploadViewModels();
+            uploadviewmodels.RegionIEnumerable = list;
+            return uploadviewmodels;
+        }
+        #endregion
         #region 匯入陣列資料
         public void InsertRegion(RegionViewModel RegionData)
         {

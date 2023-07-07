@@ -16,9 +16,9 @@ namespace LiqunManagement.Services
             var ddlist = (from reg in Liqundb.Region
                           select new RegionDDLViewModel
                           {
-                              Text = reg.City,
-                              Id = reg.CityCode,
-                          }).Distinct().ToList();
+                              text = reg.City,
+                              id = reg.CityCode,
+                          }).Distinct().OrderBy(x => x.id).ToList();
 
             return ddlist;
         }

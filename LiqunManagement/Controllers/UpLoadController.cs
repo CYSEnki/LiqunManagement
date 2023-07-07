@@ -15,11 +15,18 @@ using System.Web.UI.WebControls;
 using ICell = NPOI.SS.UserModel.ICell;
 using LiqunManagement.ViewModels;
 using NPOI.SS.Formula.Functions;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace LiqunManagement.Controllers
 {
     public class UpLoadController : Controller
     {
+        //建立與資料庫的連線字串
+        private readonly static string cnstr = ConfigurationManager.ConnectionStrings["LiqunModels"].ConnectionString;
+        //建立與資料庫的連線
+        private readonly SqlConnection conn = new SqlConnection(cnstr);
+
         //將錯誤訊息字串存取至List
         List<string> errorlist = new List<string>();
         [HttpGet]
@@ -33,8 +40,11 @@ namespace LiqunManagement.Controllers
         #region 上傳Region資料
         public ActionResult UploadRegion()
         {
-
             var UserName = User.Identity.Name;
+            ViewBag.Message = "Initial";
+            //UploadService uploadservice = new UploadService();
+            //var model = uploadservice.GetRegionData();
+
             return View();
         }
         #endregion
@@ -46,7 +56,6 @@ namespace LiqunManagement.Controllers
         {
             string errorstring = "";
             List<string> errorstringlist = new List<string>();
-
             ViewBag.Message = "匯入成功";
             if (file != null)
             {
@@ -180,9 +189,11 @@ namespace LiqunManagement.Controllers
                 catch (Exception ex)
                 {
                     ViewBag.Message = "匯入失敗";
+                    ViewBag.ErrorMessage = ex.ToString();
                     errorstring = "匯入失敗，請檢查匯入格式";
                     var error = ex.ToString();
                     errorlist.Add(errorstring);
+                    ViewBag.ErrorList = errorlist;
                 }
                 finally
                 {
@@ -193,22 +204,10 @@ namespace LiqunManagement.Controllers
                     stream.Close();
                 }
 
-                if (errorlist.Count > 1)
+                if (errorlist.Count >= 1)
                 {
-                    //存取頁面錯誤資訊至errormodel中
-                    //var errormodel = new EquipInfoViewModel
-                    //{
-                    //    //回傳資料庫內容
-                    //    EquipContent = model2.EquipContent,
-                    //    errorMessage = errorlist.ToList(),
-                    //    correctMessage = model2.correctMessage,
-                    //    EquipInfoAndName = model2.EquipInfoAndName,
-                    //    ChtItemID = model2.ChtItemID,
-                    //};
-
-                    ViewBag.Message = errorlist;
-
-                    //return View();
+                    ViewBag.Message = "匯入失敗";
+                    ViewBag.MessageList = errorlist;
                     return RedirectToAction("UploadRegion", "Upload");
                 }
                 var CodeA = 'A';
@@ -219,16 +218,47 @@ namespace LiqunManagement.Controllers
                 var CityName = "";
                 var DistrictName = "";
                 var RoadName = "";
-                using (var context = new LiqunModels())
+                try
                 {
-                    // 取得所有資料
-                    var allData = context.Region.AsEnumerable();
+                    //using (var context = new LiqunModels())
+                    //{
+                    //    // 取得所有資料
+                    //    var allData = context.Region.AsEnumerable();
 
-                    // 移除所有資料
-                    context.Region.RemoveRange(allData);
+                    //    // 移除所有資料
+                    //    context.Region.RemoveRange(allData);
+                    //    // 儲存更改到資料庫
+                    //    context.SaveChanges();
+                    //}
+                    //Sql語法
+                    string sql = $@"TRUNCATE TABLE [Liqun].[Form].[Region]; ";
 
-                    // 儲存更改到資料庫
-                    context.SaveChanges();
+                    //確保程式不會因執行錯誤而整個中斷
+                    try
+                    {
+                        //開啟資料庫連線
+                        conn.Open();
+                        //執行Sql指令
+                        SqlCommand cmd = new SqlCommand(sql, conn);
+                        SqlDataReader dr = cmd.ExecuteReader();
+                    }
+                    catch (Exception e)
+                    {
+                        //丟出錯誤
+                        throw new Exception(e.Message.ToString());
+                    }
+                    finally
+                    {
+                        //關閉資料庫連線
+                        conn.Close();
+                    }
+
+
+                }
+                catch(Exception ex)
+                {
+                    ViewBag.Message = "匯入失敗";
+                    ViewBag.ErrorMessage = ex.ToString();
                 }
                 RegionViewModel regionviewmodel = new RegionViewModel();
                 //dataTable跑回圈，insert資料至DB
@@ -284,63 +314,22 @@ namespace LiqunManagement.Controllers
                     catch (Exception ex)
                     {
                         ViewBag.Message = "匯入失敗，請檢查格式";
+                        ViewBag.ErrorMessage = ex.ToString();
                         errorstring = "匯入失敗，請重新確認資料內容。";
                         errorlist.Add(errorstring);
-                        var error = ex.ToString();
-
-                        ////找到初始化頁面資料內容
-                        //var model2 = InitialFrontPage();
-
-                        //存取頁面錯誤資訊至errormodel中
-                        //var errormodel = new EquipInfoViewModel
-                        //{
-                        //    //回傳資料庫內容
-                        //    EquipContent = model.EquipContent,
-                        //    errorMessage = errorlist.ToList(),
-                        //    correctMessage = model.correctMessage,
-                        //    EquipInfoAndName = model.EquipInfoAndName,
-                        //    ChtItemID = model.ChtItemID,
-                        //};
-
-
-                        //return View(errormodel);
+                        ViewBag.Errorlist = errorlist;
                         return View();
                     }
                 }
             }
             else
             {
-                ViewBag.Message = "匯入失敗";
-                errorstring = "請選擇檔案";
-                errorlist.Add(errorstring);
-                //存取頁面錯誤資訊至errormodel中
-                //var errormodel = new EquipInfoViewModel
-                //{
-                //    //回傳資料庫內容
-                //    EquipContent = model.EquipContent,
-                //    errorMessage = errorlist.ToList(),
-                //    correctMessage = model.correctMessage,
-                //    EquipInfoAndName = model.EquipInfoAndName,
-                //    ChtItemID = model.ChtItemID,
-                //};
-
-                //return View(errormodel);
+                ViewBag.Message = "請選擇檔案";
                 return View();
             }
-
             string correctstring = "";
             List<string> correctlist = new List<string>();
             correctlist.Add(correctstring);
-            //var correctmodel = new EquipInfoViewModel
-            //{
-            //    //回傳資料庫內容
-            //    EquipContent = okmodel.EquipContent,
-            //    errorMessage = okmodel.errorMessage,
-            //    correctMessage = correctlist,
-            //    EquipInfoAndName = okmodel.EquipInfoAndName,
-            //    ChtItemID = okmodel.ChtItemID,
-            //};
-            //return View(correctmodel);
             return View();
         }
         #endregion

@@ -12,8 +12,8 @@ namespace LiqunManagement.ViewModels
 
     public class RegionDDLViewModel
     {
-        public string Id { get; set; }
+        public string id { get; set; }
 
-        public string Text { get; set; }
+        public string text { get; set; }
     }
 }

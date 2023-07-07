@@ -779,9 +779,9 @@
     <script src="~/Content/select2/js/select2.min.js"></script>
     <script type="text/javascript">
 
+        $(function () {
         //validation
         // Example starter JavaScript for disabling form submissions if there are invalid fields
-        $(function () {
             'use strict';
             window.addEventListener('load', function () {
                 // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -806,14 +806,22 @@
             //    { id: 4, text: '南投縣'},
             //    { id: 5, text: '屏東縣'}
             //];
-            var data_city = JSON.parse('@Html.Raw(Json.Encode(ViewBag.citylist))');
+            var jsonCity = @Html.Raw(Json.Encode(ViewBag.citylist));
+            debugger;
+            var jsonArray = JSON.parse(jsonCity);
+
+            for (var i = 0; i < jsonArray.length; i++) {
+                jsonArray[i].id = jsonArray[i].id.replace(/\"/g, '');
+                jsonArray[i].text = jsonArray[i].text.replace(/\"/g, '');
+            }
+            var data_city = jsonArray;
             @*var data_city = '@ViewBag.citylist';*@
             var data_district = [
-                { id: 1, text: '樹林區'},
-                { id: 2, text: '三重區'},
-                { id: 3, text: '士林區'},
-                { id: 4, text: '鶯歌區'},
-                { id: 5, text: '淡水區'}
+                { id: 'AA', text: '樹林區'},
+                { id: 'AB', text: '三重區'},
+                { id: 'AC', text: '士林區'},
+                { id: 'AD', text: '鶯歌區'},
+                { id: 'AE', text: '淡水區'}
             ];
             var data_road = [
                 { id: 1, text: '大雅路'},

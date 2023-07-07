@@ -9,6 +9,7 @@ namespace LiqunManagement.ViewModels
 {
     public class UploadViewModels
     {
+        public IEnumerable<RegionViewModel> RegionIEnumerable { get; set; }
     }
 
     public class RegionViewModel
