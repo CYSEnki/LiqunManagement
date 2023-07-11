@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Management;
 using System.Web.Mvc;
 
 namespace LiqunManagement.Controllers
@@ -19,17 +20,20 @@ namespace LiqunManagement.Controllers
         public ActionResult HomeObject()
         {
             DDLServices ddlservices = new DDLServices();
-            var citylist = ddlservices.GetRegionDDL("city");
-            ViewBag.citylist = JsonConvert.SerializeObject(citylist);
+            var formmodel = ddlservices.GetRegionDDL("");
+            ViewBag.citylist = JsonConvert.SerializeObject(formmodel.regionddl.ToList());
 
             return View();
         }
 
         #region 找到Region下拉選單
-        public ActionResult DDLRegion()
+        public ActionResult DDLRegion(string regioncode)
         {
+            DDLServices ddlservices = new DDLServices();
+            var formmodel = ddlservices.GetRegionDDL(regioncode);
 
-            return Json("");
+            var regionJson = JsonConvert.SerializeObject(formmodel.regionddl.ToList());
+            return Json(regionJson);
         }
         #endregion
 

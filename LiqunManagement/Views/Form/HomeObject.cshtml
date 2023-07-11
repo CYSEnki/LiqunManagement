@@ -798,16 +798,10 @@
                 });
             }, false);
 
-            //select2
-            //var data_city = [
-            //    { id: 1, text: '台北市'},
-            //    { id: 2, text: '新北市'},
-            //    { id: 3, text: '花蓮縣'},
-            //    { id: 4, text: '南投縣'},
-            //    { id: 5, text: '屏東縣'}
-            //];
+            //------------------
+            // 物件地址下拉選單  *
+            //------------------
             var jsonCity = @Html.Raw(Json.Encode(ViewBag.citylist));
-            debugger;
             var jsonArray = JSON.parse(jsonCity);
 
             for (var i = 0; i < jsonArray.length; i++) {
@@ -815,33 +809,70 @@
                 jsonArray[i].text = jsonArray[i].text.replace(/\"/g, '');
             }
             var data_city = jsonArray;
-            @*var data_city = '@ViewBag.citylist';*@
-            var data_district = [
-                { id: 'AA', text: '樹林區'},
-                { id: 'AB', text: '三重區'},
-                { id: 'AC', text: '士林區'},
-                { id: 'AD', text: '鶯歌區'},
-                { id: 'AE', text: '淡水區'}
-            ];
-            var data_road = [
-                { id: 1, text: '大雅路'},
-                { id: 2, text: '大觀路'},
-                { id: 3, text: '學勤路'},
-                { id: 4, text: '學府路'},
-                { id: 5, text: '學成路'}
-            ];
             $('.select2_city').select2({
                 data: data_city,
                 placeholder: '縣/市',
             });
             $('.select2_district').select2({
-                data: data_district,
+                //data: data_district,
                 placeholder: '鄉/鎮/市/區',
             });
             $('.select2_road').select2({
-                data: data_road,
+                //data: data_road,
                 placeholder: '街道',
             });
+            //下拉選單更改事件
+
+            //當下拉選單發生改變事件(change)，執行
+            $('body').on('change', '.select2_city', function () {
+                $('.select2_road').empty();
+                $('.select2_road').select2({
+                    placeholder: '街道',
+                });
+                var regioncode = $('.select2_city').val();
+                $.ajax({
+                    type: "POST",
+                    data: { regioncode: regioncode },
+                    url: '@Url.Content("~/Form/DDLRegion/")',
+                    dataType: 'json'
+                }).done(function (dataresult) {
+                    var jsonArray = JSON.parse(dataresult);
+                        for (var i = 0; i < jsonArray.length; i++) {
+                            jsonArray[i].id = jsonArray[i].id.replace(/\"/g, '');
+                            jsonArray[i].text = jsonArray[i].text.replace(/\"/g, '');
+                        }
+                    var data_district = jsonArray;
+                    $('.select2_district').empty();
+                    $('.select2_district').select2({
+                        data: data_district,
+                        placeholder: '鄉/鎮/市/區',
+                    });
+                });
+            });
+            $('body').on('change', '.select2_district', function () {
+                var regioncode = $('.select2_district').val();
+                $.ajax({
+                    type: "POST",
+                    data: { regioncode: regioncode },
+                    url: '@Url.Content("~/Form/DDLRegion/")',
+                    dataType: 'json'
+                }).done(function (dataresult) {
+                    var jsonArray = JSON.parse(dataresult);
+                        for (var i = 0; i < jsonArray.length; i++) {
+                            jsonArray[i].id = jsonArray[i].id.replace(/\"/g, '');
+                            jsonArray[i].text = jsonArray[i].text.replace(/\"/g, '');
+                        }
+                    var data_road = jsonArray;
+                    $('.select2_road').empty();
+                    $('.select2_road').select2({
+                        data: data_road,
+                        placeholder: '街道',
+                    });
+                });
+            });
+
+
+
 
             var example_gridsize = $("#example-gridsize");
 
@@ -880,6 +911,10 @@
 
                             if (radioId === 'Inline1Radio3_1') {
                                 //住宅用; 不用上傳稅單
+                                var fileInput = document.getElementById('taxFile');
+                                var filelable = document.getElementById('taxFileLable');
+                                fileInput.value = '';
+                                filelable.innerHTML = '';
                                 $('#taxFile').prop('required', false);
                                 $('#taxFile').prop('disabled', true);
                                 $('#taxFile').prop('readonly', true);
@@ -890,10 +925,6 @@
 
                             } else if (radioId === 'Inline1Radio3_5') {
                                 //其他; 要填寫欄位
-                                var fileInput = document.getElementById('taxFile');
-                                var filelable = document.getElementById('taxFileLable');
-                                fileInput.value = '';
-                                filelable.innerHTML = '';
                                 $('#taxFile').prop('required', true);
                                 $('#taxFile').prop('disabled', false);
                                 $('#taxFile').prop('readonly', false);
@@ -902,16 +933,13 @@
                                 $('#elsemainuse').prop('readonly', false);
 
                             } else {
-                                var fileInput = document.getElementById('taxFile');
-                                var filelable = document.getElementById('taxFileLable');
-                                fileInput.value = '';
-                                filelable.innerHTML = '';
                                 $('#taxFile').prop('required', true);
                                 $('#taxFile').prop('disabled', false);
                                 $('#taxFile').prop('readonly', false);
                                 $('#elsemainuse').prop('required', false);
                                 $('#elsemainuse').prop('disabled', true);
                                 $('#elsemainuse').prop('readonly', true);
+                                $('#elsemainuse').innerHTML = '';
                             }
                         }
                     })

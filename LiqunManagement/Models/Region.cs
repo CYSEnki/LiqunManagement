@@ -12,6 +12,8 @@ namespace LiqunManagement.Models
         [Key]
         public int RegionNo { get; set; }
 
+        public int? CityOrder { get; set; }
+
         [StringLength(20)]
         public string City { get; set; }
 

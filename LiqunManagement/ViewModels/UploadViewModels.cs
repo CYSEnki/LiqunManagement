@@ -14,6 +14,7 @@ namespace LiqunManagement.ViewModels
 
     public class RegionViewModel
     {
+        public int CityOrder { get; set; }
         public string City { get; set; }
 
         public string CityCode { get; set; }

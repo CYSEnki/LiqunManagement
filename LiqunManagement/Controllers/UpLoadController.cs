@@ -193,7 +193,7 @@ namespace LiqunManagement.Controllers
                     errorstring = "匯入失敗，請檢查匯入格式";
                     var error = ex.ToString();
                     errorlist.Add(errorstring);
-                    ViewBag.ErrorList = errorlist;
+                    ViewBag.Errorlist = errorlist;
                 }
                 finally
                 {
@@ -207,8 +207,8 @@ namespace LiqunManagement.Controllers
                 if (errorlist.Count >= 1)
                 {
                     ViewBag.Message = "匯入失敗";
-                    ViewBag.MessageList = errorlist;
-                    return RedirectToAction("UploadRegion", "Upload");
+                    ViewBag.Errorlist = errorlist;
+                    return View();
                 }
                 var CodeA = 'A';
                 var Codea = 'a';
@@ -272,9 +272,39 @@ namespace LiqunManagement.Controllers
                             DistrictName = dr["行政區域名稱"].ToString();
                             RoadName = dr["路名"].ToString();
                         }
+                        else
+                        {
+                            if (CityName != dr["縣市名稱"].ToString())
+                            {
+                                if (Codea == 'z')
+                                {
+                                    CodeA++;
+                                }
+                                else
+                                {
+                                    Codea++;
+                                }
+                                Code1 = Code2 = 1;
+                                CityName = dr["縣市名稱"].ToString();
+                            }
+                            if (DistrictName != dr["行政區域名稱"].ToString())
+                            {
+                                Code1++;
+                                Code2 = 1;
+                                DistrictName = dr["行政區域名稱"].ToString();
+                            }
+                            if (RoadName != dr["路名"].ToString())
+                            {
+                                Code2++;
+                                RoadName = dr["路名"].ToString();
+                            }
+                        }
+
+
                         var CityCode = CodeA.ToString() + Codea.ToString();
                         var datedata = new RegionViewModel()
                         {
+                            CityOrder = Convert.ToInt32(dr["排序"]),
                             City = dr["縣市名稱"].ToString(),
                             CityCode = CityCode,
                             District = dr["行政區域名稱"].ToString(),
@@ -282,34 +312,8 @@ namespace LiqunManagement.Controllers
                             Road = dr["路名"].ToString(),
                             RoadCode = CityCode + Code1.ToString("D2") + Code2.ToString("D3"),
                         };
-
                         UploadService uploadservice = new UploadService();
                         uploadservice.InsertRegion(datedata);
-
-                        if (CityName != dr["縣市名稱"].ToString())
-                        {
-                            if (Codea == 'z')
-                            {
-                                CodeA++;
-                            }
-                            else
-                            {
-                                Codea++;
-                            }
-                            Code1 = Code2 = 1;
-                            CityName = dr["縣市名稱"].ToString();
-                        }
-                        if (DistrictName != dr["行政區域名稱"].ToString())
-                        {
-                            Code1++;
-                            Code2 = 1;
-                            DistrictName = dr["行政區域名稱"].ToString();
-                        }
-                        if (RoadName != dr["路名"].ToString())
-                        {
-                            Code2++;
-                            RoadName = dr["路名"].ToString();
-                        }
                     }
                     catch (Exception ex)
                     {
@@ -346,9 +350,10 @@ namespace LiqunManagement.Controllers
             string strrow = rowcell.ToString();
             //讀取欄位數(columnnumber)設strcolumn為第幾列
             string strcolumn = columnnumber.ToString();
-            //取得單元格型別
-            string Categorycelltype = "Spacetype";
-            if(cell != null)
+            
+            #region 取得單元格型別
+            var Categorycelltype = "Spacetype";
+            if (cell != null)
             {
                 switch (cell.CellType)
                 {
@@ -390,6 +395,7 @@ namespace LiqunManagement.Controllers
                         break;
                 }
             }
+            #endregion
 
             //是否為空單元格
             if (Categorycelltype == "Spacetype")
@@ -399,23 +405,49 @@ namespace LiqunManagement.Controllers
             }
             else
             {
-                //是否為字串型別
-                if (Categorycelltype != "Stringtype")
+                switch (columnnumber)
                 {
-                    errorstring = "第" + strrow + "列主項目(第" + strcolumn + "欄)，格式不正確，請再次確認是否為字串型別";
-                    errorlist.Add(errorstring);
-                }
-                else
-                {
-                    string Category = cell.ToString();
-                    if (Category != null)
-                    {
-                        if (Category.Length > 20)
+                    case 1:
+                        //是否為字串型別或數字型別
+                        if (Categorycelltype == "Stringtype" || Categorycelltype == "Numerictype")
                         {
-                            errorstring = "第" + strrow + "列主項目(第" + strcolumn + "欄)，資料長度過長";
+                            string ItemNo = cell.ToString();
+                            if (ItemNo != null)
+                            {
+                                if (ItemNo.Length > 50)
+                                {
+                                    errorstring = "第" + strrow + "列產品編號(第" + strcolumn + "欄)，資料長度過長";
+                                    errorlist.Add(errorstring);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            errorstring = "第" + strrow + "列產品編號(第" + strcolumn + "欄)，格式不正確，請再次確認是否為產品編號格式";
                             errorlist.Add(errorstring);
                         }
-                    }
+                        break;
+
+                    default:
+                        //是否為字串型別
+                        if (Categorycelltype != "Stringtype")
+                        {
+                            errorstring = "第" + strrow + "列主項目(第" + strcolumn + "欄)，格式不正確，請再次確認是否為字串型別";
+                            errorlist.Add(errorstring);
+                        }
+                        else
+                        {
+                            string Category = cell.ToString();
+                            if (Category != null)
+                            {
+                                if (Category.Length > 20)
+                                {
+                                    errorstring = "第" + strrow + "列主項目(第" + strcolumn + "欄)，資料長度過長";
+                                    errorlist.Add(errorstring);
+                                }
+                            }
+                        }
+                        break;
                 }
             }
         }

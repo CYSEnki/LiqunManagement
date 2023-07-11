@@ -29,10 +29,7 @@
     @{
         if (ViewBag.Errorlist != null)
         {
-            if (ViewBag.Errorlist.Count() > 0)
-            {
-                <button type="button" class="btn btn-default waves-effect waves-themed" data-toggle="modal" data-target="#example-modal-backdrop-transparent">匯入錯誤原因</button>
-            }
+            <button type="button" class="btn btn-default waves-effect waves-themed" data-toggle="modal" data-target="#errormodal">查看錯誤原因</button>
         }
     }
 </main>
@@ -58,7 +55,6 @@
         //    }
         //};
         function uploadclick() {
-            debugger;
             Swal.fire({
                 title: '確定上傳?',
                 text: "你可能會覆蓋系統中的檔案!",
@@ -108,6 +104,7 @@
         $(function () {
             var message = '@ViewBag.Message';
             if (message != 'Initial') {
+                debugger;
                 if (message == '匯入成功') {
                     Swal.fire({
                         title: '匯入成功',
@@ -125,30 +122,30 @@
                 }
                 else {
                     Swal.fire({
-                        title: '匯入失敗',
-                        width: 600,
-                        padding: '3em',
-                        color: '#716add',
-                        background: '#fff url(/img/trees.png)',
-                        backdrop: `
-                            rgba(0,0,123,0.4)
-                            url(/img/nyan-cat.gif)
-                            left top
-                            no-repeat
-                          `
+                        icon: 'error',
+                        title: '匯入失敗...',
+                        text: "立刻查看錯誤原因?",
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: '查看原因!',
+                        cancelButtonText: '取消'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            //Swal.fire(
+                            //    'Deleted!',
+                            //    'Your file has been deleted.',
+                            //    'success'
+                            //)
+                            $('#errormodal').modal('show');
+                        }
                     })
-                    //Swal.fire({
-                    //    icon: 'error',
-                    //    title: 'Oops...',
-                    //    text: '匯入失敗',
-                    //    footer: '測試失敗'
-                    //})
                 }
             }
         })
     </script>
 }
-<div class="modal fade modal-backdrop-transparent" id="example-modal-backdrop-transparent" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade modal-backdrop-transparent" id="errormodal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -160,21 +157,17 @@
             <div class="modal-body">
                 @if (ViewBag.Errorlist != null)
                 {
-                    if (ViewBag.Errorlist.Count() > 0)
+                    foreach (var item in ViewBag.Errorlist)
                     {
-
-                        foreach (var item in ViewBag.Errorlist)
-                        {
-                            <div class="alert alert-danger">
-                                @item
-                            </div>
-                        }
+                        <div class="alert alert-danger">
+                            @item
+                        </div>
                     }
                 }
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
             </div>
         </div>
     </div>
