@@ -112,7 +112,9 @@ namespace LiqunManagement.Controllers
             //判斷使用者是否已經過登入驗證
             if (User.Identity.IsAuthenticated)
                 return RedirectToAction("Index", "Liqun"); //已登入，重新導向
-            return View();
+
+            var model = new MembersLoginViewModel();
+            return View(model);
         }
 
         //傳入登入資料的Action

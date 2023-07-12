@@ -155,6 +155,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AgentController.cs" />
     <Compile Include="Controllers\FormController.cs" />
+    <Compile Include="Controllers\FormStuffController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LiqunController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
@@ -1820,6 +1821,8 @@
     <Content Include="Views\Agent\Form.cshtml" />
     <Content Include="Views\Form\HomeObject.cshtml" />
     <Content Include="Views\UpLoad\UploadRegion.cshtml" />
+    <Content Include="Views\FormStuff\Index.cshtml" />
+    <Content Include="Views\FormStuff\test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
