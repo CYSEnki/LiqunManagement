@@ -53,9 +53,70 @@ namespace LiqunManagement.Controllers
             string cityselect,
             string district,
             string road,
+            string elseaddress,
             string Inline1Radio3,
             string Inline1Radio3else,
-            HttpPostedFileBase taxfile,
+            HttpPostedFileBase taxFile,
+            string rent,
+            string deposit,
+            string management_fee,
+            DateTime startdate,
+            DateTime enddate,
+            int paydate,
+            string Inline1Radio4,
+            string Inline1Radio5,
+            string housenumber,
+            string hallnumber,
+            string bathnumber,
+            string Inline1Radio6,
+            string Inline1Radio7,
+            string Inline1Radio8,
+            string carpositionnumber,
+            string carmonthrent,
+            string scootermonthrent,
+            string parkmanagementfee,
+            string scootermanagementfee
+            )
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("HomeObject", "Form");
+            }
+            else
+            {
+                return RedirectToAction("Login", "Memebers");
+            }
+        }
+        #endregion
+        
+        #region 房東資料
+        public ActionResult Landlord()
+        {
+            DDLServices ddlservices = new DDLServices();
+            var formmodel = ddlservices.GetRegionDDL("");
+            ViewBag.citylist = JsonConvert.SerializeObject(formmodel.regionddl.ToList());
+            List<int> payment_date = new List<int>();
+
+            for (int i = 1; i < 32; i++)
+            {
+                payment_date.Add(i);
+            }
+            ViewBag.Payment_date = payment_date;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Landlord(
+            string Inline1Radio1, 
+            DateTime signdate, 
+            string Inline1Radio2, 
+            string Specialtext, 
+            string cityselect,
+            string district,
+            string road,
+            string elseaddress,
+            string Inline1Radio3,
+            string Inline1Radio3else,
+            HttpPostedFileBase taxfile_test,
             string rent,
             string deposit,
             string management_fee,

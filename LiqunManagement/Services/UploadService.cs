@@ -26,7 +26,7 @@ namespace LiqunManagement.Services
             return uploadviewmodels;
         }
         #endregion
-        #region 匯入陣列資料
+        #region 匯入陣列資料_臺灣地址
         public void InsertRegion(RegionViewModel RegionData)
         {
             // 建立資料上下文（Data Context）
@@ -45,6 +45,35 @@ namespace LiqunManagement.Services
 
                 // 使用資料上下文插入資料物件
                 context.Region.Add(newData);
+
+                // 儲存更改到資料庫
+                context.SaveChanges();
+            }
+
+        }
+        #endregion
+
+
+        #region 匯入陣列資料_臺灣地址
+        public void InsertBank(BankViewModel BaankData)
+        {
+            // 建立資料上下文（Data Context）
+            using (var context = new LiqunModels())
+            {
+                // 建立要插入的資料物件
+                var newData = new Bank
+                {
+                    BankRegion = BaankData.BankRegion,
+                    RootCheck = BaankData.RootCheck,
+                    BankCode = BaankData.BankCode,
+                    BankName = BaankData.BankName,
+                    BranchCode = BaankData.BranchCode,
+                    BranchName = BaankData.BranchName,
+                    BranchFullName = BaankData.BranchFullName,
+                };
+
+                // 使用資料上下文插入資料物件
+                context.Bank.Add(newData);
 
                 // 儲存更改到資料庫
                 context.SaveChanges();

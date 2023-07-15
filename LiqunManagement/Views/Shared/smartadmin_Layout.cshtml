@@ -95,7 +95,8 @@
 
         }
         else if (themeSettings.themeURL && document.getElementById('mytheme')) {
-            document.getElementById('mytheme').href = '../../Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/' + themeSettings.themeURL;
+            console.log("%cthemeSettings.themeURL: " + themeSettings.themeURL, "color: #148f32");
+            document.getElementById('mytheme').href = themeSettings.themeURL;
         }
         /**
          * Save to localstorage

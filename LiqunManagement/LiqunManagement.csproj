@@ -163,6 +163,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Bank.cs" />
+    <Compile Include="Models\HomeObject.cs" />
     <Compile Include="Models\LiqunModels.cs" />
     <Compile Include="Models\Region.cs" />
     <Compile Include="Security\JwtObject.cs" />
@@ -1823,6 +1825,8 @@
     <Content Include="Views\UpLoad\UploadRegion.cshtml" />
     <Content Include="Views\FormStuff\Index.cshtml" />
     <Content Include="Views\FormStuff\test.cshtml" />
+    <Content Include="Views\Form\Landlord.cshtml" />
+    <Content Include="Views\UpLoad\UploadBank.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

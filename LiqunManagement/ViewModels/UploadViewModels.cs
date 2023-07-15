@@ -27,4 +27,20 @@ namespace LiqunManagement.ViewModels
 
         public string RoadCode { get; set; }
     }
+
+    public class BankViewModel
+    {
+        public string BankRegion { get; set; }
+        public bool? RootCheck { get; set; }
+
+        public string BankCode { get; set; }
+
+        public string BankName { get; set; }
+
+        public string BranchCode { get; set; }
+
+        public string BranchName { get; set; }
+
+        public string BranchFullName { get; set; }
+    }
 }
