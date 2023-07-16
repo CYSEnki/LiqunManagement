@@ -70,12 +70,12 @@
                                 </label>
                                 <div class="frame-wrap padding-top-ten">
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="Inline1Radio1_1" name="Inline1Radio1" value="yes" required="">
-                                        <label class="custom-control-label" for="Inline1Radio1_1">是</label>
+                                        <input type="radio" class="custom-control-input" id="notarizationRadio_1" name="notarizationRadio" value="1" required="">
+                                        <label class="custom-control-label" for="notarizationRadio_1">是</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="Inline1Radio1_2" name="Inline1Radio1" value="no" required="">
-                                        <label class="custom-control-label" for="Inline1Radio1_2">否</label>
+                                        <input type="radio" class="custom-control-input" id="notarizationRadio_2" name="notarizationRadio" value="0" required="">
+                                        <label class="custom-control-label" for="notarizationRadio_2">否</label>
 
                                         <div class="invalid-feedback">
                                             請選擇是否為公證
@@ -83,11 +83,12 @@
                                     </div>
                                 </div>
                             </div>
+                            @*簽約日*@
                             <div class="form-group">
-                                <label class="form-label" for="datepicker_signdate">簽約日</label>
+                                <label class="form-label" for="jqsigndate">簽約日</label>
                                 <span class="text-danger">*</span>
                                 <div class="input-group">
-                                    <input type="text" class="form-control " placeholder="請選擇簽約日" id="datepicker_signdate" name="signdate" required>
+                                    <input type="text" class="form-control " placeholder="請選擇簽約日" id="jqsigndate" name="signdate" required>
                                     <div class="input-group-append">
                                         <span class="input-group-text fs-xl">
                                             <i class="fal fa-calendar-check"></i>
@@ -105,12 +106,12 @@
                                 <span class="text-danger">*</span>
                                 <div class="frame-wrap">
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="Inline1Radio2_1" name="Inline1Radio2" value="yes" required>
-                                        <label class="custom-control-label" for="Inline1Radio2_1">是</label>
+                                        <input type="radio" class="custom-control-input" id="appraiser_1" name="appraiserRadio" value="1" required>
+                                        <label class="custom-control-label" for="appraiser_1">是</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="Inline1Radio2_2" name="Inline1Radio2" value="no" required>
-                                        <label class="custom-control-label" for="Inline1Radio2_2">否</label>
+                                        <input type="radio" class="custom-control-input" id="appraiser_2" name="appraiserRadio" value="0" required>
+                                        <label class="custom-control-label" for="appraiser_2">否</label>
                                     </div>
                                     <div class="invalid-feedback">
                                         請選擇是否簽估價師
@@ -118,8 +119,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label" for="jqSpecialtext">特色</label>
-                                <input type="text" id="jqSpecialtext" name="Specialtext" class="form-control">
+                                <label class="form-label" for="jqfeature">特色</label>
+                                <input type="text" id="jqfeature" name="feature" class="form-control">
                             </div>
                             @*物件地址*@
                             <div class="form-group">
@@ -127,7 +128,7 @@
                                 <span class="text-danger">*</span>
                                 <div class="row">
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_city" name="cityselect" required>
+                                        <select class="custom-select form-control select2_city" name="selectcity" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -135,7 +136,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_district" name="district" required>
+                                        <select class="custom-select form-control select2_district" name="selectdistrict" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -143,7 +144,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_road" name="road" required>
+                                        <select class="custom-select form-control select2_road" name="selecctroad" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -153,7 +154,7 @@
                                 </div>
                                 <div class="row pt-2">
                                     <div class="col-12">
-                                        <input type="text" name="elseaddress" class="form-control" placeholder="ex.108號1樓" required>
+                                        <input type="text" class="form-control" placeholder="ex.108號1樓" name="elseaddress" required>
                                     </div>
                                 </div>
                             </div>
@@ -167,26 +168,26 @@
                                     <div class="col-12">
                                         <div class="frame-wrap padding-top-ten pl-2">
                                             <div class="custom-control custom-radio custom-radio-rounded">
-                                                <input type="radio" class="custom-control-input" id="Inline1Radio3_1" name="Inline1Radio3" value="1" required>
-                                                <label class="custom-control-label" for="Inline1Radio3_1">住家用</label>
+                                                <input type="radio" class="custom-control-input" id="useforRadio_1" name="useforRadio" value="0" required>
+                                                <label class="custom-control-label" for="useforRadio_1">住家用</label>
                                             </div>
                                             <div class="custom-control custom-radio custom-radio-rounded">
-                                                <input type="radio" class="custom-control-input" id="Inline1Radio3_2" name="Inline1Radio3" value="2" required>
-                                                <label class="custom-control-label" for="Inline1Radio3_2">商業用</label>
+                                                <input type="radio" class="custom-control-input" id="useforRadio_2" name="useforRadio" value="1" required>
+                                                <label class="custom-control-label" for="useforRadio_2">商業用</label>
                                             </div>
                                             <div class="custom-control custom-radio custom-radio-rounded">
-                                                <input type="radio" class="custom-control-input" id="Inline1Radio3_3" name="Inline1Radio3" value="3" required>
-                                                <label class="custom-control-label" for="Inline1Radio3_3">辦公室</label>
+                                                <input type="radio" class="custom-control-input" id="useforRadio_3" name="useforRadio" value="2" required>
+                                                <label class="custom-control-label" for="useforRadio_3">辦公室</label>
                                             </div>
                                             <div class="custom-control custom-radio custom-radio-rounded">
-                                                <input type="radio" class="custom-control-input" id="Inline1Radio3_4" name="Inline1Radio3" value="4" required>
-                                                <label class="custom-control-label" for="Inline1Radio3_4">一般事務所</label>
+                                                <input type="radio" class="custom-control-input" id="useforRadio_4" name="useforRadio" value="3" required>
+                                                <label class="custom-control-label" for="useforRadio_4">一般事務所</label>
                                             </div>
                                             <div class="custom-control custom-radio custom-radio-rounded">
-                                                <input type="radio" class="custom-control-input" id="Inline1Radio3_5" name="Inline1Radio3" value="5" required>
-                                                <label class="custom-control-label" for="Inline1Radio3_5">其他:</label>
+                                                <input type="radio" class="custom-control-input" id="useforRadio_5" name="useforRadio" value="4" required>
+                                                <label class="custom-control-label" for="useforRadio_5">其他:</label>
                                             </div>
-                                            <input type="text" id="elsemainuse" class="form-control mt-2" placeholder="請填寫其他選項" name="Inline1Radio3else" disabled>
+                                            <input type="text" id="elsemainuse" class="form-control mt-2" placeholder="請填寫其他選項" name="useforelse" disabled>
                                             <div class="invalid-feedback">
                                                 請選擇主要用途
                                             </div>
@@ -230,7 +231,6 @@
                                             <span class="input-group-text">$</span>
                                         </div>
                                         <input name="deposit" type="text" placeholder="" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" required>
-
                                         @*<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="20,000" required>*@
                                         <div class="invalid-feedback">
                                             請填寫押金
@@ -254,7 +254,7 @@
                                 </div>
                                 <span class="help-block pl-2">*要含在租金內就寫<code>&lt;0&gt;</code>元</span>
                             </div>
-                            @*起租日&結束日*@
+                            @*起租日&結束日&繳租日*@
                             <div class="row p-0">
                                 <div class="col-md-5">
                                     <div class="form-group">
@@ -302,20 +302,20 @@
                                     <div class="col-12">
                                         <div class="frame-wrap padding-top-ten pl-2">
                                             <div class="custom-control custom-radio custom-radio-rounded">
-                                                <input type="radio" class="custom-control-input" id="Inline1Radio4_1" name="Inline1Radio4" value="1" required>
-                                                <label class="custom-control-label" for="Inline1Radio4_1">透天厝</label>
+                                                <input type="radio" class="custom-control-input" id="buildtypeRadio_1" name="buildtypeRadio" value="0" required>
+                                                <label class="custom-control-label" for="buildtypeRadio_1">透天厝</label>
                                             </div>
                                             <div class="custom-control custom-radio custom-radio-rounded">
-                                                <input type="radio" class="custom-control-input" id="Inline1Radio4_2" name="Inline1Radio4" value="2" required>
-                                                <label class="custom-control-label" for="Inline1Radio4_2">公寓</label>
+                                                <input type="radio" class="custom-control-input" id="buildtypeRadio_2" name="buildtypeRadio" value="1" required>
+                                                <label class="custom-control-label" for="buildtypeRadio_2">公寓</label>
                                             </div>
                                             <div class="custom-control custom-radio custom-radio-rounded">
-                                                <input type="radio" class="custom-control-input" id="Inline1Radio4_3" name="Inline1Radio4" value="3" required>
-                                                <label class="custom-control-label" for="Inline1Radio4_3">華夏</label>
+                                                <input type="radio" class="custom-control-input" id="buildtypeRadio_3" name="buildtypeRadio" value="2" required>
+                                                <label class="custom-control-label" for="buildtypeRadio_3">華夏</label>
                                             </div>
                                             <div class="custom-control custom-radio custom-radio-rounded">
-                                                <input type="radio" class="custom-control-input" id="Inline1Radio4_4" name="Inline1Radio4" value="4" required>
-                                                <label class="custom-control-label" for="Inline1Radio4_4">電梯大樓</label>
+                                                <input type="radio" class="custom-control-input" id="buildtypeRadio_4" name="buildtypeRadio" value="3" required>
+                                                <label class="custom-control-label" for="buildtypeRadio_4">電梯大樓</label>
                                                 <div class="invalid-feedback">
                                                     請選擇建物型態
                                                 </div>
@@ -331,12 +331,12 @@
                                 </label>
                                 <div class="frame-wrap padding-top-ten pl-2">
                                     <div class="custom-control custom-radio custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="Inline1Radio5_1" name="Inline1Radio5" value="1" required>
-                                        <label class="custom-control-label" for="Inline1Radio5_1">整層出租</label>
+                                        <input type="radio" class="custom-control-input" id="roomtypeRadio_1" name="roomtypeRadio" value="0" required>
+                                        <label class="custom-control-label" for="roomtypeRadio_1">整層出租</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="Inline1Radio5_2" name="Inline1Radio5" value="2" required>
-                                        <label class="custom-control-label" for="Inline1Radio5_2">獨立套房</label>
+                                        <input type="radio" class="custom-control-input" id="roomtypeRadio_2" name="roomtypeRadio" value="1" required>
+                                        <label class="custom-control-label" for="roomtypeRadio_2">獨立套房</label>
                                         <div class="invalid-feedback">
                                             請選擇房型
                                         </div>
@@ -346,15 +346,15 @@
                             <div class="form-group">
                                 <div class="col-md-10 col-lg-8 col-xl-6 ">
                                     <div class="input-group input-group-multi-transition w-100">
-                                        <input name="housenumber" id="jqhousenumber" type="text" class="form-control" aria-label="Person name" required>
+                                        <input name="roomamount" id="jqroomamount" type="text" class="form-control" aria-label="Person name" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">房</span>
                                         </div>
-                                        <input name="hallnumber" type="text" class="form-control" aria-label="Person name" required>
+                                        <input name="hallamount" type="text" class="form-control" aria-label="Person name" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">廳</span>
                                         </div>
-                                        <input name="bathnumber" type="text" class="form-control" aria-label="Person name" required>
+                                        <input name="bathamount" type="text" class="form-control" aria-label="Person name" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">衛</span>
                                         </div>
@@ -641,16 +641,16 @@
                                 </label>
                                 <div class="frame-wrap padding-top-ten pl-2">
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="Inline1Radio6_1" name="Inline1Radio6" value="0" required>
-                                        <label class="custom-control-label" for="Inline1Radio6_1">無</label>
+                                        <input type="radio" class="custom-control-input" id="carparkRadio_1" name="carparkRadio" value="0" required>
+                                        <label class="custom-control-label" for="carparkRadio_1">無</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="Inline1Radio6_2" name="Inline1Radio6" value="1" required>
-                                        <label class="custom-control-label" for="Inline1Radio6_2">汽車</label>
+                                        <input type="radio" class="custom-control-input" id="carparkRadio_2" name="carparkRadio" value="1" required>
+                                        <label class="custom-control-label" for="carparkRadio_2">汽車</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="Inline1Radio6_3" name="Inline1Radio6" value="2" required>
-                                        <label class="custom-control-label" for="Inline1Radio6_3">機車</label>
+                                        <input type="radio" class="custom-control-input" id="carparkRadio_3" name="carparkRadio" value="2" required>
+                                        <label class="custom-control-label" for="carparkRadio_3">機車</label>
                                         <div class="invalid-feedback">
                                             請選擇是否有車位
                                         </div>
@@ -664,20 +664,20 @@
                                 </label>
                                 <div class="frame-wrap padding-top-ten pl-2">
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="Inline1Radio7_1" name="Inline1Radio7" value="1" required>
-                                        <label class="custom-control-label" for="Inline1Radio7_1">坡道平面</label>
+                                        <input type="radio" class="custom-control-input" id="parktypeRadio_1" name="parktypeRadio" value="0" required>
+                                        <label class="custom-control-label" for="parktypeRadio_1">坡道平面</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="Inline1Radio7_2" name="Inline1Radio7" value="2" required>
-                                        <label class="custom-control-label" for="Inline1Radio7_2">坡道機械</label>
+                                        <input type="radio" class="custom-control-input" id="parktypeRadio_2" name="parktypeRadio" value="1" required>
+                                        <label class="custom-control-label" for="parktypeRadio_2">坡道機械</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="Inline1Radio7_3" name="Inline1Radio7" value="3" required>
-                                        <label class="custom-control-label" for="Inline1Radio7_3">機械平面</label>
+                                        <input type="radio" class="custom-control-input" id="parktypeRadio_3" name="parktypeRadio" value="2" required>
+                                        <label class="custom-control-label" for="parktypeRadio_3">機械平面</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="Inline1Radio7_4" name="Inline1Radio7" value="4" required>
-                                        <label class="custom-control-label" for="Inline1Radio7_4">機械機械</label>
+                                        <input type="radio" class="custom-control-input" id="parktypeRadio_4" name="parktypeRadio" value="3" required>
+                                        <label class="custom-control-label" for="parktypeRadio_4">機械機械</label>
                                         <div class="invalid-feedback">
                                             請選擇車位樣式
                                         </div>
@@ -692,34 +692,34 @@
                                 <div class="frame-wrap padding-top-ten ml-4">
                                     <div class="row p-0">
                                         <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                            <input type="radio" class="custom-control-input" id="Inline1Radio8_1" name="Inline1Radio8" value="1" required>
-                                            <label class="custom-control-label" for="Inline1Radio8_1">地上1樓</label>
+                                            <input type="radio" class="custom-control-input" id="parkfloorRadio_1" name="parkfloorRadio" value="1" required>
+                                            <label class="custom-control-label" for="parkfloorRadio_1">地上1樓</label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                            <input type="radio" class="custom-control-input" id="Inline1Radio8_2" name="Inline1Radio8" value="2" required>
-                                            <label class="custom-control-label" for="Inline1Radio8_2">地上2樓</label>
+                                            <input type="radio" class="custom-control-input" id="parkfloorRadio_2" name="parkfloorRadio" value="2" required>
+                                            <label class="custom-control-label" for="parkfloorRadio_2">地上2樓</label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                            <input type="radio" class="custom-control-input" id="Inline1Radio8_3" name="Inline1Radio8" value="3" required>
-                                            <label class="custom-control-label" for="Inline1Radio8_3">地上3樓</label>
+                                            <input type="radio" class="custom-control-input" id="parkfloorRadio_3" name="parkfloorRadio" value="3" required>
+                                            <label class="custom-control-label" for="parkfloorRadio_3">地上3樓</label>
                                         </div>
                                     </div>
                                     <div class="row p-0">
                                         <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                            <input type="radio" class="custom-control-input" id="Inline1Radio8_4" name="Inline1Radio8" value="4" required>
-                                            <label class="custom-control-label" for="Inline1Radio8_4">地下1樓</label>
+                                            <input type="radio" class="custom-control-input" id="parkfloorRadio_4" name="parkfloorRadio" value="4" required>
+                                            <label class="custom-control-label" for="parkfloorRadio_4">地下1樓</label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                            <input type="radio" class="custom-control-input" id="Inline1Radio8_5" name="Inline1Radio8" value="5" required>
-                                            <label class="custom-control-label" for="Inline1Radio8_5">地下2樓</label>
+                                            <input type="radio" class="custom-control-input" id="parkfloorRadio_5" name="parkfloorRadio" value="5" required>
+                                            <label class="custom-control-label" for="parkfloorRadio_5">地下2樓</label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                            <input type="radio" class="custom-control-input" id="Inline1Radio8_6" name="Inline1Radio8" value="6" required>
-                                            <label class="custom-control-label" for="Inline1Radio8_6">地下3樓</label>
+                                            <input type="radio" class="custom-control-input" id="parkfloorRadio_6" name="parkfloorRadio" value="6" required>
+                                            <label class="custom-control-label" for="parkfloorRadio_6">地下3樓</label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                            <input type="radio" class="custom-control-input" id="Inline1Radio8_7" name="Inline1Radio8" value="7" required>
-                                            <label class="custom-control-label" for="Inline1Radio8_7">地下4樓</label>
+                                            <input type="radio" class="custom-control-input" id="parkfloorRadio_7" name="parkfloorRadio" value="7" required>
+                                            <label class="custom-control-label" for="parkfloorRadio_7">地下4樓</label>
                                             <div class="invalid-feedback">
                                                 請選擇車位位於
                                             </div>
@@ -798,7 +798,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row align-items-center">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="invalidCheck" required="">
@@ -809,7 +808,6 @@
                                 </div>
                                 <button class="btn btn-primary ml-auto waves-effect waves-themed" type="submit">Submit form</button>
                             </div>
-
                         }
 
                     </div>
@@ -968,7 +966,7 @@
 
             //Check&Radio
             $('#defaultIndeterminate').prop('indeterminate', true)
-            $('#Inline1Radio1').prop('indeterminate', true)
+            $('#notarizationRadio').prop('indeterminate', true)
 
             //var toggleCheckbox = function () {
             //    $('#js-checkbox-toggle').toggleText('Change to CIRCLE', 'Change back to default');
@@ -980,17 +978,19 @@
                 $('.frame-wrap .custom-radio').toggleClass('custom-radio-rounded');
             }
 
-            //radio監聽事件
-            //主要用途 : Inline1Radio3
-            $('input[name="Inline1Radio3"]').change(function () {
+            //------------------
+            // 是否要上傳稅單  *
+            //------------------
+            //radio監聽事件(useforRadio)
+            $('input[name="useforRadio"]').change(function () {
                 // 獲取被點選的 radio 按鈕的值
                 var selectedValue = $(this).val();
-                $('input[name="Inline1Radio3"]').each(function () {
+                $('input[name="useforRadio"]').each(function () {
                     var radioId = $(this).attr('id');
                     // 檢查是否被點選
                     if ($(this).is(':checked')) {
                         // 根據不同的 id 做相應的處理
-                        if (radioId === 'Inline1Radio3_1') {
+                        if (radioId === 'useforRadio_1') {
                             //住宅用; 不用上傳稅單
                             var fileInput = document.getElementById('taxFile');
                             var filelable = document.getElementById('taxFileLable');
@@ -1004,7 +1004,7 @@
                             $('#elsemainuse').prop('disabled', true);
                             $('#elsemainuse').prop('readonly', true);
 
-                        } else if (radioId === 'Inline1Radio3_5') {
+                        } else if (radioId === 'useforRadio_5') {
                             //其他; 要填寫欄位
                             $('#taxFile').prop('required', true);
                             $('#taxFile').prop('disabled', false);
@@ -1026,28 +1026,28 @@
                 })
             });
 
-            $('input[name="Inline1Radio5"]').change(function () {
+            $('input[name="roomtypeRadio"]').change(function () {
                 // 獲取被點選的 radio 按鈕的值
                 var selectedValue = $(this).val();
-                $('input[name="Inline1Radio5"]').each(function () {
+                $('input[name="roomtypeRadio"]').each(function () {
                     var radioId = $(this).attr('id');
                     // 檢查是否被點選
                     if ($(this).is(':checked')) {
-                        var housenumber = document.getElementById('jqhousenumber');
+                        var roomamount = document.getElementById('jqroomamount');
                         // 根據不同的 id 做相應的處理
-                        if (radioId === 'Inline1Radio5_1') {
+                        if (radioId === 'roomtypeRadio_1') {
                             //整層出租
-                            housenumber.value = '';
-                            $('#jqhousenumber').prop('required', true);
-                            $('#jqhousenumber').prop('disabled', false);
-                            $('#jqhousenumber').prop('readonly', false);
+                            roomamount.value = '';
+                            $('#jqroomamount').prop('required', true);
+                            $('#jqroomamount').prop('disabled', false);
+                            $('#jqroomamount').prop('readonly', false);
                         } else {
                             //獨立套房
-                            housenumber.value = '套';
-                            housenumber.innerHTML = '套'
-                            $('#jqhousenumber').prop('required', false);
-                            $('#jqhousenumber').prop('disabled', true);
-                            $('#jqhousenumber').prop('readonly', true);
+                            roomamount.value = '套';
+                            roomamount.innerHTML = '套'
+                            $('#jqroomamount').prop('required', false);
+                            $('#jqroomamount').prop('disabled', true);
+                            $('#jqroomamount').prop('readonly', true);
                         }
                     }
                 })
@@ -1086,7 +1086,7 @@
             leftArrow: '<i class="fal fa-angle-left" style="font-size: 1.25rem"></i>',
             rightArrow: '<i class="fal fa-angle-right" style="font-size: 1.25rem"></i>'
         }
-        $('#datepicker_signdate').datepicker(
+        $('#jqsigndate').datepicker(
             {
                 format: 'yyyy-mm-dd',
                 orientation: "請選擇簽約日",

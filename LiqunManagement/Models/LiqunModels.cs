@@ -12,12 +12,29 @@ namespace LiqunManagement.Models
         {
         }
 
+        public virtual DbSet<AllForm> AllForm { get; set; }
         public virtual DbSet<Bank> Bank { get; set; }
         public virtual DbSet<HomeObject> HomeObject { get; set; }
         public virtual DbSet<Region> Region { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AllForm>()
+                .Property(e => e.FormId)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<AllForm>()
+                .Property(e => e.CreateAccount)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<AllForm>()
+                .Property(e => e.UpdateAccount)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<AllForm>()
+                .Property(e => e.ProcessAccount)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Bank>()
                 .Property(e => e.BankCode)
                 .IsUnicode(false);
@@ -27,11 +44,19 @@ namespace LiqunManagement.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<HomeObject>()
+                .Property(e => e.FormId)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<HomeObject>()
                 .Property(e => e.CaseId)
                 .IsUnicode(false);
 
             modelBuilder.Entity<HomeObject>()
                 .Property(e => e.taxfile_guid)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<HomeObject>()
+                .Property(e => e.roomamount)
                 .IsUnicode(false);
 
             modelBuilder.Entity<HomeObject>()

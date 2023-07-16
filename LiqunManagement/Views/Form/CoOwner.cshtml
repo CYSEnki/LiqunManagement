@@ -1,0 +1,740 @@
+﻿@*共有人*@
+<div class="panel-tag">
+    共有人
+</div>
+<div class="form-group">
+    <div class="frame-wrap">
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="jqCoOwnerRadio_0" name="CoOwnerRadio" value="0" checked>
+            <label class="custom-control-label" for="jqCoOwnerRadio_0">無</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="jqCoOwnerRadio_1" name="CoOwnerRadio" value="1">
+            <label class="custom-control-label" for="jqCoOwnerRadio_1">1人</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="jqCoOwnerRadio_2" name="CoOwnerRadio" value="2">
+            <label class="custom-control-label" for="jqCoOwnerRadio_2">2人</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="jqCoOwnerRadio_3" name="CoOwnerRadio" value="3">
+            <label class="custom-control-label" for="jqCoOwnerRadio_3">3人</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="jqCoOwnerRadio_4" name="CoOwnerRadio" value="4">
+            <label class="custom-control-label" for="jqCoOwnerRadio_4">4人</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="jqCoOwnerRadio_5" name="CoOwnerRadio" value="5">
+            <label class="custom-control-label" for="jqCoOwnerRadio_5">5人</label>
+        </div>
+    </div>
+</div>
+
+@*共有人1*@
+<div class="panel-tag">
+    共有人1
+</div>
+<div class="form-group getco1">
+    <label class="form-label" for="jqlandlordname">共有人1姓名</label>
+    <input type="text" id="jqlandlordname" name="Specialtext" class="form-control" required>
+    <div class="invalid-feedback">
+        請輸入共有人姓名
+    </div>
+</div>
+@*性別*@
+<div class="form-group getco1">
+    <label class="form-label">
+        性別:
+        <span class="text-danger">*</span>
+    </label>
+    <div class="frame-wrap padding-top-ten">
+        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+            <input type="radio" class="custom-control-input" id="genderradio_1" name="genderradio" value="1" required="">
+            <label class="custom-control-label" for="genderradio_1">男</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+            <input type="radio" class="custom-control-input" id="genderradio_2" name="genderradio" value="0" required="">
+            <label class="custom-control-label" for="genderradio_2">女</label>
+            <div class="invalid-feedback">
+                請選擇共有人性別
+            </div>
+        </div>
+    </div>
+</div>
+@*生日*@
+<div class="form-group getco1">
+    <label class="form-label" for="birthday">生日</label>
+    <span class="text-danger">*</span>
+    <div class="input-group">
+        <input type="text" class="form-control " placeholder="請選擇生日" id="birthday" name="birthday" required>
+        <div class="input-group-append">
+            <span class="input-group-text fs-xl">
+                <i class="fal fa-calendar-check"></i>
+            </span>
+        </div>
+        <div class="invalid-feedback">
+            請選擇生日
+        </div>
+    </div>
+</div>
+@*身分證字號*@
+<div class="form-group getco1">
+    <label class="form-label" for="IDnumber">身分證字號</label>
+    <input type="text" id="IDnumber" name="IDnumber" class="form-control" required>
+    <div class="invalid-feedback">
+        請輸入身分證字號
+    </div>
+</div>
+@*連絡電話*@
+<div class="form-group getco1">
+    <label class="form-label" for="phonenumber">連絡電話</label>
+    <input type="text" id="phonenumber" name="phonenumber" class="form-control" required>
+    <div class="invalid-feedback">
+        請輸入連絡電話
+    </div>
+</div>
+@*戶籍地址*@
+<div class="form-group getco1">
+    <label class="form-label">戶籍地址</label>
+    <span class="text-danger">*</span>
+    <div class="row">
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_city" name="city_address" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇縣/市
+            </div>
+        </div>
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_district" name="district_address" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇鄉/鎮/市/區
+            </div>
+        </div>
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_road" name="road_address" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇街/路
+            </div>
+        </div>
+    </div>
+    <div class="row pt-2">
+        <div class="col-12">
+            <input type="text" name="elseaddress" class="form-control" placeholder="ex.108號1樓" required>
+        </div>
+    </div>
+</div>
+@*通訊地址*@
+<div class="form-group getco1">
+    <div class="row pb-2">
+        <div class="col-12">
+            <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" class="custom-control-input" id="sameaddresscheckbox_agent">
+                <label class="custom-control-label" for="sameaddresscheckbox_agent">同戶籍地址</label>
+            </div>
+        </div>
+    </div>
+    <label class="form-label">通訊地址</label>
+    <span class="text-danger">*</span>
+    <div class="row">
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_city" name="city_contact" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇縣/市
+            </div>
+        </div>
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_district" name="district_contact" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇鄉/鎮/市/區
+            </div>
+        </div>
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_road" name="road_contact" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇街/路
+            </div>
+        </div>
+    </div>
+    <div class="row pt-2">
+        <div class="col-12">
+            <input type="text" name="elseaddress_contact" class="form-control" placeholder="ex.108號1樓" required>
+        </div>
+    </div>
+</div>
+
+@*共有人1*@
+<div class="form-group getco2">
+    <label class="form-label" for="jqlandlordname">共有人1姓名</label>
+    <input type="text" id="jqlandlordname" name="Specialtext" class="form-control" required>
+    <div class="invalid-feedback">
+        請輸入共有人姓名
+    </div>
+</div>
+@*性別*@
+<div class="form-group getco2">
+    <label class="form-label">
+        性別:
+        <span class="text-danger">*</span>
+    </label>
+    <div class="frame-wrap padding-top-ten">
+        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+            <input type="radio" class="custom-control-input" id="genderradio_1" name="genderradio" value="1" required="">
+            <label class="custom-control-label" for="genderradio_1">男</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+            <input type="radio" class="custom-control-input" id="genderradio_2" name="genderradio" value="0" required="">
+            <label class="custom-control-label" for="genderradio_2">女</label>
+            <div class="invalid-feedback">
+                請選擇共有人性別
+            </div>
+        </div>
+    </div>
+</div>
+@*生日*@
+<div class="form-group getco2">
+    <label class="form-label" for="birthday">生日</label>
+    <span class="text-danger">*</span>
+    <div class="input-group">
+        <input type="text" class="form-control " placeholder="請選擇生日" id="birthday" name="birthday" required>
+        <div class="input-group-append">
+            <span class="input-group-text fs-xl">
+                <i class="fal fa-calendar-check"></i>
+            </span>
+        </div>
+        <div class="invalid-feedback">
+            請選擇生日
+        </div>
+    </div>
+</div>
+@*身分證字號*@
+<div class="form-group getco2">
+    <label class="form-label" for="IDnumber">身分證字號</label>
+    <input type="text" id="IDnumber" name="IDnumber" class="form-control" required>
+    <div class="invalid-feedback">
+        請輸入身分證字號
+    </div>
+</div>
+@*連絡電話*@
+<div class="form-group getco2">
+    <label class="form-label" for="phonenumber">連絡電話</label>
+    <input type="text" id="phonenumber" name="phonenumber" class="form-control" required>
+    <div class="invalid-feedback">
+        請輸入連絡電話
+    </div>
+</div>
+@*戶籍地址*@
+<div class="form-group getco2">
+    <label class="form-label">戶籍地址</label>
+    <span class="text-danger">*</span>
+    <div class="row">
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_city" name="city_address" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇縣/市
+            </div>
+        </div>
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_district" name="district_address" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇鄉/鎮/市/區
+            </div>
+        </div>
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_road" name="road_address" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇街/路
+            </div>
+        </div>
+    </div>
+    <div class="row pt-2">
+        <div class="col-12">
+            <input type="text" name="elseaddress" class="form-control" placeholder="ex.108號1樓" required>
+        </div>
+    </div>
+</div>
+@*通訊地址*@
+<div class="form-group getco2">
+    <div class="row pb-2">
+        <div class="col-12">
+            <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" class="custom-control-input" id="sameaddresscheckbox_agent">
+                <label class="custom-control-label" for="sameaddresscheckbox_agent">同戶籍地址</label>
+            </div>
+        </div>
+    </div>
+    <label class="form-label">通訊地址</label>
+    <span class="text-danger">*</span>
+    <div class="row">
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_city" name="city_contact" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇縣/市
+            </div>
+        </div>
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_district" name="district_contact" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇鄉/鎮/市/區
+            </div>
+        </div>
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_road" name="road_contact" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇街/路
+            </div>
+        </div>
+    </div>
+    <div class="row pt-2">
+        <div class="col-12">
+            <input type="text" name="elseaddress_contact" class="form-control" placeholder="ex.108號1樓" required>
+        </div>
+    </div>
+</div>
+
+@*共有人1*@
+<div class="form-group getco3">
+    <label class="form-label" for="jqlandlordname">共有人1姓名</label>
+    <input type="text" id="jqlandlordname" name="Specialtext" class="form-control" required>
+    <div class="invalid-feedback">
+        請輸入共有人姓名
+    </div>
+</div>
+@*性別*@
+<div class="form-group getco3">
+    <label class="form-label">
+        性別:
+        <span class="text-danger">*</span>
+    </label>
+    <div class="frame-wrap padding-top-ten">
+        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+            <input type="radio" class="custom-control-input" id="genderradio_1" name="genderradio" value="1" required="">
+            <label class="custom-control-label" for="genderradio_1">男</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+            <input type="radio" class="custom-control-input" id="genderradio_2" name="genderradio" value="0" required="">
+            <label class="custom-control-label" for="genderradio_2">女</label>
+            <div class="invalid-feedback">
+                請選擇共有人性別
+            </div>
+        </div>
+    </div>
+</div>
+@*生日*@
+<div class="form-group getco3">
+    <label class="form-label" for="birthday">生日</label>
+    <span class="text-danger">*</span>
+    <div class="input-group">
+        <input type="text" class="form-control " placeholder="請選擇生日" id="birthday" name="birthday" required>
+        <div class="input-group-append">
+            <span class="input-group-text fs-xl">
+                <i class="fal fa-calendar-check"></i>
+            </span>
+        </div>
+        <div class="invalid-feedback">
+            請選擇生日
+        </div>
+    </div>
+</div>
+@*身分證字號*@
+<div class="form-group getco3">
+    <label class="form-label" for="IDnumber">身分證字號</label>
+    <input type="text" id="IDnumber" name="IDnumber" class="form-control" required>
+    <div class="invalid-feedback">
+        請輸入身分證字號
+    </div>
+</div>
+@*連絡電話*@
+<div class="form-group getco3">
+    <label class="form-label" for="phonenumber">連絡電話</label>
+    <input type="text" id="phonenumber" name="phonenumber" class="form-control" required>
+    <div class="invalid-feedback">
+        請輸入連絡電話
+    </div>
+</div>
+@*戶籍地址*@
+<div class="form-group getco3">
+    <label class="form-label">戶籍地址</label>
+    <span class="text-danger">*</span>
+    <div class="row">
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_city" name="city_address" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇縣/市
+            </div>
+        </div>
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_district" name="district_address" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇鄉/鎮/市/區
+            </div>
+        </div>
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_road" name="road_address" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇街/路
+            </div>
+        </div>
+    </div>
+    <div class="row pt-2">
+        <div class="col-12">
+            <input type="text" name="elseaddress" class="form-control" placeholder="ex.108號1樓" required>
+        </div>
+    </div>
+</div>
+@*通訊地址*@
+<div class="form-group getco3">
+    <div class="row pb-2">
+        <div class="col-12">
+            <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" class="custom-control-input" id="sameaddresscheckbox_agent">
+                <label class="custom-control-label" for="sameaddresscheckbox_agent">同戶籍地址</label>
+            </div>
+        </div>
+    </div>
+    <label class="form-label">通訊地址</label>
+    <span class="text-danger">*</span>
+    <div class="row">
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_city" name="city_contact" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇縣/市
+            </div>
+        </div>
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_district" name="district_contact" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇鄉/鎮/市/區
+            </div>
+        </div>
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_road" name="road_contact" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇街/路
+            </div>
+        </div>
+    </div>
+    <div class="row pt-2">
+        <div class="col-12">
+            <input type="text" name="elseaddress_contact" class="form-control" placeholder="ex.108號1樓" required>
+        </div>
+    </div>
+</div>
+
+@*共有人1*@
+<div class="form-group getco4">
+    <label class="form-label" for="jqlandlordname">共有人1姓名</label>
+    <input type="text" id="jqlandlordname" name="Specialtext" class="form-control" required>
+    <div class="invalid-feedback">
+        請輸入共有人姓名
+    </div>
+</div>
+@*性別*@
+<div class="form-group getco4">
+    <label class="form-label">
+        性別:
+        <span class="text-danger">*</span>
+    </label>
+    <div class="frame-wrap padding-top-ten">
+        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+            <input type="radio" class="custom-control-input" id="genderradio_1" name="genderradio" value="1" required="">
+            <label class="custom-control-label" for="genderradio_1">男</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+            <input type="radio" class="custom-control-input" id="genderradio_2" name="genderradio" value="0" required="">
+            <label class="custom-control-label" for="genderradio_2">女</label>
+            <div class="invalid-feedback">
+                請選擇共有人性別
+            </div>
+        </div>
+    </div>
+</div>
+@*生日*@
+<div class="form-group getco4">
+    <label class="form-label" for="birthday">生日</label>
+    <span class="text-danger">*</span>
+    <div class="input-group">
+        <input type="text" class="form-control " placeholder="請選擇生日" id="birthday" name="birthday" required>
+        <div class="input-group-append">
+            <span class="input-group-text fs-xl">
+                <i class="fal fa-calendar-check"></i>
+            </span>
+        </div>
+        <div class="invalid-feedback">
+            請選擇生日
+        </div>
+    </div>
+</div>
+@*身分證字號*@
+<div class="form-group getco4">
+    <label class="form-label" for="IDnumber">身分證字號</label>
+    <input type="text" id="IDnumber" name="IDnumber" class="form-control" required>
+    <div class="invalid-feedback">
+        請輸入身分證字號
+    </div>
+</div>
+@*連絡電話*@
+<div class="form-group getco4">
+    <label class="form-label" for="phonenumber">連絡電話</label>
+    <input type="text" id="phonenumber" name="phonenumber" class="form-control" required>
+    <div class="invalid-feedback">
+        請輸入連絡電話
+    </div>
+</div>
+@*戶籍地址*@
+<div class="form-group getco4">
+    <label class="form-label">戶籍地址</label>
+    <span class="text-danger">*</span>
+    <div class="row">
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_city" name="city_address" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇縣/市
+            </div>
+        </div>
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_district" name="district_address" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇鄉/鎮/市/區
+            </div>
+        </div>
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_road" name="road_address" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇街/路
+            </div>
+        </div>
+    </div>
+    <div class="row pt-2">
+        <div class="col-12">
+            <input type="text" name="elseaddress" class="form-control" placeholder="ex.108號1樓" required>
+        </div>
+    </div>
+</div>
+@*通訊地址*@
+<div class="form-group getco4">
+    <div class="row pb-2">
+        <div class="col-12">
+            <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" class="custom-control-input" id="sameaddresscheckbox_agent">
+                <label class="custom-control-label" for="sameaddresscheckbox_agent">同戶籍地址</label>
+            </div>
+        </div>
+    </div>
+    <label class="form-label">通訊地址</label>
+    <span class="text-danger">*</span>
+    <div class="row">
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_city" name="city_contact" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇縣/市
+            </div>
+        </div>
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_district" name="district_contact" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇鄉/鎮/市/區
+            </div>
+        </div>
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_road" name="road_contact" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇街/路
+            </div>
+        </div>
+    </div>
+    <div class="row pt-2">
+        <div class="col-12">
+            <input type="text" name="elseaddress_contact" class="form-control" placeholder="ex.108號1樓" required>
+        </div>
+    </div>
+</div>
+
+@*共有人1*@
+<div class="form-group getco5">
+    <label class="form-label" for="jqlandlordname">共有人1姓名</label>
+    <input type="text" id="jqlandlordname" name="Specialtext" class="form-control" required>
+    <div class="invalid-feedback">
+        請輸入共有人姓名
+    </div>
+</div>
+@*性別*@
+<div class="form-group getco5">
+    <label class="form-label">
+        性別:
+        <span class="text-danger">*</span>
+    </label>
+    <div class="frame-wrap padding-top-ten">
+        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+            <input type="radio" class="custom-control-input" id="genderradio_1" name="genderradio" value="1" required="">
+            <label class="custom-control-label" for="genderradio_1">男</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+            <input type="radio" class="custom-control-input" id="genderradio_2" name="genderradio" value="0" required="">
+            <label class="custom-control-label" for="genderradio_2">女</label>
+            <div class="invalid-feedback">
+                請選擇共有人性別
+            </div>
+        </div>
+    </div>
+</div>
+@*生日*@
+<div class="form-group getco5">
+    <label class="form-label" for="birthday">生日</label>
+    <span class="text-danger">*</span>
+    <div class="input-group">
+        <input type="text" class="form-control " placeholder="請選擇生日" id="birthday" name="birthday" required>
+        <div class="input-group-append">
+            <span class="input-group-text fs-xl">
+                <i class="fal fa-calendar-check"></i>
+            </span>
+        </div>
+        <div class="invalid-feedback">
+            請選擇生日
+        </div>
+    </div>
+</div>
+@*身分證字號*@
+<div class="form-group getco5">
+    <label class="form-label" for="IDnumber">身分證字號</label>
+    <input type="text" id="IDnumber" name="IDnumber" class="form-control" required>
+    <div class="invalid-feedback">
+        請輸入身分證字號
+    </div>
+</div>
+@*連絡電話*@
+<div class="form-group getco5">
+    <label class="form-label" for="phonenumber">連絡電話</label>
+    <input type="text" id="phonenumber" name="phonenumber" class="form-control" required>
+    <div class="invalid-feedback">
+        請輸入連絡電話
+    </div>
+</div>
+@*戶籍地址*@
+<div class="form-group getco5">
+    <label class="form-label">戶籍地址</label>
+    <span class="text-danger">*</span>
+    <div class="row">
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_city" name="city_address" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇縣/市
+            </div>
+        </div>
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_district" name="district_address" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇鄉/鎮/市/區
+            </div>
+        </div>
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_road" name="road_address" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇街/路
+            </div>
+        </div>
+    </div>
+    <div class="row pt-2">
+        <div class="col-12">
+            <input type="text" name="elseaddress" class="form-control" placeholder="ex.108號1樓" required>
+        </div>
+    </div>
+</div>
+@*通訊地址*@
+<div class="form-group getco5">
+    <div class="row pb-2">
+        <div class="col-12">
+            <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" class="custom-control-input" id="sameaddresscheckbox_agent">
+                <label class="custom-control-label" for="sameaddresscheckbox_agent">同戶籍地址</label>
+            </div>
+        </div>
+    </div>
+    <label class="form-label">通訊地址</label>
+    <span class="text-danger">*</span>
+    <div class="row">
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_city" name="city_contact" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇縣/市
+            </div>
+        </div>
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_district" name="district_contact" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇鄉/鎮/市/區
+            </div>
+        </div>
+        <div class="col-lg-4 pt-3">
+            <select class="custom-select form-control select2_road" name="road_contact" required>
+                <option value="" selected=""></option>
+            </select>
+            <div class="invalid-feedback">
+                請選擇街/路
+            </div>
+        </div>
+    </div>
+    <div class="row pt-2">
+        <div class="col-12">
+            <input type="text" name="elseaddress_contact" class="form-control" placeholder="ex.108號1樓" required>
+        </div>
+    </div>
+</div>

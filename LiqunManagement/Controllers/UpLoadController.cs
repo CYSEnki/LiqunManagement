@@ -674,14 +674,6 @@ namespace LiqunManagement.Controllers
                     ViewBag.Errorlist = errorlist;
                     return View();
                 }
-                var CodeA = 'A';
-                var Codea = 'a';
-                var Code1 = 1;
-                var Code2 = 1;
-
-                var CityName = "";
-                var DistrictName = "";
-                var RoadName = "";
                 try
                 {
                     //using (var context = new LiqunModels())
@@ -695,7 +687,7 @@ namespace LiqunManagement.Controllers
                     //    context.SaveChanges();
                     //}
                     //Sql語法
-                    string sql = $@"TRUNCATE TABLE [Liqun].[Form].[Region]; ";
+                    string sql = $@"TRUNCATE TABLE [Liqun].[Form].[Bank]; ";
 
                     //確保程式不會因執行錯誤而整個中斷
                     try
@@ -729,7 +721,6 @@ namespace LiqunManagement.Controllers
                 {
                     try
                     {
-                        var CityCode = CodeA.ToString() + Codea.ToString();
                         var datedata = new BankViewModel()
                         {
                             BankRegion = dr["分區"].ToString(),
