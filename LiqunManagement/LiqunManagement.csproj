@@ -151,6 +151,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AgentController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\FormStuffController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -160,6 +161,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AllForm.cs" />
+    <Compile Include="Models\Bank.cs" />
+    <Compile Include="Models\HomeObject.cs" />
     <Compile Include="Models\LiqunModels.cs" />
     <Compile Include="Models\Region.cs" />
     <Compile Include="Security\JwtObject.cs" />
@@ -1820,9 +1824,13 @@
     <Content Include="Views\UpLoad\UploadRegion.cshtml" />
     <Content Include="Views\FormStuff\Index.cshtml" />
     <Content Include="Views\FormStuff\test.cshtml" />
+    <Content Include="Views\Form\Landlord.cshtml" />
+    <Content Include="Views\UpLoad\UploadBank.cshtml" />
+    <Content Include="Views\Form\CoOwner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
