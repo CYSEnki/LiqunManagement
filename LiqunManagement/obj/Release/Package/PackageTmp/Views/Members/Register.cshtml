@@ -1,0 +1,80 @@
+﻿@model LiqunManagement.ViewModels.MemberRegisterViewModel
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<h2>註冊</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+<table>
+    @*帳號*@
+    <tr>
+        <td>
+            @Html.LabelFor(model => model.newMember.Account)
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.newMember.Account)
+            @Html.ValidationMessageFor(model => model.newMember.Account)
+        </td>
+    </tr>
+    @*密碼*@
+    <tr>
+        <td>
+            @Html.LabelFor(model => model.Password)
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </td>
+    </tr>
+    @*確認密碼*@
+    <tr>
+        <td>
+            @Html.LabelFor(model => model.PasswordCheck)
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.PasswordCheck)
+            @Html.ValidationMessageFor(model => model.PasswordCheck)
+        </td>
+    </tr>
+    @*姓名*@
+    <tr>
+        <td>
+            @Html.LabelFor(model => model.newMember.Name)
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.newMember.Name)
+            @Html.ValidationMessageFor(model => model.newMember.Name)
+        </td>
+    </tr>
+    @*信箱*@
+    <tr>
+        <td>
+            @Html.LabelFor(model => model.newMember.Email)
+        </td>
+        <td>
+            @Html.TextBoxFor(model => model.newMember.Email)
+            @Html.ValidationMessageFor(model => model.newMember.Email)
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="submit" value="註冊" />
+        </td>
+    </tr>
+</table>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
