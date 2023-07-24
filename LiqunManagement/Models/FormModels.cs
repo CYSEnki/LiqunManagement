@@ -5,16 +5,17 @@ using System.Linq;
 
 namespace LiqunManagement.Models
 {
-    public partial class LiqunModels : DbContext
+    public partial class FormModels : DbContext
     {
-        public LiqunModels()
-            : base("name=LiqunModels")
+        public FormModels()
+            : base("name=FormModels")
         {
         }
 
         public virtual DbSet<AllForm> AllForm { get; set; }
         public virtual DbSet<Bank> Bank { get; set; }
         public virtual DbSet<HomeObject> HomeObject { get; set; }
+        public virtual DbSet<LandLord> LandLord { get; set; }
         public virtual DbSet<Region> Region { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -63,6 +64,30 @@ namespace LiqunManagement.Models
                 .Property(e => e.carpositionnumber)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<LandLord>()
+                .Property(e => e.FormId)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<LandLord>()
+                .Property(e => e.Lordtype)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<LandLord>()
+                .Property(e => e.IDNumber)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<LandLord>()
+                .Property(e => e.PhoneNumber)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<LandLord>()
+                .Property(e => e.RoadCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<LandLord>()
+                .Property(e => e.RoadCodeContact)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Region>()
                 .Property(e => e.CityCode)
                 .IsUnicode(false);
@@ -73,7 +98,7 @@ namespace LiqunManagement.Models
 
             modelBuilder.Entity<Region>()
                 .Property(e => e.RoadCode)
-                .IsFixedLength();
+                .IsUnicode(false);
         }
     }
 }

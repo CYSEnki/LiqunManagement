@@ -113,7 +113,7 @@ namespace LiqunManagement.Controllers
                     int scootermanagementfee_Integer = int.Parse(scootermanagementfee);
 
                     // 建立資料上下文（Data Context）
-                    using (var context = new LiqunModels())
+                    using (var context = new FormModels())
                     {
                         // 建立要插入的資料物件
                         var newData = new HomeObject
@@ -159,7 +159,7 @@ namespace LiqunManagement.Controllers
                     }
 
                     // 建立資料上下文（Data Context）
-                    using (var context = new LiqunModels())
+                    using (var context = new FormModels())
                     {
                         // 建立要插入的資料物件
                         var newData = new AllForm
@@ -274,6 +274,41 @@ namespace LiqunManagement.Controllers
             {
                 return RedirectToAction("Login", "Memebers");
             }
+        }
+        #endregion
+
+        #region 秘書填寫
+        [HttpGet]
+        public ActionResult Secretary()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Secretary(
+            string LandString,
+            string LandNumber,
+            string BuildString,
+            string BuildNumber,
+            string PingNumber,
+            string Squaremeter,
+            bool? ParkingSpace,
+            bool? ParkingSpace2,
+            string ManageFee,
+            string ParkManageFee,
+            HttpPostedFileBase PowerFile
+            )
+        {
+            DDLServices ddlservices = new DDLServices();
+            var FormModels = ddlservices.GetRegionDDL("");
+            ViewBag.citylist = JsonConvert.SerializeObject(FormModels.regionddl.ToList());
+            List<int> payment_date = new List<int>();
+
+            for (int i = 1; i < 32; i++)
+            {
+                payment_date.Add(i);
+            }
+            ViewBag.Payment_date = payment_date;
+            return View();
         }
         #endregion
 

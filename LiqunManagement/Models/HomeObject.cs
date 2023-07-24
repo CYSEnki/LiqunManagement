@@ -69,7 +69,7 @@ namespace LiqunManagement.Models
 
         public int? buildtype { get; set; }
 
-        public int roomtype { get; set; }
+        public int? roomtype { get; set; }
 
         [StringLength(10)]
         public string roomamount { get; set; }

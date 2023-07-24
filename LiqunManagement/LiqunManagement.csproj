@@ -163,13 +163,14 @@
     </Compile>
     <Compile Include="Models\AllForm.cs" />
     <Compile Include="Models\Bank.cs" />
+    <Compile Include="Models\FormModels.cs" />
     <Compile Include="Models\HomeObject.cs" />
-    <Compile Include="Models\LiqunModels.cs" />
+    <Compile Include="Models\LandLord.cs" />
+    <Compile Include="Models\MembersModel.cs" />
     <Compile Include="Models\Region.cs" />
     <Compile Include="Security\JwtObject.cs" />
     <Compile Include="Security\JwtService.cs" />
     <Compile Include="Models\Members.cs" />
-    <Compile Include="Models\MembersModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\DDLServices.cs" />
@@ -2098,6 +2099,7 @@
     <Content Include="Views\UpLoad\UploadBank.cshtml" />
     <Content Include="Views\Form\CoOwner.cshtml" />
     <Content Include="Views\Form\Tenant.cshtml" />
+    <Content Include="Views\Form\Secretary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

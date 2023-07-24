@@ -30,7 +30,7 @@ namespace LiqunManagement.Services
         public void InsertRegion(RegionViewModel RegionData)
         {
             // 建立資料上下文（Data Context）
-            using (var context = new LiqunModels())
+            using (var context = new FormModels())
             {
                 // 建立要插入的資料物件
                 var newData = new Region
@@ -58,7 +58,7 @@ namespace LiqunManagement.Services
         public void InsertBank(BankViewModel BaankData)
         {
             // 建立資料上下文（Data Context）
-            using (var context = new LiqunModels())
+            using (var context = new FormModels())
             {
                 // 建立要插入的資料物件
                 var newData = new Bank

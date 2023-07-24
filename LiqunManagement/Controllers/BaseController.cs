@@ -9,7 +9,7 @@ namespace LiqunManagement.Controllers
 {
     public class BaseController : Controller
     {
-        public LiqunModels liqundb = new LiqunModels();
+        public FormModels liqundb = new FormModels();
         // GET: Base
         public ActionResult Index()
         {

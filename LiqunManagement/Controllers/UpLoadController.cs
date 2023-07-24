@@ -23,7 +23,7 @@ namespace LiqunManagement.Controllers
     public class UpLoadController : Controller
     {
         //建立與資料庫的連線字串
-        private readonly static string cnstr = ConfigurationManager.ConnectionStrings["LiqunModels"].ConnectionString;
+        private readonly static string cnstr = ConfigurationManager.ConnectionStrings["FormModels"].ConnectionString;
         //建立與資料庫的連線
         private readonly SqlConnection conn = new SqlConnection(cnstr);
 
@@ -216,7 +216,7 @@ namespace LiqunManagement.Controllers
                 var RoadName = "";
                 try
                 {
-                    //using (var context = new LiqunModels())
+                    //using (var context = new FormModels())
                     //{
                     //    // 取得所有資料
                     //    var allData = context.Region.AsEnumerable();
@@ -676,7 +676,7 @@ namespace LiqunManagement.Controllers
                 }
                 try
                 {
-                    //using (var context = new LiqunModels())
+                    //using (var context = new FormModels())
                     //{
                     //    // 取得所有資料
                     //    var allData = context.Region.AsEnumerable();
