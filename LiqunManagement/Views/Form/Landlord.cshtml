@@ -28,6 +28,9 @@
 @*sweetalert2*@
 <link href="~/Content/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
 
+@*datetimepicker*@
+@*<link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />*@
+
 <main id="js-page-content" role="main" class="page-content">
     <ol class="breadcrumb page-breadcrumb">
         <li class="breadcrumb-item">
@@ -94,11 +97,12 @@
                                 </div>
                             </div>
                             @*出生年月日*@
+
                             <div class="form-group">
                                 <label class="form-label" for="birthday">生日</label>
                                 <span class="text-danger">*</span>
                                 <div class="input-group">
-                                    <input type="text" class="form-control " placeholder="請選擇生日" id="birthday" name="birthday_landlord" required>
+                                    <input type="text" class="form-control datepicker" placeholder="請選擇生日" id="birthday" name="birthday_landlord" required>
                                     <div class="input-group-append">
                                         <span class="input-group-text fs-xl">
                                             <i class="fal fa-calendar-check"></i>
@@ -392,6 +396,11 @@
     <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
     @*inputmask*@
     <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/inputmask/inputmask.bundle.js"></script>
+    @*datetimepicker*@
+    <script src="~/Content/plugins/moment/moment.min.js"></script>
+    <script src="~/Content/plugins/moment/moment-with-locales.js"></script>
+    @*<script src="~/Scripts/datepicker-zh-TW.js"></script>*@
+    @*<script src="~/Content/plugins/fullcalendar/locales-all.min.js"></script>*@
 
     <script type="text/javascript">
         //validation
@@ -418,7 +427,7 @@
             //inputmask
             $(":input").inputmask();
 
-            //將不需填寫的資料先隱藏
+            //將不需填寫的資料先隱藏(共有人)
             $('.getagent').hide();
             $('.getco1').hide();
             $('.getco2').hide();
@@ -524,81 +533,20 @@
                 });
             });
 
-
-
-
-            var example_gridsize = $("#example-gridsize");
-
-            $("#gridrange").on("input change", function () {
-                //do something
-                example_gridsize.attr("placeholder", ".col-" + $(this).val());
-                example_gridsize.parent().removeClass().addClass("col-" + $(this).val())
-                console.log("col-" + $(this).val());
-            });
+            //var example_gridsize = $("#example-gridsize");
+            //$("#gridrange").on("input change", function () {
+            //    //do something
+            //    example_gridsize.attr("placeholder", ".col-" + $(this).val());
+            //    example_gridsize.parent().removeClass().addClass("col-" + $(this).val())
+            //    console.log("col-" + $(this).val());
+            //});
 
             //Check&Radio
             $('#defaultIndeterminate').prop('indeterminate', true)
             $('#Inline1Radio1').prop('indeterminate', true)
 
-            //var toggleCheckbox = function () {
-            //    $('#js-checkbox-toggle').toggleText('Change to CIRCLE', 'Change back to default');
-            //    $('.frame-wrap .custom-checkbox').toggleClass('custom-checkbox-circle');
-            //}
-
-            var toggleRadio = function () {
-                $('#js-radio-toggle').toggleText('Change to ROUNDED', 'Change back to default');
-                $('.frame-wrap .custom-radio').toggleClass('custom-radio-rounded');
-            }
-
             //radio監聽事件
-            //主要用途 : Inline1Radio3
-            $('input[name="Inline1Radio3"]').change(function () {
-                // 獲取被點選的 radio 按鈕的值
-                var selectedValue = $(this).val();
-                $('input[name="Inline1Radio3"]').each(function () {
-                    var radioId = $(this).attr('id');
-                    // 檢查是否被點選
-                    if ($(this).is(':checked')) {
-                        // 根據不同的 id 做相應的處理
-                        if (radioId === 'Inline1Radio3_1') {
-                            //住宅用; 不用上傳稅單
-                            var fileInput = document.getElementById('taxFile');
-                            var filelable = document.getElementById('taxFileLable');
-                            fileInput.value = '';
-                            filelable.innerHTML = '';
-                            $('#taxFile').prop('required', false);
-                            $('#taxFile').prop('disabled', true);
-                            $('#taxFile').prop('readonly', true);
-                            //其他
-                            $('#elsemainuse').prop('required', false);
-                            $('#elsemainuse').prop('disabled', true);
-                            $('#elsemainuse').prop('readonly', true);
-
-                        } else if (radioId === 'Inline1Radio3_5') {
-                            //其他; 要填寫欄位
-                            $('#taxFile').prop('required', true);
-                            $('#taxFile').prop('disabled', false);
-                            $('#taxFile').prop('readonly', false);
-                            $('#elsemainuse').prop('required', true);
-                            $('#elsemainuse').prop('disabled', false);
-                            $('#elsemainuse').prop('readonly', false);
-
-                        } else {
-                            $('#taxFile').prop('required', true);
-                            $('#taxFile').prop('disabled', false);
-                            $('#taxFile').prop('readonly', false);
-                            $('#elsemainuse').prop('required', false);
-                            $('#elsemainuse').prop('disabled', true);
-                            $('#elsemainuse').prop('readonly', true);
-                            $('#elsemainuse').innerHTML = '';
-                        }
-                    }
-                })
-            });
-
-
-            //radio監聽事件
-            //主要用途 : CoOwnerRadio
+            //主要用途 : CoOwnerRadio(隱藏/顯示共有人資料)
             $('input[name="CoOwnerRadio"]').change(function () {
                 // 獲取被點選的 radio 按鈕的值
                 var selectedValue = $(this).val();
@@ -646,37 +594,10 @@
                             case "jqCoOwnerRadio_5":
                                 $('.getco1').show();
                                 $('.getco2').show();
-                                $('.getco3').show(); 
+                                $('.getco3').show();
                                 $('.getco4').show();
                                 $('.getco5').show();
                                 break;
-                        }
-                    }
-                })
-            });
-
-            $('input[name="Inline1Radio5"]').change(function () {
-                // 獲取被點選的 radio 按鈕的值
-                var selectedValue = $(this).val();
-                $('input[name="Inline1Radio5"]').each(function () {
-                    var radioId = $(this).attr('id');
-                    // 檢查是否被點選
-                    if ($(this).is(':checked')) {
-                        var housenumber = document.getElementById('jqhousenumber');
-                        // 根據不同的 id 做相應的處理
-                        if (radioId === 'Inline1Radio5_1') {
-                            //整層出租
-                            housenumber.value = '';
-                            $('#jqhousenumber').prop('required', true);
-                            $('#jqhousenumber').prop('disabled', false);
-                            $('#jqhousenumber').prop('readonly', false);
-                        } else {
-                            //獨立套房
-                            housenumber.value = '套';
-                            housenumber.innerHTML = '套'
-                            $('#jqhousenumber').prop('required', false);
-                            $('#jqhousenumber').prop('disabled', true);
-                            $('#jqhousenumber').prop('readonly', true);
                         }
                     }
                 })
@@ -719,62 +640,29 @@
             });
         });
 
-        //function SubmitForm() {
-        //    Swal.fire({
-        //        title: '確定送出?',
-        //        text: "確認資料皆填寫正確!",
-        //        icon: 'warning',
-        //        showCancelButton: true,
-        //        confirmButtonColor: '#3085d6',
-        //        cancelButtonColor: '#d33',
-        //        confirmButtonText: '確認',
-        //        cancelButtonText: '取消',
-        //    }).then((result) => {
-        //        if (result.isConfirmed) {
-        //            //提交上傳
-        //            $('#jqobjectform').submit();
-        //            Swal.fire({
-        //                title: '請稍後!',
-        //                html: '系統完成上傳動作之前請勿關閉視窗',
-        //                timerProgressBar: true,
-        //                backdrop: false,
-        //                didOpen: () => {
-        //                    Swal.showLoading()
-        //                }
-        //            })
-        //        }
-        //    })
-        //}
-
         //datepicker
         var controls = {
             leftArrow: '<i class="fal fa-angle-left" style="font-size: 1.25rem"></i>',
             rightArrow: '<i class="fal fa-angle-right" style="font-size: 1.25rem"></i>'
         }
-        $('#datepicker_signdate').datepicker(
-            {
-                format: 'yyyy-mm-dd',
-                orientation: "請選擇簽約日",
-                todayHighlight: true,
-                templates: controls
-            });
 
-        $('#datepicker_startdate').datepicker(
-            {
-                format: 'yyyy-mm-dd',
-                orientation: "請選擇起租日",
-                todayHighlight: true,
-                templates: controls
-            });
+            //$('.datepicker').datepicker({
+            //    format: 'yyyy-mm-dd',
+            //    maxDate: moment(),
+            //    viewMode: 'months',
+            //    locale: 'zh-cn',
+            //    orientation: "請選擇起租日",
+            //    todayHighlight: true,
+            //    templates: controls
+            //});
 
-        $('#datepicker_enddate').datepicker(
-            {
-                format: 'yyyy-mm-dd',
-                orientation: "請選擇結束日",
-                todayHighlight: true,
-                templates: controls
-            });
-
-
+        $(function () {
+            $(".datepicker").datepicker({
+                format: 'YYYY年MM月',
+                //maxDate: moment(),
+                //viewMode: 'months',
+                locale: 'zh-cn'
+});
+        });
     </script>
 }

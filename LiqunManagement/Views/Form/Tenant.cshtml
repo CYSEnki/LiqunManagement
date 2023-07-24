@@ -1,0 +1,1066 @@
+﻿
+@{
+    ViewBag.Title = "表單四期";
+    Layout = "~/Views/Shared/smartadmin_Layout.cshtml";
+}
+<style>
+    .padding-top-ten {
+        padding-top: 10px !important;
+    }
+
+    .panel .panel-toolbar {
+        display: none;
+    }
+
+    .panel.panel-locked:not(.panel-fullscreen) .panel-hdr h2:before {
+        display: none;
+    }
+
+    .form-label {
+        font-weight: 600 !important;
+    }
+</style>
+@*select2*@
+@*<link href="~/Content/select2/css/select2.min.css" rel="stylesheet" />*@
+<link href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/formplugins/select2/select2.bundle.css" rel="stylesheet" />
+@*datepicker*@
+<link href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/formplugins/bootstrap-datepicker/bootstrap-datepicker.css" rel="stylesheet" />
+@*sweetalert2*@
+<link href="~/Content/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+
+<main id="js-page-content" role="main" class="page-content">
+    <ol class="breadcrumb page-breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="javascript:void(0);">後臺管理系統</a>
+        </li>
+        <li class="breadcrumb-item">填寫表單</li>
+        <li class="breadcrumb-item">四期</li>
+        <li class="breadcrumb-item active">房客資料</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block">
+            <span class="js-get-date"></span>
+        </li>
+    </ol>
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class="subheader-icon fal fa-edit"></i>
+            <span class="font-weight-bold" style="padding-top:5px;">房客資料</span>
+            <small>
+
+            </small>
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel panel-locked">
+                <div class="panel-hdr">
+                    <h2>
+                        房客資料
+                    </h2>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        @using (Html.BeginForm("Landlord", "Form", FormMethod.Post, new { @class = "needs-validation", @enctype = "multipart/form-data", @novalidate = "" }))
+                        {
+                            @*租客身分*@
+                            <div class="panel-tag">
+                                一般戶
+                            </div>
+                            <div class="form-group">
+                                <div class="frame-wrap padding-top-ten">
+                                    <div class="custom-control custom-radio custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="genderRadio_1" name="genderRadio_landlord" value="0">
+                                        <label class="custom-control-label" for="genderRadio_1">
+                                            設籍於該市居民、有居住事實、或有就學就業需求者。
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="genderRadio_2" name="genderRadio_landlord" value="1">
+                                        <label class="custom-control-label" for="genderRadio_2">
+                                            現任職務之最高職務列等在警正四階以下或相當職務列等之基層警察及消防人員。
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="genderRadio_2" name="genderRadio_landlord" value="2">
+                                        <label class="custom-control-label" for="genderRadio_2">
+                                            申請人或家庭成員為身心障礙者或65歲以上老人，申請換居並將自有住宅出租。
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-tag">
+                                二類
+                            </div>
+                            <div class="frame-wrap padding-top-ten">
+                                <div class="custom-control custom-radio custom-radio-rounded">
+                                    <input type="radio" class="custom-control-input" id="genderRadio_1" name="genderRadio_landlord" value="0">
+                                    <label class="custom-control-label" for="genderRadio_1">
+                                        六十五歲以上之老人。(限申請人本人)
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-radio custom-radio-rounded">
+                                    <input type="radio" class="custom-control-input" id="genderRadio_2" name="genderRadio_landlord" value="1">
+                                    <label class="custom-control-label" for="genderRadio_2">
+                                        原住民。
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-radio custom-radio-rounded">
+                                    <input type="radio" class="custom-control-input" id="genderRadio_2" name="genderRadio_landlord" value="2">
+                                    <label class="custom-control-label" for="genderRadio_2">
+                                        育有未成年子女三人以上。(限申請人本人)
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-radio custom-radio-rounded">
+                                    <input type="radio" class="custom-control-input" id="genderRadio_1" name="genderRadio_landlord" value="0">
+                                    <label class="custom-control-label" for="genderRadio_1">
+                                        特殊境遇家庭。
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-radio custom-radio-rounded">
+                                    <input type="radio" class="custom-control-input" id="genderRadio_2" name="genderRadio_landlord" value="1">
+                                    <label class="custom-control-label" for="genderRadio_2">
+                                        於安置教養機構或寄養家庭結束安置無法返家，未滿二十五歲。(限申請人本人)
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-radio custom-radio-rounded">
+                                    <input type="radio" class="custom-control-input" id="genderRadio_2" name="genderRadio_landlord" value="2">
+                                    <label class="custom-control-label" for="genderRadio_2">
+                                        受家庭暴力或性侵害之受害者及其子女。
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-radio custom-radio-rounded">
+                                    <input type="radio" class="custom-control-input" id="genderRadio_1" name="genderRadio_landlord" value="0">
+                                    <label class="custom-control-label" for="genderRadio_1">
+                                        身心障礙者。
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-radio custom-radio-rounded">
+                                    <input type="radio" class="custom-control-input" id="genderRadio_2" name="genderRadio_landlord" value="1">
+                                    <label class="custom-control-label" for="genderRadio_2">
+                                        感染人類免疫缺乏病毒者或罹患後天免疫缺乏症候群者。
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-radio custom-radio-rounded">
+                                    <input type="radio" class="custom-control-input" id="genderRadio_2" name="genderRadio_landlord" value="2">
+                                    <label class="custom-control-label" for="genderRadio_2">
+                                        因懷孕或生育而遭遇困境之未成年人。(限申請人本人)
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-radio custom-radio-rounded">
+                                    <input type="radio" class="custom-control-input" id="genderRadio_1" name="genderRadio_landlord" value="0">
+                                    <label class="custom-control-label" for="genderRadio_1">
+                                        災民。
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-radio custom-radio-rounded">
+                                    <input type="radio" class="custom-control-input" id="genderRadio_2" name="genderRadio_landlord" value="1">
+                                    <label class="custom-control-label" for="genderRadio_2">
+                                        遊民。
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="panel-tag">
+                                二類
+                            </div>
+                            <div class="form-group">
+                                <div class="frame-wrap padding-top-ten">
+                                    <div class="custom-control custom-radio custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="genderRadio_1" name="genderRadio_landlord" value="0">
+                                        <label class="custom-control-label" for="genderRadio_1">
+                                            低收入戶。
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="genderRadio_2" name="genderRadio_landlord" value="1">
+                                        <label class="custom-control-label" for="genderRadio_2">
+                                            中低收入戶。
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*4期租客資格備註*@
+                            <div class="panel-tag">
+                                4期租客資格備註
+                            </div>
+                            <div class="form-group">
+                                <div class="frame-wrap padding-top-ten">
+                                    <div class="custom-control custom-radio custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="genderRadio_1" name="genderRadio_landlord" value="0">
+                                        <label class="custom-control-label" for="genderRadio_1">
+                                            一般戶 符合社宅、不符合300億(無補助)
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="genderRadio_2" name="genderRadio_landlord" value="1">
+                                        <label class="custom-control-label" for="genderRadio_2">
+                                            整合戶 符合社宅、符合300億 (可領補助)
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="genderRadio_2" name="genderRadio_landlord" value="2">
+                                        <label class="custom-control-label" for="genderRadio_2">
+                                            轉期戶 符合社宅、不符合300億 2、3期弱勢戶舊房客 (可領補助，但無加碼)
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="genderRadio_2" name="genderRadio_landlord" value="1">
+                                        <label class="custom-control-label" for="genderRadio_2">
+                                            轉軌2 既有租約 (原為300億物件及租客)
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="genderRadio_2" name="genderRadio_landlord" value="2">
+                                        <label class="custom-control-label" for="genderRadio_2">
+                                            換居戶 符合換居身分 (可領補助，但無加碼)
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*上傳300E試算表的截圖*@
+                            <div class="form-group">
+                                <label class="form-label">上傳300億試算表截圖</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="taxFile" name="taxfile" disabled>
+                                    <label id="taxFileLable" class="custom-file-label" for="customFile">選擇檔案</label>
+                                    <div class="invalid-feedback">
+                                        請上傳稅單
+                                    </div>
+                                </div>
+                                <span class="help-block pl-2">*都需<code>&lt;上傳300億試算表截圖&gt;</code></span>
+                            </div>
+
+                            @*性別*@
+                            <div class="form-group">
+                                <label class="form-label">
+                                    性別:
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="frame-wrap padding-top-ten">
+                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="genderRadio_1" name="genderRadio_landlord" value="1" required="">
+                                        <label class="custom-control-label" for="genderRadio_1">男</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="genderRadio_2" name="genderRadio_landlord" value="0" required="">
+                                        <label class="custom-control-label" for="genderRadio_2">女</label>
+                                        <div class="invalid-feedback">
+                                            請選擇房東性別
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*出生年月日*@
+                            <div class="form-group">
+                                <label class="form-label" for="birthday">生日</label>
+                                <span class="text-danger">*</span>
+                                <div class="input-group">
+                                    <input type="text" class="form-control " placeholder="請選擇生日" id="birthday" name="birthday_landlord" required>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text fs-xl">
+                                            <i class="fal fa-calendar-check"></i>
+                                        </span>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        請選擇生日
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*身分證字號*@
+                            <div class="form-group">
+                                <label class="form-label" for="IDnumber">身分證字號</label>
+                                <input type="text" id="IDnumber" name="IDnumber_landlord" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    請輸入身分證字號
+                                </div>
+                            </div>
+                            @*連絡電話*@
+                            <div class="form-group">
+                                <label class="form-label" for="phonenumber">連絡電話</label>
+                                <input type="text" id="phonenumber" name="phonenumber_landlord" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    請輸入連絡電話
+                                </div>
+                            </div>
+                            @*戶籍地址*@
+                            <div class="form-group">
+                                <label class="form-label">戶籍地址</label>
+                                <span class="text-danger">*</span>
+                                <div class="row">
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_city" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇縣/市
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_district" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇鄉/鎮/市/區
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_road" name="road_address_landlord" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇街/路
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="col-12">
+                                        <input type="text" name="elseaddress_landlord" class="form-control" placeholder="ex.108號1樓" required>
+                                    </div>
+                                </div>
+                            </div>
+                            @*通訊地址*@
+                            <div class="form-group">
+                                <div class="row pb-2">
+                                    <div class="col-12">
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="sameaddresscheckbox" name="sameaddress_landlord">
+                                            <label class="custom-control-label" for="sameaddresscheckbox">同戶籍地址</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="form-label">通訊地址</label>
+                                <span class="text-danger">*</span>
+                                <div class="row">
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_city" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇縣/市
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_district" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇鄉/鎮/市/區
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_road" name="road_contact_landlord" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇街/路
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="col-12">
+                                        <input type="text" name="elseaddress_contact_landlord" class="form-control" placeholder="ex.108號1樓" required>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                            @*房東*@
+                            @*房東姓名*@
+                            <div class="form-group">
+                                <label class="form-label" for="jqlandlordname">房東姓名</label>
+                                <input type="text" id="jqlandlordname" name="name_landlord" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    請輸入房東姓名
+                                </div>
+                            </div>
+
+                            @*出生年月日*@
+                            <div class="form-group">
+                                <label class="form-label" for="birthday">生日</label>
+                                <span class="text-danger">*</span>
+                                <div class="input-group">
+                                    <input type="text" class="form-control " placeholder="請選擇生日" id="birthday" name="birthday_landlord" required>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text fs-xl">
+                                            <i class="fal fa-calendar-check"></i>
+                                        </span>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        請選擇生日
+                                    </div>
+                                </div>
+                            </div>
+                            @*身分證字號*@
+                            <div class="form-group">
+                                <label class="form-label" for="IDnumber">身分證字號</label>
+                                <input type="text" id="IDnumber" name="IDnumber_landlord" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    請輸入身分證字號
+                                </div>
+                            </div>
+                            @*連絡電話*@
+                            <div class="form-group">
+                                <label class="form-label" for="phonenumber">連絡電話</label>
+                                <input type="text" id="phonenumber" name="phonenumber_landlord" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    請輸入連絡電話
+                                </div>
+                            </div>
+                            @*戶籍地址*@
+                            <div class="form-group">
+                                <label class="form-label">戶籍地址</label>
+                                <span class="text-danger">*</span>
+                                <div class="row">
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_city" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇縣/市
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_district" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇鄉/鎮/市/區
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_road" name="road_address_landlord" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇街/路
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="col-12">
+                                        <input type="text" name="elseaddress_landlord" class="form-control" placeholder="ex.108號1樓" required>
+                                    </div>
+                                </div>
+                            </div>
+                            @*通訊地址*@
+                            <div class="form-group">
+                                <div class="row pb-2">
+                                    <div class="col-12">
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="sameaddresscheckbox" name="sameaddress_landlord">
+                                            <label class="custom-control-label" for="sameaddresscheckbox">同戶籍地址</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="form-label">通訊地址</label>
+                                <span class="text-danger">*</span>
+                                <div class="row">
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_city" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇縣/市
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_district" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇鄉/鎮/市/區
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_road" name="road_contact_landlord" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇街/路
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="col-12">
+                                        <input type="text" name="elseaddress_contact_landlord" class="form-control" placeholder="ex.108號1樓" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @Html.Partial("CoOwner", "Form")
+
+                            @*代理人*@
+                            <div class="panel-tag">
+                                代理人
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" class="custom-control-input" id="jqgetagent">
+                                    <label class="custom-control-label" for="jqgetagent">代理人</label>
+                                </div>
+                            </div>
+                            @*房東姓名*@
+                            <div class="form-group getagent">
+                                <label class="form-label" for="jqlandlordname">代理人姓名</label>
+                                <input type="text" id="jqlandlordname" name="Specialtext" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    請輸入代理人姓名
+                                </div>
+                            </div>
+                            @*性別*@
+                            <div class="form-group getagent">
+                                <label class="form-label">
+                                    性別:
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="frame-wrap padding-top-ten">
+                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="genderradio_1" name="genderradio" value="1" required="">
+                                        <label class="custom-control-label" for="genderradio_1">男</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="genderradio_2" name="genderradio" value="0" required="">
+                                        <label class="custom-control-label" for="genderradio_2">女</label>
+                                        <div class="invalid-feedback">
+                                            請選擇代理人性別
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*生日*@
+                            <div class="form-group getagent">
+                                <label class="form-label" for="birthday">生日</label>
+                                <span class="text-danger">*</span>
+                                <div class="input-group">
+                                    <input type="text" class="form-control " placeholder="請選擇生日" id="birthday" name="birthday" required>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text fs-xl">
+                                            <i class="fal fa-calendar-check"></i>
+                                        </span>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        請選擇生日
+                                    </div>
+                                </div>
+                            </div>
+                            @*身分證字號*@
+                            <div class="form-group getagent">
+                                <label class="form-label" for="IDnumber">身分證字號</label>
+                                <input type="text" id="IDnumber" name="IDnumber" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    請輸入身分證字號
+                                </div>
+                            </div>
+                            @*連絡電話*@
+                            <div class="form-group getagent">
+                                <label class="form-label" for="phonenumber">連絡電話</label>
+                                <input type="text" id="phonenumber" name="phonenumber" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    請輸入連絡電話
+                                </div>
+                            </div>
+                            @*戶籍地址*@
+                            <div class="form-group getagent">
+                                <label class="form-label">戶籍地址</label>
+                                <span class="text-danger">*</span>
+                                <div class="row">
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_city" name="city_address" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇縣/市
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_district" name="district_address" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇鄉/鎮/市/區
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_road" name="road_address" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇街/路
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="col-12">
+                                        <input type="text" name="elseaddress" class="form-control" placeholder="ex.108號1樓" required>
+                                    </div>
+                                </div>
+                            </div>
+                            @*通訊地址*@
+                            <div class="form-group getagent">
+                                <div class="row pb-2">
+                                    <div class="col-12">
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="sameaddresscheckbox_agent">
+                                            <label class="custom-control-label" for="sameaddresscheckbox_agent">同戶籍地址</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="form-label">通訊地址</label>
+                                <span class="text-danger">*</span>
+                                <div class="row">
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_city" name="city_contact" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇縣/市
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_district" name="district_contact" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇鄉/鎮/市/區
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_road" name="road_contact" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇街/路
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="col-12">
+                                        <input type="text" name="elseaddress_contact" class="form-control" placeholder="ex.108號1樓" required>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row align-items-center">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="invalidCheck" required="">
+                                    <label class="custom-control-label" for="invalidCheck">確認填寫完成 <span class="text-danger">*</span></label>
+                                    <div class="invalid-feedback">
+                                        您必須選擇此區塊以確認完成填寫
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary ml-auto waves-effect waves-themed" type="submit">Submit form</button>
+                            </div>
+
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section scripts
+{
+    @*select2*@
+    @*<script src="~/Content/select2/js/select2.min.js"></script>*@
+    <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/select2/select2.bundle.js"></script>
+    @*sweetalert2*@
+    <script src="~/Content/sweetalert2/sweetalert2.min.js"></script>
+    @*datepicker*@
+    <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+    @*inputmask*@
+    <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/inputmask/inputmask.bundle.js"></script>
+
+    <script type="text/javascript">
+        //validation
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
+        $(function () {
+            //inputmask
+            $(":input").inputmask();
+
+            //將不需填寫的資料先隱藏(同)
+            $('.getagent').hide();
+            $('.getco1').hide();
+            $('.getco2').hide();
+            $('.getco3').hide();
+            $('.getco4').hide();
+            $('.getco5').hide();
+
+            //------------------
+            // 物件地址下拉選單  *
+            //------------------
+            var jsonCity = @Html.Raw(Json.Encode(ViewBag.citylist));
+            var jsonArray = JSON.parse(jsonCity);
+
+            for (var i = 0; i < jsonArray.length; i++) {
+                jsonArray[i].id = jsonArray[i].id.replace(/\"/g, '');
+                jsonArray[i].text = jsonArray[i].text.replace(/\"/g, '');
+            }
+
+            var data_city = jsonArray;
+            $('.select2_city').select2({
+                data: data_city,
+                placeholder: '縣/市'
+            });
+            $('.select2_district').select2({
+                //data: data_district,
+                placeholder: '鄉/鎮/市/區',
+            });
+            $('.select2_road').select2({
+                //data: data_road,
+                placeholder: '街道',
+            });
+            //下拉選單更改事件
+
+            //當下拉選單發生改變事件(change)，執行
+            $('body').on('change', '.select2_city', function () {
+                $('.select2_road').empty();
+                $('.select2_road').select2({
+                    placeholder: '街道',
+                });
+                var regioncode = $('.select2_city').val();
+                $.ajax({
+                    type: "POST",
+                    data: { regioncode: regioncode },
+                    url: '@Url.Content("~/Form/DDLRegion/")',
+                    dataType: 'json'
+                }).done(function (dataresult) {
+                    var jsonArray = JSON.parse(dataresult);
+                        for (var i = 0; i < jsonArray.length; i++) {
+                            jsonArray[i].id = jsonArray[i].id.replace(/\"/g, '');
+                            jsonArray[i].text = jsonArray[i].text.replace(/\"/g, '');
+                        }
+                    var data_district = jsonArray;
+                    $('.select2_district').empty();
+                    var init_data = [
+                        {
+                            id: '',
+                            text: '鄉/鎮/市/區'
+                        },
+                    ];
+                    $('.select2_district').select2({
+                        data: init_data,
+                    });
+                    $('.select2_district').select2({
+                        data: data_district,
+                        placeholder: {
+                            id: '',
+                            text: '鄉/鎮/市/區'
+                        }
+                    });
+                });
+            });
+            $('body').on('change', '.select2_district', function () {
+                var regioncode = $('.select2_district').val();
+                $.ajax({
+                    type: "POST",
+                    data: { regioncode: regioncode },
+                    url: '@Url.Content("~/Form/DDLRegion/")',
+                    dataType: 'json'
+                }).done(function (dataresult) {
+                    var jsonArray = JSON.parse(dataresult);
+                        for (var i = 0; i < jsonArray.length; i++) {
+                            jsonArray[i].id = jsonArray[i].id.replace(/\"/g, '');
+                            jsonArray[i].text = jsonArray[i].text.replace(/\"/g, '');
+                        }
+                    var data_road = jsonArray;
+                    $('.select2_road').empty();
+                    var init_data = [
+                        {
+                            id: '',
+                            text: '街道'
+                        },
+                    ];
+                    $('.select2_road').select2({
+                        data: init_data,
+                    });
+                    $('.select2_road').select2({
+                        data: data_road,
+                        placeholder: {
+                            id: '',
+                            text: '街道'
+                        }
+                    });
+                });
+            });
+
+
+
+
+            var example_gridsize = $("#example-gridsize");
+
+            $("#gridrange").on("input change", function () {
+                //do something
+                example_gridsize.attr("placeholder", ".col-" + $(this).val());
+                example_gridsize.parent().removeClass().addClass("col-" + $(this).val())
+                console.log("col-" + $(this).val());
+            });
+
+            //Check&Radio
+            $('#defaultIndeterminate').prop('indeterminate', true)
+            $('#Inline1Radio1').prop('indeterminate', true)
+
+            //var toggleCheckbox = function () {
+            //    $('#js-checkbox-toggle').toggleText('Change to CIRCLE', 'Change back to default');
+            //    $('.frame-wrap .custom-checkbox').toggleClass('custom-checkbox-circle');
+            //}
+
+            var toggleRadio = function () {
+                $('#js-radio-toggle').toggleText('Change to ROUNDED', 'Change back to default');
+                $('.frame-wrap .custom-radio').toggleClass('custom-radio-rounded');
+            }
+
+            //radio監聽事件
+            //主要用途 : Inline1Radio3
+            $('input[name="Inline1Radio3"]').change(function () {
+                // 獲取被點選的 radio 按鈕的值
+                var selectedValue = $(this).val();
+                $('input[name="Inline1Radio3"]').each(function () {
+                    var radioId = $(this).attr('id');
+                    // 檢查是否被點選
+                    if ($(this).is(':checked')) {
+                        // 根據不同的 id 做相應的處理
+                        if (radioId === 'Inline1Radio3_1') {
+                            //住宅用; 不用上傳稅單
+                            var fileInput = document.getElementById('taxFile');
+                            var filelable = document.getElementById('taxFileLable');
+                            fileInput.value = '';
+                            filelable.innerHTML = '';
+                            $('#taxFile').prop('required', false);
+                            $('#taxFile').prop('disabled', true);
+                            $('#taxFile').prop('readonly', true);
+                            //其他
+                            $('#elsemainuse').prop('required', false);
+                            $('#elsemainuse').prop('disabled', true);
+                            $('#elsemainuse').prop('readonly', true);
+
+                        } else if (radioId === 'Inline1Radio3_5') {
+                            //其他; 要填寫欄位
+                            $('#taxFile').prop('required', true);
+                            $('#taxFile').prop('disabled', false);
+                            $('#taxFile').prop('readonly', false);
+                            $('#elsemainuse').prop('required', true);
+                            $('#elsemainuse').prop('disabled', false);
+                            $('#elsemainuse').prop('readonly', false);
+
+                        } else {
+                            $('#taxFile').prop('required', true);
+                            $('#taxFile').prop('disabled', false);
+                            $('#taxFile').prop('readonly', false);
+                            $('#elsemainuse').prop('required', false);
+                            $('#elsemainuse').prop('disabled', true);
+                            $('#elsemainuse').prop('readonly', true);
+                            $('#elsemainuse').innerHTML = '';
+                        }
+                    }
+                })
+            });
+
+
+            //radio監聽事件
+            //主要用途 : CoOwnerRadio
+            $('input[name="CoOwnerRadio"]').change(function () {
+                // 獲取被點選的 radio 按鈕的值
+                var selectedValue = $(this).val();
+                $('input[name="CoOwnerRadio"]').each(function () {
+                    var radioId = $(this).attr('id');
+                    // 檢查是否被點選
+                    if ($(this).is(':checked')) {
+                        // 根據不同的 id 做相應的處理
+                        switch (radioId) {
+                            case "jqCoOwnerRadio_0":
+                                $('.getco1').hide();
+                                $('.getco2').hide();
+                                $('.getco3').hide();
+                                $('.getco4').hide();
+                                $('.getco5').hide();
+                                break;
+                            case "jqCoOwnerRadio_1":
+                                $('.getco1').show();
+                                $('.getco2').hide();
+                                $('.getco3').hide();
+                                $('.getco4').hide();
+                                $('.getco5').hide();
+                                break;
+                            case "jqCoOwnerRadio_2":
+                                $('.getco1').show();
+                                $('.getco2').show();
+                                $('.getco3').hide();
+                                $('.getco4').hide();
+                                $('.getco5').hide();
+                                break;
+                            case "jqCoOwnerRadio_3":
+                                $('.getco1').show();
+                                $('.getco2').show();
+                                $('.getco3').show();
+                                $('.getco4').hide();
+                                $('.getco5').hide();
+                                break;
+                            case "jqCoOwnerRadio_4":
+                                $('.getco1').show();
+                                $('.getco2').show();
+                                $('.getco3').show();
+                                $('.getco4').show();
+                                $('.getco5').hide();
+                                break;
+                            case "jqCoOwnerRadio_5":
+                                $('.getco1').show();
+                                $('.getco2').show();
+                                $('.getco3').show();
+                                $('.getco4').show();
+                                $('.getco5').show();
+                                break;
+                        }
+                    }
+                })
+            });
+
+            $('input[name="Inline1Radio5"]').change(function () {
+                // 獲取被點選的 radio 按鈕的值
+                var selectedValue = $(this).val();
+                $('input[name="Inline1Radio5"]').each(function () {
+                    var radioId = $(this).attr('id');
+                    // 檢查是否被點選
+                    if ($(this).is(':checked')) {
+                        var housenumber = document.getElementById('jqhousenumber');
+                        // 根據不同的 id 做相應的處理
+                        if (radioId === 'Inline1Radio5_1') {
+                            //整層出租
+                            housenumber.value = '';
+                            $('#jqhousenumber').prop('required', true);
+                            $('#jqhousenumber').prop('disabled', false);
+                            $('#jqhousenumber').prop('readonly', false);
+                        } else {
+                            //獨立套房
+                            housenumber.value = '套';
+                            housenumber.innerHTML = '套'
+                            $('#jqhousenumber').prop('required', false);
+                            $('#jqhousenumber').prop('disabled', true);
+                            $('#jqhousenumber').prop('readonly', true);
+                        }
+                    }
+                })
+            });
+
+            //同戶籍地址
+            $('#sameaddresscheckbox').on('change', function () {
+                if ($(this).is(':checked')) {
+                    $('select[name="city_contact"]').prop('disabled', true);
+                    $('select[name="district_contact"]').prop('disabled', true);
+                    $('select[name="road_contact"]').prop('disabled', true);
+                    $('input[name="elseaddress_contact"]').prop('disabled', true);
+                    //required
+                    $('select[name="city_contact"]').prop('required', false);
+                    $('select[name="district_contact"]').prop('required', false);
+                    $('select[name="road_contact"]').prop('required', false);
+                    $('input[name="elseaddress_contact"]').prop('required', false);
+                } else {
+                    $('select[name="city_contact"]').prop('disabled', false);
+                    $('select[name="district_contact"]').prop('disabled', false);
+                    $('select[name="road_contact"]').prop('disabled', false);
+                    $('input[name="elseaddress_contact"]').prop('disabled', false);
+                    //required
+                    $('select[name="city_contact"]').prop('required', true);
+                    $('select[name="district_contact"]').prop('required', true);
+                    $('select[name="road_contact"]').prop('required', true);
+                    $('input[name="elseaddress_contact"]').prop('required', true);
+                }
+            });
+
+
+            //是否有代理人(checkbox)
+            $('#jqgetagent').on('change', function () {
+                if ($(this).is(':checked')) {
+                    //getagent
+                    $('.getagent').show();
+                } else {
+                    $('.getagent').hide();
+                }
+            });
+        });
+
+        //function SubmitForm() {
+        //    Swal.fire({
+        //        title: '確定送出?',
+        //        text: "確認資料皆填寫正確!",
+        //        icon: 'warning',
+        //        showCancelButton: true,
+        //        confirmButtonColor: '#3085d6',
+        //        cancelButtonColor: '#d33',
+        //        confirmButtonText: '確認',
+        //        cancelButtonText: '取消',
+        //    }).then((result) => {
+        //        if (result.isConfirmed) {
+        //            //提交上傳
+        //            $('#jqobjectform').submit();
+        //            Swal.fire({
+        //                title: '請稍後!',
+        //                html: '系統完成上傳動作之前請勿關閉視窗',
+        //                timerProgressBar: true,
+        //                backdrop: false,
+        //                didOpen: () => {
+        //                    Swal.showLoading()
+        //                }
+        //            })
+        //        }
+        //    })
+        //}
+
+        //datepicker
+        var controls = {
+            leftArrow: '<i class="fal fa-angle-left" style="font-size: 1.25rem"></i>',
+            rightArrow: '<i class="fal fa-angle-right" style="font-size: 1.25rem"></i>'
+        }
+        $('#datepicker_signdate').datepicker(
+            {
+                format: 'yyyy-mm-dd',
+                orientation: "請選擇簽約日",
+                todayHighlight: true,
+                templates: controls
+            });
+
+        $('#datepicker_startdate').datepicker(
+            {
+                format: 'yyyy-mm-dd',
+                orientation: "請選擇起租日",
+                todayHighlight: true,
+                templates: controls
+            });
+
+        $('#datepicker_enddate').datepicker(
+            {
+                format: 'yyyy-mm-dd',
+                orientation: "請選擇結束日",
+                todayHighlight: true,
+                templates: controls
+            });
+
+
+    </script>
+}

@@ -247,6 +247,35 @@ namespace LiqunManagement.Controllers
             }
         }
         #endregion
+        
+        #region 房客資料
+        public ActionResult Tenant()
+        {
+            DDLServices ddlservices = new DDLServices();
+            var formmodel = ddlservices.GetRegionDDL("");
+            ViewBag.citylist = JsonConvert.SerializeObject(formmodel.regionddl.ToList());
+            List<int> payment_date = new List<int>();
+
+            for (int i = 1; i < 32; i++)
+            {
+                payment_date.Add(i);
+            }
+            ViewBag.Payment_date = payment_date;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Tenant(string FormID)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("HomeObject", "Form");
+            }
+            else
+            {
+                return RedirectToAction("Login", "Memebers");
+            }
+        }
+        #endregion
 
         #region 找到Region下拉選單
         public ActionResult DDLRegion(string regioncode)
