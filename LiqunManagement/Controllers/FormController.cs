@@ -83,7 +83,7 @@ namespace LiqunManagement.Controllers
             {
                 var now = DateTime.Now;
                 string newFormID = "LQ" + now.ToString("yy") + "000001";
-                var lastformid = liqundb.AllForm.OrderByDescending(x => x.FormNo).Select(x=>x.FormId).FirstOrDefault();
+                var lastformid = formdb.AllForm.OrderByDescending(x => x.FormNo).Select(x=>x.FormId).FirstOrDefault();
                 if (!String.IsNullOrEmpty(lastformid))
                 {
                     var idIndex = Convert.ToInt32(lastformid.Substring(4));
@@ -95,7 +95,7 @@ namespace LiqunManagement.Controllers
                 try
                 {
                     //找到地址
-                    var address = liqundb.Region.Where(x => x.RoadCode == selecctroad).FirstOrDefault();
+                    var address = formdb.Region.Where(x => x.RoadCode == selecctroad).FirstOrDefault();
                     //將金額型別轉換為int
                     rent = new string(rent.Where(char.IsDigit).ToArray());
                     int rent_Integer = int.Parse(rent);

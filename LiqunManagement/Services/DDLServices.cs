@@ -12,13 +12,13 @@ namespace LiqunManagement.Services
         #region 找到縣市街道下拉選單
         public FormViewModels GetRegionDDL(string regioncode)
         {
-            //var citycodelist = Liqundb.Region.Select(x => x.CityCode).Distinct();
+            //var citycodelist = formdb.Region.Select(x => x.CityCode).Distinct();
             IEnumerable<RegionDDLViewModel> regionDDL = new List<RegionDDLViewModel>();
             var codelength = regioncode.Length;
             switch (codelength)
             {
                 case 0:
-                    regionDDL = (from reg in Liqundb.Region
+                    regionDDL = (from reg in formdb.Region
                                  select new RegionDDLViewModel
                                  {
                                      order = reg.CityOrder,
@@ -27,7 +27,7 @@ namespace LiqunManagement.Services
                                  }).Distinct().OrderBy(x => x.order);
                     break;
                 case 2:
-                    regionDDL = (from reg in Liqundb.Region
+                    regionDDL = (from reg in formdb.Region
                                  where reg.CityCode == regioncode
                                  select new RegionDDLViewModel
                                  {
@@ -36,7 +36,7 @@ namespace LiqunManagement.Services
                                  }).Distinct().OrderBy(x => x.id);
                     break;
                 case 4:
-                    regionDDL = (from reg in Liqundb.Region
+                    regionDDL = (from reg in formdb.Region
                                  where reg.DistrictCode == regioncode
                                  select new RegionDDLViewModel
                                  {

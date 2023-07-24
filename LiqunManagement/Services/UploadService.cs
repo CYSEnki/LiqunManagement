@@ -14,7 +14,7 @@ namespace LiqunManagement.Services
         #region 取得Region資料
         public UploadViewModels GetRegionData()
         {
-            var list = from Rlist in Liqundb.Region
+            var list = from Rlist in formdb.Region
                         select new RegionViewModel
                         {
                             City = Rlist.City,
