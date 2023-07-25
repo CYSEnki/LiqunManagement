@@ -256,7 +256,7 @@
                                 <label class="form-label" for="birthday">生日</label>
                                 <span class="text-danger">*</span>
                                 <div class="input-group">
-                                    <input type="text" class="form-control " placeholder="請選擇生日" id="birthday" name="birthday" required>
+                                    <input type="text" class="form-control birthday" placeholder="請選擇生日" id="birthday" name="birthday" required>
                                     <div class="input-group-append">
                                         <span class="input-group-text fs-xl">
                                             <i class="fal fa-calendar-check"></i>
@@ -396,10 +396,10 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">帳號</span>
                                             </div>
-                                            <input name="banknumber" type="text" placeholder=""  class="form-control" required>
-                                        <div class="invalid-feedback">
-                                            請填寫帳號
-                                        </div>
+                                            <input name="banknumber" type="text" placeholder="" class="form-control" required>
+                                            <div class="invalid-feedback">
+                                                請填寫帳號
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -416,7 +416,105 @@
                                 </div>
                             </div>
 
+                            @*分戶戶號*@
+                            <div class="form-group">
+                                <div class="row pb-2">
+                                    <div class="col-12">
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input" id="separatehouse" data-index="2" name="separatehouse" value="true">
+                                            <label class="custom-control-label" for="separatehouse">是否分戶</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">分戶戶號</span>
+                                            </div>
+                                            <input id="separatenumber" name="separatenumber" type="text" placeholder="" class="form-control" disabled>
+                                            <div class="invalid-feedback">
+                                                請填寫分戶戶號
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            //配偶
+                            <div class="panel-tag" style="padding-bottom:0px; margin-bottom:0px;">
+                                <div class="row">
+                                    <div class="custom-control custom-checkbox" style="margin-left:10px;">
+                                        <input type="checkbox" class="custom-control-input" id="couplecheck" data-index="2" name="couplecheck" value="true">
+                                        <label class="custom-control-label" for="couplecheck"></label>
+                                    </div>
+                                    <label>配偶</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-10 col-lg-6 pt-3">
+                                        <div class="input-group input-group-multi-transition w-100">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">姓名</span>
+                                            </div>
+                                            <input name="roomamount" id="jqroomamount" type="text" class="form-control" aria-label="Person name" required>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">身分證</span>
+                                            </div>
+                                            <input name="hallamount" type="text" class="form-control" aria-label="Person name" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10 col-lg-6 pt-3">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control birthday" placeholder="請選擇生日" id="couplebirth" name="couplebirth" required>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text fs-xl">
+                                                    <i class="fal fa-calendar-check"></i>
+                                                </span>
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                請選擇生日
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+
+                            
+                            //直系親屬
+                    <div class="panel-tag" style="padding-bottom:0px; margin-bottom:0px;">
+                        <label>直系親屬</label>
+                    </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-10 col-lg-6 pt-3">
+                                        <div class="input-group input-group-multi-transition w-100">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">姓名</span>
+                                            </div>
+                                            <input name="roomamount" id="jqroomamount" type="text" class="form-control" aria-label="Person name" required>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">身分證</span>
+                                            </div>
+                                            <input name="hallamount" type="text" class="form-control" aria-label="Person name" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10 col-lg-6 pt-3">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control birthday" placeholder="請選擇生日" id="couplebirth" name="couplebirth" required>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text fs-xl">
+                                                    <i class="fal fa-calendar-check"></i>
+                                                </span>
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                請選擇生日
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
 
 
@@ -768,6 +866,23 @@
                 }
             });
 
+            //是否分戶
+            $('#separatehouse').on('change', function () {
+                if ($(this).is(':checked')) {
+                    //disabled
+                    $('input[name="separatenumber"]').prop('disabled', false);
+                    //required
+                    $('input[name="separatenumber"]').prop('required', true);
+                } else {
+                    //value
+                    $('input[name="separatenumber"]').val('');
+                    //disabled
+                    $('input[name="separatenumber"]').prop('disabled', true);
+                    //required
+                    $('input[name="separatenumber"]').prop('required', false);
+                }
+            });
+
 
             //是否有代理人(checkbox)
             $('#jqgetagent').on('change', function () {
@@ -812,26 +927,10 @@
             leftArrow: '<i class="fal fa-angle-left" style="font-size: 1.25rem"></i>',
             rightArrow: '<i class="fal fa-angle-right" style="font-size: 1.25rem"></i>'
         }
-        $('#datepicker_signdate').datepicker(
+        $('.birthday').datepicker(
             {
                 format: 'yyyy-mm-dd',
-                orientation: "請選擇簽約日",
-                todayHighlight: true,
-                templates: controls
-            });
-
-        $('#datepicker_startdate').datepicker(
-            {
-                format: 'yyyy-mm-dd',
-                orientation: "請選擇起租日",
-                todayHighlight: true,
-                templates: controls
-            });
-
-        $('#datepicker_enddate').datepicker(
-            {
-                format: 'yyyy-mm-dd',
-                orientation: "請選擇結束日",
+                orientation: "請選擇出生年月日",
                 todayHighlight: true,
                 templates: controls
             });

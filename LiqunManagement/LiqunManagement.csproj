@@ -2078,9 +2078,10 @@
     <Content Include="Views\FormStuff\test.cshtml" />
     <Content Include="Views\Form\Landlord.cshtml" />
     <Content Include="Views\UpLoad\UploadBank.cshtml" />
-    <Content Include="Views\Form\CoOwner.cshtml" />
+    <Content Include="Views\Form\_CoOwner.cshtml" />
     <Content Include="Views\Form\Tenant.cshtml" />
     <Content Include="Views\Form\Secretary.cshtml" />
+    <Content Include="Views\Form\_directfamily.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

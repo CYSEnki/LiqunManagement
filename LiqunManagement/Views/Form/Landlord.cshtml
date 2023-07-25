@@ -38,7 +38,7 @@
         </li>
         <li class="breadcrumb-item">填寫表單</li>
         <li class="breadcrumb-item">四期</li>
-        <li class="breadcrumb-item active">物件資料</li>
+        <li class="breadcrumb-item active">房東資料</li>
         <li class="position-absolute pos-top pos-right d-none d-sm-block">
             <span class="js-get-date"></span>
         </li>
@@ -102,7 +102,7 @@
                                 <label class="form-label" for="birthday">生日</label>
                                 <span class="text-danger">*</span>
                                 <div class="input-group">
-                                    <input type="text" class="form-control datepicker" placeholder="請選擇生日" id="birthday" name="birthday_landlord" required>
+                                    <input type="text" class="form-control birthday" placeholder="請選擇生日" id="birthday_landlord" name="birthday_landlord" required>
                                     <div class="input-group-append">
                                         <span class="input-group-text fs-xl">
                                             <i class="fal fa-calendar-check"></i>
@@ -124,7 +124,7 @@
                             @*連絡電話*@
                             <div class="form-group">
                                 <label class="form-label" for="phonenumber">連絡電話</label>
-                                <input type="text" id="phonenumber" name="phonenumber_landlord" class="form-control" required>
+                                <input type="text" id="phonenumber_landlord" name="phonenumber_landlord" class="form-control" required>
                                 <div class="invalid-feedback">
                                     請輸入連絡電話
                                 </div>
@@ -135,7 +135,7 @@
                                 <span class="text-danger">*</span>
                                 <div class="row">
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_city" required>
+                                        <select class="custom-select form-control select2_city" data-index="1" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -143,7 +143,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_district" required>
+                                        <select class="custom-select form-control select2_district" data-index="1" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -151,7 +151,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_road" name="road_address_landlord" required>
+                                        <select class="custom-select form-control select2_road" data-index="1" name="road_address_landlord" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -170,7 +170,7 @@
                                 <div class="row pb-2">
                                     <div class="col-12">
                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input" id="sameaddresscheckbox" name="sameaddress_landlord">
+                                            <input type="checkbox" class="custom-control-input sameaddress" id="sameaddresscheckbox" data-index="2" name="sameaddress_landlord" value="true">
                                             <label class="custom-control-label" for="sameaddresscheckbox">同戶籍地址</label>
                                         </div>
                                     </div>
@@ -179,7 +179,7 @@
                                 <span class="text-danger">*</span>
                                 <div class="row">
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_city" required>
+                                        <select class="custom-select form-control select2_city select_contact_2" data-index="2" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -187,7 +187,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_district" required>
+                                        <select class="custom-select form-control select2_district select_contact_2" data-index="2" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -195,7 +195,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_road" name="road_contact_landlord" required>
+                                        <select class="custom-select form-control select2_road select_contact_2" data-index="2" name="road_contact_landlord" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -205,12 +205,13 @@
                                 </div>
                                 <div class="row pt-2">
                                     <div class="col-12">
-                                        <input type="text" name="elseaddress_contact_landlord" class="form-control" placeholder="ex.108號1樓" required>
+                                        <input type="text" name="elseaddress_contact_landlord" class="form-control select_contact_2" data-index="2" placeholder="ex.108號1樓" required>
                                     </div>
                                 </div>
                             </div>
 
-                            @Html.Partial("CoOwner", "Form")
+                            @*共有人*@
+                            @Html.Partial("_CoOwner", "Form")
 
                             @*代理人*@
                             <div class="panel-tag">
@@ -222,10 +223,10 @@
                                     <label class="custom-control-label" for="jqgetagent">代理人</label>
                                 </div>
                             </div>
-                            @*房東姓名*@
+                            @*代理人姓名*@
                             <div class="form-group getagent">
                                 <label class="form-label" for="jqlandlordname">代理人姓名</label>
-                                <input type="text" id="jqlandlordname" name="Specialtext" class="form-control" required>
+                                <input type="text" id="jqlandlordname" name="name_agent" class="form-control" required>
                                 <div class="invalid-feedback">
                                     請輸入代理人姓名
                                 </div>
@@ -238,24 +239,24 @@
                                 </label>
                                 <div class="frame-wrap padding-top-ten">
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="genderradio_1" name="genderradio" value="1" required="">
-                                        <label class="custom-control-label" for="genderradio_1">男</label>
+                                        <input type="radio" class="custom-control-input" id="genderRadio_agent_1" name="genderRadio_agent" value="1" required="">
+                                        <label class="custom-control-label" for="genderRadio_agent_1">男</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="genderradio_2" name="genderradio" value="0" required="">
-                                        <label class="custom-control-label" for="genderradio_2">女</label>
+                                        <input type="radio" class="custom-control-input" id="genderRadio_agent_2" name="genderRadio_agent" value="0" required="">
+                                        <label class="custom-control-label" for="genderRadio_agent_2">女</label>
                                         <div class="invalid-feedback">
                                             請選擇代理人性別
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            @*生日*@
+                            @*出生年月日*@
                             <div class="form-group getagent">
                                 <label class="form-label" for="birthday">生日</label>
                                 <span class="text-danger">*</span>
                                 <div class="input-group">
-                                    <input type="text" class="form-control " placeholder="請選擇生日" id="birthday" name="birthday" required>
+                                    <input type="text" class="form-control birthday" placeholder="請選擇生日" id="birthday_agent" name="birthday_agent" required>
                                     <div class="input-group-append">
                                         <span class="input-group-text fs-xl">
                                             <i class="fal fa-calendar-check"></i>
@@ -269,7 +270,7 @@
                             @*身分證字號*@
                             <div class="form-group getagent">
                                 <label class="form-label" for="IDnumber">身分證字號</label>
-                                <input type="text" id="IDnumber" name="IDnumber" class="form-control" required>
+                                <input type="text" id="IDnumber" name="IDnumber_agent" class="form-control" required>
                                 <div class="invalid-feedback">
                                     請輸入身分證字號
                                 </div>
@@ -277,7 +278,7 @@
                             @*連絡電話*@
                             <div class="form-group getagent">
                                 <label class="form-label" for="phonenumber">連絡電話</label>
-                                <input type="text" id="phonenumber" name="phonenumber" class="form-control" required>
+                                <input type="text" id="phonenumber_agent" name="phonenumber_agent" class="form-control" required>
                                 <div class="invalid-feedback">
                                     請輸入連絡電話
                                 </div>
@@ -288,7 +289,7 @@
                                 <span class="text-danger">*</span>
                                 <div class="row">
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_city" name="city_address" required>
+                                        <select class="custom-select form-control select2_city" data-index="3" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -296,7 +297,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_district" name="district_address" required>
+                                        <select class="custom-select form-control select2_district" data-index="3" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -304,7 +305,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_road" name="road_address" required>
+                                        <select class="custom-select form-control select2_road" data-index="3" name="road_address_agent" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -314,7 +315,7 @@
                                 </div>
                                 <div class="row pt-2">
                                     <div class="col-12">
-                                        <input type="text" name="elseaddress" class="form-control" placeholder="ex.108號1樓" required>
+                                        <input type="text" name="elseaddress_agent" class="form-control" placeholder="ex.108號1樓" required>
                                     </div>
                                 </div>
                             </div>
@@ -323,8 +324,8 @@
                                 <div class="row pb-2">
                                     <div class="col-12">
                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input" id="sameaddresscheckbox_agent">
-                                            <label class="custom-control-label" for="sameaddresscheckbox_agent">同戶籍地址</label>
+                                            <input type="checkbox" class="custom-control-input sameaddress" data-index="4" id="sameaddress_agent" name="sameaddress_agent">
+                                            <label class="custom-control-label" for="sameaddress_agent">同戶籍地址</label>
                                         </div>
                                     </div>
                                 </div>
@@ -332,7 +333,7 @@
                                 <span class="text-danger">*</span>
                                 <div class="row">
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_city" name="city_contact" required>
+                                        <select class="custom-select form-control select2_city select_contact_4" data-index="4" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -340,7 +341,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_district" name="district_contact" required>
+                                        <select class="custom-select form-control select2_district select_contact_4" data-index="4" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -348,7 +349,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_road" name="road_contact" required>
+                                        <select class="custom-select form-control select2_road select_contact_4" data-index="4" name="road_contact_agent" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -358,13 +359,10 @@
                                 </div>
                                 <div class="row pt-2">
                                     <div class="col-12">
-                                        <input type="text" name="elseaddress_contact" class="form-control" placeholder="ex.108號1樓" required>
+                                        <input type="text" name="elseaddress_contact_agent" class="form-control select_contact_4" placeholder="ex.108號1樓" required>
                                     </div>
                                 </div>
                             </div>
-
-
-
                             <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row align-items-center">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="invalidCheck" required="">
@@ -375,9 +373,7 @@
                                 </div>
                                 <button class="btn btn-primary ml-auto waves-effect waves-themed" type="submit">Submit form</button>
                             </div>
-
                         }
-
                     </div>
                 </div>
             </div>
@@ -405,23 +401,23 @@
     <script type="text/javascript">
         //validation
         // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
+        //(function () {
+        //    'use strict';
+        //    window.addEventListener('load', function () {
+        //        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        //        var forms = document.getElementsByClassName('needs-validation');
+        //        // Loop over them and prevent submission
+        //        var validation = Array.prototype.filter.call(forms, function (form) {
+        //            form.addEventListener('submit', function (event) {
+        //                if (form.checkValidity() === false) {
+        //                    event.preventDefault();
+        //                    event.stopPropagation();
+        //                }
+        //                form.classList.add('was-validated');
+        //            }, false);
+        //        });
+        //    }, false);
+        //})();
 
         $(function () {
             //inputmask
@@ -463,11 +459,13 @@
 
             //當下拉選單發生改變事件(change)，執行
             $('body').on('change', '.select2_city', function () {
-                $('.select2_road').empty();
-                $('.select2_road').select2({
+                var selectedIndex = $(this).attr('data-index');
+
+                $('.select2_road[data-index="' + selectedIndex + '"]').empty();
+                $('.select2_road[data-index="' + selectedIndex + '"]').select2({
                     placeholder: '街道',
                 });
-                var regioncode = $('.select2_city').val();
+                var regioncode = $('.select2_city[data-index="' + selectedIndex + '"]').val();
                 $.ajax({
                     type: "POST",
                     data: { regioncode: regioncode },
@@ -480,17 +478,17 @@
                             jsonArray[i].text = jsonArray[i].text.replace(/\"/g, '');
                         }
                     var data_district = jsonArray;
-                    $('.select2_district').empty();
+                    $('.select2_district[data-index="' + selectedIndex + '"]').empty();
                     var init_data = [
                         {
                             id: '',
                             text: '鄉/鎮/市/區'
                         },
                     ];
-                    $('.select2_district').select2({
+                    $('.select2_district[data-index="' + selectedIndex + '"]').select2({
                         data: init_data,
                     });
-                    $('.select2_district').select2({
+                    $('.select2_district[data-index="' + selectedIndex + '"]').select2({
                         data: data_district,
                         placeholder: {
                             id: '',
@@ -500,7 +498,9 @@
                 });
             });
             $('body').on('change', '.select2_district', function () {
-                var regioncode = $('.select2_district').val();
+                var selectedIndex = $(this).attr('data-index');
+
+                var regioncode = $('.select2_district[data-index="' + selectedIndex + '"]').val();
                 $.ajax({
                     type: "POST",
                     data: { regioncode: regioncode },
@@ -513,17 +513,17 @@
                             jsonArray[i].text = jsonArray[i].text.replace(/\"/g, '');
                         }
                     var data_road = jsonArray;
-                    $('.select2_road').empty();
+                    $('.select2_road[data-index="' + selectedIndex + '"]').empty();
                     var init_data = [
                         {
                             id: '',
                             text: '街道'
                         },
                     ];
-                    $('.select2_road').select2({
+                    $('.select2_road[data-index="' + selectedIndex + '"]').select2({
                         data: init_data,
                     });
-                    $('.select2_road').select2({
+                    $('.select2_road[data-index="' + selectedIndex + '"]').select2({
                         data: data_road,
                         placeholder: {
                             id: '',
@@ -533,6 +533,14 @@
                 });
             });
 
+            var example_gridsize = $("#example-gridsize");
+
+            $("#gridrange").on("input change", function () {
+                //do something
+                example_gridsize.attr("placeholder", ".col-" + $(this).val());
+                example_gridsize.parent().removeClass().addClass("col-" + $(this).val())
+                console.log("col-" + $(this).val());
+            });
             //var example_gridsize = $("#example-gridsize");
             //$("#gridrange").on("input change", function () {
             //    //do something
@@ -546,6 +554,53 @@
             $('#Inline1Radio1').prop('indeterminate', true)
 
             //radio監聽事件
+            //主要用途 : Inline1Radio3
+            $('input[name="Inline1Radio3"]').change(function () {
+                // 獲取被點選的 radio 按鈕的值
+                var selectedValue = $(this).val();
+                $('input[name="Inline1Radio3"]').each(function () {
+                    var radioId = $(this).attr('id');
+                    // 檢查是否被點選
+                    if ($(this).is(':checked')) {
+                        // 根據不同的 id 做相應的處理
+                        if (radioId === 'Inline1Radio3_1') {
+                            //住宅用; 不用上傳稅單
+                            var fileInput = document.getElementById('taxFile');
+                            var filelable = document.getElementById('taxFileLable');
+                            fileInput.value = '';
+                            filelable.innerHTML = '';
+                            $('#taxFile').prop('required', false);
+                            $('#taxFile').prop('disabled', true);
+                            $('#taxFile').prop('readonly', true);
+                            //其他
+                            $('#elsemainuse').prop('required', false);
+                            $('#elsemainuse').prop('disabled', true);
+                            $('#elsemainuse').prop('readonly', true);
+
+                        } else if (radioId === 'Inline1Radio3_5') {
+                            //其他; 要填寫欄位
+                            $('#taxFile').prop('required', true);
+                            $('#taxFile').prop('disabled', false);
+                            $('#taxFile').prop('readonly', false);
+                            $('#elsemainuse').prop('required', true);
+                            $('#elsemainuse').prop('disabled', false);
+                            $('#elsemainuse').prop('readonly', false);
+
+                        } else {
+                            $('#taxFile').prop('required', true);
+                            $('#taxFile').prop('disabled', false);
+                            $('#taxFile').prop('readonly', false);
+                            $('#elsemainuse').prop('required', false);
+                            $('#elsemainuse').prop('disabled', true);
+                            $('#elsemainuse').prop('readonly', true);
+                            $('#elsemainuse').innerHTML = '';
+                        }
+                    }
+                })
+            });
+
+            //radio監聽事件
+            //主要用途 : CoOwnerRadio
             //主要用途 : CoOwnerRadio(隱藏/顯示共有人資料)
             $('input[name="CoOwnerRadio"]').change(function () {
                 // 獲取被點選的 radio 按鈕的值
@@ -604,27 +659,16 @@
             });
 
             //同戶籍地址
-            $('#sameaddresscheckbox').on('change', function () {
+            $('.sameaddress').on('change', function () {
+                var selectedIndex = $(this).attr('data-index');
                 if ($(this).is(':checked')) {
-                    $('select[name="city_contact"]').prop('disabled', true);
-                    $('select[name="district_contact"]').prop('disabled', true);
-                    $('select[name="road_contact"]').prop('disabled', true);
-                    $('input[name="elseaddress_contact"]').prop('disabled', true);
+                    $('.select_contact_' + selectedIndex).prop('disabled', true);
                     //required
-                    $('select[name="city_contact"]').prop('required', false);
-                    $('select[name="district_contact"]').prop('required', false);
-                    $('select[name="road_contact"]').prop('required', false);
-                    $('input[name="elseaddress_contact"]').prop('required', false);
+                    $('.select_contact_' + selectedIndex).prop('required', false);
                 } else {
-                    $('select[name="city_contact"]').prop('disabled', false);
-                    $('select[name="district_contact"]').prop('disabled', false);
-                    $('select[name="road_contact"]').prop('disabled', false);
-                    $('input[name="elseaddress_contact"]').prop('disabled', false);
+                    $('.select_contact_' + selectedIndex).prop('disabled', false);
                     //required
-                    $('select[name="city_contact"]').prop('required', true);
-                    $('select[name="district_contact"]').prop('required', true);
-                    $('select[name="road_contact"]').prop('required', true);
-                    $('input[name="elseaddress_contact"]').prop('required', true);
+                    $('.select_contact_' + selectedIndex).prop('required', true);
                 }
             });
 
@@ -646,6 +690,13 @@
             rightArrow: '<i class="fal fa-angle-right" style="font-size: 1.25rem"></i>'
         }
 
+        $('.birthday').datepicker(
+            {
+                format: 'yyyy-mm-dd',
+                orientation: "請選擇出生年月日",
+                todayHighlight: true,
+                templates: controls
+            });
             //$('.datepicker').datepicker({
             //    format: 'yyyy-mm-dd',
             //    maxDate: moment(),
