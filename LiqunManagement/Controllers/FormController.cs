@@ -13,7 +13,7 @@ namespace LiqunManagement.Controllers
     public class FormController : BaseController
     {
         // GET: Form
-        public ActionResult Index()
+        public new ActionResult Index()
         {
             return View();
         }
