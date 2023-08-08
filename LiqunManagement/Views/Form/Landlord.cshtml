@@ -1,4 +1,4 @@
-﻿
+﻿﻿
 @{
     ViewBag.Title = "表單四期";
     Layout = "~/Views/Shared/smartadmin_Layout.cshtml";
@@ -114,19 +114,27 @@
                                 </div>
                             </div>
                             @*身分證字號*@
-                            <div class="form-group">
-                                <label class="form-label" for="IDnumber">身分證字號</label>
-                                <input type="text" id="IDnumber" name="IDnumber_landlord" class="form-control" required>
-                                <div class="invalid-feedback">
-                                    請輸入身分證字號
+                    <div class="form-group">
+                        <label class="form-label" for="IDnumber">身分證字號</label>
+                        <div class="row pb-2">
+                            <div class="col-12">
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" class="custom-control-input national_check" id="international_IDnumber" name="international_IDnumber" data-index="0">
+                                    <label class="custom-control-label" for="international_IDnumber">外籍</label>
                                 </div>
                             </div>
+                        </div>
+                        <input type="text" id="IDnumber" name="IDnumber_landlord" class="form-control national_IDnumber_0" required>
+                        <div class="invalid-feedback">
+                            請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
+                        </div>
+                    </div>
                             @*連絡電話*@
                             <div class="form-group">
                                 <label class="form-label" for="phonenumber">連絡電話</label>
                                 <input type="text" id="phonenumber_landlord" name="phonenumber_landlord" class="form-control" required>
                                 <div class="invalid-feedback">
-                                    請輸入連絡電話
+                                    請輸入連絡電話，並確認格式為【10個數字】
                                 </div>
                             </div>
                             @*戶籍地址*@
@@ -210,8 +218,47 @@
                                 </div>
                             </div>
 
+                            @*銀行*@
+                            <div class="form-group">
+                                <label class="form-label">銀行/銀行代碼</label>
+                                <span class="text-danger">*</span>
+                                <div class="row">
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_bank" name="district_contact_tenant" data-index="1" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇銀行/銀行代碼
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_bankbranches" name="bankbranches" data-index="1" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇分行/分行代碼
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="basic-url">帳號</label>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">帳號</span>
+                                            </div>
+                                            <input type="text" placeholder="" class="form-control" name="banknumber" required>
+                                            <div class="invalid-feedback">
+                                                請填寫帳號
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             @*共有人*@
-                            @Html.Partial("_CoOwner", "Form")
+                            @Html.Partial("_LandlordCoOwner", "Form")
 
                             @*代理人*@
                             <div class="panel-tag">
@@ -398,26 +445,56 @@
     @*<script src="~/Scripts/datepicker-zh-TW.js"></script>*@
     @*<script src="~/Content/plugins/fullcalendar/locales-all.min.js"></script>*@
 
-    <script type="text/javascript">
+<script type="text/javascript">
         //validation
         // Example starter JavaScript for disabling form submissions if there are invalid fields
-        //(function () {
-        //    'use strict';
-        //    window.addEventListener('load', function () {
-        //        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        //        var forms = document.getElementsByClassName('needs-validation');
-        //        // Loop over them and prevent submission
-        //        var validation = Array.prototype.filter.call(forms, function (form) {
-        //            form.addEventListener('submit', function (event) {
-        //                if (form.checkValidity() === false) {
-        //                    event.preventDefault();
-        //                    event.stopPropagation();
-        //                }
-        //                form.classList.add('was-validated');
-        //            }, false);
-        //        });
-        //    }, false);
-        //})();
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+
+                        //IDnumber//
+                        const IDpattern = /^[A-Z]\d{9}$/;
+                        const IDinput = document.getElementById('IDnumber');
+                        if (IDinput.hasAttribute('required')) {
+                            const IDinputvalue = IDinput.value;
+                            const IDisValid = IDpattern.test(IDinputvalue);
+                            if (!IDisValid) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                                document.getElementById('IDnumber').classList.add('is-invalid');
+                            }
+                            else {
+                                document.getElementById('IDnumber').classList.remove('is-invalid');
+                            }
+                        }
+
+                        //phoneNumber
+                        const Phonepattern = /^\d{10}$/;
+                        const Phoneinput = document.getElementById('phonenumber_landlord').value;
+                        const PhoneisValid = Phonepattern.test(Phoneinput);
+                        if (!PhoneisValid) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            document.getElementById('phonenumber_landlord').classList.add('is-invalid');
+                        }
+                        else {
+                            document.getElementById('phonenumber_landlord').classList.remove('is-invalid');
+                        }
+
+                    }, false);
+                });
+            }, false);
+        })();
 
         $(function () {
             //inputmask
@@ -455,9 +532,28 @@
                 //data: data_road,
                 placeholder: '街道',
             });
-            //下拉選單更改事件
+
+            //------------------
+            // 銀行下拉選單  *
+            //------------------
+            var jsonBank = @Html.Raw(Json.Encode(ViewBag.banklist));
+            var jsonBankArray = JSON.parse(jsonBank);
+
+            //for (var i = 0; i < jsonBankArray.length; i++) {
+            //    jsonBankArray[i].id = jsonBankArray[i].id.replace(/\"/g, '');
+            //    jsonBankArray[i].text = jsonBankArray[i].text.replace(/\"/g, '');
+            //}
+            var data_bank = jsonBankArray;
+            $(".select2_bank").select2({
+                data: data_bank,
+                placeholder: '銀行'
+            })
+            $(".select2_bankbranches").select2({
+                placeholder: '分行'
+            })
 
             //當下拉選單發生改變事件(change)，執行
+            //臺灣地址下拉選單
             $('body').on('change', '.select2_city', function () {
                 var selectedIndex = $(this).attr('data-index');
 
@@ -532,28 +628,41 @@
                     });
                 });
             });
-
-            var example_gridsize = $("#example-gridsize");
-
-            $("#gridrange").on("input change", function () {
-                //do something
-                example_gridsize.attr("placeholder", ".col-" + $(this).val());
-                example_gridsize.parent().removeClass().addClass("col-" + $(this).val())
-                console.log("col-" + $(this).val());
+            //銀行下拉選單
+            $('body').on('change', '.select2_bank', function () {
+                var selectedIndex = $(this).attr('data-index');
+                var bankcode = $('.select2_bank[data-index="' + selectedIndex + '"]').val();
+                $.ajax({
+                    type: "POST",
+                    data: { bankcode: bankcode },
+                    url: '@Url.Content("~/Form/DDLBank/")',
+                    dataType: 'json'
+                }).done(function (dataresult) {
+                    var jsonBankBranchArray = JSON.parse(dataresult);
+                    for (var i = 0; i < jsonBankBranchArray.length; i++) {
+                            jsonBankBranchArray[i].id = jsonBankBranchArray[i].id.replace(/\"/g, '');
+                            jsonBankBranchArray[i].text = jsonBankBranchArray[i].text.replace(/\"/g, '');
+                        }
+                    var data_bankbranch = jsonBankBranchArray;
+                    $('.select2_bankbranches[data-index="' + selectedIndex + '"]').empty();
+                    var init_data = [
+                        {
+                            id: '',
+                            text: '分行'
+                        },
+                    ];
+                    $('.select2_bankbranches[data-index="' + selectedIndex + '"]').select2({
+                        data: init_data,
+                    });
+                    $('.select2_bankbranches[data-index="' + selectedIndex + '"]').select2({
+                        data: data_bankbranch,
+                        placeholder: '分行'
+                    });
+                });
             });
-            //var example_gridsize = $("#example-gridsize");
-            //$("#gridrange").on("input change", function () {
-            //    //do something
-            //    example_gridsize.attr("placeholder", ".col-" + $(this).val());
-            //    example_gridsize.parent().removeClass().addClass("col-" + $(this).val())
-            //    console.log("col-" + $(this).val());
-            //});
-
-            //Check&Radio
-            $('#defaultIndeterminate').prop('indeterminate', true)
-            $('#Inline1Radio1').prop('indeterminate', true)
-
-            //radio監聽事件
+            //------------------
+            // 是否上傳稅單  *
+            //------------------
             //主要用途 : Inline1Radio3
             $('input[name="Inline1Radio3"]').change(function () {
                 // 獲取被點選的 radio 按鈕的值
@@ -599,8 +708,9 @@
                 })
             });
 
-            //radio監聽事件
-            //主要用途 : CoOwnerRadio
+            //------------------
+            // 共有人幾位  *
+            //------------------
             //主要用途 : CoOwnerRadio(隱藏/顯示共有人資料)
             $('input[name="CoOwnerRadio"]').change(function () {
                 // 獲取被點選的 radio 按鈕的值
@@ -672,6 +782,19 @@
                 }
             });
 
+            //是否為外籍(不需填身分證)
+            $('.national_check').on('change', function () {
+                var selectedIndex = $(this).attr('data-index');
+                if ($(this).is(':checked')) {
+                    $('.national_IDnumber_' + selectedIndex).prop('disabled', true);
+                    //required
+                    $('.national_IDnumber_' + selectedIndex).prop('required', false);
+                } else {
+                    $('.national_IDnumber_' + selectedIndex).prop('disabled', false);
+                    //required
+                    $('.national_IDnumber_' + selectedIndex).prop('required', true);
+                }
+            });
 
             //是否有代理人(checkbox)
             $('#jqgetagent').on('change', function () {
@@ -715,5 +838,5 @@
                 locale: 'zh-cn'
 });
         });
-    </script>
+</script>
 }

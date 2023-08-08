@@ -130,7 +130,7 @@
         </li>
         <li>
             <a href="#" title="Application Intel" data-filter-tags="application intel">
-                @*<i class="fal fa-user-cog"></i>*@     
+                @*<i class="fal fa-user-cog"></i>*@
                 <i class="fal fa-user-cog"></i>
                 <span class="nav-link-text" data-i18n="nav.theme_settings">職員管理</span>
             </a>
@@ -152,6 +152,25 @@
                 <i class="fal fa-history"></i>
                 <span class="nav-link-text" data-i18n="nav.theme_settings">修改紀錄</span>
             </a>
+        </li>
+
+        <li>
+            <a href="#" title="Application Intel" data-filter-tags="application intel">
+                <i class="fal fa-clipboard-list"></i>
+                <span class="nav-link-text">上傳資料</span>
+            </a>
+            <ul>
+                <li>
+                    <a href="@Url.Action("UploadRegion", "UpLoad")" title="Introduction" data-filter-tags="application intel introduction">
+                        <span class="nav-link-text" data-i18n="nav.theme_settings">臺灣地址</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("UploadBank", "UpLoad")" title="Introduction" data-filter-tags="application intel introduction">
+                        <span class="nav-link-text" data-i18n="nav.theme_settings">銀行代碼</span>
+                    </a>
+                </li>
+            </ul>
         </li>
     </ul>
     <div class="filter-message js-filter-message bg-success-600"></div>

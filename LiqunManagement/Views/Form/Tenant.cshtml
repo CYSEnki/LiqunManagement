@@ -59,7 +59,7 @@
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-                        @using (Html.BeginForm("Landlord", "Form", FormMethod.Post, new { @class = "needs-validation", @enctype = "multipart/form-data", @novalidate = "" }))
+                        @using (Html.BeginForm("Tenant", "Form", FormMethod.Post, new { @class = "needs-validation", @enctype = "multipart/form-data", @novalidate = "" }))
                         {
                             @*租客身分*@
                             <div class="panel-tag">
@@ -68,92 +68,92 @@
                             <div class="form-group">
                                 <div class="frame-wrap padding-top-ten">
                                     <div class="custom-control custom-radio custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="typeRadio_1" name="typeRadio" value="0">
-                                        <label class="custom-control-label" for="typeRadio_1">
+                                        <input type="radio" class="custom-control-input" id="typeRadio_0" name="typeRadio" value="0" required>
+                                        <label class="custom-control-label" for="typeRadio_0">
                                             設籍於該市居民、有居住事實、或有就學就業需求者。
                                         </label>
                                     </div>
                                     <div class="custom-control custom-radio custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="typeRadio_2" name="typeRadio" value="1">
-                                        <label class="custom-control-label" for="typeRadio_2">
+                                        <input type="radio" class="custom-control-input" id="typeRadio_1" name="typeRadio" value="1" required>
+                                        <label class="custom-control-label" for="typeRadio_1">
                                             現任職務之最高職務列等在警正四階以下或相當職務列等之基層警察及消防人員。
                                         </label>
                                     </div>
                                     <div class="custom-control custom-radio custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="typeRadio_3" name="typeRadio" value="2">
-                                        <label class="custom-control-label" for="typeRadio_3">
+                                        <input type="radio" class="custom-control-input" id="typeRadio_2" name="typeRadio" value="2" required>
+                                        <label class="custom-control-label" for="typeRadio_2">
                                             申請人或家庭成員為身心障礙者或65歲以上老人，申請換居並將自有住宅出租。
                                         </label>
                                     </div>
                                 </div>
                             </div>
                             <div class="panel-tag">
-                                二類
+                                一類
                             </div>
                             <div class="frame-wrap padding-top-ten">
                                 <div class="custom-control custom-radio custom-radio-rounded">
-                                    <input type="radio" class="custom-control-input" id="typeRadio_4" name="typeRadio" value="0">
-                                    <label class="custom-control-label" for="typeRadio_4">
+                                    <input type="radio" class="custom-control-input" id="typeRadio_3" name="typeRadio" value="3" required>
+                                    <label class="custom-control-label" for="typeRadio_3">
                                         六十五歲以上之老人。(限申請人本人)
                                     </label>
                                 </div>
                                 <div class="custom-control custom-radio custom-radio-rounded">
-                                    <input type="radio" class="custom-control-input" id="typeRadio_5" name="typeRadio" value="1">
-                                    <label class="custom-control-label" for="typeRadio_5">
+                                    <input type="radio" class="custom-control-input" id="typeRadio_4" name="typeRadio" value="4" required>
+                                    <label class="custom-control-label" for="typeRadio_4">
                                         原住民。
                                     </label>
                                 </div>
                                 <div class="custom-control custom-radio custom-radio-rounded">
-                                    <input type="radio" class="custom-control-input" id="typeRadio_6" name="typeRadio" value="2">
-                                    <label class="custom-control-label" for="typeRadio_6">
+                                    <input type="radio" class="custom-control-input" id="typeRadio_5" name="typeRadio" value="5" required>
+                                    <label class="custom-control-label" for="typeRadio_5">
                                         育有未成年子女三人以上。(限申請人本人)
                                     </label>
                                 </div>
                                 <div class="custom-control custom-radio custom-radio-rounded">
-                                    <input type="radio" class="custom-control-input" id="typeRadio_7" name="typeRadio" value="0">
-                                    <label class="custom-control-label" for="typeRadio_7">
+                                    <input type="radio" class="custom-control-input" id="typeRadio_6" name="typeRadio" value="6" required>
+                                    <label class="custom-control-label" for="typeRadio_6">
                                         特殊境遇家庭。
                                     </label>
                                 </div>
                                 <div class="custom-control custom-radio custom-radio-rounded">
-                                    <input type="radio" class="custom-control-input" id="typeRadio_8" name="typeRadio" value="1">
-                                    <label class="custom-control-label" for="typeRadio_8">
+                                    <input type="radio" class="custom-control-input" id="typeRadio_7" name="typeRadio" value="7" required>
+                                    <label class="custom-control-label" for="typeRadio_7">
                                         於安置教養機構或寄養家庭結束安置無法返家，未滿二十五歲。(限申請人本人)
                                     </label>
                                 </div>
                                 <div class="custom-control custom-radio custom-radio-rounded">
-                                    <input type="radio" class="custom-control-input" id="typeRadio_9" name="typeRadio" value="2">
-                                    <label class="custom-control-label" for="typeRadio_9">
+                                    <input type="radio" class="custom-control-input" id="typeRadio_8" name="typeRadio" value="8" required>
+                                    <label class="custom-control-label" for="typeRadio_8">
                                         受家庭暴力或性侵害之受害者及其子女。
                                     </label>
                                 </div>
                                 <div class="custom-control custom-radio custom-radio-rounded">
-                                    <input type="radio" class="custom-control-input" id="typeRadio_10" name="typeRadio" value="0">
-                                    <label class="custom-control-label" for="typeRadio_10">
+                                    <input type="radio" class="custom-control-input" id="typeRadio_9" name="typeRadio" value="9" required>
+                                    <label class="custom-control-label" for="typeRadio_9">
                                         身心障礙者。
                                     </label>
                                 </div>
                                 <div class="custom-control custom-radio custom-radio-rounded">
-                                    <input type="radio" class="custom-control-input" id="typeRadio_11" name="typeRadio" value="1">
-                                    <label class="custom-control-label" for="typeRadio_11">
+                                    <input type="radio" class="custom-control-input" id="typeRadio_10" name="typeRadio" value="10" required>
+                                    <label class="custom-control-label" for="typeRadio_10">
                                         感染人類免疫缺乏病毒者或罹患後天免疫缺乏症候群者。
                                     </label>
                                 </div>
                                 <div class="custom-control custom-radio custom-radio-rounded">
-                                    <input type="radio" class="custom-control-input" id="typeRadio_12" name="typeRadio" value="2">
-                                    <label class="custom-control-label" for="typeRadio_12">
+                                    <input type="radio" class="custom-control-input" id="typeRadio_11" name="typeRadio" value="11" required>
+                                    <label class="custom-control-label" for="typeRadio_11">
                                         因懷孕或生育而遭遇困境之未成年人。(限申請人本人)
                                     </label>
                                 </div>
                                 <div class="custom-control custom-radio custom-radio-rounded">
-                                    <input type="radio" class="custom-control-input" id="typeRadio_13" name="typeRadio" value="0">
-                                    <label class="custom-control-label" for="typeRadio_13">
+                                    <input type="radio" class="custom-control-input" id="typeRadio_12" name="typeRadio" value="12" required>
+                                    <label class="custom-control-label" for="typeRadio_12">
                                         災民。
                                     </label>
                                 </div>
                                 <div class="custom-control custom-radio custom-radio-rounded">
-                                    <input type="radio" class="custom-control-input" id="typeRadio_14" name="typeRadio" value="1">
-                                    <label class="custom-control-label" for="typeRadio_14">
+                                    <input type="radio" class="custom-control-input" id="typeRadio_13" name="typeRadio" value="13" required>
+                                    <label class="custom-control-label" for="typeRadio_13">
                                         遊民。
                                     </label>
                                 </div>
@@ -164,55 +164,19 @@
                             <div class="form-group">
                                 <div class="frame-wrap padding-top-ten">
                                     <div class="custom-control custom-radio custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="typeRadio_15" name="typeRadio" value="0">
-                                        <label class="custom-control-label" for="typeRadio_15">
+                                        <input type="radio" class="custom-control-input" id="typeRadio_14" name="typeRadio" value="14" required>
+                                        <label class="custom-control-label" for="typeRadio_14">
                                             低收入戶。
                                         </label>
                                     </div>
                                     <div class="custom-control custom-radio custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="typeRadio_16" name="typeRadio" value="1">
-                                        <label class="custom-control-label" for="typeRadio_16">
+                                        <input type="radio" class="custom-control-input" id="typeRadio_15" name="typeRadio" value="15" required>
+                                        <label class="custom-control-label" for="typeRadio_15">
                                             中低收入戶。
                                         </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            @*4期租客資格備註*@
-                            <div class="panel-tag">
-                                4期租客資格備註
-                            </div>
-                            <div class="form-group">
-                                <div class="frame-wrap padding-top-ten">
-                                    <div class="custom-control custom-radio custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="qualifyRadio_1" name="qualifyRadio" value="0">
-                                        <label class="custom-control-label" for="qualifyRadio_1">
-                                            一般戶 符合社宅、不符合300億(無補助)
-                                        </label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="qualifyRadio_2" name="qualifyRadio" value="1">
-                                        <label class="custom-control-label" for="qualifyRadio_2">
-                                            整合戶 符合社宅、符合300億 (可領補助)
-                                        </label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="qualifyRadio_3" name="qualifyRadio" value="2">
-                                        <label class="custom-control-label" for="qualifyRadio_3">
-                                            轉期戶 符合社宅、不符合300億 2、3期弱勢戶舊房客 (可領補助，但無加碼)
-                                        </label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="qualifyRadio_4" name="qualifyRadio" value="3">
-                                        <label class="custom-control-label" for="qualifyRadio_4">
-                                            轉軌2 既有租約 (原為300億物件及租客)
-                                        </label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="qualifyRadio_5" name="qualifyRadio" value="4">
-                                        <label class="custom-control-label" for="qualifyRadio_5">
-                                            換居戶 符合換居身分 (可領補助，但無加碼)
-                                        </label>
+                                        <div class="invalid-feedback">
+                                            請選擇身分
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -221,15 +185,23 @@
                             <div class="form-group">
                                 <label class="form-label">上傳300億試算表截圖</label>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="taxFile" name="taxfile">
-                                    <label id="taxFileLable" class="custom-file-label" for="customFile">選擇檔案</label>
+                                    <input type="file" class="custom-file-input" multiple id="sheetfile" name="sheetfile" required>
+                                    <label id="taxFileLable" class="custom-file-label" for="sheetfile">選擇檔案</label>
                                     <div class="invalid-feedback">
-                                        請上傳稅單
+                                        請上傳試算表
                                     </div>
                                 </div>
                                 <span class="help-block pl-2">*<code>&lt;上傳300億試算表截圖&gt;</code></span>
                             </div>
 
+                            @*房東姓名*@
+                            <div class="form-group">
+                                <label class="form-label" for="jqlandlordname">房客姓名</label>
+                                <input type="text" id="jqlandlordname" name="name_landlord" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    請輸入房客姓名
+                                </div>
+                            </div>
                             @*性別*@
                             <div class="form-group">
                                 <label class="form-label">
@@ -238,12 +210,12 @@
                                 </label>
                                 <div class="frame-wrap padding-top-ten">
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="genderRadio_1" name="genderRadio" value="1" required="">
-                                        <label class="custom-control-label" for="genderRadio_1">男</label>
+                                        <input type="radio" class="custom-control-input" id="genderRadio_tenant_1" name="genderRadio_tenant" value="1" required>
+                                        <label class="custom-control-label" for="genderRadio_tenant_1">男</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="genderRadio_2" name="genderRadio" value="0" required="">
-                                        <label class="custom-control-label" for="genderRadio_2">女</label>
+                                        <input type="radio" class="custom-control-input" id="genderRadio_tenant_0" name="genderRadio_tenant" value="0" required>
+                                        <label class="custom-control-label" for="genderRadio_tenant_0">女</label>
                                         <div class="invalid-feedback">
                                             請選擇房東性別
                                         </div>
@@ -256,7 +228,7 @@
                                 <label class="form-label" for="birthday">生日</label>
                                 <span class="text-danger">*</span>
                                 <div class="input-group">
-                                    <input type="text" class="form-control birthday" placeholder="請選擇生日" id="birthday" name="birthday" required>
+                                    <input type="text" class="form-control birthday" placeholder="請選擇生日" name="birthday_tenant" required>
                                     <div class="input-group-append">
                                         <span class="input-group-text fs-xl">
                                             <i class="fal fa-calendar-check"></i>
@@ -271,7 +243,15 @@
                             @*身分證字號*@
                             <div class="form-group">
                                 <label class="form-label" for="IDnumber">身分證字號</label>
-                                <input type="text" id="IDnumber" name="IDnumber" class="form-control" required>
+                                <div class="row pb-2">
+                                    <div class="col-12">
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input national_check" id="international_IDnumber" name="international_IDnumber" data-index="0">
+                                            <label class="custom-control-label" for="international_IDnumber">外籍</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="text" id="IDnumber" name="IDnumber_tenant" class="form-control national_IDnumber_0" required>
                                 <div class="invalid-feedback">
                                     請輸入身分證字號
                                 </div>
@@ -279,7 +259,7 @@
                             @*連絡電話*@
                             <div class="form-group">
                                 <label class="form-label" for="phonenumber">連絡電話</label>
-                                <input type="text" id="phonenumber" name="phonenumber" class="form-control" required>
+                                <input type="text" name="phonenumber_tenant" class="form-control" required>
                                 <div class="invalid-feedback">
                                     請輸入連絡電話
                                 </div>
@@ -290,7 +270,7 @@
                                 <span class="text-danger">*</span>
                                 <div class="row">
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_city" required>
+                                        <select class="custom-select form-control select2_city" data-index="0" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -298,7 +278,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_district" required>
+                                        <select class="custom-select form-control select2_district" data-index="0" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -306,7 +286,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_road" name="road_address" required>
+                                        <select class="custom-select form-control select2_road" name="road_address_tenant" data-index="0" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -316,7 +296,7 @@
                                 </div>
                                 <div class="row pt-2">
                                     <div class="col-12">
-                                        <input type="text" name="elseaddress" class="form-control" placeholder="ex.108號1樓" required>
+                                        <input type="text" name="elseaddress_tenant" class="form-control" placeholder="ex.108號1樓" required>
                                     </div>
                                 </div>
                             </div>
@@ -325,8 +305,8 @@
                                 <div class="row pb-2">
                                     <div class="col-12">
                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input" id="sameaddresscheckbox" name="sameaddress">
-                                            <label class="custom-control-label" for="sameaddresscheckbox">同戶籍地址</label>
+                                            <input type="checkbox" class="custom-control-input sameaddress" id="sameaddress_tenant" name="sameaddress" data-index="1">
+                                            <label class="custom-control-label" for="sameaddress_tenant">同戶籍地址</label>
                                         </div>
                                     </div>
                                 </div>
@@ -334,7 +314,7 @@
                                 <span class="text-danger">*</span>
                                 <div class="row">
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_city" name="city_contact" required>
+                                        <select class="custom-select form-control select2_city select_contact_1" name="city_contact_tenant" data-index="1" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -342,7 +322,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_district" name="district_contact" required>
+                                        <select class="custom-select form-control select2_district select_contact_1" name="district_contact_tenant" data-index="1" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -350,7 +330,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_road " name="road_contact" required>
+                                        <select class="custom-select form-control select2_road select_contact_1" name="road_contact_tenant" data-index="1" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -360,7 +340,7 @@
                                 </div>
                                 <div class="row pt-2">
                                     <div class="col-12">
-                                        <input type="text" name="elseaddress_contact" class="form-control" placeholder="ex.108號1樓" required>
+                                        <input type="text" name="elseaddress_contact" class="form-control select_contact_1" placeholder="ex.108號1樓" data-index="1" required>
                                     </div>
                                 </div>
                             </div>
@@ -371,7 +351,7 @@
                                 <span class="text-danger">*</span>
                                 <div class="row">
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_bank" required>
+                                        <select class="custom-select form-control select2_bank" name="district_contact_tenant" data-index="1" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -379,7 +359,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_bankbranches" required>
+                                        <select class="custom-select form-control select2_bankbranches" name="bankbranches" data-index="1" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -396,55 +376,20 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">帳號</span>
                                             </div>
-                                            <input name="banknumber" type="text" placeholder="" class="form-control" required>
+                                            <input type="text" placeholder="" class="form-control" name="banknumber" required>
                                             <div class="invalid-feedback">
                                                 請填寫帳號
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">戶號</span>
-                                            </div>
-                                            <input name="banknumber" type="text" placeholder="" class="form-control" required>
-                                            <div class="invalid-feedback">
-                                                請填寫戶號
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            @*分戶戶號*@
-                            <div class="form-group">
-                                <div class="row pb-2">
-                                    <div class="col-12">
-                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input" id="separatehouse" data-index="2" name="separatehouse" value="true">
-                                            <label class="custom-control-label" for="separatehouse">是否分戶</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">分戶戶號</span>
-                                            </div>
-                                            <input id="separatenumber" name="separatenumber" type="text" placeholder="" class="form-control" disabled>
-                                            <div class="invalid-feedback">
-                                                請填寫分戶戶號
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             //配偶
                             <div class="panel-tag" style="padding-bottom:0px; margin-bottom:0px;">
                                 <div class="row">
                                     <div class="custom-control custom-checkbox" style="margin-left:10px;">
-                                        <input type="checkbox" class="custom-control-input" id="couplecheck" data-index="2" name="couplecheck" value="true">
+                                        <input type="checkbox" class="custom-control-input" id="couplecheck" name="couplecheck" value="true">
                                         <label class="custom-control-label" for="couplecheck"></label>
                                     </div>
                                     <label>配偶</label>
@@ -457,16 +402,16 @@
                                             <div class="input-group-append">
                                                 <span class="input-group-text">姓名</span>
                                             </div>
-                                            <input name="roomamount" id="jqroomamount" type="text" class="form-control" aria-label="Person name" required>
+                                            <input type="text" class="form-control couple_input" name="coupleName" disabled>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">身分證</span>
                                             </div>
-                                            <input name="hallamount" type="text" class="form-control" aria-label="Person name" required>
+                                            <input type="text" class="form-control couple_input" name="coupleNumber" disabled>
                                         </div>
                                     </div>
                                     <div class="col-md-10 col-lg-6 pt-3">
                                         <div class="input-group">
-                                            <input type="text" class="form-control birthday" placeholder="請選擇生日" id="couplebirth" name="couplebirth" required>
+                                            <input type="text" class="form-control birthday couple_input" id="couplebirth" name="couplebirth" placeholder="請選擇生日" disabled>
                                             <div class="input-group-append">
                                                 <span class="input-group-text fs-xl">
                                                     <i class="fal fa-calendar-check"></i>
@@ -479,46 +424,57 @@
                                     </div>
                                 </div>
                             </div>
-
-
-                            
-                            //直系親屬
-                    <div class="panel-tag" style="padding-bottom:0px; margin-bottom:0px;">
-                        <label>直系親屬</label>
-                    </div>
+                            @*分戶戶號*@
                             <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-10 col-lg-6 pt-3">
-                                        <div class="input-group input-group-multi-transition w-100">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">姓名</span>
+                                <div class="row d-flex align-items-end">
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">戶號</span>
                                             </div>
-                                            <input name="roomamount" id="jqroomamount" type="text" class="form-control" aria-label="Person name" required>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">身分證</span>
+                                            <input type="text" placeholder="" class="form-control couple_input" name="accountnumber" required disabled>
+                                            <div class="invalid-feedback">
+                                                請填寫戶號
                                             </div>
-                                            <input name="hallamount" type="text" class="form-control" aria-label="Person name" required>
                                         </div>
                                     </div>
-                                    <div class="col-md-10 col-lg-6 pt-3">
+                                    <div class="col-md-4">
+                                        <div class="custom-control custom-checkbox custom-control-inline mb-2">
+                                            <input type="checkbox" class="custom-control-input couple_input" id="separatecheck" name="separatecheck" value="true" disabled>
+                                            <label class="custom-control-label" for="separatecheck">是否分戶</label>
+                                        </div>
                                         <div class="input-group">
-                                            <input type="text" class="form-control birthday" placeholder="請選擇生日" id="couplebirth" name="couplebirth" required>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text fs-xl">
-                                                    <i class="fal fa-calendar-check"></i>
-                                                </span>
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">分戶戶號</span>
                                             </div>
+                                            <input type="text" id="separatenumber" class="form-control" name="separatenumber" placeholder="" disabled>
                                             <div class="invalid-feedback">
-                                                請選擇生日
+                                                請填寫分戶戶號
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            //直系親屬
+                            <div class="panel-tag">
+                                直系親屬
+                            </div>
+                            @Html.Partial("_TenantDirectfamily", "Form")
+                            <div class="row">
+                                <button type="button" class="btn btn-dark waves-effect waves-themed ml-3 mb-2 shipbutton" data-order="0" onclick="changeship(this, 'delete')">刪除</button>
+                                <button type="button" class="btn btn-dark waves-effect waves-themed ml-1 mb-2 shipbutton" data-order="0" onclick="changeship(this, 'create')">新增直系親屬</button>
 
-
-
-
+                            </div>
+                            //代理人
+                            <div class="panel-tag">
+                                代理人
+                            </div>
+                            @Html.Partial("_TenantAgent", "Form")
+                            //代理人
+                            <div class="panel-tag">
+                                保證人
+                            </div>
+                            @Html.Partial("_TenantGuarantor", "Form")
 
                             <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row align-items-center">
                                 <div class="custom-control custom-checkbox">
@@ -577,26 +533,38 @@
             //inputmask
             $(":input").inputmask();
 
-            //將不需填寫的資料先隱藏(同)
-            $('.getagent').hide();
-            $('.getco1').hide();
-            $('.getco2').hide();
-            $('.getco3').hide();
-            $('.getco4').hide();
-            $('.getco5').hide();
-
+            //將不需填寫的資料先隱藏
+            //直系親屬
+            $('.directformgroup[data-order="' + 1 + '"]').hide();
+            $('.directformgroup[data-order="' + 2 + '"]').hide();
+            $('.directformgroup[data-order="' + 3 + '"]').hide();
+            $('.directformgroup[data-order="' + 4 + '"]').hide();
+            $('.directformgroup[data-order="' + 5 + '"]').hide();
+            $('.directformgroup[data-order="' + 6 + '"]').hide();
+            $('.directformgroup[data-order="' + 7 + '"]').hide();
+            $('.directformgroup[data-order="' + 8 + '"]').hide();
+            $('.directformgroup[data-order="' + 9 + '"]').hide();
+            $('.directformgroup[data-order="' + 10 + '"]').hide();
+            //代理人
+            $('.getag1').hide();
+            $('.getag2').hide();
+            $('.getag3').hide();
+            //保證人
+            $('.getgu1').hide();
+            $('.getgu2').hide();
+            $('.getgu3').hide();
             //------------------
             // 物件地址下拉選單  *
             //------------------
             var jsonCity = @Html.Raw(Json.Encode(ViewBag.citylist));
-            var jsonArray = JSON.parse(jsonCity);
+            var jsonAddressArray = JSON.parse(jsonCity);
 
-            for (var i = 0; i < jsonArray.length; i++) {
-                jsonArray[i].id = jsonArray[i].id.replace(/\"/g, '');
-                jsonArray[i].text = jsonArray[i].text.replace(/\"/g, '');
+            for (var i = 0; i < jsonAddressArray.length; i++) {
+                jsonAddressArray[i].id = jsonAddressArray[i].id.replace(/\"/g, '');
+                jsonAddressArray[i].text = jsonAddressArray[i].text.replace(/\"/g, '');
             }
 
-            var data_city = jsonArray;
+            var data_city = jsonAddressArray;
             $('.select2_city').select2({
                 data: data_city,
                 placeholder: '縣/市'
@@ -609,38 +577,58 @@
                 //data: data_road,
                 placeholder: '街道',
             });
-            //下拉選單更改事件
+            //------------------
+            // 銀行下拉選單  *
+            //------------------
+            var jsonBank = @Html.Raw(Json.Encode(ViewBag.banklist));
+            var jsonBankArray = JSON.parse(jsonBank);
+            
+            //for (var i = 0; i < jsonBankArray.length; i++) {
+            //    jsonBankArray[i].id = jsonBankArray[i].id.replace(/\"/g, '');
+            //    jsonBankArray[i].text = jsonBankArray[i].text.replace(/\"/g, '');
+            //}
+            var data_bank = jsonBankArray;
+            $(".select2_bank").select2({
+                data: data_bank,
+                placeholder: '銀行'
+            })
+            $(".select2_bankbranches").select2({
+                placeholder: '分行'
+            })
 
+            //下拉選單更改事件
             //當下拉選單發生改變事件(change)，執行
             $('body').on('change', '.select2_city', function () {
-                $('.select2_road').empty();
-                $('.select2_road').select2({
+                var selectedIndex = $(this).attr('data-index');
+
+                $('.select2_road[data-index="' + selectedIndex + '"]').empty();
+                $('.select2_road[data-index="' + selectedIndex + '"]').select2({
                     placeholder: '街道',
                 });
-                var regioncode = $('.select2_city').val();
+                var regioncode = $('.select2_city[data-index="' + selectedIndex + '"]').val();
                 $.ajax({
                     type: "POST",
                     data: { regioncode: regioncode },
                     url: '@Url.Content("~/Form/DDLRegion/")',
                     dataType: 'json'
                 }).done(function (dataresult) {
-                    var jsonArray = JSON.parse(dataresult);
-                        for (var i = 0; i < jsonArray.length; i++) {
-                            jsonArray[i].id = jsonArray[i].id.replace(/\"/g, '');
-                            jsonArray[i].text = jsonArray[i].text.replace(/\"/g, '');
+                    var jsonAddressArray = JSON.parse(dataresult);
+                        for (var i = 0; i < jsonAddressArray.length; i++) {
+                            jsonAddressArray[i].id = jsonAddressArray[i].id.replace(/\"/g, '');
+                            jsonAddressArray[i].text = jsonAddressArray[i].text.replace(/\"/g, '');
                         }
-                    var data_district = jsonArray;
-                    $('.select2_district').empty();
+                    var data_district = jsonAddressArray;
+                    $('.select2_district[data-index="' + selectedIndex + '"]').empty();
                     var init_data = [
                         {
                             id: '',
                             text: '鄉/鎮/市/區'
                         },
                     ];
-                    $('.select2_district').select2({
+                    $('.select2_district[data-index="' + selectedIndex + '"]').select2({
                         data: init_data,
                     });
-                    $('.select2_district').select2({
+                    $('.select2_district[data-index="' + selectedIndex + '"]').select2({
                         data: data_district,
                         placeholder: {
                             id: '',
@@ -650,30 +638,32 @@
                 });
             });
             $('body').on('change', '.select2_district', function () {
-                var regioncode = $('.select2_district').val();
+                var selectedIndex = $(this).attr('data-index');
+
+                var regioncode = $('.select2_district[data-index="' + selectedIndex + '"]').val();
                 $.ajax({
                     type: "POST",
                     data: { regioncode: regioncode },
                     url: '@Url.Content("~/Form/DDLRegion/")',
                     dataType: 'json'
                 }).done(function (dataresult) {
-                    var jsonArray = JSON.parse(dataresult);
-                        for (var i = 0; i < jsonArray.length; i++) {
-                            jsonArray[i].id = jsonArray[i].id.replace(/\"/g, '');
-                            jsonArray[i].text = jsonArray[i].text.replace(/\"/g, '');
+                    var jsonAddressArray = JSON.parse(dataresult);
+                        for (var i = 0; i < jsonAddressArray.length; i++) {
+                            jsonAddressArray[i].id = jsonAddressArray[i].id.replace(/\"/g, '');
+                            jsonAddressArray[i].text = jsonAddressArray[i].text.replace(/\"/g, '');
                         }
-                    var data_road = jsonArray;
-                    $('.select2_road').empty();
+                    var data_road = jsonAddressArray;
+                    $('.select2_road[data-index="' + selectedIndex + '"]').empty();
                     var init_data = [
                         {
                             id: '',
                             text: '街道'
                         },
                     ];
-                    $('.select2_road').select2({
+                    $('.select2_road[data-index="' + selectedIndex + '"]').select2({
                         data: init_data,
                     });
-                    $('.select2_road').select2({
+                    $('.select2_road[data-index="' + selectedIndex + '"]').select2({
                         data: data_road,
                         placeholder: {
                             id: '',
@@ -682,32 +672,50 @@
                     });
                 });
             });
-
-
-
-
-            var example_gridsize = $("#example-gridsize");
-
-            $("#gridrange").on("input change", function () {
-                //do something
-                example_gridsize.attr("placeholder", ".col-" + $(this).val());
-                example_gridsize.parent().removeClass().addClass("col-" + $(this).val())
-                console.log("col-" + $(this).val());
+            //銀行下拉選單
+            $('body').on('change', '.select2_bank', function () {
+                var selectedIndex = $(this).attr('data-index');
+                var bankcode = $('.select2_bank[data-index="' + selectedIndex + '"]').val();
+                $.ajax({
+                    type: "POST",
+                    data: { bankcode: bankcode },
+                    url: '@Url.Content("~/Form/DDLBank/")',
+                    dataType: 'json'
+                }).done(function (dataresult) {
+                    var jsonBankBranchArray = JSON.parse(dataresult);
+                    for (var i = 0; i < jsonBankBranchArray.length; i++) {
+                            jsonBankBranchArray[i].id = jsonBankBranchArray[i].id.replace(/\"/g, '');
+                            jsonBankBranchArray[i].text = jsonBankBranchArray[i].text.replace(/\"/g, '');
+                        }
+                    var data_bankbranch = jsonBankBranchArray;
+                    $('.select2_bankbranches[data-index="' + selectedIndex + '"]').empty();
+                    var init_data = [
+                        {
+                            id: '',
+                            text: '分行'
+                        },
+                    ];
+                    $('.select2_bankbranches[data-index="' + selectedIndex + '"]').select2({
+                        data: init_data,
+                    });
+                    $('.select2_bankbranches[data-index="' + selectedIndex + '"]').select2({
+                        data: data_bankbranch,
+                        placeholder: '分行'
+                    });
+                });
             });
-
-            //Check&Radio
-            $('#defaultIndeterminate').prop('indeterminate', true)
-            $('#Inline1Radio1').prop('indeterminate', true)
-
-            //var toggleCheckbox = function () {
-            //    $('#js-checkbox-toggle').toggleText('Change to CIRCLE', 'Change back to default');
-            //    $('.frame-wrap .custom-checkbox').toggleClass('custom-checkbox-circle');
-            //}
-
-            var toggleRadio = function () {
-                $('#js-radio-toggle').toggleText('Change to ROUNDED', 'Change back to default');
-                $('.frame-wrap .custom-radio').toggleClass('custom-radio-rounded');
-            }
+            //直系親屬下拉選單(嬰幼兒不需填身分證)
+            $('body').on('change', '.select_direct', function () {
+                var selectedIndex = $(this).attr('data-order');
+                //選擇親屬關係之代號
+                var directcode = $('.select_direct[data-order="' + selectedIndex + '"]').val();
+                if (directcode == "17") {
+                    $('.direct_IDnumber[data-order="' + selectedIndex + '"]').prop('disabled', true);
+                }
+                else {
+                    $('.direct_IDnumber[data-order="' + selectedIndex + '"]').prop('disabled', false);
+                }
+            });
 
             //radio監聽事件
             //主要用途 : Inline1Radio3
@@ -741,7 +749,6 @@
                             $('#elsemainuse').prop('required', true);
                             $('#elsemainuse').prop('disabled', false);
                             $('#elsemainuse').prop('readonly', false);
-
                         } else {
                             $('#taxFile').prop('required', true);
                             $('#taxFile').prop('disabled', false);
@@ -754,66 +761,6 @@
                     }
                 })
             });
-
-
-            //radio監聽事件
-            //主要用途 : CoOwnerRadio
-            $('input[name="CoOwnerRadio"]').change(function () {
-                // 獲取被點選的 radio 按鈕的值
-                var selectedValue = $(this).val();
-                $('input[name="CoOwnerRadio"]').each(function () {
-                    var radioId = $(this).attr('id');
-                    // 檢查是否被點選
-                    if ($(this).is(':checked')) {
-                        // 根據不同的 id 做相應的處理
-                        switch (radioId) {
-                            case "jqCoOwnerRadio_0":
-                                $('.getco1').hide();
-                                $('.getco2').hide();
-                                $('.getco3').hide();
-                                $('.getco4').hide();
-                                $('.getco5').hide();
-                                break;
-                            case "jqCoOwnerRadio_1":
-                                $('.getco1').show();
-                                $('.getco2').hide();
-                                $('.getco3').hide();
-                                $('.getco4').hide();
-                                $('.getco5').hide();
-                                break;
-                            case "jqCoOwnerRadio_2":
-                                $('.getco1').show();
-                                $('.getco2').show();
-                                $('.getco3').hide();
-                                $('.getco4').hide();
-                                $('.getco5').hide();
-                                break;
-                            case "jqCoOwnerRadio_3":
-                                $('.getco1').show();
-                                $('.getco2').show();
-                                $('.getco3').show();
-                                $('.getco4').hide();
-                                $('.getco5').hide();
-                                break;
-                            case "jqCoOwnerRadio_4":
-                                $('.getco1').show();
-                                $('.getco2').show();
-                                $('.getco3').show();
-                                $('.getco4').show();
-                                $('.getco5').hide();
-                                break;
-                            case "jqCoOwnerRadio_5":
-                                $('.getco1').show();
-                                $('.getco2').show();
-                                $('.getco3').show();
-                                $('.getco4').show();
-                                $('.getco5').show();
-                                break;
-                        }
-                    }
-                })
-            });
-
             $('input[name="Inline1Radio5"]').change(function () {
                 // 獲取被點選的 radio 按鈕的值
                 var selectedValue = $(this).val();
@@ -842,32 +789,59 @@
             });
 
             //同戶籍地址
-            $('#sameaddresscheckbox').on('change', function () {
+            $('.sameaddress').on('change', function () {
+                var selectedIndex = $(this).attr('data-index');
                 if ($(this).is(':checked')) {
-                    $('select[name="city_contact"]').prop('disabled', true);
-                    $('select[name="district_contact"]').prop('disabled', true);
-                    $('select[name="road_contact"]').prop('disabled', true);
-                    $('input[name="elseaddress_contact"]').prop('disabled', true);
+                    $('.select_contact_' + selectedIndex).prop('disabled', true);
                     //required
-                    $('select[name="city_contact"]').prop('required', false);
-                    $('select[name="district_contact"]').prop('required', false);
-                    $('select[name="road_contact"]').prop('required', false);
-                    $('input[name="elseaddress_contact"]').prop('required', false);
+                    $('.select_contact_' + selectedIndex).prop('required', false);
                 } else {
-                    $('select[name="city_contact"]').prop('disabled', false);
-                    $('select[name="district_contact"]').prop('disabled', false);
-                    $('select[name="road_contact"]').prop('disabled', false);
-                    $('input[name="elseaddress_contact"]').prop('disabled', false);
+                    $('.select_contact_' + selectedIndex).prop('disabled', false);
                     //required
-                    $('select[name="city_contact"]').prop('required', true);
-                    $('select[name="district_contact"]').prop('required', true);
-                    $('select[name="road_contact"]').prop('required', true);
-                    $('input[name="elseaddress_contact"]').prop('required', true);
+                    $('.select_contact_' + selectedIndex).prop('required', true);
                 }
             });
 
+            //是否有代理人(checkbox)
+            $('#jqgetagent').on('change', function () {
+                if ($(this).is(':checked')) {
+                    //getagent
+                    $('.getagent').show();
+                } else {
+                    $('.getagent').hide();
+                }
+            });
+
+            //是否有配偶
+            $('#couplecheck').on('change', function () {
+                if ($(this).is(':checked')) {
+                    //disabled
+                    $('.couple_input').prop('disabled', false);
+                    //required
+                    $('.couple_input').prop('required', true);
+                } else {
+                    //disabled
+                    $('.couple_input').prop('disabled', true);
+                    //required
+                    $('.couple_input').prop('required', false);
+                }
+            });
+
+            //是否為外籍(不需填身分證)
+            $('.national_check').on('change', function () {
+                var selectedIndex = $(this).attr('data-index');
+                if ($(this).is(':checked')) {
+                    $('.national_IDnumber_' + selectedIndex).prop('disabled', true);
+                    //required
+                    $('.national_IDnumber_' + selectedIndex).prop('required', false);
+                } else {
+                    $('.national_IDnumber_' + selectedIndex).prop('disabled', false);
+                    //required
+                    $('.national_IDnumber_' + selectedIndex).prop('required', true);
+                }
+            });
             //是否分戶
-            $('#separatehouse').on('change', function () {
+            $('#separatecheck').on('change', function () {
                 if ($(this).is(':checked')) {
                     //disabled
                     $('input[name="separatenumber"]').prop('disabled', false);
@@ -883,44 +857,166 @@
                 }
             });
 
+            //直系親屬(下拉選單)
+            var dataDirect = [
+                { id: 1, text: '父親' },
+                { id: 2, text: '母親' },
+                { id: 3, text: '兒子' },
+                { id: 4, text: '女兒' },
+                { id: 5, text: '媳婦' },
+                { id: 6, text: '女婿' },
+                { id: 7, text: '孫子' },
+                { id: 8, text: '孫女' },
+                { id: 9, text: '孫媳婦' },
+                { id: 10, text: '孫女婿' },
+                { id: 11, text: '阿公' },
+                { id: 12, text: '阿嬤' },
+                { id: 13, text: '爺爺' },
+                { id: 14, text: '奶奶' },
+                { id: 15, text: '公公' },
+                { id: 16, text: '婆婆' },
+                { id: 17, text: '胎兒' },
+                //{ id: "1", text: '父親'},
+                //{ id: "2", text: '母親'},
+                //{ id: "3", text: '兒子'},
+                //{ id: "4", text: '女兒'},
+                //{ id: "5", text: '媳婦'},
+                //{ id: "6", text: '女婿'},
+                //{ id: "7", text: '孫子'},
+                //{ id: "8", text: '孫女'},
+                //{ id: "9", text: '孫媳婦'},
+                //{ id: "10", text: '孫女婿'},
+                //{ id: "11", text: '阿公'},
+                //{ id: "12", text: '阿嬤'},
+                //{ id: "13", text: '爺爺'},
+                //{ id: "14", text: '奶奶'},
+                //{ id: "15", text: '公公'},
+                //{ id: "16", text: '婆婆'},
+                //{ id: "17", text: '胎兒'},
+                /*{ id: 18, text: '其他'},*/
+            ];
+            $(".select_direct").select2({
+                tags: "true",
+                data: dataDirect,
+                placeholder: '親屬關係'
+            })
+            //是否填寫其他關係欄位
+            //$('body').on('change', '.select_direct', function () {
+            //    
+            //    var selectorder = $(this).attr('data-order');
+            //    var ship = $('.select_direct[data-order="' + selectorder + '"]').val();
+            //    if (ship == '18') {
+            //        $('.elseship[data-order="' + selectorder + '"]').prop('required', true);
+            //        $('.elseship[data-order="' + selectorder + '"]').prop('disabled', false);
+            //    }
+            //    else {
+            //        $('.elseship[data-order="' + selectorder + '"]').prop('required', false);
+            //        $('.elseship[data-order="' + selectorder + '"]').prop('disabled', true);
+            //    }
+            //});
 
-            //是否有代理人(checkbox)
-            $('#jqgetagent').on('change', function () {
-                if ($(this).is(':checked')) {
-                    //getagent
-                    $('.getagent').show();
-                } else {
-                    $('.getagent').hide();
-                }
+            //------------------
+            // 代理人幾位  *
+            //------------------
+            //主要用途 : CoOwnerRadio(隱藏/顯示代理人資料)
+            $('input[name="AgentRadio"]').change(function () {
+                $('input[name="AgentRadio"]').each(function () {
+                    var radioId = $(this).attr('id');
+                    // 檢查是否被點選
+                    if ($(this).is(':checked')) {
+                        // 根據不同的 id 做相應的處理
+                        switch (radioId) {
+                            case "jqAgentRadio_0":
+                                $('.getag1').hide();
+                                $('.getag2').hide();
+                                $('.getag3').hide();
+                                break;
+                            case "jqAgentRadio_1":
+                                $('.getag1').show();
+                                $('.getag2').hide();
+                                $('.getag3').hide();
+                                break;
+                            case "jqAgentRadio_2":
+                                $('.getag1').show();
+                                $('.getag2').show();
+                                $('.getag3').hide();
+                                break;
+                            case "jqAgentRadio_3":
+                                $('.getag1').show();
+                                $('.getag2').show();
+                                $('.getag3').show();
+                                break;
+                        }
+                    }
+                })
+            });
+            //------------------
+            // 保證人幾位  *
+            //------------------
+            //主要用途 : CoOwnerRadio(隱藏/顯示保證人資料)
+            $('input[name="GuarantorRadio"]').change(function () {
+                $('input[name="GuarantorRadio"]').each(function () {
+                    var radioId = $(this).attr('id');
+                    // 檢查是否被點選
+                    if ($(this).is(':checked')) {
+                        // 根據不同的 id 做相應的處理
+                        switch (radioId) {
+                            case "jqGuarantorRadio_0":
+                                $('.getgu1').hide();
+                                $('.getgu2').hide();
+                                $('.getgu3').hide();
+                                break;
+                            case "jqGuarantorRadio_1":
+                                $('.getgu1').show();
+                                $('.getgu2').hide();
+                                $('.getgu3').hide();
+                                break;
+                            case "jqGuarantorRadio_2":
+                                $('.getgu1').show();
+                                $('.getgu2').show();
+                                $('.getgu3').hide();
+                                break;
+                            case "jqGuarantorRadio_3":
+                                $('.getgu1').show();
+                                $('.getgu2').show();
+                                $('.getgu3').show();
+                                break;
+                        }
+                    }
+                })
             });
         });
 
-        //function SubmitForm() {
-        //    Swal.fire({
-        //        title: '確定送出?',
-        //        text: "確認資料皆填寫正確!",
-        //        icon: 'warning',
-        //        showCancelButton: true,
-        //        confirmButtonColor: '#3085d6',
-        //        cancelButtonColor: '#d33',
-        //        confirmButtonText: '確認',
-        //        cancelButtonText: '取消',
-        //    }).then((result) => {
-        //        if (result.isConfirmed) {
-        //            //提交上傳
-        //            $('#jqobjectform').submit();
-        //            Swal.fire({
-        //                title: '請稍後!',
-        //                html: '系統完成上傳動作之前請勿關閉視窗',
-        //                timerProgressBar: true,
-        //                backdrop: false,
-        //                didOpen: () => {
-        //                    Swal.showLoading()
-        //                }
-        //            })
-        //        }
-        //    })
-        //}
+        //------------------
+        // 新增減少直系親屬  *
+        //------------------
+        function changeship(button, active) {
+            var intselectorder = parseInt($(button).attr('data-order'));
+            if (active == 'create') {
+                if (intselectorder < 10) {
+                    intselectorder = intselectorder + 1;
+                    //顯示輸入欄位
+                    $('.directformgroup[data-order="' + intselectorder + '"]').show();
+                    $(".shipbutton").attr('data-order', intselectorder);
+                    //設定選擇關係欄位
+                    $('.select_direct[data-order="' + intselectorder + '"]').prop('required', true);
+                    $('.input_direct[data-order="' + intselectorder + '"]').prop('required', true);
+                }
+            }
+            else {
+                //隱藏輸入欄位
+                $('.select_direct[data-order="' + intselectorder + '"]').prop('required', false);
+                $('.directformgroup[data-order="' + intselectorder + '"]').hide();
+                //設定選擇關係欄位
+                $('.select_direct[data-order="' + intselectorder + '"]').prop('required', true);
+                $('.input_direct[data-order="' + intselectorder + '"]').prop('required', true);
+                $('.input_direct[data-order="' + intselectorder + '"]').val('');
+                if (intselectorder > 0) {
+                    intselectorder = intselectorder - 1;
+                }
+                    $(".shipbutton").attr('data-order', intselectorder);
+            }
+        }
 
         //datepicker
         var controls = {

@@ -1,0 +1,203 @@
+﻿﻿<!--是否有車位-->
+<div class="form-group mt-3">
+    <label class="form-label">
+        是否有車位
+    </label>
+    <div class="frame-wrap">
+        <div class="custom-control custom-checkbox custom-control-inline">
+            <input type="checkbox" class="custom-control-input" id="defaultInline0" aria-label="無車位" checked required>
+            <label class="custom-control-label" for="defaultInline0">無</label>
+        </div>
+        <div class="custom-control custom-checkbox custom-control-inline">
+            <input type="checkbox" class="custom-control-input havepersonalpark" id="defaultInline1" aria-label="汽車車位" required>
+            <label class="custom-control-label" for="defaultInline1">汽車</label>
+        </div>
+        <div class="custom-control custom-checkbox custom-control-inline">
+            <input type="checkbox" class="custom-control-input havepersonalpark" id="defaultInline2" aria-label="機車車位" required>
+            <label class="custom-control-label" for="defaultInline2">機車</label>
+        </div>
+    </div>
+</div>
+<!--汽車車位明細-->
+@*車位樣式*@
+<div class="panel-tag col-12 mb-2 mt-3 p-4 park_carclass">
+    汽車
+</div>
+<div class="form-group mt-3 park_carclass">
+    <label class="form-label">
+        車位樣式
+    </label>
+    <div class="frame-wrap padding-top-ten pl-2">
+        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+            <input type="radio" class="custom-control-input" id="parktypeRadio_1" name="parktypeRadio" value="0" required>
+            <label class="custom-control-label" for="parktypeRadio_1">坡道平面</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+            <input type="radio" class="custom-control-input" id="parktypeRadio_2" name="parktypeRadio" value="1" required>
+            <label class="custom-control-label" for="parktypeRadio_2">坡道機械</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+            <input type="radio" class="custom-control-input" id="parktypeRadio_3" name="parktypeRadio" value="2" required>
+            <label class="custom-control-label" for="parktypeRadio_3">機械平面</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+            <input type="radio" class="custom-control-input" id="parktypeRadio_4" name="parktypeRadio" value="3" required>
+            <label class="custom-control-label" for="parktypeRadio_4">機械機械</label>
+            <div class="invalid-feedback">
+                請選擇車位樣式
+            </div>
+        </div>
+    </div>
+</div>
+@*位於地上(下)第幾層*@
+<div class="form-group mt-3 park_carclass">
+    <label class="form-label">
+        位於地上(下)第幾層
+    </label>
+    <div class="input-group mt-2 col-md-6 col-lg-4">
+        <div class="input-group-prepend">
+            <div class="input-group-text">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="carparkfloor_up" name="carparkfloor" value="F" class="custom-control-input">
+                    <label class="custom-control-label" for="carparkfloor_up">地上</label>
+                </div>
+            </div>
+            <div class="input-group-text">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="carparkfloor_down" name="carparkfloor" value="B" class="custom-control-input" checked="checked">
+                    <label class="custom-control-label" for="carparkfloor_down">地下</label>
+                </div>
+            </div>
+        </div>
+        <input type="number" value="0" max="10" min="1" class="form-control" aria-label="Text input with radio button" id="parkfloornumber">
+        <div class="input-group-prepend">
+            <span class="input-group-text">樓</span>
+        </div>
+    </div>
+</div>
+@*車位月租金*@
+<div class="form-group park_carclass">
+    <label class="form-label" for="basic-url">車位月租金</label>
+    <div class="row">
+        <div class="col-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">車位編號</span>
+                </div>
+                <input name="carpositionnumber" type="text" class="form-control" required>
+                <div class="invalid-feedback">
+                    請填寫車位編號
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">汽車月租金 $</span>
+                </div>
+                <input name="carmonthrent" type="text" placeholder="" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" required>
+                @*<input type="text" class="form-control" required>*@
+                <div class="invalid-feedback">
+                    請填寫汽車月租金
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*停車管理費*@
+<div class="form-group park_carclass">
+    <label class="form-label" for="basic-url">停車管理費</label>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">汽車管理費 $</span>
+                </div>
+                <input name="parkmanagementfee" type="text" placeholder="" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" required>
+                @*<input type="text" class="form-control" required>*@
+                <div class="invalid-feedback">
+                    請填寫汽車停車管理費
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--機車車位明細-->
+<div class="panel-tag col-12 mb-2 mt-3 p-4 park_morclass">
+    機車
+</div>
+@*位於地上(下)第幾層*@
+<div class="form-group mt-3 park_morclass">
+    <label class="form-label">
+        位於地上(下)第幾層
+    </label>
+    <div class="input-group mt-2 col-md-6 col-lg-4">
+        <div class="input-group-prepend">
+            <div class="input-group-text">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="morparkfloor_up" name="morparkfloor" value="F" class="custom-control-input">
+                    <label class="custom-control-label" for="morparkfloor_up">地上</label>
+                </div>
+            </div>
+            <div class="input-group-text">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="morparkfloor_down" name="morparkfloor" value="B" class="custom-control-input" checked="checked">
+                    <label class="custom-control-label" for="morparkfloor_down">地下</label>
+                </div>
+            </div>
+        </div>
+        <input type="number" value="0" max="10" min="1" class="form-control" aria-label="Text input with radio button" id="parkfloornumber">
+        <div class="input-group-prepend">
+            <span class="input-group-text">樓</span>
+        </div>
+    </div>
+</div>
+@*車位月租金*@
+<div class="form-group park_morclass">
+    <label class="form-label" for="basic-url">機車車位月租金</label>
+    <div class="row">
+        <div class="col-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">機車車位編號</span>
+                </div>
+                <input name="morpositionnumber" type="text" class="form-control" required>
+                <div class="invalid-feedback">
+                    請填寫機車位編號
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">機車月租金 $</span>
+                </div>
+                <input name="scootermonthrent" type="text" placeholder="" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" required>
+                @*<input type="text" class="form-control" required>*@
+                <div class="invalid-feedback">
+                    請填寫機車月租金
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*停車管理費*@
+<div class="form-group park_morclass">
+    <label class="form-label" for="basic-url">停車管理費</label>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">機車管理費 $</span>
+                </div>
+                <input name="scootermanagementfee" type="text" placeholder="" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" required>
+                @*<input type="text" class="form-control" required>*@
+                <div class="invalid-feedback">
+                    請填寫機車停車管理費
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

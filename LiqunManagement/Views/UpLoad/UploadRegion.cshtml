@@ -11,6 +11,24 @@
     @*<form action="@Url.Action("UploadRegion", "Upload")" method="post" class="dropzone" id="my-dropzone">
         </form>*@
 
+    <ol class="breadcrumb page-breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="javascript:void(0);">後臺管理系統</a>
+        </li>
+        <li class="breadcrumb-item">資料上傳</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block">
+            <span class="js-get-date"></span>
+        </li>
+    </ol>
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class="subheader-icon fal fa-edit"></i>
+            <span class="font-weight-bold" style="padding-top:5px;">臺灣地址上傳</span>
+            <small>
+
+            </small>
+        </h1>
+    </div>
     <form action="@Url.Action("UploadRegion", "Upload")" method="post" enctype="multipart/form-data" id="jquploadform">
         <div class="form-group mb-0">
             <label class="form-label">File (Browser)</label>
@@ -104,7 +122,6 @@
         $(function () {
             var message = '@ViewBag.Message';
             if (message != 'Initial') {
-                debugger;
                 if (message == '匯入成功') {
                     Swal.fire({
                         title: '匯入成功',
