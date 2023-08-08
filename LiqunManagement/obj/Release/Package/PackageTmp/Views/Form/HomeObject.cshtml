@@ -1,4 +1,4 @@
-﻿
+﻿﻿
 @{
     ViewBag.Title = "表單四期";
     Layout = "~/Views/Shared/smartadmin_Layout.cshtml";
@@ -65,6 +65,26 @@
                             @*是否為公證*@
                             <div class="form-group">
                                 <label class="form-label">
+                                    類別:
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="frame-wrap padding-top-ten">
+                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="objecttypeRadio_1" name="objecttypeRadio" value="1" required="">
+                                        <label class="custom-control-label" for="objecttypeRadio_1">包租</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="objecttypeRadio_2" name="objecttypeRadio" value="0" required="" checked>
+                                        <label class="custom-control-label" for="objecttypeRadio_2">代管</label>
+                                        <div class="invalid-feedback">
+                                            請選擇包租或代管
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*是否為公證*@
+                            <div class="form-group">
+                                <label class="form-label">
                                     是否為公證:
                                     <span class="text-danger">*</span>
                                 </label>
@@ -76,7 +96,6 @@
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
                                         <input type="radio" class="custom-control-input" id="notarizationRadio_2" name="notarizationRadio" value="0" required="">
                                         <label class="custom-control-label" for="notarizationRadio_2">否</label>
-
                                         <div class="invalid-feedback">
                                             請選擇是否為公證
                                         </div>
@@ -121,6 +140,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="jqfeature">特色</label>
                                 <input type="text" id="jqfeature" name="feature" class="form-control">
+                                <span class="help-block pl-2">*建議填寫，以免提交資料時臨時需要</span>
                             </div>
                             @*物件地址*@
                             <div class="form-group">
@@ -346,15 +366,15 @@
                             <div class="form-group">
                                 <div class="col-md-10 col-lg-8 col-xl-6 ">
                                     <div class="input-group input-group-multi-transition w-100">
-                                        <input name="roomamount" id="jqroomamount" type="text" class="form-control" aria-label="Person name" required>
+                                        <input name="roomamount" id="jqroomamount" type="text" class="form-control roomtypeamount" aria-label="Person name" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">房</span>
                                         </div>
-                                        <input name="hallamount" type="text" class="form-control" aria-label="Person name" required>
+                                        <input name="hallamount" id="jqhallamount" type="text" class="form-control roomtypeamount" aria-label="Person name" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">廳</span>
                                         </div>
-                                        <input name="bathamount" type="text" class="form-control" aria-label="Person name" required>
+                                        <input name="bathamount" id="jqbathamount" type="text" class="form-control roomtypeamount" aria-label="Person name" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">衛</span>
                                         </div>
@@ -365,439 +385,9 @@
                                 </div>
                             </div>
                             @*屋況附屬設備*@
-                            <div class="form-group">
-                                <label class="form-label" for="radio-group-1">屋況附屬設備</label>
-                                <div class="row">
-                                    <div class="col-lg-6 col-xl-4">
-                                        <div class="input-group mt-2">
-                                            <span class="input-group-text" style="width:80px;">
-                                                天然瓦斯
-                                            </span>
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio0_Y" name="dRadio0" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio0_Y">是</label>
-                                                    </div>
-                                                </div>
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio0_N" name="dRadio0" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio0_N">否</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <input type="text" class="form-control" aria-label="Text input with radio button" id="radio-group-0">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-xl-4">
-                                        <div class="input-group mt-2">
-                                            <span class="input-group-text" style="width:80px;">
-                                                電視
-                                            </span>
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio1_Y" name="dRadio1" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio1_Y">是</label>
-                                                    </div>
-                                                </div>
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio1_N" name="dRadio1" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio1_N">否</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <input type="text" class="form-control" aria-label="Text input with radio button" id="radio-group-1">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-xl-4">
-                                        <div class="input-group mt-2">
-                                            <span class="input-group-text" style="width:80px;">
-                                                冷氣
-                                            </span>
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio2_Y" name="dRadio2" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio2_Y">是</label>
-                                                    </div>
-                                                </div>
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio2_N" name="dRadio2" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio2_N">否</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <input type="text" class="form-control" aria-label="Text input with radio button" id="radio-group-2">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-xl-4">
-                                        <div class="input-group mt-2">
-                                            <span class="input-group-text" style="width:80px;">
-                                                餐桌
-                                            </span>
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio4_Y" name="dRadio4" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio4_Y">是</label>
-                                                    </div>
-                                                </div>
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio4_N" name="dRadio4" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio4_N">否</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <input type="text" class="form-control" aria-label="Text input with radio button" id="radio-group-4">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-xl-4">
-                                        <div class="input-group mt-2">
-                                            <span class="input-group-text" style="width:80px;">
-                                                洗衣機
-                                            </span>
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio5_Y" name="dRadio5" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio5_Y">是</label>
-                                                    </div>
-                                                </div>
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio5_N" name="dRadio5" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio5_N">否</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <input type="text" class="form-control" aria-label="Text input with radio button" id="radio-group-5">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-xl-4">
-                                        <div class="input-group mt-2">
-                                            <span class="input-group-text" style="width:80px;">
-                                                餐椅
-                                            </span>
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio6_Y" name="dRadio6" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio6_Y">是</label>
-                                                    </div>
-                                                </div>
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio6_N" name="dRadio6" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio6_N">否</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <input type="text" class="form-control" aria-label="Text input with radio button" id="radio-group-6">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-xl-4">
-                                        <div class="input-group mt-2">
-                                            <span class="input-group-text" style="width:80px;">
-                                                瓦斯爐
-                                            </span>
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio7_Y" name="dRadio7" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio7_Y">是</label>
-                                                    </div>
-                                                </div>
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio7_N" name="dRadio7" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio7_N">否</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <input type="text" class="form-control" aria-label="Text input with radio button" id="radio-group-7">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-xl-4">
-                                        <div class="input-group mt-2">
-                                            <span class="input-group-text" style="width:80px;">
-                                                沙發
-                                            </span>
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio8_Y" name="dRadio8" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio8_Y">是</label>
-                                                    </div>
-                                                </div>
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio8_N" name="dRadio8" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio8_N">否</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <input type="text" class="form-control" aria-label="Text input with radio button" id="radio-group-8">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-xl-4">
-                                        <div class="input-group mt-2">
-                                            <span class="input-group-text" style="width:80px;">
-                                                冰箱
-                                            </span>
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio9_Y" name="dRadio9" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio9_Y">是</label>
-                                                    </div>
-                                                </div>
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio9_N" name="dRadio9" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio9_N">否</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <input type="text" class="form-control" aria-label="Text input with radio button" id="radio-group-9">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-xl-4">
-                                        <div class="input-group mt-2">
-                                            <span class="input-group-text" style="width:80px;">
-                                                置物櫃
-                                            </span>
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio10_Y" name="dRadio10" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio10_Y">是</label>
-                                                    </div>
-                                                </div>
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio10_N" name="dRadio10" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio10_N">否</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <input type="text" class="form-control" aria-label="Text input with radio button" id="radio-group-7">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-xl-4">
-                                        <div class="input-group mt-2">
-                                            <span class="input-group-text" style="width:80px;">
-                                                衣櫃
-                                            </span>
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio11_Y" name="dRadio11" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio11_Y">是</label>
-                                                    </div>
-                                                </div>
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio11_N" name="dRadio11" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio11_N">否</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <input type="text" class="form-control" aria-label="Text input with radio button" id="radio-group-8">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-xl-4">
-                                        <div class="input-group mt-2">
-                                            <span class="input-group-text" style="width:80px;">
-                                                床組
-                                            </span>
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio12_Y" name="dRadio12" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio12_Y">是</label>
-                                                    </div>
-                                                </div>
-                                                <div class="input-group-text">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="dRadio12_N" name="dRadio12" class="custom-control-input">
-                                                        <label class="custom-control-label" for="dRadio12_N">否</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <input type="text" class="form-control" aria-label="Text input with radio button" id="radio-group-9">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @Html.Partial("_HomeObjectAccessory", "Form")
                             @*是否有車位*@
-                            <div class="form-group mt-3">
-                                <label class="form-label">
-                                    是否有車位
-                                </label>
-                                <div class="frame-wrap padding-top-ten pl-2">
-                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="carparkRadio_1" name="carparkRadio" value="0" required>
-                                        <label class="custom-control-label" for="carparkRadio_1">無</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="carparkRadio_2" name="carparkRadio" value="1" required>
-                                        <label class="custom-control-label" for="carparkRadio_2">汽車</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="carparkRadio_3" name="carparkRadio" value="2" required>
-                                        <label class="custom-control-label" for="carparkRadio_3">機車</label>
-                                        <div class="invalid-feedback">
-                                            請選擇是否有車位
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @*車位樣式*@
-                            <div class="form-group mt-3">
-                                <label class="form-label">
-                                    車位樣式
-                                </label>
-                                <div class="frame-wrap padding-top-ten pl-2">
-                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="parktypeRadio_1" name="parktypeRadio" value="0" required>
-                                        <label class="custom-control-label" for="parktypeRadio_1">坡道平面</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="parktypeRadio_2" name="parktypeRadio" value="1" required>
-                                        <label class="custom-control-label" for="parktypeRadio_2">坡道機械</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="parktypeRadio_3" name="parktypeRadio" value="2" required>
-                                        <label class="custom-control-label" for="parktypeRadio_3">機械平面</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="parktypeRadio_4" name="parktypeRadio" value="3" required>
-                                        <label class="custom-control-label" for="parktypeRadio_4">機械機械</label>
-                                        <div class="invalid-feedback">
-                                            請選擇車位樣式
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @*位於地上(下)第幾層*@
-                            <div class="form-group mt-3">
-                                <label class="form-label">
-                                    位於地上(下)第幾層
-                                </label>
-                                <div class="frame-wrap padding-top-ten ml-4">
-                                    <div class="row p-0">
-                                        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                            <input type="radio" class="custom-control-input" id="parkfloorRadio_1" name="parkfloorRadio" value="1" required>
-                                            <label class="custom-control-label" for="parkfloorRadio_1">地上1樓</label>
-                                        </div>
-                                        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                            <input type="radio" class="custom-control-input" id="parkfloorRadio_2" name="parkfloorRadio" value="2" required>
-                                            <label class="custom-control-label" for="parkfloorRadio_2">地上2樓</label>
-                                        </div>
-                                        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                            <input type="radio" class="custom-control-input" id="parkfloorRadio_3" name="parkfloorRadio" value="3" required>
-                                            <label class="custom-control-label" for="parkfloorRadio_3">地上3樓</label>
-                                        </div>
-                                    </div>
-                                    <div class="row p-0">
-                                        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                            <input type="radio" class="custom-control-input" id="parkfloorRadio_4" name="parkfloorRadio" value="4" required>
-                                            <label class="custom-control-label" for="parkfloorRadio_4">地下1樓</label>
-                                        </div>
-                                        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                            <input type="radio" class="custom-control-input" id="parkfloorRadio_5" name="parkfloorRadio" value="5" required>
-                                            <label class="custom-control-label" for="parkfloorRadio_5">地下2樓</label>
-                                        </div>
-                                        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                            <input type="radio" class="custom-control-input" id="parkfloorRadio_6" name="parkfloorRadio" value="6" required>
-                                            <label class="custom-control-label" for="parkfloorRadio_6">地下3樓</label>
-                                        </div>
-                                        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                            <input type="radio" class="custom-control-input" id="parkfloorRadio_7" name="parkfloorRadio" value="7" required>
-                                            <label class="custom-control-label" for="parkfloorRadio_7">地下4樓</label>
-                                            <div class="invalid-feedback">
-                                                請選擇車位位於
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @*車位月租金*@
-                            <div class="form-group">
-                                <label class="form-label" for="basic-url">車位月租金</label>
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">車位編號</span>
-                                            </div>
-                                            <input name="carpositionnumber" type="text" class="form-control" required>
-                                            <div class="invalid-feedback">
-                                                請填寫車位編號
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">汽車 $</span>
-                                            </div>
-                                            <input name="carmonthrent" type="text" placeholder="" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" required>
-                                            @*<input type="text" class="form-control" required>*@
-                                            <div class="invalid-feedback">
-                                                請填寫汽車月租金
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">機車 $</span>
-                                            </div>
-                                            <input name="scootermonthrent" type="text" placeholder="" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" required>
-                                            @*<input type="text" class="form-control" required>*@
-                                            <div class="invalid-feedback">
-                                                請填寫機車月租金
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @*停車管理費*@
-                            <div class="form-group">
-                                <label class="form-label" for="basic-url">停車管理費</label>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">汽車 $</span>
-                                            </div>
-                                            <input name="parkmanagementfee" type="text" placeholder="" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" required>
-                                            @*<input type="text" class="form-control" required>*@
-                                            <div class="invalid-feedback">
-                                                請填寫汽車停車管理費
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">機車 $</span>
-                                            </div>
-                                            <input name="scootermanagementfee" type="text" placeholder="" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" required>
-                                            @*<input type="text" class="form-control" required>*@
-                                            <div class="invalid-feedback">
-                                                請填寫機車停車管理費
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @Html.Partial("_HomeObjectPark", "Form")
                             <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row align-items-center">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="invalidCheck" required="">
@@ -850,10 +440,74 @@
             }, false);
         })();
 
+        !function (a) {
+            a.fn.datepicker.dates["zh-TW"] = {
+                days: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
+                daysShort: ["週日", "週一", "週二", "週三", "週四", "週五", "週六"],
+                daysMin: ["日", "一", "二", "三", "四", "五", "六"],
+                months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+                monthsShort: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                today: "今天",
+                monthsTitle: "月份",
+                weekStart: 0,
+                clear: "清除",
+                format: "-mm-dd",
+                titleFormat: "年MM月",
+            };
+
+            // 覆蓋原本的日期格式化函式，讓日期選擇器上的年份顯示為民國年
+            a.fn.datepicker.DPGlobal.formatDate = function (date, format, language) {
+                var year = date.getFullYear() - 1911; // 將年份減去1911，轉換為民國年
+                var month = date.getMonth() + 1;
+                var day = date.getDate();
+                return year + format.replace(/mm/i, (month < 10 ? "0" : "") + month).replace(/dd/i, (day < 10 ? "0" : "") + day);
+            };
+
+            //a.fn.datepicker.DPGlobal.formatDate = function (date, format, language) {
+            //    var year = date.getFullYear() - 1911; // 將年份減去1911，轉換為民國年
+            //    var month = date.getMonth() + 1;
+            //    var day = date.getDate();
+            //    var formatted = format
+            //        .replace(/yyyy/i, year)
+            //        .replace(/yy/i, year % 100)
+            //        .replace(/mm/i, (month < 10 ? "0" : "") + month)
+            //        .replace(/dd/i, (day < 10 ? "0" : "") + day);
+
+            //    return formatted;
+            //};
+
+            //// 自定義處理日期的函式，將年份減去1911
+            //function taiwaneseYear(date) {
+            //    var year = date.getFullYear() - 1911;
+            //    return year;
+            //}
+
+            //// 覆蓋原本datepicker的顯示格式
+            //a.fn.datepicker.dates["zh-TW"].format = {
+            //    toDisplay: function (date, format, language) {
+            //        return taiwaneseYear(date) + "年" + a.fn.datepicker.DPGlobal.formatDate(date, "mm月dd日", language);
+            //    },
+            //    toValue: function (date, format, language) {
+            //        var year = date.split("年")[0];
+            //        var monthDay = date.split("年")[1];
+            //        var fullYear = parseInt(year) + 1911;
+            //        return new Date(fullYear + "-" + monthDay);
+            //    }
+            //};
+
+
+        }(jQuery);
+
+
+
         $(function () {
             //inputmask
             $(":input").inputmask();
 
+            //隱藏
+            //隱藏車位類型欄位
+            $('.park_carclass').hide();
+            $('.park_morclass').hide();
             //------------------
             // 物件地址下拉選單  *
             //------------------
@@ -864,7 +518,6 @@
                 jsonArray[i].id = jsonArray[i].id.replace(/\"/g, '');
                 jsonArray[i].text = jsonArray[i].text.replace(/\"/g, '');
             }
-
             var data_city = jsonArray;
             $('.select2_city').select2({
                 data: data_city,
@@ -878,7 +531,6 @@
                 //data: data_road,
                 placeholder: '街道',
             });
-            //下拉選單更改事件
 
             //當下拉選單發生改變事件(change)，執行
             $('body').on('change', '.select2_city', function () {
@@ -952,36 +604,10 @@
                 });
             });
 
-
-
-
-            var example_gridsize = $("#example-gridsize");
-
-            $("#gridrange").on("input change", function () {
-                //do something
-                example_gridsize.attr("placeholder", ".col-" + $(this).val());
-                example_gridsize.parent().removeClass().addClass("col-" + $(this).val())
-                console.log("col-" + $(this).val());
-            });
-
-            //Check&Radio
-            $('#defaultIndeterminate').prop('indeterminate', true)
-            $('#notarizationRadio').prop('indeterminate', true)
-
-            //var toggleCheckbox = function () {
-            //    $('#js-checkbox-toggle').toggleText('Change to CIRCLE', 'Change back to default');
-            //    $('.frame-wrap .custom-checkbox').toggleClass('custom-checkbox-circle');
-            //}
-
-            var toggleRadio = function () {
-                $('#js-radio-toggle').toggleText('Change to ROUNDED', 'Change back to default');
-                $('.frame-wrap .custom-radio').toggleClass('custom-radio-rounded');
-            }
-
             //------------------
             // 是否要上傳稅單  *
             //------------------
-            //radio監聽事件(useforRadio)
+            //除了住宅用，都要上傳
             $('input[name="useforRadio"]').change(function () {
                 // 獲取被點選的 radio 按鈕的值
                 var selectedValue = $(this).val();
@@ -1026,34 +652,205 @@
                 })
             });
 
+            //------------------
+            // 是否填寫房/廳/衛數量  *
+            //------------------
+            //2023-07-25 需求: 套房不需填寫(房/廳/衛)數量
             $('input[name="roomtypeRadio"]').change(function () {
                 // 獲取被點選的 radio 按鈕的值
-                var selectedValue = $(this).val();
                 $('input[name="roomtypeRadio"]').each(function () {
                     var radioId = $(this).attr('id');
                     // 檢查是否被點選
                     if ($(this).is(':checked')) {
                         var roomamount = document.getElementById('jqroomamount');
+                        var hallamount = document.getElementById('jqhallamount');
+                        var bathamount = document.getElementById('jqbathamount');
                         // 根據不同的 id 做相應的處理
                         if (radioId === 'roomtypeRadio_1') {
                             //整層出租
                             roomamount.value = '';
-                            $('#jqroomamount').prop('required', true);
-                            $('#jqroomamount').prop('disabled', false);
-                            $('#jqroomamount').prop('readonly', false);
+                            hallamount.value = '';
+                            bathamount.value = '';
+                            $('.roomtypeamount').prop('required', true);
+                            $('.roomtypeamount').prop('disabled', false);
+                            $('.roomtypeamount').prop('readonly', false);
                         } else {
                             //獨立套房
                             roomamount.value = '套';
-                            roomamount.innerHTML = '套'
-                            $('#jqroomamount').prop('required', false);
-                            $('#jqroomamount').prop('disabled', true);
-                            $('#jqroomamount').prop('readonly', true);
+                            hallamount.value = 'X';
+                            bathamount.value = 'X';
+                            $('.roomtypeamount').prop('required', false);
+                            $('.roomtypeamount').prop('disabled', true);
+                            $('.roomtypeamount').prop('readonly', true);
                         }
                     }
                 })
             });
-        });
 
+            //------------------
+            // 附屬物件  *
+            //------------------
+            // 获取所有具有"radio-option"类的单选按钮以及目标input元素
+            const radioOptions = document.querySelectorAll(".accessory_option");
+
+            radioOptions.forEach(radio => {
+                radio.addEventListener("click", function () {
+                    const index = this.getAttribute("data-index");
+                    const option = this.getAttribute("data-option");
+
+                    var object = document.getElementById('accessory_amount_' + index);
+                    object.value = 0;
+                    switch (index) {
+                        case "10":
+                        case "11":
+                        case "12":
+                            $('#accessory_amount_' + index).prop('required', true);
+                            if (option == '1') {
+                                object.value = 1;
+                            }
+                            else {
+                                object.value = 0;
+                            }
+                            break;
+
+                        default:
+                            if (option == '1') {
+                                $('#accessory_amount_' + index).prop('required', true);
+                                $('#accessory_amount_' + index).prop('readonly', false);
+                            }
+                            else {
+                                $('#accessory_amount_' + index).prop('required', false);
+                                $('#accessory_amount_' + index).prop('readonly', true);
+                            }
+                            break;
+
+                    }
+                });
+            });
+
+
+            //------------------
+            // 日期選擇器  *
+            //------------------
+            var controls = {
+                leftArrow: '<i class="fal fa-angle-left" style="font-size: 1.25rem"></i>',
+                rightArrow: '<i class="fal fa-angle-right" style="font-size: 1.25rem"></i>'
+            }
+            $('#jqsigndate').datepicker(
+                {
+                    //format: 'yyyy-mm-dd',
+                    orientation: "請選擇簽約日",
+                    todayHighlight: true,
+                    templates: controls,
+                    autoclose: true,//選擇日期後就會自動關閉
+                    language: 'zh-TW',//中文化
+
+                    onSelect: function () {
+                        $(this).change();
+                    },
+                });
+            $('#datepicker_startdate').datepicker(
+                {
+                    //format: 'yyyy-mm-dd',
+                    orientation: "請選擇起租日",
+                    todayHighlight: true,
+                    templates: controls,
+                    autoclose: true,//選擇日期後就會自動關閉
+                    language: 'zh-TW',//中文化
+
+                    onSelect: function () {
+                        $(this).change();
+                    },
+                });
+            $('#datepicker_enddate').datepicker(
+                {
+                    //format: 'yyyy-mm-dd',
+                    orientation: "請選擇結束日",
+                    todayHighlight: true,
+                    templates: controls,
+                    autoclose: true,//選擇日期後就會自動關閉
+                    language: 'zh-TW',//中文化
+                });
+            const startdatepicker = document.getElementById('datepicker_startdate');
+            //$('#datepicker_startdate').addEventListener('change', function (event) {
+            $('#datepicker_startdate').on('change', function (event) {
+                const selectedDateStr = event.target.value;
+                const selectedDate = new Date(selectedDateStr); // 將日期字串轉換為Date物件
+                const year = selectedDate.getFullYear() + 1912; // 獲取年份
+                const month = selectedDate.getMonth() + 1; // 獲取月份（注意月份從0開始，所以要加1）
+                const day = selectedDate.getDate(); // 獲取日期
+
+                // 設定日期
+                const defaultDate = new Date(year, month, day); // 創建一個預設的日期（月份從0開始，這裡設為7月31日）
+                $('#datepicker_enddate').datepicker("setDate", defaultDate);
+            });
+
+
+
+            //------------------
+            // 是否有車位  *
+            //------------------
+
+            //點選其他車輛將文字框啟用
+            //監聽其事件，若input[aria-label="其他原因"被點選則可以輸入文字框，反之則清空文字框並唯讀
+            const nopark = document.querySelectorAll('input[aria-label="無車位"]');
+            nopark.forEach(function (checkbox) {
+                checkbox.addEventListener('click', function () {
+                    const nopark = document.querySelector('input[aria-label="無車位"]');
+                    if (nopark.checked) {
+                        document.querySelector('input[aria-label="汽車車位"]').checked = false;
+                        document.querySelector('input[aria-label="機車車位"]').checked = false;
+                        $('.park_carclass').hide();
+                    }
+                });
+            });
+
+            const havepark = document.querySelectorAll('.havepersonalpark');
+            havepark.forEach(function (checkbox) {
+                checkbox.addEventListener('click', function () {
+                    const nopark = document.querySelector('input[aria-label="無車位"]');
+                    const carpark = document.querySelector('input[aria-label="汽車車位"]');
+                    const morpark = document.querySelector('input[aria-label="機車車位"]');
+                    if (carpark.checked) {
+                        nopark.checked = false;
+                        $('.park_carclass').show();
+                    }
+                    else {
+                        $('.park_carclass').hide();
+                    }
+                    if (morpark.checked) {
+                        nopark.checked = false;
+                        $('.park_morclass').show();
+                    }
+                    else {
+                        $('.park_morclass').hide();
+                    }
+                });
+            });
+        });
+        //$(function () {
+        //    $('.jqsigndate').datepicker({
+        //        autoclose: true,//選擇日期後就會自動關閉
+        //        todayHighlight: true,//今天會有一個底色
+        //        language: 'zh-TW',//中文化
+        //        format: "yyyy-mm-dd",
+        //    }).on('changeDate', function (e) {
+        //        // Get the selected date
+        //        var selectedDate = e.date;
+
+        //        // Convert the year to Taiwanese calendar (民國年)
+        //        var taiwanYear = selectedDate.getFullYear() - 1911;
+        //        var month = selectedDate.getMonth() + 1;
+        //        var day = selectedDate.getDate();
+
+        //        // Format the date as "民國yy年mm月dd日"
+        //        var formattedDate = "民國" + taiwanYear + "年" + month + "月" + day + "日";
+
+        //        // Set the input field's value with the formatted date
+        //        $(this).val(formattedDate);
+
+        //    });
+        //});
         //function SubmitForm() {
         //    Swal.fire({
         //        title: '確定送出?',
@@ -1080,35 +877,6 @@
         //        }
         //    })
         //}
-
-        //datepicker
-        var controls = {
-            leftArrow: '<i class="fal fa-angle-left" style="font-size: 1.25rem"></i>',
-            rightArrow: '<i class="fal fa-angle-right" style="font-size: 1.25rem"></i>'
-        }
-        $('#jqsigndate').datepicker(
-            {
-                format: 'yyyy-mm-dd',
-                orientation: "請選擇簽約日",
-                todayHighlight: true,
-                templates: controls
-            });
-
-        $('#datepicker_startdate').datepicker(
-            {
-                format: 'yyyy-mm-dd',
-                orientation: "請選擇起租日",
-                todayHighlight: true,
-                templates: controls
-            });
-
-        $('#datepicker_enddate').datepicker(
-            {
-                format: 'yyyy-mm-dd',
-                orientation: "請選擇結束日",
-                todayHighlight: true,
-                templates: controls
-            });
 
 
     </script>

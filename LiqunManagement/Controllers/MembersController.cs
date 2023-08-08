@@ -11,7 +11,7 @@ using System.Data;
 
 namespace LiqunManagement.Controllers
 {
-    public class MembersController : Controller
+    public class MembersController : BaseController
     {
         //宣告Members資料表的Service物件
         private readonly MembersDBService membersdbservice = new MembersDBService();
@@ -28,12 +28,20 @@ namespace LiqunManagement.Controllers
         public ActionResult Register()
         {
             //判斷使用者是否已經過登入驗證
-            if(User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "Guestbooks");
-            }
+            //if(User.Identity.IsAuthenticated)
+            //{
+            //    return RedirectToAction("Index", "Liqun");
+            //}
             //已登入則重新導向
             //否則進入註冊畫面
+
+            ViewBag.memberlist = from db in memberdb.Members.Where(x => String.IsNullOrEmpty(x.AuthCode))
+                                 select new MembersViewModel
+                                 {
+                                     Account = db.Account,
+                                     Name = db.Name,
+                                 };
+
             return View();
         }
 
@@ -46,35 +54,43 @@ namespace LiqunManagement.Controllers
             //判斷頁面資料是否都經過驗證
             if (ModelState.IsValid)
             {
-                //將頁面資料中的密碼欄位填入
-                registermember.newMember.Password = registermember.Password;
-                //取得信箱驗證碼
-                string AuthCode = mailservice.GetValidateCode();
-                //將信箱驗證碼填入
-                registermember.newMember.AuthCode = AuthCode;
-                //呼叫Service註冊新會員
-                membersdbservice.Register(registermember.newMember);
-                //取得寫好的驗證信範本內容
-                string TempMail = System.IO.File.ReadAllText(Server.MapPath("~/Views/Shared/RegisterEmailTemplate.html"));
-                //宣告Email驗證用的Url
-                UriBuilder ValidateUrl = new UriBuilder(Request.Url)
-                {
-                    Path = Url.Action("EmailValidate", "Members"
-                    , new
-                    {
-                        Account = registermember.newMember.Account,
-                        AuthCode = AuthCode
-                    })
-                };
+                #region 信箱驗證信方法(暫不使用)
+                ////將頁面資料中的密碼欄位填入
+                //registermember.newMember.Password = registermember.Password;
+                ////取得信箱驗證碼
+                //string AuthCode = mailservice.GetValidateCode();
+                ////將信箱驗證碼填入
+                //registermember.newMember.AuthCode = AuthCode;
+                ////呼叫Service註冊新會員
+                //membersdbservice.Register(registermember.newMember);
+                ////取得寫好的驗證信範本內容
+                //string TempMail = System.IO.File.ReadAllText(Server.MapPath("~/Views/Shared/RegisterEmailTemplate.html"));
+                ////宣告Email驗證用的Url
+                //UriBuilder ValidateUrl = new UriBuilder(Request.Url)
+                //{
+                //    Path = Url.Action("EmailValidate", "Members"
+                //    , new
+                //    {
+                //        Account = registermember.newMember.Account,
+                //        AuthCode = AuthCode
+                //    })
+                //};
 
-                //藉由Service將使用者資料填入驗證信範本中
-                string MailBody = mailservice.GetRegisterMailBody(TempMail, registermember.newMember.Name, ValidateUrl.ToString().Replace("%3F", "?"));
-                //呼叫Service寄出驗證信
-                mailservice.SendRegisterMail(MailBody, registermember.newMember.Email);
-                //用TempData儲存註冊訊息
-                TempData["RegisterState"] = "註冊成功，請去收信以驗證Email";
-                //重新導向頁面
-                return RedirectToAction("RegisterResult");
+                ////藉由Service將使用者資料填入驗證信範本中
+                //string MailBody = mailservice.GetRegisterMailBody(TempMail, registermember.newMember.Name, ValidateUrl.ToString().Replace("%3F", "?"));
+                ////呼叫Service寄出驗證信
+                //mailservice.SendRegisterMail(MailBody, registermember.newMember.Email);
+                ////用TempData儲存註冊訊息
+                //TempData["RegisterState"] = "註冊成功，請去收信以驗證Email";
+                ////重新導向頁面
+                //return RedirectToAction("RegisterResult");
+                #endregion
+
+                #region 管理員設定帳號方法
+                registermember.newMember.Password = registermember.Password;
+                membersdbservice.Register(registermember.newMember);
+                return RedirectToAction("Register");
+                #endregion
             }
             //未經驗證清空密碼相關欄位
             registermember.Password = null;
@@ -186,5 +202,6 @@ namespace LiqunManagement.Controllers
 
         }
         #endregion
+
     }
 }

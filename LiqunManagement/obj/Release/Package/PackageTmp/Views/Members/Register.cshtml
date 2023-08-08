@@ -1,80 +1,175 @@
 ﻿@model LiqunManagement.ViewModels.MemberRegisterViewModel
-
+﻿
 @{
-    ViewBag.Title = "Register";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "帳號設定";
+    Layout = "~/Views/Shared/smartadmin_Layout.cshtml";
 }
+<main id="js-page-content" role="main" class="page-content">
+    <ol class="breadcrumb page-breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="javascript:void(0);">後臺管理系統</a>
+        </li>
+        <li class="breadcrumb-item">職員管理</li>
+        <li class="breadcrumb-item">帳號設定</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block">
+            <span class="js-get-date"></span>
+        </li>
+    </ol>
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class="subheader-icon fal fa-edit"></i>
+            <span class="font-weight-bold" style="padding-top:5px;">帳號設定</span>
+            <small>
+
+            </small>
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel panel-locked">
+                <div class="panel-hdr">
+                    <h2>
+                        輸入帳號
+                    </h2>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+
+                        @using (Html.BeginForm("Register", "Members", FormMethod.Post, new { @class = "needs-validation", @enctype = "multipart/form-data", @novalidate = "" }))
+                        {
+                            @Html.ValidationSummary(true)
+                            <table>
+                                @*帳號*@
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.newMember.Account)
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.newMember.Account)
+                                        @Html.ValidationMessageFor(model => model.newMember.Account)
+                                    </td>
+                                </tr>
+                                @*密碼*@
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.Password)
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.Password)
+                                        @Html.ValidationMessageFor(model => model.Password)
+                                    </td>
+                                </tr>
+                                @*確認密碼*@
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.PasswordCheck)
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.PasswordCheck)
+                                        @Html.ValidationMessageFor(model => model.PasswordCheck)
+                                    </td>
+                                </tr>
+                                @*姓名*@
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.newMember.Name)
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.newMember.Name)
+                                        @Html.ValidationMessageFor(model => model.newMember.Name)
+                                    </td>
+                                </tr>
+                                @*信箱*@
+                                @*<tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.newMember.Email)
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.newMember.Email)
+                                        @Html.ValidationMessageFor(model => model.newMember.Email)
+                                    </td>
+                                </tr>*@
+                                <tr>
+                                    <td colspan="2">
+                                        <input type="submit" value="註冊" />
+                                    </td>
+                                </tr>
+                            </table>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div id="panel-1" class="panel panel-locked">
+                <div class="panel-hdr">
+                    <h2>
+                        輸入帳號
+                    </h2>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <table class="table-bordered w-100">
+                            <thead>
+                                <tr>
+                                    <td>
+                                        姓名
+                                    </td>
+                                    <td>
+                                        帳號
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach(var item in ViewBag.memberlist)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.Name
+                                        </td>
+                                        <td>
+                                            @item.Account
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 
 @section scripts
 {
+
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        //validation
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
+        $(function () {
+        });
+
+    </script>
 }
-<h2>註冊</h2>
-
-
-@using (Html.BeginForm())
-{
-    @Html.ValidationSummary(true)
-
-<table>
-    @*帳號*@
-    <tr>
-        <td>
-            @Html.LabelFor(model => model.newMember.Account)
-        </td>
-        <td>
-            @Html.TextBoxFor(model => model.newMember.Account)
-            @Html.ValidationMessageFor(model => model.newMember.Account)
-        </td>
-    </tr>
-    @*密碼*@
-    <tr>
-        <td>
-            @Html.LabelFor(model => model.Password)
-        </td>
-        <td>
-            @Html.TextBoxFor(model => model.Password)
-            @Html.ValidationMessageFor(model => model.Password)
-        </td>
-    </tr>
-    @*確認密碼*@
-    <tr>
-        <td>
-            @Html.LabelFor(model => model.PasswordCheck)
-        </td>
-        <td>
-            @Html.TextBoxFor(model => model.PasswordCheck)
-            @Html.ValidationMessageFor(model => model.PasswordCheck)
-        </td>
-    </tr>
-    @*姓名*@
-    <tr>
-        <td>
-            @Html.LabelFor(model => model.newMember.Name)
-        </td>
-        <td>
-            @Html.TextBoxFor(model => model.newMember.Name)
-            @Html.ValidationMessageFor(model => model.newMember.Name)
-        </td>
-    </tr>
-    @*信箱*@
-    <tr>
-        <td>
-            @Html.LabelFor(model => model.newMember.Email)
-        </td>
-        <td>
-            @Html.TextBoxFor(model => model.newMember.Email)
-            @Html.ValidationMessageFor(model => model.newMember.Email)
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <input type="submit" value="註冊" />
-        </td>
-    </tr>
-</table>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

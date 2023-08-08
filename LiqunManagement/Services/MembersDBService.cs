@@ -25,8 +25,8 @@ namespace LiqunManagement.Services
                 Account = newMember.Account,
                 Password = newMember.Password,
                 Name = newMember.Name,
-                Email = newMember.Email,
-                AuthCode = newMember.AuthCode,
+                //Email = newMember.Email,          //不須驗證
+                //AuthCode = newMember.AuthCode,    //不須驗證
                 IsAdmin = newMember.IsAdmin,
             };
 

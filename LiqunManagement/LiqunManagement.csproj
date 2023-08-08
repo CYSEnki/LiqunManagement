@@ -2072,16 +2072,20 @@
     <Content Include="Views\Members\RegisterResult.cshtml" />
     <Content Include="Views\Liqun\Index.cshtml" />
     <Content Include="Views\Agent\Form.cshtml" />
-    <Content Include="Views\Form\HomeObject.cshtml" />
     <Content Include="Views\UpLoad\UploadRegion.cshtml" />
     <Content Include="Views\FormStuff\Index.cshtml" />
     <Content Include="Views\FormStuff\test.cshtml" />
-    <Content Include="Views\Form\Landlord.cshtml" />
     <Content Include="Views\UpLoad\UploadBank.cshtml" />
-    <Content Include="Views\Form\_CoOwner.cshtml" />
-    <Content Include="Views\Form\Tenant.cshtml" />
+    <Content Include="Views\Form\HomeObject.cshtml" />
+    <Content Include="Views\Form\Landlord.cshtml" />
     <Content Include="Views\Form\Secretary.cshtml" />
-    <Content Include="Views\Form\_directfamily.cshtml" />
+    <Content Include="Views\Form\Tenant.cshtml" />
+    <Content Include="Views\Form\_HomeObjectAccessory.cshtml" />
+    <Content Include="Views\Form\_HomeObjectPark.cshtml" />
+    <Content Include="Views\Form\_LandlordCoOwner.cshtml" />
+    <Content Include="Views\Form\_TenantAgent.cshtml" />
+    <Content Include="Views\Form\_TenantDirectfamily.cshtml" />
+    <Content Include="Views\Form\_TenantGuarantor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

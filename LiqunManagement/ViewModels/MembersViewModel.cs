@@ -29,7 +29,7 @@ namespace LiqunManagement.ViewModels
 
         //電子信箱
         [DisplayName("Email")]
-        [Required(ErrorMessage = "請輸入Email")]
+        //[Required(ErrorMessage = "請輸入Email")]
         [StringLength(200, ErrorMessage = "Email長度最多200字元")]
         [EmailAddress(ErrorMessage = "這不是Email格式")]
         public string Email { get; set; }
