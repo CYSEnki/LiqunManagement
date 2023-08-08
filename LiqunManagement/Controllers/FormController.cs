@@ -34,11 +34,10 @@ namespace LiqunManagement.Controllers
         public ActionResult HomeObject()
         {
             DDLServices ddlservices = new DDLServices();
-            var formmodel = ddlservices.GetRegionDDL("");
-            ViewBag.citylist = JsonConvert.SerializeObject(formmodel.regionddl.ToList());
+            ViewBag.citylist = JsonConvert.SerializeObject(ddlservices.GetRegionDDL("").ddllist.ToList());
             List<int> payment_date = new List<int>();
 
-            for(int i=1; i<32; i++)
+            for (int i = 1; i < 32; i++)
             {
                 payment_date.Add(i);
             }
@@ -47,10 +46,10 @@ namespace LiqunManagement.Controllers
         }
         [HttpPost]
         public ActionResult HomeObject(
-            string notarizationRadio, 
-            DateTime signdate, 
-            string appraiserRadio, 
-            string feature, 
+            string notarizationRadio,
+            DateTime signdate,
+            string appraiserRadio,
+            string feature,
             string selectcity,
             string selectdistrict,
             string selecctroad,
@@ -83,7 +82,7 @@ namespace LiqunManagement.Controllers
             {
                 var now = DateTime.Now;
                 string newFormID = "LQ" + now.ToString("yy") + "000001";
-                var lastformid = formdb.AllForm.OrderByDescending(x => x.FormNo).Select(x=>x.FormId).FirstOrDefault();
+                var lastformid = formdb.AllForm.OrderByDescending(x => x.FormNo).Select(x => x.FormId).FirstOrDefault();
                 if (!String.IsNullOrEmpty(lastformid))
                 {
                     var idIndex = Convert.ToInt32(lastformid.Substring(4));
@@ -180,7 +179,7 @@ namespace LiqunManagement.Controllers
                     }
 
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     var error = ex.ToString();
                 }
@@ -206,13 +205,13 @@ namespace LiqunManagement.Controllers
             }
         }
         #endregion
-        
+
         #region 房東資料
         public ActionResult Landlord()
         {
             DDLServices ddlservices = new DDLServices();
-            var formmodel = ddlservices.GetRegionDDL("");
-            ViewBag.citylist = JsonConvert.SerializeObject(formmodel.regionddl.ToList());
+            ViewBag.citylist = JsonConvert.SerializeObject(ddlservices.GetRegionDDL("").ddllist.ToList());
+            ViewBag.banklist = JsonConvert.SerializeObject(ddlservices.GetBankDDL("", "bank").ddllist.ToList());
             List<int> payment_date = new List<int>();
 
             for (int i = 1; i < 32; i++)
@@ -224,11 +223,11 @@ namespace LiqunManagement.Controllers
         }
         [HttpPost]
         public ActionResult Landlord(
-            string name_landlord, 
+            string name_landlord,
             string genderRadio_landlord,
             DateTime birthday_landlord,
-            string IDnumber_landlord, 
-            string phonenumber_landlord, 
+            string IDnumber_landlord,
+            string phonenumber_landlord,
             string road_address_landlord,
             string elseaddress_landlord,
             bool sameaddress_landlord,
@@ -247,15 +246,15 @@ namespace LiqunManagement.Controllers
             }
         }
         #endregion
-        
+
         #region 房客資料
         public ActionResult Tenant()
         {
             DDLServices ddlservices = new DDLServices();
-            var formmodel = ddlservices.GetRegionDDL("");
-            ViewBag.citylist = JsonConvert.SerializeObject(formmodel.regionddl.ToList());
-            List<int> payment_date = new List<int>();
+            ViewBag.citylist = JsonConvert.SerializeObject(ddlservices.GetRegionDDL("").ddllist.ToList());
+            ViewBag.banklist = JsonConvert.SerializeObject(ddlservices.GetBankDDL("", "bank").ddllist.ToList());
 
+            List<int> payment_date = new List<int>();
             for (int i = 1; i < 32; i++)
             {
                 payment_date.Add(i);
@@ -268,11 +267,11 @@ namespace LiqunManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("HomeObject", "Form");
+                return RedirectToAction("Tenant", "Form");
             }
             else
             {
-                return RedirectToAction("Login", "Memebers");
+                return RedirectToAction("Tenant", "Memebers");
             }
         }
         #endregion
@@ -299,8 +298,7 @@ namespace LiqunManagement.Controllers
             )
         {
             DDLServices ddlservices = new DDLServices();
-            var FormModels = ddlservices.GetRegionDDL("");
-            ViewBag.citylist = JsonConvert.SerializeObject(FormModels.regionddl.ToList());
+            ViewBag.citylist = JsonConvert.SerializeObject(ddlservices.GetRegionDDL("").ddllist.ToList());
             List<int> payment_date = new List<int>();
 
             for (int i = 1; i < 32; i++)
@@ -312,14 +310,20 @@ namespace LiqunManagement.Controllers
         }
         #endregion
 
-        #region 找到Region下拉選單
+        #region 下拉選單變更事件
+        //地址
         public ActionResult DDLRegion(string regioncode)
         {
             DDLServices ddlservices = new DDLServices();
-            var formmodel = ddlservices.GetRegionDDL(regioncode);
-
-            var regionJson = JsonConvert.SerializeObject(formmodel.regionddl.ToList());
+            var regionJson = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(regioncode).ddllist.ToList());
             return Json(regionJson);
+        }
+        //銀行
+        public ActionResult DDLBank(string bankcode)
+        {
+            DDLServices ddlservices = new DDLServices();
+            var bankJson = JsonConvert.SerializeObject(ddlservices.GetBankDDL(bankcode, "branches").ddllist.ToList());
+            return Json(bankJson);
         }
         #endregion
 

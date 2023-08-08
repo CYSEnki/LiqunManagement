@@ -7,10 +7,10 @@ namespace LiqunManagement.ViewModels
 {
     public class FormViewModels
     {
-        public IEnumerable<RegionDDLViewModel> regionddl { get; set; }
+        public IEnumerable<DDLViewModel> ddllist { get; set; }
     }
 
-    public class RegionDDLViewModel
+    public class DDLViewModel
     {
         public int? order { get; set; }
         public string id { get; set; }
