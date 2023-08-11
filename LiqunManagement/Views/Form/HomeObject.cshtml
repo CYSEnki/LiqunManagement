@@ -236,7 +236,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">$</span>
                                             </div>
-                                            <input name="rent" type="text" placeholder="" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" required>
+                                            <input id="rent" name="rent" type="text" placeholder="" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" lang="en" required>
                                             @*<input name="rent" type="text" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="10,000" required>*@
                                             <div class="invalid-feedback">
                                                 請填寫租金
@@ -388,6 +388,12 @@
                             @Html.Partial("_HomeObjectAccessory", "Form")
                             @*是否有車位*@
                             @Html.Partial("_HomeObjectPark", "Form")
+
+                            <!--備註欄-->
+                            <div class="form-group">
+                                <label class="form-label" for="example-textarea">備註</label>
+                                <textarea class="form-control" id="example-textarea" rows="5" style="height: 122px;"></textarea>
+                            </div>
                             <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row align-items-center">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="invalidCheck" required="">
@@ -503,6 +509,29 @@
         $(function () {
             //inputmask
             $(":input").inputmask();
+            const inputmaskElements = $(':input').filter(function () {
+                return $(this).inputmask();
+            });
+            let previousValue = ''; // 用於追蹤前一個輸入值
+
+            // 監聽輸入事件，在每次輸入時處理
+            inputmaskElements.on('input', function () {
+                const currentValue = this.value;
+                if (currentValue === previousValue) {
+                    return; // 值未變化，不進行處理
+                }
+
+                // 過濾掉重複的字符，只保留第一個出現的字符
+                const filteredValue = currentValue
+                    .split('')
+                    .filter((char, index, self) => self.indexOf(char) === index)
+                    .join('');
+
+                // 更新輸入框值並記錄前一個值
+                this.value = filteredValue;
+                previousValue = filteredValue;
+            });
+
 
             //隱藏
             //隱藏車位類型欄位
@@ -699,7 +728,7 @@
                     const option = this.getAttribute("data-option");
 
                     var object = document.getElementById('accessory_amount_' + index);
-                    object.value = 0;
+                    //object.value = 0;
                     switch (index) {
                         case "10":
                         case "11":
@@ -712,13 +741,37 @@
                                 object.value = 0;
                             }
                             break;
-
+                        case "13":
+                        case "14":
+                            if (index == "13") {
+                                $('#accessory_amount_' + index).prop('required', true);
+                                object.value = 1;
+                                //將14disable
+                                var newindex = parseInt(index) + 1;
+                                var newobject = document.getElementById('accessory_amount_' + newindex);
+                                newobject.value = 0;
+                                $('#accessory_amount_' + newindex).prop('required', false);
+                                $('#accessory_amount_' + newindex).prop('readonly', true);
+                            }
+                            else {
+                                $('#accessory_amount_' + index).prop('required', true);
+                                object.value = 1;
+                                //將13disable
+                                var newindex = parseInt(index) - 1;
+                                var newobject = document.getElementById('accessory_amount_' + newindex);
+                                newobject.value = 0;
+                                $('#accessory_amount_' + newindex).prop('required', false);
+                                $('#accessory_amount_' + newindex).prop('readonly', true);
+                            }
+                            break;
                         default:
                             if (option == '1') {
+                                object.value = 1;
                                 $('#accessory_amount_' + index).prop('required', true);
                                 $('#accessory_amount_' + index).prop('readonly', false);
                             }
                             else {
+                                object.value = 0;
                                 $('#accessory_amount_' + index).prop('required', false);
                                 $('#accessory_amount_' + index).prop('readonly', true);
                             }
@@ -777,8 +830,8 @@
                 const selectedDateStr = event.target.value;
                 const selectedDate = new Date(selectedDateStr); // 將日期字串轉換為Date物件
                 const year = selectedDate.getFullYear() + 1912; // 獲取年份
-                const month = selectedDate.getMonth() + 1; // 獲取月份（注意月份從0開始，所以要加1）
-                const day = selectedDate.getDate(); // 獲取日期
+                const month = selectedDate.getMonth(); // 獲取月份（注意月份從0開始，所以要加1）
+                const day = selectedDate.getDate() -1; // 獲取日期
 
                 // 設定日期
                 const defaultDate = new Date(year, month, day); // 創建一個預設的日期（月份從0開始，這裡設為7月31日）
@@ -801,6 +854,7 @@
                         document.querySelector('input[aria-label="汽車車位"]').checked = false;
                         document.querySelector('input[aria-label="機車車位"]').checked = false;
                         $('.park_carclass').hide();
+                        $('.park_morclass').hide();
                     }
                 });
             });

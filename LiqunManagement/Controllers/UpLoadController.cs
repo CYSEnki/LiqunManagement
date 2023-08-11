@@ -447,59 +447,6 @@ namespace LiqunManagement.Controllers
             }
         }
         #endregion
-        #region 判斷此列是否第一欄未輸入資料
-        //將列數(rowcell)、欄位內容(checkcolumn)、單元格總數(cellCount)、此列內容(row)參數傳入後，判斷此列是否只有第一欄未輸入資料，若整列無資料則匯入此列以上的Excel表格，若僅第一欄未輸入資料則顯示錯誤訊息
-        public bool firstcolumncheck(int rowcell, string checkcolumn, int cellCount, IRow row)
-        {
-            string errorstring = "";
-            List<string> errorstringlist = new List<string>();
-            //預設錯誤訊息為0筆資料
-            int errorstringnumber = 0;
-            //預設檢查完成的欄位數為0筆資料
-            int checkcolumnisnull = 0;
-            //因列數(rowcell)參數從0開始算，略過標題列，顯示的列數為(rowcell+1)
-            int rownumber = rowcell + 1;
-            if (string.IsNullOrEmpty(checkcolumn.Trim()))   //如果此列首筆資料為空
-            {
-                //測試每一個欄位(總欄位數為cellCount)
-                for (int N = 0; N < cellCount; N++)
-                {
-                    //若此列(Irow row)的單元格內容為Null，則給予一個空值
-                    ICell Ncell = row.GetCell(N, MissingCellPolicy.RETURN_NULL_AND_BLANK);
-                    //當Ncell為Null
-                    if (Ncell == null)
-                    {
-                        if (errorstringnumber == 0)
-                        {
-                            //此欄位檢查完成，單元格無資料
-                            checkcolumnisnull++;
-                        }
-                        continue;
-                    }
-                    //當Ncell為空值
-                    else if (Ncell.ToString() == "")
-                    {
-                        if (errorstringnumber == 0)
-                        {
-                            //此欄位檢查完成，單元格無資料
-                            checkcolumnisnull++;
-                        }
-                        continue;
-                    }
-                    else
-                    {
-                        checkcolumnisnull++;
-                        errorstring = "第" + rownumber + "列第1欄，資料格式不可為空。因為此列第" + checkcolumnisnull + "欄有值";
-                        errorlist.Add(errorstring);
-                        errorstringnumber++;
-                        break;
-                    }
-                }
-            }
-            bool check = errorstringnumber > 0 || (checkcolumnisnull == 13) ? true : false;      //true:為空，false不為空
-            return check;
-        }
-        #endregion
         #endregion
 
 
@@ -730,6 +677,8 @@ namespace LiqunManagement.Controllers
                             BranchCode = String.IsNullOrEmpty(dr["分支機構代號"].ToString()) ? null : dr["分支機構代號"].ToString(),
                             BranchName = String.IsNullOrEmpty(dr["分行機構名稱"].ToString()) ? null : dr["分行機構名稱"].ToString(),
                             BranchFullName = String.IsNullOrEmpty(dr["機構名稱"].ToString()) ? null : dr["機構名稱"].ToString(),
+                            CodeMinlength = String.IsNullOrEmpty(dr["最小帳號長度"].ToString()) ? null : dr["最小帳號長度"].ToString(),
+                            CodeMaxlength = String.IsNullOrEmpty(dr["最大帳號長度"].ToString()) ? null : dr["最大帳號長度"].ToString(),
                         };
                         UploadService uploadservice = new UploadService();
                         uploadservice.InsertBank(datedata);
@@ -847,5 +796,58 @@ namespace LiqunManagement.Controllers
 
 
 
+        #region 判斷此列是否第一欄未輸入資料
+        //將列數(rowcell)、欄位內容(checkcolumn)、單元格總數(cellCount)、此列內容(row)參數傳入後，判斷此列是否只有第一欄未輸入資料，若整列無資料則匯入此列以上的Excel表格，若僅第一欄未輸入資料則顯示錯誤訊息
+        public bool firstcolumncheck(int rowcell, string checkcolumn, int cellCount, IRow row)
+        {
+            string errorstring = "";
+            List<string> errorstringlist = new List<string>();
+            //預設錯誤訊息為0筆資料
+            int errorstringnumber = 0;
+            //預設檢查完成的欄位數為0筆資料
+            int checkcolumnisnull = 0;
+            //因列數(rowcell)參數從0開始算，略過標題列，顯示的列數為(rowcell+1)
+            int rownumber = rowcell + 1;
+            if (string.IsNullOrEmpty(checkcolumn.Trim()))   //如果此列首筆資料為空
+            {
+                //測試每一個欄位(總欄位數為cellCount)
+                for (int N = 0; N < cellCount; N++)
+                {
+                    //若此列(Irow row)的單元格內容為Null，則給予一個空值
+                    ICell Ncell = row.GetCell(N, MissingCellPolicy.RETURN_NULL_AND_BLANK);
+                    //當Ncell為Null
+                    if (Ncell == null)
+                    {
+                        if (errorstringnumber == 0)
+                        {
+                            //此欄位檢查完成，單元格無資料
+                            checkcolumnisnull++;
+                        }
+                        continue;
+                    }
+                    //當Ncell為空值
+                    else if (Ncell.ToString() == "")
+                    {
+                        if (errorstringnumber == 0)
+                        {
+                            //此欄位檢查完成，單元格無資料
+                            checkcolumnisnull++;
+                        }
+                        continue;
+                    }
+                    else
+                    {
+                        checkcolumnisnull++;
+                        errorstring = "第" + rownumber + "列第1欄，資料格式不可為空。因為此列第" + checkcolumnisnull + "欄有值";
+                        errorlist.Add(errorstring);
+                        errorstringnumber++;
+                        break;
+                    }
+                }
+            }
+            bool check = errorstringnumber > 0 || (checkcolumnisnull == 9) || (checkcolumnisnull == 13) ? true : false;      //true:為空，false不為空
+            return check;
+        }
+        #endregion
     }
 }

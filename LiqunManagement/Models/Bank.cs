@@ -29,5 +29,11 @@ namespace LiqunManagement.Models
         public string BranchName { get; set; }
 
         public string BranchFullName { get; set; }
+
+        [StringLength(30)]
+        public string CodeMinlength { get; set; }
+
+        [StringLength(30)]
+        public string CodeMaxlength { get; set; }
     }
 }

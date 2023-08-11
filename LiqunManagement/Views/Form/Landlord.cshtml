@@ -114,21 +114,21 @@
                                 </div>
                             </div>
                             @*身分證字號*@
-                    <div class="form-group">
-                        <label class="form-label" for="IDnumber">身分證字號</label>
-                        <div class="row pb-2">
-                            <div class="col-12">
-                                <div class="custom-control custom-checkbox custom-control-inline">
-                                    <input type="checkbox" class="custom-control-input national_check" id="international_IDnumber" name="international_IDnumber" data-index="0">
-                                    <label class="custom-control-label" for="international_IDnumber">外籍</label>
+                            <div class="form-group">
+                                <label class="form-label" for="IDnumber">身分證字號</label>
+                                <div class="row pb-2">
+                                    <div class="col-12">
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input national_check" id="international_IDnumber" name="international_IDnumber" data-index="0">
+                                            <label class="custom-control-label" for="international_IDnumber">外籍</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="text" id="IDnumber" name="IDnumber_landlord" class="form-control national_IDnumber_0" required>
+                                <div class="invalid-feedback">
+                                    請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
                                 </div>
                             </div>
-                        </div>
-                        <input type="text" id="IDnumber" name="IDnumber_landlord" class="form-control national_IDnumber_0" required>
-                        <div class="invalid-feedback">
-                            請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
-                        </div>
-                    </div>
                             @*連絡電話*@
                             <div class="form-group">
                                 <label class="form-label" for="phonenumber">連絡電話</label>
@@ -410,6 +410,12 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!--備註欄-->
+                            <div class="form-group">
+                                <label class="form-label" for="example-textarea">備註</label>
+                                <textarea class="form-control" id="example-textarea" rows="5" style="height: 122px;"></textarea>
+                            </div>
                             <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row align-items-center">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="invalidCheck" required="">
@@ -438,7 +444,7 @@
     @*datepicker*@
     <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
     @*inputmask*@
-    <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/inputmask/inputmask.bundle.js"></script>
+    @*<script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/inputmask/inputmask.bundle.js"></script>*@
     @*datetimepicker*@
     <script src="~/Content/plugins/moment/moment.min.js"></script>
     <script src="~/Content/plugins/moment/moment-with-locales.js"></script>
@@ -498,7 +504,7 @@
 
         $(function () {
             //inputmask
-            $(":input").inputmask();
+            //$(":input").inputmask();
 
             //將不需填寫的資料先隱藏(共有人)
             $('.getagent').hide();

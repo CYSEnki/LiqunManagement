@@ -35,6 +35,7 @@ namespace LiqunManagement.Services
                 // 建立要插入的資料物件
                 var newData = new Region
                 {
+                    CityOrder = RegionData.CityOrder,
                     City = RegionData.City,
                     CityCode = RegionData.CityCode,
                     District = RegionData.District,
@@ -70,11 +71,11 @@ namespace LiqunManagement.Services
                     BranchCode = BaankData.BranchCode,
                     BranchName = BaankData.BranchName,
                     BranchFullName = BaankData.BranchFullName,
+                    CodeMinlength = BaankData.CodeMinlength,
+                    CodeMaxlength = BaankData.CodeMaxlength,
                 };
-
                 // 使用資料上下文插入資料物件
                 context.Bank.Add(newData);
-
                 // 儲存更改到資料庫
                 context.SaveChanges();
             }
