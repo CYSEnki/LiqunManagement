@@ -37,11 +37,40 @@
             </a>
         </li>
         <li class="nav-title" style="font-size:22px; margin-top:5px;">業務區</li>
-        <li>
+        @*<li>
             <a href="@Url.Action("HomeObject", "Form")" title="Application Intel" data-filter-tags="application intel">
                 <i class="fal fa-edit"></i>
                 <span class="nav-link-text">新增表單</span>
             </a>
+        </li>*@
+
+        <li>
+            <a href="#" title="Application Intel" data-filter-tags="application intel">
+                <i class="fal fa-edit"></i>
+                <span class="nav-link-text">新增表單</span>
+            </a>
+            <ul>
+                <li>
+                    <a href="@Url.Action("HomeObject", "Form")" title="Introduction" data-filter-tags="application intel introduction">
+                        <span class="nav-link-text">物件資料</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Landlord", "Form")" title="Introduction" data-filter-tags="application intel introduction">
+                        <span class="nav-link-text">房東資料</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Tenant", "Form")" title="Introduction" data-filter-tags="application intel introduction">
+                        <span class="nav-link-text">房客資料</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Secretary", "Form")" title="Introduction" data-filter-tags="application intel introduction">
+                        <span class="nav-link-text">秘書填寫</span>
+                    </a>
+                </li>
+            </ul>
         </li>
         <li>
             <a href="#" title="Application Intel" data-filter-tags="application intel">

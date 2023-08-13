@@ -236,8 +236,9 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">$</span>
                                             </div>
-                                            <input id="rent" name="rent" type="text" placeholder="" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" lang="en" required>
-                                            @*<input name="rent" type="text" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="10,000" required>*@
+                                            @*inputmask*@
+                                            @*<input id="rent" name="rent" type="text" placeholder="" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" lang="en" required>*@
+                                            <input id="rent" name="rent" type="number" data-inputmask="'alias': 'currency', 'digits': 0" placeholder="0" class="form-control" required>
                                             <div class="invalid-feedback">
                                                 請填寫租金
                                             </div>
@@ -250,8 +251,9 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">$</span>
                                         </div>
-                                        <input name="deposit" type="text" placeholder="" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" required>
-                                        @*<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="20,000" required>*@
+                                        @*inputmask*@
+                                        @*<input name="deposit" type="text" placeholder="" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" required>*@
+                                        <input name="deposit" type="number" placeholder="0" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" required>
                                         <div class="invalid-feedback">
                                             請填寫押金
                                         </div>
@@ -265,9 +267,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">$</span>
                                     </div>
-                                    <input name="management_fee" type="text" placeholder="" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" required>
-
-                                    @*<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="2,000" required>*@
+                                    @*inputmask*@
+                                    @*<input name="management_fee" type="text" placeholder="" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" required>*@
+                                    <input name="management_fee" type="number" data-inputmask="'alias': 'currency', 'digits': 0" placeholder="0" class="form-control" required>
                                     <div class="invalid-feedback">
                                         請填寫管理費
                                     </div>
@@ -509,28 +511,28 @@
         $(function () {
             //inputmask
             $(":input").inputmask();
-            const inputmaskElements = $(':input').filter(function () {
-                return $(this).inputmask();
-            });
-            let previousValue = ''; // 用於追蹤前一個輸入值
+            //const inputmaskElements = $(':input').filter(function () {
+            //    return $(this).inputmask();
+            //});
+            //let previousValue = ''; // 用於追蹤前一個輸入值
 
-            // 監聽輸入事件，在每次輸入時處理
-            inputmaskElements.on('input', function () {
-                const currentValue = this.value;
-                if (currentValue === previousValue) {
-                    return; // 值未變化，不進行處理
-                }
+            //// 監聽輸入事件，在每次輸入時處理
+            //inputmaskElements.on('input', function () {
+            //    const currentValue = this.value;
+            //    if (currentValue === previousValue) {
+            //        return; // 值未變化，不進行處理
+            //    }
 
-                // 過濾掉重複的字符，只保留第一個出現的字符
-                const filteredValue = currentValue
-                    .split('')
-                    .filter((char, index, self) => self.indexOf(char) === index)
-                    .join('');
+            //    // 過濾掉重複的字符，只保留第一個出現的字符
+            //    const filteredValue = currentValue
+            //        .split('')
+            //        .filter((char, index, self) => self.indexOf(char) === index)
+            //        .join('');
 
-                // 更新輸入框值並記錄前一個值
-                this.value = filteredValue;
-                previousValue = filteredValue;
-            });
+            //    // 更新輸入框值並記錄前一個值
+            //    this.value = filteredValue;
+            //    previousValue = filteredValue;
+            //});
 
 
             //隱藏

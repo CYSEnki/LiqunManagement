@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>E:\力群\發布</_PublishTargetUrl>
-    <History>True|2023-08-08T16:15:34.8038533Z;True|2023-07-24T23:17:18.9449871+08:00;False|2023-07-24T23:16:46.4298877+08:00;True|2023-07-24T23:11:18.5334842+08:00;False|2023-07-24T23:10:27.7605899+08:00;False|2023-07-24T23:09:46.3290408+08:00;True|2023-07-13T17:27:14.1917745+08:00;True|2023-07-13T17:07:26.9400441+08:00;True|2023-07-13T15:47:51.7755685+08:00;</History>
+    <History>True|2023-08-13T14:43:41.3702066Z;True|2023-08-13T22:39:22.0282790+08:00;True|2023-08-13T22:34:36.8995874+08:00;True|2023-08-13T20:42:43.3918007+08:00;True|2023-08-09T00:15:34.8038533+08:00;True|2023-07-24T23:17:18.9449871+08:00;False|2023-07-24T23:16:46.4298877+08:00;True|2023-07-24T23:11:18.5334842+08:00;False|2023-07-24T23:10:27.7605899+08:00;False|2023-07-24T23:09:46.3290408+08:00;True|2023-07-13T17:27:14.1917745+08:00;True|2023-07-13T17:07:26.9400441+08:00;True|2023-07-13T15:47:51.7755685+08:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -34,10 +34,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/08/2023 23:37:05</publishTime>
     </File>
     <File Include="bin/LiqunManagement.dll">
-      <publishTime>08/09/2023 00:15:29</publishTime>
+      <publishTime>08/13/2023 22:43:40</publishTime>
     </File>
     <File Include="bin/LiqunManagement.pdb">
-      <publishTime>08/09/2023 00:15:29</publishTime>
+      <publishTime>08/13/2023 22:43:40</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>08/08/2023 23:37:04</publishTime>
@@ -5845,34 +5845,34 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/24/2023 22:25:16</publishTime>
     </File>
     <File Include="Views/Form/HomeObject.cshtml">
-      <publishTime>08/08/2023 23:37:02</publishTime>
+      <publishTime>08/13/2023 20:15:16</publishTime>
     </File>
     <File Include="Views/Form/Landlord.cshtml">
-      <publishTime>08/08/2023 23:37:02</publishTime>
+      <publishTime>08/13/2023 22:28:45</publishTime>
     </File>
     <File Include="Views/Form/Secretary.cshtml">
-      <publishTime>08/08/2023 23:37:02</publishTime>
+      <publishTime>08/13/2023 22:17:24</publishTime>
     </File>
     <File Include="Views/Form/Tenant.cshtml">
-      <publishTime>08/08/2023 23:37:02</publishTime>
+      <publishTime>08/13/2023 21:57:07</publishTime>
     </File>
     <File Include="Views/Form/_HomeObjectAccessory.cshtml">
-      <publishTime>08/08/2023 23:37:02</publishTime>
+      <publishTime>08/13/2023 20:17:00</publishTime>
     </File>
     <File Include="Views/Form/_HomeObjectPark.cshtml">
       <publishTime>08/08/2023 23:37:02</publishTime>
     </File>
     <File Include="Views/Form/_LandlordCoOwner.cshtml">
-      <publishTime>08/08/2023 23:37:02</publishTime>
+      <publishTime>08/13/2023 21:31:13</publishTime>
     </File>
     <File Include="Views/Form/_TenantAgent.cshtml">
-      <publishTime>08/08/2023 23:37:02</publishTime>
+      <publishTime>08/13/2023 22:43:39</publishTime>
     </File>
     <File Include="Views/Form/_TenantDirectfamily.cshtml">
-      <publishTime>08/08/2023 23:37:02</publishTime>
+      <publishTime>08/13/2023 22:39:13</publishTime>
     </File>
     <File Include="Views/Form/_TenantGuarantor.cshtml">
-      <publishTime>08/08/2023 23:37:02</publishTime>
+      <publishTime>08/13/2023 22:43:30</publishTime>
     </File>
     <File Include="Views/FormStuff/Index.cshtml">
       <publishTime>08/08/2023 23:37:02</publishTime>
@@ -5911,7 +5911,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/08/2023 23:37:02</publishTime>
     </File>
     <File Include="Views/Shared/smartadmin_Layout.cshtml">
-      <publishTime>08/08/2023 23:37:02</publishTime>
+      <publishTime>08/13/2023 20:00:22</publishTime>
     </File>
     <File Include="Views/Shared/_FooterPartial.cshtml">
       <publishTime>08/08/2023 23:37:02</publishTime>
@@ -5941,7 +5941,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/08/2023 23:37:02</publishTime>
     </File>
     <File Include="Views/Shared/_SidebarMenuPartial.cshtml">
-      <publishTime>08/09/2023 00:13:28</publishTime>
+      <publishTime>08/13/2023 20:41:53</publishTime>
     </File>
     <File Include="Views/UpLoad/UploadBank.cshtml">
       <publishTime>08/08/2023 23:37:02</publishTime>
@@ -5956,7 +5956,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/08/2023 23:37:02</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/09/2023 00:15:30</publishTime>
+      <publishTime>08/13/2023 20:42:42</publishTime>
     </File>
   </ItemGroup>
 </Project>

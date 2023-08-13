@@ -31,6 +31,12 @@
     <link href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/fa-brands.css" rel="stylesheet" />
     <link href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/fa-regular.css" rel="stylesheet" />
     <link href="~/Content/fontawesome-free/css/all.css" rel="stylesheet" />
+
+    <style>
+        .custom-file-label::after {
+            content: "瀏覽" !important;
+        }
+    </style>
 </head>
 
 <!-- BEGIN Body -->
@@ -169,6 +175,31 @@
 
         ga('create', 'UA-141754477-1', 'auto');
         ga('send', 'pageview');
+
+
+        $(":input").inputmask();
+        const inputmaskElements = $(':input').filter(function () {
+            return $(this).inputmask();
+        });
+        let previousValue = ''; // 用於追蹤前一個輸入值
+
+        // 監聽輸入事件，在每次輸入時處理
+        inputmaskElements.on('input', function () {
+            const currentValue = this.value;
+            if (currentValue === previousValue) {
+                return; // 值未變化，不進行處理
+            }
+
+            // 過濾掉重複的字符，只保留第一個出現的字符
+            const filteredValue = currentValue
+                .split('')
+                .filter((char, index, self) => self.indexOf(char) === index)
+                .join('');
+
+            // 更新輸入框值並記錄前一個值
+            this.value = filteredValue;
+            previousValue = filteredValue;
+        });
 
         </script>
     <!-- base vendor bundle:

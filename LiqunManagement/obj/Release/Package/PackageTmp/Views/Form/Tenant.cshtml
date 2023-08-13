@@ -19,6 +19,8 @@
     .form-label {
         font-weight: 600 !important;
     }
+
+
 </style>
 @*select2*@
 @*<link href="~/Content/select2/css/select2.min.css" rel="stylesheet" />*@
@@ -181,11 +183,24 @@
                                 </div>
                             </div>
 
+                            @*上傳弱勢戶佐證文件*@
+                            <div class="form-group">
+                                <label class="form-label">上傳弱勢戶佐證文件</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="vulnerablefile" name="vulnerablefile" multiple disabled>
+                                    <label id="vulnerablefileLable" class="custom-file-label" for="vulnerablefile">選擇檔案</label>
+                                    <div class="invalid-feedback">
+                                        請上傳弱勢戶佐證文件
+                                    </div>
+                                </div>
+                                <span class="help-block pl-2">*<code>&lt;上傳弱勢戶佐證文件&gt;</code></span>
+                            </div>
+
                             @*上傳300E試算表的截圖*@
                             <div class="form-group">
                                 <label class="form-label">上傳300億試算表截圖</label>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" multiple id="sheetfile" name="sheetfile" required>
+                                    <input type="file" class="custom-file-input" id="sheetfile" name="sheetfile" multiple required>
                                     <label id="taxFileLable" class="custom-file-label" for="sheetfile">選擇檔案</label>
                                     <div class="invalid-feedback">
                                         請上傳試算表
@@ -224,18 +239,42 @@
                             </div>
 
                             @*出生年月日*@
+                            @*<div class="form-group">
+                <label class="form-label" for="birthday">生日</label>
+                <span class="text-danger">*</span>
+                <div class="input-group">
+                    <input type="text" class="form-control birthday" placeholder="請選擇生日" name="birthday_tenant" required>
+                    <div class="input-group-append">
+                        <span class="input-group-text fs-xl">
+                            <i class="fal fa-calendar-check"></i>
+                        </span>
+                    </div>
+                    <div class="invalid-feedback">
+                        請選擇生日
+                    </div>
+                </div>
+            </div>*@
+
+                            @*出生年月日*@
                             <div class="form-group">
                                 <label class="form-label" for="birthday">生日</label>
-                                <span class="text-danger">*</span>
-                                <div class="input-group">
-                                    <input type="text" class="form-control birthday" placeholder="請選擇生日" name="birthday_tenant" required>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text fs-xl">
-                                            <i class="fal fa-calendar-check"></i>
-                                        </span>
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        請選擇生日
+                                <div class="col-md-8 col-lg-6 mb-3 pl-0">
+                                    <div class="input-group w-100">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">民國</span>
+                                        </div>
+                                        <input type="number" max="130" min="10" value="112" class="form-control couple_input" name="birthyear">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">年</span>
+                                        </div>
+                                        <input type="number" max="12" min="1" value="8" class="form-control couple_input" name="birthmonth">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">月</span>
+                                        </div>
+                                        <input type="number" max="31" min="1" value="13" class="form-control couple_input" name="birthday">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">日</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -297,6 +336,18 @@
                                 <div class="row pt-2">
                                     <div class="col-12">
                                         <input type="text" name="elseaddress_tenant" class="form-control" placeholder="ex.108號1樓" required>
+                                    </div>
+                                </div>
+                            </div>
+                            @*戶號*@
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">戶號</span>
+                                    </div>
+                                    <input type="text" placeholder="" class="form-control" name="accountnumber" required>
+                                    <div class="invalid-feedback">
+                                        請填寫戶號
                                     </div>
                                 </div>
                             </div>
@@ -387,38 +438,67 @@
 
                             //配偶
                             <div class="panel-tag" style="padding-bottom:0px; margin-bottom:0px;">
-                                <div class="row">
-                                    <div class="custom-control custom-checkbox" style="margin-left:10px;">
-                                        <input type="checkbox" class="custom-control-input" id="couplecheck" name="couplecheck" value="true">
-                                        <label class="custom-control-label" for="couplecheck"></label>
-                                    </div>
+                                <div class="row pl-3 pb-2">
                                     <label>配偶</label>
+                                    <div class="custom-control custom-checkbox" style="margin-left:10px;">
+                                        <input type="checkbox" class="custom-control-input couplecheck" id="couplecheck_1" name="couplecheck_1" value="1">
+                                        <label class="custom-control-label" for="couplecheck_1"></label>
+                                    </div>
+                                    <label>丈夫</label>
+                                    <div class="custom-control custom-checkbox" style="margin-left:10px;">
+                                        <input type="checkbox" class="custom-control-input" id="couplecheck_0" name="couplecheck_0" value="0">
+                                        <label class="custom-control-label" for="couplecheck_0"></label>
+                                    </div>
+                                    <label>妻子</label>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-10 col-lg-6 pt-3">
-                                        <div class="input-group input-group-multi-transition w-100">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">姓名</span>
-                                            </div>
-                                            <input type="text" class="form-control couple_input" name="coupleName" disabled>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">身分證</span>
-                                            </div>
-                                            <input type="text" class="form-control couple_input" name="coupleNumber" disabled>
+                                <label class="form-label pt-3" for="couplename">基本資料</label>
+                                <div class="col-md-10 col-lg-6 pl-0">
+                                    <div class="input-group input-group-multi-transition w-100">
+                                        <div class="input-group-append">
+                                            <span id="couplename" class="input-group-text">姓名</span>
                                         </div>
+                                        <input type="text" class="form-control couple_input" name="coupleName" disabled>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">身分證</span>
+                                        </div>
+                                        <input type="text" class="form-control couple_input" name="coupleNumber" disabled>
                                     </div>
-                                    <div class="col-md-10 col-lg-6 pt-3">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control birthday couple_input" id="couplebirth" name="couplebirth" placeholder="請選擇生日" disabled>
+                                </div>
+                                @*出生年月日*@
+                                @*<div class="col-md-10 col-lg-6 pt-3">
+            <div class="input-group">
+                <input type="text" class="form-control birthday couple_input" id="couplebirth" name="couplebirth" placeholder="請選擇生日" disabled>
+                <div class="input-group-append">
+                    <span class="input-group-text fs-xl">
+                        <i class="fal fa-calendar-check"></i>
+                    </span>
+                </div>
+                <div class="invalid-feedback">
+                    請選擇生日
+                </div>
+            </div>
+        </div>*@
+
+                                <div class="form-group pt-3">
+                                    <label class="form-label" for="birthday">生日</label>
+                                    <div class="col-md-8 col-lg-6 mb-3 pl-0">
+                                        <div class="input-group w-100">
                                             <div class="input-group-append">
-                                                <span class="input-group-text fs-xl">
-                                                    <i class="fal fa-calendar-check"></i>
-                                                </span>
+                                                <span class="input-group-text">民國</span>
                                             </div>
-                                            <div class="invalid-feedback">
-                                                請選擇生日
+                                            <input type="number" max="130" min="10" value="112" class="form-control couple_input" name="birthyear">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">年</span>
+                                            </div>
+                                            <input type="number" max="12" min="1" value="8" class="form-control couple_input" name="birthmonth">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">月</span>
+                                            </div>
+                                            <input type="number" max="31" min="1" value="13" class="form-control couple_input" name="birthday">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">日</span>
                                             </div>
                                         </div>
                                     </div>
@@ -427,17 +507,6 @@
                             @*分戶戶號*@
                             <div class="form-group">
                                 <div class="row d-flex align-items-end">
-                                    <div class="col-md-4">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">戶號</span>
-                                            </div>
-                                            <input type="text" placeholder="" class="form-control couple_input" name="accountnumber" required disabled>
-                                            <div class="invalid-feedback">
-                                                請填寫戶號
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="col-md-4">
                                         <div class="custom-control custom-checkbox custom-control-inline mb-2">
                                             <input type="checkbox" class="custom-control-input couple_input" id="separatecheck" name="separatecheck" value="true" disabled>
@@ -476,6 +545,11 @@
                             </div>
                             @Html.Partial("_TenantGuarantor", "Form")
 
+                            <!--備註欄-->
+                            <div class="form-group">
+                                <label class="form-label" for="example-textarea">備註</label>
+                                <textarea class="form-control" id="example-textarea" rows="5" style="height: 122px;"></textarea>
+                            </div>
                             <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row align-items-center">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="invalidCheck" required="">
@@ -506,7 +580,7 @@
     @*datepicker*@
     <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
     @*inputmask*@
-    <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/inputmask/inputmask.bundle.js"></script>
+    @*<script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/inputmask/inputmask.bundle.js"></script>*@
 
     <script type="text/javascript">
         //validation
@@ -531,7 +605,7 @@
 
         $(function () {
             //inputmask
-            $(":input").inputmask();
+            //$(":input").inputmask();
 
             //將不需填寫的資料先隱藏
             //直系親屬
@@ -710,9 +784,13 @@
                 //選擇親屬關係之代號
                 var directcode = $('.select_direct[data-order="' + selectedIndex + '"]').val();
                 if (directcode == "17") {
+                    const checkbox = document.getElementById('international_Direct_IDnumber' + selectedIndex);
+                    checkbox.checked = false;
+                    $('#international_Direct_IDnumber' + selectedIndex).prop('disabled', true);
                     $('.direct_IDnumber[data-order="' + selectedIndex + '"]').prop('disabled', true);
                 }
                 else {
+                    $('#international_Direct_IDnumber' + selectedIndex).prop('disabled', false);
                     $('.direct_IDnumber[data-order="' + selectedIndex + '"]').prop('disabled', false);
                 }
             });
@@ -788,6 +866,34 @@
                 })
             });
 
+            $('input[name="typeRadio"]').change(function () {
+                // 獲取被點選的 radio 按鈕的值
+                var vulnerablefile = document.getElementById('vulnerablefile');
+                var filelable = document.getElementById('vulnerablefileLable');
+                $('input[name="typeRadio"]').each(function () {
+                    var radioId = $(this).attr('id');
+                    // 檢查是否被點選
+                    if ($(this).is(':checked')) {
+                        switch (radioId) {
+                            case 'typeRadio_3' :
+                            case 'typeRadio_4' :
+                            case 'typeRadio_5':
+                                vulnerablefile.value = '';
+                                filelable.innerHTML = '';
+                                $('#vulnerablefile').prop('disabled', true);
+                                $('#vulnerablefile').prop('readonly', true);
+                                $('#vulnerablefile').prop('required', false);
+                                break;
+                            default:
+                                $('#vulnerablefile').prop('disabled', false);
+                                $('#vulnerablefile').prop('readonly', false);
+                                $('#vulnerablefile').prop('required', true);
+                                break;
+                        }
+                    }
+                })
+            });
+
             //同戶籍地址
             $('.sameaddress').on('change', function () {
                 var selectedIndex = $(this).attr('data-index');
@@ -812,18 +918,42 @@
                 }
             });
 
-            //是否有配偶
-            $('#couplecheck').on('change', function () {
+            //是否有配偶(丈夫)
+            $('#couplecheck_1').on('change', function () {
                 if ($(this).is(':checked')) {
-                    //disabled
+                    //妻子nochecked
+                    const checkbox = document.getElementById('couplecheck_0');
+                    checkbox.checked = false;
                     $('.couple_input').prop('disabled', false);
-                    //required
                     $('.couple_input').prop('required', true);
                 } else {
-                    //disabled
                     $('.couple_input').prop('disabled', true);
-                    //required
                     $('.couple_input').prop('required', false);
+                    //分戶
+                    const checkbox = document.getElementById('separatecheck');
+                    checkbox.checked = false;
+                    $('input[name="separatenumber"]').val('');
+                    $('input[name="separatenumber"]').prop('disabled', true);
+                    $('input[name="separatenumber"]').prop('required', false);
+                }
+            });
+            //是否有配偶(妻子)
+            $('#couplecheck_0').on('change', function () {
+                if ($(this).is(':checked')) {
+                    //丈夫nochecked
+                    const checkbox = document.getElementById('couplecheck_1');
+                    checkbox.checked = false;
+                    $('.couple_input').prop('disabled', false);
+                    $('.couple_input').prop('required', true);
+                } else {
+                    $('.couple_input').prop('disabled', true);
+                    $('.couple_input').prop('required', false);
+                    //分戶
+                    const checkbox = document.getElementById('separatecheck');
+                    checkbox.checked = false;
+                    $('input[name="separatenumber"]').val('');
+                    $('input[name="separatenumber"]').prop('disabled', true);
+                    $('input[name="separatenumber"]').prop('required', false);
                 }
             });
 
