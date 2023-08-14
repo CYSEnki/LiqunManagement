@@ -1,2 +1,5 @@
 # 忽略 web.config
 web.config
+
+# 忽略發布
+LiqunManagement/LiqunManagement/Properties/PublishProfiles
