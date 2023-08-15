@@ -290,15 +290,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="text" id="IDnumber" name="IDnumber_tenant" class="form-control national_IDnumber_0" required>
+                                <input type="text" id="IDnumber" name="inputIDnumber_tenant" class="form-control inputIDnumber" data-index="0" data-valid="1" required>
                                 <div class="invalid-feedback">
-                                    請輸入身分證字號
+                                    請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
                                 </div>
                             </div>
                             @*連絡電話*@
                             <div class="form-group">
                                 <label class="form-label" for="phonenumber">連絡電話</label>
-                                <input type="text" name="phonenumber_tenant" class="form-control" required>
+                                <input type="text" name="inputPhoneNumber_0" class="form-control inputPhoneNumber" data-index="0" data-valid="1" required>
                                 <div class="invalid-feedback">
                                     請輸入連絡電話
                                 </div>
@@ -454,6 +454,14 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label pt-3" for="couplename">基本資料</label>
+                                <div class="row pb-2">
+                                    <div class="col-12">
+                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" class="custom-control-input national_check couple_input" id="IDnumber_99" name="IDnumber_99" data-index="99" disabled>
+                                            <label class="custom-control-label" for="IDnumber_99">外籍</label>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-10 col-lg-6 pl-0">
                                     <div class="input-group input-group-multi-transition w-100">
                                         <div class="input-group-append">
@@ -463,24 +471,12 @@
                                         <div class="input-group-append">
                                             <span class="input-group-text">身分證</span>
                                         </div>
-                                        <input type="text" class="form-control couple_input" name="coupleNumber" disabled>
+                                        <input type="text" id="coupleIDcheck" class="form-control couple_input inputIDnumber" name="coupleNumber" data-index="99" data-valid="1" disabled>
+                                        <div class="invalid-feedback">
+                                            請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
+                                        </div>
                                     </div>
                                 </div>
-                                @*出生年月日*@
-                                @*<div class="col-md-10 col-lg-6 pt-3">
-            <div class="input-group">
-                <input type="text" class="form-control birthday couple_input" id="couplebirth" name="couplebirth" placeholder="請選擇生日" disabled>
-                <div class="input-group-append">
-                    <span class="input-group-text fs-xl">
-                        <i class="fal fa-calendar-check"></i>
-                    </span>
-                </div>
-                <div class="invalid-feedback">
-                    請選擇生日
-                </div>
-            </div>
-        </div>*@
-
                                 <div class="form-group pt-3">
                                     <label class="form-label" for="birthday">生日</label>
                                     <div class="col-md-8 col-lg-6 mb-3 pl-0">
@@ -598,7 +594,75 @@
                             event.stopPropagation();
                         }
                         form.classList.add('was-validated');
+
+                        //------------------
+                        //IDnumber//
+                        //------------------
+                        const inputIDElements = document.querySelectorAll('.inputIDnumber');
+                        const IDpattern = /^[A-Z]\d{9}$/;
+                        inputIDElements.forEach(inputID => {
+                            var selectedIndex = inputID.getAttribute('data-index');
+                            var selectedValid = inputID.getAttribute('data-valid');
+                            const inputElement = document.querySelector('.inputIDnumber[data-index="' + selectedIndex + '"]');
+                            //validation
+                            //const IDinput = document.getElementById('IDnumber');
+                            if (inputElement.hasAttribute('required') && selectedValid == '1') {
+                                const IDinputvalue = inputElement.value;
+                                const IDisValid = IDpattern.test(IDinputvalue);
+                                if (!IDisValid) {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                    //document.getElementById('IDnumber').classList.add('is-invalid');
+                                    //form.classList.remove('was-validated');//將頁面綠色框架(驗證成功)移除
+                                    inputElement.classList.remove('was-validated');
+                                    inputElement.classList.add('is-invalid');//賦予紅色框架(驗證失敗)
+                                }
+                                else {
+                                    //document.getElementById('IDnumber').classList.remove('is-invalid');
+                                    inputElement.classList.remove('is-invalid');
+                                }
+                            }
+                            else {
+                                //外籍不做驗證
+                                inputElement.classList.remove('is-invalid');
+                            }
+                        });
+
+                        //------------------
+                        //phoneNumber
+                        //------------------
+                        const inputPhoneElements = document.querySelectorAll('.inputPhoneNumber');
+                        const Phonepattern = /^\d{10}$/;
+
+                        //const Phoneinput = document.getElementById('phonenumber_landlord').value;
+                        //const PhoneisValid = Phonepattern.test(Phoneinput);
+
+                        inputPhoneElements.forEach(inputID => {
+                            var selectedIndex = inputID.getAttribute('data-index');
+                            var selectedValid = inputID.getAttribute('data-valid');
+                            const inputElement = document.querySelector('.inputPhoneNumber[data-index="' + selectedIndex + '"]');
+                            //validation
+                            //const IDinput = document.getElementById('IDnumber');
+                            if (inputElement.hasAttribute('required')) {
+                                const IDinputvalue = inputElement.value;
+                                const PhoneisValid = Phonepattern.test(IDinputvalue);
+                                if (!PhoneisValid) {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                    //document.getElementById('IDnumber').classList.add('is-invalid');
+                                    //form.classList.remove('was-validated');//將頁面綠色框架(驗證成功)移除
+                                    inputElement.classList.remove('was-validated');
+                                    inputElement.classList.add('is-invalid');//賦予紅色框架(驗證失敗)
+                                }
+                                else {
+                                    //document.getElementById('IDnumber').classList.remove('is-invalid');
+                                    inputElement.classList.remove('is-invalid');
+                                }
+                            }
+                        });
+
                     }, false);
+
                 });
             }, false);
         })();
@@ -929,6 +993,10 @@
                 } else {
                     $('.couple_input').prop('disabled', true);
                     $('.couple_input').prop('required', false);
+                    //身分證
+                    const IDcheckbox = document.getElementById('coupleIDcheck');
+                    IDcheckbox.checked = false;
+                    IDcheckbox.prop('disabled', true);
                     //分戶
                     const checkbox = document.getElementById('separatecheck');
                     checkbox.checked = false;
@@ -946,8 +1014,13 @@
                     $('.couple_input').prop('disabled', false);
                     $('.couple_input').prop('required', true);
                 } else {
+
                     $('.couple_input').prop('disabled', true);
                     $('.couple_input').prop('required', false);
+                    //身分證
+                    const IDcheckbox = document.getElementById('coupleIDcheck');
+                    IDcheckbox.checked = false;
+                    $('input[name="separatenumber"]').prop('disabled', true);
                     //分戶
                     const checkbox = document.getElementById('separatecheck');
                     checkbox.checked = false;
@@ -958,16 +1031,19 @@
             });
 
             //是否為外籍(不需填身分證)
+            ///20230815Required還是要有，只是不需驗證
             $('.national_check').on('change', function () {
                 var selectedIndex = $(this).attr('data-index');
+
+                const inputElement = document.querySelector('.inputIDnumber[data-index="' + selectedIndex + '"]');
                 if ($(this).is(':checked')) {
-                    $('.national_IDnumber_' + selectedIndex).prop('disabled', true);
-                    //required
-                    $('.national_IDnumber_' + selectedIndex).prop('required', false);
+                    inputElement.setAttribute('data-valid', 0);
+                    //$('.inputIDnumber_' + selectedIndex).prop('disabled', true);
+                    //$('.inputIDnumber_' + selectedIndex).prop('required', false);
                 } else {
-                    $('.national_IDnumber_' + selectedIndex).prop('disabled', false);
-                    //required
-                    $('.national_IDnumber_' + selectedIndex).prop('required', true);
+                    inputElement.setAttribute('data-valid', 1);
+                    //$('.inputIDnumber_' + selectedIndex).prop('disabled', false);
+                    //$('.inputIDnumber_' + selectedIndex).prop('required', true);
                 }
             });
             //是否分戶

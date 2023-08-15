@@ -226,7 +226,7 @@ namespace LiqunManagement.Controllers
             string name_landlord,
             string genderRadio_landlord,
             DateTime birthday_landlord,
-            string IDnumber_landlord,
+            string inputIDnumber_landlord,
             string phonenumber_landlord,
             string road_address_landlord,
             string elseaddress_landlord,
