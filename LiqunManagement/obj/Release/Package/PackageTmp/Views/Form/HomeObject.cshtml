@@ -852,11 +852,23 @@
             nopark.forEach(function (checkbox) {
                 checkbox.addEventListener('click', function () {
                     const nopark = document.querySelector('input[aria-label="無車位"]');
+                    const carpark = document.querySelector('input[aria-label="汽車車位"]');
+                    const morpark = document.querySelector('input[aria-label="機車車位"]');
                     if (nopark.checked) {
                         document.querySelector('input[aria-label="汽車車位"]').checked = false;
                         document.querySelector('input[aria-label="機車車位"]').checked = false;
                         $('.park_carclass').hide();
                         $('.park_morclass').hide();
+                    }
+
+                    //重設Requiired屬性
+                    $('input[aria-label="無車位"]').prop('required', false);
+                    $('input[aria-label="汽車車位"]').prop('required', false);
+                    $('input[aria-label="機車車位"]').prop('required', false);
+                    if (!nopark.checked && !carpark.checked && !morpark.checked) {
+                        $('input[aria-label="無車位"]').prop('required', true);
+                        $('input[aria-label="汽車車位"]').prop('required', true);
+                        $('input[aria-label="機車車位"]').prop('required', true);
                     }
                 });
             });
@@ -880,6 +892,16 @@
                     }
                     else {
                         $('.park_morclass').hide();
+                    }
+
+                    //重設Requiired屬性
+                    $('input[aria-label="無車位"]').prop('required', false);
+                    $('input[aria-label="汽車車位"]').prop('required', false);
+                    $('input[aria-label="機車車位"]').prop('required', false);
+                    if (!nopark.checked && !carpark.checked && !morpark.checked) {
+                        $('input[aria-label="無車位"]').prop('required', true);
+                        $('input[aria-label="汽車車位"]').prop('required', true);
+                        $('input[aria-label="機車車位"]').prop('required', true);
                     }
                 });
             });

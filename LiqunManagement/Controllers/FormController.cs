@@ -323,7 +323,36 @@ namespace LiqunManagement.Controllers
         {
             DDLServices ddlservices = new DDLServices();
             var bankJson = JsonConvert.SerializeObject(ddlservices.GetBankDDL(bankcode, "branches").ddllist.ToList());
-            return Json(bankJson);
+
+            //字元大小
+            var banklength = (from db in formdb.Bank.Where(x => x.RootCheck == true && x.BankCode == bankcode)
+                             select new
+                             {
+                                 minlength = db.CodeMinlength,
+                                 maxlength = db.CodeMaxlength,
+                             }).FirstOrDefault();
+            string[] mindata = new string[0];
+            if(banklength != null)
+            {
+                mindata = banklength.minlength.Split(',');
+                int datacount = mindata.Length;
+                if(mindata.Length == 1)
+                {
+                    mindata = new string[0];
+                }
+            }
+
+
+            var result = new
+            {
+                lengthset = mindata,
+                minlength = banklength.minlength,
+                maxlength = banklength.maxlength,
+                bankJson = bankJson
+            };
+
+
+            return Json(result);
         }
         #endregion
 

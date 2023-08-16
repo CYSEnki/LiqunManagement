@@ -290,7 +290,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="text" id="IDnumber" name="inputIDnumber_tenant" class="form-control inputIDnumber" data-index="0" data-valid="1" required>
+                                <input type="text" id="IDnumber" name="inputIDnumber_tenant" class="form-control inputIDnumber" data-index="0" data-valid="1" pattern="^[A-Z]\d{9}$" required>
                                 <div class="invalid-feedback">
                                     請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
                                 </div>
@@ -298,9 +298,9 @@
                             @*連絡電話*@
                             <div class="form-group">
                                 <label class="form-label" for="phonenumber">連絡電話</label>
-                                <input type="text" name="inputPhoneNumber_0" class="form-control inputPhoneNumber" data-index="0" data-valid="1" required>
+                                <input type="text" name="inputPhoneNumber_0" class="form-control inputPhoneNumber" data-index="0" data-valid="1" pattern="^\d{10}$" required>
                                 <div class="invalid-feedback">
-                                    請輸入連絡電話
+                                    請輸入連絡電話，並確認格式為【10個數字】
                                 </div>
                             </div>
                             @*戶籍地址*@
@@ -420,15 +420,15 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label" for="basic-url">帳號</label>
+                                <label class="form-label" for="banknumber">帳號</label><label class="form-label" id="jqlengthalert" for="banknumber"></label>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">帳號</span>
                                             </div>
-                                            <input type="text" placeholder="" class="form-control" name="banknumber" required>
-                                            <div class="invalid-feedback">
+                                            <input type="text" id="banknumber" name="banknumber" class="form-control" required>
+                                            <div class="invalid-feedback" id="banknumberalert">
                                                 請填寫帳號
                                             </div>
                                         </div>
@@ -471,7 +471,7 @@
                                         <div class="input-group-append">
                                             <span class="input-group-text">身分證</span>
                                         </div>
-                                        <input type="text" id="coupleIDcheck" class="form-control couple_input inputIDnumber" name="coupleNumber" data-index="99" data-valid="1" disabled>
+                                        <input type="text" id="coupleIDcheck" class="form-control couple_input inputIDnumber" name="coupleNumber" data-index="99" data-valid="1" pattern="^[A-Z]\d{9}$" disabled>
                                         <div class="invalid-feedback">
                                             請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
                                         </div>
@@ -594,72 +594,6 @@
                             event.stopPropagation();
                         }
                         form.classList.add('was-validated');
-
-                        //------------------
-                        //IDnumber//
-                        //------------------
-                        const inputIDElements = document.querySelectorAll('.inputIDnumber');
-                        const IDpattern = /^[A-Z]\d{9}$/;
-                        inputIDElements.forEach(inputID => {
-                            var selectedIndex = inputID.getAttribute('data-index');
-                            var selectedValid = inputID.getAttribute('data-valid');
-                            const inputElement = document.querySelector('.inputIDnumber[data-index="' + selectedIndex + '"]');
-                            //validation
-                            //const IDinput = document.getElementById('IDnumber');
-                            if (inputElement.hasAttribute('required') && selectedValid == '1') {
-                                const IDinputvalue = inputElement.value;
-                                const IDisValid = IDpattern.test(IDinputvalue);
-                                if (!IDisValid) {
-                                    event.preventDefault();
-                                    event.stopPropagation();
-                                    //document.getElementById('IDnumber').classList.add('is-invalid');
-                                    //form.classList.remove('was-validated');//將頁面綠色框架(驗證成功)移除
-                                    inputElement.classList.remove('was-validated');
-                                    inputElement.classList.add('is-invalid');//賦予紅色框架(驗證失敗)
-                                }
-                                else {
-                                    //document.getElementById('IDnumber').classList.remove('is-invalid');
-                                    inputElement.classList.remove('is-invalid');
-                                }
-                            }
-                            else {
-                                //外籍不做驗證
-                                inputElement.classList.remove('is-invalid');
-                            }
-                        });
-
-                        //------------------
-                        //phoneNumber
-                        //------------------
-                        const inputPhoneElements = document.querySelectorAll('.inputPhoneNumber');
-                        const Phonepattern = /^\d{10}$/;
-
-                        //const Phoneinput = document.getElementById('phonenumber_landlord').value;
-                        //const PhoneisValid = Phonepattern.test(Phoneinput);
-
-                        inputPhoneElements.forEach(inputID => {
-                            var selectedIndex = inputID.getAttribute('data-index');
-                            var selectedValid = inputID.getAttribute('data-valid');
-                            const inputElement = document.querySelector('.inputPhoneNumber[data-index="' + selectedIndex + '"]');
-                            //validation
-                            //const IDinput = document.getElementById('IDnumber');
-                            if (inputElement.hasAttribute('required')) {
-                                const IDinputvalue = inputElement.value;
-                                const PhoneisValid = Phonepattern.test(IDinputvalue);
-                                if (!PhoneisValid) {
-                                    event.preventDefault();
-                                    event.stopPropagation();
-                                    //document.getElementById('IDnumber').classList.add('is-invalid');
-                                    //form.classList.remove('was-validated');//將頁面綠色框架(驗證成功)移除
-                                    inputElement.classList.remove('was-validated');
-                                    inputElement.classList.add('is-invalid');//賦予紅色框架(驗證失敗)
-                                }
-                                else {
-                                    //document.getElementById('IDnumber').classList.remove('is-invalid');
-                                    inputElement.classList.remove('is-invalid');
-                                }
-                            }
-                        });
 
                     }, false);
 
@@ -820,7 +754,7 @@
                     url: '@Url.Content("~/Form/DDLBank/")',
                     dataType: 'json'
                 }).done(function (dataresult) {
-                    var jsonBankBranchArray = JSON.parse(dataresult);
+                    var jsonBankBranchArray = JSON.parse(dataresult.bankJson);
                     for (var i = 0; i < jsonBankBranchArray.length; i++) {
                             jsonBankBranchArray[i].id = jsonBankBranchArray[i].id.replace(/\"/g, '');
                             jsonBankBranchArray[i].text = jsonBankBranchArray[i].text.replace(/\"/g, '');
@@ -840,6 +774,34 @@
                         data: data_bankbranch,
                         placeholder: '分行'
                     });
+                    //設定帳號長度
+                    var inputElement = document.getElementById('banknumber');
+                    var alertelement = document.getElementById('banknumberalert');
+                    var lengthalert = document.getElementById('jqlengthalert');
+                    if (dataresult.lengthset.length === 0) {
+                        //非兩種長度以上
+                        var length = "";
+                        if (dataresult.minlength == dataresult.maxlength) {
+                            length = dataresult.minlength + "字";
+                        }
+                        else {
+                            length = dataresult.minlength + "字 ~" + dataresult.maxlength + "字"
+                        }
+
+                        alertelement.innerHTML = "請正確輸入帳號，帳號長度數請填寫 : " + length;
+                        inputElement.setAttribute('pattern', '.{' + dataresult.minlength + ',' + dataresult.maxlength + '}');
+                        lengthalert.innerHTML = "(" + length + ")"
+                    }
+                    else {
+                        // 將陣列中的數字轉換成以 | 分隔的字串
+                        var regexPattern = dataresult.lengthset.map(length => `.{${length}}`).join('|');
+                        var regexword = dataresult.lengthset.join('字,') + "字";
+
+                        alertelement.innerHTML = "請正確輸入帳號，帳號長度數請填寫 : " + regexword;
+                        inputElement.setAttribute('pattern', regexPattern);
+                        lengthalert.innerHTML = "(" + regexword + ")"
+
+                    }
                 });
             });
             //直系親屬下拉選單(嬰幼兒不需填身分證)
@@ -1037,15 +999,14 @@
 
                 const inputElement = document.querySelector('.inputIDnumber[data-index="' + selectedIndex + '"]');
                 if ($(this).is(':checked')) {
-                    inputElement.setAttribute('data-valid', 0);
-                    //$('.inputIDnumber_' + selectedIndex).prop('disabled', true);
-                    //$('.inputIDnumber_' + selectedIndex).prop('required', false);
+                    //inputElement.setAttribute('data-valid', 0);
+                    inputElement.removeAttribute('pattern');
                 } else {
-                    inputElement.setAttribute('data-valid', 1);
-                    //$('.inputIDnumber_' + selectedIndex).prop('disabled', false);
-                    //$('.inputIDnumber_' + selectedIndex).prop('required', true);
+                    //inputElement.setAttribute('data-valid', 1);
+                    inputElement.setAttribute('pattern', '^[A-Z]\\d{9}$');
                 }
             });
+
             //是否分戶
             $('#separatecheck').on('change', function () {
                 if ($(this).is(':checked')) {

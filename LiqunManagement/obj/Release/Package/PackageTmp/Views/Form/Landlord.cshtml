@@ -147,7 +147,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="text" id="IDnumber" name="IDnumber_landlord" class="form-control national_IDnumber_0" required>
+                                <input type="text" id="IDnumber_0" name="IDnumber_0" class="form-control inputIDnumber" data-index="0" data-valid="1" pattern="^[A-Z]\d{9}$" required>
                                 <div class="invalid-feedback">
                                     請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
                                 </div>
@@ -155,7 +155,7 @@
                             @*連絡電話*@
                             <div class="form-group">
                                 <label class="form-label" for="phonenumber">連絡電話</label>
-                                <input type="text" id="phonenumber_landlord" name="phonenumber_landlord" class="form-control" required>
+                                <input type="text" id="inputPhoneNumber_0" name="inputPhoneNumber_0" class="form-control inputPhoneNumber" data-index="0" data-valid="1" pattern="^\d{10}$" required>
                                 <div class="invalid-feedback">
                                     請輸入連絡電話，並確認格式為【10個數字】
                                 </div>
@@ -265,15 +265,15 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label" for="basic-url">帳號</label>
+                                <label class="form-label" for="banknumber">帳號</label><label class="form-label" id="jqlengthalert" for="banknumber"></label>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text">帳號</span>
+                                                <span class="input-group-text">帳號</span><label class="form-label" id="jqlengthalert" for="banknumber"></label>
                                             </div>
-                                            <input type="text" placeholder="" class="form-control" name="banknumber" required>
-                                            <div class="invalid-feedback">
+                                            <input type="text" id="banknumber" name="banknumber" class="form-control" required>
+                                            <div class="invalid-feedback" id="banknumberalert">
                                                 請填寫帳號
                                             </div>
                                         </div>
@@ -361,16 +361,7 @@
                                     </div>
                                 </div>
                             </div>
-
                             @*身分證字號*@
-                            @*<div class="form-group getagent">
-                                <label class="form-label" for="IDnumber">身分證字號</label>
-                                <input type="text" id="IDnumber" name="IDnumber_agent" class="form-control" required>
-                                <div class="invalid-feedback">
-                                    請輸入身分證字號
-                                </div>
-                            </div>*@
-
                             <div class="form-group getagent">
                                 <label class="form-label" for="IDnumber">身分證字號</label>
                                 <div class="row pb-2">
@@ -381,7 +372,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="text" id="IDnumber" name="IDnumber_landlord" class="form-control national_IDnumber_11">
+                                <input type="text" id="IDnumber" name="inputIDnumber_landlord" class="form-control  inputIDnumber" data-index="11" data-valid="1" pattern="^[A-Z]\d{9}$">
                                 <div class="invalid-feedback">
                                     請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
                                 </div>
@@ -389,9 +380,9 @@
                             @*連絡電話*@
                             <div class="form-group getagent">
                                 <label class="form-label" for="phonenumber">連絡電話</label>
-                                <input type="text" id="phonenumber_agent" name="phonenumber_agent" class="form-control" required>
+                                <input type="text" id="inputPhoneNumber_11" name="inputPhoneNumber_11" class="form-control inputPhoneNumber" data-index="11" data-valid="1" pattern="^\d{10}$">
                                 <div class="invalid-feedback">
-                                    請輸入連絡電話
+                                    請輸入連絡電話，並確認格式為【10個數字】
                                 </div>
                             </div>
                             @*戶籍地址*@
@@ -517,7 +508,6 @@
 
     <script type="text/javascript">
         //validation
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function () {
             'use strict';
             window.addEventListener('load', function () {
@@ -532,34 +522,75 @@
                         }
                         form.classList.add('was-validated');
 
-                        //IDnumber//
-                        const IDpattern = /^[A-Z]\d{9}$/;
-                        const IDinput = document.getElementById('IDnumber');
-                        if (IDinput.hasAttribute('required')) {
-                            const IDinputvalue = IDinput.value;
-                            const IDisValid = IDpattern.test(IDinputvalue);
-                            if (!IDisValid) {
-                                event.preventDefault();
-                                event.stopPropagation();
-                                document.getElementById('IDnumber').classList.add('is-invalid');
-                            }
-                            else {
-                                document.getElementById('IDnumber').classList.remove('is-invalid');
-                            }
-                        }
+                        //------------------
+                        //IDnumber// 20230816改由pattern驗證(更優)
+                        //------------------
+                        //const inputIDElements = document.querySelectorAll('.inputIDnumber');
+                        //const IDpattern = /^[A-Z]\d{9}$/;
+                        //inputIDElements.forEach(inputID => {
+                        //    var selectedIndex = inputID.getAttribute('data-index');
+                        //    var selectedValid = inputID.getAttribute('data-valid');
+                        //    const inputElement = document.querySelector('.inputIDnumber[data-index="' + selectedIndex + '"]');
+                        //    //validation
+                        //    //const IDinput = document.getElementById('IDnumber');
+                        //    if (selectedIndex == "3") {
+                        //        debugger;
+                        //    }
+                        //    if (inputElement.hasAttribute('required') && selectedValid == '1') {
+                        //        const IDinputvalue = inputElement.value;
+                        //        const IDisValid = IDpattern.test(IDinputvalue);
+                        //        if (!IDisValid) {
+                        //            event.preventDefault();
+                        //            event.stopPropagation();
+                        //            //document.getElementById('IDnumber').classList.add('is-invalid');
+                        //            //form.classList.remove('was-validated');//將頁面綠色框架(驗證成功)移除
+                        //            inputElement.classList.remove('was-validated');
+                        //            inputElement.classList.add('is-invalid');//賦予紅色框架(驗證失敗)
+                        //        }
+                        //        else {
+                        //            //document.getElementById('IDnumber').classList.remove('is-invalid');
+                        //            inputElement.classList.remove('is-invalid');
+                        //        }
+                        //    }
+                        //    else {
+                        //        //外籍不做驗證
+                        //        inputElement.classList.remove('is-invalid');
+                        //    }
+                        //});
 
-                        //phoneNumber
-                        const Phonepattern = /^\d{10}$/;
-                        const Phoneinput = document.getElementById('phonenumber_landlord').value;
-                        const PhoneisValid = Phonepattern.test(Phoneinput);
-                        if (!PhoneisValid) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                            document.getElementById('phonenumber_landlord').classList.add('is-invalid');
-                        }
-                        else {
-                            document.getElementById('phonenumber_landlord').classList.remove('is-invalid');
-                        }
+                        //------------------
+                        //phoneNumber// 20230816改由pattern驗證(更優)
+                        //------------------
+                        //const inputPhoneElements = document.querySelectorAll('.inputPhoneNumber');
+                        //const Phonepattern = /^\d{10}$/;
+
+                        ////const Phoneinput = document.getElementById('phonenumber_landlord').value;
+                        ////const PhoneisValid = Phonepattern.test(Phoneinput);
+
+                        //inputPhoneElements.forEach(inputID => {
+                        //    var selectedIndex = inputID.getAttribute('data-index');
+                        //    //var selectedValid = inputID.getAttribute('data-valid');
+                        //    const inputElement = document.querySelector('.inputPhoneNumber[data-index="' + selectedIndex + '"]');
+                        //    //validation
+                        //    //const IDinput = document.getElementById('IDnumber');
+                        //    if (inputElement.hasAttribute('required')) {
+                        //        const IDinputvalue = inputElement.value;
+                        //        const PhoneisValid = Phonepattern.test(IDinputvalue);
+                        //        if (!PhoneisValid) {
+                        //            event.preventDefault();
+                        //            event.stopPropagation();
+                        //            //document.getElementById('IDnumber').classList.add('is-invalid');
+                        //            //form.classList.remove('was-validated');//將頁面綠色框架(驗證成功)移除
+                        //            inputElement.classList.remove('was-validated');
+                        //            inputElement.classList.add('is-invalid');//賦予紅色框架(驗證失敗)
+                        //        }
+                        //        else {
+                        //            //document.getElementById('IDnumber').classList.remove('is-invalid');
+                        //            inputElement.classList.remove('is-invalid');
+                        //        }
+                        //    }
+                        //});
+                        
 
                     }, false);
                 });
@@ -579,7 +610,7 @@
             $('.getco5').hide();
 
             //------------------
-            // 物件地址下拉選單  *
+            // 初始化物件地址下拉選單  *
             //------------------
             var jsonCity = @Html.Raw(Json.Encode(ViewBag.citylist));
             var jsonArray = JSON.parse(jsonCity);
@@ -604,7 +635,7 @@
             });
 
             //------------------
-            // 銀行下拉選單  *
+            // 初始化銀行下拉選單  *
             //------------------
             var jsonBank = @Html.Raw(Json.Encode(ViewBag.banklist));
             var jsonBankArray = JSON.parse(jsonBank);
@@ -708,7 +739,8 @@
                     url: '@Url.Content("~/Form/DDLBank/")',
                     dataType: 'json'
                 }).done(function (dataresult) {
-                    var jsonBankBranchArray = JSON.parse(dataresult);
+                    //第二層銀行支部
+                    var jsonBankBranchArray = JSON.parse(dataresult.bankJson);
                     for (var i = 0; i < jsonBankBranchArray.length; i++) {
                             jsonBankBranchArray[i].id = jsonBankBranchArray[i].id.replace(/\"/g, '');
                             jsonBankBranchArray[i].text = jsonBankBranchArray[i].text.replace(/\"/g, '');
@@ -728,6 +760,35 @@
                         data: data_bankbranch,
                         placeholder: '分行'
                     });
+
+                    //設定帳號長度
+                    var inputElement = document.getElementById('banknumber');
+                    var alertelement = document.getElementById('banknumberalert');
+                    var lengthalert = document.getElementById('jqlengthalert');
+                    if (dataresult.lengthset.length === 0) {
+                        //非兩種長度以上
+                        var length = "";
+                        if (dataresult.minlength == dataresult.maxlength) {
+                            length = dataresult.minlength + "字";
+                        }
+                        else {
+                            length = dataresult.minlength + "字 ~" + dataresult.maxlength + "字"
+                        }
+
+                        alertelement.innerHTML = "請正確輸入帳號，帳號長度數請填寫 : " + length;
+                        inputElement.setAttribute('pattern', '.{' + dataresult.minlength + ',' + dataresult.maxlength + '}');
+                        lengthalert.innerHTML = "(" + length + ")"
+                    }
+                    else {
+                        // 將陣列中的數字轉換成以 | 分隔的字串
+                        var regexPattern = dataresult.lengthset.map(length => `.{${length}}`).join('|');
+                        var regexword = dataresult.lengthset.join('字,') + "字";
+
+                        alertelement.innerHTML = "請正確輸入帳號，帳號長度數請填寫 : " + regexword;
+                        inputElement.setAttribute('pattern', regexPattern);
+                        lengthalert.innerHTML = "(" + regexword + ")"
+
+                    }
                 });
             });
             //------------------
@@ -797,6 +858,11 @@
                                 $('.getco3').hide();
                                 $('.getco4').hide();
                                 $('.getco5').hide();
+                                $('.inputIDnumber[data-index="1"]').prop('required', false);
+                                $('.inputIDnumber[data-index="2"]').prop('required', false);
+                                $('.inputIDnumber[data-index="3"]').prop('required', false);
+                                $('.inputIDnumber[data-index="4"]').prop('required', false);
+                                $('.inputIDnumber[data-index="5"]').prop('required', false);
                                 break;
                             case "jqCoOwnerRadio_1":
                                 $('.getco1').show();
@@ -804,6 +870,11 @@
                                 $('.getco3').hide();
                                 $('.getco4').hide();
                                 $('.getco5').hide();
+                                $('.inputIDnumber[data-index="1"]').prop('required', true);
+                                $('.inputIDnumber[data-index="2"]').prop('required', false);
+                                $('.inputIDnumber[data-index="3"]').prop('required', false);
+                                $('.inputIDnumber[data-index="4"]').prop('required', false);
+                                $('.inputIDnumber[data-index="5"]').prop('required', false);
                                 break;
                             case "jqCoOwnerRadio_2":
                                 $('.getco1').show();
@@ -811,6 +882,11 @@
                                 $('.getco3').hide();
                                 $('.getco4').hide();
                                 $('.getco5').hide();
+                                $('.inputIDnumber[data-index="1"]').prop('required', true);
+                                $('.inputIDnumber[data-index="2"]').prop('required', true);
+                                $('.inputIDnumber[data-index="3"]').prop('required', false);
+                                $('.inputIDnumber[data-index="4"]').prop('required', false);
+                                $('.inputIDnumber[data-index="5"]').prop('required', false);
                                 break;
                             case "jqCoOwnerRadio_3":
                                 $('.getco1').show();
@@ -818,6 +894,11 @@
                                 $('.getco3').show();
                                 $('.getco4').hide();
                                 $('.getco5').hide();
+                                $('.inputIDnumber[data-index="1"]').prop('required', true);
+                                $('.inputIDnumber[data-index="2"]').prop('required', true);
+                                $('.inputIDnumber[data-index="3"]').prop('required', true);
+                                $('.inputIDnumber[data-index="4"]').prop('required', false);
+                                $('.inputIDnumber[data-index="5"]').prop('required', false);
                                 break;
                             case "jqCoOwnerRadio_4":
                                 $('.getco1').show();
@@ -825,6 +906,11 @@
                                 $('.getco3').show();
                                 $('.getco4').show();
                                 $('.getco5').hide();
+                                $('.inputIDnumber[data-index="1"]').prop('required', true);
+                                $('.inputIDnumber[data-index="2"]').prop('required', true);
+                                $('.inputIDnumber[data-index="3"]').prop('required', true);
+                                $('.inputIDnumber[data-index="4"]').prop('required', true);
+                                $('.inputIDnumber[data-index="5"]').prop('required', false);
                                 break;
                             case "jqCoOwnerRadio_5":
                                 $('.getco1').show();
@@ -832,6 +918,11 @@
                                 $('.getco3').show();
                                 $('.getco4').show();
                                 $('.getco5').show();
+                                $('.inputIDnumber[data-index="1"]').prop('required', true);
+                                $('.inputIDnumber[data-index="2"]').prop('required', true);
+                                $('.inputIDnumber[data-index="3"]').prop('required', true);
+                                $('.inputIDnumber[data-index="4"]').prop('required', true);
+                                $('.inputIDnumber[data-index="5"]').prop('required', true);
                                 break;
                         }
                     }
@@ -853,16 +944,17 @@
             });
 
             //是否為外籍(不需填身分證)
+            ///20230815Required還是要有，只是不需驗證
             $('.national_check').on('change', function () {
                 var selectedIndex = $(this).attr('data-index');
+
+                const inputElement = document.querySelector('.inputIDnumber[data-index="' + selectedIndex + '"]');
                 if ($(this).is(':checked')) {
-                    $('.national_IDnumber_' + selectedIndex).prop('disabled', true);
-                    //required
-                    $('.national_IDnumber_' + selectedIndex).prop('required', false);
+                    //inputElement.setAttribute('data-valid', 0);
+                    inputElement.removeAttribute('pattern');
                 } else {
-                    $('.national_IDnumber_' + selectedIndex).prop('disabled', false);
-                    //required
-                    $('.national_IDnumber_' + selectedIndex).prop('required', true);
+                    //inputElement.setAttribute('data-valid', 1);
+                    inputElement.setAttribute('pattern', '^[A-Z]\\d{9}$');
                 }
             });
 
