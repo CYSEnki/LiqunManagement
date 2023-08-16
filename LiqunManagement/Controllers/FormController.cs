@@ -46,36 +46,41 @@ namespace LiqunManagement.Controllers
         }
         [HttpPost]
         public ActionResult HomeObject(
-            string notarizationRadio,
-            DateTime signdate,
-            string appraiserRadio,
-            string feature,
-            string selectcity,
-            string selectdistrict,
-            string selecctroad,
-            string elseaddress,
-            string useforRadio,
-            string useforelse,
-            HttpPostedFileBase taxFile,
-            string rent,
-            string deposit,
-            string management_fee,
-            DateTime startdate,
-            DateTime enddate,
-            int paydate,
-            string buildtypeRadio,
-            string roomtypeRadio,
-            string roomamount,
-            string hallamount,
-            string bathamount,
-            string carparkRadio,
-            string parktypeRadio,
-            string parkfloorRadio,
-            string carpositionnumber,
-            string carmonthrent,
-            string scootermonthrent,
-            string parkmanagementfee,
-            string scootermanagementfee
+            string objecttypeRadio,     //(radio)包租:1; 代管:0
+            string notarizationRadio,   //(radio)公證:1; 非公證:0
+            DateTime signdate,          //(datetime)簽約日
+            string appraiserRadio,      //(radio)簽估價師:1; 非簽估價師:0
+            string feature,             //(text)特色
+            string selecctroad,         //(ddl)物件地址
+            string detailaddress,       //(text)地址細節
+            string useforRadio,         //(radio)主要用途 住家用:0; 商業用:1; 辦公室:2; 一般事務所:3; 其他:4
+            string useforelse,          //(text)主要用途 其他
+            HttpPostedFileBase taxFile, //(file)上傳稅單
+            string rent,                //(number)租金
+            string deposit,             //(number)押金
+            string management_fee,      //(number)管理費
+            DateTime startdate,         //(datetime)起租日
+            DateTime enddate,           //(datetime)結束日
+            int paydate,                //(ddl)繳租日
+            string buildtypeRadio,      //(radio)建物型態 透天厝:0; 公寓:1; 華夏:2; 電梯大樓:3
+            string roomtypeRadio,       //(radio)房型 整層出租:0; 獨立套房:1;
+            string roomamount,          //(text)房數
+            string hallamount,          //(text)廳數
+            string bathamount,          //(text)衛數
+
+
+            string noparkcheck,         //(checkbox)車位 無車位:0
+            string carparkcheck,        //(checkbox)車位 汽車車位:0
+            string morparkcheck,        //(checkbox)車位 機車車位:0
+            string parktypeRadio,       //(radio)汽車車位樣式 坡道平面:0; 坡道機械:1; 機械平面:2; 機械機械:3
+            string carparkfloorRadio,   //(radio)汽車位於 地上:1; 地下:0
+            string parkfloornumber,     //(number)汽車位於幾樓
+            string carpositionnumber,   //(text)汽車位編號
+            string carmonthrent,        //(text)汽車月租金
+            string parkmanagementfee,   //(number)汽車管理費
+            string morpositionnumber,   //(text)機車位編號
+            string scootermonthrent,    //(number)機車月租金
+            string scootermanagementfee //(number)機車管理費
             )
         {
             if (ModelState.IsValid)
@@ -125,8 +130,8 @@ namespace LiqunManagement.Controllers
                             city = address.City,
                             district = address.District,
                             road = address.Road,
-                            elseaddress = elseaddress,
-                            fulladdress = address.City + address.District + address.Road + elseaddress,
+                            elseaddress = detailaddress,
+                            fulladdress = address.City + address.District + address.Road + detailaddress,
                             usefor = Convert.ToInt32(useforRadio),
                             useforelse = useforelse,
                             taxfile_name = taxFile.FileName,
@@ -142,9 +147,9 @@ namespace LiqunManagement.Controllers
                             roomamount = roomtypeRadio == "1" ? "套" : roomamount,
                             hallamount = Convert.ToInt32(hallamount),
                             bathamount = Convert.ToInt32(bathamount),
-                            carpark = Convert.ToInt32(carparkRadio),
+                            carpark = Convert.ToInt32(detailaddress),
                             parktype = Convert.ToInt32(parktypeRadio),
-                            parkfloor = Convert.ToInt32(parkfloorRadio),
+                            parkfloor = Convert.ToInt32(parkfloornumber),
                             carpositionnumber = carpositionnumber,
                             carmonthrent = carmonthrent_Integer,
                             scootermonthrent = scootermonthrent_Integer,
