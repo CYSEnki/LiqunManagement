@@ -109,7 +109,7 @@
                                     <span class="text-danger">*</span>
                                 </label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control " placeholder="請選擇簽約日" id="signdate" name="signdate" required>
+                                    <input type="text" class="form-control " placeholder="請選擇簽約日" id="signdate" name="signdate" autocomplete="off" required>
                                     <div class="input-group-append">
                                         <span class="input-group-text fs-xl">
                                             <i class="fal fa-calendar-check"></i>
@@ -127,7 +127,7 @@
                                 <span class="text-danger">*</span>
                                 <div class="frame-wrap">
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="appraiser_1" name="appraiserRadio_1" value="1" required>
+                                        <input type="radio" class="custom-control-input" id="appraiserRadio_1" name="appraiserRadio" value="1" required>
                                         <label class="custom-control-label" for="appraiserRadio_1">是</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
@@ -277,7 +277,7 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label class="form-label" for="example-date">起租日</label>
-                                        <input type="text" class="form-control " placeholder="請選擇起租日" id="datepicker_startdate" name="startdate" required>
+                                        <input type="text" class="form-control " placeholder="請選擇起租日" id="datepicker_startdate" name="startdate" autocomplete="off" required>
                                         <div class="invalid-feedback">
                                             請選擇起租日
                                         </div>
@@ -286,7 +286,7 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label class="form-label" for="example-date">結束日</label>
-                                        <input type="text" class="form-control " placeholder="請選擇起租日" id="datepicker_enddate" name="enddate" required>
+                                        <input type="text" class="form-control " placeholder="請選擇起租日" id="datepicker_enddate" name="enddate" autocomplete="off" required>
                                         <div class="invalid-feedback">
                                             請選擇結束日
                                         </div>
@@ -387,7 +387,7 @@
                             <!--備註欄-->
                             <div class="form-group">
                                 <label class="form-label" for="example-textarea">備註</label>
-                                <textarea class="form-control" id="example-textarea" rows="5" style="height: 122px;"></textarea>
+                                <textarea class="form-control" id="momo" name="memo" rows="5" style="height: 122px;"></textarea>
                             </div>
                             <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row align-items-center">
                                 <div class="custom-control custom-checkbox">
@@ -435,6 +435,41 @@
                             event.preventDefault();
                             event.stopPropagation();
                         }
+
+                        //將屋況附屬設備存成[]陣列
+                        const dataArray = [];
+                        for (let i = 10; i <= 13; i++) {
+                            if (i != 13) {
+                                const inputValue = document.getElementById(`accessory_amount_${i}`).value;
+                                dataArray.push(parseInt(inputValue));
+                            }
+                            else {
+                                //取得選擇的熱水器
+                                var selectedValue = $('input[name="dRadio13"]:checked').val();
+                                switch (selectedValue) {
+                                    case 'A':
+                                        dataArray.push(3, 2, 2);
+                                        break;
+                                    case 'B':
+                                        dataArray.push(2, 3, 2);
+                                        break;
+                                    case 'C':
+                                        dataArray.push(3, 3, 2);
+                                        break;
+                                }
+                            }
+                        }
+                        for (let i = 1; i <= 9; i++) {
+                            const inputValue = document.getElementById(`accessory_amount_${i}`).value;
+                            dataArray.push(parseInt(inputValue));
+                        }
+                        for (let i = 21; i <= 34; i++) {
+                            const inputValue = document.getElementById(`accessory_amount_${i}`).value;
+                            dataArray.push(parseInt(inputValue));
+                        }
+                        const jsonResult = JSON.stringify(dataArray);
+                        $('#JsonHomeObjectAccessory').val(jsonResult);
+
                         form.classList.add('was-validated');
                     }, false);
                 });
@@ -640,7 +675,7 @@
                     // 檢查是否被點選
                     if ($(this).is(':checked')) {
                         // 根據不同的 id 做相應的處理
-                        if (radioId === 'useforRadio_1') {
+                        if (radioId === 'useforRadio_0') {
                             //住宅用; 不用上傳稅單
                             var fileInput = document.getElementById('taxFile');
                             var filelable = document.getElementById('taxFileLable');
@@ -654,7 +689,7 @@
                             $('#elsemainuse').prop('disabled', true);
                             $('#elsemainuse').prop('readonly', true);
 
-                        } else if (radioId === 'useforRadio_5') {
+                        } else if (radioId === 'useforRadio_4') {
                             //其他; 要填寫欄位
                             $('#taxFile').prop('required', true);
                             $('#taxFile').prop('disabled', false);
@@ -690,7 +725,7 @@
                         var hallamount = document.getElementById('jqhallamount');
                         var bathamount = document.getElementById('jqbathamount');
                         // 根據不同的 id 做相應的處理
-                        if (radioId === 'roomtypeRadio_1') {
+                        if (radioId === 'roomtypeRadio_0') {
                             //整層出租
                             roomamount.value = '';
                             hallamount.value = '';
@@ -823,13 +858,20 @@
             //$('#datepicker_startdate').addEventListener('change', function (event) {
             $('#datepicker_startdate').on('change', function (event) {
                 const selectedDateStr = event.target.value;
-                const selectedDate = new Date(selectedDateStr); // 將日期字串轉換為Date物件
-                const year = selectedDate.getFullYear() + 1912; // 獲取年份
-                const month = selectedDate.getMonth(); // 獲取月份（注意月份從0開始，所以要加1）
-                const day = selectedDate.getDate() -1; // 獲取日期
+
+                const dateParts = selectedDateStr.split('-');
+
+                // 重新组合日期字符串
+                //const formattedDate = year + '-' + dateParts[1] + '-' + dateParts[2] -1;
+
+                //const selectedDate = new Date(formattedDate); // 將日期字串轉換為Date物件
+                //const newyear = selectedDate.getFullYear(); // 獲取年份
+                //const newmonth = selectedDate.getMonth(); // 獲取月份（注意月份從0開始，所以要加1）
+                //const newday = selectedDate.getDate() -1; // 獲取日期
 
                 // 設定日期
-                const defaultDate = new Date(year, month, day); // 創建一個預設的日期（月份從0開始，這裡設為7月31日）
+                const defaultDate = new Date(parseInt(dateParts[0]) + 1912, dateParts[1] -1, dateParts[2]); // 創建一個預設的日期（月份從0開始，這裡設為7月31日）
+                defaultDate.setDate(defaultDate.getDate() - 1);
                 $('#datepicker_enddate').datepicker("setDate", defaultDate);
             });
 
@@ -858,6 +900,9 @@
                     $('input[aria-label="無車位"]').prop('required', false);
                     $('input[aria-label="汽車車位"]').prop('required', false);
                     $('input[aria-label="機車車位"]').prop('required', false);
+                    //資料不須必填
+                    $('.carrequired').prop('required', false);
+                    $('.scooterrequired').prop('required', false);
                     if (!nopark.checked && !carpark.checked && !morpark.checked) {
                         $('input[aria-label="無車位"]').prop('required', true);
                         $('input[aria-label="汽車車位"]').prop('required', true);
@@ -873,17 +918,22 @@
                     const carpark = document.querySelector('input[aria-label="汽車車位"]');
                     const morpark = document.querySelector('input[aria-label="機車車位"]');
                     if (carpark.checked) {
+                        //資料不須必填
+                        $('.carrequired').prop('required', true);
                         nopark.checked = false;
                         $('.park_carclass').show();
                     }
                     else {
+                        $('.carrequired').prop('required', false);
                         $('.park_carclass').hide();
                     }
                     if (morpark.checked) {
                         nopark.checked = false;
+                        $('.scooterrequired').prop('required', true);
                         $('.park_morclass').show();
                     }
                     else {
+                        $('.scooterrequired').prop('required', false);
                         $('.park_morclass').hide();
                     }
 

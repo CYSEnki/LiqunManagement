@@ -13,9 +13,9 @@ namespace LiqunManagement.Controllers
         public MembersModel memberdb = new MembersModel();
         //public FormModels formdb = new FormModels();
         // GET: Base
-        public ActionResult Index()
-        {
-            return View();
-        }
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
     }
 }

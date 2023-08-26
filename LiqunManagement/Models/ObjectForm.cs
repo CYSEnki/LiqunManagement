@@ -6,8 +6,8 @@ namespace LiqunManagement.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Form.AllForm")]
-    public partial class AllForm
+    [Table("Form.ObjectForm")]
+    public partial class ObjectForm
     {
         [Key]
         public int FormNo { get; set; }

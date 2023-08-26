@@ -157,11 +157,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LiqunController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
+    <Compile Include="Controllers\SalesController.cs" />
     <Compile Include="Controllers\UpLoadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AllForm.cs" />
+    <Compile Include="Models\ObjectForm.cs" />
     <Compile Include="Models\Bank.cs" />
     <Compile Include="Models\FormModels.cs" />
     <Compile Include="Models\HomeObject.cs" />
@@ -2086,6 +2087,7 @@
     <Content Include="Views\Form\_TenantAgent.cshtml" />
     <Content Include="Views\Form\_TenantDirectfamily.cshtml" />
     <Content Include="Views\Form\_TenantGuarantor.cshtml" />
+    <Content Include="Views\Sales\CaseManage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
