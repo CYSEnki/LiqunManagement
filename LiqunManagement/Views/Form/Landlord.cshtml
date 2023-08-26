@@ -64,14 +64,16 @@
                     <div class="panel-content">
                         @using (Html.BeginForm("Landlord", "Form", FormMethod.Post, new { @class = "needs-validation", @enctype = "multipart/form-data", @novalidate = "" }))
                         {
+                            @*表單編號*@
+                            <input type="text" value="@ViewBag.FormID" name="FormID" hidden />
                             @*房東*@
                             <div class="panel-tag">
                                 房東
                             </div>
                             @*房東姓名*@
                             <div class="form-group">
-                                <label class="form-label" for="jqlandlordname">房東姓名</label>
-                                <input type="text" id="jqlandlordname" name="name_landlord" class="form-control" required>
+                                <label class="form-label" for="Name_Landlord">房東姓名</label>
+                                <input type="text" id="Name_0" name="Name_0" class="form-control" required>
                                 <div class="invalid-feedback">
                                     請輸入房東姓名
                                 </div>
@@ -84,35 +86,18 @@
                                 </label>
                                 <div class="frame-wrap padding-top-ten">
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="genderRadio_1" name="genderRadio_landlord" value="1" required="">
-                                        <label class="custom-control-label" for="genderRadio_1">男</label>
+                                        <input type="radio" class="custom-control-input" id="genderRadio_0_1" name="genderRadio_0" value="1" required="">
+                                        <label class="custom-control-label" for="genderRadio_0_1">男</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="genderRadio_2" name="genderRadio_landlord" value="0" required="">
-                                        <label class="custom-control-label" for="genderRadio_2">女</label>
+                                        <input type="radio" class="custom-control-input" id="genderRadio_0_0" name="genderRadio_0" value="0" required="">
+                                        <label class="custom-control-label" for="genderRadio_0_0">女</label>
                                         <div class="invalid-feedback">
                                             請選擇房東性別
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            @*出生年月日*@
-
-                            @*<div class="form-group">
-                <label class="form-label" for="birthday">生日</label>
-                <span class="text-danger">*</span>
-                <div class="input-group">
-                    <input type="text" class="form-control birthday" placeholder="請選擇生日" id="birthday_landlord" name="birthday_landlord" required>
-                    <div class="input-group-append">
-                        <span class="input-group-text fs-xl">
-                            <i class="fal fa-calendar-check"></i>
-                        </span>
-                    </div>
-                    <div class="invalid-feedback">
-                        請選擇生日
-                    </div>
-                </div>
-            </div>*@
                             @*出生年月日*@
                             <div class="form-group">
                                 <label class="form-label" for="birthday">生日</label>
@@ -121,24 +106,25 @@
                                         <div class="input-group-append">
                                             <span class="input-group-text">民國</span>
                                         </div>
-                                        <input type="number" max="130" min="10" value="112" class="form-control" name="birthyear">
+                                        <input type="number" class="form-control" min="10" max="130" id="birthdayYear_0" name="birthdayYear_0" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">年</span>
                                         </div>
-                                        <input type="number" max="12" min="1" value="8" class="form-control" name="birthmonth">
+                                        <input type="number" class="form-control birthdayMonth" min="1" max="12" id="birthdayMonth_0" name="birthdayMonth_0" data-index="0" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">月</span>
                                         </div>
-                                        <input type="number" max="31" min="1" value="13" class="form-control" name="birthday">
+                                        <input type="number" class="form-control" min="1" max="31" id="birthdayDay_0" name="birthdayDay_0" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">日</span>
                                         </div>
                                     </div>
                                 </div>
+                                <input type="text" id="birthday_0" name="birthday_0" hidden>
                             </div>
                             @*身分證字號*@
                             <div class="form-group">
-                                <label class="form-label" for="IDnumber">身分證字號</label>
+                                <label class="form-label" for="IDnumber_0">身分證字號</label>
                                 <div class="row pb-2">
                                     <div class="col-12">
                                         <div class="custom-control custom-checkbox custom-control-inline">
@@ -155,7 +141,7 @@
                             @*連絡電話*@
                             <div class="form-group">
                                 <label class="form-label" for="phonenumber">連絡電話</label>
-                                <input type="text" id="inputPhoneNumber_0" name="inputPhoneNumber_0" class="form-control inputPhoneNumber" data-index="0" data-valid="1" pattern="^\d{10}$" required>
+                                <input type="text" id="Phone_0" name="Phone_0" class="form-control inputPhoneNumber" data-index="0" data-valid="1" pattern="^\d{10}$" required>
                                 <div class="invalid-feedback">
                                     請輸入連絡電話，並確認格式為【10個數字】
                                 </div>
@@ -182,7 +168,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_road" data-index="1" name="road_address_landlord" required>
+                                        <select class="custom-select form-control select2_road" data-index="1" name="addressroad_0" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -192,7 +178,7 @@
                                 </div>
                                 <div class="row pt-2">
                                     <div class="col-12">
-                                        <input type="text" name="elseaddress_landlord" class="form-control" placeholder="ex.108號1樓" required>
+                                        <input type="text" name="detailaddress_0" class="form-control" placeholder="ex.108號1樓" required>
                                     </div>
                                 </div>
                             </div>
@@ -201,8 +187,8 @@
                                 <div class="row pb-2">
                                     <div class="col-12">
                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input sameaddress" id="sameaddresscheckbox" data-index="2" name="sameaddress_landlord" value="true">
-                                            <label class="custom-control-label" for="sameaddresscheckbox">同戶籍地址</label>
+                                            <input type="checkbox" class="custom-control-input sameaddress" id="sameaddress_check_0" name="sameaddress_check_0" data-index="2" value="true">
+                                            <label class="custom-control-label" for="sameaddress_check_0">同戶籍地址</label>
                                         </div>
                                     </div>
                                 </div>
@@ -226,7 +212,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_road select_contact_2" data-index="2" name="road_contact_landlord" required>
+                                        <select class="custom-select form-control select2_road select_contact_2" name="contactroad_0" data-index="2" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -236,7 +222,7 @@
                                 </div>
                                 <div class="row pt-2">
                                     <div class="col-12">
-                                        <input type="text" name="elseaddress_contact_landlord" class="form-control select_contact_2" data-index="2" placeholder="ex.108號1樓" required>
+                                        <input type="text" class="form-control select_contact_2" name="detailcontact_0" data-index="2" placeholder="ex.108號1樓" required>
                                     </div>
                                 </div>
                             </div>
@@ -247,7 +233,7 @@
                                 <span class="text-danger">*</span>
                                 <div class="row">
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_bank" name="district_contact_tenant" data-index="1" required>
+                                        <select class="custom-select form-control select2_bank" name="bank_0" data-index="1" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -255,7 +241,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_bankbranches" name="bankbranches" data-index="1" required>
+                                        <select class="custom-select form-control select2_bankbranches" name="bankbranche_0" data-index="1" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -265,14 +251,14 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label" for="banknumber">帳號</label><label class="form-label" id="jqlengthalert" for="banknumber"></label>
+                                <label class="form-label" for="banknumber_0">帳號</label><label class="form-label" id="jqlengthalert" for="banknumber_0"></label>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">帳號</span><label class="form-label" id="jqlengthalert" for="banknumber"></label>
                                             </div>
-                                            <input type="text" id="banknumber" name="banknumber" class="form-control" required>
+                                            <input type="text" id="banknumber_0" name="banknumber_0" class="form-control" required>
                                             <div class="invalid-feedback" id="banknumberalert">
                                                 請填寫帳號
                                             </div>
@@ -289,14 +275,14 @@
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox custom-control-inline">
-                                    <input type="checkbox" class="custom-control-input" id="jqgetagent">
-                                    <label class="custom-control-label" for="jqgetagent">代理人</label>
+                                    <input type="checkbox" class="custom-control-input" id="agentCheckbox" name="agentCheckbox">
+                                    <label class="custom-control-label" for="agentCheckbox">代理人</label>
                                 </div>
                             </div>
                             @*代理人姓名*@
                             <div class="form-group getagent">
-                                <label class="form-label" for="jqlandlordname">代理人姓名</label>
-                                <input type="text" id="jqlandlordname" name="name_agent" class="form-control" required>
+                                <label class="form-label" for="Name_11">代理人姓名</label>
+                                <input type="text" class="form-control agentrequired" id="Name_11" name="Name_11">
                                 <div class="invalid-feedback">
                                     請輸入代理人姓名
                                 </div>
@@ -309,35 +295,18 @@
                                 </label>
                                 <div class="frame-wrap padding-top-ten">
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="genderRadio_agent_1" name="genderRadio_agent" value="1" required="">
-                                        <label class="custom-control-label" for="genderRadio_agent_1">男</label>
+                                        <input type="radio" class="custom-control-input agentrequired" id="genderRadio_11_1" name="genderRadio_11" value="1">
+                                        <label class="custom-control-label" for="genderRadio_11_1">男</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="genderRadio_agent_2" name="genderRadio_agent" value="0" required="">
-                                        <label class="custom-control-label" for="genderRadio_agent_2">女</label>
+                                        <input type="radio" class="custom-control-input agentrequired" id="genderRadio_11_0" name="genderRadio_11" value="0">
+                                        <label class="custom-control-label" for="genderRadio_11_0">女</label>
                                         <div class="invalid-feedback">
                                             請選擇代理人性別
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            @*出生年月日*@
-                            @*<div class="form-group getagent">
-                <label class="form-label" for="birthday">生日</label>
-                <span class="text-danger">*</span>
-                <div class="input-group">
-                    <input type="text" class="form-control birthday" placeholder="請選擇生日" id="birthday_agent" name="birthday_agent" required>
-                    <div class="input-group-append">
-                        <span class="input-group-text fs-xl">
-                            <i class="fal fa-calendar-check"></i>
-                        </span>
-                    </div>
-                    <div class="invalid-feedback">
-                        請選擇生日
-                    </div>
-                </div>
-            </div>*@
-
                             @*出生年月日*@
                             <div class="form-group getagent">
                                 <label class="form-label" for="birthday">生日</label>
@@ -346,33 +315,34 @@
                                         <div class="input-group-append">
                                             <span class="input-group-text">民國</span>
                                         </div>
-                                        <input type="number" max="130" min="10" value="112" class="form-control " name="birthyear">
+                                        <input type="number" class="form-control agentrequired" max="130" min="10" id="birthdayYear_11" name="birthdayYear_11">
                                         <div class="input-group-append">
                                             <span class="input-group-text">年</span>
                                         </div>
-                                        <input type="number" max="12" min="1" value="8" class="form-control " name="birthmonth">
+                                        <input type="number" class="form-control birthdayMonth agentrequired" max="12" min="1" id="birthdayMonth_11" name="birthdayMonth_11" data-index="11">
                                         <div class="input-group-append">
                                             <span class="input-group-text">月</span>
                                         </div>
-                                        <input type="number" max="31" min="1" value="13" class="form-control " name="birthday">
+                                        <input type="number" class="form-control agentrequired" max="31" min="1" id="birthdayDay_11" name="birthdayDay_11">
                                         <div class="input-group-append">
                                             <span class="input-group-text">日</span>
                                         </div>
                                     </div>
                                 </div>
+                                @*<input type="text" id="birthday_11" name="birthday_11" hidden>*@
                             </div>
                             @*身分證字號*@
                             <div class="form-group getagent">
-                                <label class="form-label" for="IDnumber">身分證字號</label>
+                                <label class="form-label" for="IDNumber_10">身分證字號</label>
                                 <div class="row pb-2">
                                     <div class="col-12">
                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input national_check" id="Agent_IDnumber" name="Agent_IDnumber" data-index="11">
-                                            <label class="custom-control-label" for="Agent_IDnumber">外籍</label>
+                                            <input type="checkbox" class="custom-control-input national_check" id="international_IDnumber_11" data-index="11">
+                                            <label class="custom-control-label" for="international_IDnumber_11">外籍</label>
                                         </div>
                                     </div>
                                 </div>
-                                <input type="text" id="IDnumber" name="inputIDnumber_landlord" class="form-control  inputIDnumber" data-index="11" data-valid="1" pattern="^[A-Z]\d{9}$">
+                                <input type="text" class="form-control inputIDnumber agentrequired" id="IDNumber_11" name="IDNumber_11" data-index="11" data-valid="1" pattern="^[A-Z]\d{9}$">
                                 <div class="invalid-feedback">
                                     請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
                                 </div>
@@ -380,7 +350,7 @@
                             @*連絡電話*@
                             <div class="form-group getagent">
                                 <label class="form-label" for="phonenumber">連絡電話</label>
-                                <input type="text" id="inputPhoneNumber_11" name="inputPhoneNumber_11" class="form-control inputPhoneNumber" data-index="11" data-valid="1" pattern="^\d{10}$">
+                                <input type="text" id="Phone_11" name="Phone_11" class="form-control inputPhoneNumber agentrequired" data-index="11" data-valid="1" pattern="^\d{10}$">
                                 <div class="invalid-feedback">
                                     請輸入連絡電話，並確認格式為【10個數字】
                                 </div>
@@ -391,7 +361,7 @@
                                 <span class="text-danger">*</span>
                                 <div class="row">
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_city" data-index="3" required>
+                                        <select class="custom-select form-control select2_city agentrequired" data-index="3">
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -399,7 +369,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_district" data-index="3" required>
+                                        <select class="custom-select form-control select2_district agentrequired" data-index="3">
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -407,7 +377,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_road" data-index="3" name="road_address_agent" required>
+                                        <select class="custom-select form-control select2_road agentrequired" data-index="3" id="addressroad_11" name="addressroad_11">
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -417,7 +387,7 @@
                                 </div>
                                 <div class="row pt-2">
                                     <div class="col-12">
-                                        <input type="text" name="elseaddress_agent" class="form-control" placeholder="ex.108號1樓" required>
+                                        <input type="text" class="form-control agentrequired" id="detailaddress_11" name="detailaddress_11" placeholder="ex.108號1樓">
                                     </div>
                                 </div>
                             </div>
@@ -426,8 +396,8 @@
                                 <div class="row pb-2">
                                     <div class="col-12">
                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input sameaddress" data-index="4" id="sameaddress_agent" name="sameaddress_agent">
-                                            <label class="custom-control-label" for="sameaddress_agent">同戶籍地址</label>
+                                            <input type="checkbox" class="custom-control-input sameaddress" id="sameaddress_check_11" name="sameaddress_check_11" data-index="4" value="true">
+                                            <label class="custom-control-label" for="sameaddress_check_11">同戶籍地址</label>
                                         </div>
                                     </div>
                                 </div>
@@ -435,7 +405,7 @@
                                 <span class="text-danger">*</span>
                                 <div class="row">
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_city select_contact_4" data-index="4" required>
+                                        <select class="custom-select form-control select2_city select_contact_4 agentrequired" data-index="4">
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -443,7 +413,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_district select_contact_4" data-index="4" required>
+                                        <select class="custom-select form-control select2_district select_contact_4 agentrequired" data-index="4">
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -451,7 +421,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_road select_contact_4" data-index="4" name="road_contact_agent" required>
+                                        <select class="custom-select form-control select2_road select_contact_4 agentrequired" data-index="4" id="contactroad_11" name="contactroad_11">
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -461,11 +431,12 @@
                                 </div>
                                 <div class="row pt-2">
                                     <div class="col-12">
-                                        <input type="text" name="elseaddress_contact_agent" class="form-control select_contact_4" placeholder="ex.108號1樓" required>
+                                        <input type="text" class="form-control select_contact_4 agentrequired" id="detailcontact_11" name="detailcontact_11" placeholder="ex.108號1樓">
                                     </div>
                                 </div>
                             </div>
 
+                            <input type="text" id="AgentInput" name="AgentInput" hidden />
                             <!--備註欄-->
                             <div class="form-group">
                                 <label class="form-label" for="example-textarea">備註</label>
@@ -520,77 +491,234 @@
                             event.preventDefault();
                             event.stopPropagation();
                         }
+                        else {
+                            //打包房東生日
+
+                            const Year = parseInt($("#birthdayYear_0").val()) + 1911;
+                            var Month = $("#birthdayMonth_0").val();
+                            var Day = $("#birthdayDay_0").val();
+                            const birth = Year.toString() + '-' + Month + '-' + Day;
+                            $("#birthday_0").val(birth)
+
+                            //將共有人資料打包
+                            //取得幾位共有人
+                            var CoRadioElement = document.getElementsByName("CoOwnerRadio");
+                            // 定义变量来存储选中的值
+                            var selectedValue;
+                            // 循环遍历单选按钮，找到选中的值
+                            for (var i = 0; i < CoRadioElement.length; i++) {
+                                if (CoRadioElement[i].checked) {
+                                    selectedValue = CoRadioElement[i].value;
+                                    break; // 如果找到选中的值，就跳出循环
+                                }
+                            }
+                            //共有人1
+                            if (selectedValue >= 1) {
+                                const dataArray = [];
+                                const Name = document.getElementById(`Name_Co1`).value;
+                                const Year = parseInt(document.getElementById(`birthdayYear_Co1`).value) + 1911;
+                                const Month = document.getElementById(`birthdayMonth_Co1`).value;
+                                const Day = document.getElementById(`birthdayDay_Co1`).value;
+                                const Birthday = Year.toString() + '-' + Month + '-' + Day;
+                                const IDNumber = document.getElementById(`IDnumber_Co1`).value;
+                                const Phone = document.getElementById(`Phone_Co1`).value;
+                                const Road = document.getElementById(`road_Co1`).value;
+                                const DetailAddress = document.getElementById(`detailaddress_Co1`).value;
+                                const sameaddresscheck = document.getElementById('sameaddress_Co1');
+                                const Contact = Road;
+                                const detailContact = DetailAddress;
+                                if (sameaddresscheck) {
+                                    if (!sameaddresscheck.checked) {
+                                        Contact = document.getElementById(`road_contact_Co1`).value;
+                                        detailContact = document.getElementById(`detailcontact_Co1`).value;
+                                    }
+                                }
+                                dataArray.push(Name);
+                                dataArray.push(Birthday);
+                                dataArray.push(IDNumber);
+                                dataArray.push(Phone);
+                                dataArray.push(Road);
+                                dataArray.push(DetailAddress);
+                                dataArray.push(Contact);
+                                dataArray.push(detailContact);
+                                const jsonResult = JSON.stringify(dataArray);
+                                $('#CoOwnerInput1').val(jsonResult);
+                            }
+                            if (selectedValue >= 2) {
+                                const dataArray = [];
+                                const Name = document.getElementById(`Name_Co2`).value;
+                                const Year = parseInt(document.getElementById(`birthdayYear_Co2`).value) + 1911;
+                                const Month = document.getElementById(`birthdayMonth_Co2`).value;
+                                const Day = document.getElementById(`birthdayDay_Co2`).value;
+                                const Birthday = Year.toString() + '-' + Month + '-' + Day;
+                                const IDNumber = document.getElementById(`IDnumber_Co2`).value;
+                                const Phone = document.getElementById(`Phone_Co2`).value;
+                                const Road = document.getElementById(`road_Co2`).value;
+                                const DetailAddress = document.getElementById(`detailaddress_Co2`).value;
+                                const sameaddresscheck = document.getElementById('sameaddress_Co2');
+                                const Contact = Road;
+                                const detailContact = DetailAddress;
+                                if (sameaddresscheck) {
+                                    if (!sameaddresscheck.checked) {
+                                        Contact = document.getElementById(`road_contact_Co2`).value;
+                                        detailContact = document.getElementById(`detailcontact_Co2`).value;
+                                    }
+                                }
+                                dataArray.push(Name);
+                                dataArray.push(Birthday);
+                                dataArray.push(IDNumber);
+                                dataArray.push(Phone);
+                                dataArray.push(Road);
+                                dataArray.push(DetailAddress);
+                                dataArray.push(Contact);
+                                dataArray.push(detailContact);
+                                const jsonResult = JSON.stringify(dataArray);
+                                $('#CoOwnerInput2').val(jsonResult);
+                            }
+                            if (selectedValue >= 3) {
+                                const dataArray = [];
+                                const Name = document.getElementById(`Name_Co3`).value;
+                                const Year = parseInt(document.getElementById(`birthdayYear_Co3`).value) + 1911;
+                                const Month = document.getElementById(`birthdayMonth_Co3`).value;
+                                const Day = document.getElementById(`birthdayDay_Co3`).value;
+                                const Birthday = Year.toString() + '-' + Month + '-' + Day;
+                                const IDNumber = document.getElementById(`IDnumber_Co3`).value;
+                                const Phone = document.getElementById(`Phone_Co3`).value;
+                                const Road = document.getElementById(`road_Co3`).value;
+                                const DetailAddress = document.getElementById(`detailaddress_Co3`).value;
+                                const sameaddresscheck = document.getElementById('sameaddress_Co3');
+                                const Contact = Road;
+                                const detailContact = DetailAddress;
+                                if (sameaddresscheck) {
+                                    if (!sameaddresscheck.checked) {
+                                        Contact = document.getElementById(`road_contact_Co3`).value;
+                                        detailContact = document.getElementById(`detailcontact_Co3`).value;
+                                    }
+                                }
+                                dataArray.push(Name);
+                                dataArray.push(Birthday);
+                                dataArray.push(IDNumber);
+                                dataArray.push(Phone);
+                                dataArray.push(Road);
+                                dataArray.push(DetailAddress);
+                                dataArray.push(Contact);
+                                dataArray.push(detailContact);
+                                const jsonResult = JSON.stringify(dataArray);
+                                $('#CoOwnerInput3').val(jsonResult);
+                            }
+                            if (selectedValue >= 4) {
+                                const dataArray = [];
+                                const Name = document.getElementById(`Name_Co4`).value;
+                                const Year = parseInt(document.getElementById(`birthdayYear_Co4`).value) + 1911;
+                                const Month = document.getElementById(`birthdayMonth_Co4`).value;
+                                const Day = document.getElementById(`birthdayDay_Co4`).value;
+                                const Birthday = Year.toString() + '-' + Month + '-' + Day;
+                                const IDNumber = document.getElementById(`IDnumber_Co4`).value;
+                                const Phone = document.getElementById(`Phone_Co4`).value;
+                                const Road = document.getElementById(`road_Co4`).value;
+                                const DetailAddress = document.getElementById(`detailaddress_Co4`).value;
+                                const sameaddresscheck = document.getElementById('sameaddress_Co4');
+                                const Contact = Road;
+                                const detailContact = DetailAddress;
+                                if (sameaddresscheck) {
+                                    if (!sameaddresscheck.checked) {
+                                        Contact = document.getElementById(`road_contact_Co4`).value;
+                                        detailContact = document.getElementById(`detailcontact_Co4`).value;
+                                    }
+                                }
+
+                                dataArray.push(Name);
+                                dataArray.push(Birthday);
+                                dataArray.push(IDNumber);
+                                dataArray.push(Phone);
+                                dataArray.push(Road);
+                                dataArray.push(DetailAddress);
+                                dataArray.push(Contact);
+                                dataArray.push(detailContact);
+                                const jsonResult = JSON.stringify(dataArray);
+                                $('#CoOwnerInput4').val(jsonResult);
+                            }
+                            if (selectedValue >= 5) {
+                                const dataArray = [];
+                                const Name = document.getElementById(`Name_Co5`).value;
+                                const Year = parseInt(document.getElementById(`birthdayYear_Co5`).value) + 1911;
+                                const Month = document.getElementById(`birthdayMonth_Co5`).value;
+                                const Day = document.getElementById(`birthdayDay_Co5`).value;
+                                const Birthday = Year.toString() + '-' + Month + '-' + Day;
+                                const IDNumber = document.getElementById(`IDnumber_Co5`).value;
+                                const Phone = document.getElementById(`Phone_Co5`).value;
+                                const Road = document.getElementById(`road_Co5`).value;
+                                const DetailAddress = document.getElementById(`detailaddress_Co5`).value;
+                                const sameaddresscheck = document.getElementById('sameaddress_Co5');
+                                const Contact = Road;
+                                const detailContact = DetailAddress;
+                                if (sameaddresscheck) {
+                                    if (!sameaddresscheck.checked) {
+                                        Contact = document.getElementById(`road_contact_Co5`).value;
+                                        detailContact = document.getElementById(`detailcontact_Co5`).value;
+                                    }
+                                }
+
+                                dataArray.push(Name);
+                                dataArray.push(Birthday);
+                                dataArray.push(IDNumber);
+                                dataArray.push(Phone);
+                                dataArray.push(Road);
+                                dataArray.push(DetailAddress);
+                                dataArray.push(Contact);
+                                dataArray.push(detailContact);
+                                const jsonResult = JSON.stringify(dataArray);
+                                $('#CoOwnerInput5').val(jsonResult);
+                            }
+
+
+                            //將代理人資料打包
+                            //取得幾位共有人
+                            const agentCheckbox = document.getElementById('agentCheckbox');
+                            const agentdataArray = [];
+                            if (agentCheckbox) {
+                                if (agentCheckbox.checked) {
+                                    const Name = document.getElementById(`Name_11`).value;
+                                    //性別
+                                    var genderRadioElement = document.getElementsByName("genderRadio");
+                                    // 定义变量来存储选中的值
+                                    var selectgender = '1'; //預設男性
+                                    if (!genderRadioElement[0].checked) {
+                                        selectgender = '0'  //女性
+                                    }
+                                    const Year = parseInt(document.getElementById(`birthdayYear_11`).value) + 1911;
+                                    const Month = document.getElementById(`birthdayMonth_11`).value;
+                                    const Day = document.getElementById(`birthdayDay_11`).value;
+                                    const Birthday = Year.toString() + '-' + Month + '-' + Day;
+                                    const IDNumber = document.getElementById(`IDNumber_11`).value;
+                                    const Phone = document.getElementById(`Phone_11`).value;
+                                    const Road = document.getElementById(`addressroad_11`).value;
+                                    const DetailAddress = document.getElementById(`detailaddress_11`).value;
+                                    const sameaddresscheck = document.getElementById('sameaddress_check_11');
+                                    const Contact = '';
+                                    const detailContact = '';
+                                    if (sameaddresscheck) {
+                                        if (!sameaddresscheck.checked) {
+                                            Contact = document.getElementById(`contactroad_11`).value;
+                                            detailContact = document.getElementById(`detailcontact_11`).value;
+                                        }
+                                    }
+                                    agentdataArray.push(Name);
+                                    agentdataArray.push(selectgender);
+                                    agentdataArray.push(Birthday);
+                                    agentdataArray.push(IDNumber);
+                                    agentdataArray.push(Phone);
+                                    agentdataArray.push(Road);
+                                    agentdataArray.push(DetailAddress);
+                                    agentdataArray.push(Contact);
+                                    agentdataArray.push(detailContact);
+                                    const jsonResult = JSON.stringify(agentdataArray);
+                                    $('#AgentInput').val(jsonResult);
+                                }
+                            }
+                        }
                         form.classList.add('was-validated');
 
-                        //------------------
-                        //IDnumber// 20230816改由pattern驗證(更優)
-                        //------------------
-                        //const inputIDElements = document.querySelectorAll('.inputIDnumber');
-                        //const IDpattern = /^[A-Z]\d{9}$/;
-                        //inputIDElements.forEach(inputID => {
-                        //    var selectedIndex = inputID.getAttribute('data-index');
-                        //    var selectedValid = inputID.getAttribute('data-valid');
-                        //    const inputElement = document.querySelector('.inputIDnumber[data-index="' + selectedIndex + '"]');
-                        //    //validation
-                        //    //const IDinput = document.getElementById('IDnumber');
-                        //    if (selectedIndex == "3") {
-                        //        debugger;
-                        //    }
-                        //    if (inputElement.hasAttribute('required') && selectedValid == '1') {
-                        //        const IDinputvalue = inputElement.value;
-                        //        const IDisValid = IDpattern.test(IDinputvalue);
-                        //        if (!IDisValid) {
-                        //            event.preventDefault();
-                        //            event.stopPropagation();
-                        //            //document.getElementById('IDnumber').classList.add('is-invalid');
-                        //            //form.classList.remove('was-validated');//將頁面綠色框架(驗證成功)移除
-                        //            inputElement.classList.remove('was-validated');
-                        //            inputElement.classList.add('is-invalid');//賦予紅色框架(驗證失敗)
-                        //        }
-                        //        else {
-                        //            //document.getElementById('IDnumber').classList.remove('is-invalid');
-                        //            inputElement.classList.remove('is-invalid');
-                        //        }
-                        //    }
-                        //    else {
-                        //        //外籍不做驗證
-                        //        inputElement.classList.remove('is-invalid');
-                        //    }
-                        //});
-
-                        //------------------
-                        //phoneNumber// 20230816改由pattern驗證(更優)
-                        //------------------
-                        //const inputPhoneElements = document.querySelectorAll('.inputPhoneNumber');
-                        //const Phonepattern = /^\d{10}$/;
-
-                        ////const Phoneinput = document.getElementById('phonenumber_landlord').value;
-                        ////const PhoneisValid = Phonepattern.test(Phoneinput);
-
-                        //inputPhoneElements.forEach(inputID => {
-                        //    var selectedIndex = inputID.getAttribute('data-index');
-                        //    //var selectedValid = inputID.getAttribute('data-valid');
-                        //    const inputElement = document.querySelector('.inputPhoneNumber[data-index="' + selectedIndex + '"]');
-                        //    //validation
-                        //    //const IDinput = document.getElementById('IDnumber');
-                        //    if (inputElement.hasAttribute('required')) {
-                        //        const IDinputvalue = inputElement.value;
-                        //        const PhoneisValid = Phonepattern.test(IDinputvalue);
-                        //        if (!PhoneisValid) {
-                        //            event.preventDefault();
-                        //            event.stopPropagation();
-                        //            //document.getElementById('IDnumber').classList.add('is-invalid');
-                        //            //form.classList.remove('was-validated');//將頁面綠色框架(驗證成功)移除
-                        //            inputElement.classList.remove('was-validated');
-                        //            inputElement.classList.add('is-invalid');//賦予紅色框架(驗證失敗)
-                        //        }
-                        //        else {
-                        //            //document.getElementById('IDnumber').classList.remove('is-invalid');
-                        //            inputElement.classList.remove('is-invalid');
-                        //        }
-                        //    }
-                        //});
-                        
 
                     }, false);
                 });
@@ -762,7 +890,7 @@
                     });
 
                     //設定帳號長度
-                    var inputElement = document.getElementById('banknumber');
+                    var inputbanknumberElement = document.getElementById('banknumber_0');
                     var alertelement = document.getElementById('banknumberalert');
                     var lengthalert = document.getElementById('jqlengthalert');
                     if (dataresult.lengthset.length === 0) {
@@ -776,7 +904,7 @@
                         }
 
                         alertelement.innerHTML = "請正確輸入帳號，帳號長度數請填寫 : " + length;
-                        inputElement.setAttribute('pattern', '.{' + dataresult.minlength + ',' + dataresult.maxlength + '}');
+                        inputbanknumberElement.setAttribute('pattern', '.{' + dataresult.minlength + ',' + dataresult.maxlength + '}');
                         lengthalert.innerHTML = "(" + length + ")"
                     }
                     else {
@@ -785,7 +913,7 @@
                         var regexword = dataresult.lengthset.join('字,') + "字";
 
                         alertelement.innerHTML = "請正確輸入帳號，帳號長度數請填寫 : " + regexword;
-                        inputElement.setAttribute('pattern', regexPattern);
+                        inputbanknumberElement.setAttribute('pattern', regexPattern);
                         lengthalert.innerHTML = "(" + regexword + ")"
 
                     }
@@ -853,16 +981,16 @@
                         // 根據不同的 id 做相應的處理
                         switch (radioId) {
                             case "jqCoOwnerRadio_0":
-                                $('.getco1').hide();
-                                $('.getco2').hide();
-                                $('.getco3').hide();
-                                $('.getco4').hide();
-                                $('.getco5').hide();
-                                $('.inputIDnumber[data-index="1"]').prop('required', false);
-                                $('.inputIDnumber[data-index="2"]').prop('required', false);
-                                $('.inputIDnumber[data-index="3"]').prop('required', false);
-                                $('.inputIDnumber[data-index="4"]').prop('required', false);
-                                $('.inputIDnumber[data-index="5"]').prop('required', false);
+                                $('.getco1').show();
+                                $('.getco2').show();
+                                $('.getco3').show();
+                                $('.getco4').show();
+                                $('.getco5').show();
+                                $('.CoInput_1').prop('required', false);
+                                $('.CoInput_2').prop('required', false);
+                                $('.CoInput_3').prop('required', false);
+                                $('.CoInput_4').prop('required', false);
+                                $('.CoInput_5').prop('required', false);
                                 break;
                             case "jqCoOwnerRadio_1":
                                 $('.getco1').show();
@@ -870,11 +998,11 @@
                                 $('.getco3').hide();
                                 $('.getco4').hide();
                                 $('.getco5').hide();
-                                $('.inputIDnumber[data-index="1"]').prop('required', true);
-                                $('.inputIDnumber[data-index="2"]').prop('required', false);
-                                $('.inputIDnumber[data-index="3"]').prop('required', false);
-                                $('.inputIDnumber[data-index="4"]').prop('required', false);
-                                $('.inputIDnumber[data-index="5"]').prop('required', false);
+                                $('.CoInput_1').prop('required', true);
+                                $('.CoInput_2').prop('required', false);
+                                $('.CoInput_3').prop('required', false);
+                                $('.CoInput_4').prop('required', false);
+                                $('.CoInput_5').prop('required', false);
                                 break;
                             case "jqCoOwnerRadio_2":
                                 $('.getco1').show();
@@ -882,11 +1010,11 @@
                                 $('.getco3').hide();
                                 $('.getco4').hide();
                                 $('.getco5').hide();
-                                $('.inputIDnumber[data-index="1"]').prop('required', true);
-                                $('.inputIDnumber[data-index="2"]').prop('required', true);
-                                $('.inputIDnumber[data-index="3"]').prop('required', false);
-                                $('.inputIDnumber[data-index="4"]').prop('required', false);
-                                $('.inputIDnumber[data-index="5"]').prop('required', false);
+                                $('.CoInput_1').prop('required', true);
+                                $('.CoInput_2').prop('required', true);
+                                $('.CoInput_3').prop('required', false);
+                                $('.CoInput_4').prop('required', false);
+                                $('.CoInput_5').prop('required', false);
                                 break;
                             case "jqCoOwnerRadio_3":
                                 $('.getco1').show();
@@ -894,11 +1022,11 @@
                                 $('.getco3').show();
                                 $('.getco4').hide();
                                 $('.getco5').hide();
-                                $('.inputIDnumber[data-index="1"]').prop('required', true);
-                                $('.inputIDnumber[data-index="2"]').prop('required', true);
-                                $('.inputIDnumber[data-index="3"]').prop('required', true);
-                                $('.inputIDnumber[data-index="4"]').prop('required', false);
-                                $('.inputIDnumber[data-index="5"]').prop('required', false);
+                                $('.CoInput_1').prop('required', true);
+                                $('.CoInput_2').prop('required', true);
+                                $('.CoInput_3').prop('required', true);
+                                $('.CoInput_4').prop('required', false);
+                                $('.CoInput_5').prop('required', false);
                                 break;
                             case "jqCoOwnerRadio_4":
                                 $('.getco1').show();
@@ -906,11 +1034,11 @@
                                 $('.getco3').show();
                                 $('.getco4').show();
                                 $('.getco5').hide();
-                                $('.inputIDnumber[data-index="1"]').prop('required', true);
-                                $('.inputIDnumber[data-index="2"]').prop('required', true);
-                                $('.inputIDnumber[data-index="3"]').prop('required', true);
-                                $('.inputIDnumber[data-index="4"]').prop('required', true);
-                                $('.inputIDnumber[data-index="5"]').prop('required', false);
+                                $('.CoInput_1').prop('required', true);
+                                $('.CoInput_2').prop('required', true);
+                                $('.CoInput_3').prop('required', true);
+                                $('.CoInput_4').prop('required', true);
+                                $('.CoInput_5').prop('required', false);
                                 break;
                             case "jqCoOwnerRadio_5":
                                 $('.getco1').show();
@@ -918,11 +1046,11 @@
                                 $('.getco3').show();
                                 $('.getco4').show();
                                 $('.getco5').show();
-                                $('.inputIDnumber[data-index="1"]').prop('required', true);
-                                $('.inputIDnumber[data-index="2"]').prop('required', true);
-                                $('.inputIDnumber[data-index="3"]').prop('required', true);
-                                $('.inputIDnumber[data-index="4"]').prop('required', true);
-                                $('.inputIDnumber[data-index="5"]').prop('required', true);
+                                $('.CoInput_1').prop('required', true);
+                                $('.CoInput_2').prop('required', true);
+                                $('.CoInput_3').prop('required', true);
+                                $('.CoInput_4').prop('required', true);
+                                $('.CoInput_5').prop('required', true);
                                 break;
                         }
                     }
@@ -959,13 +1087,34 @@
             });
 
             //是否有代理人(checkbox)
-            $('#jqgetagent').on('change', function () {
+            $('#agentCheckbox').on('change', function () {
                 if ($(this).is(':checked')) {
                     //getagent
                     $('.getagent').show();
+                    $('.agentrequired').prop('required', true);
                 } else {
                     $('.getagent').hide();
+                    $('.agentrequired').prop('required', false);
                 }
+            });
+
+            //生日月份變更日期之最大值為30 or31
+            const inputElements = document.querySelectorAll('.birthdayMonth');
+            inputElements.forEach(function (inputElement) {
+                inputElement.addEventListener('input', function () {
+                    const inputValue = inputElement.value;
+                    const dataIndex = inputElement.getAttribute('data-index');
+                    if (inputValue == '1' || inputValue == '3' || inputValue == '5' || inputValue == '7' || inputValue == '8' || inputValue == '10' || inputValue == '12') {
+                        $('#birthdayDay_' + dataIndex).attr('max', 31); //設置最大值
+                    }
+                    else if (inputValue == '2') {
+                        $('#birthdayDay_' + dataIndex).attr('max', 29); //設置最大值
+                    }
+                    else {
+                        $('#birthdayDay_' + dataIndex).attr('max', 30); //設置最大值
+                    }
+                    // 在这里执行你的其他操作
+                });
             });
         });
 

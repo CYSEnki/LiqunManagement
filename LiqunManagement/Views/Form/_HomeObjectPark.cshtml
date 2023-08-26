@@ -5,15 +5,15 @@
     </label>
     <div class="frame-wrap">
         <div class="custom-control custom-checkbox custom-control-inline">
-            <input type="checkbox" class="custom-control-input" id="noparkcheck" name="noparkcheck" value="true" aria-label="無車位" checked>
+            <input type="checkbox" class="custom-control-input" id="noparkcheck" name="noparkcheck" aria-label="無車位" checked required>
             <label class="custom-control-label" for="noparkcheck">無</label>
         </div>
         <div class="custom-control custom-checkbox custom-control-inline">
-            <input type="checkbox" class="custom-control-input havepersonalpark" id="carparkcheck" name="carparkcheck" value="true" aria-label="汽車車位">
+            <input type="checkbox" class="custom-control-input havepersonalpark" id="carparkcheck" name="carparkcheck" aria-label="汽車車位" required>
             <label class="custom-control-label" for="carparkcheck">汽車</label>
         </div>
         <div class="custom-control custom-checkbox custom-control-inline">
-            <input type="checkbox" class="custom-control-input havepersonalpark" id="morparkcheck" name="morparkcheck" value="true" aria-label="機車車位">
+            <input type="checkbox" class="custom-control-input havepersonalpark" id="morparkcheck" name="morparkcheck" aria-label="機車車位" required>
             <label class="custom-control-label" for="morparkcheck">機車</label>
         </div>
     </div>
@@ -29,19 +29,19 @@
     </label>
     <div class="frame-wrap padding-top-ten pl-2">
         <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-            <input type="radio" class="custom-control-input carrequired" id="parktypeRadio_0" name="parktypeRadio" value="0" >
+            <input type="radio" class="custom-control-input" id="parktypeRadio_0" name="parktypeRadio" value="0" >
             <label class="custom-control-label" for="parktypeRadio_0">坡道平面</label>
         </div>
         <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-            <input type="radio" class="custom-control-input carrequired" id="parktypeRadio_1" name="parktypeRadio" value="1" >
+            <input type="radio" class="custom-control-input" id="parktypeRadio_1" name="parktypeRadio" value="1" >
             <label class="custom-control-label" for="parktypeRadio_1">坡道機械</label>
         </div>
         <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-            <input type="radio" class="custom-control-input carrequired" id="parktypeRadio_2" name="parktypeRadio" value="2" >
+            <input type="radio" class="custom-control-input" id="parktypeRadio_2" name="parktypeRadio" value="2" >
             <label class="custom-control-label" for="parktypeRadio_2">機械平面</label>
         </div>
         <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-            <input type="radio" class="custom-control-input carrequired" id="parktypeRadio_3" name="parktypeRadio" value="3" >
+            <input type="radio" class="custom-control-input" id="parktypeRadio_3" name="parktypeRadio" value="3" >
             <label class="custom-control-label" for="parktypeRadio_3">機械機械</label>
             <div class="invalid-feedback">
                 請選擇車位樣式
@@ -58,18 +58,18 @@
         <div class="input-group-prepend">
             <div class="input-group-text">
                 <div class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input carrequired" id="carparkfloor_1" name="carparkfloorRadio" value="1">
-                    <label class="custom-control-label" for="carparkfloor_1">地上</label>
+                    <input type="radio" id="carparkfloor_up" name="carparkfloorRadio" value="1" class="custom-control-input">
+                    <label class="custom-control-label" for="carparkfloor_up">地上</label>
                 </div>
             </div>
             <div class="input-group-text">
                 <div class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input carrequired" id="carparkfloor_0" name="carparkfloorRadio" value="0" checked="checked">
-                    <label class="custom-control-label" for="carparkfloor_0">地下</label>
+                    <input type="radio" id="carparkfloor_down" name="carparkfloorRadio" value="0" class="custom-control-input" checked="checked">
+                    <label class="custom-control-label" for="carparkfloor_down">地下</label>
                 </div>
             </div>
         </div>
-        <input type="number" value="1" max="10" min="1" class="form-control carrequired" aria-label="Text input with radio button" id="carparkfloornumber" name="carparkfloornumber">
+        <input type="number" value="0" max="10" min="1" class="form-control" aria-label="Text input with radio button" id="parkfloornumber" name="parkfloornumber">
         <div class="input-group-prepend">
             <span class="input-group-text">樓</span>
         </div>
@@ -84,7 +84,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">車位編號</span>
                 </div>
-                <input   type="text" class="form-control carrequired" name="carpositionnumber">
+                <input name="carpositionnumber" type="text" class="form-control" >
                 <div class="invalid-feedback">
                     請填寫車位編號
                 </div>
@@ -95,7 +95,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">汽車月租金 $</span>
                 </div>
-                <input type="number" class="form-control carrequired" name="carmonthrent" data-inputmask="'alias': 'currency', 'digits': 0" >
+                <input name="carmonthrent" type="number" placeholder="" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" >
                 <div class="invalid-feedback">
                     請填寫汽車月租金
                 </div>
@@ -112,7 +112,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">汽車管理費 $</span>
                 </div>
-                <input type="number" class="form-control carrequired" name="parkmanagementfee" data-inputmask="'alias': 'currency', 'digits': 0" >
+                <input name="parkmanagementfee" type="number" placeholder="" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" >
                 @*<input type="text" class="form-control" >*@
                 <div class="invalid-feedback">
                     請填寫汽車停車管理費
@@ -136,18 +136,18 @@
         <div class="input-group-prepend">
             <div class="input-group-text">
                 <div class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input scooterrequired" id="scooterparkfloor_1" name="scooterparkfloor" value="1">
-                    <label class="custom-control-label" for="scooterparkfloor_1">地上</label>
+                    <input type="radio" id="morparkfloor_up" name="morparkfloor" value="F" class="custom-control-input">
+                    <label class="custom-control-label" for="morparkfloor_up">地上</label>
                 </div>
             </div>
             <div class="input-group-text">
                 <div class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input scooterrequired" id="scooterparkfloor_0" name="scooterparkfloor" value="0" checked="checked">
-                    <label class="custom-control-label" for="scooterparkfloor_0">地下</label>
+                    <input type="radio" id="morparkfloor_down" name="morparkfloor" value="B" class="custom-control-input" checked="checked">
+                    <label class="custom-control-label" for="morparkfloor_down">地下</label>
                 </div>
             </div>
         </div>
-        <input type="number" class="form-control scooterrequired" value="1" max="10" min="1" id="scooterparkfloornumber" name="scooterparkfloornumber">
+        <input type="number" value="0" max="10" min="1" class="form-control" aria-label="Text input with radio button" id="parkfloornumber">
         <div class="input-group-prepend">
             <span class="input-group-text">樓</span>
         </div>
@@ -162,7 +162,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">機車車位編號</span>
                 </div>
-                <input type="text" class="form-control scooterrequired" name="scooterpositionnumber"  >
+                <input name="morpositionnumber" type="text" class="form-control" >
                 <div class="invalid-feedback">
                     請填寫機車位編號
                 </div>
@@ -173,7 +173,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">機車月租金 $</span>
                 </div>
-                <input type="number" class="form-control scooterrequired" name="scootermonthrent" data-inputmask="'alias': 'currency', 'digits': 0" >
+                <input name="scootermonthrent" type="number" placeholder="" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" >
                 @*<input type="text" class="form-control" >*@
                 <div class="invalid-feedback">
                     請填寫機車月租金
@@ -191,7 +191,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">機車管理費 $</span>
                 </div>
-                <input type="number" class="form-control scooterrequired" name="scootermanagementfee" data-inputmask="'alias': 'currency', 'digits': 0" >
+                <input name="scootermanagementfee" type="number" placeholder="" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" >
                 @*<input type="text" class="form-control" >*@
                 <div class="invalid-feedback">
                     請填寫機車停車管理費

@@ -19,6 +19,8 @@ namespace LiqunManagement.Models
         [StringLength(10)]
         public string CaseId { get; set; }
 
+        public int? objecttype { get; set; }
+
         public int? notarization { get; set; }
 
         public DateTime? signdate { get; set; }
@@ -48,10 +50,10 @@ namespace LiqunManagement.Models
         [StringLength(100)]
         public string useforelse { get; set; }
 
-        [StringLength(300)]
+        [StringLength(200)]
         public string taxfile_name { get; set; }
 
-        [StringLength(300)]
+        [StringLength(200)]
         public string taxfile_alias { get; set; }
 
         public int? rent { get; set; }
@@ -76,22 +78,19 @@ namespace LiqunManagement.Models
         [StringLength(20)]
         public string havepark { get; set; }
 
-        public int? carparktype { get; set; }
+        public int? parktype { get; set; }
 
-        [StringLength(10)]
-        public string carparkfloor { get; set; }
+        [StringLength(20)]
+        public string parkfloor { get; set; }
 
-        [StringLength(10)]
+        [StringLength(20)]
         public string carpositionnumber { get; set; }
 
         public int? carmonthrent { get; set; }
 
         public int? carparkmanagefee { get; set; }
 
-        [StringLength(10)]
-        public string scooterparkfloor { get; set; }
-
-        [StringLength(10)]
+        [StringLength(20)]
         public string scooterpositionnumber { get; set; }
 
         public int? scootermonthrent { get; set; }

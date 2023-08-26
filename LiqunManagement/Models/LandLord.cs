@@ -15,11 +15,10 @@ namespace LiqunManagement.Models
         [StringLength(10)]
         public string FormId { get; set; }
 
-        [StringLength(10)]
-        public string Lordtype { get; set; }
-
         [StringLength(20)]
         public string Name { get; set; }
+
+        public int? Gender { get; set; }
 
         public DateTime? Birthday { get; set; }
 
@@ -27,25 +26,46 @@ namespace LiqunManagement.Models
         public string IDNumber { get; set; }
 
         [StringLength(20)]
-        public string PhoneNumber { get; set; }
+        public string Phone { get; set; }
+
+        [StringLength(20)]
+        public string BankNo { get; set; }
+
+        [StringLength(20)]
+        public string BrancheNo { get; set; }
 
         [StringLength(10)]
         public string RoadCode { get; set; }
 
         [StringLength(50)]
-        public string elseaddress { get; set; }
-
-        [StringLength(200)]
-        public string fulladdress { get; set; }
+        public string detailaddress { get; set; }
 
         [StringLength(10)]
         public string RoadCodeContact { get; set; }
 
         [StringLength(50)]
-        public string elseaddressContact { get; set; }
+        public string detailaddressContact { get; set; }
+
+        [StringLength(50)]
+        public string MemberArray { get; set; }
 
         [StringLength(200)]
-        public string fulladdressContact { get; set; }
+        public string CoOwner1 { get; set; }
+
+        [StringLength(200)]
+        public string CoOwner2 { get; set; }
+
+        [StringLength(200)]
+        public string CoOwner3 { get; set; }
+
+        [StringLength(200)]
+        public string CoOwner4 { get; set; }
+
+        [StringLength(200)]
+        public string CoOwner5 { get; set; }
+
+        [StringLength(200)]
+        public string Agent { get; set; }
 
         public DateTime? CreateTime { get; set; }
 

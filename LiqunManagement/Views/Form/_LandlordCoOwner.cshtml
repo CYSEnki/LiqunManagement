@@ -37,28 +37,11 @@
 </div>
 <div class="form-group getco1">
     <label class="form-label" for="jqname_Co1">共有人1姓名</label>
-    <input type="text" id="jqname_Co1" name="name_Co1" class="form-control">
+    <input type="text" class="form-control CoInput_1" id="Name_Co1">
     <div class="invalid-feedback">
         請輸入共有人姓名
     </div>
 </div>
-@*出生年月日*@
-@*<div class="form-group getco1">
-        <label class="form-label" for="birthday_Co1">生日</label>
-        <span class="text-danger">*</span>
-        <div class="input-group">
-            <input type="text" class="form-control birthday" placeholder="請選擇生日" id="birthday_Co1" name="birthday_Co1">
-            <div class="input-group-append">
-                <span class="input-group-text fs-xl">
-                    <i class="fal fa-calendar-check"></i>
-                </span>
-            </div>
-            <div class="invalid-feedback">
-                請選擇生日
-            </div>
-        </div>
-    </div>*@
-
 <div class="form-group getco1">
     <label class="form-label" for="birthday">生日</label>
     <div class="col-md-8 col-lg-6 mb-3 pl-0">
@@ -66,15 +49,15 @@
             <div class="input-group-append">
                 <span class="input-group-text">民國</span>
             </div>
-            <input type="number" max="130" min="10" value="112" class="form-control " name="birthyear">
+            <input type="number" class="form-control CoInput_1" max="130" min="10" id="birthdayYear_Co1">
             <div class="input-group-append">
                 <span class="input-group-text">年</span>
             </div>
-            <input type="number" max="12" min="1" value="8" class="form-control " name="birthmonth">
+            <input type="number" class="form-control CoInput_1" max="12" min="1" id="birthdayMonth_Co1">
             <div class="input-group-append">
                 <span class="input-group-text">月</span>
             </div>
-            <input type="number" max="31" min="1" value="13" class="form-control " name="birthday">
+            <input type="number" class="form-control CoInput_1" max="31" min="1" id="birthdayDay_Co1">
             <div class="input-group-append">
                 <span class="input-group-text">日</span>
             </div>
@@ -83,24 +66,24 @@
 </div>
 @*身分證字號*@
 <div class="form-group getco1">
-    <label class="form-label" for="IDnumber">身分證字號</label>
+    <label class="form-label" for="IDnumber_Co1">身分證字號</label>
     <div class="row pb-2">
         <div class="col-12">
             <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="custom-control-input national_check" id="Co_IDnumber1" name="Co_IDnumber1" data-index="1">
-                <label class="custom-control-label" for="Co_IDnumber1">外籍</label>
+                <input type="checkbox" class="custom-control-input national_check" id="International_Co1" data-index="1">
+                <label class="custom-control-label" for="International_Co1">外籍</label>
             </div>
         </div>
     </div>
-    <input type="text" id="IDnumber" name="inputIDnumber_landlord" class="form-control inputIDnumber" data-index="1" data-valid="1" pattern="^[A-Z]\d{9}$" />
+    <input type="text" class="form-control inputIDnumber CoInput_1" id="IDnumber_Co1" data-index="1" data-valid="1" pattern="^[A-Z]\d{9}$" />
     <div class="invalid-feedback">
         請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
     </div>
 </div>
 @*連絡電話*@
 <div class="form-group getco1">
-    <label class="form-label" for="phonenumber_Co1">連絡電話</label>
-    <input type="text" id="phonenumber_Co1" name="phonenumber_Co1" class="form-control inputPhoneNumber" data-index="1" data-valid="1" pattern="^\d{10}$">
+    <label class="form-label" for="Phone_Co1">連絡電話</label>
+    <input type="text" class="form-control inputPhoneNumber CoInput_1" id="Phone_Co1"data-index="1" data-valid="1" pattern="^\d{10}$">
     <div class="invalid-feedback">
         請輸入連絡電話，並確認格式為【10個數字】
     </div>
@@ -111,7 +94,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city" data-index="11">
+            <select class="custom-select form-control select2_city CoInput_1" data-index="11">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -119,7 +102,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district" data-index="11">
+            <select class="custom-select form-control select2_district CoInput_1" data-index="11">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -127,7 +110,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road" data-index="11" name="road_address_Co1">
+            <select class="custom-select form-control select2_road CoInput_1" data-index="11" id="road_Co1">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -137,7 +120,7 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" name="elseaddress_Co1" class="form-control" placeholder="ex.108號1樓">
+            <input type="text" class="form-control CoInput_1" id="detailaddress_Co1" placeholder="ex.108號1樓">
         </div>
     </div>
 </div>
@@ -146,7 +129,7 @@
     <div class="row pb-2">
         <div class="col-12">
             <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="custom-control-input sameaddress" id="sameaddress_Co1" name="sameaddress_Co1" data-index="12">
+                <input type="checkbox" class="custom-control-input sameaddress" id="sameaddress_Co1" data-index="12">
                 <label class="custom-control-label" for="sameaddress_Co1">同戶籍地址</label>
             </div>
         </div>
@@ -155,7 +138,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city select_contact_12" data-index="12">
+            <select class="custom-select form-control select2_city select_contact_12 CoInput_1" data-index="12">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -163,7 +146,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district select_contact_12" data-index="12">
+            <select class="custom-select form-control select2_district select_contact_12 CoInput_1" data-index="12">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -171,7 +154,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road select_contact_12" data-index="12" name="road_contact_Co1">
+            <select class="custom-select form-control select2_road select_contact_12 CoInput_1" data-index="12" id="road_contact_Co1">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -181,39 +164,22 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" name="elseaddress_contact_Co1" class="form-control select_contact_12" data-index="12" placeholder="ex.108號1樓">
+            <input type="text" class="form-control select_contact_12 CoInput_1" id="detailcontact_Co1" data-index="12" placeholder="ex.108號1樓">
         </div>
     </div>
 </div>
-
+<input type="text" id="CoOwnerInput1" name="CoOwnerInput1" hidden/>
 @*共有人2*@
 <div class="panel-tag getco2">
     共有人2
 </div>
 <div class="form-group getco2">
-    <label class="form-label" for="jqname_Co2">共有人2姓名</label>
-    <input type="text" id="jqname_Co2" name="name_Co2" class="form-control">
+    <label class="form-label" for="Name_Co2">共有人2姓名</label>
+    <input type="text" class="form-control CoInput_2" id="Name_Co2">
     <div class="invalid-feedback">
         請輸入共有人姓名
     </div>
 </div>
-@*出生年月日*@
-@*<div class="form-group getco2">
-        <label class="form-label" for="birthday_Co2">生日</label>
-        <span class="text-danger">*</span>
-        <div class="input-group">
-            <input type="text" class="form-control birthday" placeholder="請選擇生日" id="birthday_Co2" name="birthday_Co2">
-            <div class="input-group-append">
-                <span class="input-group-text fs-xl">
-                    <i class="fal fa-calendar-check"></i>
-                </span>
-            </div>
-            <div class="invalid-feedback">
-                請選擇生日
-            </div>
-        </div>
-    </div>*@
-
 <div class="form-group getco2">
     <label class="form-label" for="birthday">生日</label>
     <div class="col-md-8 col-lg-6 mb-3 pl-0">
@@ -221,15 +187,15 @@
             <div class="input-group-append">
                 <span class="input-group-text">民國</span>
             </div>
-            <input type="number" max="130" min="10" value="112" class="form-control " name="birthyear">
+            <input type="number" class="form-control CoInput_2" max="130" min="10" id="birthdayYear_Co2">
             <div class="input-group-append">
                 <span class="input-group-text">年</span>
             </div>
-            <input type="number" max="12" min="1" value="8" class="form-control " name="birthmonth">
+            <input type="number" class="form-control CoInput_2" max="12" min="1" id="birthdayMonth_Co2">
             <div class="input-group-append">
                 <span class="input-group-text">月</span>
             </div>
-            <input type="number" max="31" min="1" value="13" class="form-control " name="birthday">
+            <input type="number" class="form-control CoInput_2" max="31" min="1" id="birthdayDay_Co2">
             <div class="input-group-append">
                 <span class="input-group-text">日</span>
             </div>
@@ -238,28 +204,24 @@
 </div>
 @*身分證字號*@
 <div class="form-group getco2">
-    <label class="form-label" for="IDnumber">身分證字號</label>
+    <label class="form-label" for="IDnumber_Co2">身分證字號</label>
     <div class="row pb-2">
         <div class="col-12">
             <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="custom-control-input national_check" id="Co_IDnumber2" name="Co_IDnumber2" data-index="2">
-                <label class="custom-control-label" for="Co_IDnumber2">外籍</label>
+                <input type="checkbox" class="custom-control-input national_check" id="International_Co2" data-index="2">
+                <label class="custom-control-label" for="International_Co2">外籍</label>
             </div>
         </div>
     </div>
-    <input type="text" id="IDnumber" name="
-           
-           
-           
-           _landlord" class="form-control inputIDnumber" data-index="2" data-valid="1" pattern="^[A-Z]\d{9}$">
+    <input type="text" class="form-control inputIDnumber CoInput_2" id="IDnumber_Co2" data-index="2" data-valid="1" pattern="^[A-Z]\d{9}$">
     <div class="invalid-feedback">
         請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
     </div>
 </div>
 @*連絡電話*@
 <div class="form-group getco2">
-    <label class="form-label" for="phonenumber_Co2">連絡電話</label>
-    <input type="text" id="phonenumber_Co2" name="phonenumber_Co2" class="form-control inputPhoneNumber" data-index="2" data-valid="1" pattern="^\d{10}$">
+    <label class="form-label" for="Phone_Co2">連絡電話</label>
+    <input type="text" class="form-control inputPhoneNumber CoInput_2" id="Phone_Co2" data-index="2" data-valid="1" pattern="^\d{10}$">
     <div class="invalid-feedback">
         請輸入連絡電話，並確認格式為【10個數字】
     </div>
@@ -270,7 +232,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city" data-index="13">
+            <select class="custom-select form-control select2_city CoInput_2" data-index="13">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -278,7 +240,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district" data-index="13">
+            <select class="custom-select form-control select2_district CoInput_2" data-index="13">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -286,7 +248,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road" data-index="13" name="road_address_Co2">
+            <select class="custom-select form-control select2_road CoInput_2" data-index="13" id="road_Co2">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -296,7 +258,7 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" name="elseaddress_Co2" class="form-control" placeholder="ex.108號1樓">
+            <input type="text" class="form-control CoInput_2" id="detailaddress_Co2" placeholder="ex.108號1樓">
         </div>
     </div>
 </div>
@@ -305,7 +267,7 @@
     <div class="row pb-2">
         <div class="col-12">
             <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="custom-control-input sameaddress" id="sameaddress_Co2" data-index="14" name="sameaddress_Co2">
+                <input type="checkbox" class="custom-control-input sameaddress" id="sameaddress_Co2" data-index="14">
                 <label class="custom-control-label" for="sameaddress_Co2">同戶籍地址</label>
             </div>
         </div>
@@ -314,7 +276,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city select_contact_14" data-index="14">
+            <select class="custom-select form-control select2_city select_contact_14 CoInput_2" data-index="14">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -322,7 +284,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district select_contact_14" data-index="14">
+            <select class="custom-select form-control select2_district select_contact_14 CoInput_2" data-index="14">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -330,7 +292,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road select_contact_14" data-index="14" name="road_contact_Co2">
+            <select class="custom-select form-control select2_road select_contact_14 CoInput_2" data-index="14" id="road_contact_Co2">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -340,10 +302,11 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" name="elseaddress_contact_Co2" class="form-control select_contact_14" data-index="14" placeholder="ex.108號1樓">
+            <input type="text" class="form-control select_contact_14 CoInput_2" id="detailcontact_Co2" data-index="14" placeholder="ex.108號1樓">
         </div>
     </div>
 </div>
+<input type="text" id="CoOwnerInput2" name="CoOwnerInput2" hidden/>
 
 @*共有人3*@
 <div class="panel-tag getco3">
@@ -351,28 +314,11 @@
 </div>
 <div class="form-group getco3">
     <label class="form-label" for="jqname_Co3">共有人3姓名</label>
-    <input type="text" id="jqname_Co3" name="name_Co3" class="form-control">
+    <input type="text" class="form-control CoInput_3" id="Name_Co3">
     <div class="invalid-feedback">
         請輸入共有人姓名
     </div>
 </div>
-@*出生年月日*@
-@*<div class="form-group getco3">
-        <label class="form-label" for="birthday_Co3">生日</label>
-        <span class="text-danger">*</span>
-        <div class="input-group">
-            <input type="text" class="form-control birthday" placeholder="請選擇生日" id="birthday_Co3" name="birthday_Co3">
-            <div class="input-group-append">
-                <span class="input-group-text fs-xl">
-                    <i class="fal fa-calendar-check"></i>
-                </span>
-            </div>
-            <div class="invalid-feedback">
-                請選擇生日
-            </div>
-        </div>
-    </div>*@
-
 <div class="form-group getco3">
     <label class="form-label" for="birthday">生日</label>
     <div class="col-md-8 col-lg-6 mb-3 pl-0">
@@ -380,15 +326,15 @@
             <div class="input-group-append">
                 <span class="input-group-text">民國</span>
             </div>
-            <input type="number" max="130" min="10" value="112" class="form-control " name="birthyear">
+            <input type="number" max="130" min="10" class="form-control CoInput_3" id="birthdayYear_Co3">
             <div class="input-group-append">
                 <span class="input-group-text">年</span>
             </div>
-            <input type="number" max="12" min="1" value="8" class="form-control " name="birthmonth">
+            <input type="number" max="12" min="1" class="form-control CoInput_3" id="birthdayMonth_Co3">
             <div class="input-group-append">
                 <span class="input-group-text">月</span>
             </div>
-            <input type="number" max="31" min="1" value="13" class="form-control " name="birthday">
+            <input type="number" max="31" min="1" class="form-control CoInput_3" id="birthdayDay_Co3">
             <div class="input-group-append">
                 <span class="input-group-text">日</span>
             </div>
@@ -397,24 +343,24 @@
 </div>
 @*身分證字號*@
 <div class="form-group getco3">
-    <label class="form-label" for="IDnumber">身分證字號</label>
+    <label class="form-label" for="IDnumber_Co3">身分證字號</label>
     <div class="row pb-2">
         <div class="col-12">
             <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="custom-control-input national_check" id="Co_IDnumber3" name="Co_IDnumber3" data-index="3">
-                <label class="custom-control-label" for="Co_IDnumber3">外籍</label>
+                <input type="checkbox" class="custom-control-input national_check" id="International_Co3" data-index="3">
+                <label class="custom-control-label" for="International_Co3">外籍</label>
             </div>
         </div>
     </div>
-    <input type="text" id="IDnumber" name="inputIDnumber_landlord" class="form-control inputIDnumber" data-index="3" data-valid="1" pattern="^[A-Z]\d{9}$">
+    <input type="text" class="form-control inputIDnumber CoInput_3" id="IDnumber_Co3" data-index="3" data-valid="1" pattern="^[A-Z]\d{9}$">
     <div class="invalid-feedback">
         請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
     </div>
 </div>
 @*連絡電話*@
 <div class="form-group getco3">
-    <label class="form-label" for="phonenumber_Co3">連絡電話</label>
-    <input type="text" id="phonenumber_Co3" name="phonenumber_Co3" class="form-control inputPhoneNumber" data-index="3" data-valid="1" pattern="^\d{10}$">
+    <label class="form-label" for="Phone_Co3">連絡電話</label>
+    <input type="text" class="form-control inputPhoneNumber CoInput_3" id="Phone_Co3" data-index="3" data-valid="1" pattern="^\d{10}$">
     <div class="invalid-feedback">
         請輸入連絡電話，並確認格式為【10個數字】
     </div>
@@ -425,7 +371,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city" data-index="15">
+            <select class="custom-select form-control select2_city CoInput_3" data-index="15">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -433,7 +379,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district" data-index="15">
+            <select class="custom-select form-control select2_district CoInput_3" data-index="15">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -441,7 +387,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road" data-index="15" name="road_address_Co3">
+            <select class="custom-select form-control select2_road CoInput_3" data-index="15" id="road_Co3">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -451,7 +397,7 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" name="elseaddress_Co3" class="form-control" placeholder="ex.108號1樓">
+            <input type="text" class="form-control CoInput_3" id="detailaddress_Co3" placeholder="ex.108號1樓">
         </div>
     </div>
 </div>
@@ -460,7 +406,7 @@
     <div class="row pb-2">
         <div class="col-12">
             <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="custom-control-input sameaddress" id="sameaddress_Co3" name="sameaddress_Co3" data-index="16">
+                <input type="checkbox" class="custom-control-input sameaddress" id="sameaddress_Co3" data-index="16">
                 <label class="custom-control-label" for="sameaddress_Co3">同戶籍地址</label>
             </div>
         </div>
@@ -469,7 +415,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city select_contact_16" data-index="16">
+            <select class="custom-select form-control select2_city select_contact_16 CoInput_3" data-index="16">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -477,7 +423,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district select_contact_16" data-index="16">
+            <select class="custom-select form-control select2_district select_contact_16 CoInput_3" data-index="16">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -485,7 +431,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road select_contact_16" data-index="16" name="road_contact_Co3">
+            <select class="custom-select form-control select2_road select_contact_16 CoInput_3" data-index="16" id="road_contact_Co3">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -495,39 +441,23 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" name="elseaddress_contact_Co3" class="form-control select_contact_16" data-index="16" placeholder="ex.108號1樓">
+            <input type="text" class="form-control select_contact_16 CoInput_3" id="detailcontact_Co3" data-index="16" placeholder="ex.108號1樓">
         </div>
     </div>
 </div>
+<input type="text" id="CoOwnerInput3" name="CoOwnerInput3" hidden/>
 
 @*共有人4*@
 <div class="panel-tag getco4">
     共有人4
 </div>
 <div class="form-group getco4">
-    <label class="form-label" for="jqname_Co4">共有人4姓名</label>
-    <input type="text" id="jqname_Co4" name="name_Co4" class="form-control">
+    <label class="form-label" for="Name_Co4">共有人4姓名</label>
+    <input type="text" class="form-control CoInput_4" id="Name_Co4">
     <div class="invalid-feedback">
         請輸入共有人姓名
     </div>
 </div>
-@*出生年月日*@
-@*<div class="form-group getco4">
-        <label class="form-label" for="birthday_Co4">生日</label>
-        <span class="text-danger">*</span>
-        <div class="input-group">
-            <input type="text" class="form-control birthday" placeholder="請選擇生日" id="birthday_Co4" name="birthday_Co4">
-            <div class="input-group-append">
-                <span class="input-group-text fs-xl">
-                    <i class="fal fa-calendar-check"></i>
-                </span>
-            </div>
-            <div class="invalid-feedback">
-                請選擇生日
-            </div>
-        </div>
-    </div>*@
-
 <div class="form-group getco4">
     <label class="form-label" for="birthday">生日</label>
     <div class="col-md-8 col-lg-6 mb-3 pl-0">
@@ -535,15 +465,15 @@
             <div class="input-group-append">
                 <span class="input-group-text">民國</span>
             </div>
-            <input type="number" max="130" min="10" value="112" class="form-control " name="birthyear">
+            <input type="number" class="form-control CoInput_4" max="130" min="10" id="birthdayYear_Co4">
             <div class="input-group-append">
                 <span class="input-group-text">年</span>
             </div>
-            <input type="number" max="12" min="1" value="8" class="form-control " name="birthmonth">
+            <input type="number" class="form-control CoInput_4" max="12" min="1" id="birthdayMonth_Co4">
             <div class="input-group-append">
                 <span class="input-group-text">月</span>
             </div>
-            <input type="number" max="31" min="1" value="13" class="form-control " name="birthday">
+            <input type="number" class="form-control CoInput_4" max="31" min="1" id="birthdayDay_Co4">
             <div class="input-group-append">
                 <span class="input-group-text">日</span>
             </div>
@@ -552,24 +482,24 @@
 </div>
 @*身分證字號*@
 <div class="form-group getco4">
-    <label class="form-label" for="IDnumber">身分證字號</label>
+    <label class="form-label" for="IDnumber_Co4">身分證字號</label>
     <div class="row pb-2">
         <div class="col-12">
             <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="custom-control-input national_check" id="Co_IDnumber4" name="Co_IDnumber4" data-index="4">
-                <label class="custom-control-label" for="Co_IDnumber4">外籍</label>
+                <input type="checkbox" class="custom-control-input national_check" id="International_Co4" data-index="4">
+                <label class="custom-control-label" for="International_Co4">外籍</label>
             </div>
         </div>
     </div>
-    <input type="text" id="IDnumber" name="inputIDnumber_landlord" class="form-control inputIDnumber" data-index="4" data-valid="1" pattern="^[A-Z]\d{9}$">
+    <input type="text" class="form-control inputIDnumber CoInput_4" id="IDnumber_Co4" data-index="4" data-valid="1" pattern="^[A-Z]\d{9}$">
     <div class="invalid-feedback">
         請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
     </div>
 </div>
 @*連絡電話*@
 <div class="form-group getco4">
-    <label class="form-label" for="phonenumber_Co4">連絡電話</label>
-    <input type="text" id="phonenumber_Co4" name="phonenumber_Co4" class="form-control inputPhoneNumber" data-index="4" data-valid="1" pattern="^\d{10}$">
+    <label class="form-label" for="Phone_Co4">連絡電話</label>
+    <input type="text" class="form-control inputPhoneNumber CoInput_4" id="Phone_Co4" data-index="4" data-valid="1" pattern="^\d{10}$">
     <div class="invalid-feedback">
         請輸入連絡電話，並確認格式為【10個數字】
     </div>
@@ -580,7 +510,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city" data-index="17">
+            <select class="custom-select form-control select2_city CoInput_4" data-index="17">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -588,7 +518,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district" data-index="17">
+            <select class="custom-select form-control select2_district CoInput_4" data-index="17">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -596,7 +526,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road" data-index="17" name="road_address_Co4">
+            <select class="custom-select form-control select2_road CoInput_4" data-index="17" id="road_Co4">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -606,7 +536,7 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" name="elseaddress_Co4" class="form-control" placeholder="ex.108號1樓">
+            <input type="text" class="form-control CoInput_4" id="detailaddress_Co4" placeholder="ex.108號1樓">
         </div>
     </div>
 </div>
@@ -615,7 +545,7 @@
     <div class="row pb-2">
         <div class="col-12">
             <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="custom-control-input sameaddress" id="sameaddress_Co4" name="sameaddress_Co4" data-index="18">
+                <input type="checkbox" class="custom-control-input sameaddress" id="sameaddress_Co4" data-index="18">
                 <label class="custom-control-label" for="sameaddress_Co4">同戶籍地址</label>
             </div>
         </div>
@@ -624,7 +554,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city select_contact_18" data-index="18">
+            <select class="custom-select form-control select2_city select_contact_18 CoInput_4" data-index="18">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -632,7 +562,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district select_contact_18" data-index="18">
+            <select class="custom-select form-control select2_district select_contact_18 CoInput_4" data-index="18">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -640,7 +570,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road select_contact_18" data-index="18" name="road_contact_Co4">
+            <select class="custom-select form-control select2_road select_contact_18 CoInput_4" data-index="18" id="road_contact_Co4">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -650,39 +580,23 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" name="elseaddress_contact_Co4" class="form-control select_contact_18" data-index="18" placeholder="ex.108號1樓">
+            <input type="text" class="form-control select_contact_18 CoInput_4" id="detailcontact_Co4" data-index="18" placeholder="ex.108號1樓">
         </div>
     </div>
 </div>
+<input type="text" id="CoOwnerInput4" name="CoOwnerInput4" hidden/>
 
 @*共有人5*@
 <div class="panel-tag getco5">
     共有人5
 </div>
 <div class="form-group getco5">
-    <label class="form-label" for="jqname_Co5">共有人5姓名</label>
-    <input type="text" id="jqname_Co5" name="name_Co5" class="form-control">
+    <label class="form-label" for="Name_Co5">共有人5姓名</label>
+    <input type="text" id="Name_Co5" class="form-control CoInput_5">
     <div class="invalid-feedback">
         請輸入共有人姓名
     </div>
 </div>
-@*出生年月日*@
-@*<div class="form-group getco5">
-        <label class="form-label" for="birthday_Co5">生日</label>
-        <span class="text-danger">*</span>
-        <div class="input-group">
-            <input type="text" class="form-control birthday" placeholder="請選擇生日" id="birthday_Co5" name="birthday_Co5">
-            <div class="input-group-append">
-                <span class="input-group-text fs-xl">
-                    <i class="fal fa-calendar-check"></i>
-                </span>
-            </div>
-            <div class="invalid-feedback">
-                請選擇生日
-            </div>
-        </div>
-    </div>*@
-
 <div class="form-group getco5">
     <label class="form-label" for="birthday">生日</label>
     <div class="col-md-8 col-lg-6 mb-3 pl-0">
@@ -690,15 +604,15 @@
             <div class="input-group-append">
                 <span class="input-group-text">民國</span>
             </div>
-            <input type="number" max="130" min="10" value="112" class="form-control " name="birthyear">
+            <input type="number" class="form-control CoInput_5" max="130" min="10" id="birthdayYear_Co5">
             <div class="input-group-append">
                 <span class="input-group-text">年</span>
             </div>
-            <input type="number" max="12" min="1" value="8" class="form-control " name="birthmonth">
+            <input type="number" class="form-control CoInput_5" max="12" min="1" id="birthdayMonth_Co5">
             <div class="input-group-append">
                 <span class="input-group-text">月</span>
             </div>
-            <input type="number" max="31" min="1" value="13" class="form-control " name="birthday">
+            <input type="number" class="form-control CoInput_5" max="31" min="1" id="birthdayDay_Co5">
             <div class="input-group-append">
                 <span class="input-group-text">日</span>
             </div>
@@ -711,12 +625,12 @@
     <div class="row pb-2">
         <div class="col-12">
             <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="custom-control-input national_check" id="Co_IDnumber5" name="Co_IDnumber5" data-index="5">
-                <label class="custom-control-label" for="Co_IDnumber5">外籍</label>
+                <input type="checkbox" class="custom-control-input national_check" id="International_Co5" data-index="5">
+                <label class="custom-control-label" for="International_Co5">外籍</label>
             </div>
         </div>
     </div>
-    <input type="text" id="IDnumber" name="inputIDnumber_landlord" class="form-control inputIDnumber" data-index="5" data-valid="1" pattern="^[A-Z]\d{9}$">
+    <input type="text" class="form-control inputIDnumber CoInput_5" id="IDnumber_Co5" data-index="5" data-valid="1" pattern="^[A-Z]\d{9}$">
     <div class="invalid-feedback">
         請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
     </div>
@@ -724,7 +638,7 @@
 @*連絡電話*@
 <div class="form-group getco5">
     <label class="form-label" for="phonenumber_Co5">連絡電話</label>
-    <input type="text" id="phonenumber_Co5" name="phonenumber_Co5" class="form-control inputPhoneNumber" data-index="5" data-valid="1" pattern="^\d{10}$">
+    <input type="text" class="form-control inputPhoneNumber CoInput_5" id="Phone_Co5" data-index="5" data-valid="1" pattern="^\d{10}$">
     <div class="invalid-feedback">
         請輸入連絡電話，並確認格式為【10個數字】
     </div>
@@ -735,7 +649,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city" data-index="19">
+            <select class="custom-select form-control select2_city CoInput_5" data-index="19">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -743,7 +657,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district" data-index="19">
+            <select class="custom-select form-control select2_district CoInput_5" data-index="19">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -751,7 +665,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road" data-index="19" name="road_address_Co5">
+            <select class="custom-select form-control select2_road CoInput_5" data-index="19" id="road_Co5">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -761,7 +675,7 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" name="elseaddress_Co5" class="form-control" placeholder="ex.108號1樓">
+            <input type="text" class="form-control CoInput_5" id="detailaddress_Co5" placeholder="ex.108號1樓">
         </div>
     </div>
 </div>
@@ -770,7 +684,7 @@
     <div class="row pb-2">
         <div class="col-12">
             <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="custom-control-input sameaddress" id="sameaddress_Co5" name="sameaddress_Co5" data-index="20">
+                <input type="checkbox" class="custom-control-input sameaddress" id="sameaddress_Co5" data-index="20">
                 <label class="custom-control-label" for="sameaddress_Co5">同戶籍地址</label>
             </div>
         </div>
@@ -779,7 +693,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city select_contact_20" data-index="20">
+            <select class="custom-select form-control select2_city select_contact_20 CoInput_5" data-index="20">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -787,7 +701,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district select_contact_20" data-index="20">
+            <select class="custom-select form-control select2_district select_contact_20 CoInput_5" data-index="20">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -795,7 +709,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road select_contact_20" data-index="20" name="road_contact_Co5">
+            <select class="custom-select form-control select2_road select_contact_20 CoInput_5" data-index="20" id="road_contact_Co5">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -805,7 +719,8 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" name="elseaddress_contact_Co5" class="form-control select_contact_20" data-index="20" placeholder="ex.108號1樓">
+            <input type="text" class="form-control select_contact_20 CoInput_5" id="detailcontact_Co5" data-index="20" placeholder="ex.108號1樓">
         </div>
     </div>
 </div>
+<input type="text" id="CoOwnerInput5" name="CoOwnerInput5" hidden />

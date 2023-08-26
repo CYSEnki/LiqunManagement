@@ -20,6 +20,8 @@ namespace LiqunManagement.Controllers
         {
             var Formlist = from form in formdb.ObjectForm
                            join obj in formdb.HomeObject on form.FormId equals obj.FormId
+                           join lan in formdb.LandLord on form.FormId equals lan.FormId into temp1
+                           from land in temp1.DefaultIfEmpty()
                            select new objectForm
                            {
                                FormId = (string)form.FormId,
@@ -27,7 +29,7 @@ namespace LiqunManagement.Controllers
                                ProcessName = (string)form.ProcessName,
                                Address = (string)obj.fulladdress,
                                SignDate = (DateTime)obj.signdate,
-                               Landlord = "陳霸天",
+                               Landlord = land != null ? land.Name : null,
                                Tenant = "小蘋果",
                            };
             //ViewBag.Formlist = Formlist;

@@ -22,8 +22,8 @@
             <div id="panel-4" class="panel panel-sortable panel-locked" data-panel-lock="false" data-panel-close="false" data-panel-fullscreen="false" data-panel-collapsed="false" data-panel-color="false" data-panel-locked="false" data-panel-refresh="false" data-panel-reset="false">
                 <div class="panel-hdr" role="heading">
                     <h2 class="ui-sortable-handle">
-                        業務區
-                        <span class="fw-300"><i>案件管理</i></span>
+                        Sale
+                        <span class="fw-300"><i>Records</i></span>
                     </h2>
                 </div>
                 <div class="panel-container show">
@@ -62,16 +62,17 @@
                                                     <td style="display: none;">
                                                         @*<a href="javascript:void(0);" class="btn btn-sm btn-icon btn-outline-danger rounded-circle mr-1" title="Delete Record">
                                                             <i class="fal fa-times"></i>
-                                                        </a>
+                                                        </a>*@
                                                         <div class="dropdown d-inline-block dropleft">
                                                             <a href="#" class="btn btn-sm btn-icon btn-outline-primary rounded-circle shadow-0" data-toggle="dropdown" aria-expanded="true" title="More options">
                                                                 <i class="fal fa-ellipsis-v"></i>
                                                             </a>
                                                             <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="javascript:void(0);">編輯</a>
-                                                                <a class="dropdown-item" href="javascript:void(0);">匯出Word表單</a>
+                                                                <a class="dropdown-item" href="javascript:void(0);">物件資料</a>
+                                                                <a class="dropdown-item" href="@Url.Action("Landlord", "Form", new { FormID = item.FormId})">房東資料</a>
+                                                                <a class="dropdown-item" href="javascript:void(0);">房客資料</a>
                                                             </div>
-                                                        </div>*@
+                                                        </div>
                                                     </td>
                                                 </tr>
 
@@ -144,51 +145,45 @@
                         }
 
                     ],
-                    "language": {
-                        "info": " _START_ - _END_  筆資料 (共 _TOTAL_ 筆)"
-                    },
                     //定義每列的屬性和操作
-                    columnDefs: [
-                        {
-                            //目標列為倒數第一列
-                            targets: -1,
-                            //空的標題
-                            title: '',
-                            //不可排序
-                            orderable: false,
-                            //自定義內容
-                            ///在渲染函數中，通過字符串產生了一段HTML碼，其中包刮"刪除"和"更多選項"的按鈕，
-                            ///刪除按鈕允許用戶刪除紀錄，更多選項按鈕則打開一個下拉選單，其中包含一些額外的操作選項，如更換狀態和生成報告
-                            render: function (data, type, full, meta) {
+                    //columnDefs: [
+                    //    {
+                    //        //目標列為倒數第一列
+                    //        targets: -1,
+                    //        //空的標題
+                    //        title: '',
+                    //        //不可排序
+                    //        orderable: false,
+                    //        //自定義內容
+                    //        ///在渲染函數中，通過字符串產生了一段HTML碼，其中包刮"刪除"和"更多選項"的按鈕，
+                    //        ///刪除按鈕允許用戶刪除紀錄，更多選項按鈕則打開一個下拉選單，其中包含一些額外的操作選項，如更換狀態和生成報告
+                    //        render: function (data, type, full, meta) {
 
+                                
+                    //            //-- ES6
+                    //            //-- convert using https://babeljs.io online transpiler
+                    //            return `
+                    //            <a href='javascript:void(0);' class='btn btn-sm btn-icon btn-outline-danger rounded-circle mr-1' title='Delete Record'>
+                    //                <i class="fal fa-times"></i>
+                    //            </a>
+                    //            <div class='dropdown d-inline-block dropleft '>
+                    //                <a href='#'' class='btn btn-sm btn-icon btn-outline-primary rounded-circle shadow-0' data-toggle='dropdown' aria-expanded='true' title='More options'>
+                    //                    <i class="fal fa-ellipsis-v"></i>
+                    //                </a>
+                    //                <div class='dropdown-menu'>
+                    //                    <a class='dropdown-item' href='javascript:void(0);'>編輯表單</a>
+                    //                    <a class='dropdown-item' href='javascript:void(0);'>匯出Word表單</a>
+                    //                </div>
+                    //            </div>`;
 
-                                //-- ES6
-                                //-- convert using https://babeljs.io online transpiler
-                                //<a href='javascript:void(0);' class='btn btn-sm btn-icon btn-outline-danger rounded-circle mr-1' title='Delete Record'>
-                                //    <i class="fal fa-times"></i>
-                                //</a>
-                                return `
+                    //            //ES5 example below:
 
-                                <div class='dropdown d-inline-block dropleft '>
-                                    <a href='#'' class='btn btn-sm btn-icon btn-outline-primary rounded-circle shadow-0' data-toggle='dropdown' aria-expanded='true' title='More options'>
-                                        <i class="fal fa-ellipsis-v"></i>
-                                    </a>
-                                    <div class='dropdown-menu'>
-                                        <a class='dropdown-item' href='@Url.Action("HomeObject", "Form")'>物件資料</a>
-                                        <a class='dropdown-item' href='@Url.Action("Landlord", "Form")'>房東資料</a>
-                                        <a class='dropdown-item' href='@Url.Action("Tenant", "Form")'>房客資料</a>
-                                        <a class='dropdown-item' href=''>匯出Word表單</a>
-                                    </div>
-                                </div>`;
+                                
+                    //            //return "\n\t\t\t\t\t\t<a href='javascript:void(0);' class='btn btn-sm btn-icon btn-outline-danger rounded-circle mr-1' title='Delete Record'>\n\t\t\t\t\t\t\t<i class=\"fal fa-times\"></i>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t\t<div class='dropdown d-inline-block dropleft'>\n\t\t\t\t\t\t\t<a href='#'' class='btn btn-sm btn-icon btn-outline-primary rounded-circle shadow-0' data-toggle='dropdown' aria-expanded='true' title='More options'>\n\t\t\t\t\t\t\t\t<i class=\"fal fa-ellipsis-v\"></i>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<div class='dropdown-menu'>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>編輯表單</a>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>匯出Word表單</a>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>";
+                    //        },
+                    //    },
 
-                                //ES5 example below:
-
-
-                                //return "\n\t\t\t\t\t\t<a href='javascript:void(0);' class='btn btn-sm btn-icon btn-outline-danger rounded-circle mr-1' title='Delete Record'>\n\t\t\t\t\t\t\t<i class=\"fal fa-times\"></i>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t\t<div class='dropdown d-inline-block dropleft'>\n\t\t\t\t\t\t\t<a href='#'' class='btn btn-sm btn-icon btn-outline-primary rounded-circle shadow-0' data-toggle='dropdown' aria-expanded='true' title='More options'>\n\t\t\t\t\t\t\t\t<i class=\"fal fa-ellipsis-v\"></i>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<div class='dropdown-menu'>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>編輯表單</a>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>匯出Word表單</a>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>";
-                            },
-                        },
-
-                    ]
+                    //]
 
                 });
         });

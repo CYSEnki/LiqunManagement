@@ -209,10 +209,10 @@
                                 <span class="help-block pl-2">*<code>&lt;上傳300億試算表截圖&gt;</code></span>
                             </div>
 
-                            @*房東姓名*@
+                            @*房客姓名*@
                             <div class="form-group">
                                 <label class="form-label" for="jqlandlordname">房客姓名</label>
-                                <input type="text" id="jqlandlordname" name="name_landlord" class="form-control" required>
+                                <input type="text" id="Name_0" name="Name_0" class="form-control" required>
                                 <div class="invalid-feedback">
                                     請輸入房客姓名
                                 </div>
@@ -225,36 +225,18 @@
                                 </label>
                                 <div class="frame-wrap padding-top-ten">
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="genderRadio_tenant_1" name="genderRadio_tenant" value="1" required>
-                                        <label class="custom-control-label" for="genderRadio_tenant_1">男</label>
+                                        <input type="radio" class="custom-control-input" id="genderRadio_0_1" name="genderRadio_0" value="1" required>
+                                        <label class="custom-control-label" for="genderRadio_0_1">男</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input" id="genderRadio_tenant_0" name="genderRadio_tenant" value="0" required>
-                                        <label class="custom-control-label" for="genderRadio_tenant_0">女</label>
+                                        <input type="radio" class="custom-control-input" id="genderRadio_0_0" name="genderRadio_0" value="0" required>
+                                        <label class="custom-control-label" for="genderRadio_0_0">女</label>
                                         <div class="invalid-feedback">
                                             請選擇房東性別
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            @*出生年月日*@
-                            @*<div class="form-group">
-                <label class="form-label" for="birthday">生日</label>
-                <span class="text-danger">*</span>
-                <div class="input-group">
-                    <input type="text" class="form-control birthday" placeholder="請選擇生日" name="birthday_tenant" required>
-                    <div class="input-group-append">
-                        <span class="input-group-text fs-xl">
-                            <i class="fal fa-calendar-check"></i>
-                        </span>
-                    </div>
-                    <div class="invalid-feedback">
-                        請選擇生日
-                    </div>
-                </div>
-            </div>*@
-
                             @*出生年月日*@
                             <div class="form-group">
                                 <label class="form-label" for="birthday">生日</label>
@@ -263,21 +245,22 @@
                                         <div class="input-group-append">
                                             <span class="input-group-text">民國</span>
                                         </div>
-                                        <input type="number" max="130" min="10" value="112" class="form-control couple_input" name="birthyear">
+                                        <input type="number" class="form-control" max="130" min="10" id="birthdayYear_0" name="birthdayYear_0" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">年</span>
                                         </div>
-                                        <input type="number" max="12" min="1" value="8" class="form-control couple_input" name="birthmonth">
+                                        <input type="number" class="form-control birthdayMonth" max="12" min="1" id="birthdayMonth_0" name="birthdayMonth_0" data-index="0" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">月</span>
                                         </div>
-                                        <input type="number" max="31" min="1" value="13" class="form-control couple_input" name="birthday">
+                                        <input type="number" class="form-control" max="31" min="1" id="birthdayDay_0" name="birthdayDay_0" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">日</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <input type="text" id="birthday_0" name="birthday_0" hidden>
 
                             @*身分證字號*@
                             <div class="form-group">
@@ -285,12 +268,12 @@
                                 <div class="row pb-2">
                                     <div class="col-12">
                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input national_check" id="international_IDnumber" name="international_IDnumber" data-index="0">
-                                            <label class="custom-control-label" for="international_IDnumber">外籍</label>
+                                            <input type="checkbox" class="custom-control-input national_check" id="international_IDnumber_0" name="international_IDnumber_0" data-index="0">
+                                            <label class="custom-control-label" for="international_IDnumber_0">外籍</label>
                                         </div>
                                     </div>
                                 </div>
-                                <input type="text" id="IDnumber" name="inputIDnumber_tenant" class="form-control inputIDnumber" data-index="0" data-valid="1" pattern="^[A-Z]\d{9}$" required>
+                                <input type="text" class="form-control inputIDnumber" id="IDNumber_0" name="IDNumber_0" data-index="0" data-valid="1" pattern="^[A-Z]\d{9}$" required>
                                 <div class="invalid-feedback">
                                     請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
                                 </div>
@@ -298,7 +281,7 @@
                             @*連絡電話*@
                             <div class="form-group">
                                 <label class="form-label" for="phonenumber">連絡電話</label>
-                                <input type="text" name="inputPhoneNumber_0" class="form-control inputPhoneNumber" data-index="0" data-valid="1" pattern="^\d{10}$" required>
+                                <input type="text" class="form-control inputPhoneNumber" id="Phone_0" name="Phone_0" data-index="0" data-valid="1" pattern="^\d{10}$" required>
                                 <div class="invalid-feedback">
                                     請輸入連絡電話，並確認格式為【10個數字】
                                 </div>
@@ -325,7 +308,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_road" name="road_address_tenant" data-index="0" required>
+                                        <select class="custom-select form-control select2_road" name="addressroad_0" data-index="0" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -335,7 +318,7 @@
                                 </div>
                                 <div class="row pt-2">
                                     <div class="col-12">
-                                        <input type="text" name="elseaddress_tenant" class="form-control" placeholder="ex.108號1樓" required>
+                                        <input type="text" name="detailaddress_0" class="form-control" placeholder="ex.108號1樓" required>
                                     </div>
                                 </div>
                             </div>
@@ -356,8 +339,8 @@
                                 <div class="row pb-2">
                                     <div class="col-12">
                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                            <input type="checkbox" class="custom-control-input sameaddress" id="sameaddress_tenant" name="sameaddress" data-index="1">
-                                            <label class="custom-control-label" for="sameaddress_tenant">同戶籍地址</label>
+                                            <input type="checkbox" class="custom-control-input sameaddress" id="sameaddresscheckbox" name="sameaddresscheckbox" data-index="1" value="true">
+                                            <label class="custom-control-label" for="sameaddresscheckbox">同戶籍地址</label>
                                         </div>
                                     </div>
                                 </div>
@@ -365,7 +348,7 @@
                                 <span class="text-danger">*</span>
                                 <div class="row">
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_city select_contact_1" name="city_contact_tenant" data-index="1" required>
+                                        <select class="custom-select form-control select2_city select_contact_1" data-index="1" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -373,7 +356,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_district select_contact_1" name="district_contact_tenant" data-index="1" required>
+                                        <select class="custom-select form-control select2_district select_contact_1" data-index="1" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -381,7 +364,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_road select_contact_1" name="road_contact_tenant" data-index="1" required>
+                                        <select class="custom-select form-control select2_road select_contact_1" name="contactroad_0" data-index="1" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -391,7 +374,7 @@
                                 </div>
                                 <div class="row pt-2">
                                     <div class="col-12">
-                                        <input type="text" name="elseaddress_contact" class="form-control select_contact_1" placeholder="ex.108號1樓" data-index="1" required>
+                                        <input type="text" class="form-control select_contact_1" name="detailcontact_0" data-index="1" placeholder="ex.108號1樓" required>
                                     </div>
                                 </div>
                             </div>
@@ -402,7 +385,7 @@
                                 <span class="text-danger">*</span>
                                 <div class="row">
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_bank" name="district_contact_tenant" data-index="1" required>
+                                        <select class="custom-select form-control select2_bank" name="bank_0" data-index="1" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -410,7 +393,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_bankbranches" name="bankbranches" data-index="1" required>
+                                        <select class="custom-select form-control select2_bankbranches" name="bankbranche_0" data-index="1" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -427,7 +410,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">帳號</span>
                                             </div>
-                                            <input type="text" id="banknumber" name="banknumber" class="form-control" required>
+                                            <input type="text" id="banknumber_0" name="banknumber_0" class="form-control" required>
                                             <div class="invalid-feedback" id="banknumberalert">
                                                 請填寫帳號
                                             </div>
@@ -441,12 +424,12 @@
                                 <div class="row pl-3 pb-2">
                                     <label>配偶</label>
                                     <div class="custom-control custom-checkbox" style="margin-left:10px;">
-                                        <input type="checkbox" class="custom-control-input couplecheck" id="couplecheck_1" name="couplecheck_1" value="1">
+                                        <input type="checkbox" class="custom-control-input couplecheck" id="couplecheck_1" name="couplecheck" value="1">
                                         <label class="custom-control-label" for="couplecheck_1"></label>
                                     </div>
                                     <label>丈夫</label>
                                     <div class="custom-control custom-checkbox" style="margin-left:10px;">
-                                        <input type="checkbox" class="custom-control-input" id="couplecheck_0" name="couplecheck_0" value="0">
+                                        <input type="checkbox" class="custom-control-input" id="couplecheck_0" name="couplecheck" value="0">
                                         <label class="custom-control-label" for="couplecheck_0"></label>
                                     </div>
                                     <label>妻子</label>
@@ -1151,6 +1134,28 @@
                         }
                     }
                 })
+            });
+
+            //------------------
+            // 生日月份變更日期之最大值為30 or31  *
+            //------------------
+
+            const inputElements = document.querySelectorAll('.birthdayMonth');
+            inputElements.forEach(function (inputElement) {
+                inputElement.addEventListener('input', function () {
+                    const inputValue = inputElement.value;
+                    const dataIndex = inputElement.getAttribute('data-index');
+                    if (inputValue == '1' || inputValue == '3' || inputValue == '5' || inputValue == '7' || inputValue == '8' || inputValue == '10' || inputValue == '12') {
+                        $('#birthdayDay_' + dataIndex).attr('max', 31); //設置最大值
+                    }
+                    else if (inputValue == '2') {
+                        $('#birthdayDay_' + dataIndex).attr('max', 29); //設置最大值
+                    }
+                    else {
+                        $('#birthdayDay_' + dataIndex).attr('max', 30); //設置最大值
+                    }
+                    // 在这里执行你的其他操作
+                });
             });
         });
 

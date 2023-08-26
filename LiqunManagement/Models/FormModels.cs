@@ -17,6 +17,7 @@ namespace LiqunManagement.Models
         public virtual DbSet<LandLord> LandLord { get; set; }
         public virtual DbSet<ObjectForm> ObjectForm { get; set; }
         public virtual DbSet<Region> Region { get; set; }
+        public virtual DbSet<Tenant> Tenant { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -45,10 +46,6 @@ namespace LiqunManagement.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<HomeObject>()
-                .Property(e => e.taxfile_alias)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<HomeObject>()
                 .Property(e => e.roomamount)
                 .IsUnicode(false);
 
@@ -57,15 +54,11 @@ namespace LiqunManagement.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<HomeObject>()
-                .Property(e => e.carparkfloor)
+                .Property(e => e.parkfloor)
                 .IsUnicode(false);
 
             modelBuilder.Entity<HomeObject>()
                 .Property(e => e.carpositionnumber)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<HomeObject>()
-                .Property(e => e.scooterparkfloor)
                 .IsUnicode(false);
 
             modelBuilder.Entity<HomeObject>()
@@ -81,15 +74,19 @@ namespace LiqunManagement.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<LandLord>()
-                .Property(e => e.Lordtype)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<LandLord>()
                 .Property(e => e.IDNumber)
                 .IsUnicode(false);
 
             modelBuilder.Entity<LandLord>()
-                .Property(e => e.PhoneNumber)
+                .Property(e => e.Phone)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<LandLord>()
+                .Property(e => e.BankNo)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<LandLord>()
+                .Property(e => e.BrancheNo)
                 .IsUnicode(false);
 
             modelBuilder.Entity<LandLord>()
@@ -98,6 +95,10 @@ namespace LiqunManagement.Models
 
             modelBuilder.Entity<LandLord>()
                 .Property(e => e.RoadCodeContact)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<LandLord>()
+                .Property(e => e.MemberArray)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ObjectForm>()
@@ -126,6 +127,50 @@ namespace LiqunManagement.Models
 
             modelBuilder.Entity<Region>()
                 .Property(e => e.RoadCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Tenant>()
+                .Property(e => e.vulnerablefile_Alias)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Tenant>()
+                .Property(e => e.sheetfile_Alias)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Tenant>()
+                .Property(e => e.Name)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Tenant>()
+                .Property(e => e.IDNumber)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Tenant>()
+                .Property(e => e.Phone)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Tenant>()
+                .Property(e => e.RoadCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Tenant>()
+                .Property(e => e.RoadCodeContact)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Tenant>()
+                .Property(e => e.accountNo)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Tenant>()
+                .Property(e => e.BankNo)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Tenant>()
+                .Property(e => e.BrancheNo)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Tenant>()
+                .Property(e => e.MemberArray)
                 .IsUnicode(false);
         }
     }

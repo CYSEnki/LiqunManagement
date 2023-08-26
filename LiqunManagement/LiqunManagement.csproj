@@ -150,10 +150,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AgentController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\FormController.cs" />
-    <Compile Include="Controllers\FormStuffController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LiqunController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
@@ -169,6 +167,7 @@
     <Compile Include="Models\LandLord.cs" />
     <Compile Include="Models\MembersModel.cs" />
     <Compile Include="Models\Region.cs" />
+    <Compile Include="Models\Tenant.cs" />
     <Compile Include="Security\JwtObject.cs" />
     <Compile Include="Security\JwtService.cs" />
     <Compile Include="Models\Members.cs" />
