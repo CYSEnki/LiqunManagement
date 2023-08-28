@@ -1,4 +1,6 @@
-﻿using LiqunManagement.Services;
+﻿using LiqunManagement.Attributes;
+using LiqunManagement.Services;
+using LiqunManagement.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,32 +9,38 @@ using System.Web.Mvc;
 
 namespace LiqunManagement.Controllers
 {
-    public class LiqunController : Controller
+    public class LiqunController : BaseController
     {
         //宣告Members資料表的Service物件
         private readonly MembersDBService membersdbservice = new MembersDBService();
+
         // GET: Liqun
+        [AdminAuthorize]
         public ActionResult Index()
         {
-            //判斷使用者是否已經過登入驗證
-            if (!User.Identity.IsAuthenticated)
-                return RedirectToAction("Login", "Members");
+            #region 使用者資料
+            var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
+                                join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
+                                from empdb0 in temp.DefaultIfEmpty()
+                                select new MembersViewModel
+                                {
+                                    Name = db.Name,
+                                    Department = empdb0 != null ? empdb0.Department : null,
+                                    Position = empdb0 != null ? empdb0.Position : null,
+                                }).FirstOrDefault();
+            if (EmployeeData != null)
+            {
+                ViewBag.UserName = EmployeeData.Name;                 //使用者名稱
+                ViewBag.Department = EmployeeData.Department;   //使用者部門
+                ViewBag.Position = EmployeeData.Position;       //使用者職位
+            }
+            //確認角色
+            var role = User.IsInRole("Admin");
+            //var role2 = User.IsInRole("User");
+            #endregion
 
-            //var name = User.Identity.Name;
-            //string RoleData = membersdbservice.GetRole(LoginMember.Account);
-            //ViewBag.UserName = 
             return View();
         }
 
-        [HttpGet]
-        public ActionResult Form()
-        {
-            if (!User.Identity.IsAuthenticated)
-                return RedirectToAction("Login", "Members");
-
-
-
-            return View();
-        }
     }
 }

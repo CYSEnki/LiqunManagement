@@ -14,7 +14,7 @@ namespace LiqunManagement.Models
 
         [Required]
         [StringLength(10)]
-        public string FormId { get; set; }
+        public string FormID { get; set; }
 
         [StringLength(10)]
         public string CaseId { get; set; }
@@ -50,10 +50,10 @@ namespace LiqunManagement.Models
         [StringLength(100)]
         public string useforelse { get; set; }
 
-        [StringLength(200)]
+        [StringLength(300)]
         public string taxfile_name { get; set; }
 
-        [StringLength(200)]
+        [StringLength(300)]
         public string taxfile_alias { get; set; }
 
         public int? rent { get; set; }
@@ -99,5 +99,18 @@ namespace LiqunManagement.Models
 
         [StringLength(100)]
         public string Accessory { get; set; }
+
+        public DateTime? CreateTime { get; set; }
+
+        [StringLength(50)]
+        public string CreateUser { get; set; }
+
+        public DateTime? UpdateTime { get; set; }
+
+        [StringLength(50)]
+        public string UpdateUser { get; set; }
+
+        [StringLength(300)]
+        public string Memo { get; set; }
     }
 }

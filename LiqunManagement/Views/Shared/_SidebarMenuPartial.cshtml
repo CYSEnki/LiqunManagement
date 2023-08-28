@@ -13,11 +13,11 @@
         <div class="info-card-text">
             <a href="#" class="d-flex align-items-center text-white">
                 <span class="text-truncate text-truncate-lg d-inline-block" style="font-size:30px;">
-                    徐羽東
+                    @ViewBag.UserName
                 </span>
             </a>
-            <span class="d-inline-block text-truncate text-truncate-sm" style="font-size:18px;">業務部</span>
-            <span class="d-inline-block text-truncate text-truncate-sm" style="font-size:18px;">業務經理</span>
+            <span class="d-inline-block text-truncate text-truncate-sm" style="font-size:18px;">@(ViewBag.Department == null ? "" : @ViewBag.Department)</span>
+            <span class="d-inline-block text-truncate text-truncate-sm" style="font-size:18px;">@(ViewBag.Position == null ? "" : @ViewBag.Position)</span>
             @*<span class="" style="font-size:18px;">業務部/業務經理</span>*@
         </div>
         @*<img src="../../img/card-backgrounds/cover-2-lg.png" class="cover" alt="cover">*@
@@ -30,21 +30,21 @@
     TIP: The menu items are not auto translated. You must have a residing lang file associated with the menu saved inside dist/media/data with reference to each 'data-i18n' attribute.
     -->
     <ul id="js-nav-menu" class="nav-menu">
-        <li>
-            <a href="#" title="Application Intel" data-filter-tags="application intel">
+        <li data-controller="Liqun">
+            <a href="@Url.Action("Index", "Liqun")" title="Application Intel" data-filter-tags="application intel">
                 <i class="fal fa-home"></i>
                 <span class="nav-link-text">首頁</span>
             </a>
         </li>
         <li class="nav-title" style="font-size:22px; margin-top:5px;">業務區</li>
-        @*<li>
+        <li data-controller="Form">
             <a href="@Url.Action("HomeObject", "Form")" title="Application Intel" data-filter-tags="application intel">
                 <i class="fal fa-edit"></i>
                 <span class="nav-link-text">新增表單</span>
             </a>
-        </li>*@
+        </li>
 
-        <li>
+        @*<li>
             <a href="#" title="Application Intel" data-filter-tags="application intel">
                 <i class="fal fa-edit"></i>
                 <span class="nav-link-text">新增表單</span>
@@ -71,8 +71,8 @@
                     </a>
                 </li>
             </ul>
-        </li>
-        <li>
+        </li>*@
+        <li data-controller="Case">
             <a href="#" title="Application Intel" data-filter-tags="application intel">
                 <i class="fal fa-th-list"></i>
                 <span class="nav-link-text">案件管理</span>
@@ -83,7 +83,7 @@
                         <span class="nav-link-text">案件追蹤表</span>
                     </a>
                 </li>
-                <li>
+                <li  data-branches="CaseManage">
                     <a href="@Url.Action("CaseManage", "Sales")" title="Introduction" data-filter-tags="application intel introduction">
                         <span class="nav-link-text">案件管理</span>
                     </a>
@@ -157,14 +157,14 @@
                 <span class="nav-link-text" data-i18n="nav.theme_settings">請假系統</span>
             </a>
         </li>
-        <li>
+        <li data-controller="MembersManage">
             <a href="#" title="Application Intel" data-filter-tags="application intel">
                 @*<i class="fal fa-user-cog"></i>*@
                 <i class="fal fa-user-cog"></i>
                 <span class="nav-link-text" data-i18n="nav.theme_settings">職員管理</span>
             </a>
             <ul>
-                <li>
+                <li data-branches="SetAccount">
                     <a href="@Url.Action("Register", "Members")" title="Introduction" data-filter-tags="application intel introduction">
                         <span class="nav-link-text" data-i18n="nav.theme_settings">帳號設定</span>
                     </a>
@@ -190,18 +190,18 @@
             </a>
         </li>
 
-        <li>
+        <li data-controller="Uploads">
             <a href="#" title="Application Intel" data-filter-tags="application intel">
                 <i class="fal fa-clipboard-list"></i>
                 <span class="nav-link-text">上傳資料</span>
             </a>
             <ul>
-                <li>
+                <li data-branches="UploadRegion">
                     <a href="@Url.Action("UploadRegion", "UpLoad")" title="Introduction" data-filter-tags="application intel introduction">
                         <span class="nav-link-text" data-i18n="nav.theme_settings">臺灣地址</span>
                     </a>
                 </li>
-                <li>
+                <li data-branches="UploadBank">
                     <a href="@Url.Action("UploadBank", "UpLoad")" title="Introduction" data-filter-tags="application intel introduction">
                         <span class="nav-link-text" data-i18n="nav.theme_settings">銀行代碼</span>
                     </a>

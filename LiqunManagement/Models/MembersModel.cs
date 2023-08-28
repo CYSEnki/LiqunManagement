@@ -12,10 +12,23 @@ namespace LiqunManagement.Models
         {
         }
 
+        public virtual DbSet<EmployeeData> EmployeeData { get; set; }
         public virtual DbSet<Members> Members { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<EmployeeData>()
+                .Property(e => e.Account)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<EmployeeData>()
+                .Property(e => e.CreateAccount)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<EmployeeData>()
+                .Property(e => e.UpdateAccount)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Members>()
                 .Property(e => e.Account)
                 .IsUnicode(false);

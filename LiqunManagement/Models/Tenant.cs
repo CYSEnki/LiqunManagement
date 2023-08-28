@@ -12,6 +12,9 @@ namespace LiqunManagement.Models
         [Key]
         public int TenantNo { get; set; }
 
+        [StringLength(10)]
+        public string FormID { get; set; }
+
         public int? TenantType { get; set; }
 
         [StringLength(200)]
@@ -26,7 +29,7 @@ namespace LiqunManagement.Models
         [StringLength(300)]
         public string sheetfile_Alias { get; set; }
 
-        [StringLength(20)]
+        [StringLength(50)]
         public string Name { get; set; }
 
         public int? Gender { get; set; }
@@ -60,6 +63,9 @@ namespace LiqunManagement.Models
         [StringLength(20)]
         public string BrancheNo { get; set; }
 
+        [StringLength(20)]
+        public string BankAccount { get; set; }
+
         [StringLength(50)]
         public string MemberArray { get; set; }
 
@@ -81,8 +87,8 @@ namespace LiqunManagement.Models
         [StringLength(200)]
         public string Family5 { get; set; }
 
-        [MaxLength(50)]
-        public byte[] Family6 { get; set; }
+        [StringLength(200)]
+        public string Family6 { get; set; }
 
         [StringLength(200)]
         public string Family7 { get; set; }
@@ -106,12 +112,25 @@ namespace LiqunManagement.Models
         public string Agent3 { get; set; }
 
         [StringLength(200)]
-        public string Gurantor1 { get; set; }
+        public string Guarantor1 { get; set; }
 
         [StringLength(200)]
-        public string Gurantor2 { get; set; }
+        public string Guarantor2 { get; set; }
 
         [StringLength(200)]
-        public string Gurantor3 { get; set; }
+        public string Guarantor3 { get; set; }
+
+        public DateTime? CreateTime { get; set; }
+
+        [StringLength(50)]
+        public string CreateUser { get; set; }
+
+        public DateTime? UpdateTime { get; set; }
+
+        [StringLength(50)]
+        public string UpdateUser { get; set; }
+
+        [StringLength(300)]
+        public string Memo { get; set; }
     }
 }

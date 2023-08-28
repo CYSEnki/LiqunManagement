@@ -349,7 +349,7 @@ function pageSetUp() {
 		runAllCharts();
 
 		// run form elements
-		runAllForms();
+		runObjectForms();
 
 	} else {
 
@@ -370,7 +370,7 @@ function pageSetUp() {
 		setup_widgets_mobile();
 
 		// run form elements
-		runAllForms();
+		runObjectForms();
 
 	}
 

@@ -27,5 +27,7 @@ namespace LiqunManagement.Models
         public string AuthCode { get; set; }
 
         public bool IsAdmin { get; set; }
+
+        public bool Status { get; set; }
     }
 }

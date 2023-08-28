@@ -1,6 +1,7 @@
 ﻿﻿
 @{
     ViewBag.Title = "表單四期";
+    ViewBag.Controller = "Form";
     Layout = "~/Views/Shared/smartadmin_Layout.cshtml";
 }
 <style>
@@ -106,7 +107,7 @@
                                         <div class="input-group-append">
                                             <span class="input-group-text">民國</span>
                                         </div>
-                                        <input type="number" class="form-control" min="10" max="130" id="birthdayYear_0" name="birthdayYear_0" required>
+                                        <input type="number" class="form-control" min="1" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" id="birthdayYear_0" name="birthdayYear_0" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">年</span>
                                         </div>
@@ -114,7 +115,7 @@
                                         <div class="input-group-append">
                                             <span class="input-group-text">月</span>
                                         </div>
-                                        <input type="number" class="form-control" min="1" max="31" id="birthdayDay_0" name="birthdayDay_0" required>
+                                        <input type="number" class="form-control birthdayDay" min="1" max="31" id="birthdayDay_0" name="birthdayDay_0" data-index="0" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">日</span>
                                         </div>
@@ -251,14 +252,14 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label" for="banknumber_0">帳號</label><label class="form-label" id="jqlengthalert" for="banknumber_0"></label>
+                                <label class="form-label" for="bankaccount_0">帳號</label><label class="form-label" id="jqlengthalert" for="bankaccount_0"></label>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">帳號</span><label class="form-label" id="jqlengthalert" for="banknumber"></label>
                                             </div>
-                                            <input type="text" id="banknumber_0" name="banknumber_0" class="form-control" required>
+                                            <input type="text" id="bankaccount_0" name="bankaccount_0" class="form-control" required>
                                             <div class="invalid-feedback" id="banknumberalert">
                                                 請填寫帳號
                                             </div>
@@ -275,7 +276,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox custom-control-inline">
-                                    <input type="checkbox" class="custom-control-input" id="agentCheckbox" name="agentCheckbox">
+                                    <input type="checkbox" class="custom-control-input" id="agentCheckbox" name="agentCheckbox" value="true">
                                     <label class="custom-control-label" for="agentCheckbox">代理人</label>
                                 </div>
                             </div>
@@ -315,7 +316,7 @@
                                         <div class="input-group-append">
                                             <span class="input-group-text">民國</span>
                                         </div>
-                                        <input type="number" class="form-control agentrequired" max="130" min="10" id="birthdayYear_11" name="birthdayYear_11">
+                                        <input type="number" class="form-control agentrequired" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_11" name="birthdayYear_11">
                                         <div class="input-group-append">
                                             <span class="input-group-text">年</span>
                                         </div>
@@ -440,7 +441,7 @@
                             <!--備註欄-->
                             <div class="form-group">
                                 <label class="form-label" for="example-textarea">備註</label>
-                                <textarea class="form-control" id="example-textarea" rows="5" style="height: 122px;"></textarea>
+                                <textarea class="form-control" id="momo" name="memo" rows="5" style="height: 122px;"></textarea>
                             </div>
                             <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row align-items-center">
                                 <div class="custom-control custom-checkbox">
@@ -450,7 +451,7 @@
                                         您必須選擇此區塊以確認完成填寫
                                     </div>
                                 </div>
-                                <button class="btn btn-primary ml-auto waves-effect waves-themed" type="submit">Submit form</button>
+                                <button class="btn btn-primary ml-auto waves-effect waves-themed" type="submit">送出</button>
                             </div>
                         }
                     </div>
@@ -493,7 +494,6 @@
                         }
                         else {
                             //打包房東生日
-
                             const Year = parseInt($("#birthdayYear_0").val()) + 1911;
                             var Month = $("#birthdayMonth_0").val();
                             var Day = $("#birthdayDay_0").val();
@@ -890,7 +890,7 @@
                     });
 
                     //設定帳號長度
-                    var inputbanknumberElement = document.getElementById('banknumber_0');
+                    var inputbanknumberElement = document.getElementById('bankaccount_0');
                     var alertelement = document.getElementById('banknumberalert');
                     var lengthalert = document.getElementById('jqlengthalert');
                     if (dataresult.lengthset.length === 0) {
@@ -981,11 +981,11 @@
                         // 根據不同的 id 做相應的處理
                         switch (radioId) {
                             case "jqCoOwnerRadio_0":
-                                $('.getco1').show();
-                                $('.getco2').show();
-                                $('.getco3').show();
-                                $('.getco4').show();
-                                $('.getco5').show();
+                                $('.getco1').hide();
+                                $('.getco2').hide();
+                                $('.getco3').hide();
+                                $('.getco4').hide();
+                                $('.getco5').hide();
                                 $('.CoInput_1').prop('required', false);
                                 $('.CoInput_2').prop('required', false);
                                 $('.CoInput_3').prop('required', false);
@@ -1105,13 +1105,16 @@
                     const inputValue = inputElement.value;
                     const dataIndex = inputElement.getAttribute('data-index');
                     if (inputValue == '1' || inputValue == '3' || inputValue == '5' || inputValue == '7' || inputValue == '8' || inputValue == '10' || inputValue == '12') {
-                        $('#birthdayDay_' + dataIndex).attr('max', 31); //設置最大值
+                        //$('#birthdayDay_' + dataIndex).attr('max', 31); //設置最大值
+                        $('.birthdayDay[data-index="' + dataIndex + '"]').attr('max', 31); //設置最大值
                     }
                     else if (inputValue == '2') {
-                        $('#birthdayDay_' + dataIndex).attr('max', 29); //設置最大值
+                        //$('#birthdayDay_' + dataIndex).attr('max', 29); //設置最大值
+                        $('.birthdayDay[data-index="' + dataIndex + '"]').attr('max', 29); //設置最大值
                     }
                     else {
-                        $('#birthdayDay_' + dataIndex).attr('max', 30); //設置最大值
+                        //$('#birthdayDay_' + dataIndex).attr('max', 30); //設置最大值
+                        $('.birthdayDay[data-index="' + dataIndex + '"]').attr('max', 30); //設置最大值
                     }
                     // 在这里执行你的其他操作
                 });

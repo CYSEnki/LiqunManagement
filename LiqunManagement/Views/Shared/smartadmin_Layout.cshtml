@@ -128,7 +128,7 @@
             document.getElementsByTagName('head')[0].appendChild(cssfile);
         }
         else if (themeSettings.themeURL && document.getElementById('mytheme')) {
-            console.log("%c取得樣式themeSettings.themeURL : >" + themeSettings.themeURL , "color: #9900ff");
+            console.log("%c取得樣式themeSettings.themeURL : >" + themeSettings.themeURL, "color: #9900ff");
             console.log("%cthemeSettings.themeURL: " + themeSettings.themeURL, "color: #148f32");
             document.getElementById('mytheme').href = themeSettings.themeURL;
             console.log("%c寫入資料", "color: #148f32");
@@ -160,39 +160,46 @@
         }
     </script>
     <!-- BEGIN Page Wrapper -->
-    <div class="page-wrapper">
-        <div class="page-inner">
-            @Html.Partial("_MainSidebarPartial")
-            <div class="page-content-wrapper">
-                <!-- BEGIN Page Header -->
-                @Html.Partial("_HeaderPartial")
-                <!-- END Page Header -->
-                <!-- BEGIN Page Content -->
-                <!-- the #js-page-content id is needed for some plugins to initialize -->
-                @RenderBody()
-                <!-- this overlay is activated only when mobile menu is triggered -->
-                <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div> <!-- END Page Content -->
-                <!-- this overlay is activated only when mobile menu is triggered -->
-                <!-- BEGIN Page Footer -->
-                @Html.Partial("_FooterPartial")
-                <!-- END Page Footer -->
-                <!-- BEGIN Shortcuts -->
-                @Html.Partial("_Shortcuts")
-                <!-- END Shortcuts -->
+    @if (ViewBag.Title != "登入")
+    {
+        <div class="page-wrapper">
+            <div class="page-inner">
+                @Html.Partial("_MainSidebarPartial")
+                <div class="page-content-wrapper">
+                    <!-- BEGIN Page Header -->
+                    @Html.Partial("_HeaderPartial")
+                    <!-- END Page Header -->
+                    <!-- BEGIN Page Content -->
+                    <!-- the #js-page-content id is needed for some plugins to initialize -->
+                    @RenderBody()
+                    <!-- this overlay is activated only when mobile menu is triggered -->
+                    <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div> <!-- END Page Content -->
+                    <!-- this overlay is activated only when mobile menu is triggered -->
+                    <!-- BEGIN Page Footer -->
+                    @Html.Partial("_FooterPartial")
+                    <!-- END Page Footer -->
+                    <!-- BEGIN Shortcuts -->
+                    @Html.Partial("_Shortcuts")
+                    <!-- END Shortcuts -->
+                </div>
             </div>
         </div>
-    </div>
-    <!-- END Page Wrapper -->
-    <!-- BEGIN Quick Menu -->
-    <!-- to add more items, please make sure to change the variable '$menu-items: number;' in your _page-components-shortcut.scss -->
-    @Html.Partial("_NavbarPartial")
-    <!-- END Quick Menu -->
-    <!-- BEGIN Messenger -->
-    @Html.Partial("_Messenger")
-    <!-- END Messenger -->
-    <!-- BEGIN Page Settings -->
-    @Html.Partial("_PageSettings")
-    <!-- END Page Settings -->
+        <!-- END Page Wrapper -->
+        <!-- BEGIN Quick Menu -->
+        <!-- to add more items, please make sure to change the variable '$menu-items: number;' in your _page-components-shortcut.scss -->
+        @Html.Partial("_NavbarPartial")
+        <!-- END Quick Menu -->
+        <!-- BEGIN Messenger -->
+        @Html.Partial("_Messenger")
+        <!-- END Messenger -->
+        <!-- BEGIN Page Settings -->
+        @Html.Partial("_PageSettings")
+        <!-- END Page Settings -->
+    }
+    else
+    {
+        @RenderBody()
+    }
 
 
     <script>
@@ -228,10 +235,46 @@
     @Scripts.Render("~/smartadmin/js")
     <!--This page contains the basic JS and CSS files to get started on your project. If you need aditional addon's or plugins please see scripts located at the bottom of each page in order to find out which JS/CSS files to add.-->
 
-    <script type="text/javascript">
+<script type="text/javascript">
         /* Activate smart panels */
         $('#js-page-content').smartPanel();
-    </script>
+    $(function () {
+            const Controller = '@ViewBag.Controller';
+            if (Controller != '') {
+                // 找到所有的 <li> 元素
+                var mainItems = document.querySelectorAll('li[data-controller]');
+
+                // 遍歷所有元素，根據 data-index 設置 "active"
+                mainItems.forEach(function (item) {
+                    var dataController = item.getAttribute('data-controller');
+
+                    if (dataController && dataController === Controller) {
+                        item.classList.add('active');
+                        item.classList.add('open');
+                    } else {
+                        item.classList.remove('active');
+                        item.classList.remove('open');
+                    }
+                });
+        }
+            const Action = '@ViewBag.Branches';
+            if (Action != '') {
+                // 找到所有的 <li> 元素
+                var branchesItems = document.querySelectorAll('li[data-branches]');
+
+                // 遍歷所有元素，根據 data-index 設置 "active"
+                branchesItems.forEach(function (item) {
+                    var dataBranches = item.getAttribute('data-branches');
+
+                    if (dataBranches && dataBranches === Action) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            }
+        });
+</script>
     @RenderSection("scripts", required: false)
 
 </body>

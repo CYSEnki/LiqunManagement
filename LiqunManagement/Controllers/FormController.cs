@@ -1,5 +1,7 @@
-﻿using LiqunManagement.Models;
+﻿using LiqunManagement.Attributes;
+using LiqunManagement.Models;
 using LiqunManagement.Services;
+using LiqunManagement.ViewModels;
 using Newtonsoft.Json;
 using NPOI.SS.Formula.Functions;
 using Org.BouncyCastle.Bcpg.Sig;
@@ -12,16 +14,57 @@ using System.Web.Mvc;
 
 namespace LiqunManagement.Controllers
 {
+    [AdminAuthorize]
     public class FormController : BaseController
     {
         // GET: Form
         public ActionResult Index()
         {
+            #region 使用者資料
+            var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
+                                join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
+                                from empdb0 in temp.DefaultIfEmpty()
+                                select new MembersViewModel
+                                {
+                                    Name = db.Name,
+                                    Department = empdb0 != null ? empdb0.Department : null,
+                                    Position = empdb0 != null ? empdb0.Position : null,
+                                }).FirstOrDefault();
+            if (EmployeeData != null)
+            {
+                ViewBag.UserName = EmployeeData.Name;                 //使用者名稱
+                ViewBag.Department = EmployeeData.Department;   //使用者部門
+                ViewBag.Position = EmployeeData.Position;       //使用者職位
+            }
+            //確認角色
+            var role = User.IsInRole("Admin");
+            //var role2 = User.IsInRole("User");
+            #endregion
             return View();
         }
         [HttpPost]
         public ActionResult Index(string Inline1Radio1, DateTime signdate, string Inline1Radio2, string Specialtext)
         {
+            #region 使用者資料
+            var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
+                                join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
+                                from empdb0 in temp.DefaultIfEmpty()
+                                select new MembersViewModel
+                                {
+                                    Name = db.Name,
+                                    Department = empdb0 != null ? empdb0.Department : null,
+                                    Position = empdb0 != null ? empdb0.Position : null,
+                                }).FirstOrDefault();
+            if (EmployeeData != null)
+            {
+                ViewBag.UserName = EmployeeData.Name;                 //使用者名稱
+                ViewBag.Department = EmployeeData.Department;   //使用者部門
+                ViewBag.Position = EmployeeData.Position;       //使用者職位
+            }
+            //確認角色
+            var role = User.IsInRole("Admin");
+            //var role2 = User.IsInRole("User");
+            #endregion
             if (ModelState.IsValid)
             {
                 return View();
@@ -35,6 +78,26 @@ namespace LiqunManagement.Controllers
         #region 房屋物件資料
         public ActionResult HomeObject()
         {
+            #region 使用者資料
+            var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
+                                join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
+                                from empdb0 in temp.DefaultIfEmpty()
+                                select new MembersViewModel
+                                {
+                                    Name = db.Name,
+                                    Department = empdb0 != null ? empdb0.Department : null,
+                                    Position = empdb0 != null ? empdb0.Position : null,
+                                }).FirstOrDefault();
+            if (EmployeeData != null)
+            {
+                ViewBag.UserName = EmployeeData.Name;                 //使用者名稱
+                ViewBag.Department = EmployeeData.Department;   //使用者部門
+                ViewBag.Position = EmployeeData.Position;       //使用者職位
+            }
+            //確認角色
+            var role = User.IsInRole("Admin");
+            //var role2 = User.IsInRole("User");
+            #endregion
             DDLServices ddlservices = new DDLServices();
             ViewBag.citylist = JsonConvert.SerializeObject(ddlservices.GetRegionDDL("").ddllist.ToList());
             List<int> payment_date = new List<int>();
@@ -86,16 +149,38 @@ namespace LiqunManagement.Controllers
             string memo                 //備註
             )
         {
+            #region 使用者資料
+            var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
+                                join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
+                                from empdb0 in temp.DefaultIfEmpty()
+                                select new MembersViewModel
+                                {
+                                    Name = db.Name,
+                                    Department = empdb0 != null ? empdb0.Department : null,
+                                    Position = empdb0 != null ? empdb0.Position : null,
+                                }).FirstOrDefault();
+            if (EmployeeData != null)
+            {
+                ViewBag.UserName = EmployeeData.Name;                 //使用者名稱
+                ViewBag.Department = EmployeeData.Department;   //使用者部門
+                ViewBag.Position = EmployeeData.Position;       //使用者職位
+            }
+            //確認角色
+            var role = User.IsInRole("Admin");
+            //var role2 = User.IsInRole("User");
+            #endregion
             var now = DateTime.Now;
+
+            var userid = User.Identity.Name;
+
             string newFormID = "LQ" + now.ToString("yy") + "000001";
-            var lastformid = formdb.ObjectForm.OrderByDescending(x => x.FormNo).Select(x => x.FormId).FirstOrDefault();
+            var lastformid = formdb.ObjectForm.OrderByDescending(x => x.FormNo).Select(x => x.FormID).FirstOrDefault();
             if (!String.IsNullOrEmpty(lastformid))
             {
                 var idIndex = Convert.ToInt32(lastformid.Substring(4));
                 newFormID = lastformid.Substring(0, 4) + (idIndex + 1).ToString("D6");
             }
 
-            var userid = "enkisu";
 
 
             int[] roomamountArray = new int[3];
@@ -150,10 +235,10 @@ namespace LiqunManagement.Controllers
                     var error = ex.ToString();
                 }
             }
-            #endregion
-
             string fileNames = JsonConvert.SerializeObject(fileNamesArray);
             string taxfile_alias = JsonConvert.SerializeObject(taxfile_aliasArray);
+            #endregion
+
 
             try
             {
@@ -166,7 +251,8 @@ namespace LiqunManagement.Controllers
                     // 建立要插入的資料物件
                     var newData = new HomeObject
                     {
-                        FormId = newFormID,
+                        FormID = newFormID,
+                        objecttype = Convert.ToInt32(objecttypeRadio),
                         notarization = Convert.ToInt32(notarizationRadio),
                         signdate = Signdate,
                         appraiser = Convert.ToInt32(appraiserRadio),
@@ -193,12 +279,18 @@ namespace LiqunManagement.Controllers
                         parktype = Convert.ToInt32(parktypeRadio),
                         parkfloor = jsonparkfloorArray,
                         carpositionnumber = carpositionnumber,
-                        carmonthrent = Convert.ToInt32(carmonthrent),
-                        carparkmanagefee = Convert.ToInt32(parkmanagementfee),
+                        carmonthrent = String.IsNullOrEmpty(carmonthrent) ? 0 : Convert.ToInt32(carmonthrent),
+                        carparkmanagefee = String.IsNullOrEmpty(parkmanagementfee) ? 0 : Convert.ToInt32(parkmanagementfee),
                         scooterpositionnumber = morpositionnumber,
-                        scootermonthrent = Convert.ToInt32(scootermonthrent),
-                        scootermanagefee = Convert.ToInt32(scootermanagementfee),
+                        scootermonthrent = String.IsNullOrEmpty(scootermonthrent) ? 0 : Convert.ToInt32(scootermonthrent),
+                        scootermanagefee = String.IsNullOrEmpty(scootermanagementfee) ? 0 : Convert.ToInt32(scootermanagementfee),
                         Accessory = JsonHomeObjectAccessory,
+
+                        CreateUser = userid,
+                        CreateTime = now,
+                        UpdateUser = userid,
+                        UpdateTime = now,
+                        Memo = memo,
                     };
                     // 使用資料上下文插入資料物件
                     context.HomeObject.Add(newData);
@@ -212,13 +304,13 @@ namespace LiqunManagement.Controllers
                     // 建立要插入的資料物件
                     var newData = new ObjectForm
                     {
-                        FormId = newFormID,
+                        FormID = newFormID,
                         CreateAccount = userid,
                         CreateTime = now,
                         UpdateAccount = userid,
                         UpdateTime = now,
                         ProcessAccount = userid,
-                        ProcessName = "蘇家潁",
+                        ProcessName = EmployeeData.Name,
                         FormType = 0,
                     };
                     // 使用資料上下文插入資料物件
@@ -232,20 +324,6 @@ namespace LiqunManagement.Controllers
             {
                 var error = ex.ToString();
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             return RedirectToAction("HomeObject", "Form");
         }
         #endregion
@@ -254,6 +332,26 @@ namespace LiqunManagement.Controllers
         [HttpGet]
         public ActionResult Landlord(string FormID)
         {
+            #region 使用者資料
+            var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
+                                join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
+                                from empdb0 in temp.DefaultIfEmpty()
+                                select new MembersViewModel
+                                {
+                                    Name = db.Name,
+                                    Department = empdb0 != null ? empdb0.Department : null,
+                                    Position = empdb0 != null ? empdb0.Position : null,
+                                }).FirstOrDefault();
+            if (EmployeeData != null)
+            {
+                ViewBag.UserName = EmployeeData.Name;                 //使用者名稱
+                ViewBag.Department = EmployeeData.Department;   //使用者部門
+                ViewBag.Position = EmployeeData.Position;       //使用者職位
+            }
+            //確認角色
+            var role = User.IsInRole("Admin");
+            //var role2 = User.IsInRole("User");
+            #endregion
             ViewBag.FormID = FormID != null ? FormID : "";
             DDLServices ddlservices = new DDLServices();
             ViewBag.citylist = JsonConvert.SerializeObject(ddlservices.GetRegionDDL("").ddllist.ToList());
@@ -265,7 +363,7 @@ namespace LiqunManagement.Controllers
                 payment_date.Add(i);
             }
             ViewBag.Payment_date = payment_date;
-            var Form = formdb.LandLord.Where(x => x.FormId == FormID).FirstOrDefault();
+            var Form = formdb.LandLord.Where(x => x.FormID == FormID).FirstOrDefault();
             if(Form != null)
             {
                 return RedirectToAction("CaseManage", "Sales");
@@ -291,6 +389,7 @@ namespace LiqunManagement.Controllers
             string detailcontact_0,         //房東詳細通訊地址
             string bank_0,                  //房東銀行
             string bankbranche_0,           //房東銀行支部
+            string bankaccount_0,           //房東銀行帳號
 
             //共有人(Json格式)
             string CoOwnerRadio,
@@ -301,21 +400,35 @@ namespace LiqunManagement.Controllers
             string CoOwnerInput5,
 
             //代理人(Json格式)
-            string AgentInput
-            //bool? agentCheckbox,            //代理人Chcekbox
-            //string Name_11,                 //代理人姓名
-            //string genderRadio_11,          //代理人性別(男:1; 女:0)
-            //string birthday_11,             //代理人生日
-            //string IDNumber_11,             //代理人身分證
-            //string Phone_11,                //代理人電話
-            //string addressroad_11,          //代理人地址(路)
-            //string detailaddress_11,        //代理人詳細地址  
-            //bool? sameaddress_check_11,     //代理人通訊地址Checkbox
-            //string contactroad_11,          //代理人通訊地址(路)
-            //string detailcontact_11,        //代理人詳細通訊地址
+            bool? agentCheckbox,
+            string AgentInput,
+
+            string memo
             )
         {
-            if(FormID == null)
+            #region 使用者資料
+            var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
+                                join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
+                                from empdb0 in temp.DefaultIfEmpty()
+                                select new MembersViewModel
+                                {
+                                    Name = db.Name,
+                                    Department = empdb0 != null ? empdb0.Department : null,
+                                    Position = empdb0 != null ? empdb0.Position : null,
+                                }).FirstOrDefault();
+            if (EmployeeData != null)
+            {
+                ViewBag.UserName = EmployeeData.Name;                 //使用者名稱
+                ViewBag.Department = EmployeeData.Department;   //使用者部門
+                ViewBag.Position = EmployeeData.Position;       //使用者職位
+            }
+            //確認角色
+            var role = User.IsInRole("Admin");
+            //var role2 = User.IsInRole("User");
+            #endregion
+            var now = DateTime.Now;
+            var userid = "enkisu";
+            if (String.IsNullOrEmpty(FormID))
             {
                 return View();
             }
@@ -324,6 +437,13 @@ namespace LiqunManagement.Controllers
                 contactroad_0 = addressroad_0;
                 detailcontact_0 = detailaddress_0;
             }
+
+            //成員陣列[共有人, 代理人]
+            int[] memberArray = new int[2];
+            memberArray[0] = Convert.ToInt32(CoOwnerRadio);
+            memberArray[1] = agentCheckbox != null ? 1: 0;
+            string jsonmemberArray = JsonConvert.SerializeObject(memberArray);
+
             try
             {
                 // 建立資料上下文（Data Context）
@@ -332,7 +452,7 @@ namespace LiqunManagement.Controllers
                     // 建立要插入的資料物件
                     var newData = new LandLord
                     {
-                        FormId = FormID,
+                        FormID = FormID,
                         Name = Name_0,
                         Gender = Convert.ToInt32(genderRadio_0),
                         Birthday = Convert.ToDateTime(birthday_0),
@@ -340,20 +460,24 @@ namespace LiqunManagement.Controllers
                         Phone = Phone_0,
                         BankNo = bank_0,
                         BrancheNo = bankbranche_0,
+                        BankAccount = bankaccount_0,
                         RoadCode = addressroad_0,
                         detailaddress = detailaddress_0,
                         RoadCodeContact = contactroad_0,
                         detailaddressContact = detailcontact_0,
+                        MemberArray = jsonmemberArray,
                         CoOwner1 = CoOwnerInput1,
                         CoOwner2 = CoOwnerInput2,
                         CoOwner3 = CoOwnerInput3,
                         CoOwner4 = CoOwnerInput4,
                         CoOwner5 = CoOwnerInput5,
                         Agent = AgentInput,
-                        CreateTime = DateTime.Now,
-                        CreateUser = "Enkisu",
-                        UpdateTime = DateTime.Now,
-                        UpdateUser = "Enkisu",
+
+                        CreateUser = userid,
+                        CreateTime = now,
+                        UpdateUser = userid,
+                        UpdateTime = now,
+                        Memo = memo,
                     };
                     // 使用資料上下文插入資料物件
                     context.LandLord.Add(newData);
@@ -367,17 +491,44 @@ namespace LiqunManagement.Controllers
                 return RedirectToAction("Landlord", "Form", new {FormID = FormID});
             }
 
-            return View();
+            return RedirectToAction("CaseManage", "Sales");
         }
         #endregion
 
         #region 房客資料
-        public ActionResult Tenant()
+        public ActionResult Tenant(string FormID)
         {
+            #region 使用者資料
+            var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
+                                join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
+                                from empdb0 in temp.DefaultIfEmpty()
+                                select new MembersViewModel
+                                {
+                                    Name = db.Name,
+                                    Department = empdb0 != null ? empdb0.Department : null,
+                                    Position = empdb0 != null ? empdb0.Position : null,
+                                }).FirstOrDefault();
+            if (EmployeeData != null)
+            {
+                ViewBag.UserName = EmployeeData.Name;                 //使用者名稱
+                ViewBag.Department = EmployeeData.Department;   //使用者部門
+                ViewBag.Position = EmployeeData.Position;       //使用者職位
+            }
+            //確認角色
+            var role = User.IsInRole("Admin");
+            //var role2 = User.IsInRole("User");
+            #endregion
+            ViewBag.FormID = FormID != null ? FormID : "";
             DDLServices ddlservices = new DDLServices();
             ViewBag.citylist = JsonConvert.SerializeObject(ddlservices.GetRegionDDL("").ddllist.ToList());
             ViewBag.banklist = JsonConvert.SerializeObject(ddlservices.GetBankDDL("", "bank").ddllist.ToList());
 
+            //房客資料是否已填寫過
+            var Form = formdb.Tenant.Where(x => x.FormID == FormID).FirstOrDefault();
+            if (Form != null)
+            {
+                return RedirectToAction("CaseManage", "Sales");
+            }
             List<int> payment_date = new List<int>();
             for (int i = 1; i < 32; i++)
             {
@@ -407,24 +558,228 @@ namespace LiqunManagement.Controllers
             string accountnumber,           //房客戶號
             string bank_0,                  //房客銀行
             string bankbranche_0,           //房客銀行支部
+            string bankaccount_0,           //房東銀行帳號
 
-            //共有人(Json格式)
-            string CoOwnerRadio,
-            string CoOwnerInput1,
-            string CoOwnerInput2,
-            string CoOwnerInput3,
-            string CoOwnerInput4,
-            string CoOwnerInput5
+            //配偶
+            bool? couplecheck_1,            //丈夫
+            bool? couplecheck_0,            //妻子
+            string coupleName,              //配偶姓名
+            string birthday_couple,         //配偶生日
+            string separatenumber,          //分戶戶號(非必填)
+
+            //直系親屬(Json格式)
+            string directCount,             //親屬人數
+            string DirectInput1,
+            string DirectInput2,
+            string DirectInput3,
+            string DirectInput4,
+            string DirectInput5,
+            string DirectInput6,
+            string DirectInput7,
+            string DirectInput8,
+            string DirectInput9,
+            string DirectInput10,
+
+            //代理人(Json格式)
+            string AgentRadio,
+            string AgentInput11,
+            string AgentInput12,
+            string AgentInput13,
+
+            //保證人(Json格式)
+            string GuarantorRadio,
+            string GuarantorInput21,
+            string GuarantorInput22,
+            string GuarantorInput23,
+
+            string memo
             )
         {
-            if (ModelState.IsValid)
+            #region 使用者資料
+            var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
+                                join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
+                                from empdb0 in temp.DefaultIfEmpty()
+                                select new MembersViewModel
+                                {
+                                    Name = db.Name,
+                                    Department = empdb0 != null ? empdb0.Department : null,
+                                    Position = empdb0 != null ? empdb0.Position : null,
+                                }).FirstOrDefault();
+            if (EmployeeData != null)
             {
-                return RedirectToAction("Tenant", "Form");
+                ViewBag.UserName = EmployeeData.Name;                 //使用者名稱
+                ViewBag.Department = EmployeeData.Department;   //使用者部門
+                ViewBag.Position = EmployeeData.Position;       //使用者職位
             }
-            else
+            //確認角色
+            var role = User.IsInRole("Admin");
+            //var role2 = User.IsInRole("User");
+            #endregion
+            var now = DateTime.Now;
+            var userid = "enkisu";
+
+            if (String.IsNullOrEmpty(FormID))
             {
-                return RedirectToAction("Tenant", "Memebers");
+                return View();
             }
+            if (sameaddress_check_0 != null)
+            {
+                contactroad_0 = addressroad_0;
+                detailcontact_0 = detailaddress_0;
+            }
+
+            #region 存檔(弱勢戶)
+            //取得檔名與檔案GUID
+            List<string> vulnerablefileNameArray = new List<string>();
+            List<string> vulnerablefileAliasArray = new List<string>();
+            //存檔
+            if (vulnerablefile != null && vulnerablefile.Any())
+            {
+                try
+                {
+                    foreach (var file in vulnerablefile)
+                    {
+                        if (file != null && file.ContentLength > 0)
+                        {
+                            string name = Path.GetFileName(file.FileName);
+                            vulnerablefileNameArray.Add(name);
+                            string alias = Guid.NewGuid().ToString() + Path.GetExtension(name);
+                            vulnerablefileAliasArray.Add(alias);
+
+                            string path = Path.Combine(Server.MapPath("~/Uploads/TaxFile"), alias);
+                            file.SaveAs(path);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var error = ex.ToString();
+                }
+            }
+            string vulnerablefileNames = JsonConvert.SerializeObject(vulnerablefileNameArray);
+            string vulnerablefileAlias = JsonConvert.SerializeObject(vulnerablefileAliasArray);
+            #endregion
+            
+            #region 存檔(300E)
+            //取得檔名與檔案GUID
+            List<string> sheetfileNameArray = new List<string>();
+            List<string> sheetfileAliasArray = new List<string>();
+            //存檔
+            if (vulnerablefile != null && vulnerablefile.Any())
+            {
+                try
+                {
+                    foreach (var file in vulnerablefile)
+                    {
+                        if (file != null && file.ContentLength > 0)
+                        {
+                            string name = Path.GetFileName(file.FileName);
+                            sheetfileNameArray.Add(name);
+                            string alias = Guid.NewGuid().ToString() + Path.GetExtension(name);
+                            sheetfileAliasArray.Add(alias);
+
+                            string path = Path.Combine(Server.MapPath("~/Uploads/TaxFile"), alias);
+                            file.SaveAs(path);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var error = ex.ToString();
+                }
+            }
+            string sheetfileNames = JsonConvert.SerializeObject(sheetfileNameArray);
+            string sheetfileAlias = JsonConvert.SerializeObject(sheetfileAliasArray);
+            #endregion
+
+
+            //成員陣列[配偶, 直系, 代理人, 保證人]
+            var coupletype = couplecheck_1 != null ? 1 : couplecheck_0 == null ? 0 : -1;    //-1:無; 1:丈夫; 0:妻子;
+            int[] memberArray = new int[4];
+            memberArray[0] = coupletype;
+            memberArray[1] = Convert.ToInt32(directCount);
+            memberArray[2] = Convert.ToInt32(AgentRadio);
+            memberArray[3] = Convert.ToInt32(GuarantorRadio);
+            string jsonmemberArray = JsonConvert.SerializeObject(memberArray);
+
+            //打包配偶資料陣列[配偶類別, 配偶姓名, 配偶生日, 分戶戶號(非必填)]
+            List<string> coupleArray = new List<string>();
+
+            if (coupletype != -1)
+            {
+                coupleArray.Add(coupletype.ToString());
+                coupleArray.Add(coupleName);
+                coupleArray.Add(birthday_couple);
+                coupleArray.Add(String.IsNullOrEmpty(separatenumber) ? "" : separatenumber);
+            }
+            string jsoncoupleArray = JsonConvert.SerializeObject(coupleArray);
+
+
+            try
+            {
+                // 建立資料上下文（Data Context）
+                using (var context = new FormModels())
+                {
+                    // 建立要插入的資料物件
+                    var newData = new Tenant
+                    {
+                        FormID = FormID,
+                        TenantType = Convert.ToInt32(typeRadio),
+                        vulnerablefile_Name = vulnerablefileNames,
+                        vulnerablefile_Alias = vulnerablefileAlias,
+                        sheetfile_Name = sheetfileNames,
+                        sheetfile_Alias = sheetfileAlias,
+                        Name = Name_0,
+                        Gender = Convert.ToInt32(genderRadio_0),
+                        Birthday = Convert.ToDateTime(birthday_0),
+                        IDNumber = IDNumber_0,
+                        Phone = Phone_0,
+                        BankNo = bank_0,
+                        BrancheNo = bankbranche_0,
+                        BankAccount = bankaccount_0,
+                        RoadCode = addressroad_0,
+                        accountNo = accountnumber,
+                        detailaddress = detailaddress_0,
+                        RoadCodeContact = contactroad_0,
+                        detailaddressContact = detailcontact_0,
+                        MemberArray = jsonmemberArray,
+                        Couple = jsoncoupleArray,
+                        Family1 = DirectInput1,
+                        Family2 = DirectInput2,
+                        Family3 = DirectInput3,
+                        Family4 = DirectInput4,
+                        Family5 = DirectInput5,
+                        Family6 = DirectInput6,
+                        Family7 = DirectInput7,
+                        Family8 = DirectInput8,
+                        Family9 = DirectInput9,
+                        Family10 = DirectInput10,
+                        Agent1 = AgentInput11,
+                        Agent2 = AgentInput12,
+                        Agent3 = AgentInput13,
+                        Guarantor1 = GuarantorInput21,
+                        Guarantor2 = GuarantorInput22,
+                        Guarantor3 = GuarantorInput23,
+
+                        CreateUser = userid,
+                        CreateTime = now,
+                        UpdateUser = userid,
+                        UpdateTime = now,
+                        Memo = memo,
+                    };
+                    // 使用資料上下文插入資料物件
+                    context.Tenant.Add(newData);
+                    // 儲存更改到資料庫
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                var error = ex.ToString();
+                return RedirectToAction("Tenant", "Form", new { FormID = FormID });
+            }
+
+            return RedirectToAction("CaseManage", "Sales");
         }
         #endregion
 
@@ -432,6 +787,26 @@ namespace LiqunManagement.Controllers
         [HttpGet]
         public ActionResult Secretary()
         {
+            #region 使用者資料
+            var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
+                                join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
+                                from empdb0 in temp.DefaultIfEmpty()
+                                select new MembersViewModel
+                                {
+                                    Name = db.Name,
+                                    Department = empdb0 != null ? empdb0.Department : null,
+                                    Position = empdb0 != null ? empdb0.Position : null,
+                                }).FirstOrDefault();
+            if (EmployeeData != null)
+            {
+                ViewBag.UserName = EmployeeData.Name;                 //使用者名稱
+                ViewBag.Department = EmployeeData.Department;   //使用者部門
+                ViewBag.Position = EmployeeData.Position;       //使用者職位
+            }
+            //確認角色
+            var role = User.IsInRole("Admin");
+            //var role2 = User.IsInRole("User");
+            #endregion
             return View();
         }
         [HttpPost]
@@ -449,6 +824,26 @@ namespace LiqunManagement.Controllers
             HttpPostedFileBase PowerFile
             )
         {
+            #region 使用者資料
+            var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
+                               join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
+                               from empdb0 in temp.DefaultIfEmpty()
+                               select new MembersViewModel
+                               {
+                                   Name = db.Name,
+                                   Department = empdb0 != null ? empdb0.Department : null,
+                                   Position = empdb0 != null ? empdb0.Position : null,
+                               }).FirstOrDefault();
+            if (EmployeeData != null)
+            {
+                ViewBag.UserName = EmployeeData.Name;                 //使用者名稱
+                ViewBag.Department = EmployeeData.Department;   //使用者部門
+                ViewBag.Position = EmployeeData.Position;       //使用者職位
+            }
+            //確認角色
+            var role = User.IsInRole("Admin");
+            //var role2 = User.IsInRole("User");
+            #endregion
             DDLServices ddlservices = new DDLServices();
             ViewBag.citylist = JsonConvert.SerializeObject(ddlservices.GetRegionDDL("").ddllist.ToList());
             List<int> payment_date = new List<int>();

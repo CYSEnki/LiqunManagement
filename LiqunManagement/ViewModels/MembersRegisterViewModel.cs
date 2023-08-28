@@ -4,12 +4,17 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Collections.Generic;
 
 namespace LiqunManagement.ViewModels
 {
     public class MemberRegisterViewModel
     {
+        //public IE<MembersViewModel> MembersList { get; set; }
+
+        public IEnumerable<MembersViewModel> MemberList { get; set; }
         public MembersViewModel newMember { get; set; }
+        public EmployeeData  employeeDatamodel { get; set; }
 
         [DisplayName("密碼")]
         [Required(ErrorMessage = "請輸入密碼")]

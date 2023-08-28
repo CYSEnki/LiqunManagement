@@ -38,7 +38,7 @@ namespace LiqunManagement.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<HomeObject>()
-                .Property(e => e.FormId)
+                .Property(e => e.FormID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<HomeObject>()
@@ -70,7 +70,7 @@ namespace LiqunManagement.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<LandLord>()
-                .Property(e => e.FormId)
+                .Property(e => e.FormID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<LandLord>()
@@ -90,6 +90,10 @@ namespace LiqunManagement.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<LandLord>()
+                .Property(e => e.BankAccount)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<LandLord>()
                 .Property(e => e.RoadCode)
                 .IsUnicode(false);
 
@@ -102,7 +106,7 @@ namespace LiqunManagement.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<ObjectForm>()
-                .Property(e => e.FormId)
+                .Property(e => e.FormID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ObjectForm>()
@@ -130,15 +134,15 @@ namespace LiqunManagement.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Tenant>()
+                .Property(e => e.FormID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Tenant>()
                 .Property(e => e.vulnerablefile_Alias)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Tenant>()
                 .Property(e => e.sheetfile_Alias)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Tenant>()
-                .Property(e => e.Name)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Tenant>()
@@ -167,6 +171,10 @@ namespace LiqunManagement.Models
 
             modelBuilder.Entity<Tenant>()
                 .Property(e => e.BrancheNo)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Tenant>()
+                .Property(e => e.BankAccount)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Tenant>()

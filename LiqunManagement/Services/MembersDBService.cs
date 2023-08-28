@@ -28,6 +28,7 @@ namespace LiqunManagement.Services
                 //Email = newMember.Email,          //不須驗證
                 //AuthCode = newMember.AuthCode,    //不須驗證
                 IsAdmin = newMember.IsAdmin,
+                Status = true,
             };
 
             Memberdb.Members.Add(user);

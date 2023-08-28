@@ -13,7 +13,7 @@ namespace LiqunManagement.Models
         public int LandlordNo { get; set; }
 
         [StringLength(10)]
-        public string FormId { get; set; }
+        public string FormID { get; set; }
 
         [StringLength(20)]
         public string Name { get; set; }
@@ -33,6 +33,9 @@ namespace LiqunManagement.Models
 
         [StringLength(20)]
         public string BrancheNo { get; set; }
+
+        [StringLength(20)]
+        public string BankAccount { get; set; }
 
         [StringLength(10)]
         public string RoadCode { get; set; }
@@ -76,5 +79,8 @@ namespace LiqunManagement.Models
 
         [StringLength(50)]
         public string UpdateUser { get; set; }
+
+        [StringLength(300)]
+        public string Memo { get; set; }
     }
 }

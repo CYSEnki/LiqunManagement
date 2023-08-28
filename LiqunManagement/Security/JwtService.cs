@@ -15,9 +15,9 @@ namespace LiqunManagement.Security
         {
             JwtObject jwtobject = new JwtObject
             {
-                Account = Account,
-                Role = Role,
-                Expire = DateTime.Now.AddMinutes(Convert.ToInt32(WebConfigurationManager.AppSettings["ExpireMinutes"])).ToString(),
+                Account = Account,  //帳號
+                Role = Role,        //帳號角色
+                Expire = DateTime.Now.AddMinutes(Convert.ToInt32(WebConfigurationManager.AppSettings["ExpireMinutes"])).ToString(),     //取得有限時間
             };
             //從Web.Config取得密鑰
             string SecretKey = WebConfigurationManager.AppSettings["SecretKey"].ToString();
