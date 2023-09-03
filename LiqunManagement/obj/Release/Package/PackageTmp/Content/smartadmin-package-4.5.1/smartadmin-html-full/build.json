@@ -1,21 +1,21 @@
 {
 	"config": {
 		"debug": false,
-		"data" : {
+		"data": {
 			"app": "SmartAdmin",
 			"app-name": "SmartAdmin WebApp",
 			"app-flavor": "SmartAdmin WebApp",
 			"app-flavor-subscript": "",
 			"user": "Dr. Codex Lantern",
-			"email": "drlantern@gotbootstrap.com",
+			"email": "drlantern@enkidevelopment.com",
 			"twitter": "codexlantern",
 			"avatar": "avatar-admin.png",
 			"version": "4.5.1",
 			"bs4v": "4.5",
 			"logo": "logo.png",
 			"logo-m": "logo.png",
-			"copyright": "2020 © SmartAdmin by&nbsp;<a href='https://www.gotbootstrap.com' class='text-primary fw-500' title='gotbootstrap.com' target='_blank'>gotbootstrap.com</a>",
-			"copyright-inverse": "2020 © SmartAdmin by&nbsp;<a href='https://www.gotbootstrap.com' class='text-white opacity-40 fw-500' title='gotbootstrap.com' target='_blank'>gotbootstrap.com</a>",
+			"copyright": "2023 © LiqunManagement by&nbsp;<a href='#' class='text-primary fw-500' title='enkidevelopment.com' target='_blank'>enkidevelopment.com</a>",
+			"copyright-inverse": "2023 © LiqunManagement by&nbsp;<a href='#' class='text-white opacity-40 fw-500' title='enkidevelopment.com' target='_blank'>enkidevelopment.com</a>",
 			"iconPrefix": "fal",
 			"layoutSettings": true,
 			"chatInterface": true,

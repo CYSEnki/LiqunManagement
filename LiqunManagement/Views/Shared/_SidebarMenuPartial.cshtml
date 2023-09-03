@@ -79,17 +79,17 @@
             </a>
             <ul>
                 <li>
-                    <a href="@Url.Action("Track", "Case")" title="Introduction" data-filter-tags="application intel introduction">
+                    <a href="@Url.Action("Track", "Case")" title="Track" data-filter-tags="application intel introduction">
                         <span class="nav-link-text">案件追蹤表</span>
                     </a>
                 </li>
                 <li  data-branches="CaseManage">
-                    <a href="@Url.Action("CaseManage", "Sales")" title="Introduction" data-filter-tags="application intel introduction">
+                    <a href="@Url.Action("CaseManage", "Sales")" title="CaseManage" data-filter-tags="application intel introduction">
                         <span class="nav-link-text">案件管理</span>
                     </a>
                 </li>
                 <li>
-                    <a href="@Url.Action("Process", "Case")" title="Introduction" data-filter-tags="application intel introduction">
+                    <a href="@Url.Action("Process", "Case")" title="Process" data-filter-tags="application intel introduction">
                         <span class="nav-link-text">待結案區</span>
                     </a>
                 </li>
@@ -108,42 +108,42 @@
             </a>
             <ul>
                 <li>
-                    <a href="@Url.Action("Track", "Case")" title="Introduction" data-filter-tags="application intel introduction">
+                    <a href="@Url.Action("Track", "Case")" title="Track" data-filter-tags="application intel introduction">
                         <span class="nav-link-text" data-i18n="nav.theme_settings">審查案件</span>
                     </a>
                 </li>
                 <li>
-                    <a href="@Url.Action("Manage", "Case")" title="Introduction" data-filter-tags="application intel introduction">
+                    <a href="@Url.Action("Manage", "Case")" title="Manage" data-filter-tags="application intel introduction">
                         <span class="nav-link-text" data-i18n="nav.theme_settings">新增續約</span>
                     </a>
                 </li>
                 <li>
-                    <a href="@Url.Action("Process", "Case")" title="Introduction" data-filter-tags="application intel introduction">
+                    <a href="@Url.Action("Process", "Case")" title="Process" data-filter-tags="application intel introduction">
                         <span class="nav-link-text" data-i18n="nav.theme_settings">總表</span>
                     </a>
                 </li>
                 <li>
-                    <a href="@Url.Action("Search", "Case")" title="Privacy" data-filter-tags="application intel privacy">
+                    <a href="@Url.Action("Search", "Case")" title="Search" data-filter-tags="application intel privacy">
                         <span class="nav-link-text" data-i18n="nav.theme_settings">新增修繕</span>
                     </a>
                 </li>
                 <li>
-                    <a href="@Url.Action("Search", "Case")" title="Privacy" data-filter-tags="application intel privacy">
+                    <a href="@Url.Action("Search", "Case")" title="Search" data-filter-tags="application intel privacy">
                         <span class="nav-link-text" data-i18n="nav.theme_settings">經費控管表</span>
                     </a>
                 </li>
                 <li>
-                    <a href="@Url.Action("Search", "Case")" title="Privacy" data-filter-tags="application intel privacy">
+                    <a href="@Url.Action("Search", "Case")" title="Search" data-filter-tags="application intel privacy">
                         <span class="nav-link-text" data-i18n="nav.theme_settings">新增週報</span>
                     </a>
                 </li>
                 <li>
-                    <a href="@Url.Action("Search", "Case")" title="Privacy" data-filter-tags="application intel privacy">
+                    <a href="@Url.Action("Search", "Case")" title="Search" data-filter-tags="application intel privacy">
                         <span class="nav-link-text" data-i18n="nav.theme_settings">新增月報</span>
                     </a>
                 </li>
                 <li>
-                    <a href="@Url.Action("Search", "Case")" title="Privacy" data-filter-tags="application intel privacy">
+                    <a href="@Url.Action("Search", "Case")" title="Search" data-filter-tags="application intel privacy">
                         <span class="nav-link-text" data-i18n="nav.theme_settings">客訴追蹤表</span>
                     </a>
                 </li>
@@ -165,8 +165,13 @@
             </a>
             <ul>
                 <li data-branches="SetAccount">
-                    <a href="@Url.Action("Register", "Members")" title="Introduction" data-filter-tags="application intel introduction">
+                    <a href="@Url.Action("Register", "Members")" title="Register" data-filter-tags="application intel introduction">
                         <span class="nav-link-text" data-i18n="nav.theme_settings">帳號設定</span>
+                    </a>
+                </li>
+                <li data-branches="SetDepartment">
+                    <a href="@Url.Action("DeptManage", "Members")" title="DeptManage" data-filter-tags="application intel introduction">
+                        <span class="nav-link-text" data-i18n="nav.theme_settings">部門管理</span>
                     </a>
                 </li>
             </ul>
@@ -184,7 +189,7 @@
             </a>
         </li>
         <li>
-            <a href="@Url.Action("Track", "Case")" title="Introduction" data-filter-tags="application intel introduction">
+            <a href="@Url.Action("Track", "Case")" title="Track" data-filter-tags="application intel introduction">
                 <i class="fal fa-history"></i>
                 <span class="nav-link-text" data-i18n="nav.theme_settings">修改紀錄</span>
             </a>
@@ -197,12 +202,12 @@
             </a>
             <ul>
                 <li data-branches="UploadRegion">
-                    <a href="@Url.Action("UploadRegion", "UpLoad")" title="Introduction" data-filter-tags="application intel introduction">
+                    <a href="@Url.Action("UploadRegion", "UpLoad")" title="UploadRegion" data-filter-tags="application intel introduction">
                         <span class="nav-link-text" data-i18n="nav.theme_settings">臺灣地址</span>
                     </a>
                 </li>
                 <li data-branches="UploadBank">
-                    <a href="@Url.Action("UploadBank", "UpLoad")" title="Introduction" data-filter-tags="application intel introduction">
+                    <a href="@Url.Action("UploadBank", "UpLoad")" title="UploadBank" data-filter-tags="application intel introduction">
                         <span class="nav-link-text" data-i18n="nav.theme_settings">銀行代碼</span>
                     </a>
                 </li>

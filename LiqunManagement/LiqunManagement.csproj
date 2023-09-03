@@ -161,6 +161,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Department.cs" />
     <Compile Include="Models\EmployeeData.cs" />
     <Compile Include="Models\ObjectForm.cs" />
     <Compile Include="Models\Bank.cs" />
@@ -2089,6 +2090,7 @@
     <Content Include="Views\Form\_TenantDirectfamily.cshtml" />
     <Content Include="Views\Form\_TenantGuarantor.cshtml" />
     <Content Include="Views\Sales\CaseManage.cshtml" />
+    <Content Include="Views\Members\DeptManage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

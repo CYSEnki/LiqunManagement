@@ -22,11 +22,13 @@ namespace LiqunManagement.Controllers
             var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
                                 join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
                                 from empdb0 in temp.DefaultIfEmpty()
+                                join deptdb in memberdb.Department on empdb0.DivCode equals deptdb.DivCode into temp2
+                                from deptdb0 in temp2.DefaultIfEmpty()
                                 select new MembersViewModel
                                 {
                                     Name = db.Name,
-                                    Department = empdb0 != null ? empdb0.Department : null,
-                                    Position = empdb0 != null ? empdb0.Position : null,
+                                    Department = empdb0 != null ? deptdb0.DivFullName : null,
+                                    Position = empdb0 != null ? empdb0.JobTitle : null,
                                 }).FirstOrDefault();
             if (EmployeeData != null)
             {

@@ -983,9 +983,12 @@
                     // 檢查是否被點選
                     if ($(this).is(':checked')) {
                         switch (radioId) {
+                            case 'typeRadio_0' :
+                            case 'typeRadio_1' :
+                            case 'typeRadio_2' :
                             case 'typeRadio_3' :
                             case 'typeRadio_4' :
-                            case 'typeRadio_5':
+                            case 'typeRadio_5' :
                                 vulnerablefile.value = '';
                                 filelable.innerHTML = '';
                                 $('#vulnerablefile').prop('disabled', true);

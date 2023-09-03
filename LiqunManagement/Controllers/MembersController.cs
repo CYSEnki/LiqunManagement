@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using LiqunManagement.Services;
 using LiqunManagement.Security;
 using System.Web.Configuration;
@@ -40,11 +41,13 @@ namespace LiqunManagement.Controllers
             var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
                                 join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
                                 from empdb0 in temp.DefaultIfEmpty()
+                                join deptdb in memberdb.Department on empdb0.DivCode equals deptdb.DivCode into temp2
+                                from deptdb0 in temp2.DefaultIfEmpty()
                                 select new MembersViewModel
                                 {
                                     Name = db.Name,
-                                    Department = empdb0 != null ? empdb0.Department : null,
-                                    Position = empdb0 != null ? empdb0.Position : null,
+                                    Department = empdb0 != null ? deptdb0.DivFullName : null,
+                                    Position = empdb0 != null ? empdb0.JobTitle : null,
                                 }).FirstOrDefault();
             if (EmployeeData != null)
             {
@@ -55,19 +58,28 @@ namespace LiqunManagement.Controllers
             //確認角色
             var role = User.IsInRole("Admin");
             //var role2 = User.IsInRole("User");
+
+            if (!role)
+                return RedirectToAction("Index", "Liqun");
             #endregion
 
             var members = from db in memberdb.Members.Where(x => String.IsNullOrEmpty(x.AuthCode))
                           join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
                           from empdb0 in temp.DefaultIfEmpty()
+                          join deptdb in memberdb.Department on empdb0.DivCode equals deptdb.DivCode into temp2
+                          from deptdb0 in temp2.DefaultIfEmpty()
                           select new MembersViewModel
                           {
                               Account = db.Account,
                               Name = db.Name,
                               Status = db.Status,
-                              Department = empdb0 != null ? empdb0.Department : null,
-                              Position = empdb0 != null ? empdb0.Position : null,
+                              Department = empdb0 != null ? deptdb0.DivFullName : null,
+                              Position = empdb0 != null ? empdb0.JobTitle : null,
                           };
+
+            DDLServices ddlServices = new DDLServices();
+            var ddl = JsonConvert.SerializeObject(ddlServices.GetDeptDDL("").ddllist.ToList());
+            @ViewBag.ddl = ddl;
             MemberRegisterViewModel model = new MemberRegisterViewModel()
             {
                 MemberList = members,
@@ -110,7 +122,7 @@ namespace LiqunManagement.Controllers
                 ////藉由Service將使用者資料填入驗證信範本中
                 //string MailBody = mailservice.GetRegisterMailBody(TempMail, registermember.newMember.Name, ValidateUrl.ToString().Replace("%3F", "?"));
                 ////呼叫Service寄出驗證信
-                //mailservice.SendRegisterMail(MailBody, registermember.newMember.Email);
+                //mailservice.SendMail(MailBody, registermember.newMember.Email);
                 ////用TempData儲存註冊訊息
                 //TempData["RegisterState"] = "註冊成功，請去收信以驗證Email";
                 ////重新導向頁面
@@ -118,6 +130,10 @@ namespace LiqunManagement.Controllers
                 #endregion
 
                 #region 管理員設定帳號方法
+                //提醒系統管理員已新增帳號密碼
+                mailservice.SendMail("新增帳密", "人員: " + registermember.newMember.Account, "cys.Enki@gmail.com");
+
+
                 registermember.newMember.Password = registermember.Password;
                 membersdbservice.Register(registermember.newMember);
                 return RedirectToAction("Register");
@@ -160,37 +176,50 @@ namespace LiqunManagement.Controllers
         public JsonResult GetEmployeeData(string Account)
         {
             var result = "nodata";
+            DDLServices ddlServices = new DDLServices();
+            var ddl = JsonConvert.SerializeObject(ddlServices.GetDeptDDL("").ddllist.ToList());
 
-            var EmployeeData = from db in memberdb.EmployeeData.Where(x => x.Account == Account)
-                               select new
-                               {
-                                   Department = db.Department,
-                                   Position = db.Position,
-                               };
-            if(EmployeeData == null)
+            var divcode = memberdb.EmployeeData.Where(x => x.Account == Account).Select(x => x.DivCode).FirstOrDefault();
+            var divcodeIsnull = String.IsNullOrEmpty(divcode);
+
+            if(divcodeIsnull)
             {
                 return Json(result);
             }
+            else
+            {
+                var EmployeeData = from db in memberdb.EmployeeData.Where(x => x.Account == Account)
+                                   join deptdb in memberdb.Department on db.DivCode equals deptdb.DivCode
+                                   select new
+                                   {
+                                       //Department = deptdb0.DivFullName,
+                                       JobTitle = db.JobTitle,
+                                       divcode = divcodeIsnull ? "" : deptdb.DivCode,
+                                   };
+                return Json(EmployeeData);
+            }
 
-            //呼叫Service來判斷，並回傳結果
-            return Json(EmployeeData);
         }
 
         //編輯職員資料
         [Authorize]
         [HttpPost]
-        public ActionResult UpdateMemberData(string Account, string Name, string Department, string Position)
+        public ActionResult UpdateMemberData(string Account, string Name, string DivCode)
         {
             var empdata = memberdb.EmployeeData.Where(x => x.Account == Account).FirstOrDefault();
+
+            var deptdata = memberdb.Department.Where(x => x.DivCode == DivCode).FirstOrDefault();
             try
             {
                 if (empdata != null)
                 {
                     // 更新員工的部門和職位
-                    empdata.Department = Department;
-                    empdata.Position = Position;
+                    //empdata.Department = Department;
+                    empdata.DivCode = DivCode;
+                    empdata.JobTitle = deptdata.GeneralTitle;
                     empdata.UpdateTime = DateTime.Now;
                     empdata.UpdateAccount = User.Identity.Name;
+
 
                     // 提交更改到資料庫
                     memberdb.SaveChanges();
@@ -201,8 +230,8 @@ namespace LiqunManagement.Controllers
                     var newEmployee = new EmployeeData
                     {
                         Account = Account,
-                        Department = Department,
-                        Position = Position,
+                        DivCode = DivCode,
+                        JobTitle = deptdata.GeneralTitle,
                         CreateTime = DateTime.Now,
                         CreateAccount = User.Identity.Name,
                         UpdateTime = DateTime.Now,
@@ -370,6 +399,117 @@ namespace LiqunManagement.Controllers
 
         }
         #endregion
-        
+
+        #region 部門管理
+        public ActionResult DeptManage()
+        {
+            #region 使用者資料
+            var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
+                                join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
+                                from empdb0 in temp.DefaultIfEmpty()
+                                join deptdb in memberdb.Department on empdb0.DivCode equals deptdb.DivCode into temp2
+                                from deptdb0 in temp2.DefaultIfEmpty()
+                                select new MembersViewModel
+                                {
+                                    Name = db.Name,
+                                    Department = empdb0 != null ? deptdb0.DivFullName : null,
+                                    Position = empdb0 != null ? empdb0.JobTitle : null,
+                                }).FirstOrDefault();
+            if (EmployeeData != null)
+            {
+                ViewBag.UserName = EmployeeData.Name;                 //使用者名稱
+                ViewBag.Department = EmployeeData.Department;   //使用者部門
+                ViewBag.Position = EmployeeData.Position;       //使用者職位
+            }
+            //確認角色
+            var role = User.IsInRole("Admin");
+            //var role2 = User.IsInRole("User");
+
+            if (!role)
+                return RedirectToAction("Index", "Liqun");
+            #endregion
+
+            var deptlist = from db in memberdb.Department
+                           select new DepartmentViewModel
+                           {
+                               DivCode = db.DivCode,
+                               DivName = db.DivName,
+                               DivFullName = db.DivFullName,
+                               ParentDivCode = db.ParentDivCode,
+                               ParentDivName = memberdb.Department.Where(x => x.DivCode == db.ParentDivCode).FirstOrDefault().DivFullName,
+                               ManageName = memberdb.Members.Where(x => x.Account == db.ManageAccount).FirstOrDefault().Name,
+
+                           };
+            var model = new MemberRegisterViewModel
+            {
+                Deptlist = deptlist,
+            };
+
+            return View(model);
+        }
+
+        //取得部門主管資料
+        public JsonResult GetManager(string divcode)
+        {
+            var result = "nodata";
+            DDLServices ddlServices = new DDLServices();
+            var ddl = ddlServices.GetManager(divcode).ddllist;
+            var ddd = ddl.ToList();
+            var jsonddl = JsonConvert.SerializeObject(ddlServices.GetManager(divcode).ddllist.ToList());
+
+            if (ddl.Count() == 0)
+            {
+                return Json(result);
+            }
+            else
+            {
+                return Json(jsonddl);
+            }
+
+        }
+
+        //更動部門主管
+        public ActionResult UpdateManager(string DivCode, string Account)
+        {
+            var empdata = memberdb.EmployeeData.Where(x => x.Account == Account).FirstOrDefault();
+            var deptdata = memberdb.Department.Where(x => x.DivCode == DivCode).FirstOrDefault();
+            var canclempdata = memberdb.EmployeeData.Where(x => x.JobTitle == deptdata.ManagerTitle).FirstOrDefault();
+            try
+            {
+                if (deptdata != null)
+                {
+                    // 更新員工的職稱
+                    empdata.JobTitle = deptdata.ManagerTitle;
+                    //更換部門主管
+                    deptdata.ManageAccount = Account;
+
+                    // 提交更改到資料庫
+                    memberdb.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                var error = ex.ToString();
+            }
+
+            try
+            {
+                if (deptdata != null)
+                {
+                    canclempdata.JobTitle = deptdata.GeneralTitle;
+                    memberdb.SaveChanges();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                var error = ex.ToString();
+
+            }
+            return RedirectToAction("DeptManage");
+        }
+        #endregion
+
+
     }
 }

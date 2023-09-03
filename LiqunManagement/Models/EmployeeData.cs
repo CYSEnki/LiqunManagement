@@ -13,6 +13,9 @@ namespace LiqunManagement.Models
         [StringLength(30)]
         public string Account { get; set; }
 
+        [StringLength(10)]
+        public string DivCode { get; set; }
+
         public DateTime? CreateTime { get; set; }
 
         [StringLength(30)]
@@ -23,10 +26,7 @@ namespace LiqunManagement.Models
         [StringLength(30)]
         public string UpdateAccount { get; set; }
 
-        [StringLength(50)]
-        public string Department { get; set; }
-
-        [StringLength(20)]
-        public string Position { get; set; }
+        [StringLength(10)]
+        public string JobTitle { get; set; }
     }
 }

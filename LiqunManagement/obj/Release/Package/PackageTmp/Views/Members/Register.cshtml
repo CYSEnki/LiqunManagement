@@ -1,12 +1,25 @@
-﻿@model LiqunManagement.ViewModels.MemberRegisterViewModel
-﻿
+﻿@model LiqunManagement.ViewModels.MemberRegisterViewModel﻿
 @{
     ViewBag.Title = "帳號設定";
     ViewBag.Controller = "MembersManage";
     ViewBag.Branches = "SetAccount";
     Layout = "~/Views/Shared/smartadmin_Layout.cshtml";
 }
+@*datatables*@
 <link href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/datagrid/datatables/datatables.bundle.css" rel="stylesheet" />
+@*select2*@
+<link href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/formplugins/select2/select2.bundle.css" rel="stylesheet" />
+<style>
+    #deptddl.select2-container {
+        z-index: 99999; /* 適當的z-index值，確保高於modal的z-index值 */
+    }
+    .select2-dropdown {
+        z-index: 99999; /* 適當的z-index值，確保高於modal的z-index值 */
+    }
+    .modal {
+        z-index: 99998;  較低的z-index值，以確保在Select2之下 
+    }
+</style>
 <main id="js-page-content" role="main" class="page-content">
     <ol class="breadcrumb page-breadcrumb">
         <li class="breadcrumb-item">
@@ -18,6 +31,7 @@
             <span class="js-get-date"></span>
         </li>
     </ol>
+
     <div class="subheader">
         <h1 class="subheader-title">
             <i class="subheader-icon fal fa-edit"></i>
@@ -109,7 +123,7 @@
             <div id="panel-1" class="panel panel-locked">
                 <div class="panel-hdr">
                     <h2>
-                        輸入帳號
+                        職員設定
                     </h2>
                 </div>
                 <div class="panel-container show">
@@ -146,8 +160,8 @@
                                         <td>@item.Position</td>
                                         <td style="display: none;">
                                             @*<a href="" class="btn btn-sm btn-icon btn-outline-primary rounded-circle mr-1" title="Edit Data" data-toggle="modal" data-target="#SetDataModal" data-account="@item.Account" data-name="@item.Name">
-                                                <i class="fa fa-pen"></i>
-                                            </a>*@
+                                                    <i class="fa fa-pen"></i>
+                                                </a>*@
 
 
                                             <div class="dropdown d-inline-block dropleft">
@@ -183,10 +197,12 @@
 
 @section scripts
 {
+    @*datatables*@
     <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/datagrid/datatables/datatables.bundle.js"></script>
-
+    @*select2*@
+    <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/select2/select2.bundle.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript">
+<script type="text/javascript">
 
         $(document).ready(function () {
 
@@ -223,6 +239,19 @@
                     ],
                 });
 
+            /* init select2 */
+            var jsonddl = @Html.Raw(Json.Encode(ViewBag.ddl));
+            var jsonArray = JSON.parse(jsonddl);
+            for (var i = 0; i < jsonArray.length; i++) {
+                jsonArray[i].id = jsonArray[i].id.replace(/\"/g, '');
+                jsonArray[i].text = jsonArray[i].text.replace(/\"/g, '');
+            }
+            //var data_city = jsonArray;
+            $('#deptddl').select2({
+                data: jsonArray,
+                placeholder: '選擇部門'
+            });
+
             //Modal
             $('#SetDataModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget)
@@ -242,9 +271,24 @@
 
                             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
                             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                            //modal.find('#Department').val(firstData.Department)
+                            modal.find('#Position').val(firstData.JobTitle)
 
-                            modal.find('#Department').val(firstData.Department)
-                            modal.find('#Position').val(firstData.Position)
+                            /*select2*/
+                            //var jsonArray = JSON.parse(firstData.ddl);
+                            //for (var i = 0; i < jsonArray.length; i++) {
+                            //    jsonArray[i].id = jsonArray[i].id.replace(/\"/g, '');
+                            //    jsonArray[i].text = jsonArray[i].text.replace(/\"/g, '');
+                            //}
+                            ////var data_city = jsonArray;
+                            //modal.find('#deptddl').select2({
+                            //    data: jsonArray,
+                            //    placeholder: '選擇部門'
+                            //});
+                            if (firstData.divcode.trim() !== "")
+                                $('#deptddl').val(firstData.divcode).trigger('change');
+
+
                         }
                     },
                     error: function (error) {
@@ -287,21 +331,7 @@
             });
         });
 
-        //function ResetPassword() {
-        //    debugger;
-        //    // 获取输入字段的值
-        //    var password = document.getElementById("ResetPassword").value;
-        //    var confirm = document.getElementById("ConfirmPassword").value;
-
-        //    // 比较输入字段的值
-        //    if (password === confirm) {
-        //        $("#ResetForm").submit();
-        //    } else {
-        //        document.getElementById("confirmerror").innerHTML = "密碼輸入不相同，請重新輸入";
-        //    }
-        //}
-
-    </script>
+</script>
 }
 
 <!-- SetMemberDataModal -->
@@ -334,13 +364,17 @@
                     </div>
                     @*部門*@
                     <div class="form-group">
-                        <label class="form-label" for="Department">員工部門</label>
-                        <input type="text" id="Department" name="Department" class="form-control" value="" required>
+                        <label class="form-label" for="deptddl">員工部門</label>
+                        @*<input type="text" id="DivCode" name="DivCode" class="form-control" value="" required>*@
+
+                        <select id="deptddl" class="custom-select form-control " data-index="1" name="DivCode" required>
+                            <option value="" selected=""></option>
+                        </select>
                     </div>
                     @*職位*@
                     <div class="form-group">
                         <label class="form-label" for="Position">職務名稱</label>
-                        <input type="text" id="Position" name="Position" class="form-control" value="" required>
+                        <input type="text" id="Position" name="Position" class="form-control" value="" readonly>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -367,7 +401,7 @@
                     <span aria-hidden="true"><i class="fal fa-times"></i></span>
                 </button>
             </div>
-            @using (Html.BeginForm("ResetPassword", "Members", FormMethod.Post, new { @id = "ResetForm"}))
+            @using (Html.BeginForm("ResetPassword", "Members", FormMethod.Post, new { @id = "ResetForm" }))
             {
                 <div class="modal-body">
                     @*姓名*@

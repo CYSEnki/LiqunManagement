@@ -3,7 +3,7 @@
   "version": "4.5.0",
   "private": true,
   "description": "user interface toolkit",
-  "author": "@myplaneticket (gotbootstrap.com)",
+  "author": "@myplaneticket (enkidevelopment.com)",
   "license": "Check website (http://support.wrapbootstrap.com/knowledge_base/topics/usage-licenses)",
   "bugs": {
     "url": "https://wrapbootstrap.com/user/myorange"
@@ -120,5 +120,5 @@
     "test": "tests"
   },
   "repository": "git+https://myorange@bitbucket.org/myorange/smartadmin-html-full.git",
-  "homepage": "https://www.gotbootstrap.com"
+  "homepage": "#"
 }

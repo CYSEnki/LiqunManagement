@@ -31763,7 +31763,7 @@ return $.fn.dataTable;
  * @summary altEditor
  * @description Lightweight editor for DataTables
  * @version 3.0
- * @copyright Copyright 2016 Kingkode & Gotbootstrap.com
+ * @copyright Copyright 2016 Kingkode & enkidevelopment.com
  */
 (function (factory) {
 	if (typeof define === 'function' && define.amd) {

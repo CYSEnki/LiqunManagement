@@ -13,8 +13,12 @@ namespace LiqunManagement.ViewModels
         //public IE<MembersViewModel> MembersList { get; set; }
 
         public IEnumerable<MembersViewModel> MemberList { get; set; }
+        public IEnumerable<DepartmentViewModel> Deptlist { get; set; }
         public MembersViewModel newMember { get; set; }
         public EmployeeData  employeeDatamodel { get; set; }
+
+        //下拉選單
+        public IEnumerable<DDLViewModel> ddllist { get; set; }
 
         [DisplayName("密碼")]
         [Required(ErrorMessage = "請輸入密碼")]

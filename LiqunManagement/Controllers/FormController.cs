@@ -24,11 +24,13 @@ namespace LiqunManagement.Controllers
             var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
                                 join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
                                 from empdb0 in temp.DefaultIfEmpty()
+                                join deptdb in memberdb.Department on empdb0.DivCode equals deptdb.DivCode into temp2
+                                from deptdb0 in temp2.DefaultIfEmpty()
                                 select new MembersViewModel
                                 {
                                     Name = db.Name,
-                                    Department = empdb0 != null ? empdb0.Department : null,
-                                    Position = empdb0 != null ? empdb0.Position : null,
+                                    Department = empdb0 != null ? deptdb0.DivFullName : null,
+                                    Position = empdb0 != null ? empdb0.JobTitle : null,
                                 }).FirstOrDefault();
             if (EmployeeData != null)
             {
@@ -49,11 +51,13 @@ namespace LiqunManagement.Controllers
             var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
                                 join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
                                 from empdb0 in temp.DefaultIfEmpty()
+                                join deptdb in memberdb.Department on empdb0.DivCode equals deptdb.DivCode into temp2
+                                from deptdb0 in temp2.DefaultIfEmpty()
                                 select new MembersViewModel
                                 {
                                     Name = db.Name,
-                                    Department = empdb0 != null ? empdb0.Department : null,
-                                    Position = empdb0 != null ? empdb0.Position : null,
+                                    Department = empdb0 != null ? deptdb0.DivFullName : null,
+                                    Position = empdb0 != null ? empdb0.JobTitle : null,
                                 }).FirstOrDefault();
             if (EmployeeData != null)
             {
@@ -82,11 +86,13 @@ namespace LiqunManagement.Controllers
             var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
                                 join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
                                 from empdb0 in temp.DefaultIfEmpty()
+                                join deptdb in memberdb.Department on empdb0.DivCode equals deptdb.DivCode into temp2
+                                from deptdb0 in temp2.DefaultIfEmpty()
                                 select new MembersViewModel
                                 {
                                     Name = db.Name,
-                                    Department = empdb0 != null ? empdb0.Department : null,
-                                    Position = empdb0 != null ? empdb0.Position : null,
+                                    Department = empdb0 != null ? deptdb0.DivFullName : null,
+                                    Position = empdb0 != null ? empdb0.JobTitle : null,
                                 }).FirstOrDefault();
             if (EmployeeData != null)
             {
@@ -153,11 +159,13 @@ namespace LiqunManagement.Controllers
             var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
                                 join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
                                 from empdb0 in temp.DefaultIfEmpty()
+                                join deptdb in memberdb.Department on empdb0.DivCode equals deptdb.DivCode into temp2
+                                from deptdb0 in temp2.DefaultIfEmpty()
                                 select new MembersViewModel
                                 {
                                     Name = db.Name,
-                                    Department = empdb0 != null ? empdb0.Department : null,
-                                    Position = empdb0 != null ? empdb0.Position : null,
+                                    Department = empdb0 != null ? deptdb0.DivFullName : null,
+                                    Position = empdb0 != null ? empdb0.JobTitle : null,
                                 }).FirstOrDefault();
             if (EmployeeData != null)
             {
@@ -232,7 +240,9 @@ namespace LiqunManagement.Controllers
                 }
                 catch (Exception ex)
                 {
-                    var error = ex.ToString();
+                    MailService mailService = new MailService();
+                    mailService.SendMail("【力群管理系統】房客資料寫入DB錯誤", ex.ToString(), "cys.enki@gmail.com");
+                    return View();
                 }
             }
             string fileNames = JsonConvert.SerializeObject(fileNamesArray);
@@ -322,9 +332,11 @@ namespace LiqunManagement.Controllers
             }
             catch (Exception ex)
             {
-                var error = ex.ToString();
+                MailService mailService = new MailService();
+                mailService.SendMail("【力群管理系統】房客資料寫入DB錯誤", ex.ToString(), "cys.enki@gmail.com");
+                return View();
             }
-            return RedirectToAction("HomeObject", "Form");
+            return RedirectToAction("CaseManage", "Sales");
         }
         #endregion
 
@@ -336,11 +348,13 @@ namespace LiqunManagement.Controllers
             var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
                                 join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
                                 from empdb0 in temp.DefaultIfEmpty()
+                                join deptdb in memberdb.Department on empdb0.DivCode equals deptdb.DivCode into temp2
+                                from deptdb0 in temp2.DefaultIfEmpty()
                                 select new MembersViewModel
                                 {
                                     Name = db.Name,
-                                    Department = empdb0 != null ? empdb0.Department : null,
-                                    Position = empdb0 != null ? empdb0.Position : null,
+                                    Department = empdb0 != null ? deptdb0.DivFullName : null,
+                                    Position = empdb0 != null ? empdb0.JobTitle : null,
                                 }).FirstOrDefault();
             if (EmployeeData != null)
             {
@@ -410,11 +424,13 @@ namespace LiqunManagement.Controllers
             var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
                                 join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
                                 from empdb0 in temp.DefaultIfEmpty()
+                                join deptdb in memberdb.Department on empdb0.DivCode equals deptdb.DivCode into temp2
+                                from deptdb0 in temp2.DefaultIfEmpty()
                                 select new MembersViewModel
                                 {
                                     Name = db.Name,
-                                    Department = empdb0 != null ? empdb0.Department : null,
-                                    Position = empdb0 != null ? empdb0.Position : null,
+                                    Department = empdb0 != null ? deptdb0.DivFullName : null,
+                                    Position = empdb0 != null ? empdb0.JobTitle : null,
                                 }).FirstOrDefault();
             if (EmployeeData != null)
             {
@@ -487,7 +503,8 @@ namespace LiqunManagement.Controllers
             }
             catch (Exception ex)
             {
-                var error = ex.ToString();
+                MailService mailService = new MailService();
+                mailService.SendMail("【力群管理系統】房客資料寫入DB錯誤", ex.ToString(), "cys.enki@gmail.com");
                 return RedirectToAction("Landlord", "Form", new {FormID = FormID});
             }
 
@@ -496,17 +513,20 @@ namespace LiqunManagement.Controllers
         #endregion
 
         #region 房客資料
+        [HttpGet]
         public ActionResult Tenant(string FormID)
         {
             #region 使用者資料
             var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
                                 join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
                                 from empdb0 in temp.DefaultIfEmpty()
+                                join deptdb in memberdb.Department on empdb0.DivCode equals deptdb.DivCode into temp2
+                                from deptdb0 in temp2.DefaultIfEmpty()
                                 select new MembersViewModel
                                 {
                                     Name = db.Name,
-                                    Department = empdb0 != null ? empdb0.Department : null,
-                                    Position = empdb0 != null ? empdb0.Position : null,
+                                    Department = empdb0 != null ? deptdb0.DivFullName : null,
+                                    Position = empdb0 != null ? empdb0.JobTitle : null,
                                 }).FirstOrDefault();
             if (EmployeeData != null)
             {
@@ -537,6 +557,7 @@ namespace LiqunManagement.Controllers
             ViewBag.Payment_date = payment_date;
             return View();
         }
+
         [HttpPost]
         public ActionResult Tenant(
             string FormID,                  //表單編號
@@ -599,11 +620,13 @@ namespace LiqunManagement.Controllers
             var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
                                 join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
                                 from empdb0 in temp.DefaultIfEmpty()
+                                join deptdb in memberdb.Department on empdb0.DivCode equals deptdb.DivCode into temp2
+                                from deptdb0 in temp2.DefaultIfEmpty()
                                 select new MembersViewModel
                                 {
                                     Name = db.Name,
-                                    Department = empdb0 != null ? empdb0.Department : null,
-                                    Position = empdb0 != null ? empdb0.Position : null,
+                                    Department = empdb0 != null ? deptdb0.DivFullName : null,
+                                    Position = empdb0 != null ? empdb0.JobTitle : null,
                                 }).FirstOrDefault();
             if (EmployeeData != null)
             {
@@ -653,6 +676,8 @@ namespace LiqunManagement.Controllers
                 }
                 catch (Exception ex)
                 {
+                    MailService mailService = new MailService();
+                    mailService.SendMail("【力群管理系統】房客資料寫入DB錯誤", ex.ToString(), "cys.enki@gmail.com");
                     var error = ex.ToString();
                 }
             }
@@ -685,7 +710,8 @@ namespace LiqunManagement.Controllers
                 }
                 catch (Exception ex)
                 {
-                    var error = ex.ToString();
+                    MailService mailService = new MailService();
+                    mailService.SendMail("【力群管理系統】房客資料寫入DB錯誤", ex.ToString(), "cys.enki@gmail.com");
                 }
             }
             string sheetfileNames = JsonConvert.SerializeObject(sheetfileNameArray);
@@ -775,7 +801,8 @@ namespace LiqunManagement.Controllers
             }
             catch (Exception ex)
             {
-                var error = ex.ToString();
+                MailService mailService = new MailService();
+                mailService.SendMail("【力群管理系統】房客資料寫入DB錯誤", ex.ToString(), "cys.enki@gmail.com");
                 return RedirectToAction("Tenant", "Form", new { FormID = FormID });
             }
 
@@ -791,11 +818,13 @@ namespace LiqunManagement.Controllers
             var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
                                 join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
                                 from empdb0 in temp.DefaultIfEmpty()
+                                join deptdb in memberdb.Department on empdb0.DivCode equals deptdb.DivCode into temp2
+                                from deptdb0 in temp2.DefaultIfEmpty()
                                 select new MembersViewModel
                                 {
                                     Name = db.Name,
-                                    Department = empdb0 != null ? empdb0.Department : null,
-                                    Position = empdb0 != null ? empdb0.Position : null,
+                                    Department = empdb0 != null ? deptdb0.DivFullName : null,
+                                    Position = empdb0 != null ? empdb0.JobTitle : null,
                                 }).FirstOrDefault();
             if (EmployeeData != null)
             {
@@ -828,11 +857,13 @@ namespace LiqunManagement.Controllers
             var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
                                join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
                                from empdb0 in temp.DefaultIfEmpty()
-                               select new MembersViewModel
+                                join deptdb in memberdb.Department on empdb0.DivCode equals deptdb.DivCode into temp2
+                                from deptdb0 in temp2.DefaultIfEmpty()
+                                select new MembersViewModel
                                {
                                    Name = db.Name,
-                                   Department = empdb0 != null ? empdb0.Department : null,
-                                   Position = empdb0 != null ? empdb0.Position : null,
+                                   Department = empdb0 != null ? deptdb0.DivFullName : null,
+                                   Position = empdb0 != null ? empdb0.JobTitle : null,
                                }).FirstOrDefault();
             if (EmployeeData != null)
             {

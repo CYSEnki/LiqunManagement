@@ -87,6 +87,48 @@ namespace LiqunManagement.Services
         }
         #endregion
 
+        #region 找到部門下拉選單
+        public MemberRegisterViewModel GetDeptDDL(string divcode)
+        {
+            IEnumerable<DDLViewModel> deptDDL = new List<DDLViewModel>();
+
+            deptDDL = (from deptdb in Memberdb.Department
+                       select new DDLViewModel
+                       {
+                           order = 1,
+                           text = deptdb.DivFullName,
+                           id = deptdb.DivCode,
+                       }).Distinct();
+            var model = new MemberRegisterViewModel
+            {
+                ddllist = deptDDL,
+            };
+
+            return model;
+        }
+        #endregion
+        
+        #region 找到主管下拉選單
+        public MemberRegisterViewModel GetManager(string divcode)
+        {
+            IEnumerable<DDLViewModel> managerddl = new List<DDLViewModel>();
+
+            managerddl = (from db in Memberdb.EmployeeData.Where(x => x.DivCode == divcode)
+                       join members in Memberdb.Members on db.Account equals members.Account
+                       select new DDLViewModel
+                       {
+                           order = 1,
+                           text = members.Name,
+                           id = members.Account,
+                       }).Distinct();
+            var model = new MemberRegisterViewModel
+            {
+                ddllist = managerddl,
+            };
+
+            return model;
+        }
+        #endregion
 
     }
 }
