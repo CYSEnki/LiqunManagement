@@ -1,5 +1,5 @@
 # 忽略 web.config
-LiqunManagement/web.config
+LiqunManagement/Web.config
 
 # 忽略發布
-LiqunManagement/LiqunManagement/Properties/PublishProfiles/
+LiqunManagement/Properties/PublishProfiles/

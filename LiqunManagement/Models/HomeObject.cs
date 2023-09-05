@@ -91,6 +91,9 @@ namespace LiqunManagement.Models
         public int? carparkmanagefee { get; set; }
 
         [StringLength(20)]
+        public string scooterparkfloor { get; set; }
+
+        [StringLength(20)]
         public string scooterpositionnumber { get; set; }
 
         public int? scootermonthrent { get; set; }

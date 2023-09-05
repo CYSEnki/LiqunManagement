@@ -1,8 +1,10 @@
-﻿﻿
+﻿@model LiqunManagement.ViewModels.FormViewModels
 @{
     ViewBag.Title = "表單四期";
     ViewBag.Controller = "Form";
     Layout = "~/Views/Shared/smartadmin_Layout.cshtml";
+
+    var FormID = Model.FormID;
 }
 <style>
     .padding-top-ten {
@@ -63,7 +65,7 @@
 
                         @using (Html.BeginForm("HomeObject", "Form", FormMethod.Post, new { @class = "needs-validation", @enctype = "multipart/form-data", @novalidate = "" }))
                         {
-                            @*是否為公證*@
+                            @*包租或代管*@
                             <div class="form-group">
                                 <label class="form-label">
                                     類別:
@@ -151,7 +153,7 @@
                                 <span class="text-danger">*</span>
                                 <div class="row">
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_city" required>
+                                        <select class="custom-select form-control select2_city" id="selectcity" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -159,7 +161,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_district" required>
+                                        <select class="custom-select form-control select2_district" id="selectdistrict" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -167,7 +169,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_road" name="selecctroad" required>
+                                        <select class="custom-select form-control select2_road" id="selectroad" name="selectroad" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -239,7 +241,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">$</span>
                                             </div>
-                                            <input id="rent" name="rent" type="number" data-inputmask="'alias': 'currency', 'digits': 0" placeholder="0" class="form-control" required>
+                                            <input class="form-control" id="rent" name="rent" type="number" data-inputmask="'alias': 'currency', 'digits': 0" placeholder="0" required>
                                             <div class="invalid-feedback">
                                                 請填寫租金
                                             </div>
@@ -252,7 +254,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">$</span>
                                         </div>
-                                        <input name="deposit" type="number" placeholder="0" data-inputmask="'alias': 'currency', 'digits': 0" class="form-control" required>
+                                        <input class="form-control" id="deposit" name="deposit" type="number" placeholder="0" data-inputmask="'alias': 'currency', 'digits': 0" required>
                                         <div class="invalid-feedback">
                                             請填寫押金
                                         </div>
@@ -266,7 +268,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">$</span>
                                     </div>
-                                    <input name="management_fee" type="number" data-inputmask="'alias': 'currency', 'digits': 0" placeholder="0" class="form-control" required>
+                                    <input type="number" class="form-control" id="management_fee" name="management_fee" data-inputmask="'alias': 'currency', 'digits': 0" placeholder="0" required>
                                     <div class="invalid-feedback">
                                         請填寫管理費
                                     </div>
@@ -278,7 +280,7 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label class="form-label" for="example-date">起租日</label>
-                                        <input type="text" class="form-control" autocomplete="off" placeholder="請選擇起租日" id="datepicker_startdate" name="startdate" required>
+                                        <input type="text" class="form-control" autocomplete="off" placeholder="請選擇起租日" id="startdate" name="startdate" required>
                                         <div class="invalid-feedback">
                                             請選擇起租日
                                         </div>
@@ -287,7 +289,7 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label class="form-label" for="example-date">結束日</label>
-                                        <input type="text" class="form-control" autocomplete="off" placeholder="請選擇起租日" id="datepicker_enddate" name="enddate" required>
+                                        <input type="text" class="form-control" autocomplete="off" placeholder="請選擇起租日" id="enddate" name="enddate" required>
                                         <div class="invalid-feedback">
                                             請選擇結束日
                                         </div>
@@ -296,7 +298,7 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label class="form-label">繳租日</label>
-                                        <select name="paydate" class="custom-select form-control" required>
+                                        <select id="paydate" name="paydate" class="custom-select form-control" required>
                                             <option value="" selected="" disabled>繳租日</option>
                                             @foreach (var item in ViewBag.Payment_date)
                                             {
@@ -362,15 +364,15 @@
                             <div class="form-group">
                                 <div class="col-md-10 col-lg-8 col-xl-6 ">
                                     <div class="input-group input-group-multi-transition w-100">
-                                        <input name="roomamount" id="jqroomamount" type="text" class="form-control roomtypeamount" aria-label="Person name" required>
+                                        <input name="roomamount" id="jqroomamount" type="text" class="form-control roomtypeamount" data-index="0" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">房</span>
                                         </div>
-                                        <input name="hallamount" id="jqhallamount" type="text" class="form-control roomtypeamount" aria-label="Person name" required>
+                                        <input name="hallamount" id="jqhallamount" type="text" class="form-control roomtypeamount" data-index="1" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">廳</span>
                                         </div>
-                                        <input name="bathamount" id="jqbathamount" type="text" class="form-control roomtypeamount" aria-label="Person name" required>
+                                        <input name="bathamount" id="jqbathamount" type="text" class="form-control roomtypeamount" data-index="2" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">衛</span>
                                         </div>
@@ -422,8 +424,9 @@
     <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/inputmask/inputmask.bundle.js"></script>
 
     <script type="text/javascript">
-        //validation
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        //----------------
+        //  validation
+        //----------------
         (function () {
             'use strict';
             window.addEventListener('load', function () {
@@ -439,7 +442,7 @@
 
                         //將屋況附屬設備存成[]陣列
                         const dataArray = [];
-                        for (let i = 10; i <= 14; i++) {
+                        for (let i = 10; i <= 15; i++) {
                             const inputValue = document.getElementById(`accessory_amount_${i}`).value;
                             dataArray.push(parseInt(inputValue));
                         }
@@ -460,6 +463,9 @@
             }, false);
         })();
 
+        //-------------------
+        //  日期選擇器格式設定
+        //-------------------
         !function (a) {
             a.fn.datepicker.dates["zh-TW"] = {
                 days: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
@@ -482,75 +488,19 @@
                 var day = date.getDate();
                 return year + format.replace(/mm/i, (month < 10 ? "0" : "") + month).replace(/dd/i, (day < 10 ? "0" : "") + day);
             };
-
-            //a.fn.datepicker.DPGlobal.formatDate = function (date, format, language) {
-            //    var year = date.getFullYear() - 1911; // 將年份減去1911，轉換為民國年
-            //    var month = date.getMonth() + 1;
-            //    var day = date.getDate();
-            //    var formatted = format
-            //        .replace(/yyyy/i, year)
-            //        .replace(/yy/i, year % 100)
-            //        .replace(/mm/i, (month < 10 ? "0" : "") + month)
-            //        .replace(/dd/i, (day < 10 ? "0" : "") + day);
-
-            //    return formatted;
-            //};
-
-            //// 自定義處理日期的函式，將年份減去1911
-            //function taiwaneseYear(date) {
-            //    var year = date.getFullYear() - 1911;
-            //    return year;
-            //}
-
-            //// 覆蓋原本datepicker的顯示格式
-            //a.fn.datepicker.dates["zh-TW"].format = {
-            //    toDisplay: function (date, format, language) {
-            //        return taiwaneseYear(date) + "年" + a.fn.datepicker.DPGlobal.formatDate(date, "mm月dd日", language);
-            //    },
-            //    toValue: function (date, format, language) {
-            //        var year = date.split("年")[0];
-            //        var monthDay = date.split("年")[1];
-            //        var fullYear = parseInt(year) + 1911;
-            //        return new Date(fullYear + "-" + monthDay);
-            //    }
-            //};
-
-
         }(jQuery);
 
 
 
         $(function () {
-            //inputmask
+            /*Initial inputmask*/
             $(":input").inputmask();
-            //const inputmaskElements = $(':input').filter(function () {
-            //    return $(this).inputmask();
-            //});
-            //let previousValue = ''; // 用於追蹤前一個輸入值
-
-            //// 監聽輸入事件，在每次輸入時處理
-            //inputmaskElements.on('input', function () {
-            //    const currentValue = this.value;
-            //    if (currentValue === previousValue) {
-            //        return; // 值未變化，不進行處理
-            //    }
-
-            //    // 過濾掉重複的字符，只保留第一個出現的字符
-            //    const filteredValue = currentValue
-            //        .split('')
-            //        .filter((char, index, self) => self.indexOf(char) === index)
-            //        .join('');
-
-            //    // 更新輸入框值並記錄前一個值
-            //    this.value = filteredValue;
-            //    previousValue = filteredValue;
-            //});
-
 
             //隱藏
             //隱藏車位類型欄位
             $('.park_carclass').hide();
             $('.park_morclass').hide();
+
             //------------------
             // 物件地址下拉選單  *
             //------------------
@@ -573,78 +523,6 @@
             $('.select2_road').select2({
                 //data: data_road,
                 placeholder: '街道',
-            });
-
-            //當下拉選單發生改變事件(change)，執行
-            $('body').on('change', '.select2_city', function () {
-                $('.select2_road').empty();
-                $('.select2_road').select2({
-                    placeholder: '街道',
-                });
-                var regioncode = $('.select2_city').val();
-                $.ajax({
-                    type: "POST",
-                    data: { regioncode: regioncode },
-                    url: '@Url.Content("~/Form/DDLRegion/")',
-                    dataType: 'json'
-                }).done(function (dataresult) {
-                    var jsonArray = JSON.parse(dataresult);
-                        for (var i = 0; i < jsonArray.length; i++) {
-                            jsonArray[i].id = jsonArray[i].id.replace(/\"/g, '');
-                            jsonArray[i].text = jsonArray[i].text.replace(/\"/g, '');
-                        }
-                    var data_district = jsonArray;
-                    $('.select2_district').empty();
-                    var init_data = [
-                        {
-                            id: '',
-                            text: '鄉/鎮/市/區'
-                        },
-                    ];
-                    $('.select2_district').select2({
-                        data: init_data,
-                    });
-                    $('.select2_district').select2({
-                        data: data_district,
-                        placeholder: {
-                            id: '',
-                            text: '鄉/鎮/市/區'
-                        }
-                    });
-                });
-            });
-            $('body').on('change', '.select2_district', function () {
-                var regioncode = $('.select2_district').val();
-                $.ajax({
-                    type: "POST",
-                    data: { regioncode: regioncode },
-                    url: '@Url.Content("~/Form/DDLRegion/")',
-                    dataType: 'json'
-                }).done(function (dataresult) {
-                    var jsonArray = JSON.parse(dataresult);
-                        for (var i = 0; i < jsonArray.length; i++) {
-                            jsonArray[i].id = jsonArray[i].id.replace(/\"/g, '');
-                            jsonArray[i].text = jsonArray[i].text.replace(/\"/g, '');
-                        }
-                    var data_road = jsonArray;
-                    $('.select2_road').empty();
-                    var init_data = [
-                        {
-                            id: '',
-                            text: '街道'
-                        },
-                    ];
-                    $('.select2_road').select2({
-                        data: init_data,
-                    });
-                    $('.select2_road').select2({
-                        data: data_road,
-                        placeholder: {
-                            id: '',
-                            text: '街道'
-                        }
-                    });
-                });
             });
 
             //------------------
@@ -735,7 +613,6 @@
             //------------------
             // 获取所有具有"radio-option"类的单选按钮以及目标input元素
             const radioOptions = document.querySelectorAll(".accessory_option");
-
             radioOptions.forEach(radio => {
                 radio.addEventListener("click", function () {
                     const index = this.getAttribute("data-index");
@@ -756,28 +633,70 @@
                             }
                             break;
                         case "13":
-                        case "14":
-                            if (index == "13") {
-                                $('#accessory_amount_' + index).prop('required', true);
-                                object.value = 1;
-                                //將14disable
-                                var newindex = parseInt(index) + 1;
-                                var newobject = document.getElementById('accessory_amount_' + newindex);
-                                newobject.value = 0;
-                                $('#accessory_amount_' + newindex).prop('required', false);
-                                $('#accessory_amount_' + newindex).prop('readonly', true);
-                            }
-                            else {
-                                $('#accessory_amount_' + index).prop('required', true);
-                                object.value = 1;
-                                //將13disable
-                                var newindex = parseInt(index) - 1;
-                                var newobject = document.getElementById('accessory_amount_' + newindex);
-                                newobject.value = 0;
-                                $('#accessory_amount_' + newindex).prop('required', false);
-                                $('#accessory_amount_' + newindex).prop('readonly', true);
-                            }
+                            $('#accessory_amount_' + index).prop('required', true);
+                            object.value = 1;
+                            //將14disable
+                            newindex = parseInt(index) + 1;
+                            var newobject = document.getElementById('accessory_amount_' + newindex);
+                            newobject.value = 0;
+                            $('#accessory_amount_' + newindex).prop('required', false);
+                            $('#accessory_amount_' + newindex).prop('readonly', true);
+                            //將15disable
+                            newindex = newindex + 1;
+                            newobject = document.getElementById('accessory_amount_' + newindex);
+                            newobject.value = 0;
+                            $('#accessory_amount_' + newindex).prop('required', false);
+                            $('#accessory_amount_' + newindex).prop('readonly', true);
+                            //將16disable
+                            newindex = newindex + 1;
+                            newobject = document.getElementById('accessory_amount_' + newindex);
+                            newobject.value = 0;
+                            $('#accessory_amount_' + newindex).prop('required', false);
+                            $('#accessory_amount_' + newindex).prop('readonly', true);
                             break;
+
+                        case "14":
+                            $('#accessory_amount_' + index).prop('required', true);
+                            object.value = 1;
+                            //將13disable
+                            newindex = 13;
+                            var newobject = document.getElementById('accessory_amount_' + newindex);
+                            newobject.value = 0;
+                            $('#accessory_amount_' + newindex).prop('required', false);
+                            $('#accessory_amount_' + newindex).prop('readonly', true);
+                            //將15disable
+                            newindex = 15;
+                            newobject = document.getElementById('accessory_amount_' + newindex);
+                            newobject.value = 0;
+                            $('#accessory_amount_' + newindex).prop('required', false);
+                            $('#accessory_amount_' + newindex).prop('readonly', true);
+                            //Set 16
+                            newindex = 16;
+                            newobject = document.getElementById('accessory_amount_' + newindex);
+                            newobject.value = 1;
+                            break;
+
+                        case "15":
+                            $('#accessory_amount_' + index).prop('required', true);
+                            object.value = 1;
+                            //將13disable
+                            newindex = 13;
+                            var newobject = document.getElementById('accessory_amount_' + newindex);
+                            newobject.value = 0;
+                            $('#accessory_amount_' + newindex).prop('required', false);
+                            $('#accessory_amount_' + newindex).prop('readonly', true);
+                            //將15disable
+                            newindex = 14;
+                            newobject = document.getElementById('accessory_amount_' + newindex);
+                            newobject.value = 0;
+                            $('#accessory_amount_' + newindex).prop('required', false);
+                            $('#accessory_amount_' + newindex).prop('readonly', true);
+                            //Set 16
+                            newindex = 16;
+                            newobject = document.getElementById('accessory_amount_' + newindex);
+                            newobject.value = 1;
+                            break;
+
                         default:
                             if (option == '1') {
                                 object.value = 1;
@@ -794,7 +713,6 @@
                     }
                 });
             });
-
 
             //------------------
             // 日期選擇器  *
@@ -816,7 +734,7 @@
                         $(this).change();
                     },
                 });
-            $('#datepicker_startdate').datepicker(
+            $('#startdate').datepicker(
                 {
                     //format: 'yyyy-mm-dd',
                     orientation: "請選擇起租日",
@@ -829,7 +747,7 @@
                         $(this).change();
                     },
                 });
-            $('#datepicker_enddate').datepicker(
+            $('#enddate').datepicker(
                 {
                     //format: 'yyyy-mm-dd',
                     orientation: "請選擇結束日",
@@ -838,9 +756,7 @@
                     autoclose: true,//選擇日期後就會自動關閉
                     language: 'zh-TW',//中文化
                 });
-            const startdatepicker = document.getElementById('datepicker_startdate');
-            //$('#datepicker_startdate').addEventListener('change', function (event) {
-            $('#datepicker_startdate').on('change', function (event) {
+            $('#startdate').on('change', function (event) {
                 const selectedDateStr = event.target.value;
                 const selectedDate = new Date(selectedDateStr); // 將日期字串轉換為Date物件
                 const year = selectedDate.getFullYear() + 1912; // 獲取年份
@@ -849,15 +765,12 @@
 
                 // 設定日期
                 const defaultDate = new Date(year, month, day); // 創建一個預設的日期（月份從0開始，這裡設為7月31日）
-                $('#datepicker_enddate').datepicker("setDate", defaultDate);
+                $('#enddate').datepicker("setDate", defaultDate);
             });
-
-
 
             //------------------
             // 是否有車位  *
             //------------------
-
             //點選其他車輛將文字框啟用
             //監聽其事件，若input[aria-label="其他原因"被點選則可以輸入文字框，反之則清空文字框並唯讀
             const nopark = document.querySelectorAll('input[aria-label="無車位"]');
@@ -871,6 +784,9 @@
                         document.querySelector('input[aria-label="機車車位"]').checked = false;
                         $('.park_carclass').hide();
                         $('.park_morclass').hide();
+
+                        $(".CarparkInput").prop("required", false);
+                        $(".MorparkInput").prop("required", false);
                     }
 
                     //重設Requiired屬性
@@ -894,16 +810,20 @@
                     if (carpark.checked) {
                         nopark.checked = false;
                         $('.park_carclass').show();
+                        $(".CarparkInput").prop("required", true);
                     }
                     else {
+                        $(".CarparkInput").prop("required", false);
                         $('.park_carclass').hide();
                     }
                     if (morpark.checked) {
                         nopark.checked = false;
                         $('.park_morclass').show();
+                        $(".MorparkInput").prop("required", true);
                     }
                     else {
                         $('.park_morclass').hide();
+                        $(".MorparkInput").prop("required", false);
                     }
 
                     //重設Requiired屬性
@@ -917,57 +837,276 @@
                     }
                 });
             });
-        });
-        //$(function () {
-        //    $('.signdate').datepicker({
-        //        autoclose: true,//選擇日期後就會自動關閉
-        //        todayHighlight: true,//今天會有一個底色
-        //        language: 'zh-TW',//中文化
-        //        format: "yyyy-mm-dd",
-        //    }).on('changeDate', function (e) {
-        //        // Get the selected date
-        //        var selectedDate = e.date;
 
-        //        // Convert the year to Taiwanese calendar (民國年)
-        //        var taiwanYear = selectedDate.getFullYear() - 1911;
-        //        var month = selectedDate.getMonth() + 1;
-        //        var day = selectedDate.getDate();
+            //------------------
+            // 編輯模式
+            //------------------
+            var formid = '@FormID';
+            if (formid !== '') {
+                //包租:1; 代管:0
+                var objecttypeValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.objecttype : "")';
+                $('input[name="objecttypeRadio"][value="' + objecttypeValue + '"]').prop('checked', true);
+                //[是否公證]0:無公證; 1:是公證
+                var notarizationValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.notarization : "")';
+                $('input[name="notarizationRadio"][value="' + notarizationValue + '"]').prop('checked', true);
+                //簽約日
+                var signdate = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.signdateStr : "")';
+                $('input[name="signdate"]').datepicker("setDate", signdate);
+                //[是否簽估價師] 0:無估價師; 1:簽估價師
+                var appraiserValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.appraiser : "")';
+                $('input[name="appraiserRadio"][value="' + appraiserValue + '"]').prop('checked', true);
+                //特色
+                var feature = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.feature : "")';
+                if (feature !== '') {
+                    $('input[name="feature"]').val(feature);
+                }
+                //物件地址(縣市)
+                var cityValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.citycode : "")';
 
-        //        // Format the date as "民國yy年mm月dd日"
-        //        var formattedDate = "民國" + taiwanYear + "年" + month + "月" + day + "日";
+                // 取消body上的change事件处理程序
+                $('body').off('change', '.select2_city');
+                $('body').off('change', '.select2_district');
+                $('#selectcity').val(cityValue).trigger('change');
+                //$('#selectcity').val(cityValue);
+                //物件地址(鄉鎮市區)
+                var districtValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.districtcode : "")';
+                var jsonDistrict = @Html.Raw(Json.Encode(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.distirctJsonDDL : ""));
+                var districtArray = JSON.parse(jsonDistrict);
+                for (var i = 0; i < districtArray.length; i++) {
+                    districtArray[i].id = districtArray[i].id.replace(/\"/g, '');
+                    districtArray[i].text = districtArray[i].text.replace(/\"/g, '');
+                }
+                $('#selectdistrict').empty();
+                $('#selectdistrict').select2({
+                    data: districtArray,
+                    //placeholder: ''
+                });
+                $('#selectdistrict').val(districtValue).trigger('change');
+                //$('#selectdistrict').val(districtValue);
+                //物件地址(道路)
+                var roadValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.roadcode : "")';
+                var jsonRoad = @Html.Raw(Json.Encode(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.roadJsonDDL : ""));
+                var roadArray = JSON.parse(jsonRoad);
+                for (var i = 0; i < roadArray.length; i++) {
+                    roadArray[i].id = roadArray[i].id.replace(/\"/g, '');
+                    roadArray[i].text = roadArray[i].text.replace(/\"/g, '');
+                }
+                $('#selectroad').empty();
+                $('#selectroad').select2({
+                    data: roadArray,
+                    //placeholder: '道路'
+                });
+                $('#selectroad').val(roadValue).trigger('change');
+                //$('#selectroad').val(roadValue);
+                //物件地址(詳細地址)
+                var detailaddress = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.detailaddress : "")';
+                $('input[name="detailaddress"]').val(detailaddress);
+                //[主要用途]0:住家用; 1:商業用; 2:辦公室; 3:一般事務所 4: 其他
+                var useforValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.usefor : "")';
+                $('input[name="useforRadio"][value="' + useforValue + '"]').prop('checked', true);
+                //[主要用途]其他
+                var useforelse = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.useforelse : "")';
+                if (useforelse !== '') {
+                    $('#elsemainuse').prop('required', true);
+                    $('#elsemainuse').prop('disabled', false);
+                    $('#elsemainuse').prop('readonly', false);
+                    $('#elsemainuse').val(useforelse);
+                }
+                //[租金]
+                var rent = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.rent : "")';
+                $('#rent').val(rent);
+                //[押金]
+                var deposit = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.deposit : "")';
+                $('#deposit').val(deposit);
+                //[管理費]
+                var management_fee = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.management_fee : "")';
+                $('#management_fee').val(management_fee);
+                //[起租日]
+                var startdate = new Date('@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.startdateStr : "")');
+                $('input[name="startdate"]').datepicker("setDate", startdate);
+                //[結束日]
+                var enddate = new Date('@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.enddateStr : "")');
+                $('input[name="enddate"]').datepicker("setDate", enddate);
+                //[繳租日]
+                var paydate = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.paydate : "")';
+                $('#paydate').val(paydate);
+                //[建物型態]0:透天厝; 1:公寓; 2:華夏; 3:電梯大樓
+                var buildtypeValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.buildtype : "")';
+                $('input[name="buildtypeRadio"][value="' + buildtypeValue + '"]').prop('checked', true);
+                //[房型]0:整層出租; 1:獨立套房
+                var roomtypeValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.roomtype : "")';
+                $('input[name="roomtypeRadio"][value="' + roomtypeValue + '"]').prop('checked', true);
+                if (roomtypeValue === '0') {
+                    var roomamountlist = @Html.Raw(Json.Encode(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.roomamountlist : "[]"));
+                    for (var i = 0; i < roomamountlist.length; i++) {
+                        var roomelement = $('[data-index="' + i + '"].roomtypeamount');
+                        roomelement.val(roomamountlist[i]);
+                    }
+                } else {
+                    //獨立套房
+                    $('#jqroomamount').val('套');
+                    $('#jqhallamount').val('X');
+                    $('#jqbathamount').val('X');
+                    $('.roomtypeamount').prop('required', false);
+                    $('.roomtypeamount').prop('disabled', true);
+                    $('.roomtypeamount').prop('readonly', true);
+                }
+                //是否有車位
+                var haveparklist = @Html.Raw(Json.Encode(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.haveparklist : ""));
 
-        //        // Set the input field's value with the formatted date
-        //        $(this).val(formattedDate);
+                const nopark = document.querySelector('input[aria-label="無車位"]');
+                const carpark = document.querySelector('input[aria-label="汽車車位"]');
+                const morpark = document.querySelector('input[aria-label="機車車位"]');
+                if (haveparklist[0] === 1) {
+                    nopark.checked = true;
+                }
+                if (haveparklist[1] === 1) {
+                    nopark.checked = false;
+                    carpark.checked = true;
+                    $('.park_carclass').show();
 
-        //    });
-        //});
-        //function SubmitForm() {
-        //    Swal.fire({
-        //        title: '確定送出?',
-        //        text: "確認資料皆填寫正確!",
-        //        icon: 'warning',
-        //        showCancelButton: true,
-        //        confirmButtonColor: '#3085d6',
-        //        cancelButtonColor: '#d33',
-        //        confirmButtonText: '確認',
-        //        cancelButtonText: '取消',
-        //    }).then((result) => {
-        //        if (result.isConfirmed) {
-        //            //提交上傳
-        //            $('#jqobjectform').submit();
-        //            Swal.fire({
-        //                title: '請稍後!',
-        //                html: '系統完成上傳動作之前請勿關閉視窗',
-        //                timerProgressBar: true,
-        //                backdrop: false,
-        //                didOpen: () => {
-        //                    Swal.showLoading()
-        //                }
-        //            })
-        //        }
-        //    })
-        //}
+                    //[汽車車位樣式]0:坡道平面; 1:坡道機械; 2: 機械平面; 3:機械機械
+                    var parktypeValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.parktype : "")';
+                                $('input[name="parktypeRadio"][value="' + parktypeValue + '"]').prop('checked', true);
+                    //[車位位於]: 陣列[(地上:1; 地下:0;),  (樓數)]
+                                var parkfloorlist = @Html.Raw(Json.Encode(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.parkfloorlist : ""));
 
+                                $('input[name="carparkfloorRadio"][value="' + parkfloorlist[0] + '"]').prop('checked', true);
+                                $('#parkfloornumber').val(parkfloorlist[1]);
+                    //[車位編號]
+                    var carpositionnumber = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.carpositionnumber : "")';
+                    if (carpositionnumber !== '') {
+                                    $('#carpositionnumber').val(carpositionnumber);
+                    }
+                    //[汽車月租金]
+                    var carmonthrentValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.carmonthrent : "")';
+                                $('#carmonthrent').val(carmonthrentValue);
+                    //[汽車停車管理費]
+                    var carparkmanagefeeValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.carparkmanagefee : "")';
+                                $('#carparkmanagefee').val(carparkmanagefeeValue);
+                }
+                if (haveparklist[2] === 1) {
+                    nopark.checked = false;
+                    morpark.checked = true;
+                            $('.park_morclass').show();
 
+                //[機車位位於]: 陣列[(地上:1; 地下:0;),  (樓數)]
+                        var scooterparkfloorlist = @Html.Raw(Json.Encode(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.scooterparkfloorlist : ""));
+                $('input[name="scooterparkfloorRadio"][value="' + scooterparkfloorlist[0] + '"]').prop('checked', true);
+                $('#scooterparkfloornumber').val(scooterparkfloorlist[1]);
+                //[機車位編號]
+                var scooterpositionnumber = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.scooterpositionnumber : "")';
+                if (scooterpositionnumber !== '') {
+                            $('#morpositionnumber').val(scooterpositionnumber);
+                }
+                //[機車位月租金]
+                var scootermonthrent = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.scootermonthrent : "")';
+                        $('#scootermonthrent').val(scootermonthrent);
+                //[機車停車管理費]
+                var scootermanagefee = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.scootermanagefee : "")';
+                        $('#scootermanagefee').val(scootermanagefee);
+                }
+                //重設Requiired屬性
+                $('input[aria-label="無車位"]').prop('required', false);
+                $('input[aria-label="汽車車位"]').prop('required', false);
+                $('input[aria-label="機車車位"]').prop('required', false);
+
+                //房屋附屬物件
+                var Accessorylist = @Html.Raw(Json.Encode(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.Accessorylist : "[]"));
+
+                for (var i = 0; i <= Accessorylist.length; i++) {
+
+                    if (Accessorylist[i] === 0) {
+                        $('[data-option = "0"][data-edit="' + i + '"].accessory_option').prop('checked', true);
+                    }
+                    else {
+                        $('[data-option = "1"][data-edit="' + i + '"].accessory_option').prop('checked', true);
+                        $('[data-edit="' + i + '"].accessoryInput').val(Accessorylist[i]);
+                        $('[data-edit="' + i + '"].accessoryInput').prop('readonly', false);
+                        if (i == 4 || i == 5) {
+                            $('[data-edit="45"].accessoryInput').val(Accessorylist[i]);
+                        }
+                    }
+                }
+
+                //備註
+                var memo = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.Memo : "")';
+                if (memo !== '') {
+                    $('#momo').val(memo);
+                }
+        }
+            //當下拉選單發生改變事件(change)，執行
+            $('body').on('change', '.select2_city', function () {
+                $('.select2_road').empty();
+                $('.select2_road').select2({
+                    placeholder: '街道',
+                });
+                var regioncode = $('.select2_city').val();
+                $.ajax({
+                    type: "POST",
+                    data: { regioncode: regioncode },
+                    url: '@Url.Content("~/Form/DDLRegion/")',
+                    dataType: 'json'
+                }).done(function (dataresult) {
+                    var jsonArray = JSON.parse(dataresult);
+                        for (var i = 0; i < jsonArray.length; i++) {
+                            jsonArray[i].id = jsonArray[i].id.replace(/\"/g, '');
+                            jsonArray[i].text = jsonArray[i].text.replace(/\"/g, '');
+                        }
+                    var data_district = jsonArray;
+                    $('.select2_district').empty();
+                    var init_data = [
+                        {
+                            id: '',
+                            text: '鄉/鎮/市/區'
+                        },
+                    ];
+                    $('.select2_district').select2({
+                        data: init_data,
+                    });
+                    $('.select2_district').select2({
+                        data: data_district,
+                        placeholder: {
+                            id: '',
+                            text: '鄉/鎮/市/區'
+                        }
+                    });
+                });
+            });
+            $('body').on('change', '.select2_district', function () {
+                var regioncode = $('.select2_district').val();
+                $.ajax({
+                    type: "POST",
+                    data: { regioncode: regioncode },
+                    url: '@Url.Content("~/Form/DDLRegion/")',
+                    dataType: 'json'
+                }).done(function (dataresult) {
+                    var jsonArray = JSON.parse(dataresult);
+                        for (var i = 0; i < jsonArray.length; i++) {
+                            jsonArray[i].id = jsonArray[i].id.replace(/\"/g, '');
+                            jsonArray[i].text = jsonArray[i].text.replace(/\"/g, '');
+                        }
+                    var data_road = jsonArray;
+                    $('.select2_road').empty();
+                    var init_data = [
+                        {
+                            id: '',
+                            text: '街道'
+                        },
+                    ];
+                    $('.select2_road').select2({
+                        data: init_data,
+                    });
+                    $('.select2_road').select2({
+                        data: data_road,
+                        placeholder: {
+                            id: '',
+                            text: '街道'
+                        }
+                    });
+                });
+            });
+
+    });
     </script>
 }

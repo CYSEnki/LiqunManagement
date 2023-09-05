@@ -68,7 +68,7 @@
                                                                 <i class="fal fa-ellipsis-v"></i>
                                                             </a>
                                                             <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="javascript:void(0);">物件資料</a>
+                                                                <a class="dropdown-item" href="@Url.Action("HomeObject", "Form", new { FormID = item.FormId})">物件資料</a>
                                                                 <a class="dropdown-item" href="@Url.Action("Landlord", "Form", new { FormID = item.FormId})">房東資料</a>
                                                                 <a class="dropdown-item" href="@Url.Action("Tenant", "Form", new { FormID = item.FormId})">房客資料</a>
                                                             </div>

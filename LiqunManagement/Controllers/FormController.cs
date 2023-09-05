@@ -17,70 +17,22 @@ namespace LiqunManagement.Controllers
     [AdminAuthorize]
     public class FormController : BaseController
     {
-        // GET: Form
-        public ActionResult Index()
+        // Initial Model
+        public FormViewModels InitialModel()
         {
-            #region 使用者資料
-            var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
-                                join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
-                                from empdb0 in temp.DefaultIfEmpty()
-                                join deptdb in memberdb.Department on empdb0.DivCode equals deptdb.DivCode into temp2
-                                from deptdb0 in temp2.DefaultIfEmpty()
-                                select new MembersViewModel
-                                {
-                                    Name = db.Name,
-                                    Department = empdb0 != null ? deptdb0.DivFullName : null,
-                                    Position = empdb0 != null ? empdb0.JobTitle : null,
-                                }).FirstOrDefault();
-            if (EmployeeData != null)
+            var model = new FormViewModels
             {
-                ViewBag.UserName = EmployeeData.Name;                 //使用者名稱
-                ViewBag.Department = EmployeeData.Department;   //使用者部門
-                ViewBag.Position = EmployeeData.Position;       //使用者職位
-            }
-            //確認角色
-            var role = User.IsInRole("Admin");
-            //var role2 = User.IsInRole("User");
-            #endregion
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Index(string Inline1Radio1, DateTime signdate, string Inline1Radio2, string Specialtext)
-        {
-            #region 使用者資料
-            var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
-                                join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
-                                from empdb0 in temp.DefaultIfEmpty()
-                                join deptdb in memberdb.Department on empdb0.DivCode equals deptdb.DivCode into temp2
-                                from deptdb0 in temp2.DefaultIfEmpty()
-                                select new MembersViewModel
-                                {
-                                    Name = db.Name,
-                                    Department = empdb0 != null ? deptdb0.DivFullName : null,
-                                    Position = empdb0 != null ? empdb0.JobTitle : null,
-                                }).FirstOrDefault();
-            if (EmployeeData != null)
-            {
-                ViewBag.UserName = EmployeeData.Name;                 //使用者名稱
-                ViewBag.Department = EmployeeData.Department;   //使用者部門
-                ViewBag.Position = EmployeeData.Position;       //使用者職位
-            }
-            //確認角色
-            var role = User.IsInRole("Admin");
-            //var role2 = User.IsInRole("User");
-            #endregion
-            if (ModelState.IsValid)
-            {
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("Login", "Memebers");
-            }
+                FormID = null,
+                homeobjectviewmodel = null,
+            };
+
+            return model;
         }
 
+
         #region 房屋物件資料
-        public ActionResult HomeObject()
+        //頁面讀取
+        public ActionResult HomeObject(string FormID)
         {
             #region 使用者資料
             var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
@@ -113,8 +65,80 @@ namespace LiqunManagement.Controllers
                 payment_date.Add(i);
             }
             ViewBag.Payment_date = payment_date;
-            return View();
+
+            #region 存在表單資料
+            var ExistForm = formdb.HomeObject.Where(x => x.FormID == FormID).FirstOrDefault();
+            if(ExistForm != null)
+            {
+                //取得物件地址DDL
+                var addressdata = formdb.Region.Where(x => x.City == ExistForm.city && x.District == ExistForm.district && x.Road == ExistForm.road).FirstOrDefault();
+                var CityCode = addressdata.CityCode;
+                var DistrictCode = addressdata.DistrictCode;
+                var RoadCode = addressdata.RoadCode;
+                var districtlist = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(CityCode).ddllist.ToList());
+                var roadlist = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(DistrictCode).ddllist.ToList());
+
+                var FormValue = new HomeObjectViewModel
+                {
+                    objecttype = ExistForm.objecttype,
+                    notarization = ExistForm.notarization,
+                    signdateStr = Convert.ToDateTime(ExistForm.signdate).ToString("yyyy-MM-dd"),
+                    appraiser = ExistForm.appraiser,
+                    feature = ExistForm.feature != null ? ExistForm.feature : "",
+                    citycode = CityCode,
+                    districtcode = DistrictCode,
+                    distirctJsonDDL = districtlist,     //鄉鎮市區地址
+                    roadcode = RoadCode,
+                    roadJsonDDL = roadlist,             //道路地址
+                    detailaddress = ExistForm.detailaddress,
+                    usefor = ExistForm.usefor,
+                    useforelse = String.IsNullOrWhiteSpace(ExistForm.useforelse) ? "" : ExistForm.useforelse,
+                    rent = ExistForm.rent,
+                    deposit = ExistForm.deposit,
+                    management_fee = ExistForm.management_fee,
+                    startdateStr = Convert.ToDateTime(ExistForm.startdate).ToString("yyyy-MM-dd"),
+                    enddateStr = Convert.ToDateTime(ExistForm.enddate).ToString("yyyy-MM-dd"),
+                    paydate = ExistForm.paydate,
+                    buildtype = ExistForm.buildtype,
+                    roomtype = ExistForm.roomtype,
+                    //roomamount = ExistForm.roomamount,
+                    roomamountlist = JsonConvert.DeserializeObject<List<int>>(ExistForm.roomamount),
+                    haveparklist = JsonConvert.DeserializeObject<List<int>>(ExistForm.havepark),
+                    parktype = ExistForm.parktype,
+                    parkfloorlist = JsonConvert.DeserializeObject<List<int>>(ExistForm.parkfloor),
+                    carpositionnumber = String.IsNullOrEmpty(ExistForm.carpositionnumber) ? "" : ExistForm.carpositionnumber,   //汽車位編號
+                    carmonthrent = ExistForm.carmonthrent,
+                    carparkmanagefee = ExistForm.carparkmanagefee,
+                    scooterparkfloorlist = JsonConvert.DeserializeObject<List<int>>(ExistForm.scooterparkfloor),
+                    scooterpositionnumber = String.IsNullOrEmpty(ExistForm.scooterpositionnumber) ? "" : ExistForm.scooterpositionnumber,   //機車位編號
+                    scootermonthrent = ExistForm.scootermonthrent,
+                    scootermanagefee = ExistForm.scootermanagefee,
+                    Accessorylist = JsonConvert.DeserializeObject<List<int>>(ExistForm.Accessory),    //房屋附屬物件
+
+                    Memo = String.IsNullOrEmpty(ExistForm.Memo) ? "" : ExistForm.Memo,
+                };
+
+
+                var model = new FormViewModels
+                {
+                    FormID = FormID != null ? FormID : "",
+                    homeobjectviewmodel = FormValue,
+
+                };
+
+                return View(model);
+            }
+            //取得下拉選單
+
+            #endregion
+
+            var model0 = InitialModel();
+
+
+            return View(model0);
         }
+
+        //[Insert]新增物件
         [HttpPost]
         public ActionResult HomeObject(
             string objecttypeRadio,     //(radio)包租:1; 代管:0
@@ -122,7 +146,7 @@ namespace LiqunManagement.Controllers
             string signdate,            //(datetime)簽約日
             string appraiserRadio,      //(radio)簽估價師:1; 非簽估價師:0
             string feature,             //(text)特色
-            string selecctroad,         //(ddl)物件地址
+            string selectroad,         //(ddl)物件地址
             string detailaddress,       //(text)地址細節
             string useforRadio,         //(radio)主要用途 住家用:0; 商業用:1; 辦公室:2; 一般事務所:3; 其他:4
             string useforelse,          //(text)主要用途 其他
@@ -146,10 +170,12 @@ namespace LiqunManagement.Controllers
             string parkfloornumber,     //(number)汽車位於幾樓
             string carpositionnumber,   //(text)汽車位編號
             string carmonthrent,        //(text)汽車月租金
-            string parkmanagementfee,   //(number)汽車管理費
+            string carparkmanagefee,   //(number)汽車管理費
+            string scooterparkfloorRadio,       //(radio)機車位於 地上:1; 地下:0
+            string scooterparkfloornumber,     //(number)機車位於幾樓
             string morpositionnumber,   //(text)機車位編號
             string scootermonthrent,    //(number)機車月租金
-            string scootermanagementfee,//(number)機車管理費
+            string scootermanagefee,//(number)機車管理費
 
             string JsonHomeObjectAccessory, //房屋附屬家具
             string memo                 //備註
@@ -208,6 +234,12 @@ namespace LiqunManagement.Controllers
             parkfloorArray[1] = Convert.ToInt32(parkfloornumber);
             string jsonparkfloorArray = JsonConvert.SerializeObject(parkfloorArray);
 
+
+            int[] scooterparkfloorArray = new int[2];
+            scooterparkfloorArray[0] = Convert.ToInt32(scooterparkfloorRadio);
+            scooterparkfloorArray[1] = Convert.ToInt32(scooterparkfloornumber);
+            string jsonscooterparkfloorArray = JsonConvert.SerializeObject(scooterparkfloorArray);
+
             //民國 -> 西元
             var Signdate = Convert.ToDateTime(signdate).AddYears(1911);
             var Startdate = Convert.ToDateTime(startdate).AddYears(1911);
@@ -253,7 +285,7 @@ namespace LiqunManagement.Controllers
             try
             {
                 //找到地址
-                var address = formdb.Region.Where(x => x.RoadCode == selecctroad).FirstOrDefault();
+                var address = formdb.Region.Where(x => x.RoadCode == selectroad).FirstOrDefault();
 
                 // 建立資料上下文（Data Context）
                 using (var context = new FormModels())
@@ -290,10 +322,11 @@ namespace LiqunManagement.Controllers
                         parkfloor = jsonparkfloorArray,
                         carpositionnumber = carpositionnumber,
                         carmonthrent = String.IsNullOrEmpty(carmonthrent) ? 0 : Convert.ToInt32(carmonthrent),
-                        carparkmanagefee = String.IsNullOrEmpty(parkmanagementfee) ? 0 : Convert.ToInt32(parkmanagementfee),
+                        carparkmanagefee = String.IsNullOrEmpty(carparkmanagefee) ? 0 : Convert.ToInt32(carparkmanagefee),
+                        scooterparkfloor = jsonscooterparkfloorArray,
                         scooterpositionnumber = morpositionnumber,
                         scootermonthrent = String.IsNullOrEmpty(scootermonthrent) ? 0 : Convert.ToInt32(scootermonthrent),
-                        scootermanagefee = String.IsNullOrEmpty(scootermanagementfee) ? 0 : Convert.ToInt32(scootermanagementfee),
+                        scootermanagefee = String.IsNullOrEmpty(scootermanagefee) ? 0 : Convert.ToInt32(scootermanagefee),
                         Accessory = JsonHomeObjectAccessory,
 
                         CreateUser = userid,
