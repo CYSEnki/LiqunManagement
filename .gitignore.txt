@@ -3,3 +3,5 @@ LiqunManagement/Web.config
 
 # 忽略發布
 LiqunManagement/Properties/PublishProfiles/
+
+#忽略
