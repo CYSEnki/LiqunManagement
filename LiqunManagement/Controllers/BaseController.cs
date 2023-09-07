@@ -1,4 +1,5 @@
 ﻿using LiqunManagement.Models;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,14 @@ namespace LiqunManagement.Controllers
 {
     public class BaseController : Controller
     {
+        public Logger logger;
+
         public FormModels formdb = new FormModels();
         public MembersModel memberdb = new MembersModel();
 
         public BaseController()
         {
+            logger = LogManager.GetCurrentClassLogger();
         }
 
         //public FormModels formdb = new FormModels();

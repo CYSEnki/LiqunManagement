@@ -4,7 +4,79 @@
     ViewBag.Controller = "Form";
     Layout = "~/Views/Shared/smartadmin_Layout.cshtml";
 
-    var FormID = Model.FormID;
+    var FormID = Model.FormID != null ? Model.FormID : "";
+
+    //包租:1; 代管:0
+    var objecttypeValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.objecttype.ToString() : "";
+    //[是否公證]0:無公證; 1:是公證
+    var notarizationValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.notarization.ToString() : "";
+    //簽約日
+    var signdate = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.signdateStr : "";
+    //[是否簽估價師] 0:無估價師; 1:簽估價師
+    var appraiserValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.appraiser.ToString() : "";
+    //特色
+    var feature = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.feature : "";
+    //物件地址(縣市)
+    var citycodeValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.citycode : "";
+    //物件地址(鄉鎮市區)
+    var jsonDistrict = @Html.Raw(Json.Encode(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.distirctJsonDDL : ""));
+    var districtcodeValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.districtcode : "";
+    //物件地址(道路)
+    var jsonRoad = @Html.Raw(Json.Encode(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.roadJsonDDL : ""));
+    var roadcodeValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.roadcode : "";
+    //物件地址(詳細地址)
+    var detailaddress = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.detailaddress : "";
+    //[主要用途]0:住家用; 1:商業用; 2:辦公室; 3:一般事務所 4: 其他
+    var useforValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.usefor.ToString() : "";
+    //[主要用途]其他
+    var useforelse = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.useforelse : "";
+    //[租金](int)
+    var rent = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.rent : 0;
+    //[押金](int)
+    var deposit = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.deposit : 0;
+    //[管理費](int)
+    var management_fee = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.management_fee : 0;
+    //[起租日]
+    var startdate = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.startdateStr : "";
+    //[結束日]
+    var enddate = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.enddateStr : "";
+    //[繳租日]
+    var paydate = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.paydate : -1;
+
+    //[建物型態]0:透天厝; 1:公寓; 2:華夏; 3:電梯大樓
+    var buildtypeValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.buildtype.ToString() : "";
+    //[房型]0:整層出租; 1:獨立套房
+    var roomtypeValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.roomtype.ToString() : "";
+    var roomamount = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.roomamount.ToString() : "";
+
+    //是否有車位
+    var havepark = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.havepark.ToString() : "";
+
+    //[汽車車位樣式]0:坡道平面; 1:坡道機械; 2: 機械平面; 3:機械機械
+    var parktypeValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.parktype.ToString() : "";
+    //[車位位於]: 陣列[(地上:1; 地下:0;),  (樓數)]
+    var parkfloor = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.parkfloor : "";
+    //[車位編號]
+    var carpositionnumber = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.carpositionnumber : "";
+    //[汽車月租金](int)
+    var carmonthrentValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.carmonthrent : 0;
+    //[汽車停車管理費](int)
+    var carparkmanagefeeValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.carparkmanagefee : 0;
+
+    //[機車位位於]: 陣列[(地上:1; 地下:0;),  (樓數)]
+    var scooterparkfloor = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.scooterparkfloor : "";
+    //[機車位編號]
+    var scooterpositionnumber = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.scooterpositionnumber : "";
+    //[機車位月租金]
+    var scootermonthrent = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.scootermonthrent : 0;
+    //[機車停車管理費]
+    var scootermanagefee = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.scootermanagefee : 0;
+
+    //房屋附屬物件
+    var Accessory = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.Accessory : "";
+
+    //備註
+    var memo = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.Memo : "";
 }
 <style>
     .padding-top-ten {
@@ -65,6 +137,8 @@
 
                         @using (Html.BeginForm("HomeObject", "Form", FormMethod.Post, new { @class = "needs-validation", @enctype = "multipart/form-data", @novalidate = "" }))
                         {
+                            @*表單編號*@
+                            <input type="text" name="FormID" hidden readonly/>
                             @*包租或代管*@
                             <div class="form-group">
                                 <label class="form-label">
@@ -493,6 +567,7 @@
 
 
         $(function () {
+
             /*Initial inputmask*/
             $(":input").inputmask();
 
@@ -843,101 +918,93 @@
             //------------------
             var formid = '@FormID';
             if (formid !== '') {
+                $('input[name="FormID"]').val(formid);
                 //包租:1; 代管:0
-                var objecttypeValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.objecttype : "")';
+                var objecttypeValue = '@objecttypeValue';
                 $('input[name="objecttypeRadio"][value="' + objecttypeValue + '"]').prop('checked', true);
                 //[是否公證]0:無公證; 1:是公證
-                var notarizationValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.notarization : "")';
+                var notarizationValue = '@notarizationValue';
                 $('input[name="notarizationRadio"][value="' + notarizationValue + '"]').prop('checked', true);
                 //簽約日
-                var signdate = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.signdateStr : "")';
+                var signdate = new Date('@signdate');
                 $('input[name="signdate"]').datepicker("setDate", signdate);
                 //[是否簽估價師] 0:無估價師; 1:簽估價師
-                var appraiserValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.appraiser : "")';
+                var appraiserValue = '@appraiserValue';
                 $('input[name="appraiserRadio"][value="' + appraiserValue + '"]').prop('checked', true);
                 //特色
-                var feature = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.feature : "")';
+                var feature = '@feature';
                 if (feature !== '') {
                     $('input[name="feature"]').val(feature);
                 }
-                //物件地址(縣市)
-                var cityValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.citycode : "")';
 
-                // 取消body上的change事件处理程序
-                $('body').off('change', '.select2_city');
-                $('body').off('change', '.select2_district');
-                $('#selectcity').val(cityValue).trigger('change');
-                //$('#selectcity').val(cityValue);
-                //物件地址(鄉鎮市區)
-                var districtValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.districtcode : "")';
-                var jsonDistrict = @Html.Raw(Json.Encode(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.distirctJsonDDL : ""));
+                //物件地址
+                //鄉鎮市區DDL
+                var jsonDistrict = @jsonDistrict;
                 var districtArray = JSON.parse(jsonDistrict);
                 for (var i = 0; i < districtArray.length; i++) {
                     districtArray[i].id = districtArray[i].id.replace(/\"/g, '');
                     districtArray[i].text = districtArray[i].text.replace(/\"/g, '');
                 }
-                $('#selectdistrict').empty();
-                $('#selectdistrict').select2({
-                    data: districtArray,
-                    //placeholder: ''
-                });
-                $('#selectdistrict').val(districtValue).trigger('change');
-                //$('#selectdistrict').val(districtValue);
-                //物件地址(道路)
-                var roadValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.roadcode : "")';
-                var jsonRoad = @Html.Raw(Json.Encode(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.roadJsonDDL : ""));
+                $('#selectdistrict').empty().select2({data: districtArray});
+                //道路DDL
+                var jsonRoad = @jsonRoad;
                 var roadArray = JSON.parse(jsonRoad);
                 for (var i = 0; i < roadArray.length; i++) {
                     roadArray[i].id = roadArray[i].id.replace(/\"/g, '');
                     roadArray[i].text = roadArray[i].text.replace(/\"/g, '');
                 }
-                $('#selectroad').empty();
-                $('#selectroad').select2({
-                    data: roadArray,
-                    //placeholder: '道路'
-                });
-                $('#selectroad').val(roadValue).trigger('change');
-                //$('#selectroad').val(roadValue);
+                $('#selectroad').empty().select2({ data: roadArray });
+                //取消body上的change綁定事件
+                $('body').off('change', '.select2_city');
+                $('body').off('change', '.select2_district');
+                $('#selectcity').val('@citycodeValue').trigger('change');
+                $('#selectdistrict').val('@districtcodeValue').trigger('change');
+                $('#selectroad').val('@roadcodeValue').trigger('change');
                 //物件地址(詳細地址)
-                var detailaddress = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.detailaddress : "")';
+                var detailaddress = '@detailaddress';
                 $('input[name="detailaddress"]').val(detailaddress);
+
                 //[主要用途]0:住家用; 1:商業用; 2:辦公室; 3:一般事務所 4: 其他
-                var useforValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.usefor : "")';
+                var useforValue = '@useforValue';
                 $('input[name="useforRadio"][value="' + useforValue + '"]').prop('checked', true);
                 //[主要用途]其他
-                var useforelse = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.useforelse : "")';
+                var useforelse = '@useforelse';
                 if (useforelse !== '') {
                     $('#elsemainuse').prop('required', true);
                     $('#elsemainuse').prop('disabled', false);
                     $('#elsemainuse').prop('readonly', false);
                     $('#elsemainuse').val(useforelse);
                 }
+
                 //[租金]
-                var rent = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.rent : "")';
+                var rent = '@rent';
                 $('#rent').val(rent);
                 //[押金]
-                var deposit = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.deposit : "")';
+                var deposit = '@deposit';
                 $('#deposit').val(deposit);
                 //[管理費]
-                var management_fee = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.management_fee : "")';
+                var management_fee = '@management_fee';
                 $('#management_fee').val(management_fee);
+
                 //[起租日]
-                var startdate = new Date('@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.startdateStr : "")');
+                var startdate = new Date('@startdate');
                 $('input[name="startdate"]').datepicker("setDate", startdate);
                 //[結束日]
-                var enddate = new Date('@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.enddateStr : "")');
+                var enddate = new Date('@enddate');
                 $('input[name="enddate"]').datepicker("setDate", enddate);
                 //[繳租日]
-                var paydate = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.paydate : "")';
+                var paydate = '@paydate';
                 $('#paydate').val(paydate);
+
+
                 //[建物型態]0:透天厝; 1:公寓; 2:華夏; 3:電梯大樓
-                var buildtypeValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.buildtype : "")';
+                var buildtypeValue = '@buildtypeValue';
                 $('input[name="buildtypeRadio"][value="' + buildtypeValue + '"]').prop('checked', true);
                 //[房型]0:整層出租; 1:獨立套房
-                var roomtypeValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.roomtype : "")';
+                var roomtypeValue = '@roomtypeValue';
                 $('input[name="roomtypeRadio"][value="' + roomtypeValue + '"]').prop('checked', true);
                 if (roomtypeValue === '0') {
-                    var roomamountlist = @Html.Raw(Json.Encode(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.roomamountlist : "[]"));
+                    var roomamountlist = JSON.parse('@roomamount');
                     for (var i = 0; i < roomamountlist.length; i++) {
                         var roomelement = $('[data-index="' + i + '"].roomtypeamount');
                         roomelement.val(roomamountlist[i]);
@@ -951,13 +1018,14 @@
                     $('.roomtypeamount').prop('disabled', true);
                     $('.roomtypeamount').prop('readonly', true);
                 }
+
                 //是否有車位
-                var haveparklist = @Html.Raw(Json.Encode(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.haveparklist : ""));
+                var haveparklist = JSON.parse('@havepark');
 
                 const nopark = document.querySelector('input[aria-label="無車位"]');
                 const carpark = document.querySelector('input[aria-label="汽車車位"]');
                 const morpark = document.querySelector('input[aria-label="機車車位"]');
-                if (haveparklist[0] === 1) {
+                if (havepark[0] === 1) {
                     nopark.checked = true;
                 }
                 if (haveparklist[1] === 1) {
@@ -966,45 +1034,44 @@
                     $('.park_carclass').show();
 
                     //[汽車車位樣式]0:坡道平面; 1:坡道機械; 2: 機械平面; 3:機械機械
-                    var parktypeValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.parktype : "")';
-                                $('input[name="parktypeRadio"][value="' + parktypeValue + '"]').prop('checked', true);
+                    var parktypeValue = '@parktypeValue';
+                    $('input[name="parktypeRadio"][value="' + parktypeValue + '"]').prop('checked', true);
                     //[車位位於]: 陣列[(地上:1; 地下:0;),  (樓數)]
-                                var parkfloorlist = @Html.Raw(Json.Encode(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.parkfloorlist : ""));
-
-                                $('input[name="carparkfloorRadio"][value="' + parkfloorlist[0] + '"]').prop('checked', true);
-                                $('#parkfloornumber').val(parkfloorlist[1]);
+                    var parkfloorlist = JSON.parse('@parkfloor');
+                    $('input[name="carparkfloorRadio"][value="' + parkfloorlist[0] + '"]').prop('checked', true);
+                    $('#parkfloornumber').val(parkfloorlist[1]);
                     //[車位編號]
-                    var carpositionnumber = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.carpositionnumber : "")';
+                    var carpositionnumber = '@carpositionnumber';
                     if (carpositionnumber !== '') {
-                                    $('#carpositionnumber').val(carpositionnumber);
+                        $('#carpositionnumber').val(carpositionnumber);
                     }
                     //[汽車月租金]
-                    var carmonthrentValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.carmonthrent : "")';
-                                $('#carmonthrent').val(carmonthrentValue);
+                    var carmonthrentValue = '@carmonthrentValue';
+                    $('#carmonthrent').val(carmonthrentValue);
                     //[汽車停車管理費]
-                    var carparkmanagefeeValue = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.carparkmanagefee : "")';
-                                $('#carparkmanagefee').val(carparkmanagefeeValue);
+                    var carparkmanagefeeValue = '@carparkmanagefeeValue';
+                    $('#carparkmanagefee').val(carparkmanagefeeValue);
                 }
                 if (haveparklist[2] === 1) {
                     nopark.checked = false;
                     morpark.checked = true;
-                            $('.park_morclass').show();
+                    $('.park_morclass').show();
 
-                //[機車位位於]: 陣列[(地上:1; 地下:0;),  (樓數)]
-                        var scooterparkfloorlist = @Html.Raw(Json.Encode(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.scooterparkfloorlist : ""));
-                $('input[name="scooterparkfloorRadio"][value="' + scooterparkfloorlist[0] + '"]').prop('checked', true);
-                $('#scooterparkfloornumber').val(scooterparkfloorlist[1]);
-                //[機車位編號]
-                var scooterpositionnumber = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.scooterpositionnumber : "")';
-                if (scooterpositionnumber !== '') {
-                            $('#morpositionnumber').val(scooterpositionnumber);
-                }
-                //[機車位月租金]
-                var scootermonthrent = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.scootermonthrent : "")';
-                        $('#scootermonthrent').val(scootermonthrent);
-                //[機車停車管理費]
-                var scootermanagefee = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.scootermanagefee : "")';
-                        $('#scootermanagefee').val(scootermanagefee);
+                    //[機車位位於]: 陣列[(地上:1; 地下:0;),  (樓數)]
+                    var scooterparkfloorlist = JSON.parse('@scooterparkfloor');
+                    $('input[name="scooterparkfloorRadio"][value="' + scooterparkfloorlist[0] + '"]').prop('checked', true);
+                    $('#scooterparkfloornumber').val(scooterparkfloorlist[1]);
+                    //[機車位編號]
+                    var scooterpositionnumber = '@scooterpositionnumber';
+                    if (scooterpositionnumber !== '') {
+                        $('#morpositionnumber').val(scooterpositionnumber);
+                    }
+                    //[機車位月租金]
+                    var scootermonthrent = '@scootermonthrent';
+                    $('#scootermonthrent').val(scootermonthrent);
+                    //[機車停車管理費]
+                    var scootermanagefee = '@scootermanagefee';
+                    $('#scootermanagefee').val(scootermanagefee);
                 }
                 //重設Requiired屬性
                 $('input[aria-label="無車位"]').prop('required', false);
@@ -1012,17 +1079,20 @@
                 $('input[aria-label="機車車位"]').prop('required', false);
 
                 //房屋附屬物件
-                var Accessorylist = @Html.Raw(Json.Encode(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.Accessorylist : "[]"));
-
+                var Accessorylist = JSON.parse('@Accessory');
                 for (var i = 0; i <= Accessorylist.length; i++) {
 
                     if (Accessorylist[i] === 0) {
                         $('[data-option = "0"][data-edit="' + i + '"].accessory_option').prop('checked', true);
+                        $('[data-edit="' + i + '"].accessoryInput').val(Accessorylist[i]);
+                        $('[data-edit="' + i + '"].accessoryInput').prop('readonly', true);
                     }
                     else {
                         $('[data-option = "1"][data-edit="' + i + '"].accessory_option').prop('checked', true);
                         $('[data-edit="' + i + '"].accessoryInput').val(Accessorylist[i]);
-                        $('[data-edit="' + i + '"].accessoryInput').prop('readonly', false);
+                        if (i > 6) {
+                            $('[data-edit="' + i + '"].accessoryInput').prop('readonly', false);
+                        }
                         if (i == 4 || i == 5) {
                             $('[data-edit="45"].accessoryInput').val(Accessorylist[i]);
                         }
@@ -1030,11 +1100,14 @@
                 }
 
                 //備註
-                var memo = '@(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.Memo : "")';
+                var memo = '@memo';
                 if (memo !== '') {
                     $('#momo').val(memo);
                 }
-        }
+
+
+
+            }
             //當下拉選單發生改變事件(change)，執行
             $('body').on('change', '.select2_city', function () {
                 $('.select2_road').empty();

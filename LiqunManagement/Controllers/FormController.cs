@@ -4,11 +4,14 @@ using LiqunManagement.Services;
 using LiqunManagement.ViewModels;
 using Newtonsoft.Json;
 using NPOI.SS.Formula.Functions;
+using NPOI.SS.Util;
 using Org.BouncyCastle.Bcpg.Sig;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
@@ -34,6 +37,7 @@ namespace LiqunManagement.Controllers
         //頁面讀取
         public ActionResult HomeObject(string FormID)
         {
+            logger.Info("進入房屋物件資料 FormID : " + (FormID != null ? FormID : ""));
             #region 使用者資料
             var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
                                 join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
@@ -67,80 +71,105 @@ namespace LiqunManagement.Controllers
             ViewBag.Payment_date = payment_date;
 
             #region 存在表單資料
-            var ExistForm = formdb.HomeObject.Where(x => x.FormID == FormID).FirstOrDefault();
-            if(ExistForm != null)
+            try
             {
-                //取得物件地址DDL
-                var addressdata = formdb.Region.Where(x => x.City == ExistForm.city && x.District == ExistForm.district && x.Road == ExistForm.road).FirstOrDefault();
-                var CityCode = addressdata.CityCode;
-                var DistrictCode = addressdata.DistrictCode;
-                var RoadCode = addressdata.RoadCode;
-                var districtlist = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(CityCode).ddllist.ToList());
-                var roadlist = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(DistrictCode).ddllist.ToList());
-
-                var FormValue = new HomeObjectViewModel
+                var ExistForm = formdb.HomeObject.Where(x => x.FormID == FormID).FirstOrDefault();
+                if (ExistForm != null)
                 {
-                    objecttype = ExistForm.objecttype,
-                    notarization = ExistForm.notarization,
-                    signdateStr = Convert.ToDateTime(ExistForm.signdate).ToString("yyyy-MM-dd"),
-                    appraiser = ExistForm.appraiser,
-                    feature = ExistForm.feature != null ? ExistForm.feature : "",
-                    citycode = CityCode,
-                    districtcode = DistrictCode,
-                    distirctJsonDDL = districtlist,     //鄉鎮市區地址
-                    roadcode = RoadCode,
-                    roadJsonDDL = roadlist,             //道路地址
-                    detailaddress = ExistForm.detailaddress,
-                    usefor = ExistForm.usefor,
-                    useforelse = String.IsNullOrWhiteSpace(ExistForm.useforelse) ? "" : ExistForm.useforelse,
-                    rent = ExistForm.rent,
-                    deposit = ExistForm.deposit,
-                    management_fee = ExistForm.management_fee,
-                    startdateStr = Convert.ToDateTime(ExistForm.startdate).ToString("yyyy-MM-dd"),
-                    enddateStr = Convert.ToDateTime(ExistForm.enddate).ToString("yyyy-MM-dd"),
-                    paydate = ExistForm.paydate,
-                    buildtype = ExistForm.buildtype,
-                    roomtype = ExistForm.roomtype,
-                    //roomamount = ExistForm.roomamount,
-                    roomamountlist = JsonConvert.DeserializeObject<List<int>>(ExistForm.roomamount),
-                    haveparklist = JsonConvert.DeserializeObject<List<int>>(ExistForm.havepark),
-                    parktype = ExistForm.parktype,
-                    parkfloorlist = JsonConvert.DeserializeObject<List<int>>(ExistForm.parkfloor),
-                    carpositionnumber = String.IsNullOrEmpty(ExistForm.carpositionnumber) ? "" : ExistForm.carpositionnumber,   //汽車位編號
-                    carmonthrent = ExistForm.carmonthrent,
-                    carparkmanagefee = ExistForm.carparkmanagefee,
-                    scooterparkfloorlist = JsonConvert.DeserializeObject<List<int>>(ExistForm.scooterparkfloor),
-                    scooterpositionnumber = String.IsNullOrEmpty(ExistForm.scooterpositionnumber) ? "" : ExistForm.scooterpositionnumber,   //機車位編號
-                    scootermonthrent = ExistForm.scootermonthrent,
-                    scootermanagefee = ExistForm.scootermanagefee,
-                    Accessorylist = JsonConvert.DeserializeObject<List<int>>(ExistForm.Accessory),    //房屋附屬物件
+                    //取得物件地址DDL
+                    var addressdata = formdb.Region.Where(x => x.City == ExistForm.city && x.District == ExistForm.district && x.Road == ExistForm.road).FirstOrDefault();
+                    var CityCode = addressdata.CityCode;
+                    var DistrictCode = addressdata.DistrictCode;
+                    var RoadCode = addressdata.RoadCode;
+                    var districtlist = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(CityCode).ddllist.ToList());
+                    var roadlist = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(DistrictCode).ddllist.ToList());
 
-                    Memo = String.IsNullOrEmpty(ExistForm.Memo) ? "" : ExistForm.Memo,
-                };
+                    var FormValue = new HomeObjectViewModel
+                    {
+                        objecttype = ExistForm.objecttype,
+                        notarization = ExistForm.notarization,
+                        signdateStr = Convert.ToDateTime(ExistForm.signdate).ToString("yyyy-MM-dd"),
+                        appraiser = ExistForm.appraiser,
+                        feature = ExistForm.feature != null ? ExistForm.feature : "",
+                        citycode = CityCode,
+                        districtcode = DistrictCode,
+                        distirctJsonDDL = districtlist,     //鄉鎮市區地址
+                        roadcode = RoadCode,
+                        roadJsonDDL = roadlist,             //道路地址
+                        detailaddress = ExistForm.detailaddress,
+                        usefor = ExistForm.usefor,
+                        useforelse = String.IsNullOrWhiteSpace(ExistForm.useforelse) ? "" : ExistForm.useforelse,
+                        rent = ExistForm.rent,
+                        deposit = ExistForm.deposit,
+                        management_fee = ExistForm.management_fee,
+                        startdateStr = Convert.ToDateTime(ExistForm.startdate).ToString("yyyy-MM-dd"),
+                        enddateStr = Convert.ToDateTime(ExistForm.enddate).ToString("yyyy-MM-dd"),
+                        paydate = ExistForm.paydate,
+                        buildtype = ExistForm.buildtype,
+                        roomtype = ExistForm.roomtype,
+                        roomamount = ExistForm.roomamount,
+                        //roomamountlist = JsonConvert.DeserializeObject<List<int>>(ExistForm.roomamount),
+                        havepark = ExistForm.havepark,
+                        //haveparklist = JsonConvert.DeserializeObject<List<int>>(ExistForm.havepark),
+                        parktype = ExistForm.parktype,
+                        parkfloor = ExistForm.parkfloor,
+                        //parkfloorlist = JsonConvert.DeserializeObject<List<int>>(ExistForm.parkfloor),
+                        carpositionnumber = String.IsNullOrEmpty(ExistForm.carpositionnumber) ? "" : ExistForm.carpositionnumber,   //汽車位編號
+                        carmonthrent = ExistForm.carmonthrent,
+                        carparkmanagefee = ExistForm.carparkmanagefee,
+                        scooterparkfloor = ExistForm.scooterparkfloor,
+                        //scooterparkfloorlist = JsonConvert.DeserializeObject<List<int>>(ExistForm.scooterparkfloor),
+                        scooterpositionnumber = String.IsNullOrEmpty(ExistForm.scooterpositionnumber) ? "" : ExistForm.scooterpositionnumber,   //機車位編號
+                        scootermonthrent = ExistForm.scootermonthrent,
+                        scootermanagefee = ExistForm.scootermanagefee,
+                        Accessory = ExistForm.Accessory,    //房屋附屬物件
+
+                        Memo = String.IsNullOrEmpty(ExistForm.Memo) ? "" : ExistForm.Memo,
+                    };
 
 
-                var model = new FormViewModels
-                {
-                    FormID = FormID != null ? FormID : "",
-                    homeobjectviewmodel = FormValue,
+                    var model = new FormViewModels
+                    {
+                        FormID = FormID != null ? FormID : "",
+                        homeobjectviewmodel = FormValue,
 
-                };
+                    };
 
-                return View(model);
+                    Type type = FormValue.GetType();
+                    PropertyInfo[] properties = type.GetProperties();
+
+                    foreach (PropertyInfo property in properties)
+                    {
+                        string propertyName = property.Name;
+                        object propertyValue = property.GetValue(FormValue);
+
+                        string logMessage = $"{propertyName}: {propertyValue}";
+                        logger.Error(logMessage);
+                    }
+
+                    logger.Error("取得房屋物件資料成功" + FormValue + "\n" +
+                                FormValue.ToString());
+                    return View(model);
+                }
             }
-            //取得下拉選單
-
+            catch(Exception ex)
+            {
+                logger.Error("取得房屋物件資料錯誤 : " + ex.ToString());
+            }
             #endregion
 
             var model0 = InitialModel();
 
 
+            logger.Info("返還初始Model");
             return View(model0);
         }
 
         //[Insert]新增物件
         [HttpPost]
         public ActionResult HomeObject(
+            string FormID,
+
             string objecttypeRadio,     //(radio)包租:1; 代管:0
             string notarizationRadio,   //(radio)公證:1; 非公證:0
             string signdate,            //(datetime)簽約日
@@ -241,9 +270,16 @@ namespace LiqunManagement.Controllers
             string jsonscooterparkfloorArray = JsonConvert.SerializeObject(scooterparkfloorArray);
 
             //民國 -> 西元
-            var Signdate = Convert.ToDateTime(signdate).AddYears(1911);
-            var Startdate = Convert.ToDateTime(startdate).AddYears(1911);
-            var Enddate = Convert.ToDateTime(enddate).AddYears(1911);
+            string[] signdateparts = signdate.Split('-');
+            string[] startdateparts = startdate.Split('-');
+            string[] enddateparts = enddate.Split('-');
+            var signdateYear = Convert.ToInt32(signdateparts[0]) + 1911;
+            var startdateYear = Convert.ToInt32(startdateparts[0]) + 1911;
+            var enddateYear = Convert.ToInt32(enddateparts[0]) + 1911;
+
+            var Signdate = Convert.ToDateTime(signdateYear + "-" + signdateparts[1] + "-" + signdateparts[2]);
+            var Startdate = Convert.ToDateTime(signdateYear + "-" + startdateparts[1] + "-" + startdateparts[2]);
+            var Enddate = Convert.ToDateTime(signdateYear + "-" + enddateparts[1] + "-" + enddateparts[2]);
 
 
             #region 存檔
@@ -286,80 +322,132 @@ namespace LiqunManagement.Controllers
             {
                 //找到地址
                 var address = formdb.Region.Where(x => x.RoadCode == selectroad).FirstOrDefault();
-
-                // 建立資料上下文（Data Context）
-                using (var context = new FormModels())
-                {
-                    // 建立要插入的資料物件
-                    var newData = new HomeObject
+                if(FormID == null) {
+                    // 建立資料上下文（Data Context）
+                    using (var context = new FormModels())
                     {
-                        FormID = newFormID,
-                        objecttype = Convert.ToInt32(objecttypeRadio),
-                        notarization = Convert.ToInt32(notarizationRadio),
-                        signdate = Signdate,
-                        appraiser = Convert.ToInt32(appraiserRadio),
-                        feature = feature,
-                        city = address.City,
-                        district = address.District,
-                        road = address.Road,
-                        detailaddress = detailaddress,
-                        fulladdress = address.City + address.District + address.Road + detailaddress,
-                        usefor = Convert.ToInt32(useforRadio),
-                        useforelse = useforelse,
-                        taxfile_name = fileNames,
-                        taxfile_alias = taxfile_alias,
-                        rent = Convert.ToInt32(rent),
-                        deposit = Convert.ToInt32(deposit),
-                        management_fee = Convert.ToInt32(management_fee),
-                        startdate = Startdate,
-                        enddate = Enddate,
-                        paydate = paydate,
-                        buildtype = Convert.ToInt32(buildtypeRadio),
-                        roomtype = Convert.ToInt32(roomtypeRadio),
-                        roomamount = jsonroomamountArray,
-                        havepark = jsonhaveparkArray,
-                        parktype = Convert.ToInt32(parktypeRadio),
-                        parkfloor = jsonparkfloorArray,
-                        carpositionnumber = carpositionnumber,
-                        carmonthrent = String.IsNullOrEmpty(carmonthrent) ? 0 : Convert.ToInt32(carmonthrent),
-                        carparkmanagefee = String.IsNullOrEmpty(carparkmanagefee) ? 0 : Convert.ToInt32(carparkmanagefee),
-                        scooterparkfloor = jsonscooterparkfloorArray,
-                        scooterpositionnumber = morpositionnumber,
-                        scootermonthrent = String.IsNullOrEmpty(scootermonthrent) ? 0 : Convert.ToInt32(scootermonthrent),
-                        scootermanagefee = String.IsNullOrEmpty(scootermanagefee) ? 0 : Convert.ToInt32(scootermanagefee),
-                        Accessory = JsonHomeObjectAccessory,
+                        // 建立要插入的資料物件
+                        var newData = new HomeObject
+                        {
+                            FormID = newFormID,
+                            objecttype = Convert.ToInt32(objecttypeRadio),
+                            notarization = Convert.ToInt32(notarizationRadio),
+                            signdate = Signdate,
+                            appraiser = Convert.ToInt32(appraiserRadio),
+                            feature = feature,
+                            city = address.City,
+                            district = address.District,
+                            road = address.Road,
+                            detailaddress = detailaddress,
+                            fulladdress = address.City + address.District + address.Road + detailaddress,
+                            usefor = Convert.ToInt32(useforRadio),
+                            useforelse = useforelse,
+                            taxfile_name = fileNames,
+                            taxfile_alias = taxfile_alias,
+                            rent = Convert.ToInt32(rent),
+                            deposit = Convert.ToInt32(deposit),
+                            management_fee = Convert.ToInt32(management_fee),
+                            startdate = Startdate,
+                            enddate = Enddate,
+                            paydate = paydate,
+                            buildtype = Convert.ToInt32(buildtypeRadio),
+                            roomtype = Convert.ToInt32(roomtypeRadio),
+                            roomamount = jsonroomamountArray,
+                            havepark = jsonhaveparkArray,
+                            parktype = Convert.ToInt32(parktypeRadio),
+                            parkfloor = jsonparkfloorArray,
+                            carpositionnumber = carpositionnumber,
+                            carmonthrent = String.IsNullOrEmpty(carmonthrent) ? 0 : Convert.ToInt32(carmonthrent),
+                            carparkmanagefee = String.IsNullOrEmpty(carparkmanagefee) ? 0 : Convert.ToInt32(carparkmanagefee),
+                            scooterparkfloor = jsonscooterparkfloorArray,
+                            scooterpositionnumber = morpositionnumber,
+                            scootermonthrent = String.IsNullOrEmpty(scootermonthrent) ? 0 : Convert.ToInt32(scootermonthrent),
+                            scootermanagefee = String.IsNullOrEmpty(scootermanagefee) ? 0 : Convert.ToInt32(scootermanagefee),
+                            Accessory = JsonHomeObjectAccessory,
 
-                        CreateUser = userid,
-                        CreateTime = now,
-                        UpdateUser = userid,
-                        UpdateTime = now,
-                        Memo = memo,
-                    };
-                    // 使用資料上下文插入資料物件
-                    context.HomeObject.Add(newData);
-                    // 儲存更改到資料庫
-                    context.SaveChanges();
+                            CreateUser = userid,
+                            CreateTime = now,
+                            UpdateUser = userid,
+                            UpdateTime = now,
+                            Memo = memo,
+                        };
+                        // 使用資料上下文插入資料物件
+                        context.HomeObject.Add(newData);
+                        // 儲存更改到資料庫
+                        context.SaveChanges();
+                    }
+
+                    // 建立資料上下文（Data Context）
+                    using (var context = new FormModels())
+                    {
+                        // 建立要插入的資料物件
+                        var newData = new ObjectForm
+                        {
+                            FormID = newFormID,
+                            CreateAccount = userid,
+                            CreateTime = now,
+                            UpdateAccount = userid,
+                            UpdateTime = now,
+                            ProcessAccount = userid,
+                            ProcessName = EmployeeData.Name,
+                            FormType = 0,
+                        };
+                        // 使用資料上下文插入資料物件
+                        context.ObjectForm.Add(newData);
+                        // 儲存更改到資料庫
+                        context.SaveChanges();
+                    }
+
                 }
-
-                // 建立資料上下文（Data Context）
-                using (var context = new FormModels())
+                else
                 {
-                    // 建立要插入的資料物件
-                    var newData = new ObjectForm
+                    // 建立資料上下文（Data Context）
+                    using (var context = new FormModels())
                     {
-                        FormID = newFormID,
-                        CreateAccount = userid,
-                        CreateTime = now,
-                        UpdateAccount = userid,
-                        UpdateTime = now,
-                        ProcessAccount = userid,
-                        ProcessName = EmployeeData.Name,
-                        FormType = 0,
-                    };
-                    // 使用資料上下文插入資料物件
-                    context.ObjectForm.Add(newData);
-                    // 儲存更改到資料庫
-                    context.SaveChanges();
+                        var existformdata = context.HomeObject.Where(x => x.FormID == FormID).FirstOrDefault();
+
+                        //更新物件內資料
+                        existformdata.objecttype = Convert.ToInt32(objecttypeRadio);
+                        existformdata.notarization = Convert.ToInt32(notarizationRadio);
+                        existformdata.signdate = Signdate;
+                        existformdata.appraiser = Convert.ToInt32(appraiserRadio);
+                        existformdata.feature = feature;
+                        existformdata.city = address.City;
+                        existformdata.district = address.District;
+                        existformdata.road = address.Road;
+                        existformdata.detailaddress = detailaddress;
+                        existformdata.fulladdress = address.City + address.District + address.Road + detailaddress;
+                        existformdata.usefor = Convert.ToInt32(useforRadio);
+                        existformdata.useforelse = useforelse;
+                        existformdata.taxfile_name = fileNames;
+                        existformdata.taxfile_alias = taxfile_alias;
+                        existformdata.rent = Convert.ToInt32(rent);
+                        existformdata.deposit = Convert.ToInt32(deposit);
+                        existformdata.management_fee = Convert.ToInt32(management_fee);
+                        existformdata.startdate = Startdate;
+                        existformdata.enddate = Enddate;
+                        existformdata.paydate = paydate;
+                        existformdata.buildtype = Convert.ToInt32(buildtypeRadio);
+                        existformdata.roomtype = Convert.ToInt32(roomtypeRadio);
+                        existformdata.roomamount = jsonroomamountArray;
+                        existformdata.havepark = jsonhaveparkArray;
+                        existformdata.parktype = Convert.ToInt32(parktypeRadio);
+                        existformdata.parkfloor = jsonparkfloorArray;
+                        existformdata.carpositionnumber = carpositionnumber;
+                        existformdata.carmonthrent = String.IsNullOrEmpty(carmonthrent) ? 0 : Convert.ToInt32(carmonthrent);
+                        existformdata.carparkmanagefee = String.IsNullOrEmpty(carparkmanagefee) ? 0 : Convert.ToInt32(carparkmanagefee);
+                        existformdata.scooterparkfloor = jsonscooterparkfloorArray;
+                        existformdata.scooterpositionnumber = morpositionnumber;
+                        existformdata.scootermonthrent = String.IsNullOrEmpty(scootermonthrent) ? 0 : Convert.ToInt32(scootermonthrent);
+                        existformdata.scootermanagefee = String.IsNullOrEmpty(scootermanagefee) ? 0 : Convert.ToInt32(scootermanagefee);
+                        existformdata.Accessory = JsonHomeObjectAccessory;
+
+                        existformdata.UpdateUser = userid;
+                        existformdata.UpdateTime = now;
+                        existformdata.Memo = memo;
+                        // 儲存更改到資料庫
+                        context.SaveChanges();
+                    }
                 }
 
             }
@@ -377,6 +465,7 @@ namespace LiqunManagement.Controllers
         [HttpGet]
         public ActionResult Landlord(string FormID)
         {
+            logger.Info("進入房東資料 FormID : " + (FormID != null ? FormID : ""));
             #region 使用者資料
             var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
                                 join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
@@ -549,6 +638,7 @@ namespace LiqunManagement.Controllers
         [HttpGet]
         public ActionResult Tenant(string FormID)
         {
+            logger.Info("進入房客資料 FormID : " + (FormID != null ? FormID : ""));
             #region 使用者資料
             var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
                                 join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
@@ -847,6 +937,7 @@ namespace LiqunManagement.Controllers
         [HttpGet]
         public ActionResult Secretary()
         {
+            logger.Info("進入秘書填寫");
             #region 使用者資料
             var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
                                 join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
