@@ -1,8 +1,5 @@
-# 忽略 web.config
-LiqunManagement/LiqunManagement/Web.config
+LiqunManagement/Web.config
 
-# 忽略發布
 LiqunManagement/Properties/PublishProfiles/
 
-#忽略檔案
 LiqunManagement/Uploads
