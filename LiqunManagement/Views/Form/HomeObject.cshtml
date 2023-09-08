@@ -25,7 +25,7 @@
     var jsonRoad = @Html.Raw(Json.Encode(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.roadJsonDDL : ""));
     var roadcodeValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.roadcode : "";
     //物件地址(詳細地址)
-    var detailaddress = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.detailaddress : "";
+    var AddressDetail = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.AddressDetail : "";
     //[主要用途]0:住家用; 1:商業用; 2:辦公室; 3:一般事務所 4: 其他
     var useforValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.usefor.ToString() : "";
     //[主要用途]其他
@@ -253,7 +253,7 @@
                                 </div>
                                 <div class="row pt-2">
                                     <div class="col-12">
-                                        <input type="text" class="form-control" placeholder="ex.108號1樓" name="detailaddress" required>
+                                        <input type="text" class="form-control" placeholder="ex.108號1樓" name="AddressDetail" required>
                                     </div>
                                 </div>
                             </div>
@@ -961,8 +961,8 @@
                 $('#selectdistrict').val('@districtcodeValue').trigger('change');
                 $('#selectroad').val('@roadcodeValue').trigger('change');
                 //物件地址(詳細地址)
-                var detailaddress = '@detailaddress';
-                $('input[name="detailaddress"]').val(detailaddress);
+                var AddressDetail = '@AddressDetail';
+                $('input[name="AddressDetail"]').val(AddressDetail);
 
                 //[主要用途]0:住家用; 1:商業用; 2:辦公室; 3:一般事務所 4: 其他
                 var useforValue = '@useforValue';

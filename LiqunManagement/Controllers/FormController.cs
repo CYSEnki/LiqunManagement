@@ -32,7 +32,6 @@ namespace LiqunManagement.Controllers
             return model;
         }
 
-
         #region 房屋物件資料
         //頁面讀取
         public ActionResult HomeObject(string FormID)
@@ -80,7 +79,7 @@ namespace LiqunManagement.Controllers
                     var addressdata = formdb.Region.Where(x => x.City == ExistForm.city && x.District == ExistForm.district && x.Road == ExistForm.road).FirstOrDefault();
                     var CityCode = addressdata.CityCode;
                     var DistrictCode = addressdata.DistrictCode;
-                    var RoadCode = addressdata.RoadCode;
+                    var Address = addressdata.RoadCode;
                     var districtlist = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(CityCode).ddllist.ToList());
                     var roadlist = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(DistrictCode).ddllist.ToList());
 
@@ -94,9 +93,9 @@ namespace LiqunManagement.Controllers
                         citycode = CityCode,
                         districtcode = DistrictCode,
                         distirctJsonDDL = districtlist,     //鄉鎮市區地址
-                        roadcode = RoadCode,
+                        roadcode = Address,
                         roadJsonDDL = roadlist,             //道路地址
-                        detailaddress = ExistForm.detailaddress,
+                        AddressDetail = ExistForm.detailaddress,
                         usefor = ExistForm.usefor,
                         useforelse = String.IsNullOrWhiteSpace(ExistForm.useforelse) ? "" : ExistForm.useforelse,
                         rent = ExistForm.rent,
@@ -167,48 +166,51 @@ namespace LiqunManagement.Controllers
 
         //[Insert]新增物件
         [HttpPost]
-        public ActionResult HomeObject(
-            string FormID,
+        #region 過時
+        //public ActionResult HomeObject(
+        //    string FormID,
 
-            string objecttypeRadio,     //(radio)包租:1; 代管:0
-            string notarizationRadio,   //(radio)公證:1; 非公證:0
-            string signdate,            //(datetime)簽約日
-            string appraiserRadio,      //(radio)簽估價師:1; 非簽估價師:0
-            string feature,             //(text)特色
-            string selectroad,         //(ddl)物件地址
-            string detailaddress,       //(text)地址細節
-            string useforRadio,         //(radio)主要用途 住家用:0; 商業用:1; 辦公室:2; 一般事務所:3; 其他:4
-            string useforelse,          //(text)主要用途 其他
-            IEnumerable<HttpPostedFileBase> taxFile, //(file)上傳稅單
-            string rent,                //(number)租金
-            string deposit,             //(number)押金
-            string management_fee,      //(number)管理費
-            string startdate,           //(datetime)起租日
-            string enddate,             //(datetime)結束日
-            int paydate,                //(ddl)繳租日
-            string buildtypeRadio,      //(radio)建物型態 透天厝:0; 公寓:1; 華夏:2; 電梯大樓:3
-            string roomtypeRadio,       //(radio)房型 整層出租:0; 獨立套房:1;
-            string roomamount,          //(text)房數
-            string hallamount,          //(text)廳數
-            string bathamount,          //(text)衛數
-            bool? noparkcheck,         //(checkbox)車位 無車位:0
-            bool? carparkcheck,        //(checkbox)車位 汽車車位:0
-            bool? morparkcheck,        //(checkbox)車位 機車車位:0
-            string parktypeRadio,       //(radio)汽車車位樣式 坡道平面:0; 坡道機械:1; 機械平面:2; 機械機械:3
-            string carparkfloorRadio,   //(radio)汽車位於 地上:1; 地下:0
-            string parkfloornumber,     //(number)汽車位於幾樓
-            string carpositionnumber,   //(text)汽車位編號
-            string carmonthrent,        //(text)汽車月租金
-            string carparkmanagefee,   //(number)汽車管理費
-            string scooterparkfloorRadio,       //(radio)機車位於 地上:1; 地下:0
-            string scooterparkfloornumber,     //(number)機車位於幾樓
-            string morpositionnumber,   //(text)機車位編號
-            string scootermonthrent,    //(number)機車月租金
-            string scootermanagefee,//(number)機車管理費
+        //    string objecttypeRadio,     //(radio)包租:1; 代管:0
+        //    string notarizationRadio,   //(radio)公證:1; 非公證:0
+        //    string signdate,            //(datetime)簽約日
+        //    string appraiserRadio,      //(radio)簽估價師:1; 非簽估價師:0
+        //    string feature,             //(text)特色
+        //    string selectroad,         //(ddl)物件地址
+        //    string AddressDetail,       //(text)地址細節
+        //    string useforRadio,         //(radio)主要用途 住家用:0; 商業用:1; 辦公室:2; 一般事務所:3; 其他:4
+        //    string useforelse,          //(text)主要用途 其他
+        //    IEnumerable<HttpPostedFileBase> taxFile, //(file)上傳稅單
+        //    string rent,                //(number)租金
+        //    string deposit,             //(number)押金
+        //    string management_fee,      //(number)管理費
+        //    string startdate,           //(datetime)起租日
+        //    string enddate,             //(datetime)結束日
+        //    int paydate,                //(ddl)繳租日
+        //    string buildtypeRadio,      //(radio)建物型態 透天厝:0; 公寓:1; 華夏:2; 電梯大樓:3
+        //    string roomtypeRadio,       //(radio)房型 整層出租:0; 獨立套房:1;
+        //    string roomamount,          //(text)房數
+        //    string hallamount,          //(text)廳數
+        //    string bathamount,          //(text)衛數
+        //    bool? noparkcheck,         //(checkbox)車位 無車位:0
+        //    bool? carparkcheck,        //(checkbox)車位 汽車車位:0
+        //    bool? morparkcheck,        //(checkbox)車位 機車車位:0
+        //    string parktypeRadio,       //(radio)汽車車位樣式 坡道平面:0; 坡道機械:1; 機械平面:2; 機械機械:3
+        //    string carparkfloorRadio,   //(radio)汽車位於 地上:1; 地下:0
+        //    string parkfloornumber,     //(number)汽車位於幾樓
+        //    string carpositionnumber,   //(text)汽車位編號
+        //    string carmonthrent,        //(text)汽車月租金
+        //    string carparkmanagefee,   //(number)汽車管理費
+        //    string scooterparkfloorRadio,       //(radio)機車位於 地上:1; 地下:0
+        //    string scooterparkfloornumber,     //(number)機車位於幾樓
+        //    string morpositionnumber,   //(text)機車位編號
+        //    string scootermonthrent,    //(number)機車月租金
+        //    string scootermanagefee,//(number)機車管理費
 
-            string JsonHomeObjectAccessory, //房屋附屬家具
-            string memo                 //備註
-            )
+        //    string JsonHomeObjectAccessory, //房屋附屬家具
+        //    string memo                 //備註
+        //    )
+        #endregion
+        public ActionResult HomeObject(HomeObjectInputViewModel inputmodel)
         {
             #region 使用者資料
             var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
@@ -247,32 +249,32 @@ namespace LiqunManagement.Controllers
 
 
             int[] roomamountArray = new int[3];
-            roomamountArray[0] = Convert.ToInt32(roomamount);
-            roomamountArray[1] = Convert.ToInt32(hallamount);
-            roomamountArray[2] = Convert.ToInt32(bathamount);
+            roomamountArray[0] = Convert.ToInt32(inputmodel.roomamount);
+            roomamountArray[1] = Convert.ToInt32(inputmodel.hallamount);
+            roomamountArray[2] = Convert.ToInt32(inputmodel.bathamount);
             string jsonroomamountArray = JsonConvert.SerializeObject(roomamountArray);
 
             int[] haveparkArray = new int[3];
-            haveparkArray[0] = noparkcheck != null ? 1 : 0;
-            haveparkArray[1] = carparkcheck != null ? 1 : 0;
-            haveparkArray[2] = morparkcheck != null ? 1 : 0;
+            haveparkArray[0] = inputmodel.noparkcheck != null ? 1 : 0;
+            haveparkArray[1] = inputmodel.carparkcheck != null ? 1 : 0;
+            haveparkArray[2] = inputmodel.morparkcheck != null ? 1 : 0;
             string jsonhaveparkArray = JsonConvert.SerializeObject(haveparkArray);
 
             int[] parkfloorArray = new int[2];
-            parkfloorArray[0] = Convert.ToInt32(carparkfloorRadio);
-            parkfloorArray[1] = Convert.ToInt32(parkfloornumber);
+            parkfloorArray[0] = Convert.ToInt32(inputmodel.carparkfloorRadio);
+            parkfloorArray[1] = Convert.ToInt32(inputmodel.parkfloornumber);
             string jsonparkfloorArray = JsonConvert.SerializeObject(parkfloorArray);
 
 
             int[] scooterparkfloorArray = new int[2];
-            scooterparkfloorArray[0] = Convert.ToInt32(scooterparkfloorRadio);
-            scooterparkfloorArray[1] = Convert.ToInt32(scooterparkfloornumber);
+            scooterparkfloorArray[0] = Convert.ToInt32(inputmodel.scooterparkfloorRadio);
+            scooterparkfloorArray[1] = Convert.ToInt32(inputmodel.scooterparkfloornumber);
             string jsonscooterparkfloorArray = JsonConvert.SerializeObject(scooterparkfloorArray);
 
             //民國 -> 西元
-            string[] signdateparts = signdate.Split('-');
-            string[] startdateparts = startdate.Split('-');
-            string[] enddateparts = enddate.Split('-');
+            string[] signdateparts = inputmodel.signdate.Split('-');
+            string[] startdateparts = inputmodel.startdate.Split('-');
+            string[] enddateparts = inputmodel.enddate.Split('-');
             var signdateYear = Convert.ToInt32(signdateparts[0]) + 1911;
             var startdateYear = Convert.ToInt32(startdateparts[0]) + 1911;
             var enddateYear = Convert.ToInt32(enddateparts[0]) + 1911;
@@ -287,11 +289,11 @@ namespace LiqunManagement.Controllers
             List<string> fileNamesArray = new List<string>();
             List<string> taxfile_aliasArray = new List<string>();
             //存檔
-            if (taxFile != null && taxFile.Any())
+            if (inputmodel.taxFile != null && inputmodel.taxFile.Any())
             {
                 try
                 {
-                    foreach (var file in taxFile)
+                    foreach (var file in inputmodel.taxFile)
                     {
                         if (file != null && file.ContentLength > 0)
                         {
@@ -321,8 +323,8 @@ namespace LiqunManagement.Controllers
             try
             {
                 //找到地址
-                var address = formdb.Region.Where(x => x.RoadCode == selectroad).FirstOrDefault();
-                if(FormID == null) {
+                var address = formdb.Region.Where(x => x.RoadCode == inputmodel.selectroad).FirstOrDefault();
+                if(String.IsNullOrEmpty(inputmodel.FormID)) {
                     // 建立資料上下文（Data Context）
                     using (var context = new FormModels())
                     {
@@ -330,46 +332,46 @@ namespace LiqunManagement.Controllers
                         var newData = new HomeObject
                         {
                             FormID = newFormID,
-                            objecttype = Convert.ToInt32(objecttypeRadio),
-                            notarization = Convert.ToInt32(notarizationRadio),
+                            objecttype = Convert.ToInt32(inputmodel.objecttypeRadio),
+                            notarization = Convert.ToInt32(inputmodel.notarizationRadio),
                             signdate = Signdate,
-                            appraiser = Convert.ToInt32(appraiserRadio),
-                            feature = feature,
+                            appraiser = Convert.ToInt32(inputmodel.appraiserRadio),
+                            feature = inputmodel.feature,
                             city = address.City,
                             district = address.District,
                             road = address.Road,
-                            detailaddress = detailaddress,
-                            fulladdress = address.City + address.District + address.Road + detailaddress,
-                            usefor = Convert.ToInt32(useforRadio),
-                            useforelse = useforelse,
+                            detailaddress = inputmodel.AddressDetail,
+                            fulladdress = address.City + address.District + address.Road + inputmodel.AddressDetail,
+                            usefor = Convert.ToInt32(inputmodel.useforRadio),
+                            useforelse = inputmodel.useforelse,
                             taxfile_name = fileNames,
                             taxfile_alias = taxfile_alias,
-                            rent = Convert.ToInt32(rent),
-                            deposit = Convert.ToInt32(deposit),
-                            management_fee = Convert.ToInt32(management_fee),
+                            rent = Convert.ToInt32(inputmodel.rent),
+                            deposit = Convert.ToInt32(inputmodel.deposit),
+                            management_fee = Convert.ToInt32(inputmodel.management_fee),
                             startdate = Startdate,
                             enddate = Enddate,
-                            paydate = paydate,
-                            buildtype = Convert.ToInt32(buildtypeRadio),
-                            roomtype = Convert.ToInt32(roomtypeRadio),
+                            paydate = inputmodel.paydate,
+                            buildtype = Convert.ToInt32(inputmodel.buildtypeRadio),
+                            roomtype = Convert.ToInt32(inputmodel.roomtypeRadio),
                             roomamount = jsonroomamountArray,
                             havepark = jsonhaveparkArray,
-                            parktype = Convert.ToInt32(parktypeRadio),
+                            parktype = Convert.ToInt32(inputmodel.parktypeRadio),
                             parkfloor = jsonparkfloorArray,
-                            carpositionnumber = carpositionnumber,
-                            carmonthrent = String.IsNullOrEmpty(carmonthrent) ? 0 : Convert.ToInt32(carmonthrent),
-                            carparkmanagefee = String.IsNullOrEmpty(carparkmanagefee) ? 0 : Convert.ToInt32(carparkmanagefee),
+                            carpositionnumber = inputmodel.carpositionnumber,
+                            carmonthrent = String.IsNullOrEmpty(inputmodel.carmonthrent) ? 0 : Convert.ToInt32(inputmodel.carmonthrent),
+                            carparkmanagefee = String.IsNullOrEmpty(inputmodel.carparkmanagefee) ? 0 : Convert.ToInt32(inputmodel.carparkmanagefee),
                             scooterparkfloor = jsonscooterparkfloorArray,
-                            scooterpositionnumber = morpositionnumber,
-                            scootermonthrent = String.IsNullOrEmpty(scootermonthrent) ? 0 : Convert.ToInt32(scootermonthrent),
-                            scootermanagefee = String.IsNullOrEmpty(scootermanagefee) ? 0 : Convert.ToInt32(scootermanagefee),
-                            Accessory = JsonHomeObjectAccessory,
+                            scooterpositionnumber = inputmodel.morpositionnumber,
+                            scootermonthrent = String.IsNullOrEmpty(inputmodel.scootermonthrent) ? 0 : Convert.ToInt32(inputmodel.scootermonthrent),
+                            scootermanagefee = String.IsNullOrEmpty(inputmodel.scootermanagefee) ? 0 : Convert.ToInt32(inputmodel.scootermanagefee),
+                            Accessory = inputmodel.JsonHomeObjectAccessory,
 
                             CreateUser = userid,
                             CreateTime = now,
                             UpdateUser = userid,
                             UpdateTime = now,
-                            Memo = memo,
+                            Memo = inputmodel.memo,
                         };
                         // 使用資料上下文插入資料物件
                         context.HomeObject.Add(newData);
@@ -404,47 +406,47 @@ namespace LiqunManagement.Controllers
                     // 建立資料上下文（Data Context）
                     using (var context = new FormModels())
                     {
-                        var existformdata = context.HomeObject.Where(x => x.FormID == FormID).FirstOrDefault();
+                        var existformdata = context.HomeObject.Where(x => x.FormID == inputmodel.FormID).FirstOrDefault();
 
                         //更新物件內資料
-                        existformdata.objecttype = Convert.ToInt32(objecttypeRadio);
-                        existformdata.notarization = Convert.ToInt32(notarizationRadio);
+                        existformdata.objecttype = Convert.ToInt32(inputmodel.objecttypeRadio);
+                        existformdata.notarization = Convert.ToInt32(inputmodel.notarizationRadio);
                         existformdata.signdate = Signdate;
-                        existformdata.appraiser = Convert.ToInt32(appraiserRadio);
-                        existformdata.feature = feature;
+                        existformdata.appraiser = Convert.ToInt32(inputmodel.appraiserRadio);
+                        existformdata.feature = inputmodel.feature;
                         existformdata.city = address.City;
                         existformdata.district = address.District;
                         existformdata.road = address.Road;
-                        existformdata.detailaddress = detailaddress;
-                        existformdata.fulladdress = address.City + address.District + address.Road + detailaddress;
-                        existformdata.usefor = Convert.ToInt32(useforRadio);
-                        existformdata.useforelse = useforelse;
+                        existformdata.detailaddress = inputmodel.AddressDetail;
+                        existformdata.fulladdress = address.City + address.District + address.Road + inputmodel.AddressDetail;
+                        existformdata.usefor = Convert.ToInt32(inputmodel.useforRadio);
+                        existformdata.useforelse = inputmodel.useforelse;
                         existformdata.taxfile_name = fileNames;
                         existformdata.taxfile_alias = taxfile_alias;
-                        existformdata.rent = Convert.ToInt32(rent);
-                        existformdata.deposit = Convert.ToInt32(deposit);
-                        existformdata.management_fee = Convert.ToInt32(management_fee);
+                        existformdata.rent = Convert.ToInt32(inputmodel.rent);
+                        existformdata.deposit = Convert.ToInt32(inputmodel.deposit);
+                        existformdata.management_fee = Convert.ToInt32(inputmodel.management_fee);
                         existformdata.startdate = Startdate;
                         existformdata.enddate = Enddate;
-                        existformdata.paydate = paydate;
-                        existformdata.buildtype = Convert.ToInt32(buildtypeRadio);
-                        existformdata.roomtype = Convert.ToInt32(roomtypeRadio);
+                        existformdata.paydate = inputmodel.paydate;
+                        existformdata.buildtype = Convert.ToInt32(inputmodel.buildtypeRadio);
+                        existformdata.roomtype = Convert.ToInt32(inputmodel.roomtypeRadio);
                         existformdata.roomamount = jsonroomamountArray;
                         existformdata.havepark = jsonhaveparkArray;
-                        existformdata.parktype = Convert.ToInt32(parktypeRadio);
+                        existformdata.parktype = Convert.ToInt32(inputmodel.parktypeRadio);
                         existformdata.parkfloor = jsonparkfloorArray;
-                        existformdata.carpositionnumber = carpositionnumber;
-                        existformdata.carmonthrent = String.IsNullOrEmpty(carmonthrent) ? 0 : Convert.ToInt32(carmonthrent);
-                        existformdata.carparkmanagefee = String.IsNullOrEmpty(carparkmanagefee) ? 0 : Convert.ToInt32(carparkmanagefee);
+                        existformdata.carpositionnumber = inputmodel.carpositionnumber;
+                        existformdata.carmonthrent = String.IsNullOrEmpty(inputmodel.carmonthrent) ? 0 : Convert.ToInt32(inputmodel.carmonthrent);
+                        existformdata.carparkmanagefee = String.IsNullOrEmpty(inputmodel.carparkmanagefee) ? 0 : Convert.ToInt32(inputmodel.carparkmanagefee);
                         existformdata.scooterparkfloor = jsonscooterparkfloorArray;
-                        existformdata.scooterpositionnumber = morpositionnumber;
-                        existformdata.scootermonthrent = String.IsNullOrEmpty(scootermonthrent) ? 0 : Convert.ToInt32(scootermonthrent);
-                        existformdata.scootermanagefee = String.IsNullOrEmpty(scootermanagefee) ? 0 : Convert.ToInt32(scootermanagefee);
-                        existformdata.Accessory = JsonHomeObjectAccessory;
+                        existformdata.scooterpositionnumber = inputmodel.morpositionnumber;
+                        existformdata.scootermonthrent = String.IsNullOrEmpty(inputmodel.scootermonthrent) ? 0 : Convert.ToInt32(inputmodel.scootermonthrent);
+                        existformdata.scootermanagefee = String.IsNullOrEmpty(inputmodel.scootermanagefee) ? 0 : Convert.ToInt32(inputmodel.scootermanagefee);
+                        existformdata.Accessory = inputmodel.JsonHomeObjectAccessory;
 
                         existformdata.UpdateUser = userid;
                         existformdata.UpdateTime = now;
-                        existformdata.Memo = memo;
+                        existformdata.Memo = inputmodel.memo;
                         // 儲存更改到資料庫
                         context.SaveChanges();
                     }
@@ -505,42 +507,118 @@ namespace LiqunManagement.Controllers
                 return RedirectToAction("CaseManage", "Sales");
             }
 
+            #region 存在表單資料
+            try
+            {
+                var ExistForm = formdb.LandLord.Where(x => x.FormID == FormID).FirstOrDefault();
+                if (ExistForm != null)
+                {
+                    //取得房東地址
+                    string[] Addresparts = ExistForm.Address.Split('-');    //地址
+                    var AddressCode_Landlord = formdb.Region.Where(x => x.City == Addresparts[0] && x.District == Addresparts[1] && x.Road == Addresparts[2]).Select(x => x.RoadCode).FirstOrDefault();
+                    string[] Contactparts = ExistForm.ContactAddress.Split('-');    //通訊地址
+                    var ContactCode_Landlord = formdb.Region.Where(x => x.City == Contactparts[0] && x.District == Contactparts[1] && x.Road == Contactparts[2]).Select(x => x.RoadCode).FirstOrDefault();
+
+                    //取得共有人
+                    var CoOwnerCount = Convert.ToInt32(JsonConvert.DeserializeObject<List<string>>(ExistForm.MemberArray)[0]);
+                    //取得代理人
+                    var AgentCount = Convert.ToInt32(JsonConvert.DeserializeObject<List<string>>(ExistForm.MemberArray)[1]);
+                    var FormValue = new LandLordViewModel
+                    {
+                        Name = ExistForm.Name,      //房東姓名(公司名稱)
+                        Principal = ExistForm.Gender != 2 ? "" : ExistForm.Principal,       //負責人
+                        Gender = ExistForm.Gender,      //性別(0/1)，法人(2)
+                        Birthday = ExistForm.Gender != 2 ? ExistForm.Birthday : null,     //房東生日
+                        IDNumber = ExistForm.IDNumber,      //身分證字號(統一編號)
+                        Phone = ExistForm.Phone,        //電話
+                        BankNo = ExistForm.BankNo,      //銀行代碼
+                        BrancheNo = ExistForm.BrancheNo,        //分行代碼
+                        BankAccount = ExistForm.BankAccount,        //銀行帳號
+                        AddressCode_LandLord = AddressCode_Landlord,    //地址代碼
+                        AddressDetail = ExistForm.AddressDetail,
+                        ContactCode_Landlord = ContactCode_Landlord,    //通訊地址代碼
+                        ContactAddressDetail = ExistForm.ContactAddressDetail,
+                        CoOwnerCount = CoOwnerCount,
+                        AgentCount = AgentCount,
+
+
+
+
+                        Memo = String.IsNullOrEmpty(ExistForm.Memo) ? "" : ExistForm.Memo,
+                    };
+
+
+                    var model = new FormViewModels
+                    {
+                        FormID = FormID != null ? FormID : "",
+                        landlordviewmodel = FormValue,
+
+                    };
+
+                    Type type = FormValue.GetType();
+                    PropertyInfo[] properties = type.GetProperties();
+
+                    foreach (PropertyInfo property in properties)
+                    {
+                        string propertyName = property.Name;
+                        object propertyValue = property.GetValue(FormValue);
+
+                        string logMessage = $"{propertyName}: {propertyValue}";
+                        logger.Error(logMessage);
+                    }
+
+                    logger.Error("取得房屋物件資料成功" + FormValue + "\n" +
+                                FormValue.ToString());
+                    return View(model);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error("取得房屋物件資料錯誤 : " + ex.ToString());
+            }
+            #endregion
+
 
 
             return View();
         }
         [HttpPost]
-        public ActionResult Landlord(
-            string FormID,                  //表單編號
+        #region 過時
+        //public ActionResult Landlord(
+        //    string FormID,                  //表單編號
 
-            string Name_0,                  //房東姓名
-            string genderRadio_0,           //房東性別(男:1; 女:0)
-            string birthday_0,              //房東生日
-            string IDNumber_0,              //房東身分證
-            string Phone_0,                 //房東電話
-            string addressroad_0,           //房東地址(路)
-            string detailaddress_0,         //房東詳細地址  
-            bool? sameaddress_check_0,       //房東通訊地址Checkbox
-            string contactroad_0,           //房東通訊地址(路)
-            string detailcontact_0,         //房東詳細通訊地址
-            string bank_0,                  //房東銀行
-            string bankbranche_0,           //房東銀行支部
-            string bankaccount_0,           //房東銀行帳號
+        //    string persontypeRadio,         //自然人:0; 法人:1
+        //    string Name_0,                  //房東姓名
+        //    string Principal,               //負責人姓名(法人才需要填寫)
+        //    string genderRadio_0,           //房東性別(女:0; 男:1; 法人:2)
+        //    string birthday_0,              //房東生日
+        //    string IDNumber_0,              //房東身分證
+        //    string Phone_0,                 //房東電話
+        //    string addressroad_0,           //房東地址(路)
+        //    string AddressDetail_0,         //房東詳細地址  
+        //    bool? sameaddress_check_0,       //房東通訊地址Checkbox
+        //    string contactroad_0,           //房東通訊地址(路)
+        //    string detailcontact_0,         //房東詳細通訊地址
+        //    string bank_0,                  //房東銀行
+        //    string bankbranche_0,           //房東銀行支部
+        //    string bankaccount_0,           //房東銀行帳號
 
-            //共有人(Json格式)
-            string CoOwnerRadio,
-            string CoOwnerInput1,
-            string CoOwnerInput2,
-            string CoOwnerInput3,
-            string CoOwnerInput4,
-            string CoOwnerInput5,
+        //    //共有人(Json格式)
+        //    string CoOwnerRadio,
+        //    string CoOwnerInput1,
+        //    string CoOwnerInput2,
+        //    string CoOwnerInput3,
+        //    string CoOwnerInput4,
+        //    string CoOwnerInput5,
 
-            //代理人(Json格式)
-            bool? agentCheckbox,
-            string AgentInput,
+        //    //代理人(Json格式)
+        //    bool? agentCheckbox,
+        //    string AgentInput,
 
-            string memo
-            )
+        //    string memo
+        //    )
+        #endregion
+        public ActionResult Landlord(LandlordInputViewModel inputmodel)
         {
             #region 使用者資料
             var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
@@ -566,22 +644,72 @@ namespace LiqunManagement.Controllers
             #endregion
             var now = DateTime.Now;
             var userid = "enkisu";
-            if (String.IsNullOrEmpty(FormID))
+            if (String.IsNullOrEmpty(inputmodel.FormID))
             {
                 return View();
             }
-            if(sameaddress_check_0 != null)
+
+            //轉換地址
+            var addressdata = formdb.Region.Where(x => x.RoadCode == inputmodel.addressroad_0).FirstOrDefault();
+            var Address = addressdata.City + "-" + addressdata.District + "-" + addressdata.Road;
+            var ContactAddress = "";
+            if (inputmodel.sameaddress_check_0 != null)
             {
-                contactroad_0 = addressroad_0;
-                detailcontact_0 = detailaddress_0;
+                inputmodel.contactroad_0 = Address;
+                inputmodel.detailcontact_0 = inputmodel.AddressDetail_0;
+            }
+            else
+            {
+                addressdata = formdb.Region.Where(x => x.RoadCode == inputmodel.contactroad_0).FirstOrDefault();
+                ContactAddress = addressdata.City + "-" + addressdata.District + "-" + addressdata.Road;
             }
 
             //成員陣列[共有人, 代理人]
             int[] memberArray = new int[2];
-            memberArray[0] = Convert.ToInt32(CoOwnerRadio);
-            memberArray[1] = agentCheckbox != null ? 1: 0;
+            int CoOwnerCount = Convert.ToInt32(inputmodel.CoOwnerRadio);
+            memberArray[0] = CoOwnerCount;
+            memberArray[1] = inputmodel.agentCheckbox != null ? 1: 0;
             string jsonmemberArray = JsonConvert.SerializeObject(memberArray);
 
+            #region 打包共有人資料
+            string[] coownerarray1 = new string[8];
+            string[] coownerarray2 = new string[8];
+            string[] coownerarray3 = new string[8];
+            string[] coownerarray4 = new string[8];
+            string[] coownerarray5 = new string[8];
+
+            //創建複數陣列存取資料型態
+            string[] coownerInputs = new string[] { inputmodel.CoOwnerInput1, inputmodel.CoOwnerInput2, inputmodel.CoOwnerInput3, inputmodel.CoOwnerInput4, inputmodel.CoOwnerInput5 };    //輸入
+            string[][] coownerArrays = new string[][] { coownerarray1, coownerarray2, coownerarray3, coownerarray4, coownerarray5 };    //輸出
+
+            for (int count = 0; count < CoOwnerCount; count++)
+            {
+                //找到要取得的共有人Json陣列資料
+                List<string> coownerlist = new List<string>();
+                coownerlist = JsonConvert.DeserializeObject<List<string>>(coownerInputs[count]);
+                //遞迴取出資料
+                for(int i=0; i < coownerlist.Count(); i++) 
+                //foreach(var item in coownerlist)
+                {
+                    if(i == 4 || i == 6)
+                    {
+                        //由Address找到地址資料
+                        var roadcode = coownerlist[i].ToString();
+                        addressdata = formdb.Region.Where(x => x.RoadCode == roadcode).FirstOrDefault();
+                        coownerArrays[count][i] = addressdata.City + "-" + addressdata.District + "-" + addressdata.Road;
+                    }
+                    else
+                    {
+                        coownerArrays[count][i] = coownerlist[i];
+                    }
+                }
+            }
+            #endregion
+            DateTime? LandlordBirthday = null;
+            if (inputmodel.persontypeRadio != "1")
+            {
+                LandlordBirthday = Convert.ToDateTime(inputmodel.birthday_0);
+            }
             try
             {
                 // 建立資料上下文（Data Context）
@@ -590,32 +718,33 @@ namespace LiqunManagement.Controllers
                     // 建立要插入的資料物件
                     var newData = new LandLord
                     {
-                        FormID = FormID,
-                        Name = Name_0,
-                        Gender = Convert.ToInt32(genderRadio_0),
-                        Birthday = Convert.ToDateTime(birthday_0),
-                        IDNumber = IDNumber_0,
-                        Phone = Phone_0,
-                        BankNo = bank_0,
-                        BrancheNo = bankbranche_0,
-                        BankAccount = bankaccount_0,
-                        RoadCode = addressroad_0,
-                        detailaddress = detailaddress_0,
-                        RoadCodeContact = contactroad_0,
-                        detailaddressContact = detailcontact_0,
+                        FormID = inputmodel.FormID,
+                        Name = inputmodel.Name_0,
+                        Principal = inputmodel.persontypeRadio == "1" ? inputmodel.Principal : null,
+                        Gender = inputmodel.persontypeRadio == "1" ? 2 : Convert.ToInt32(inputmodel.genderRadio_0),   //男:1 女:0 法人:2
+                        Birthday = LandlordBirthday,
+                        IDNumber = inputmodel.IDNumber_0,
+                        Phone = inputmodel.Phone_0,
+                        BankNo = inputmodel.bank_0,
+                        BrancheNo = inputmodel.bankbranche_0,
+                        BankAccount = inputmodel.bankaccount_0,
+                        Address = Address,
+                        AddressDetail = inputmodel.AddressDetail_0,
+                        ContactAddress = ContactAddress,
+                        ContactAddressDetail = inputmodel.detailcontact_0,
                         MemberArray = jsonmemberArray,
-                        CoOwner1 = CoOwnerInput1,
-                        CoOwner2 = CoOwnerInput2,
-                        CoOwner3 = CoOwnerInput3,
-                        CoOwner4 = CoOwnerInput4,
-                        CoOwner5 = CoOwnerInput5,
-                        Agent = AgentInput,
+                        CoOwner1 = CoOwnerCount >= 1 ? JsonConvert.SerializeObject(coownerArrays[0]) : null,
+                        CoOwner2 = CoOwnerCount >= 2 ? JsonConvert.SerializeObject(coownerArrays[1]) : null,
+                        CoOwner3 = CoOwnerCount >= 3 ? JsonConvert.SerializeObject(coownerArrays[2]) : null,
+                        CoOwner4 = CoOwnerCount >= 4 ? JsonConvert.SerializeObject(coownerArrays[3]) : null,
+                        CoOwner5 = CoOwnerCount >= 5 ? JsonConvert.SerializeObject(coownerArrays[4]) : null,
+                        Agent = inputmodel.AgentInput,
 
                         CreateUser = userid,
                         CreateTime = now,
                         UpdateUser = userid,
                         UpdateTime = now,
-                        Memo = memo,
+                        Memo = inputmodel.memo,
                     };
                     // 使用資料上下文插入資料物件
                     context.LandLord.Add(newData);
@@ -627,7 +756,7 @@ namespace LiqunManagement.Controllers
             {
                 MailService mailService = new MailService();
                 mailService.SendMail("【力群管理系統】房客資料寫入DB錯誤", ex.ToString(), "cys.enki@gmail.com");
-                return RedirectToAction("Landlord", "Form", new {FormID = FormID});
+                return RedirectToAction("Landlord", "Form", new {FormID = inputmodel.FormID });
             }
 
             return RedirectToAction("CaseManage", "Sales");
@@ -695,7 +824,7 @@ namespace LiqunManagement.Controllers
             string IDNumber_0,              //房客身分證
             string Phone_0,                 //房客電話
             string addressroad_0,           //房客地址(路)
-            string detailaddress_0,         //房客詳細地址  
+            string AddressDetail_0,         //房客詳細地址  
             bool? sameaddress_check_0,      //房客通訊地址Checkbox
             string contactroad_0,           //房客通訊地址(路)
             string detailcontact_0,         //房客詳細通訊地址
@@ -771,7 +900,7 @@ namespace LiqunManagement.Controllers
             if (sameaddress_check_0 != null)
             {
                 contactroad_0 = addressroad_0;
-                detailcontact_0 = detailaddress_0;
+                detailcontact_0 = AddressDetail_0;
             }
 
             #region 存檔(弱勢戶)
@@ -886,11 +1015,11 @@ namespace LiqunManagement.Controllers
                         BankNo = bank_0,
                         BrancheNo = bankbranche_0,
                         BankAccount = bankaccount_0,
-                        RoadCode = addressroad_0,
+                        Address = addressroad_0,
                         accountNo = accountnumber,
-                        detailaddress = detailaddress_0,
-                        RoadCodeContact = contactroad_0,
-                        detailaddressContact = detailcontact_0,
+                        AddressDetail = AddressDetail_0,
+                        ContactAddress = contactroad_0,
+                        ContactAddressDetail = detailcontact_0,
                         MemberArray = jsonmemberArray,
                         Couple = jsoncoupleArray,
                         Family1 = DirectInput1,

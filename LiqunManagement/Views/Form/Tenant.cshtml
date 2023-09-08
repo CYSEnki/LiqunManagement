@@ -321,7 +321,7 @@
                                 </div>
                                 <div class="row pt-2">
                                     <div class="col-12">
-                                        <input type="text" name="detailaddress_0" class="form-control" placeholder="ex.108號1樓" required>
+                                        <input type="text" name="AddressDetail_0" class="form-control" placeholder="ex.108號1樓" required>
                                     </div>
                                 </div>
                             </div>
@@ -657,11 +657,11 @@
                                 const Phone = document.getElementById(`Phone_Ag` + strindex).value;
                                 //地址
                                 const Road = document.getElementById(`road_Ag` + strindex).value;
-                                const DetailAddress = document.getElementById(`detailaddress_Ag` + strindex).value;
+                                const AddressDetail = document.getElementById(`AddressDetail_Ag` + strindex).value;
                                 //通訊地址
                                 const sameaddresscheck = document.getElementById('sameaddresscheck_Ag' + strindex);
                                 const Contact = Road;
-                                const detailContact = DetailAddress;
+                                const detailContact = AddressDetail;
                                 if (sameaddresscheck) {
                                     if (!sameaddresscheck.checked) {
                                         Contact = document.getElementById(`road_contact_Ag` + strindex).value;
@@ -674,7 +674,7 @@
                                 dataArray.push(IDNumber);
                                 dataArray.push(Phone);
                                 dataArray.push(Road);
-                                dataArray.push(DetailAddress);
+                                dataArray.push(AddressDetail);
                                 dataArray.push(Contact);
                                 dataArray.push(detailContact);
                                 const jsonResult = JSON.stringify(dataArray);
@@ -717,11 +717,11 @@
                                 const Phone = document.getElementById(`Phone_Gu` + strindex).value;
                                 //地址
                                 const Road = document.getElementById(`road_Gu` + strindex).value;
-                                const DetailAddress = document.getElementById(`detailaddress_Gu` + strindex).value;
+                                const AddressDetail = document.getElementById(`AddressDetail_Gu` + strindex).value;
                                 //通訊地址
                                 const sameaddresscheck = document.getElementById('sameaddress_Gu' + strindex);
                                 const Contact = Road;
-                                const detailContact = DetailAddress;
+                                const detailContact = AddressDetail;
                                 if (sameaddresscheck) {
                                     if (!sameaddresscheck.checked) {
                                         Contact = document.getElementById(`road_contact_Gu` + strindex).value;
@@ -734,7 +734,7 @@
                                 dataArray.push(IDNumber);
                                 dataArray.push(Phone);
                                 dataArray.push(Road);
-                                dataArray.push(DetailAddress);
+                                dataArray.push(AddressDetail);
                                 dataArray.push(Contact);
                                 dataArray.push(detailContact);
                                 const jsonResult = JSON.stringify(dataArray);

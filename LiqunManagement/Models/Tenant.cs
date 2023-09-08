@@ -42,17 +42,17 @@ namespace LiqunManagement.Models
         [StringLength(20)]
         public string Phone { get; set; }
 
-        [StringLength(10)]
-        public string RoadCode { get; set; }
+        [StringLength(50)]
+        public string Address { get; set; }
 
         [StringLength(50)]
-        public string detailaddress { get; set; }
-
-        [StringLength(10)]
-        public string RoadCodeContact { get; set; }
+        public string AddressDetail { get; set; }
 
         [StringLength(50)]
-        public string detailaddressContact { get; set; }
+        public string ContactAddress { get; set; }
+
+        [StringLength(50)]
+        public string ContactAddressDetail { get; set; }
 
         [StringLength(20)]
         public string accountNo { get; set; }

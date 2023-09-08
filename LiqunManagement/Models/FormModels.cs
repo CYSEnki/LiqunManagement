@@ -98,14 +98,6 @@ namespace LiqunManagement.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<LandLord>()
-                .Property(e => e.RoadCode)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<LandLord>()
-                .Property(e => e.RoadCodeContact)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<LandLord>()
                 .Property(e => e.MemberArray)
                 .IsUnicode(false);
 
@@ -155,14 +147,6 @@ namespace LiqunManagement.Models
 
             modelBuilder.Entity<Tenant>()
                 .Property(e => e.Phone)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Tenant>()
-                .Property(e => e.RoadCode)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Tenant>()
-                .Property(e => e.RoadCodeContact)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Tenant>()

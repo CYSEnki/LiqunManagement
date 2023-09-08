@@ -67,20 +67,42 @@
                         {
                             @*表單編號*@
                             <input type="text" value="@ViewBag.FormID" name="FormID" hidden />
+
+                            @*自然人或法人*@
+                            <div class="form-group">
+                                <div class="frame-wrap">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="natureperson" name="persontypeRadio" value="0" checked>
+                                        <label class="custom-control-label" for="natureperson">自然人</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="legalperson" name="persontypeRadio" value="1">
+                                        <label class="custom-control-label" for="legalperson">法人</label>
+                                    </div>
+                                </div>
+                            </div>
                             @*房東*@
                             <div class="panel-tag">
                                 房東
                             </div>
                             @*房東姓名*@
                             <div class="form-group">
-                                <label class="form-label" for="Name_Landlord">房東姓名</label>
+                                <label class="form-label" for="Name_Landlord" id="labelName">房東姓名</label>
                                 <input type="text" id="Name_0" name="Name_0" class="form-control" required>
                                 <div class="invalid-feedback">
                                     請輸入房東姓名
                                 </div>
                             </div>
+                            @*負責人姓名*@
+                            <div class="form-group Principle_formgroup "style="display: none;">
+                                <label class="form-label" for="Principal">負責人姓名</label>
+                                <input type="text" id="Principal" name="Principal" class="form-control">
+                                <div class="invalid-feedback">
+                                    請輸入負責人姓名
+                                </div>
+                            </div>
                             @*性別*@
-                            <div class="form-group">
+                            <div class="form-group legal_formtype">
                                 <label class="form-label">
                                     性別:
                                     <span class="text-danger">*</span>
@@ -100,7 +122,7 @@
                                 </div>
                             </div>
                             @*出生年月日*@
-                            <div class="form-group">
+                            <div class="form-group legal_formtype">
                                 <label class="form-label" for="birthday">生日</label>
                                 <div class="col-md-8 col-lg-6 mb-3 pl-0">
                                     <div class="input-group w-100">
@@ -125,8 +147,8 @@
                             </div>
                             @*身分證字號*@
                             <div class="form-group">
-                                <label class="form-label" for="IDnumber_0">身分證字號</label>
-                                <div class="row pb-2">
+                                <label class="form-label" for="IDnumber_0" id="labelIDNumber">身分證字號</label>
+                                <div class="row pb-2 legal_formtype">
                                     <div class="col-12">
                                         <div class="custom-control custom-checkbox custom-control-inline">
                                             <input type="checkbox" class="custom-control-input national_check" id="international_IDnumber" name="international_IDnumber" data-index="0">
@@ -179,7 +201,7 @@
                                 </div>
                                 <div class="row pt-2">
                                     <div class="col-12">
-                                        <input type="text" name="detailaddress_0" class="form-control" placeholder="ex.108號1樓" required>
+                                        <input type="text" name="AddressDetail_0" class="form-control" placeholder="ex.108號1樓" required>
                                     </div>
                                 </div>
                             </div>
@@ -388,7 +410,7 @@
                                 </div>
                                 <div class="row pt-2">
                                     <div class="col-12">
-                                        <input type="text" class="form-control agentrequired" id="detailaddress_11" name="detailaddress_11" placeholder="ex.108號1樓">
+                                        <input type="text" class="form-control agentrequired" id="AddressDetail_11" name="AddressDetail_11" placeholder="ex.108號1樓">
                                     </div>
                                 </div>
                             </div>
@@ -494,16 +516,28 @@
                         }
                         else {
                             //打包房東生日
-                            const Year = parseInt($("#birthdayYear_0").val()) + 1911;
-                            var Month = $("#birthdayMonth_0").val();
-                            var Day = $("#birthdayDay_0").val();
-                            const birth = Year.toString() + '-' + Month + '-' + Day;
-                            $("#birthday_0").val(birth)
+                            var persontypeRadioElement = document.getElementsByName("persontypeRadio");
+                            var typevalue;
+                            for (var i = 0; i < persontypeRadioElement.length; i++) {
+                                if (persontypeRadioElement[i].checked) {
+                                    typevalue = persontypeRadioElement[i].value;
+                                    break; // 如果找到选中的值，就跳出循环
+                                }
+                            }
+                            if (typevalue === '0') {
+                                const Year = parseInt($("#birthdayYear_0").val()) + 1911;
+                                var Month = $("#birthdayMonth_0").val();
+                                var Day = $("#birthdayDay_0").val();
+                                const birth = Year.toString() + '-' + Month + '-' + Day;
+                                $("#birthday_0").val(birth)
+                            } else {
+                                $("#birthday_0").val('')
+                            }
 
                             //將共有人資料打包
                             //取得幾位共有人
                             var CoRadioElement = document.getElementsByName("CoOwnerRadio");
-                            // 定义变量来存储选中的值
+                            // 存儲選中的值
                             var selectedValue;
                             // 循环遍历单选按钮，找到选中的值
                             for (var i = 0; i < CoRadioElement.length; i++) {
@@ -523,10 +557,10 @@
                                 const IDNumber = document.getElementById(`IDnumber_Co1`).value;
                                 const Phone = document.getElementById(`Phone_Co1`).value;
                                 const Road = document.getElementById(`road_Co1`).value;
-                                const DetailAddress = document.getElementById(`detailaddress_Co1`).value;
+                                const AddressDetail = document.getElementById(`AddressDetail_Co1`).value;
                                 const sameaddresscheck = document.getElementById('sameaddress_Co1');
                                 const Contact = Road;
-                                const detailContact = DetailAddress;
+                                const detailContact = AddressDetail;
                                 if (sameaddresscheck) {
                                     if (!sameaddresscheck.checked) {
                                         Contact = document.getElementById(`road_contact_Co1`).value;
@@ -538,7 +572,7 @@
                                 dataArray.push(IDNumber);
                                 dataArray.push(Phone);
                                 dataArray.push(Road);
-                                dataArray.push(DetailAddress);
+                                dataArray.push(AddressDetail);
                                 dataArray.push(Contact);
                                 dataArray.push(detailContact);
                                 const jsonResult = JSON.stringify(dataArray);
@@ -554,10 +588,10 @@
                                 const IDNumber = document.getElementById(`IDnumber_Co2`).value;
                                 const Phone = document.getElementById(`Phone_Co2`).value;
                                 const Road = document.getElementById(`road_Co2`).value;
-                                const DetailAddress = document.getElementById(`detailaddress_Co2`).value;
+                                const AddressDetail = document.getElementById(`AddressDetail_Co2`).value;
                                 const sameaddresscheck = document.getElementById('sameaddress_Co2');
                                 const Contact = Road;
-                                const detailContact = DetailAddress;
+                                const detailContact = AddressDetail;
                                 if (sameaddresscheck) {
                                     if (!sameaddresscheck.checked) {
                                         Contact = document.getElementById(`road_contact_Co2`).value;
@@ -569,7 +603,7 @@
                                 dataArray.push(IDNumber);
                                 dataArray.push(Phone);
                                 dataArray.push(Road);
-                                dataArray.push(DetailAddress);
+                                dataArray.push(AddressDetail);
                                 dataArray.push(Contact);
                                 dataArray.push(detailContact);
                                 const jsonResult = JSON.stringify(dataArray);
@@ -585,10 +619,10 @@
                                 const IDNumber = document.getElementById(`IDnumber_Co3`).value;
                                 const Phone = document.getElementById(`Phone_Co3`).value;
                                 const Road = document.getElementById(`road_Co3`).value;
-                                const DetailAddress = document.getElementById(`detailaddress_Co3`).value;
+                                const AddressDetail = document.getElementById(`AddressDetail_Co3`).value;
                                 const sameaddresscheck = document.getElementById('sameaddress_Co3');
                                 const Contact = Road;
-                                const detailContact = DetailAddress;
+                                const detailContact = AddressDetail;
                                 if (sameaddresscheck) {
                                     if (!sameaddresscheck.checked) {
                                         Contact = document.getElementById(`road_contact_Co3`).value;
@@ -600,7 +634,7 @@
                                 dataArray.push(IDNumber);
                                 dataArray.push(Phone);
                                 dataArray.push(Road);
-                                dataArray.push(DetailAddress);
+                                dataArray.push(AddressDetail);
                                 dataArray.push(Contact);
                                 dataArray.push(detailContact);
                                 const jsonResult = JSON.stringify(dataArray);
@@ -616,10 +650,10 @@
                                 const IDNumber = document.getElementById(`IDnumber_Co4`).value;
                                 const Phone = document.getElementById(`Phone_Co4`).value;
                                 const Road = document.getElementById(`road_Co4`).value;
-                                const DetailAddress = document.getElementById(`detailaddress_Co4`).value;
+                                const AddressDetail = document.getElementById(`AddressDetail_Co4`).value;
                                 const sameaddresscheck = document.getElementById('sameaddress_Co4');
                                 const Contact = Road;
-                                const detailContact = DetailAddress;
+                                const detailContact = AddressDetail;
                                 if (sameaddresscheck) {
                                     if (!sameaddresscheck.checked) {
                                         Contact = document.getElementById(`road_contact_Co4`).value;
@@ -632,7 +666,7 @@
                                 dataArray.push(IDNumber);
                                 dataArray.push(Phone);
                                 dataArray.push(Road);
-                                dataArray.push(DetailAddress);
+                                dataArray.push(AddressDetail);
                                 dataArray.push(Contact);
                                 dataArray.push(detailContact);
                                 const jsonResult = JSON.stringify(dataArray);
@@ -648,10 +682,10 @@
                                 const IDNumber = document.getElementById(`IDnumber_Co5`).value;
                                 const Phone = document.getElementById(`Phone_Co5`).value;
                                 const Road = document.getElementById(`road_Co5`).value;
-                                const DetailAddress = document.getElementById(`detailaddress_Co5`).value;
+                                const AddressDetail = document.getElementById(`AddressDetail_Co5`).value;
                                 const sameaddresscheck = document.getElementById('sameaddress_Co5');
                                 const Contact = Road;
-                                const detailContact = DetailAddress;
+                                const detailContact = AddressDetail;
                                 if (sameaddresscheck) {
                                     if (!sameaddresscheck.checked) {
                                         Contact = document.getElementById(`road_contact_Co5`).value;
@@ -664,7 +698,7 @@
                                 dataArray.push(IDNumber);
                                 dataArray.push(Phone);
                                 dataArray.push(Road);
-                                dataArray.push(DetailAddress);
+                                dataArray.push(AddressDetail);
                                 dataArray.push(Contact);
                                 dataArray.push(detailContact);
                                 const jsonResult = JSON.stringify(dataArray);
@@ -693,7 +727,7 @@
                                     const IDNumber = document.getElementById(`IDNumber_11`).value;
                                     const Phone = document.getElementById(`Phone_11`).value;
                                     const Road = document.getElementById(`addressroad_11`).value;
-                                    const DetailAddress = document.getElementById(`detailaddress_11`).value;
+                                    const AddressDetail = document.getElementById(`AddressDetail_11`).value;
                                     const sameaddresscheck = document.getElementById('sameaddress_check_11');
                                     const Contact = '';
                                     const detailContact = '';
@@ -709,7 +743,7 @@
                                     agentdataArray.push(IDNumber);
                                     agentdataArray.push(Phone);
                                     agentdataArray.push(Road);
-                                    agentdataArray.push(DetailAddress);
+                                    agentdataArray.push(AddressDetail);
                                     agentdataArray.push(Contact);
                                     agentdataArray.push(detailContact);
                                     const jsonResult = JSON.stringify(agentdataArray);
@@ -919,6 +953,58 @@
                     }
                 });
             });
+
+            //------------------
+            // 自然人/法人  *
+            //------------------
+            $('input[name="persontypeRadio"]').change(function () {
+
+                $('input[name="persontypeRadio"]').each(function () {
+                    var radioId = $(this).attr('id');
+                    // 檢查是否被點選
+                    if ($(this).is(':checked')) {
+                        // 根據不同的 id 做相應的處理
+                        const inputElement = document.getElementById('IDnumber_0');
+                        switch (radioId) {
+                            case "natureperson":
+                                //更改姓名
+                                $('#labelName').text('房東姓名');
+                                $('#labelIDNumber').text('身分證字號');
+                                $('.Principle_formgroup').hide();
+                                $('#Principal').prop('required', false);
+                                //需要性別
+                                $('.legal_formtype').show();
+                                $('#genderRadio_0_1').prop('required', true);
+                                $('#genderRadio_0_0').prop('required', true);
+                                //生日
+                                $('#birthdayYear_0').prop('required', true);
+                                $('#birthdayMonth_0').prop('required', true);
+                                $('#birthdayDay_0').prop('required', true);
+                                //身分證字號(需驗證)
+                                inputElement.setAttribute('pattern', '^[A-Z]\\d{9}$');
+                                break;
+                            case "legalperson":
+                                //更改姓名
+                                $('#labelName').text('公司名稱');
+                                $('#labelIDNumber').text('統一編號');
+                                $('.Principle_formgroup').show();
+                                $('#Principal').prop('required', true);
+                                //取消性別
+                                $('.legal_formtype').hide();
+                                $('#genderRadio_0_1').prop('required', false);
+                                $('#genderRadio_0_0').prop('required', false);
+                                //生日
+                                $('#birthdayYear_0').prop('required', false);
+                                $('#birthdayMonth_0').prop('required', false);
+                                $('#birthdayDay_0').prop('required', false);
+                                //身分證字號(不需驗證)
+                                inputElement.removeAttribute('pattern');
+                                break;
+                        }
+                    }
+                })
+            });
+
             //------------------
             // 是否上傳稅單  *
             //------------------
@@ -966,6 +1052,8 @@
                     }
                 })
             });
+
+
 
             //------------------
             // 共有人幾位  *
