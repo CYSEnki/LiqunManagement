@@ -62,6 +62,10 @@ namespace LiqunManagement.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<HomeObject>()
+                .Property(e => e.scooterparkfloor)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<HomeObject>()
                 .Property(e => e.scooterpositionnumber)
                 .IsUnicode(false);
 
