@@ -38,6 +38,7 @@ namespace LiqunManagement.ViewModels
         public string Tenant { get; set; }
     }
 
+    #region FormGet資料
     //房屋物件
     public class HomeObjectViewModel
     {
@@ -147,6 +148,7 @@ namespace LiqunManagement.ViewModels
         public string Principal { get; set; }
         public int? Gender { get; set; }
         public DateTime? Birthday { get; set; }
+        public string BirthdayStr { get; set; }
         public string IDNumber { get; set; }
         public string Phone { get; set; }
         public string BankNo { get; set; }
@@ -176,8 +178,47 @@ namespace LiqunManagement.ViewModels
         public DateTime? UpdateTime { get; set; }
         public string UpdateUser { get; set; }
         public string Memo { get; set; }
-    }
 
+        //下拉選單
+        public string Address_DistrictDDL_Landlord { get; set; }
+        public string Address_RoadDDL_Landlord { get; set; }
+        public string Contact_DistrictDDL_Landlord { get; set; }
+        public string Contact_RoadDDL_Landlord { get; set; }
+
+        //共有人一
+        public string CoAddress1_District { get; set; }
+        public string CoAddress1_Road { get; set; }
+        public string CoContact1_District { get; set; }
+        public string CoContact1_Road { get; set; }
+        //共有人二
+        public string CoAddress2_District { get; set; }
+        public string CoAddress2_Road { get; set; }
+        public string CoContact2_District { get; set; }
+        public string CoContact2_Road { get; set; }
+        //共有人三
+        public string CoAddress3_District { get; set; }
+        public string CoAddress3_Road { get; set; }
+        public string CoContact3_District { get; set; }
+        public string CoContact3_Road { get; set; }
+        //共有人四
+        public string CoAddress4_District { get; set; }
+        public string CoAddress4_Road { get; set; }
+        public string CoContact4_District { get; set; }
+        public string CoContact4_Road { get; set; }
+        //共有人五
+        public string CoAddress5_District { get; set; }
+        public string CoAddress5_Road { get; set; }
+        public string CoContact5_District { get; set; }
+        public string CoContact5_Road { get; set; }
+        //代理人
+        public string AgAddress_District { get; set; }
+        public string AgAddress_Road { get; set; }
+        public string AgContact_District { get; set; }
+        public string AgContact_Road { get; set; }
+    }
+    #endregion
+
+    #region FormPost資料
     public class HomeObjectInputViewModel
     {
         // 表單編號
@@ -295,8 +336,6 @@ namespace LiqunManagement.ViewModels
         public string memo { get; set; }
     }
 
-
-
     public class LandlordInputViewModel
     {
         public string FormID { get; set; }
@@ -325,4 +364,5 @@ namespace LiqunManagement.ViewModels
         public string AgentInput { get; set; }
         public string memo { get; set; }
     }
+    #endregion
 }

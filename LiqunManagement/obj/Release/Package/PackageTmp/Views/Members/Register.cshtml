@@ -1,0 +1,436 @@
+﻿@model LiqunManagement.ViewModels.MemberRegisterViewModel﻿
+@{
+    ViewBag.Title = "帳號設定";
+    ViewBag.Controller = "MembersManage";
+    ViewBag.Branches = "SetAccount";
+    Layout = "~/Views/Shared/smartadmin_Layout.cshtml";
+}
+@*datatables*@
+<link href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/datagrid/datatables/datatables.bundle.css" rel="stylesheet" />
+@*select2*@
+<link href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/formplugins/select2/select2.bundle.css" rel="stylesheet" />
+<style>
+    #deptddl.select2-container {
+        z-index: 99999; /* 適當的z-index值，確保高於modal的z-index值 */
+    }
+    .select2-dropdown {
+        z-index: 99999; /* 適當的z-index值，確保高於modal的z-index值 */
+    }
+    .modal {
+        z-index: 99998;  較低的z-index值，以確保在Select2之下 
+    }
+</style>
+<main id="js-page-content" role="main" class="page-content">
+    <ol class="breadcrumb page-breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="javascript:void(0);">後臺管理系統</a>
+        </li>
+        <li class="breadcrumb-item">職員管理</li>
+        <li class="breadcrumb-item">帳號設定</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block">
+            <span class="js-get-date"></span>
+        </li>
+    </ol>
+
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class="subheader-icon fal fa-edit"></i>
+            <span class="font-weight-bold" style="padding-top:5px;">帳號設定</span>
+            <small>
+
+            </small>
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel panel-locked">
+                <div class="panel-hdr">
+                    <h2>
+                        輸入帳號
+                    </h2>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+
+                        @using (Html.BeginForm("Register", "Members", FormMethod.Post, new { @class = "needs-validation", @enctype = "multipart/form-data", @novalidate = "" }))
+                        {
+                            @Html.ValidationSummary(true)
+                            <table>
+                                @*帳號*@
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.newMember.Account)
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.newMember.Account)
+                                        @Html.ValidationMessageFor(model => model.newMember.Account)
+                                    </td>
+                                </tr>
+                                @*密碼*@
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.Password)
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.Password)
+                                        @Html.ValidationMessageFor(model => model.Password)
+                                    </td>
+                                </tr>
+                                @*確認密碼*@
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.PasswordCheck)
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.PasswordCheck)
+                                        @Html.ValidationMessageFor(model => model.PasswordCheck)
+                                    </td>
+                                </tr>
+                                @*姓名*@
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.newMember.Name)
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.newMember.Name)
+                                        @Html.ValidationMessageFor(model => model.newMember.Name)
+                                    </td>
+                                </tr>
+                                @*信箱*@
+                                @*<tr>
+                                        <td>
+                                            @Html.LabelFor(model => model.newMember.Email)
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.newMember.Email)
+                                            @Html.ValidationMessageFor(model => model.newMember.Email)
+                                        </td>
+                                    </tr>*@
+                                <tr>
+                                    <td colspan="2">
+                                        <button class="btn btn-primary ml-auto waves-effect waves-themed" type="submit">送出</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div id="panel-1" class="panel panel-locked">
+                <div class="panel-hdr">
+                    <h2>
+                        職員設定
+                    </h2>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+
+                        <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100 dataTable dtr-inline collapsed" role="grid" aria-describedby="dt-basic-example_info" style="width: 876px;">
+                            <thead class="bg-warning-200">
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column ascending">使用者名稱</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" aria-label="Account: activate to sort column ascending">帳號</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" aria-label="Status: activate to sort column ascending">帳號狀態</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" aria-label="Department: activate to sort column ascending">部門</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" aria-label="Position: activate to sort column ascending">職稱</th>
+                                    <th class="sorting_disabled" rowspan="1" colspan="1" aria-label=""></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.MemberList)
+                                {
+                                    <tr role="row" class="odd">
+                                        <td class="sorting_1 dtr-control">@item.Name</td>
+                                        <td>@item.Account</td>
+                                        <td class="d-flex justify-content-center">
+                                            @if (item.Status)
+                                            {
+                                                <span class="font-weight-bolder color-success-700">啟用</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="font-weight-bolder color-danger-700">停權</span>
+                                            }
+                                        </td>
+                                        <td>@item.Department</td>
+                                        <td>@item.Position</td>
+                                        <td style="display: none;">
+                                            @*<a href="" class="btn btn-sm btn-icon btn-outline-primary rounded-circle mr-1" title="Edit Data" data-toggle="modal" data-target="#SetDataModal" data-account="@item.Account" data-name="@item.Name">
+                                                    <i class="fa fa-pen"></i>
+                                                </a>*@
+
+
+                                            <div class="dropdown d-inline-block dropleft">
+                                                <a href="#" class="btn btn-sm btn-icon btn-outline-primary rounded-circle shadow-0" data-toggle="dropdown" aria-expanded="true" title="More options">
+                                                    <i class="fa fa-pen"></i>
+                                                </a>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#SetDataModal" data-account="@item.Account" data-name="@item.Name">編輯</a>
+                                                    @if (item.Status)
+                                                    {
+                                                        <a class="dropdown-item" href="@Url.Action("ChangeEmpStatus", "Members", new { @Account = item.Account, @ToStatus = false})">停用</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a class="dropdown-item" href="@Url.Action("ChangeEmpStatus", "Members", new { Account = item.Account, @ToStatus = true})">啟用</a>
+                                                    }
+                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ResetPasswordModal" data-account="@item.Account" data-name="@item.Name">重設密碼</a>
+                                                </div>
+                                            </div>
+
+
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section scripts
+{
+    @*datatables*@
+    <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/datagrid/datatables/datatables.bundle.js"></script>
+    @*select2*@
+    <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/select2/select2.bundle.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+
+        $(document).ready(function () {
+
+            /* init datatables */
+            $('#dt-basic-example').dataTable(
+                {
+                    //響應式設計
+                    responsive: true,
+                    //定義工具欄和元素的布局結構
+                    dom: "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'B>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                    //定義按鈕
+                    buttons: [
+                        {
+                            extend: 'colvis',
+                            text: '觀看欄位',
+                            titleAttr: 'Col visibility',
+                            className: 'btn-outline-default'
+                        },
+                        {
+                            extend: 'copyHtml5',
+                            text: 'Copy',
+                            titleAttr: 'Copy to clipboard',
+                            className: 'btn-outline-default'
+                        },
+                        {
+                            extend: 'print',
+                            text: '<i class="fal fa-print"></i>',
+                            titleAttr: 'Print Table',
+                            className: 'btn-outline-default'
+                        }
+
+                    ],
+                });
+
+            /* init select2 */
+            var jsonddl = @Html.Raw(Json.Encode(ViewBag.ddl));
+            var jsonArray = JSON.parse(jsonddl);
+            for (var i = 0; i < jsonArray.length; i++) {
+                jsonArray[i].id = jsonArray[i].id.replace(/\"/g, '');
+                jsonArray[i].text = jsonArray[i].text.replace(/\"/g, '');
+            }
+            //var data_city = jsonArray;
+            $('#deptddl').select2({
+                data: jsonArray,
+                placeholder: '選擇部門'
+            });
+
+            //Modal
+            $('#SetDataModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget)
+                var name = button.data('name')
+                var account = button.data('account')
+
+
+                var modal = $(this)
+                $.ajax({
+                    type: "POST",
+                    data: { Account: account },
+                    url: "@Url.Action("GetEmployeeData", "Members")",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data != 'nodata') {
+                            var firstData = data[0];
+
+                            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                            //modal.find('#Department').val(firstData.Department)
+                            modal.find('#Position').val(firstData.JobTitle)
+
+                            /*select2*/
+                            //var jsonArray = JSON.parse(firstData.ddl);
+                            //for (var i = 0; i < jsonArray.length; i++) {
+                            //    jsonArray[i].id = jsonArray[i].id.replace(/\"/g, '');
+                            //    jsonArray[i].text = jsonArray[i].text.replace(/\"/g, '');
+                            //}
+                            ////var data_city = jsonArray;
+                            //modal.find('#deptddl').select2({
+                            //    data: jsonArray,
+                            //    placeholder: '選擇部門'
+                            //});
+                            if (firstData.divcode.trim() !== "")
+                                $('#deptddl').val(firstData.divcode).trigger('change');
+
+
+                        }
+                    },
+                    error: function (error) {
+                        // 處理錯誤情況
+                        console.error("發生錯誤：", error);
+                    }
+                });
+                modal.find('#Name').val(name)
+                modal.find('#Account').val(account)
+            });
+
+            $('#ResetPasswordModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget)
+                var name = button.data('name')
+                var account = button.data('account')
+
+
+                var modal = $(this)
+                modal.find('#ResetName').val(name)
+                modal.find('#ResetAccount').val(account)
+            })
+
+            //重設密碼表單送出事件
+
+            $("#ResetForm").submit(function (event) {
+                // 阻止表单的默认提交行为
+                event.preventDefault();
+
+                // 获取输入字段的值
+                var password = document.getElementById("ResetPassword").value;
+                var confirm = document.getElementById("ConfirmPassword").value;
+
+                // 比较输入字段的值
+                if (password === confirm) {
+                    // 提交表单
+                    this.submit(); // 注意这里使用了 this.submit()
+                } else {
+                    document.getElementById("confirmerror").innerHTML = "密碼輸入不相同，請重新輸入";
+                }
+            });
+        });
+
+</script>
+}
+
+<!-- SetMemberDataModal -->
+<div class="modal fade" id="SetDataModal" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span class="font-weight-bolder">編輯員工資料</span>
+                    <small class="m-0 text-muted">
+                        Below is a static modal example
+                    </small>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                </button>
+            </div>
+            @using (Html.BeginForm("UpdateMemberData", "Members", FormMethod.Post))
+            {
+                <div class="modal-body">
+                    @*姓名*@
+                    <div class="form-group">
+                        <label class="form-label" for="Name">員工姓名</label>
+                        <input type="text" id="Name" name="Name" class="form-control" value="" readonly required>
+                    </div>
+                    @*帳號*@
+                    <div class="form-group">
+                        <label class="form-label" for="Account">員工帳號</label>
+                        <input type="text" id="Account" name="Account" class="form-control" value="" readonly required>
+                    </div>
+                    @*部門*@
+                    <div class="form-group">
+                        <label class="form-label" for="deptddl">員工部門</label>
+                        @*<input type="text" id="DivCode" name="DivCode" class="form-control" value="" required>*@
+
+                        <select id="deptddl" class="custom-select form-control " data-index="1" name="DivCode" required>
+                            <option value="" selected=""></option>
+                        </select>
+                    </div>
+                    @*職位*@
+                    <div class="form-group">
+                        <label class="form-label" for="Position">職務名稱</label>
+                        <input type="text" id="Position" name="Position" class="form-control" value="" readonly>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">離開</button>
+                    <button type="submit" class="btn btn-primary">儲存</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- ReSetPassword -->
+<div class="modal fade" id="ResetPasswordModal" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span class="font-weight-bolder">重設密碼</span>
+                    <small class="m-0 text-muted">
+                        Below is a static modal example
+                    </small>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                </button>
+            </div>
+            @using (Html.BeginForm("ResetPassword", "Members", FormMethod.Post, new { @id = "ResetForm" }))
+            {
+                <div class="modal-body">
+                    @*姓名*@
+                    <div class="form-group">
+                        <label class="form-label" for="Name">員工姓名</label>
+                        <input type="text" id="ResetName" name="Name" class="form-control" value="" readonly required>
+                    </div>
+                    @*帳號*@
+                    <div class="form-group">
+                        <label class="form-label" for="Account">員工帳號</label>
+                        <input type="text" id="ResetAccount" name="Account" class="form-control" value="" readonly required>
+                    </div>
+                    @*密碼*@
+                    <div class="form-group">
+                        <label class="form-label" for="Department">員工密碼</label>
+                        <input type="password" id="ResetPassword" name="Password" class="form-control" value="" required>
+                    </div>
+                    @*職位*@
+                    <div class="form-group">
+                        <label class="form-label" for="Position">密碼確認</label>
+                        <input type="password" id="ConfirmPassword" class="form-control" value="" required>
+                    </div>
+                    <span class="text-danger" id="confirmerror"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">離開</button>
+                    <button type="submit" class="btn btn-primary">重設密碼</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -22,6 +22,7 @@ namespace LiqunManagement.Services
                            select new DDLViewModel
                            {
                                order = reg.CityOrder,
+                               //order = null,
                                text = reg.City,
                                id = reg.CityCode,
                            }).Distinct().OrderBy(x => x.order);
@@ -63,7 +64,7 @@ namespace LiqunManagement.Services
                     bankDDL = (from bank in formdb.Bank.Where(x => x.RootCheck == true)
                                select new DDLViewModel
                                {
-                                   order = 1,
+                                   order = null,
                                    text = bank.BankName + bank.BankCode,
                                    id = bank.BankCode,
                                }).Distinct();
@@ -72,7 +73,7 @@ namespace LiqunManagement.Services
                     bankDDL = (from bank in formdb.Bank.Where(x => x.RootCheck == true && x.BankCode == bankcode)
                                select new DDLViewModel
                                {
-                                   order = 1,
+                                   order = null,
                                    text = bank.BranchName + bank.BranchCode,
                                    id = bank.BranchCode,
                                }).Distinct();
@@ -95,7 +96,7 @@ namespace LiqunManagement.Services
             deptDDL = (from deptdb in Memberdb.Department
                        select new DDLViewModel
                        {
-                           order = 1,
+                           order = null,
                            text = deptdb.DivFullName,
                            id = deptdb.DivCode,
                        }).Distinct();
@@ -117,7 +118,7 @@ namespace LiqunManagement.Services
                        join members in Memberdb.Members on db.Account equals members.Account
                        select new DDLViewModel
                        {
-                           order = 1,
+                           order = null,
                            text = members.Name,
                            id = members.Account,
                        }).Distinct();
