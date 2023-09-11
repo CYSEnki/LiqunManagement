@@ -18,6 +18,7 @@ namespace LiqunManagement.ViewModels
         //房屋物件
         public HomeObjectViewModel homeobjectviewmodel { get; set; }
         public LandLordViewModel landlordviewmodel { get; set; }
+        public TenantViewModel tenantviewmodel { get; set; }
     }
 
     public class DDLViewModel
@@ -228,18 +229,20 @@ namespace LiqunManagement.ViewModels
         public string Name { get; set; }
         public int? Gender { get; set; }
         public DateTime? Birthday { get; set; }
-        [StringLength(20)]
+        public string BirthdayStr { get; set; }
         public string IDNumber { get; set; }
         public string Phone { get; set; }
-        public string Address { get; set; }
-        public string AddressDetail { get; set; }
-        public string ContactAddress { get; set; }
-        public string ContactAddressDetail { get; set; }
-        public string accountNo { get; set; }
         public string BankNo { get; set; }
         public string BrancheNo { get; set; }
         public string BankAccount { get; set; }
-        public string MemberArray { get; set; }
+        public string AddressCode { get; set; }         //戶籍地址代碼
+        public string Address { get; set; }             //戶籍地址
+        public string AddressDetail { get; set; }       //戶籍地址細節
+        public string ContactAddressCode { get; set; }  //通訊地址代碼
+        public string ContactAddress { get; set; }      //通訊地址
+        public string ContactAddressDetail { get; set; }//通訊地址細節
+        public string accountNo { get; set; }           //戶號
+        public string MemberArray { get; set; }         //人數陣列[配偶, 直系, 代理人, 保證人]
         public string Couple { get; set; }
         public string Family1 { get; set; }
         public string Family2 { get; set; }
@@ -262,10 +265,18 @@ namespace LiqunManagement.ViewModels
         public DateTime? UpdateTime { get; set; }
         public string UpdateUser { get; set; }
         public string Memo { get; set; }
+
+
+        //下拉選單
+        public string TeAddress_District { get; set; }
+        public string TeAddress_Road { get; set; }
+        public string TeContact_District { get; set; }
+        public string TeContact_Road { get; set; }
     }
     #endregion
 
     #region FormPost資料
+    //物件資料
     public class HomeObjectInputViewModel
     {
         // 表單編號
@@ -382,7 +393,7 @@ namespace LiqunManagement.ViewModels
         // 備註
         public string memo { get; set; }
     }
-
+    //房東資料
     public class LandlordInputViewModel
     {
         public string FormID { get; set; }
@@ -409,6 +420,58 @@ namespace LiqunManagement.ViewModels
         public string CoOwnerInput5 { get; set; }
         public bool? agentCheckbox { get; set; }
         public string AgentInput { get; set; }
+        public string memo { get; set; }
+    }
+    //房客資料
+    public class TenantInputViewModel
+    {
+        public string FormID { get; set; }
+        public string typeRadio { get; set; }
+        public IEnumerable<HttpPostedFileBase> vulnerablefile { get; set; }
+        public IEnumerable<HttpPostedFileBase> sheetfile { get; set; }
+        public string Name_0 { get; set; }
+        public string genderRadio_0 { get; set; }
+        public string birthday_0 { get; set; }
+        public string IDNumber_0 { get; set; }
+        public string Phone_0 { get; set; }
+        public string addressroad_0 { get; set; }
+        public string AddressDetail_0 { get; set; }
+        public bool? sameaddress_check_0 { get; set; }
+        public string contactroad_0 { get; set; }
+        public string detailcontact_0 { get; set; }
+        public string accountnumber { get; set; }
+        public string bank_0 { get; set; }
+        public string bankbranche_0 { get; set; }
+        public string bankaccount_0 { get; set; }
+
+        //配偶
+        public string coupleInput { get; set; }
+
+        //直系親屬
+        public string directCount { get; set; }
+        public string directInput1 { get; set; }
+        public string directInput2 { get; set; }
+        public string directInput3 { get; set; }
+        public string directInput4 { get; set; }
+        public string directInput5 { get; set; }
+        public string directInput6 { get; set; }
+        public string directInput7 { get; set; }
+        public string directInput8 { get; set; }
+        public string directInput9 { get; set; }
+        public string directInput10 { get; set; }
+
+        //代理人
+        public string AgentRadio { get; set; }
+        public string AgentInput11 { get; set; }
+        public string AgentInput12 { get; set; }
+        public string AgentInput13 { get; set; }
+
+        //保證人
+        public string GuarantorRadio { get; set; }
+        public string GuarantorInput21 { get; set; }
+        public string GuarantorInput22 { get; set; }
+        public string GuarantorInput23 { get; set; }
+
         public string memo { get; set; }
     }
     #endregion

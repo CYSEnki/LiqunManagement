@@ -799,7 +799,7 @@ namespace LiqunManagement.Controllers
             //var role2 = User.IsInRole("User");
             #endregion
             var now = DateTime.Now;
-            var userid = "enkisu";
+            var userid = User.Identity.Name;
             if (String.IsNullOrEmpty(inputmodel.FormID))
             {
                 return View();
@@ -1033,204 +1033,140 @@ namespace LiqunManagement.Controllers
             #region 存在表單資料
             try
             {
-                var ExistForm = formdb.LandLord.Where(x => x.FormID == FormID).FirstOrDefault();
+                var ExistForm = formdb.Tenant.Where(x => x.FormID == FormID).FirstOrDefault();
                 if (ExistForm != null)
                 {
-                    #region 取得房東資料(地址)
+                    #region 取得房客資料(地址)
                     //取得房東戶籍地址
                     string[] Addressparts = ExistForm.Address.Split('-');    //地址
-                    var AddressSplit_Landlord = new { City = Addressparts[0].ToString(), District = Addressparts[1].ToString(), Road = Addressparts[2].ToString(), };
-                    var addressCode_Landlord = formdb.Region.Where(x => x.City == AddressSplit_Landlord.City && x.District == AddressSplit_Landlord.District && x.Road == AddressSplit_Landlord.Road).Select(x => x.RoadCode).FirstOrDefault();
-                    //取得房東通訊地址
+                    var AddressSplit_Tenant = new { City = Addressparts[0].ToString(), District = Addressparts[1].ToString(), Road = Addressparts[2].ToString(), };
+                    var addressCode_Tenant = formdb.Region.Where(x => x.City == AddressSplit_Tenant.City && x.District == AddressSplit_Tenant.District && x.Road == AddressSplit_Tenant.Road).Select(x => x.RoadCode).FirstOrDefault();
+                    //取得房客通訊地址
                     string[] Contactparts = ExistForm.ContactAddress.Split('-');    //通訊地址
-                    var ContactSplit_Landlord = new { City = Contactparts[0].ToString(), District = Contactparts[1].ToString(), Road = Contactparts[2].ToString(), };
-                    var contactCode_Landlord = formdb.Region.Where(x => x.City == ContactSplit_Landlord.City && x.District == ContactSplit_Landlord.District && x.Road == ContactSplit_Landlord.Road).Select(x => x.RoadCode).FirstOrDefault();
+                    var ContactSplit_Tenant = new { City = Contactparts[0].ToString(), District = Contactparts[1].ToString(), Road = Contactparts[2].ToString(), };
+                    var contactCode_Tenant = formdb.Region.Where(x => x.City == ContactSplit_Tenant.City && x.District == ContactSplit_Tenant.District && x.Road == ContactSplit_Tenant.Road).Select(x => x.RoadCode).FirstOrDefault();
 
-                    //取得房東地址陣列下拉選單
-                    string[] Landlord_Address_Input = new string[4];
-                    Landlord_Address_Input[0] = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(addressCode_Landlord.Substring(0, 2)).ddllist.ToList());
-                    Landlord_Address_Input[1] = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(addressCode_Landlord.Substring(0, 4)).ddllist.ToList());
-                    Landlord_Address_Input[2] = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(contactCode_Landlord.Substring(0, 2)).ddllist.ToList());
-                    Landlord_Address_Input[3] = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(contactCode_Landlord.Substring(0, 4)).ddllist.ToList());
-
+                    //取得房客地址陣列下拉選單
+                    string[] Tenant_Address_Input = new string[4];
+                    Tenant_Address_Input[0] = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(addressCode_Tenant.Substring(0, 2)).ddllist.ToList());
+                    Tenant_Address_Input[1] = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(addressCode_Tenant.Substring(0, 4)).ddllist.ToList());
+                    Tenant_Address_Input[2] = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(contactCode_Tenant.Substring(0, 2)).ddllist.ToList());
+                    Tenant_Address_Input[3] = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(contactCode_Tenant.Substring(0, 4)).ddllist.ToList());
                     #endregion
 
-                    #region 取得共有人資料(地址)
-                    //取得共有人人數
-                    var CoOwnerCount = Convert.ToInt32(JsonConvert.DeserializeObject<List<string>>(ExistForm.MemberArray)[0]);
-                    string[] coownerarray1 = new string[8];
-                    string[] coownerarray2 = new string[8];
-                    string[] coownerarray3 = new string[8];
-                    string[] coownerarray4 = new string[8];
-                    string[] coownerarray5 = new string[8];
-                    string[][] coownerArrays = new string[][] { coownerarray1, coownerarray2, coownerarray3, coownerarray4, coownerarray5 };    //輸出
+                    //人數陣列
+                    var MemberList = JsonConvert.DeserializeObject<List<string>>(ExistForm.MemberArray);
+                    var CoupleCount = Convert.ToInt32(MemberList[0]);   //配偶人數
+                    var DirectCount = Convert.ToInt32(MemberList[1]);   //直系親屬人數
+                    var AgentCount = Convert.ToInt32(MemberList[2]);    //代理人人數
+                    var GuarantCount = Convert.ToInt32(MemberList[3]);  //保證人人數
+
+                    #region 取得代理人資料(地址)
+                    string[] agentarray1 = new string[8];
+                    string[] agentarray2 = new string[8];
+                    string[] agentarray3 = new string[8];
+                    string[][] agentArrays = new string[][] { agentarray1, agentarray2, agentarray3};    //輸出
 
                     //取得共有人戶籍地址DDL[district, road, districtContact, roadContact]
-                    string[] CoOwner_Address_Input1 = new string[4];
-                    string[] CoOwner_Address_Input2 = new string[4];
-                    string[] CoOwner_Address_Input3 = new string[4];
-                    string[] CoOwner_Address_Input4 = new string[4];
-                    string[] CoOwner_Address_Input5 = new string[4];
-                    string[][] CoOwner_AddressArraays = new string[][] { CoOwner_Address_Input1, CoOwner_Address_Input2, CoOwner_Address_Input3, CoOwner_Address_Input4, CoOwner_Address_Input5 };    //輸出
+                    string[] agent_Address_Input1 = new string[4];
+                    string[] agent_Address_Input2 = new string[4];
+                    string[] agent_Address_Input3 = new string[4];
+                    string[][] agent_AddressArraays = new string[][] { agent_Address_Input1, agent_Address_Input2, agent_Address_Input3};    //輸出
                     int arraycount = 0;
 
-
-                    for (int count = 0; count < CoOwnerCount; count++)
+                    for (int count = 0; count < AgentCount; count++)
                     {
                         //找到要取得的共有人Json陣列資料
-                        string coOwnerProperty = $"CoOwner{count + 1}";
-                        coownerArrays[count] = JsonConvert.DeserializeObject<List<string>>(ExistForm.GetType().GetProperty(coOwnerProperty).GetValue(ExistForm).ToString()).ToArray();
+                        string agentProperty = $"agent{count + 1}";
+                        agentArrays[count] = JsonConvert.DeserializeObject<List<string>>(ExistForm.GetType().GetProperty(agentProperty).GetValue(ExistForm).ToString()).ToArray();
 
                         //將地址轉換成地址代碼
-                        for (int arrayscount = 0; arrayscount < coownerArrays[count].Count(); arrayscount++)
+                        for (int arrayscount = 0; arrayscount < agentArrays[count].Count(); arrayscount++)
                         {
                             //4:地址 // 6:通訊地址
                             if (arrayscount == 4 || arrayscount == 6)
                             {
-                                string[] Parts = coownerArrays[count][arrayscount].Split('-');    //通訊地址
+                                string[] Parts = agentArrays[count][arrayscount].Split('-');    //通訊地址
                                 //門牌地址 => 地址代碼
                                 var Split = new { City = Parts[0].ToString(), District = Parts[1].ToString(), Road = Parts[2].ToString(), };
                                 var co_addresscode = formdb.Region.Where(x => x.City == Split.City && x.District == Split.District && x.Road == Split.Road).Select(x => x.RoadCode).FirstOrDefault();
-                                coownerArrays[count][arrayscount] = co_addresscode;
+                                agentArrays[count][arrayscount] = co_addresscode;
 
                                 //找到DDL並存入
                                 if (arrayscount == 4)
                                 {
                                     var splitaddress = new { City = Parts[0].ToString(), District = Parts[1].ToString(), Road = Parts[2].ToString(), };
-                                    CoOwner_AddressArraays[arraycount][0] = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(co_addresscode.Substring(0, 2)).ddllist.ToList());
-                                    CoOwner_AddressArraays[arraycount][1] = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(co_addresscode.Substring(0, 4)).ddllist.ToList());
+                                    agent_AddressArraays[arraycount][0] = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(co_addresscode.Substring(0, 2)).ddllist.ToList());
+                                    agent_AddressArraays[arraycount][1] = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(co_addresscode.Substring(0, 4)).ddllist.ToList());
                                 }
                                 if (arrayscount == 6)
                                 {
-                                    CoOwner_AddressArraays[arraycount][2] = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(co_addresscode.Substring(0, 2)).ddllist.ToList());
-                                    CoOwner_AddressArraays[arraycount][3] = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(co_addresscode.Substring(0, 4)).ddllist.ToList());
+                                    agent_AddressArraays[arraycount][2] = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(co_addresscode.Substring(0, 2)).ddllist.ToList());
+                                    agent_AddressArraays[arraycount][3] = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(co_addresscode.Substring(0, 4)).ddllist.ToList());
                                     arraycount++;
                                 }
                             }
                             else
                             {
-                                coownerArrays[count][arrayscount] = coownerArrays[count][arrayscount];
+                                agentArrays[count][arrayscount] = agentArrays[count][arrayscount];
                             }
                         }
                     }
                     #endregion
 
-                    #region 取得代理人資料(地址)
-                    //取得代理人人數
-                    var AgentCount = Convert.ToInt32(JsonConvert.DeserializeObject<List<string>>(ExistForm.MemberArray)[1]);
-                    //取得代理人陣列
-                    string[] agentarray = new string[9];
-                    //取得代理人地址陣列
-                    string[] Agent_Address_Input = new string[4];
-                    if (ExistForm.Agent != null)
-                    {
-                        if (AgentCount > 0)
-                        {
-                            agentarray = JsonConvert.DeserializeObject<List<string>>(ExistForm.Agent).ToArray();
-
-                            //將地址轉換成地址代碼
-                            for (int arrayscount = 0; arrayscount < agentarray.Count(); arrayscount++)
-                            {
-
-                                //4:地址 // 6:通訊地址
-                                if (arrayscount == 5 || arrayscount == 7)
-                                {
-                                    string[] Parts = agentarray[arrayscount].Split('-');    //通訊地址
-                                                                                            //門牌地址 => 地址代碼
-                                    var Split = new { City = Parts[0].ToString(), District = Parts[1].ToString(), Road = Parts[2].ToString(), };
-                                    var ag_addresscode = formdb.Region.Where(x => x.City == Split.City && x.District == Split.District && x.Road == Split.Road).Select(x => x.RoadCode).FirstOrDefault();
-                                    agentarray[arrayscount] = ag_addresscode;
-
-                                    //找到DDL並存入
-                                    if (arrayscount == 5)
-                                    {
-                                        var splitaddress = new { City = Parts[0].ToString(), District = Parts[1].ToString(), Road = Parts[2].ToString(), };
-                                        Agent_Address_Input[0] = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(ag_addresscode.Substring(0, 2)).ddllist.ToList());
-                                        Agent_Address_Input[1] = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(ag_addresscode.Substring(0, 4)).ddllist.ToList());
-                                    }
-                                    if (arrayscount == 7)
-                                    {
-                                        Agent_Address_Input[2] = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(ag_addresscode.Substring(0, 2)).ddllist.ToList());
-                                        Agent_Address_Input[3] = JsonConvert.SerializeObject(ddlservices.GetRegionDDL(ag_addresscode.Substring(0, 4)).ddllist.ToList());
-                                        arraycount++;
-                                    }
-                                }
-                                else
-                                {
-                                    agentarray[arrayscount] = agentarray[arrayscount];
-                                }
-                            }
-                        }
-                    }
-                    #endregion
-
-                    var FormValue = new LandLordViewModel
+                    var FormValue = new TenantViewModel
                     {
                         FormID = FormID,
-                        Name = ExistForm.Name,      //房東姓名(公司名稱)
-                        Principal = ExistForm.Gender != 2 ? "" : ExistForm.Principal,       //負責人
-                        Gender = ExistForm.Gender,      //性別(0/1)，法人(2)
-                        BirthdayStr = ExistForm.Gender != 2 ? Convert.ToDateTime(ExistForm.Birthday).ToString("yyyy-MM-dd") : null,     //房東生日
-                        IDNumber = ExistForm.IDNumber,      //身分證字號(統一編號)
-                        Phone = ExistForm.Phone,        //電話
-                        BankNo = ExistForm.BankNo,      //銀行代碼
+                        TenantType = ExistForm.TenantType,
+                        Name = ExistForm.Name,                  //房客姓名
+                        Gender = ExistForm.Gender,              //性別(0/1)
+                        BirthdayStr = Convert.ToDateTime(ExistForm.Birthday).ToString("yyyy-MM-dd"),     //房客生日
+                        IDNumber = ExistForm.IDNumber,          //身分證字號(統一編號)
+                        Phone = ExistForm.Phone,                //電話
+                        BankNo = ExistForm.BankNo,              //銀行代碼
                         BrancheNo = ExistForm.BrancheNo,        //分行代碼
-                        BankAccount = ExistForm.BankAccount,        //銀行帳號
-                        AddressCode_LandLord = addressCode_Landlord,    //地址代碼
+                        BankAccount = ExistForm.BankAccount,    //銀行帳號
+
+                        //地址下拉選單
+                        TeAddress_District = Tenant_Address_Input[0],
+                        TeAddress_Road = Tenant_Address_Input[1],
+                        TeContact_District = Tenant_Address_Input[2],
+                        TeContact_Road = Tenant_Address_Input[3],
+                        AddressCode = addressCode_Tenant,           //地址代碼
                         AddressDetail = ExistForm.AddressDetail,
-                        ContactCode_Landlord = contactCode_Landlord,    //通訊地址代碼
+                        ContactAddressCode = contactCode_Tenant,    //通訊地址代碼
                         ContactAddressDetail = ExistForm.ContactAddressDetail,
-                        CoOwnerCount = CoOwnerCount,
-                        CoOwner1 = JsonConvert.SerializeObject(coownerArrays[0]),
-                        CoOwner2 = JsonConvert.SerializeObject(coownerArrays[1]),
-                        CoOwner3 = JsonConvert.SerializeObject(coownerArrays[2]),
-                        CoOwner4 = JsonConvert.SerializeObject(coownerArrays[3]),
-                        CoOwner5 = JsonConvert.SerializeObject(coownerArrays[4]),
-                        AgentCount = AgentCount,
-                        Agent = JsonConvert.SerializeObject(agentarray),
+                        accountNo = ExistForm.accountNo,            //戶號
+
+                        MemberArray = ExistForm.MemberArray,        //人數陣列[配偶, 直系, 代理人, 保證人]
+                        Couple = ExistForm.Couple,
+
+                        Family1 = JsonConvert.SerializeObject(ExistForm.Family1),
+                        Family2 = JsonConvert.SerializeObject(ExistForm.Family2),
+                        Family3 = JsonConvert.SerializeObject(ExistForm.Family3),
+                        Family4 = JsonConvert.SerializeObject(ExistForm.Family4),
+                        Family5 = JsonConvert.SerializeObject(ExistForm.Family5),
+                        Family6 = JsonConvert.SerializeObject(ExistForm.Family6),
+                        Family7 = JsonConvert.SerializeObject(ExistForm.Family7),
+                        Family8 = JsonConvert.SerializeObject(ExistForm.Family8),
+                        Family9 = JsonConvert.SerializeObject(ExistForm.Family9),
+                        Family10 = JsonConvert.SerializeObject(ExistForm.Family10),
+
+                        Agent1 = JsonConvert.SerializeObject(ExistForm.Agent1),
+                        Agent2 = JsonConvert.SerializeObject(ExistForm.Agent2),
+                        Agent3 = JsonConvert.SerializeObject(ExistForm.Agent3),
+
+                        Guarantor1 = JsonConvert.SerializeObject(ExistForm.Guarantor1),
+                        Guarantor2 = JsonConvert.SerializeObject(ExistForm.Guarantor2),
+                        Guarantor3 = JsonConvert.SerializeObject(ExistForm.Guarantor2),
+
                         Memo = String.IsNullOrEmpty(ExistForm.Memo) ? "" : ExistForm.Memo.Replace("\r\n", "\\r\\n"),
-
-                        //下拉選單
-                        LaAddress_District = Landlord_Address_Input[0],
-                        LaAddress_Road = Landlord_Address_Input[1],
-                        LaContact_District = Landlord_Address_Input[2],
-                        LaContact_Road = Landlord_Address_Input[3],
-
-                        CoAddress1_District = CoOwner_AddressArraays[0][0],
-                        CoAddress1_Road = CoOwner_AddressArraays[0][1],
-                        CoContact1_District = CoOwner_AddressArraays[0][2],
-                        CoContact1_Road = CoOwner_AddressArraays[0][3],
-
-                        CoAddress2_District = CoOwner_AddressArraays[1][0],
-                        CoAddress2_Road = CoOwner_AddressArraays[1][1],
-                        CoContact2_District = CoOwner_AddressArraays[1][2],
-                        CoContact2_Road = CoOwner_AddressArraays[1][3],
-
-                        CoAddress3_District = CoOwner_AddressArraays[2][0],
-                        CoAddress3_Road = CoOwner_AddressArraays[2][1],
-                        CoContact3_District = CoOwner_AddressArraays[2][2],
-                        CoContact3_Road = CoOwner_AddressArraays[2][3],
-
-                        CoAddress4_District = CoOwner_AddressArraays[3][0],
-                        CoAddress4_Road = CoOwner_AddressArraays[3][1],
-                        CoContact4_District = CoOwner_AddressArraays[3][2],
-                        CoContact4_Road = CoOwner_AddressArraays[3][3],
-
-                        CoAddress5_District = CoOwner_AddressArraays[4][0],
-                        CoAddress5_Road = CoOwner_AddressArraays[4][1],
-                        CoContact5_District = CoOwner_AddressArraays[4][2],
-                        CoContact5_Road = CoOwner_AddressArraays[4][3],
-
-                        AgAddress_District = Agent_Address_Input[0],
-                        AgAddress_Road = Agent_Address_Input[1],
-                        AgContact_District = Agent_Address_Input[2],
-                        AgContact_Road = Agent_Address_Input[3],
                     };
 
                     var model = new FormViewModels
                     {
                         FormID = FormID != null ? FormID : "",
-                        landlordviewmodel = FormValue,
+                        tenantviewmodel = FormValue,
                     };
                     #region Nlog
                     //取得目前model資料
@@ -1265,62 +1201,61 @@ namespace LiqunManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult Tenant(
-            string FormID,                  //表單編號
+        #region 過時
+        //public ActionResult Tenant(
+        //    string FormID,                  //表單編號
 
-            string typeRadio,               //房客分類(一般戶; 一類戶; 二類戶)
-            IEnumerable<HttpPostedFileBase> vulnerablefile,     //(file)上傳弱勢戶佐證文件
-            IEnumerable<HttpPostedFileBase> sheetfile,          //(file)上傳300億試算表截圖
+        //    string typeRadio,               //房客分類(一般戶; 一類戶; 二類戶)
+        //    IEnumerable<HttpPostedFileBase> vulnerablefile,     //(file)上傳弱勢戶佐證文件
+        //    IEnumerable<HttpPostedFileBase> sheetfile,          //(file)上傳300億試算表截圖
 
-            string Name_0,                  //房客姓名
-            string genderRadio_0,           //房客性別(男:1; 女:0)
-            string birthday_0,              //房客生日
-            string IDNumber_0,              //房客身分證
-            string Phone_0,                 //房客電話
-            string addressroad_0,           //房客地址(路)
-            string AddressDetail_0,         //房客詳細地址  
-            bool? sameaddress_check_0,      //房客通訊地址Checkbox
-            string contactroad_0,           //房客通訊地址(路)
-            string detailcontact_0,         //房客詳細通訊地址
-            string accountnumber,           //房客戶號
-            string bank_0,                  //房客銀行
-            string bankbranche_0,           //房客銀行支部
-            string bankaccount_0,           //房東銀行帳號
+        //    string Name_0,                  //房客姓名
+        //    string genderRadio_0,           //房客性別(男:1; 女:0)
+        //    string birthday_0,              //房客生日
+        //    string IDNumber_0,              //房客身分證
+        //    string Phone_0,                 //房客電話
+        //    string addressroad_0,           //房客地址(路)
+        //    string AddressDetail_0,         //房客詳細地址  
+        //    bool? sameaddress_check_0,      //房客通訊地址Checkbox
+        //    string contactroad_0,           //房客通訊地址(路)
+        //    string detailcontact_0,         //房客詳細通訊地址
+        //    string accountnumber,           //房客戶號
+        //    string bank_0,                  //房客銀行
+        //    string bankbranche_0,           //房客銀行支部
+        //    string bankaccount_0,           //房東銀行帳號
 
-            //配偶
-            bool? couplecheck_1,            //丈夫
-            bool? couplecheck_0,            //妻子
-            string coupleName,              //配偶姓名
-            string birthday_couple,         //配偶生日
-            string separatenumber,          //分戶戶號(非必填)
+        //    //配偶
+        //    bool? coupleInput,            //丈夫
 
-            //直系親屬(Json格式)
-            string directCount,             //親屬人數
-            string DirectInput1,
-            string DirectInput2,
-            string DirectInput3,
-            string DirectInput4,
-            string DirectInput5,
-            string DirectInput6,
-            string DirectInput7,
-            string DirectInput8,
-            string DirectInput9,
-            string DirectInput10,
+        //    //直系親屬(Json格式)
+        //    string directCount,             //親屬人數
+        //    string directInput1,
+        //    string directInput2,
+        //    string directInput3,
+        //    string directInput4,
+        //    string directInput5,
+        //    string directInput6,
+        //    string directInput7,
+        //    string directInput8,
+        //    string directInput9,
+        //    string directInput10,
 
-            //代理人(Json格式)
-            string AgentRadio,
-            string AgentInput11,
-            string AgentInput12,
-            string AgentInput13,
+        //    //代理人(Json格式)
+        //    string AgentRadio,
+        //    string AgentInput11,
+        //    string AgentInput12,
+        //    string AgentInput13,
 
-            //保證人(Json格式)
-            string GuarantorRadio,
-            string GuarantorInput21,
-            string GuarantorInput22,
-            string GuarantorInput23,
+        //    //保證人(Json格式)
+        //    string GuarantorRadio,
+        //    string GuarantorInput21,
+        //    string GuarantorInput22,
+        //    string GuarantorInput23,
 
-            string memo
-            )
+        //    string memo
+        //    )
+        #endregion
+        public ActionResult Tenant(TenantInputViewModel inputmodel)
         {
             #region 使用者資料
             var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
@@ -1345,16 +1280,26 @@ namespace LiqunManagement.Controllers
             //var role2 = User.IsInRole("User");
             #endregion
             var now = DateTime.Now;
-            var userid = "enkisu";
+            var userid = User.Identity.Name;
 
-            if (String.IsNullOrEmpty(FormID))
+            if (String.IsNullOrEmpty(inputmodel.FormID))
             {
                 return View();
             }
-            if (sameaddress_check_0 != null)
+
+            //轉換地址
+            var addressdata = formdb.Region.Where(x => x.RoadCode == inputmodel.addressroad_0).FirstOrDefault();
+            var Address = addressdata.City + "-" + addressdata.District + "-" + addressdata.Road;
+            var ContactAddress = "";
+            if (inputmodel.sameaddress_check_0 != null)
             {
-                contactroad_0 = addressroad_0;
-                detailcontact_0 = AddressDetail_0;
+                inputmodel.contactroad_0 = inputmodel.addressroad_0;
+                inputmodel.detailcontact_0 = inputmodel.AddressDetail_0;
+            }
+            else
+            {
+                addressdata = formdb.Region.Where(x => x.RoadCode == inputmodel.contactroad_0).FirstOrDefault();
+                ContactAddress = addressdata.City + "-" + addressdata.District + "-" + addressdata.Road;
             }
 
             #region 存檔(弱勢戶)
@@ -1362,11 +1307,11 @@ namespace LiqunManagement.Controllers
             List<string> vulnerablefileNameArray = new List<string>();
             List<string> vulnerablefileAliasArray = new List<string>();
             //存檔
-            if (vulnerablefile != null && vulnerablefile.Any())
+            if (inputmodel.vulnerablefile != null && inputmodel.vulnerablefile.Any())
             {
                 try
                 {
-                    foreach (var file in vulnerablefile)
+                    foreach (var file in inputmodel.vulnerablefile)
                     {
                         if (file != null && file.ContentLength > 0)
                         {
@@ -1396,11 +1341,11 @@ namespace LiqunManagement.Controllers
             List<string> sheetfileNameArray = new List<string>();
             List<string> sheetfileAliasArray = new List<string>();
             //存檔
-            if (vulnerablefile != null && vulnerablefile.Any())
+            if (inputmodel.sheetfile != null && inputmodel.sheetfile.Any())
             {
                 try
                 {
-                    foreach (var file in vulnerablefile)
+                    foreach (var file in inputmodel.sheetfile)
                     {
                         if (file != null && file.ContentLength > 0)
                         {
@@ -1426,25 +1371,89 @@ namespace LiqunManagement.Controllers
 
 
             //成員陣列[配偶, 直系, 代理人, 保證人]
-            var coupletype = couplecheck_1 != null ? 1 : couplecheck_0 == null ? 0 : -1;    //-1:無; 1:丈夫; 0:妻子;
+            var coupleType = -1;
+            if (!String.IsNullOrEmpty(inputmodel.coupleInput))
+            {
+                var coupleArray = JsonConvert.DeserializeObject<string[]>(inputmodel.coupleInput);
+                coupleType = Convert.ToInt32(coupleArray[0]);    //-1:無; 1:丈夫; 0:妻子;
+            }
             int[] memberArray = new int[4];
-            memberArray[0] = coupletype;
-            memberArray[1] = Convert.ToInt32(directCount);
-            memberArray[2] = Convert.ToInt32(AgentRadio);
-            memberArray[3] = Convert.ToInt32(GuarantorRadio);
+            var agentCount = Convert.ToInt32(inputmodel.AgentRadio);
+            var guarantorCount = Convert.ToInt32(inputmodel.GuarantorRadio);
+            memberArray[0] = coupleType;
+            memberArray[1] = Convert.ToInt32(inputmodel.directCount);
+            memberArray[2] = agentCount;
+            memberArray[3] = guarantorCount;
             string jsonmemberArray = JsonConvert.SerializeObject(memberArray);
 
-            //打包配偶資料陣列[配偶類別, 配偶姓名, 配偶生日, 分戶戶號(非必填)]
-            List<string> coupleArray = new List<string>();
+            #region 打包代理人資料
 
-            if (coupletype != -1)
+            string[] agentarray1 = new string[9];
+            string[] agentarray2 = new string[9];
+            string[] agentarray3 = new string[9];
+
+            //創建複數陣列存取資料型態
+            string[] agentInputs = new string[] { inputmodel.AgentInput11, inputmodel.AgentInput12, inputmodel.AgentInput13};   //輸入
+            string[][] agentArrays = new string[][] { agentarray1, agentarray2, agentarray3};        //輸出
+
+            for (int count = 0; count < agentCount; count++)
             {
-                coupleArray.Add(coupletype.ToString());
-                coupleArray.Add(coupleName);
-                coupleArray.Add(birthday_couple);
-                coupleArray.Add(String.IsNullOrEmpty(separatenumber) ? "" : separatenumber);
+                //找到要取得的共有人Json陣列資料
+                List<string> agentlist = new List<string>();
+                agentlist = JsonConvert.DeserializeObject<List<string>>(agentInputs[count]);
+                //遞迴取出資料
+                for (int i = 0; i < agentlist.Count(); i++)
+                //foreach(var item in agentlist)
+                {
+                    if (i == 5 || i == 7)
+                    {
+                        //由Address找到地址資料
+                        var roadcode = agentlist[i].ToString();
+                        addressdata = formdb.Region.Where(x => x.RoadCode == roadcode).FirstOrDefault();
+                        agentArrays[count][i] = addressdata.City + "-" + addressdata.District + "-" + addressdata.Road;
+                    }
+                    else
+                    {
+                        agentArrays[count][i] = agentlist[i];
+                    }
+                }
             }
-            string jsoncoupleArray = JsonConvert.SerializeObject(coupleArray);
+            #endregion
+
+            
+            #region 打包代理人資料
+
+            string[] guarantorarray1 = new string[9];
+            string[] guarantorarray2 = new string[9];
+            string[] guarantorarray3 = new string[9];
+
+            //創建複數陣列存取資料型態
+            string[] guarantorInputs = new string[] { inputmodel.GuarantorInput21, inputmodel.GuarantorInput22, inputmodel.GuarantorInput23 };   //輸入
+            string[][] guarantorArrays = new string[][] { guarantorarray1, guarantorarray2, guarantorarray3};        //輸出
+
+            for (int count = 0; count < guarantorCount; count++)
+            {
+                //找到要取得的共有人Json陣列資料
+                List<string> guarantorlist = new List<string>();
+                guarantorlist = JsonConvert.DeserializeObject<List<string>>(guarantorInputs[count]);
+                //遞迴取出資料
+                for (int i = 0; i < guarantorlist.Count(); i++)
+                //foreach(var item in guarantorlist)
+                {
+                    if (i == 5 || i == 7)
+                    {
+                        //由Address找到地址資料
+                        var roadcode = guarantorlist[i].ToString();
+                        addressdata = formdb.Region.Where(x => x.RoadCode == roadcode).FirstOrDefault();
+                        guarantorArrays[count][i] = addressdata.City + "-" + addressdata.District + "-" + addressdata.Road;
+                    }
+                    else
+                    {
+                        guarantorArrays[count][i] = guarantorlist[i];
+                    }
+                }
+            }
+            #endregion
 
 
             try
@@ -1455,49 +1464,51 @@ namespace LiqunManagement.Controllers
                     // 建立要插入的資料物件
                     var newData = new Tenant
                     {
-                        FormID = FormID,
-                        TenantType = Convert.ToInt32(typeRadio),
+                        FormID = inputmodel.FormID,
+                        TenantType = Convert.ToInt32(inputmodel.typeRadio),
                         vulnerablefile_Name = vulnerablefileNames,
                         vulnerablefile_Alias = vulnerablefileAlias,
                         sheetfile_Name = sheetfileNames,
                         sheetfile_Alias = sheetfileAlias,
-                        Name = Name_0,
-                        Gender = Convert.ToInt32(genderRadio_0),
-                        Birthday = Convert.ToDateTime(birthday_0),
-                        IDNumber = IDNumber_0,
-                        Phone = Phone_0,
-                        BankNo = bank_0,
-                        BrancheNo = bankbranche_0,
-                        BankAccount = bankaccount_0,
-                        Address = addressroad_0,
-                        accountNo = accountnumber,
-                        AddressDetail = AddressDetail_0,
-                        ContactAddress = contactroad_0,
-                        ContactAddressDetail = detailcontact_0,
+                        Name = inputmodel.Name_0,
+                        Gender = Convert.ToInt32(inputmodel.genderRadio_0),
+                        Birthday = Convert.ToDateTime(inputmodel.birthday_0),
+                        IDNumber = inputmodel.IDNumber_0,
+                        Phone = inputmodel.Phone_0,
+                        BankNo = inputmodel.bank_0,
+                        BrancheNo = inputmodel.bankbranche_0,
+                        BankAccount = inputmodel.bankaccount_0,
+                        Address = Address,
+                        accountNo = inputmodel.accountnumber,
+                        AddressDetail = inputmodel.AddressDetail_0,
+                        ContactAddress = ContactAddress,
+                        ContactAddressDetail = inputmodel.detailcontact_0,
                         MemberArray = jsonmemberArray,
-                        Couple = jsoncoupleArray,
-                        Family1 = DirectInput1,
-                        Family2 = DirectInput2,
-                        Family3 = DirectInput3,
-                        Family4 = DirectInput4,
-                        Family5 = DirectInput5,
-                        Family6 = DirectInput6,
-                        Family7 = DirectInput7,
-                        Family8 = DirectInput8,
-                        Family9 = DirectInput9,
-                        Family10 = DirectInput10,
-                        Agent1 = AgentInput11,
-                        Agent2 = AgentInput12,
-                        Agent3 = AgentInput13,
-                        Guarantor1 = GuarantorInput21,
-                        Guarantor2 = GuarantorInput22,
-                        Guarantor3 = GuarantorInput23,
+                        //配偶
+                        Couple = inputmodel.coupleInput,
+                        //直系親屬
+                        Family1 = inputmodel.directInput1,
+                        Family2 = inputmodel.directInput2,
+                        Family3 = inputmodel.directInput3,
+                        Family4 = inputmodel.directInput4,
+                        Family5 = inputmodel.directInput5,
+                        Family6 = inputmodel.directInput6,
+                        Family7 = inputmodel.directInput7,
+                        Family8 = inputmodel.directInput8,
+                        Family9 = inputmodel.directInput9,
+                        Family10 = inputmodel.directInput10,
+                        Agent1 = agentCount >= 1 ? JsonConvert.SerializeObject(agentArrays[0]) : null,
+                        Agent2 = agentCount >= 2 ? JsonConvert.SerializeObject(agentArrays[1]) : null,
+                        Agent3 = agentCount >= 3 ? JsonConvert.SerializeObject(agentArrays[2]) : null,
+                        Guarantor1 = guarantorCount >= 1 ? JsonConvert.SerializeObject(guarantorArrays[0]) : null,
+                        Guarantor2 = guarantorCount >= 2 ? JsonConvert.SerializeObject(guarantorArrays[1]) : null,
+                        Guarantor3 = guarantorCount >= 3 ? JsonConvert.SerializeObject(guarantorArrays[2]) : null,
 
                         CreateUser = userid,
                         CreateTime = now,
                         UpdateUser = userid,
                         UpdateTime = now,
-                        Memo = memo,
+                        Memo = inputmodel.memo,
                     };
                     // 使用資料上下文插入資料物件
                     context.Tenant.Add(newData);
@@ -1509,7 +1520,7 @@ namespace LiqunManagement.Controllers
             {
                 MailService mailService = new MailService();
                 mailService.SendMail("【力群管理系統】房客資料寫入DB錯誤", ex.ToString(), "cys.enki@gmail.com");
-                return RedirectToAction("Tenant", "Form", new { FormID = FormID });
+                return RedirectToAction("Tenant", "Form", new { FormID = inputmodel.FormID });
             }
 
             return RedirectToAction("CaseManage", "Sales");

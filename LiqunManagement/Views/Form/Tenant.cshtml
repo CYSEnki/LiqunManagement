@@ -427,7 +427,7 @@
                                 <div class="row pl-3 pb-2">
                                     <label>配偶</label>
                                     <div class="custom-control custom-checkbox" style="margin-left:10px;">
-                                        <input type="checkbox" class="custom-control-input couplecheck" id="couplecheck_1" name="couplecheck_1" value="true">
+                                        <input type="checkbox" class="custom-control-input" id="couplecheck_1" name="couplecheck_1" value="true">
                                         <label class="custom-control-label" for="couplecheck_1"></label>
                                     </div>
                                     <label>丈夫</label>
@@ -453,7 +453,7 @@
                                         <div class="input-group-append">
                                             <span id="couplename" class="input-group-text">姓名</span>
                                         </div>
-                                        <input type="text" class="form-control couple_input" name="coupleName" disabled>
+                                        <input type="text" class="form-control couple_input" id="coupleName" name="coupleName" disabled>
                                         <div class="input-group-append">
                                             <span class="input-group-text">身分證</span>
                                         </div>
@@ -484,7 +484,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="text" id="birthday_couple" name="birthday_couple" hidden>
+                                    <input type="text" id="coupleInput" name="coupleInput" hidden>
                                 </div>
                             </div>
                             @*分戶戶號*@
@@ -588,16 +588,32 @@
                             const birth_0 = Year_0.toString() + '-' + Month_0 + '-' + Day_0;
                             $("#birthday_0").val(birth_0)
 
-                            //打包配偶生日
-                            const Year_couple = parseInt($("#birthdayYear_99").val()) + 1911;
-                            var Month_couple = $("#birthdayMonth_99").val();
-                            var Day_couple = $("#birthdayDay_99").val();
-                            const birth_couple = Year_couple.toString() + '-' + Month_couple + '-' + Day_couple;
-                            $("#birthday_couple").val(birth_couple)
+                            //打包配偶資料
+                            if ($("#couplecheck_0").is(":checked") || $("#couplecheck_1").is(":checked")) {
+                                const dataArray = [];
+                                //性別
+                                var genderCouple = -1;
+                                genderCouple = ($("#couplecheck_0").is(":checked")) ? 0 : 1;
+                                //姓名
+                                var nameCouple = $("#coupleName").val();
+                                //生日
+                                const Year_couple = parseInt($("#birthdayYear_99").val()) + 1911;
+                                var Month_couple = $("#birthdayMonth_99").val();
+                                var Day_couple = $("#birthdayDay_99").val();
+                                const birthdayCouple = Year_couple.toString() + '-' + Month_couple + '-' + Day_couple;
+                                //分戶戶號
+                                var seperatenumber = $("#separatenumber").val();
+
+                                dataArray.push(genderCouple)
+                                dataArray.push(nameCouple);
+                                dataArray.push(birthdayCouple);
+                                dataArray.push(seperatenumber);
+                                const jsonResult = JSON.stringify(dataArray);
+                                $('#coupleInput').val(jsonResult);
+                            }
 
                             //打包直系親屬
                             //取得有幾位親屬
-                            debugger;
                             var i = 0;
                             var directcount = parseInt($("#directCount").val());
                             for (i = 1; i <= directcount; i++) {
@@ -618,7 +634,7 @@
                                 dataArray.push(IDNumber);
                                 dataArray.push(Birthday);
                                 const jsonResult = JSON.stringify(dataArray);
-                                $('#DirectInput' + strindex).val(jsonResult);
+                                $('#directInput' + strindex).val(jsonResult);
                             }
 
                             //打包代理人資料
@@ -635,7 +651,7 @@
                                 const index = i + 10;
                                 const strindex = index.toString();
                                 const dataArray = [];
-                                 //姓名
+                                //姓名
                                 const Name = document.getElementById(`Name_Ag` + strindex).value;
                                 //性別
                                 var genderRadioElement = document.getElementsByName("genderRadio_Ag" + strindex);
@@ -660,8 +676,8 @@
                                 const AddressDetail = document.getElementById(`AddressDetail_Ag` + strindex).value;
                                 //通訊地址
                                 const sameaddresscheck = document.getElementById('sameaddresscheck_Ag' + strindex);
-                                const Contact = Road;
-                                const detailContact = AddressDetail;
+                                var Contact = Road;
+                                var detailContact = AddressDetail;
                                 if (sameaddresscheck) {
                                     if (!sameaddresscheck.checked) {
                                         Contact = document.getElementById(`road_contact_Ag` + strindex).value;
@@ -720,8 +736,8 @@
                                 const AddressDetail = document.getElementById(`AddressDetail_Gu` + strindex).value;
                                 //通訊地址
                                 const sameaddresscheck = document.getElementById('sameaddress_Gu' + strindex);
-                                const Contact = Road;
-                                const detailContact = AddressDetail;
+                                var Contact = Road;
+                                var detailContact = AddressDetail;
                                 if (sameaddresscheck) {
                                     if (!sameaddresscheck.checked) {
                                         Contact = document.getElementById(`road_contact_Gu` + strindex).value;
@@ -1257,7 +1273,7 @@
                     //顯示輸入欄位
                     $('.directformgroup[data-order="' + intselectorder + '"]').show();
                     //設定欄位為必填
-                    $('.DirectInput_' + intselectorder).prop('required', true);
+                    $('.directInput_' + intselectorder).prop('required', true);
 
                     //將人數寫入input欄位
                     $("#directCount").val(intselectorder)
@@ -1268,8 +1284,8 @@
                 $('.directformgroup[data-order="' + intselectorder + '"]').hide();
 
                 //設定欄位為非必填
-                $('.DirectInput_' + intselectorder).prop('required', false);
-                $('.DirectInput_' + intselectorder).val('');
+                $('.directInput_' + intselectorder).prop('required', false);
+                $('.directInput_' + intselectorder).val('');
                 if (intselectorder > 0) {
                     intselectorder = intselectorder - 1;
                 }
