@@ -180,10 +180,10 @@ namespace LiqunManagement.ViewModels
         public string Memo { get; set; }
 
         //下拉選單
-        public string Address_DistrictDDL_Landlord { get; set; }
-        public string Address_RoadDDL_Landlord { get; set; }
-        public string Contact_DistrictDDL_Landlord { get; set; }
-        public string Contact_RoadDDL_Landlord { get; set; }
+        public string LaAddress_District { get; set; }
+        public string LaAddress_Road { get; set; }
+        public string LaContact_District { get; set; }
+        public string LaContact_Road { get; set; }
 
         //共有人一
         public string CoAddress1_District { get; set; }
@@ -215,6 +215,53 @@ namespace LiqunManagement.ViewModels
         public string AgAddress_Road { get; set; }
         public string AgContact_District { get; set; }
         public string AgContact_Road { get; set; }
+    }
+    //房客資料
+    public class TenantViewModel
+    {
+        public string FormID { get; set; }
+        public int? TenantType { get; set; }
+        public string vulnerablefile_Name { get; set; }
+        public string vulnerablefile_Alias { get; set; }
+        public string sheetfile_Name { get; set; }
+        public string sheetfile_Alias { get; set; }
+        public string Name { get; set; }
+        public int? Gender { get; set; }
+        public DateTime? Birthday { get; set; }
+        [StringLength(20)]
+        public string IDNumber { get; set; }
+        public string Phone { get; set; }
+        public string Address { get; set; }
+        public string AddressDetail { get; set; }
+        public string ContactAddress { get; set; }
+        public string ContactAddressDetail { get; set; }
+        public string accountNo { get; set; }
+        public string BankNo { get; set; }
+        public string BrancheNo { get; set; }
+        public string BankAccount { get; set; }
+        public string MemberArray { get; set; }
+        public string Couple { get; set; }
+        public string Family1 { get; set; }
+        public string Family2 { get; set; }
+        public string Family3 { get; set; }
+        public string Family4 { get; set; }
+        public string Family5 { get; set; }
+        public string Family6 { get; set; }
+        public string Family7 { get; set; }
+        public string Family8 { get; set; }
+        public string Family9 { get; set; }
+        public string Family10 { get; set; }
+        public string Agent1 { get; set; }
+        public string Agent2 { get; set; }
+        public string Agent3 { get; set; }
+        public string Guarantor1 { get; set; }
+        public string Guarantor2 { get; set; }
+        public string Guarantor3 { get; set; }
+        public DateTime? CreateTime { get; set; }
+        public string CreateUser { get; set; }
+        public DateTime? UpdateTime { get; set; }
+        public string UpdateUser { get; set; }
+        public string Memo { get; set; }
     }
     #endregion
 

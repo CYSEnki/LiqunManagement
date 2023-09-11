@@ -29,7 +29,7 @@
     var AddressCode = Model.landlordviewmodel != null ? Model.landlordviewmodel.AddressCode_LandLord : "";
     var AddressDetail = Model.landlordviewmodel != null ? Model.landlordviewmodel.AddressDetail : "";
     //通訊地址代碼
-    var ContactCode_Landlord = Model.landlordviewmodel != null ? Model.landlordviewmodel.ContactCode_Landlord : "";
+    var ContactCode = Model.landlordviewmodel != null ? Model.landlordviewmodel.ContactCode_Landlord : "";
     var ContactAddressDetail = Model.landlordviewmodel != null ? Model.landlordviewmodel.ContactAddressDetail : "";
     //共有人
     var CoOwnerCount = Model.landlordviewmodel != null ? Model.landlordviewmodel.CoOwnerCount : 0;
@@ -46,11 +46,10 @@
     var memo = Model.landlordviewmodel != null ? Model.landlordviewmodel.Memo : "";
 
     //下拉選單
-    var Address_DistrictDDL_Landlord = @Html.Raw(Model.landlordviewmodel != null ? Model.landlordviewmodel.Address_DistrictDDL_Landlord : "");
-    var Address_RoadDDL_Landlord = @Html.Raw(Model.landlordviewmodel != null ? Model.landlordviewmodel.Address_RoadDDL_Landlord : "");
-
-    var Contact_DistrictDDL_Landlord = @Html.Raw(Model.landlordviewmodel != null ? Model.landlordviewmodel.Contact_DistrictDDL_Landlord : "");
-    var Contact_RoadDDL_Landlord = @Html.Raw(Model.landlordviewmodel != null ? Model.landlordviewmodel.Contact_RoadDDL_Landlord : "");
+    var LaAddress_District = @Html.Raw(Model.landlordviewmodel != null ? Model.landlordviewmodel.LaAddress_District : "");
+    var LaAddress_Road = @Html.Raw(Model.landlordviewmodel != null ? Model.landlordviewmodel.LaAddress_Road : "");
+    var LaContact_District = @Html.Raw(Model.landlordviewmodel != null ? Model.landlordviewmodel.LaContact_District : "");
+    var LaContact_Road = @Html.Raw(Model.landlordviewmodel != null ? Model.landlordviewmodel.LaContact_Road : "");
     //共有人一
     var CoAddress1_District = @Html.Raw(Model.landlordviewmodel != null ? Model.landlordviewmodel.CoAddress1_District : "");
     var CoAddress1_Road = @Html.Raw(Model.landlordviewmodel != null ? Model.landlordviewmodel.CoAddress1_Road : "");
@@ -810,8 +809,8 @@
                                     const Road = document.getElementById(`addressroad_11`).value;
                                     const AddressDetail = document.getElementById(`AddressDetail_11`).value;
                                     const sameaddresscheck = document.getElementById('sameaddress_check_11');
-                                    var Contact = '';
-                                    var detailContact = '';
+                                    var Contact = Road;
+                                    var detailContact = AddressDetail;
                                     if (sameaddresscheck) {
                                         if (!sameaddresscheck.checked) {
                                             Contact = document.getElementById(`contactroad_11`).value;
@@ -1282,31 +1281,28 @@
                 }
 
                 //地址代碼
-                //鄉鎮市區DDL
-                var Address_DistrictDDL_Landlord = JSON.parse('@Address_DistrictDDL_Landlord');
-                $('.select2_district[data-index="1"]').empty().select2({ data: Address_DistrictDDL_Landlord });
-                var Address_RoadDDL_Landlord = JSON.parse('@Address_RoadDDL_Landlord');
-                $('.select2_road[data-index="1"]').empty().select2({ data: Address_RoadDDL_Landlord });
+                //房東地址(下拉選單)
+                var LaAddress_District = JSON.parse('@LaAddress_District');
+                var LaAddress_Road = JSON.parse('@LaAddress_Road');
+                var LaContact_District = JSON.parse('@LaContact_District');
+                var LaContact_Road = JSON.parse('@LaContact_Road');
+                $('.select2_district[data-index="1"]').empty().select2({ data: LaAddress_District });
+                $('.select2_road[data-index="1"]').empty().select2({ data: LaAddress_Road });
+                $('.select2_district[data-index="2"]').empty().select2({ data: LaContact_District });
+                $('.select2_road[data-index="2"]').empty().select2({ data: LaContact_Road });
+
                 //寫進地址
                 var AddressCode = '@AddressCode';
+                var AddressDetail = '@AddressDetail';
                 $('.select2_city[data-index="1"]').val(AddressCode.substring(0, 2)).trigger('change');
                 $('.select2_district[data-index="1"]').val(AddressCode.substring(0, 4)).trigger('change');
                 $('.select2_road[data-index="1"]').val(AddressCode).trigger('change');
-                var AddressDetail = '@AddressDetail';
                 $('input[name="AddressDetail_0"]').val(AddressDetail);
-
-
-                //通訊地址代碼
-                var Contact_DistrictDDL_Landlord = JSON.parse('@Contact_DistrictDDL_Landlord');
-                $('.select2_district[data-index="2"]').empty().select2({ data: Contact_DistrictDDL_Landlord });
-                var Contact_RoadDDL_Landlord = JSON.parse('@Contact_RoadDDL_Landlord');
-                $('.select2_road[data-index="2"]').empty().select2({ data: Contact_RoadDDL_Landlord });
-                //寫進地址
-                var AddressCode = '@AddressCode';
-                $('.select2_city[data-index="2"]').val(AddressCode.substring(0, 2)).trigger('change');
-                $('.select2_district[data-index="2"]').val(AddressCode.substring(0, 4)).trigger('change');
-                $('.select2_road[data-index="2"]').val(AddressCode).trigger('change');
+                var ContactCode = '@ContactCode';
                 var ContactAddressDetail = '@ContactAddressDetail';
+                $('.select2_city[data-index="2"]').val(ContactCode.substring(0, 2)).trigger('change');
+                $('.select2_district[data-index="2"]').val(ContactCode.substring(0, 4)).trigger('change');
+                $('.select2_road[data-index="2"]').val(ContactCode).trigger('change');
                 $('input[name="detailcontact_0"]').val(ContactAddressDetail);
 
                 //共有人
