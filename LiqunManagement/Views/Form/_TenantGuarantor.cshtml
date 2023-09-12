@@ -26,7 +26,7 @@
 </div>
 <div class="form-group getgu1">
     <label class="form-label" for="Name_Gu21">保證人1姓名</label>
-    <input type="text" class="form-control GuInput_1" id="Name_Gu21">
+    <input type="text" class="form-control GuInput_1" id="Name_Gu21" data-input="0">
     <div class="invalid-feedback">
         請輸入保證人姓名
     </div>
@@ -58,15 +58,15 @@
             <div class="input-group-append">
                 <span class="input-group-text">民國</span>
             </div>
-            <input type="number" class="form-control GuInput_1" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_21">
+            <input type="number" class="form-control GuInput_1" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_21" data-input="1">
             <div class="input-group-append">
                 <span class="input-group-text">年</span>
             </div>
-            <input type="number" class="form-control birthdayMonth GuInput_1" max="12" min="1" id="birthdayMonth_21" data-index="21">
+            <input type="number" class="form-control birthdayMonth GuInput_1" max="12" min="1" id="birthdayMonth_21" data-index="21" data-input="2">
             <div class="input-group-append">
                 <span class="input-group-text">月</span>
             </div>
-            <input type="number" class="form-control birthdayDay GuInput_1" max="31" min="1" id="birthdayDay_21" data-index="21">
+            <input type="number" class="form-control birthdayDay GuInput_1" max="31" min="1" id="birthdayDay_21" data-index="21" data-input="3">
             <div class="input-group-append">
                 <span class="input-group-text">日</span>
             </div>
@@ -84,7 +84,7 @@
             </div>
         </div>
     </div>
-    <input type="text" class="form-control inputIDnumber GuInput_1" id="IDnumber_Gu21" data-index="21" pattern="^[A-Z]\d{9}$">
+    <input type="text" class="form-control inputIDnumber GuInput_1" id="IDnumber_Gu21" data-index="21" pattern="^[A-Z]\d{9}$" data-input="4">
     <div class="invalid-feedback">
         請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
     </div>
@@ -92,7 +92,7 @@
 @*連絡電話*@
 <div class="form-group getgu1">
     <label class="form-label" for="phonenumber_Gu1">連絡電話</label>
-    <input type="text" class="form-control inputPhoneNumber GuInput_1" id="Phone_Gu21" data-index="21" pattern="^\d{10}$">
+    <input type="text" class="form-control inputPhoneNumber GuInput_1" id="Phone_Gu21" data-index="21" pattern="^\d{10}$" data-input="5">
     <div class="invalid-feedback">
         請輸入連絡電話，並確認格式為【10個數字】
     </div>
@@ -103,7 +103,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city GuInput_1" data-index="21">
+            <select class="custom-select form-control select2_city GuInput_1" data-index="21" data-input="6">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -111,7 +111,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district GuInput_1" data-index="21">
+            <select class="custom-select form-control select2_district GuInput_1" data-index="21" data-input="7">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -119,7 +119,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road GuInput_1" id="road_Gu21" data-index="21">
+            <select class="custom-select form-control select2_road GuInput_1" id="road_Gu21" data-index="21" data-input="8">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -129,7 +129,7 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" class="form-control GuInput_1" id="AddressDetail_Gu21" placeholder="ex.108號1樓">
+            <input type="text" class="form-control GuInput_1" id="AddressDetail_Gu21" placeholder="ex.108號1樓" data-input="9">
         </div>
     </div>
 </div>
@@ -147,7 +147,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city select_contact_22 GuInput_1" data-index="22">
+            <select class="custom-select form-control select2_city select_contact_22 GuInput_1" data-index="22" data-input="10">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -155,7 +155,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district select_contact_22 GuInput_1" data-index="22">
+            <select class="custom-select form-control select2_district select_contact_22 GuInput_1" data-index="22" data-input="11">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -163,7 +163,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road select_contact_22 GuInput_1" id="road_contact_Gu21" data-index="22">
+            <select class="custom-select form-control select2_road select_contact_22 GuInput_1" id="road_contact_Gu21" data-index="22" data-input="12">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -173,7 +173,7 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" class="form-control select_contact_22 GuInput_1" id="detailcontact_Gu21" data-index="22" placeholder="ex.108號1樓">
+            <input type="text" class="form-control select_contact_22 GuInput_1" id="detailcontact_Gu21" data-index="22" placeholder="ex.108號1樓" data-input="13">
         </div>
     </div>
 </div>
@@ -185,7 +185,7 @@
 </div>
 <div class="form-group getgu2">
     <label class="form-label" for="Name_Gu22">保證人2姓名</label>
-    <input type="text" class="form-control GuInput_2" id="Name_Gu22">
+    <input type="text" class="form-control GuInput_2" id="Name_Gu22" data-input="0">
     <div class="invalid-feedback">
         請輸入保證人姓名
     </div>
@@ -217,15 +217,15 @@
             <div class="input-group-append">
                 <span class="input-group-text">民國</span>
             </div>
-            <input type="number" class="form-control GuInput_2" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_22">
+            <input type="number" class="form-control GuInput_2" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_22" data-input="1">
             <div class="input-group-append">
                 <span class="input-group-text">年</span>
             </div>
-            <input type="number" class="form-control birthdayMonth GuInput_2" max="12" min="1" id="birthdayMonth_22" data-index="22">
+            <input type="number" class="form-control birthdayMonth GuInput_2" max="12" min="1" id="birthdayMonth_22" data-index="22" data-input="2">
             <div class="input-group-append">
                 <span class="input-group-text">月</span>
             </div>
-            <input type="number" class="form-control birthdayDay GuInput_2" max="31" min="1" id="birthdayDay_22" data-index="22">
+            <input type="number" class="form-control birthdayDay GuInput_2" max="31" min="1" id="birthdayDay_22" data-index="22" data-input="3">
             <div class="input-group-append">
                 <span class="input-group-text">日</span>
             </div>
@@ -243,7 +243,7 @@
             </div>
         </div>
     </div>
-    <input type="text" class="form-control inputIDnumber GuInput_2" id="IDnumber_Gu22" data-index="22" pattern="^[A-Z]\d{9}$">
+    <input type="text" class="form-control inputIDnumber GuInput_2" id="IDnumber_Gu22" data-index="22" pattern="^[A-Z]\d{9}$" data-input="4">
     <div class="invalid-feedback">
         請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
     </div>
@@ -251,7 +251,7 @@
 @*連絡電話*@
 <div class="form-group getgu2">
     <label class="form-label" for="phonenumber_Gu2">連絡電話</label>
-    <input type="text" class="form-control inputPhoneNumber GuInput_2" id="Phone_Gu22" data-index="22" pattern="^\d{10}$">
+    <input type="text" class="form-control inputPhoneNumber GuInput_2" id="Phone_Gu22" data-index="22" pattern="^\d{10}$" data-input="5">
     <div class="invalid-feedback">
         請輸入連絡電話，並確認格式為【10個數字】
     </div>
@@ -262,7 +262,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city GuInput_2" data-index="23">
+            <select class="custom-select form-control select2_city GuInput_2" data-index="23" data-input="6">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -270,7 +270,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district GuInput_2" data-index="23">
+            <select class="custom-select form-control select2_district GuInput_2" data-index="23" data-input="7">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -278,7 +278,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road GuInput_2" id="road_Gu22" data-index="23">
+            <select class="custom-select form-control select2_road GuInput_2" id="road_Gu22" data-index="23" data-input="8">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -288,7 +288,7 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" class="form-control GuInput_2" id="AddressDetail_Gu22" placeholder="ex.108號1樓">
+            <input type="text" class="form-control GuInput_2" id="AddressDetail_Gu22" placeholder="ex.108號1樓" data-input="9">
         </div>
     </div>
 </div>
@@ -306,7 +306,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city select_contact_24 GuInput_2" data-index="24">
+            <select class="custom-select form-control select2_city select_contact_24 GuInput_2" data-index="24" data-input="10">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -314,7 +314,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district select_contact_24 GuInput_2" data-index="24">
+            <select class="custom-select form-control select2_district select_contact_24 GuInput_2" data-index="24" data-input="11">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -322,7 +322,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road select_contact_24 GuInput_2" id="road_contact_Gu21" data-index="24">
+            <select class="custom-select form-control select2_road select_contact_24 GuInput_2" id="road_contact_Gu21" data-index="24" data-input="12">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -332,7 +332,7 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" class="form-control select_contact_24 GuInput_2" id="detailcontact_Gu22" data-index="24" placeholder="ex.108號1樓">
+            <input type="text" class="form-control select_contact_24 GuInput_2" id="detailcontact_Gu22" data-index="24" placeholder="ex.108號1樓" data-input="13">
         </div>
     </div>
 </div>
@@ -344,7 +344,7 @@
 </div>
 <div class="form-group getgu3">
     <label class="form-label" for="Name_Gu23">保證人3姓名</label>
-    <input type="text" class="form-control GuInput_3" id="Name_Gu23">
+    <input type="text" class="form-control GuInput_3" id="Name_Gu23" data-input="0">
     <div class="invalid-feedback">
         請輸入保證人姓名
     </div>
@@ -376,15 +376,15 @@
             <div class="input-group-append">
                 <span class="input-group-text">民國</span>
             </div>
-            <input type="number" class="form-control GuInput_3" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_23">
+            <input type="number" class="form-control GuInput_3" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_23" data-input="1">
             <div class="input-group-append">
                 <span class="input-group-text">年</span>
             </div>
-            <input type="number" class="form-control birthdayMonth GuInput_3" max="12" min="1" id="birthdayMonth_23" data-index="23">
+            <input type="number" class="form-control birthdayMonth GuInput_3" max="12" min="1" id="birthdayMonth_23" data-index="23" data-input="2">
             <div class="input-group-append">
                 <span class="input-group-text">月</span>
             </div>
-            <input type="number" class="form-control birthdayDay GuInput_3" max="31" min="1" id="birthdayDay_23" data-index="23">
+            <input type="number" class="form-control birthdayDay GuInput_3" max="31" min="1" id="birthdayDay_23" data-index="23" data-input="3">
             <div class="input-group-append">
                 <span class="input-group-text">日</span>
             </div>
@@ -402,7 +402,7 @@
             </div>
         </div>
     </div>
-    <input type="text" class="form-control inputIDnumber GuInput_3" id="IDnumber_Gu23" data-index="23" pattern="^[A-Z]\d{9}$">
+    <input type="text" class="form-control inputIDnumber GuInput_3" id="IDnumber_Gu23" data-index="23" pattern="^[A-Z]\d{9}$" data-input="4">
     <div class="invalid-feedback">
         請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
     </div>
@@ -410,7 +410,7 @@
 @*連絡電話*@
 <div class="form-group getgu3">
     <label class="form-label" for="phonenumber_Gu3">連絡電話</label>
-    <input type="text" class="form-control inputPhoneNumber GuInput_3" id="Phone_Gu23" data-index="23" pattern="^\d{10}$">
+    <input type="text" class="form-control inputPhoneNumber GuInput_3" id="Phone_Gu23" data-index="23" pattern="^\d{10}$" data-input="5">
     <div class="invalid-feedback">
         請輸入連絡電話，並確認格式為【10個數字】
     </div>
@@ -421,7 +421,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city GuInput_3" data-index="25">
+            <select class="custom-select form-control select2_city GuInput_3" data-index="25" data-input="6">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -429,7 +429,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district GuInput_3" data-index="25">
+            <select class="custom-select form-control select2_district GuInput_3" data-index="25" data-input="7">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -437,7 +437,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road GuInput_3" id="road_Gu23" data-index="25">
+            <select class="custom-select form-control select2_road GuInput_3" id="road_Gu23" data-index="25" data-input="8">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -447,7 +447,7 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" class="form-control GuInput_3" id="AddressDetail_Gu23" placeholder="ex.108號1樓">
+            <input type="text" class="form-control GuInput_3" id="AddressDetail_Gu23" placeholder="ex.108號1樓" data-input="9">
         </div>
     </div>
 </div>
@@ -465,7 +465,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city select_contact_26 GuInput_3" data-index="26">
+            <select class="custom-select form-control select2_city select_contact_26 GuInput_3" data-index="26" data-input="10">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -473,7 +473,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district select_contact_26 GuInput_3" data-index="26">
+            <select class="custom-select form-control select2_district select_contact_26 GuInput_3" data-index="26" data-input="11">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -481,7 +481,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road select_contact_26 GuInput_3" id="road_contact_Gu23" data-index="26">
+            <select class="custom-select form-control select2_road select_contact_26 GuInput_3" id="road_contact_Gu23" data-index="12">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -491,7 +491,7 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" class="form-control select_contact_26 GuInput_3" id="detailcontact_Gu23" data-index="26" placeholder="ex.108號1樓">
+            <input type="text" class="form-control select_contact_26 GuInput_3" id="detailcontact_Gu23" data-index="26" placeholder="ex.108號1樓" data-input="13">
         </div>
     </div>
 </div>

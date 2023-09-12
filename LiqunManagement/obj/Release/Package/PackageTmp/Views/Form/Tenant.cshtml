@@ -1,8 +1,104 @@
-﻿
+﻿@model LiqunManagement.ViewModels.FormViewModels
 @{
     ViewBag.Title = "表單四期";
     ViewBag.Controller = "Form";
     Layout = "~/Views/Shared/smartadmin_Layout.cshtml";
+
+
+    //表單編號
+    var FormID = Model.FormID != null ? Model.FormID : "";
+    //房客類別
+    var TenantType = Model.tenantviewmodel != null ? Model.tenantviewmodel.TenantType.ToString() : "";
+    //房東姓名
+    var Name = Model.tenantviewmodel != null ? Model.tenantviewmodel.Name : "";
+    //性別
+    var Gender = Model.tenantviewmodel != null ? Model.tenantviewmodel.Gender.ToString() : "";
+    //生日
+    var BirthdayStr = Model.tenantviewmodel != null ? Model.tenantviewmodel.BirthdayStr != null ? Model.tenantviewmodel.BirthdayStr : "" : "";
+    //身分證字號(法人-統一編號)
+    var IDNumber = Model.tenantviewmodel != null ? Model.tenantviewmodel.IDNumber : "";
+    //電話號碼
+    var Phone = Model.tenantviewmodel != null ? Model.tenantviewmodel.Phone : "";
+    //銀行代碼
+    var BankNo = Model.tenantviewmodel != null ? Model.tenantviewmodel.BankNo : "";
+    //分行代碼
+    var BrancheNo = Model.tenantviewmodel != null ? Model.tenantviewmodel.BrancheNo : "";
+    //銀行帳號
+    var BankAccount = Model.tenantviewmodel != null ? Model.tenantviewmodel.BankAccount : "";
+    //地址代碼
+    var AddressCode = Model.tenantviewmodel != null ? Model.tenantviewmodel.AddressCode : "";
+    var AddressDetail = Model.tenantviewmodel != null ? Model.tenantviewmodel.AddressDetail : "";
+    //通訊地址代碼
+    var ContactCode = Model.tenantviewmodel != null ? Model.tenantviewmodel.ContactAddressCode : "";
+    var ContactAddressDetail = Model.tenantviewmodel != null ? Model.tenantviewmodel.ContactAddressDetail : "";
+    //戶號
+    var accountNo = Model.tenantviewmodel != null ? Model.tenantviewmodel.accountNo : "";
+    //配偶
+    var CoupleCount = Model.tenantviewmodel != null ? Model.tenantviewmodel.CoupleCount : "";
+    var Couple = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.Couple.ToString() : "");
+    //直系親屬
+    var DirectCount = Model.tenantviewmodel != null ? Model.tenantviewmodel.DirectCount : "";
+    var Family1 = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.Family1.ToString() : "");
+    var Family2 = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.Family2.ToString() : "");
+    var Family3 = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.Family3.ToString() : "");
+    var Family4 = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.Family4.ToString() : "");
+    var Family5 = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.Family5.ToString() : "");
+    var Family6 = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.Family6.ToString() : "");
+    var Family7 = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.Family7.ToString() : "");
+    var Family8 = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.Family8.ToString() : "");
+    var Family9 = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.Family9.ToString() : "");
+    var Family10 = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.Family10.ToString() : "");
+    //代理人
+    var AgentCount = Model.tenantviewmodel != null ? Model.tenantviewmodel.AgentCount : "";
+    var Agent1 = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.Agent1.ToString() : "");
+    var Agent2 = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.Agent2.ToString() : "");
+    var Agent3 = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.Agent3.ToString() : "");
+    //保證人
+    var GuarantorCount = Model.tenantviewmodel != null ? Model.tenantviewmodel.GuarantorCount : "";
+    var Guarantor1 = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.Guarantor1.ToString() : "");
+    var Guarantor2 = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.Guarantor2.ToString() : "");
+    var Guarantor3 = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.Guarantor3.ToString() : "");
+
+
+    //下拉選單
+    var TeAddress_District = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.TeAddress_District : "");
+    var TeAddress_Road = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.TeAddress_Road : "");
+    var TeContact_District = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.TeContact_District : "");
+    var TeContact_Road = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.TeContact_Road : "");
+
+    //代理人一
+    var AgAddress1_District = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.AgAddress1_District : "");
+    var AgAddress1_Road = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.AgAddress1_Road : "");
+    var AgContact1_District = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.AgContact1_District : "");
+    var AgContact1_Road = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.AgContact1_Road : "");
+    //代理人二
+    var AgAddress2_District = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.AgAddress2_District : "");
+    var AgAddress2_Road = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.AgAddress2_Road : "");
+    var AgContact2_District = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.AgContact2_District : "");
+    var AgContact2_Road = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.AgContact2_Road : "");
+    //代理人三
+    var AgAddress3_District = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.AgAddress3_District : "");
+    var AgAddress3_Road = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.AgAddress3_Road : "");
+    var AgContact3_District = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.AgContact3_District : "");
+    var AgContact3_Road = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.AgContact3_Road : "");
+    //保證人一
+    var GuAddress1_District = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.GuAddress1_District : "");
+    var GuAddress1_Road = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.GuAddress1_Road : "");
+    var GuContact1_District = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.GuContact1_District : "");
+    var GuContact1_Road = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.GuContact1_Road : "");
+    //保證人二
+    var GuAddress2_District = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.GuAddress2_District : "");
+    var GuAddress2_Road = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.GuAddress2_Road : "");
+    var GuContact2_District = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.GuContact2_District : "");
+    var GuContact2_Road = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.GuContact2_Road : "");
+    //保證人三
+    var GuAddress3_District = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.GuAddress3_District : "");
+    var GuAddress3_Road = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.GuAddress3_Road : "");
+    var GuContact3_District = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.GuContact3_District : "");
+    var GuContact3_Road = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.GuContact3_Road : "");
+
+    //備註
+    var memo = Model.tenantviewmodel != null ? Model.tenantviewmodel.Memo : "";
 }
 <style>
     .padding-top-ten {
@@ -20,8 +116,6 @@
     .form-label {
         font-weight: 600 !important;
     }
-
-
 </style>
 @*select2*@
 @*<link href="~/Content/select2/css/select2.min.css" rel="stylesheet" />*@
@@ -331,7 +425,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">戶號</span>
                                     </div>
-                                    <input type="text" placeholder="" class="form-control" name="accountnumber" required>
+                                    <input type="text" placeholder="" class="form-control" id="accountnumber" name="accountnumber" required>
                                     <div class="invalid-feedback">
                                         請填寫戶號
                                     </div>
@@ -396,7 +490,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 pt-3">
-                                        <select class="custom-select form-control select2_bankbranches" name="bankbranche_0" data-index="1" required>
+                                        <select class="custom-select form-control select2_bankbranches" id="bankbranche_0" name="bankbranche_0" data-index="1" required>
                                             <option value="" selected=""></option>
                                         </select>
                                         <div class="invalid-feedback">
@@ -406,7 +500,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label" for="banknumber">帳號</label><label class="form-label" id="jqlengthalert" for="banknumber"></label>
+                                <label class="form-label" for="banknumber">帳號</label>
+                                <label class="form-label" id="jqlengthalert" for="banknumber"></label>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="input-group">
@@ -427,7 +522,7 @@
                                 <div class="row pl-3 pb-2">
                                     <label>配偶</label>
                                     <div class="custom-control custom-checkbox" style="margin-left:10px;">
-                                        <input type="checkbox" class="custom-control-input couplecheck" id="couplecheck_1" name="couplecheck_1" value="true">
+                                        <input type="checkbox" class="custom-control-input" id="couplecheck_1" name="couplecheck_1" value="true">
                                         <label class="custom-control-label" for="couplecheck_1"></label>
                                     </div>
                                     <label>丈夫</label>
@@ -453,11 +548,11 @@
                                         <div class="input-group-append">
                                             <span id="couplename" class="input-group-text">姓名</span>
                                         </div>
-                                        <input type="text" class="form-control couple_input" name="coupleName" disabled>
+                                        <input type="text" class="form-control couple_input" id="coupleName" name="coupleName" disabled>
                                         <div class="input-group-append">
                                             <span class="input-group-text">身分證</span>
                                         </div>
-                                        <input type="text" id="coupleIDcheck" class="form-control couple_input inputIDnumber" name="coupleNumber" data-index="99" pattern="^[A-Z]\d{9}$" disabled>
+                                        <input type="text" class="form-control couple_input inputIDnumber" id="coupleNumber" name="coupleNumber" data-index="99" pattern="^[A-Z]\d{9}$" disabled>
                                         <div class="invalid-feedback">
                                             請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
                                         </div>
@@ -484,7 +579,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="text" id="birthday_couple" name="birthday_couple" hidden>
+                                    <input type="text" id="coupleInput" name="coupleInput" hidden>
                                 </div>
                             </div>
                             @*分戶戶號*@
@@ -499,7 +594,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">分戶戶號</span>
                                             </div>
-                                            <input type="text" id="separatenumber" class="form-control" name="separatenumber" disabled>
+                                            <input type="text" class="form-control" id="saparatenumber" name="saparatenumber" disabled>
                                             <div class="invalid-feedback">
                                                 請填寫分戶戶號
                                             </div>
@@ -565,7 +660,7 @@
     @*inputmask*@
     @*<script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/inputmask/inputmask.bundle.js"></script>*@
 
-    <script type="text/javascript">
+<script type="text/javascript">
         //validation
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function () {
@@ -588,16 +683,35 @@
                             const birth_0 = Year_0.toString() + '-' + Month_0 + '-' + Day_0;
                             $("#birthday_0").val(birth_0)
 
-                            //打包配偶生日
-                            const Year_couple = parseInt($("#birthdayYear_99").val()) + 1911;
-                            var Month_couple = $("#birthdayMonth_99").val();
-                            var Day_couple = $("#birthdayDay_99").val();
-                            const birth_couple = Year_couple.toString() + '-' + Month_couple + '-' + Day_couple;
-                            $("#birthday_couple").val(birth_couple)
+                            //打包配偶資料
+                            if ($("#couplecheck_0").is(":checked") || $("#couplecheck_1").is(":checked")) {
+                                const dataArray = [];
+                                //性別
+                                var genderCouple = -1;
+                                genderCouple = ($("#couplecheck_0").is(":checked")) ? 0 : 1;
+                                //姓名
+                                var nameCouple = $("#coupleName").val();
+                                //身分證
+                                var coupleNumber = $("#coupleNumber").val();
+                                //生日
+                                const Year_couple = parseInt($("#birthdayYear_99").val()) + 1911;
+                                var Month_couple = $("#birthdayMonth_99").val();
+                                var Day_couple = $("#birthdayDay_99").val();
+                                const birthdayCouple = Year_couple.toString() + '-' + Month_couple + '-' + Day_couple;
+                                //分戶戶號
+                                var saparatenumber = $('#saparatenumber').val();
+
+                                dataArray.push(genderCouple)
+                                dataArray.push(nameCouple);
+                                dataArray.push(coupleNumber);
+                                dataArray.push(birthdayCouple);
+                                dataArray.push(saparatenumber);
+                                const jsonResult = JSON.stringify(dataArray);
+                                $('#coupleInput').val(jsonResult);
+                            }
 
                             //打包直系親屬
                             //取得有幾位親屬
-                            debugger;
                             var i = 0;
                             var directcount = parseInt($("#directCount").val());
                             for (i = 1; i <= directcount; i++) {
@@ -618,7 +732,7 @@
                                 dataArray.push(IDNumber);
                                 dataArray.push(Birthday);
                                 const jsonResult = JSON.stringify(dataArray);
-                                $('#DirectInput' + strindex).val(jsonResult);
+                                $('#directInput' + strindex).val(jsonResult);
                             }
 
                             //打包代理人資料
@@ -635,7 +749,7 @@
                                 const index = i + 10;
                                 const strindex = index.toString();
                                 const dataArray = [];
-                                 //姓名
+                                //姓名
                                 const Name = document.getElementById(`Name_Ag` + strindex).value;
                                 //性別
                                 var genderRadioElement = document.getElementsByName("genderRadio_Ag" + strindex);
@@ -660,8 +774,8 @@
                                 const AddressDetail = document.getElementById(`AddressDetail_Ag` + strindex).value;
                                 //通訊地址
                                 const sameaddresscheck = document.getElementById('sameaddresscheck_Ag' + strindex);
-                                const Contact = Road;
-                                const detailContact = AddressDetail;
+                                var Contact = Road;
+                                var detailContact = AddressDetail;
                                 if (sameaddresscheck) {
                                     if (!sameaddresscheck.checked) {
                                         Contact = document.getElementById(`road_contact_Ag` + strindex).value;
@@ -680,7 +794,7 @@
                                 const jsonResult = JSON.stringify(dataArray);
                                 $('#AgentInput' + strindex).val(jsonResult);
                             }
-                            
+
                             //打包保證人資料
                             //取得幾位保證人
                             var GuarantorRadioElement = document.getElementsByName("GuarantorRadio");
@@ -720,8 +834,8 @@
                                 const AddressDetail = document.getElementById(`AddressDetail_Gu` + strindex).value;
                                 //通訊地址
                                 const sameaddresscheck = document.getElementById('sameaddress_Gu' + strindex);
-                                const Contact = Road;
-                                const detailContact = AddressDetail;
+                                var Contact = Road;
+                                var detailContact = AddressDetail;
                                 if (sameaddresscheck) {
                                     if (!sameaddresscheck.checked) {
                                         Contact = document.getElementById(`road_contact_Gu` + strindex).value;
@@ -803,7 +917,7 @@
             //------------------
             var jsonBank = @Html.Raw(Json.Encode(ViewBag.banklist));
             var jsonBankArray = JSON.parse(jsonBank);
-            
+
             //for (var i = 0; i < jsonBankArray.length; i++) {
             //    jsonBankArray[i].id = jsonBankArray[i].id.replace(/\"/g, '');
             //    jsonBankArray[i].text = jsonBankArray[i].text.replace(/\"/g, '');
@@ -817,7 +931,681 @@
                 placeholder: '分行'
             })
 
-            //下拉選單更改事件
+            //銀行下拉選單
+            //判斷是否為第一次載入頁面
+            var isFirstLoad_Bank = true;
+            $('body').on('change', '.select2_bank', function () {
+                var selectedIndex = $(this).attr('data-index');
+                var bankcode = $('.select2_bank[data-index="' + selectedIndex + '"]').val();
+                $.ajax({
+                    type: "POST",
+                    data: { bankcode: bankcode },
+                    url: '@Url.Content("~/Form/DDLBank/")',
+                    dataType: 'json'
+                }).done(function (dataresult) {
+                    var jsonBankBranchArray = JSON.parse(dataresult.bankJson);
+                    for (var i = 0; i < jsonBankBranchArray.length; i++) {
+                            jsonBankBranchArray[i].id = jsonBankBranchArray[i].id.replace(/\"/g, '');
+                            jsonBankBranchArray[i].text = jsonBankBranchArray[i].text.replace(/\"/g, '');
+                        }
+                    var data_bankbranch = jsonBankBranchArray;
+                    $('.select2_bankbranches[data-index="' + selectedIndex + '"]').empty();
+                    var init_data = [
+                        {
+                            id: '',
+                            text: '分行'
+                        },
+                    ];
+                    $('.select2_bankbranches[data-index="' + selectedIndex + '"]').select2({
+                        data: init_data,
+                    });
+                    $('.select2_bankbranches[data-index="' + selectedIndex + '"]').select2({
+                        data: data_bankbranch,
+                        placeholder: '分行'
+                    });
+                    //------------------
+                    // 編輯模式
+                    //------------------
+                    if ('@FormID' !== '') {
+                        if (isFirstLoad_Bank) {
+                            //分行代碼
+                            var BrancheNo = '@BrancheNo';
+                            $('#bankbranche_0').val(BrancheNo).trigger('change');
+                            isFirstLoad_Bank = false;
+                        }
+                    }
+                    //設定帳號長度
+                    var inputbanknumberElement = document.getElementById('bankaccount_0');
+                    var alertelement = document.getElementById('banknumberalert');
+                    var lengthalert = document.getElementById('jqlengthalert');
+                    if (dataresult.lengthset.length === 0) {
+                        //非兩種長度以上
+                        var length = "";
+                        if (dataresult.minlength == dataresult.maxlength) {
+                            length = dataresult.minlength + "字";
+                        }
+                        else {
+                            length = dataresult.minlength + "字 ~" + dataresult.maxlength + "字"
+                        }
+
+                        alertelement.innerHTML = "請正確輸入帳號，帳號長度數請填寫 : " + length;
+                        inputbanknumberElement.setAttribute('pattern', '.{' + dataresult.minlength + ',' + dataresult.maxlength + '}');
+                        lengthalert.innerHTML = "(" + length + ")"
+                    }
+                    else {
+                        // 將陣列中的數字轉換成以 | 分隔的字串
+                        var regexPattern = dataresult.lengthset.map(length => `.{${length}}`).join('|');
+                        var regexword = dataresult.lengthset.join('字,') + "字";
+
+                        alertelement.innerHTML = "請正確輸入帳號，帳號長度數請填寫 : " + regexword;
+                        inputbanknumberElement.setAttribute('pattern', regexPattern);
+                        lengthalert.innerHTML = "(" + regexword + ")"
+
+                    }
+                });
+            });
+            //直系親屬下拉選單(嬰幼兒不需填身分證)
+            $('body').on('change', '.select_direct', function () {
+                var selectedIndex = $(this).attr('data-order');
+                //選擇親屬關係之代號
+                var directcode = $('.select_direct[data-order="' + selectedIndex + '"]').val();
+                if (directcode == "胎兒") {
+                    const checkbox = document.getElementById('international_Direct_IDnumber' + selectedIndex);
+                    checkbox.checked = false;
+                    $('#international_Direct_IDnumber' + selectedIndex).prop('disabled', true);         //不須勾選外籍
+                    $('.inputIDnumber[data-order="' + selectedIndex + '"]').prop('disabled', true);     //身分證不須填
+                    $('.inputIDnumber[data-order="' + selectedIndex + '"]').prop('required', false);    //身分證不須填
+                }
+                else {
+                    $('#international_Direct_IDnumber' + selectedIndex).prop('disabled', false);        //可勾選外籍
+                    $('.inputIDnumber[data-order="' + selectedIndex + '"]').prop('disabled', false);    //身分證須填
+                    $('.inputIDnumber[data-order="' + selectedIndex + '"]').prop('required', true);     //身分證須填
+                }
+            });
+
+            //主要用途 : 弱勢戶佐證文件是否需要上傳
+            $('input[name="typeRadio"]').change(function () {
+                // 獲取被點選的 radio 按鈕的值
+                var vulnerablefile = document.getElementById('vulnerablefile');
+                var filelable = document.getElementById('vulnerablefileLable');
+                $('input[name="typeRadio"]').each(function () {
+                    var radioId = $(this).attr('id');
+                    // 檢查是否被點選
+                    if ($(this).is(':checked')) {
+                        switch (radioId) {
+                            case 'typeRadio_0' :
+                            case 'typeRadio_1' :
+                            case 'typeRadio_2' :
+                            case 'typeRadio_3' :
+                            case 'typeRadio_4' :
+                            case 'typeRadio_5' :
+                                vulnerablefile.value = '';
+                                filelable.innerHTML = '';
+                                $('#vulnerablefile').prop('disabled', true);
+                                $('#vulnerablefile').prop('readonly', true);
+                                $('#vulnerablefile').prop('required', false);
+                                break;
+                            default:
+                                $('#vulnerablefile').prop('disabled', false);
+                                $('#vulnerablefile').prop('readonly', false);
+                                $('#vulnerablefile').prop('required', true);
+                                break;
+                        }
+                    }
+                })
+            });
+
+            //同戶籍地址
+            $('.sameaddress').on('change', function () {
+                var selectedIndex = $(this).attr('data-index');
+                if ($(this).is(':checked')) {
+                    $('.select_contact_' + selectedIndex).prop('disabled', true);
+                    //required
+                    $('.select_contact_' + selectedIndex).prop('required', false);
+                } else {
+                    $('.select_contact_' + selectedIndex).prop('disabled', false);
+                    //required
+                    $('.select_contact_' + selectedIndex).prop('required', true);
+                }
+            });
+
+            //是否有配偶(丈夫)
+            $('#couplecheck_1').on('change', function () {
+                if ($(this).is(':checked')) {
+                    //妻子nochecked
+                    const checkbox = document.getElementById('couplecheck_0');
+                    checkbox.checked = false;
+                    $('.couple_input').prop('disabled', false);
+                    $('.couple_input_disable').prop('disabled', false);
+                    $('.couple_input').prop('required', true);
+                } else {
+                    $('.couple_input').prop('disabled', true);
+                    $('.couple_input_disable').prop('disabled', true);
+                    $('.couple_input').prop('required', false);
+                    //身分證
+                    const IDcheckbox = document.getElementById('international_IDnumber99');
+                    IDcheckbox.checked = false;
+                    IDcheckbox.prop('disabled', true);
+                    //分戶
+                    const checkbox = document.getElementById('separatecheck');
+                    checkbox.checked = false;
+                    $('input[name="saparatenumber"]').val('');
+                    $('input[name="saparatenumber"]').prop('disabled', true);
+                    $('input[name="saparatenumber"]').prop('required', false);
+                }
+            });
+            //是否有配偶(妻子)
+            $('#couplecheck_0').on('change', function () {
+                if ($(this).is(':checked')) {
+                    //丈夫nochecked
+                    const checkbox = document.getElementById('couplecheck_1');
+                    checkbox.checked = false;
+                    $('.couple_input').prop('disabled', false);
+                    $('.couple_input_disable').prop('disabled', false);
+                    $('.couple_input').prop('required', true);
+                } else {
+
+                    $('.couple_input').prop('disabled', true);
+                    $('.couple_input_disable').prop('disabled', true);
+                    $('.couple_input').prop('required', false);
+                    //身分證
+                    const IDcheckbox = document.getElementById('coupleNumber');
+                    IDcheckbox.checked = false;
+                    $('input[name="saparatenumber"]').prop('disabled', true);
+                    //分戶
+                    const checkbox = document.getElementById('separatecheck');
+                    checkbox.checked = false;
+                    $('input[name="saparatenumber"]').val('');
+                    $('input[name="saparatenumber"]').prop('disabled', true);
+                    $('input[name="saparatenumber"]').prop('required', false);
+                }
+            });
+
+            //是否為外籍(身分證不須驗證)
+            $('.national_check').on('change', function () {
+                var selectedIndex = $(this).attr('data-index');
+
+                const inputElement = document.querySelector('.inputIDnumber[data-index="' + selectedIndex + '"]');
+                if ($(this).is(':checked')) {
+                    inputElement.removeAttribute('pattern');
+                } else {
+                    inputElement.setAttribute('pattern', '^[A-Z]\\d{9}$');
+                }
+            });
+
+            //是否分戶
+            $('#separatecheck').on('change', function () {
+                if ($(this).is(':checked')) {
+                    //disabled
+                    $('input[name="saparatenumber"]').prop('disabled', false);
+                    //required
+                    $('input[name="saparatenumber"]').prop('required', true);
+                } else {
+                    //value
+                    $('input[name="saparatenumber"]').val('');
+                    //disabled
+                    $('input[name="saparatenumber"]').prop('disabled', true);
+                    //required
+                    $('input[name="saparatenumber"]').prop('required', false);
+                }
+            });
+
+            //直系親屬(下拉選單)
+            var dataDirect = [
+                { id: '父親', text: '父親' },
+                { id: '母親', text: '母親' },
+                { id: '兒子', text: '兒子' },
+                { id: '女兒' , text: '女兒' },
+                { id: '媳婦', text: '媳婦' },
+                { id: '女婿', text: '女婿' },
+                { id: '孫子', text: '孫子' },
+                { id: '孫女', text: '孫女' },
+                { id: '孫媳婦', text: '孫媳婦' },
+                { id: '孫女婿', text: '孫女婿' },
+                { id: '阿公', text: '阿公' },
+                { id: '阿嬤', text: '阿嬤' },
+                { id: '爺爺', text: '爺爺' },
+                { id: '奶奶', text: '奶奶' },
+                { id: '公公', text: '公公' },
+                { id: '婆婆', text: '婆婆' },
+                { id: '胎兒', text: '胎兒' },
+            ];
+            $(".select_direct").select2({
+                tags: "true",
+                data: dataDirect,
+                placeholder: '親屬關係'
+            })
+            //------------------
+            // 代理人幾位  *
+            //------------------
+            //主要用途 : AgentRadio(隱藏/顯示代理人資料)
+            $('input[name="AgentRadio"]').change(function () {
+                $('input[name="AgentRadio"]').each(function () {
+                    var radioId = $(this).attr('id');
+                    // 檢查是否被點選
+                    if ($(this).is(':checked')) {
+                        // 根據不同的 id 做相應的處理
+                        switch (radioId) {
+                            case "AgentRadio_0":
+                                $('.getag1').hide();
+                                $('.getag2').hide();
+                                $('.getag3').hide();
+                                $('.AgInput_1').prop('required', false);
+                                $('.AgInput_2').prop('required', false);
+                                $('.AgInput_3').prop('required', false);
+                                break;
+                            case "AgentRadio_1":
+                                $('.getag1').show();
+                                $('.getag2').hide();
+                                $('.getag3').hide();
+                                $('.AgInput_1').prop('required', true);
+                                $('.AgInput_2').prop('required', false);
+                                $('.AgInput_3').prop('required', false);
+                                break;
+                            case "AgentRadio_2":
+                                $('.getag1').show();
+                                $('.getag2').show();
+                                $('.getag3').hide();
+                                $('.AgInput_1').prop('required', true);
+                                $('.AgInput_2').prop('required', true);
+                                $('.AgInput_3').prop('required', false);
+                                break;
+                            case "AgentRadio_3":
+                                $('.getag1').show();
+                                $('.getag2').show();
+                                $('.getag3').show();
+                                $('.AgInput_1').prop('required', true);
+                                $('.AgInput_2').prop('required', true);
+                                $('.AgInput_3').prop('required', true);
+                                break;
+                        }
+                    }
+                })
+            });
+            //------------------
+            // 保證人幾位  *
+            //------------------
+            //主要用途 : GuarantorRadio(隱藏/顯示保證人資料)
+            $('input[name="GuarantorRadio"]').change(function () {
+                $('input[name="GuarantorRadio"]').each(function () {
+                    var radioId = $(this).attr('id');
+                    // 檢查是否被點選
+                    if ($(this).is(':checked')) {
+                        // 根據不同的 id 做相應的處理
+                        switch (radioId) {
+                            case "jqGuarantorRadio_0":
+                                $('.getgu1').hide();
+                                $('.getgu2').hide();
+                                $('.getgu3').hide();
+                                $('.GuInput_1').prop('required', false);
+                                $('.GuInput_2').prop('required', false);
+                                $('.GuInput_3').prop('required', false);
+                                break;
+                            case "jqGuarantorRadio_1":
+                                $('.getgu1').show();
+                                $('.getgu2').hide();
+                                $('.getgu3').hide();
+                                $('.GuInput_1').prop('required', true);
+                                $('.GuInput_2').prop('required', false);
+                                $('.GuInput_3').prop('required', false);
+                                break;
+                            case "jqGuarantorRadio_2":
+                                $('.getgu1').show();
+                                $('.getgu2').show();
+                                $('.getgu3').hide();
+                                $('.GuInput_1').prop('required', true);
+                                $('.GuInput_2').prop('required', true);
+                                $('.GuInput_3').prop('required', false);
+                                break;
+                            case "jqGuarantorRadio_3":
+                                $('.getgu1').show();
+                                $('.getgu2').show();
+                                $('.getgu3').show();
+                                $('.GuInput_1').prop('required', true);
+                                $('.GuInput_2').prop('required', true);
+                                $('.GuInput_3').prop('required', true);
+                                break;
+                        }
+                    }
+                })
+            });
+
+            //------------------
+            // 生日月份變更日期之最大值為30 or31  *
+            //------------------
+            const inputElements = document.querySelectorAll('.birthdayMonth');
+            inputElements.forEach(function (inputElement) {
+                inputElement.addEventListener('input', function () {
+                    const inputValue = inputElement.value;
+                    const dataIndex = inputElement.getAttribute('data-index');
+                    if (inputValue == '1' || inputValue == '3' || inputValue == '5' || inputValue == '7' || inputValue == '8' || inputValue == '10' || inputValue == '12') {
+                        //$('#birthdayDay_' + dataIndex).attr('max', 31); //設置最大值
+                        $('.birthdayDay[data-index="' + dataIndex + '"]').attr('max', 31); //設置最大值
+                    }
+                    else if (inputValue == '2') {
+                        //$('#birthdayDay_' + dataIndex).attr('max', 29); //設置最大值
+                        $('.birthdayDay[data-index="' + dataIndex + '"]').attr('max', 29); //設置最大值
+                    }
+                    else {
+                        //$('#birthdayDay_' + dataIndex).attr('max', 30); //設置最大值
+                        $('.birthdayDay[data-index="' + dataIndex + '"]').attr('max', 30); //設置最大值
+                    }
+                    // 在这里执行你的其他操作
+                });
+            });
+
+            //------------------
+            // 編輯模式
+            //------------------
+            var formid = '@FormID'
+            if (formid !== '') {
+                $('input[name="FormID"]').val(formid);
+                //房客類別
+                var TenantType = '@TenantType';
+                $('input[name="typeRadio"][value="' + TenantType + '"]').prop('checked', true).trigger('change');;
+                //房東姓名
+                var Name = '@Name';
+                $('input[name="Name_0"]').val(Name);
+                //性別
+                var Gender = '@Gender';
+                $('input[name="genderRadio_0"][value="' + Gender + '"]').prop('checked', true).trigger('change');;
+                    //生日
+                    var birthdaystr = '@BirthdayStr';
+                    var birthpart = birthdaystr.split('-');
+                    var birthyear = parseInt(parseInt(birthpart[0])-1911);
+                    var birthmonth = parseInt(birthpart[1]);
+                    var biirthday = parseInt(birthpart[2]);
+                    $('#birthdayYear_0').val(birthyear);
+                    $('#birthdayMonth_0').val(birthmonth);
+                    $('#birthdayDay_0').val(biirthday);
+                //身分證字號(法人-統一編號)
+                const IDNumberpattern = /^[A-Z]\d{9}$/;
+                var IDNumber = '@IDNumber';
+                if (!IDNumberpattern.test(IDNumber)) {
+                    $('#international_IDnumber_0').prop('checked', true).trigger('change');
+                }
+                $('#IDNumber_0').val(IDNumber);
+                //電話號碼
+                var Phone = '@Phone';
+                $('input[name="Phone_0"]').val(Phone);
+                //銀行代碼
+                var BankNo = '@BankNo';
+                $('.select2_bank[data-index="1"]').val(BankNo).trigger('change');
+
+                //銀行帳號
+                var BankAccount = '@BankAccount';
+                $('input[name="bankaccount_0"]').val(BankAccount);
+
+                var memo = '@memo';
+                if (memo !== '') {
+                    $('#momo').val(memo);
+                }
+                //戶號
+                var accountNo = '@accountNo';
+                $('#accountnumber').val(accountNo);
+
+                //地址代碼
+                //房客地址(下拉選單)
+                var TeAddress_District = JSON.parse('@TeAddress_District');
+                var TeAddress_Road = JSON.parse('@TeAddress_Road');
+                var TeContact_District = JSON.parse('@TeContact_District');
+                var TeContact_Road = JSON.parse('@TeContact_Road');
+                $('.select2_district[data-index="0"]').empty().select2({ data: TeAddress_District });
+                $('.select2_road[data-index="0"]').empty().select2({ data: TeAddress_Road });
+                $('.select2_district[data-index="1"]').empty().select2({ data: TeContact_District });
+                $('.select2_road[data-index="1"]').empty().select2({ data: TeContact_Road });
+
+                //寫進地址
+                var AddressCode = '@AddressCode';
+                var AddressDetail = '@AddressDetail';
+                $('.select2_city[data-index="0"]').val(AddressCode.substring(0, 2)).trigger('change');
+                $('.select2_district[data-index="0"]').val(AddressCode.substring(0, 4)).trigger('change');
+                $('.select2_road[data-index="0"]').val(AddressCode).trigger('change');
+                $('input[name="AddressDetail_0"]').val(AddressDetail);
+                var ContactCode = '@ContactCode';
+                var ContactAddressDetail = '@ContactAddressDetail';
+                $('.select2_city[data-index="1"]').val(ContactCode.substring(0, 2)).trigger('change');
+                $('.select2_district[data-index="1"]').val(ContactCode.substring(0, 4)).trigger('change');
+                $('.select2_road[data-index="1"]').val(ContactCode).trigger('change');
+                $('input[name="detailcontact_0"]').val(ContactAddressDetail);
+
+                //配偶
+                var CoupleCount = parseInt('@CoupleCount');
+                if (CoupleCount > 0) {
+                    var Couple = JSON.parse('@Couple');
+                    $('#couplecheck_' + Couple[0]).prop('checked', true).trigger('change');
+                    $('#coupleName').val(Couple[1]);
+                    var coupleNumber = Couple[2];
+                    $('input[name="coupleNumber"]').val(coupleNumber);
+                    if (!IDNumberpattern.test(coupleNumber)) {
+                        $('#international_IDnumber99').prop('checked', true).trigger('change');
+                    }
+                    //生日
+                    var Cbirthdaystr = '@BirthdayStr';
+                    var Cbirthpart = Cbirthdaystr.split('-');
+                    var Cbirthyear = parseInt(parseInt(Cbirthpart[0])-1911);
+                    var Cbirthmonth = parseInt(Cbirthpart[1]);
+                    var Cbiirthday = parseInt(Cbirthpart[2]);
+                    $('#birthdayYear_99').val(Cbirthyear);
+                    $('#birthdayMonth_99').val(Cbirthmonth);
+                    $('#birthdayDay_99').val(Cbiirthday);
+                    var seperateNo = Couple[4];
+                    if (seperateNo !== '') {
+                        $('#separatecheck').prop('checked', true).trigger('change');
+                        $('#saparatenumber').val(seperateNo);
+                    }
+                }
+                //直系親屬
+                var Family1 = JSON.parse('@Family1');
+                var Family2 = JSON.parse('@Family2');
+                var Family3 = JSON.parse('@Family3');
+                var Family4 = JSON.parse('@Family4');
+                var Family5 = JSON.parse('@Family5');
+                var Family6 = JSON.parse('@Family6');
+                var Family7 = JSON.parse('@Family7');
+                var Family8 = JSON.parse('@Family8');
+                var Family9 = JSON.parse('@Family9');
+                var Family10 = JSON.parse('@Family10');
+                var directArray = [];
+                directArray.push(Family1);
+                directArray.push(Family2);
+                directArray.push(Family3);
+                directArray.push(Family4);
+                directArray.push(Family5);
+                directArray.push(Family6);
+                directArray.push(Family7);
+                directArray.push(Family8);
+                directArray.push(Family9);
+                directArray.push(Family10);
+                var DirectCount = parseInt('@DirectCount');
+                for (var DiInput = 1; DiInput <= DirectCount; DiInput++) {
+                    //顯示輸入欄位
+                    $('.directformgroup[data-order="' + DiInput + '"]').show();
+                    //設定欄位為必填
+                    $('.directInput_' + DiInput).prop('required', true);
+                    //將人數寫入input欄位
+                    $("#directCount").val(DiInput)
+                    //將目前人數寫回button中
+                    $(".shipbutton").attr('data-order', DiInput);
+
+                    var ArrayNo = DiInput - 1;
+
+                    var data = [
+                        { id: directArray[ArrayNo][0], text: directArray[ArrayNo][0] },
+                    ];
+                    $(".select_direct").select2({
+                        tags: "true",
+                        data: data,
+                        placeholder: '親屬關係'
+                    })
+                    $('.directInput_' + DiInput + '[data-input="0"]').val(directArray[ArrayNo][0]).trigger('change');   //關係
+
+                    $('.directInput_' + DiInput + '[data-input="1"]').val(directArray[ArrayNo][1]);   //姓名
+                    $('.directInput_' + DiInput + '[data-input="2"]').val(directArray[ArrayNo][2]);   //身分證
+                    if (!IDNumberpattern.test(directArray[ArrayNo][2])) {
+                        $('#international_Direct_IDnumber' + DiInput).prop('checked', true).trigger('change');
+                    }
+                    var birthparts = directArray[ArrayNo][3].split('-');
+                    $('.directInput_' + DiInput + '[data-input="3"]').val(parseInt(birthparts[0]) - 1911);    //生日
+                    $('.directInput_' + DiInput + '[data-input="4"]').val(parseInt(birthparts[1]));
+                    $('.directInput_' + DiInput + '[data-input="5"]').val(parseInt(birthparts[2]));
+                }
+
+
+
+
+
+
+                //代理人
+                $('input[name="AgentRadio"][value="' + AgentCount + '"]').prop('checked', true).trigger('change');;
+
+                var Agent1 = JSON.parse('@Agent1');
+                var Agent2 = JSON.parse('@Agent2');
+                var Agent3 = JSON.parse('@Agent3');
+                var agentArray = [];
+                agentArray.push(Agent1);
+                agentArray.push(Agent2);
+                agentArray.push(Agent3);
+
+                var AgentCount = parseInt('@AgentCount');       //代理人人數
+                $('input[name="AgentRadio"][value="' + AgentCount + '"]').prop('checked', true).trigger('change');;
+                for (var AgInput = 1; AgInput <= AgentCount; AgInput++) {
+                    var Agent = agentArray[AgInput - 1];
+                    var anotherInputNo = AgInput + 10;      //代理人代碼為(10起跳)
+                    var birthparts = Agent[2].split('-');
+                    var agIDNumber = Agent[3];
+                    $('.AgInput_' + AgInput + '[data-input="0"]').val(Agent[0]);   //姓名
+                    $('input[name="genderRadio_Ag' + anotherInputNo + '"][value="' + Agent[1] + '"]').prop('checked', true).trigger('change');;     //性別
+                    $('.AgInput_' + AgInput + '[data-input="1"]').val(parseInt(birthparts[0]) - 1911);    //生日
+                    $('.AgInput_' + AgInput + '[data-input="2"]').val(parseInt(birthparts[1]));
+                    $('.AgInput_' + AgInput + '[data-input="3"]').val(parseInt(birthparts[2]));
+                    $('.AgInput_' + AgInput + '[data-input="4"]').val(Agent[3]);   //身分證
+                    if (!IDNumberpattern.test(agIDNumber)) {
+                        $('.national_check[data-index="' + anotherInputNo + '"]').prop('checked', true).trigger('change');
+                    }
+                    $('.AgInput_' + AgInput + '[data-input="5"]').val(Agent[4]);   //號碼
+
+                    //地址DDL
+                    var AgAddress_District;
+                    var AgAddress_Road;
+                    var AgContact_District;
+                    var AgContact_Road;
+                    //保證人下拉選單
+                    switch (AgInput) {
+                        case 1:
+                            AgAddress_District = JSON.parse('@AgAddress1_District');
+                            AgAddress_Road = JSON.parse('@AgAddress1_Road');
+                            AgContact_District = JSON.parse('@AgContact1_District');
+                            AgContact_Road = JSON.parse('@AgContact1_Road');
+                            break;
+
+                        case 2:
+                            AgAddress_District = JSON.parse('@AgAddress2_District');
+                            AgAddress_Road = JSON.parse('@AgAddress2_Road');
+                            AgContact_District = JSON.parse('@AgContact2_District');
+                            AgContact_Road = JSON.parse('@AgContact2_Road');
+                            break;
+
+                        case 3:
+                            AgAddress_District = JSON.parse('@AgAddress3_District');
+                            AgAddress_Road = JSON.parse('@AgAddress3_Road');
+                            AgContact_District = JSON.parse('@AgContact3_District');
+                            AgContact_Road = JSON.parse('@AgContact3_Road');
+                            break;
+                    }
+                    $('.AgInput_' + AgInput + '[data-input="7"]').empty().select2({ data: AgAddress_District });    //戶籍地址_鄉鎮市區
+                    $('.AgInput_' + AgInput + '[data-input="8"]').empty().select2({ data: AgAddress_Road });        //戶籍地址_道路名稱
+                    $('.AgInput_' + AgInput + '[data-input="11"]').empty().select2({ data: AgContact_District });   //通訊地址_鄉鎮市區
+                    $('.AgInput_' + AgInput + '[data-input="12"]').empty().select2({ data: AgContact_Road });       //通訊地址_道路名稱
+                    //寫進地址
+                    var Agaddress_code = Agent[5];
+                    var Agcontact_code = Agent[7];
+                    $('.AgInput_' + AgInput + '[data-input="6"]').val(Agaddress_code.substring(0, 2)).trigger('change');
+                    $('.AgInput_' + AgInput + '[data-input="7"]').val(Agaddress_code.substring(0, 4)).trigger('change');
+                    $('.AgInput_' + AgInput + '[data-input="8"]').val(Agaddress_code).trigger('change');
+                    $('.AgInput_' + AgInput + '[data-input="9"]').val(Agent[6]);      //戶籍地址_詳細地址
+                    $('.AgInput_' + AgInput + '[data-input="10"]').val(Agcontact_code.substring(0, 2)).trigger('change');
+                    $('.AgInput_' + AgInput + '[data-input="11"]').val(Agcontact_code.substring(0, 4)).trigger('change');
+                    $('.AgInput_' + AgInput + '[data-input="12"]').val(Agcontact_code).trigger('change');
+                    $('.AgInput_' + AgInput + '[data-input="13"]').val(Agent[8]);      //通訊地址_詳細地址
+                }
+
+
+                //保證人
+                var GuarantorCount = parseInt('@GuarantorCount');       //保證人人數
+                $('input[name="GuarantorRadio"][value="' + GuarantorCount + '"]').prop('checked', true).trigger('change');
+                var Guarantor1 = JSON.parse('@Guarantor1');
+                var Guarantor2 = JSON.parse('@Guarantor2');
+                var Guarantor3 = JSON.parse('@Guarantor3');
+                var GuarantorArray = [];
+                GuarantorArray.push(Guarantor1);
+                GuarantorArray.push(Guarantor2);
+                GuarantorArray.push(Guarantor3);
+
+                for (var GuInput = 1; GuInput <= GuarantorCount; GuInput++) {
+                    var Guarantor = GuarantorArray[GuInput - 1];
+                    var anotherInputNo = GuInput + 20;      //保證人代碼為(10起跳)
+                    var birthparts = Guarantor[2].split('-');
+                    var GuIDNumber = Guarantor[3];
+                    $('.GuInput_' + GuInput + '[data-input="0"]').val(Guarantor[0]);   //姓名
+                    $('input[name="genderRadio_Gu' + anotherInputNo + '"][value="' + Guarantor[1] + '"]').prop('checked', true).trigger('change');;     //性別
+                    $('.GuInput_' + GuInput + '[data-input="1"]').val(parseInt(birthparts[0]) - 1911);    //生日
+                    $('.GuInput_' + GuInput + '[data-input="2"]').val(parseInt(birthparts[1]));
+                    $('.GuInput_' + GuInput + '[data-input="3"]').val(parseInt(birthparts[2]));
+                    $('.GuInput_' + GuInput + '[data-input="4"]').val(Guarantor[3]);   //身分證
+                    if (!IDNumberpattern.test(GuIDNumber)) {
+                        $('.national_check[data-index="' + anotherInputNo + '"]').prop('checked', true).trigger('change');
+                    }
+                    $('.GuInput_' + GuInput + '[data-input="5"]').val(Guarantor[4]);   //號碼
+
+                    //地址DDL
+                    var GuAddress_District;
+                    var GuAddress_Road;
+                    var GuContact_District;
+                    var GuContact_Road;
+                    //代理人下拉選單
+                    switch (GuInput) {
+                        case 1:
+                            GuAddress_District = JSON.parse('@GuAddress1_District');
+                            GuAddress_Road = JSON.parse('@GuAddress1_Road');
+                            GuContact_District = JSON.parse('@GuContact1_District');
+                            GuContact_Road = JSON.parse('@GuContact1_Road');
+                            break;
+
+                        case 2:
+                            GuAddress_District = JSON.parse('@GuAddress2_District');
+                            GuAddress_Road = JSON.parse('@GuAddress2_Road');
+                            GuContact_District = JSON.parse('@GuContact2_District');
+                            GuContact_Road = JSON.parse('@GuContact2_Road');
+                            break;
+
+                        case 3:
+                            GuAddress_District = JSON.parse('@GuAddress3_District');
+                            GuAddress_Road = JSON.parse('@GuAddress3_Road');
+                            GuContact_District = JSON.parse('@GuContact3_District');
+                            GuContact_Road = JSON.parse('@GuContact3_Road');
+                            break;
+                    }
+                    $('.GuInput_' + GuInput + '[data-input="7"]').empty().select2({ data: GuAddress_District });    //戶籍地址_鄉鎮市區
+                    $('.GuInput_' + GuInput + '[data-input="8"]').empty().select2({ data: GuAddress_Road });        //戶籍地址_道路名稱
+                    $('.GuInput_' + GuInput + '[data-input="11"]').empty().select2({ data: GuContact_District });   //通訊地址_鄉鎮市區
+                    $('.GuInput_' + GuInput + '[data-input="12"]').empty().select2({ data: GuContact_Road });       //通訊地址_道路名稱
+                    //寫進地址
+                    var Guaddress_code = Guarantor[5];
+                    var Gucontact_code = Guarantor[7];
+                    $('.GuInput_' + GuInput + '[data-input="6"]').val(Guaddress_code.substring(0, 2)).trigger('change');
+                    $('.GuInput_' + GuInput + '[data-input="7"]').val(Guaddress_code.substring(0, 4)).trigger('change');
+                    $('.GuInput_' + GuInput + '[data-input="8"]').val(Guaddress_code).trigger('change');
+                    $('.GuInput_' + GuInput + '[data-input="9"]').val(Guarantor[6]);      //戶籍地址_詳細地址
+                    $('.GuInput_' + GuInput + '[data-input="10"]').val(Gucontact_code.substring(0, 2)).trigger('change');
+                    $('.GuInput_' + GuInput + '[data-input="11"]').val(Gucontact_code.substring(0, 4)).trigger('change');
+                    $('.GuInput_' + GuInput + '[data-input="12"]').val(Gucontact_code).trigger('change');
+                    $('.GuInput_' + GuInput + '[data-input="13"]').val(Guarantor[8]);      //通訊地址_詳細地址
+                }
+
+            }
+
+
             //當下拉選單發生改變事件(change)，執行
             $('body').on('change', '.select2_city', function () {
                 var selectedIndex = $(this).attr('data-index');
@@ -893,357 +1681,6 @@
                     });
                 });
             });
-            //銀行下拉選單
-            $('body').on('change', '.select2_bank', function () {
-                var selectedIndex = $(this).attr('data-index');
-                var bankcode = $('.select2_bank[data-index="' + selectedIndex + '"]').val();
-                $.ajax({
-                    type: "POST",
-                    data: { bankcode: bankcode },
-                    url: '@Url.Content("~/Form/DDLBank/")',
-                    dataType: 'json'
-                }).done(function (dataresult) {
-                    var jsonBankBranchArray = JSON.parse(dataresult.bankJson);
-                    for (var i = 0; i < jsonBankBranchArray.length; i++) {
-                            jsonBankBranchArray[i].id = jsonBankBranchArray[i].id.replace(/\"/g, '');
-                            jsonBankBranchArray[i].text = jsonBankBranchArray[i].text.replace(/\"/g, '');
-                        }
-                    var data_bankbranch = jsonBankBranchArray;
-                    $('.select2_bankbranches[data-index="' + selectedIndex + '"]').empty();
-                    var init_data = [
-                        {
-                            id: '',
-                            text: '分行'
-                        },
-                    ];
-                    $('.select2_bankbranches[data-index="' + selectedIndex + '"]').select2({
-                        data: init_data,
-                    });
-                    $('.select2_bankbranches[data-index="' + selectedIndex + '"]').select2({
-                        data: data_bankbranch,
-                        placeholder: '分行'
-                    });
-                    //設定帳號長度
-                    var inputbanknumberElement = document.getElementById('bankaccount_0');
-                    var alertelement = document.getElementById('banknumberalert');
-                    var lengthalert = document.getElementById('jqlengthalert');
-                    if (dataresult.lengthset.length === 0) {
-                        //非兩種長度以上
-                        var length = "";
-                        if (dataresult.minlength == dataresult.maxlength) {
-                            length = dataresult.minlength + "字";
-                        }
-                        else {
-                            length = dataresult.minlength + "字 ~" + dataresult.maxlength + "字"
-                        }
-
-                        alertelement.innerHTML = "請正確輸入帳號，帳號長度數請填寫 : " + length;
-                        inputbanknumberElement.setAttribute('pattern', '.{' + dataresult.minlength + ',' + dataresult.maxlength + '}');
-                        lengthalert.innerHTML = "(" + length + ")"
-                    }
-                    else {
-                        // 將陣列中的數字轉換成以 | 分隔的字串
-                        var regexPattern = dataresult.lengthset.map(length => `.{${length}}`).join('|');
-                        var regexword = dataresult.lengthset.join('字,') + "字";
-
-                        alertelement.innerHTML = "請正確輸入帳號，帳號長度數請填寫 : " + regexword;
-                        inputbanknumberElement.setAttribute('pattern', regexPattern);
-                        lengthalert.innerHTML = "(" + regexword + ")"
-
-                    }
-                });
-            });
-            //直系親屬下拉選單(嬰幼兒不需填身分證)
-            $('body').on('change', '.select_direct', function () {
-                var selectedIndex = $(this).attr('data-order');
-                //選擇親屬關係之代號
-                var directcode = $('.select_direct[data-order="' + selectedIndex + '"]').val();
-                if (directcode == "胎兒") {
-                    const checkbox = document.getElementById('international_Direct_IDnumber' + selectedIndex);
-                    checkbox.checked = false;
-                    $('#international_Direct_IDnumber' + selectedIndex).prop('disabled', true);         //不須勾選外籍
-                    $('.inputIDnumber[data-order="' + selectedIndex + '"]').prop('disabled', true);     //身分證不須填
-                    $('.inputIDnumber[data-order="' + selectedIndex + '"]').prop('required', false);    //身分證不須填
-                }
-                else {
-                    $('#international_Direct_IDnumber' + selectedIndex).prop('disabled', false);        //可勾選外籍
-                    $('.inputIDnumber[data-order="' + selectedIndex + '"]').prop('disabled', false);    //身分證須填
-                    $('.inputIDnumber[data-order="' + selectedIndex + '"]').prop('required', true);     //身分證須填
-                }
-            });
-
-            //radio監聽事件
-            //主要用途 : 弱勢戶佐證文件是否需要上傳送
-            $('input[name="typeRadio"]').change(function () {
-                // 獲取被點選的 radio 按鈕的值
-                var vulnerablefile = document.getElementById('vulnerablefile');
-                var filelable = document.getElementById('vulnerablefileLable');
-                $('input[name="typeRadio"]').each(function () {
-                    var radioId = $(this).attr('id');
-                    // 檢查是否被點選
-                    if ($(this).is(':checked')) {
-                        switch (radioId) {
-                            case 'typeRadio_0' :
-                            case 'typeRadio_1' :
-                            case 'typeRadio_2' :
-                            case 'typeRadio_3' :
-                            case 'typeRadio_4' :
-                            case 'typeRadio_5' :
-                                vulnerablefile.value = '';
-                                filelable.innerHTML = '';
-                                $('#vulnerablefile').prop('disabled', true);
-                                $('#vulnerablefile').prop('readonly', true);
-                                $('#vulnerablefile').prop('required', false);
-                                break;
-                            default:
-                                $('#vulnerablefile').prop('disabled', false);
-                                $('#vulnerablefile').prop('readonly', false);
-                                $('#vulnerablefile').prop('required', true);
-                                break;
-                        }
-                    }
-                })
-            });
-
-            //同戶籍地址
-            $('.sameaddress').on('change', function () {
-                var selectedIndex = $(this).attr('data-index');
-                if ($(this).is(':checked')) {
-                    $('.select_contact_' + selectedIndex).prop('disabled', true);
-                    //required
-                    $('.select_contact_' + selectedIndex).prop('required', false);
-                } else {
-                    $('.select_contact_' + selectedIndex).prop('disabled', false);
-                    //required
-                    $('.select_contact_' + selectedIndex).prop('required', true);
-                }
-            });
-
-            //是否有配偶(丈夫)
-            $('#couplecheck_1').on('change', function () {
-                if ($(this).is(':checked')) {
-                    //妻子nochecked
-                    const checkbox = document.getElementById('couplecheck_0');
-                    checkbox.checked = false;
-                    $('.couple_input').prop('disabled', false);
-                    $('.couple_input_disable').prop('disabled', false);
-                    $('.couple_input').prop('required', true);
-                } else {
-                    $('.couple_input').prop('disabled', true);
-                    $('.couple_input_disable').prop('disabled', true);
-                    $('.couple_input').prop('required', false);
-                    //身分證
-                    const IDcheckbox = document.getElementById('international_IDnumber99');
-                    IDcheckbox.checked = false;
-                    IDcheckbox.prop('disabled', true);
-                    //分戶
-                    const checkbox = document.getElementById('separatecheck');
-                    checkbox.checked = false;
-                    $('input[name="separatenumber"]').val('');
-                    $('input[name="separatenumber"]').prop('disabled', true);
-                    $('input[name="separatenumber"]').prop('required', false);
-                }
-            });
-            //是否有配偶(妻子)
-            $('#couplecheck_0').on('change', function () {
-                if ($(this).is(':checked')) {
-                    //丈夫nochecked
-                    const checkbox = document.getElementById('couplecheck_1');
-                    checkbox.checked = false;
-                    $('.couple_input').prop('disabled', false);
-                    $('.couple_input_disable').prop('disabled', false);
-                    $('.couple_input').prop('required', true);
-                } else {
-
-                    $('.couple_input').prop('disabled', true);
-                    $('.couple_input_disable').prop('disabled', true);
-                    $('.couple_input').prop('required', false);
-                    //身分證
-                    const IDcheckbox = document.getElementById('coupleIDcheck');
-                    IDcheckbox.checked = false;
-                    $('input[name="separatenumber"]').prop('disabled', true);
-                    //分戶
-                    const checkbox = document.getElementById('separatecheck');
-                    checkbox.checked = false;
-                    $('input[name="separatenumber"]').val('');
-                    $('input[name="separatenumber"]').prop('disabled', true);
-                    $('input[name="separatenumber"]').prop('required', false);
-                }
-            });
-
-            //是否為外籍(身分證不須驗證)
-            $('.national_check').on('change', function () {
-                var selectedIndex = $(this).attr('data-index');
-
-                const inputElement = document.querySelector('.inputIDnumber[data-index="' + selectedIndex + '"]');
-                if ($(this).is(':checked')) {
-                    inputElement.removeAttribute('pattern');
-                } else {
-                    inputElement.setAttribute('pattern', '^[A-Z]\\d{9}$');
-                }
-            });
-
-            //是否分戶
-            $('#separatecheck').on('change', function () {
-                if ($(this).is(':checked')) {
-                    //disabled
-                    $('input[name="separatenumber"]').prop('disabled', false);
-                    //required
-                    $('input[name="separatenumber"]').prop('required', true);
-                } else {
-                    //value
-                    $('input[name="separatenumber"]').val('');
-                    //disabled
-                    $('input[name="separatenumber"]').prop('disabled', true);
-                    //required
-                    $('input[name="separatenumber"]').prop('required', false);
-                }
-            });
-
-            //直系親屬(下拉選單)
-            var dataDirect = [
-                { id: '父親', text: '父親' },
-                { id: '母親', text: '母親' },
-                { id: '兒子', text: '兒子' },
-                { id: '女兒' , text: '女兒' },
-                { id: '媳婦', text: '媳婦' },
-                { id: '女婿', text: '女婿' },
-                { id: '孫子', text: '孫子' },
-                { id: '孫女', text: '孫女' },
-                { id: '孫媳婦', text: '孫媳婦' },
-                { id: '孫女婿', text: '孫女婿' },
-                { id: '阿公', text: '阿公' },
-                { id: '阿嬤', text: '阿嬤' },
-                { id: '爺爺', text: '爺爺' },
-                { id: '奶奶', text: '奶奶' },
-                { id: '公公', text: '公公' },
-                { id: '婆婆', text: '婆婆' },
-                { id: '胎兒', text: '胎兒' },
-            ];
-            $(".select_direct").select2({
-                tags: "true",
-                data: dataDirect,
-                placeholder: '親屬關係'
-            })
-            //------------------
-            // 代理人幾位  *
-            //------------------
-            //主要用途 : CoOwnerRadio(隱藏/顯示代理人資料)
-            $('input[name="AgentRadio"]').change(function () {
-                $('input[name="AgentRadio"]').each(function () {
-                    var radioId = $(this).attr('id');
-                    // 檢查是否被點選
-                    if ($(this).is(':checked')) {
-                        // 根據不同的 id 做相應的處理
-                        switch (radioId) {
-                            case "AgentRadio_0":
-                                $('.getag1').hide();
-                                $('.getag2').hide();
-                                $('.getag3').hide();
-                                $('.AgInput_1').prop('required', false);
-                                $('.AgInput_2').prop('required', false);
-                                $('.AgInput_3').prop('required', false);
-                                break;
-                            case "AgentRadio_1":
-                                $('.getag1').show();
-                                $('.getag2').hide();
-                                $('.getag3').hide();
-                                $('.AgInput_1').prop('required', true);
-                                $('.AgInput_2').prop('required', false);
-                                $('.AgInput_3').prop('required', false);
-                                break;
-                            case "AgentRadio_2":
-                                $('.getag1').show();
-                                $('.getag2').show();
-                                $('.getag3').hide();
-                                $('.AgInput_1').prop('required', true);
-                                $('.AgInput_2').prop('required', true);
-                                $('.AgInput_3').prop('required', false);
-                                break;
-                            case "AgentRadio_3":
-                                $('.getag1').show();
-                                $('.getag2').show();
-                                $('.getag3').show();
-                                $('.AgInput_1').prop('required', true);
-                                $('.AgInput_2').prop('required', true);
-                                $('.AgInput_3').prop('required', true);
-                                break;
-                        }
-                    }
-                })
-            });
-            //------------------
-            // 保證人幾位  *
-            //------------------
-            //主要用途 : CoOwnerRadio(隱藏/顯示保證人資料)
-            $('input[name="GuarantorRadio"]').change(function () {
-                $('input[name="GuarantorRadio"]').each(function () {
-                    var radioId = $(this).attr('id');
-                    // 檢查是否被點選
-                    if ($(this).is(':checked')) {
-                        // 根據不同的 id 做相應的處理
-                        switch (radioId) {
-                            case "jqGuarantorRadio_0":
-                                $('.getgu1').hide();
-                                $('.getgu2').hide();
-                                $('.getgu3').hide();
-                                $('.GuInput_1').prop('required', false);
-                                $('.GuInput_2').prop('required', false);
-                                $('.GuInput_3').prop('required', false);
-                                break;
-                            case "jqGuarantorRadio_1":
-                                $('.getgu1').show();
-                                $('.getgu2').hide();
-                                $('.getgu3').hide();
-                                $('.GuInput_1').prop('required', true);
-                                $('.GuInput_2').prop('required', false);
-                                $('.GuInput_3').prop('required', false);
-                                break;
-                            case "jqGuarantorRadio_2":
-                                $('.getgu1').show();
-                                $('.getgu2').show();
-                                $('.getgu3').hide();
-                                $('.GuInput_1').prop('required', true);
-                                $('.GuInput_2').prop('required', true);
-                                $('.GuInput_3').prop('required', false);
-                                break;
-                            case "jqGuarantorRadio_3":
-                                $('.getgu1').show();
-                                $('.getgu2').show();
-                                $('.getgu3').show();
-                                $('.GuInput_1').prop('required', true);
-                                $('.GuInput_2').prop('required', true);
-                                $('.GuInput_3').prop('required', true);
-                                break;
-                        }
-                    }
-                })
-            });
-
-            //------------------
-            // 生日月份變更日期之最大值為30 or31  *
-            //------------------
-
-            const inputElements = document.querySelectorAll('.birthdayMonth');
-            inputElements.forEach(function (inputElement) {
-                inputElement.addEventListener('input', function () {
-                    const inputValue = inputElement.value;
-                    const dataIndex = inputElement.getAttribute('data-index');
-                    if (inputValue == '1' || inputValue == '3' || inputValue == '5' || inputValue == '7' || inputValue == '8' || inputValue == '10' || inputValue == '12') {
-                        //$('#birthdayDay_' + dataIndex).attr('max', 31); //設置最大值
-                        $('.birthdayDay[data-index="' + dataIndex + '"]').attr('max', 31); //設置最大值
-                    }
-                    else if (inputValue == '2') {
-                        //$('#birthdayDay_' + dataIndex).attr('max', 29); //設置最大值
-                        $('.birthdayDay[data-index="' + dataIndex + '"]').attr('max', 29); //設置最大值
-                    }
-                    else {
-                        //$('#birthdayDay_' + dataIndex).attr('max', 30); //設置最大值
-                        $('.birthdayDay[data-index="' + dataIndex + '"]').attr('max', 30); //設置最大值
-                    }
-                    // 在这里执行你的其他操作
-                });
-            });
         });
 
         //------------------
@@ -1257,7 +1694,7 @@
                     //顯示輸入欄位
                     $('.directformgroup[data-order="' + intselectorder + '"]').show();
                     //設定欄位為必填
-                    $('.DirectInput_' + intselectorder).prop('required', true);
+                    $('.directInput_' + intselectorder).prop('required', true);
 
                     //將人數寫入input欄位
                     $("#directCount").val(intselectorder)
@@ -1268,8 +1705,8 @@
                 $('.directformgroup[data-order="' + intselectorder + '"]').hide();
 
                 //設定欄位為非必填
-                $('.DirectInput_' + intselectorder).prop('required', false);
-                $('.DirectInput_' + intselectorder).val('');
+                $('.directInput_' + intselectorder).prop('required', false);
+                $('.directInput_' + intselectorder).val('');
                 if (intselectorder > 0) {
                     intselectorder = intselectorder - 1;
                 }
@@ -1294,5 +1731,5 @@
             });
 
 
-    </script>
+</script>
 }

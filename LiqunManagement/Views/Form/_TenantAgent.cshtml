@@ -26,7 +26,7 @@
 </div>
 <div class="form-group getag1">
     <label class="form-label" for="Name_Ag11">代理人1姓名</label>
-    <input type="text" class="form-control AgInput_1" id="Name_Ag11">
+    <input type="text" class="form-control AgInput_1" id="Name_Ag11" data-input="0">
     <div class="invalid-feedback">
         請輸入代理人姓名
     </div>
@@ -60,15 +60,15 @@
             <div class="input-group-append">
                 <span class="input-group-text">民國</span>
             </div>
-            <input type="number" class="form-control AgInput_1" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_11">
+            <input type="number" class="form-control AgInput_1" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_11" data-input="1">
             <div class="input-group-append">
                 <span class="input-group-text">年</span>
             </div>
-            <input type="number" class="form-control birthdayMonth AgInput_1" max="12" min="1" id="birthdayMonth_11" data-index="11">
+            <input type="number" class="form-control birthdayMonth AgInput_1" max="12" min="1" id="birthdayMonth_11" data-index="11" data-input="2">
             <div class="input-group-append">
                 <span class="input-group-text">月</span>
             </div>
-            <input type="number" class="form-control birthdayDay AgInput_1" max="31" min="1" id="birthdayDay_11" data-index="11">
+            <input type="number" class="form-control birthdayDay AgInput_1" max="31" min="1" id="birthdayDay_11" data-index="11" data-input="3">
             <div class="input-group-append">
                 <span class="input-group-text">日</span>
             </div>
@@ -86,7 +86,7 @@
             </div>
         </div>
     </div>
-    <input type="text" class="form-control inputIDnumber AgInput_1" id="IDnumber_Ag11" data-index="11" pattern="^[A-Z]\d{9}$">
+    <input type="text" class="form-control inputIDnumber AgInput_1" id="IDnumber_Ag11" data-index="11" pattern="^[A-Z]\d{9}$" data-input="4">
     <div class="invalid-feedback">
         請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
     </div>
@@ -94,7 +94,7 @@
 @*連絡電話*@
 <div class="form-group getag1">
     <label class="form-label" for="phonenumber_Ag1">連絡電話</label>
-    <input type="text" class="form-control inputPhoneNumber AgInput_1" id="Phone_Ag11" data-index="11" pattern="^\d{10}$">
+    <input type="text" class="form-control inputPhoneNumber AgInput_1" id="Phone_Ag11" data-index="11" pattern="^\d{10}$" data-input="5">
     <div class="invalid-feedback">
         請輸入連絡電話，並確認格式為【10個數字】
     </div>
@@ -105,7 +105,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city AgInput_1" data-index="11">
+            <select class="custom-select form-control select2_city AgInput_1" data-index="11" data-input="6">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -113,7 +113,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district AgInput_1" data-index="11">
+            <select class="custom-select form-control select2_district AgInput_1" data-index="11" data-input="7">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -121,7 +121,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road AgInput_1" id="road_Ag11" data-index="11">
+            <select class="custom-select form-control select2_road AgInput_1" id="road_Ag11" data-index="11" data-input="8">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -131,7 +131,7 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" class="form-control AgInput_1" id="AddressDetail_Ag11" placeholder="ex.108號1樓">
+            <input type="text" class="form-control AgInput_1" id="AddressDetail_Ag11" placeholder="ex.108號1樓" data-input="9">
         </div>
     </div>
 </div>
@@ -149,7 +149,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city select_contact_11 AgInput_1" data-index="12">
+            <select class="custom-select form-control select2_city select_contact_11 AgInput_1" data-index="12" data-input="10">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -157,7 +157,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district select_contact_11 AgInput_1" data-index="12">
+            <select class="custom-select form-control select2_district select_contact_11 AgInput_1" data-index="12" data-input="11">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -165,7 +165,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road select_contact_11 AgInput_1" id="road_contact_Ag11" data-index="12">
+            <select class="custom-select form-control select2_road select_contact_11 AgInput_1" id="road_contact_Ag11" data-index="12" data-input="12">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -175,7 +175,7 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" class="form-control select_contact_11 AgInput_1" id="detailcontact_Ag11" data-index="11" placeholder="ex.108號1樓">
+            <input type="text" class="form-control select_contact_11 AgInput_1" id="detailcontact_Ag11" data-index="11" placeholder="ex.108號1樓" data-input="13">
         </div>
     </div>
 </div>
@@ -187,7 +187,7 @@
 </div>
 <div class="form-group getag2">
     <label class="form-label" for="Name_Ag12">代理人2姓名</label>
-    <input type="text" class="form-control AgInput_2" id="Name_Ag12">
+    <input type="text" class="form-control AgInput_2" id="Name_Ag12" data-input="0">
     <div class="invalid-feedback">
         請輸入代理人姓名
     </div>
@@ -219,15 +219,15 @@
             <div class="input-group-append">
                 <span class="input-group-text">民國</span>
             </div>
-            <input type="number" class="form-control AgInput_2" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_12">
+            <input type="number" class="form-control AgInput_2" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_12" data-input="1">
             <div class="input-group-append">
                 <span class="input-group-text">年</span>
             </div>
-            <input type="number" class="form-control birthdayMonth AgInput_2" max="12" min="1" id="birthdayMonth_12" data-index="12">
+            <input type="number" class="form-control birthdayMonth AgInput_2" max="12" min="1" id="birthdayMonth_12" data-index="12" data-input="2">
             <div class="input-group-append">
                 <span class="input-group-text">月</span>
             </div>
-            <input type="number" class="form-control birthdayDay AgInput_2" max="31" min="1" id="birthdayDay_12" data-index="12">
+            <input type="number" class="form-control birthdayDay AgInput_2" max="31" min="1" id="birthdayDay_12" data-index="12" data-input="3">
             <div class="input-group-append">
                 <span class="input-group-text">日</span>
             </div>
@@ -245,7 +245,7 @@
             </div>
         </div>
     </div>
-    <input type="text" class="form-control inputIDnumber AgInput_2" id="IDnumber_Ag12" data-index="12" pattern="^[A-Z]\d{9}$">
+    <input type="text" class="form-control inputIDnumber AgInput_2" id="IDnumber_Ag12" data-index="12" pattern="^[A-Z]\d{9}$" data-input="4">
     <div class="invalid-feedback">
         請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
     </div>
@@ -253,7 +253,7 @@
 @*連絡電話*@
 <div class="form-group getag2">
     <label class="form-label" for="phonenumber_Ag2">連絡電話</label>
-    <input type="text" class="form-control inputPhoneNumber AgInput_2" id="Phone_Ag12" data-index="12" pattern="^\d{10}$">
+    <input type="text" class="form-control inputPhoneNumber AgInput_2" id="Phone_Ag12" data-index="12" pattern="^\d{10}$" data-input="5">
     <div class="invalid-feedback">
         請輸入連絡電話，並確認格式為【10個數字】
     </div>
@@ -264,7 +264,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city AgInput_2" data-index="13">
+            <select class="custom-select form-control select2_city AgInput_2" data-index="13" data-input="6">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -272,7 +272,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district AgInput_2" data-index="13">
+            <select class="custom-select form-control select2_district AgInput_2" data-index="13" data-input="7">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -280,7 +280,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road AgInput_2" id="road_Ag12" data-index="13">
+            <select class="custom-select form-control select2_road AgInput_2" id="road_Ag12" data-index="13" data-input="8">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -290,7 +290,7 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" class="form-control AgInput_2" id="AddressDetail_Ag12" placeholder="ex.108號1樓">
+            <input type="text" class="form-control AgInput_2" id="AddressDetail_Ag12" placeholder="ex.108號1樓" data-input="9">
         </div>
     </div>
 </div>
@@ -308,7 +308,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city select_contact_13 AgInput_2" data-index="14">
+            <select class="custom-select form-control select2_city select_contact_13 AgInput_2" data-index="14" data-input="10">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -316,7 +316,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district select_contact_13 AgInput_2" data-index="14">
+            <select class="custom-select form-control select2_district select_contact_13 AgInput_2" data-index="14" data-input="11">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -324,7 +324,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road select_contact_13 AgInput_2" id="road_contact_Ag12" data-index="14">
+            <select class="custom-select form-control select2_road select_contact_13 AgInput_2" id="road_contact_Ag12" data-index="14" data-input="12">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -334,7 +334,7 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" class="form-control select_contact_13 AgInput_2" id="detailcontact_Ag12" data-index="13" placeholder="ex.108號1樓">
+            <input type="text" class="form-control select_contact_13 AgInput_2" id="detailcontact_Ag12" data-index="13" placeholder="ex.108號1樓" data-input="13">
         </div>
     </div>
 </div>
@@ -346,7 +346,7 @@
 </div>
 <div class="form-group getag3">
     <label class="form-label" for="Name_Ag13">代理人3姓名</label>
-    <input type="text" class="form-control AgInput_3" id="Name_Ag13">
+    <input type="text" class="form-control AgInput_3" id="Name_Ag13" data-input="0">
     <div class="invalid-feedback">
         請輸入代理人姓名
     </div>
@@ -378,15 +378,15 @@
             <div class="input-group-append">
                 <span class="input-group-text">民國</span>
             </div>
-            <input type="number" class="form-control AgInput_3" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_13">
+            <input type="number" class="form-control AgInput_3" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_13" data-input="1">
             <div class="input-group-append">
                 <span class="input-group-text">年</span>
             </div>
-            <input type="number" class="form-control birthdayMonth AgInput_3" max="12" min="1" id="birthdayMonth_13" data-index="13">
+            <input type="number" class="form-control birthdayMonth AgInput_3" max="12" min="1" id="birthdayMonth_13" data-index="13" data-input="2">
             <div class="input-group-append">
                 <span class="input-group-text">月</span>
             </div>
-            <input type="number" class="form-control birthdayDay AgInput_3" max="31" min="1" id="birthdayDay_13" data-index="13">
+            <input type="number" class="form-control birthdayDay AgInput_3" max="31" min="1" id="birthdayDay_13" data-index="13" data-input="3">
             <div class="input-group-append">
                 <span class="input-group-text">日</span>
             </div>
@@ -404,7 +404,7 @@
             </div>
         </div>
     </div>
-    <input type="text" class="form-control inputIDnumber AgInput_3" id="IDnumber_Ag13" data-index="13" pattern="^[A-Z]\d{9}$">
+    <input type="text" class="form-control inputIDnumber AgInput_3" id="IDnumber_Ag13" data-index="13" pattern="^[A-Z]\d{9}$" data-input="4">
     <div class="invalid-feedback">
         請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
     </div>
@@ -412,7 +412,7 @@
 @*連絡電話*@
 <div class="form-group getag3">
     <label class="form-label" for="phonenumber_Ag3">連絡電話</label>
-    <input type="text" class="form-control inputPhoneNumber AgInput_3" id="Phone_Ag13" data-index="13" pattern="^\d{10}$">
+    <input type="text" class="form-control inputPhoneNumber AgInput_3" id="Phone_Ag13" data-index="13" pattern="^\d{10}$" data-input="5">
     <div class="invalid-feedback">
         請輸入連絡電話，並確認格式為【10個數字】
     </div>
@@ -423,7 +423,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city AgInput_3" data-index="15">
+            <select class="custom-select form-control select2_city AgInput_3" data-index="15" data-input="6">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -431,7 +431,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district AgInput_3" data-index="15">
+            <select class="custom-select form-control select2_district AgInput_3" data-index="15" data-input="7">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -439,7 +439,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road AgInput_3" data-index="15" id="road_Ag13">
+            <select class="custom-select form-control select2_road AgInput_3" data-index="15" id="road_Ag13" data-input="8">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -449,7 +449,7 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" class="form-control AgInput_3" id="AddressDetail_Ag13" placeholder="ex.108號1樓">
+            <input type="text" class="form-control AgInput_3" id="AddressDetail_Ag13" placeholder="ex.108號1樓" data-input="9">
         </div>
     </div>
 </div>
@@ -467,7 +467,7 @@
     <span class="text-danger">*</span>
     <div class="row">
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_city select_contact_15 AgInput_3" data-index="16">
+            <select class="custom-select form-control select2_city select_contact_15 AgInput_3" data-index="16" data-input="10">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -475,7 +475,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_district select_contact_15 AgInput_3" data-index="16">
+            <select class="custom-select form-control select2_district select_contact_15 AgInput_3" data-index="16" data-input="11">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -483,7 +483,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road select_contact_15 AgInput_3" data-index="16" id="road_contact_Ag13">
+            <select class="custom-select form-control select2_road select_contact_15 AgInput_3" data-index="16" id="road_contact_Ag13" data-input="12">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -493,7 +493,7 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" class="form-control select_contact_15 AgInput_3" id="detailcontact_Ag13" data-index="15" placeholder="ex.108號1樓">
+            <input type="text" class="form-control select_contact_15 AgInput_3" id="detailcontact_Ag13" data-index="15" placeholder="ex.108號1樓" data-input="13">
         </div>
     </div>
 </div>

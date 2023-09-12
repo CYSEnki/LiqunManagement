@@ -243,7 +243,9 @@ namespace LiqunManagement.ViewModels
         public string ContactAddressDetail { get; set; }//通訊地址細節
         public string accountNo { get; set; }           //戶號
         public string MemberArray { get; set; }         //人數陣列[配偶, 直系, 代理人, 保證人]
+        public string CoupleCount { get; set; }
         public string Couple { get; set; }
+        public string DirectCount { get; set; }
         public string Family1 { get; set; }
         public string Family2 { get; set; }
         public string Family3 { get; set; }
@@ -254,9 +256,11 @@ namespace LiqunManagement.ViewModels
         public string Family8 { get; set; }
         public string Family9 { get; set; }
         public string Family10 { get; set; }
+        public string AgentCount { get; set; }
         public string Agent1 { get; set; }
         public string Agent2 { get; set; }
         public string Agent3 { get; set; }
+        public string GuarantorCount { get; set; }
         public string Guarantor1 { get; set; }
         public string Guarantor2 { get; set; }
         public string Guarantor3 { get; set; }
@@ -272,6 +276,39 @@ namespace LiqunManagement.ViewModels
         public string TeAddress_Road { get; set; }
         public string TeContact_District { get; set; }
         public string TeContact_Road { get; set; }
+
+
+        //代理人一
+        public string AgAddress1_District { get; set; }
+        public string AgAddress1_Road { get; set; }
+        public string AgContact1_District { get; set; }
+        public string AgContact1_Road { get; set; }
+        //代理人二
+        public string AgAddress2_District { get; set; }
+        public string AgAddress2_Road { get; set; }
+        public string AgContact2_District { get; set; }
+        public string AgContact2_Road { get; set; }
+        //代理人三
+        public string AgAddress3_District { get; set; }
+        public string AgAddress3_Road { get; set; }
+        public string AgContact3_District { get; set; }
+        public string AgContact3_Road { get; set; }
+
+        //保證人一
+        public string GuAddress1_District { get; set; }
+        public string GuAddress1_Road { get; set; }
+        public string GuContact1_District { get; set; }
+        public string GuContact1_Road { get; set; }
+        //保證人二
+        public string GuAddress2_District { get; set; }
+        public string GuAddress2_Road { get; set; }
+        public string GuContact2_District { get; set; }
+        public string GuContact2_Road { get; set; }
+        //保證人三
+        public string GuAddress3_District { get; set; }
+        public string GuAddress3_Road { get; set; }
+        public string GuContact3_District { get; set; }
+        public string GuContact3_Road { get; set; }
     }
     #endregion
 

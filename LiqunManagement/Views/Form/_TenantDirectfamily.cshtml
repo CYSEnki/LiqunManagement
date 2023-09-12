@@ -6,7 +6,7 @@
 <div class="form-group directformgroup" data-order="1">
     <div class="row">
         <div class="col-6 col-md-4 pt-3">
-            <select class="custom-select form-control select_direct directInput_1" id="shipSelect_1" data-order="1">
+            <select class="custom-select form-control select_direct directInput_1" id="shipSelect_1" data-order="1" data-input="0">
                 <option value="" selected=""></option>
             </select>
             <div class="invalid-feedback">
@@ -19,14 +19,6 @@
                 <label class="custom-control-label" for="international_Direct_IDnumber1">外籍</label>
             </div>
         </div>
-        @*<div class="col-6 col-md-4 pt-3">
-                <div class="input-group">
-                    <input id="separatenumber" name="separatenumber" type="text" placeholder="填寫親屬關係" class="form-control elseship" data-order="1" disabled>
-                    <div class="invalid-feedback">
-                        請填寫親屬關係
-                    </div>
-                </div>
-            </div>*@
     </div>
     <div class="form-group">
         <label class="form-label pt-3" for="Name_Di1">基本資料</label>
@@ -35,11 +27,11 @@
                 <div class="input-group-append">
                     <span class="input-group-text">姓名</span>
                 </div>
-                <input type="text" class="form-control directInput_1" id="Name_Di1">
+                <input type="text" class="form-control directInput_1" id="Name_Di1" data-input="1">
                 <div class="input-group-append">
                     <span class="input-group-text">身分證</span>
                 </div>
-                <input type="text" class="form-control inputIDnumber directInput_1" id="IDnumber_Di1" data-index="1" data-order="1" pattern="^[A-Z]\d{9}$">
+                <input type="text" class="form-control inputIDnumber directInput_1" id="IDnumber_Di1" data-index="1" data-order="1" pattern="^[A-Z]\d{9}$" data-input="2">
             </div>
         </div>
         <div class="form-group pt-3">
@@ -49,15 +41,15 @@
                     <div class="input-group-append">
                         <span class="input-group-text">民國</span>
                     </div>
-                    <input type="number" class="form-control directInput_1" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_1">
+                    <input type="number" class="form-control directInput_1" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_1" data-input="3">
                     <div class="input-group-append">
                         <span class="input-group-text">年</span>
                     </div>
-                    <input type="number" class="form-control birthdayMonth directInput_1" max="12" min="1" id="birthdayMonth_1" data-index="1">
+                    <input type="number" class="form-control birthdayMonth directInput_1" max="12" min="1" id="birthdayMonth_1" data-index="1" data-input="4">
                     <div class="input-group-append">
                         <span class="input-group-text">月</span>
                     </div>
-                    <input type="number" class="form-control birthdayDay directInput_1" max="31" min="1" id="birthdayDay_1" data-index="1">
+                    <input type="number" class="form-control birthdayDay directInput_1" max="31" min="1" id="birthdayDay_1" data-index="1" data-input="5">
                     <div class="input-group-append">
                         <span class="input-group-text">日</span>
                     </div>
@@ -74,7 +66,7 @@
 <div class="form-group directformgroup" data-order="2">
     <div class="row">
         <div class="col-6 col-md-4 pt-3">
-            <select class="custom-select form-control select_direct directInput_2" id="shipSelect_2" data-order="2">
+            <select class="custom-select form-control select_direct directInput_2" id="shipSelect_2" data-order="2" data-input="0">
                 <option value="" selected=""></option>
             </select>
             <div class="invalid-feedback">
@@ -87,14 +79,6 @@
                 <label class="custom-control-label" for="international_Direct_IDnumber2">外籍</label>
             </div>
         </div>
-        @*<div class="col-6 col-md-4 pt-3">
-                <div class="input-group">
-                    <input id="separatenumber" name="separatenumber" type="text" placeholder="填寫親屬關係" class="form-control elseship" data-order="2" disabled>
-                    <div class="invalid-feedback">
-                        請填寫親屬關係
-                    </div>
-                </div>
-            </div>*@
     </div>
     <label class="form-label pt-3" for="Name_Di2">基本資料</label>
     <div class="col-md-10 col-lg-6 pl-0">
@@ -102,11 +86,11 @@
             <div class="input-group-append">
                 <span class="input-group-text">姓名</span>
             </div>
-            <input type="text" class="form-control directInput_2" id="Name_Di2">
+            <input type="text" class="form-control directInput_2" id="Name_Di2" data-input="1">
             <div class="input-group-append">
                 <span class="input-group-text">身分證</span>
             </div>
-            <input type="text" class="form-control inputIDnumber directInput_2" id="IDnumber_Di2" data-index="2" data-order="2" pattern="^[A-Z]\d{9}$">
+            <input type="text" class="form-control inputIDnumber directInput_2" id="IDnumber_Di2" data-index="2" data-order="2" pattern="^[A-Z]\d{9}$" data-input="2">
         </div>
     </div>
     <div class="form-group pt-3">
@@ -116,15 +100,15 @@
                 <div class="input-group-append">
                     <span class="input-group-text">民國</span>
                 </div>
-                <input type="number" class="form-control directInput_2" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_2">
+                <input type="number" class="form-control directInput_2" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_2" data-input="3">
                 <div class="input-group-append">
                     <span class="input-group-text">年</span>
                 </div>
-                <input type="number" class="form-control birthdayMonth directInput_2" max="12" min="1" id="birthdayMonth_2" data-index="2">
+                <input type="number" class="form-control birthdayMonth directInput_2" max="12" min="1" id="birthdayMonth_2" data-index="2" data-input="4">
                 <div class="input-group-append">
                     <span class="input-group-text">月</span>
                 </div>
-                <input type="number" class="form-control birthdayDay directInput_2" max="31" min="1" id="birthdayDay_2" data-index="2">
+                <input type="number" class="form-control birthdayDay directInput_2" max="31" min="1" id="birthdayDay_2" data-index="2" data-input="5">
                 <div class="input-group-append">
                     <span class="input-group-text">日</span>
                 </div>
@@ -140,7 +124,7 @@
 <div class="form-group directformgroup" data-order="3">
     <div class="row">
         <div class="col-6 col-md-4 pt-3">
-            <select class="custom-select form-control select_direct directInput_3" id="shipSelect_3" data-order="3">
+            <select class="custom-select form-control select_direct directInput_3" id="shipSelect_3" data-order="3" data-input="0">
                 <option value="" selected=""></option>
             </select>
             <div class="invalid-feedback">
@@ -153,14 +137,6 @@
                 <label class="custom-control-label" for="international_Direct_IDnumber3">外籍</label>
             </div>
         </div>
-        @*<div class="col-6 col-md-4 pt-3">
-                <div class="input-group">
-                    <input id="separatenumber" name="separatenumber" type="text" placeholder="填寫親屬關係" class="form-control elseship" data-order="3" disabled>
-                    <div class="invalid-feedback">
-                        請填寫親屬關係
-                    </div>
-                </div>
-            </div>*@
     </div>
     <label class="form-label pt-3" for="Name_Di3">基本資料</label>
     <div class="col-md-10 col-lg-6 pl-0">
@@ -168,11 +144,11 @@
             <div class="input-group-append">
                 <span class="input-group-text">姓名</span>
             </div>
-            <input type="text" class="form-control directInput_3" id="Name_Di3">
+            <input type="text" class="form-control directInput_3" id="Name_Di3" data-input="1">
             <div class="input-group-append">
                 <span class="input-group-text">身分證</span>
             </div>
-            <input type="text" class="form-control inputIDnumber directInput_3" id="IDnumber_Di3" data-index="3" data-order="3" pattern="^[A-Z]\d{9}$">
+            <input type="text" class="form-control inputIDnumber directInput_3" id="IDnumber_Di3" data-index="3" data-order="3" pattern="^[A-Z]\d{9}$" data-input="2">
         </div>
     </div>
     <div class="form-group pt-3">
@@ -182,15 +158,15 @@
                 <div class="input-group-append">
                     <span class="input-group-text">民國</span>
                 </div>
-                <input type="number" class="form-control directInput_3" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_3">
+                <input type="number" class="form-control directInput_3" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_3" data-input="3">
                 <div class="input-group-append">
                     <span class="input-group-text">年</span>
                 </div>
-                <input type="number" class="form-control birthdayMonth directInput_3" max="12" min="1" id="birthdayMonth_3" data-index="3">
+                <input type="number" class="form-control birthdayMonth directInput_3" max="12" min="1" id="birthdayMonth_3" data-index="3" data-input="4">
                 <div class="input-group-append">
                     <span class="input-group-text">月</span>
                 </div>
-                <input type="number" class="form-control birthdayDay directInput_3" max="31" min="1" id="birthdayDay_3" data-index="3">
+                <input type="number" class="form-control birthdayDay directInput_3" max="31" min="1" id="birthdayDay_3" data-index="3" data-input="5">
                 <div class="input-group-append">
                     <span class="input-group-text">日</span>
                 </div>
@@ -206,7 +182,7 @@
 <div class="form-group directformgroup" data-order="4">
     <div class="row">
         <div class="col-6 col-md-4 pt-3">
-            <select class="custom-select form-control select_direct directInput_4" id="shipSelect_4" data-order="4">
+            <select class="custom-select form-control select_direct directInput_4" id="shipSelect_4" data-order="4" data-input="0">
                 <option value="" selected=""></option>
             </select>
             <div class="invalid-feedback">
@@ -219,14 +195,6 @@
                 <label class="custom-control-label" for="international_Direct_IDnumber4">外籍</label>
             </div>
         </div>
-        @*<div class="col-6 col-md-4 pt-3">
-                <div class="input-group">
-                    <input id="separatenumber" name="separatenumber" type="text" placeholder="填寫親屬關係" class="form-control elseship" data-order="4" disabled>
-                    <div class="invalid-feedback">
-                        請填寫親屬關係
-                    </div>
-                </div>
-            </div>*@
     </div>
     <label class="form-label pt-3" for="Name_Di4">基本資料</label>
     <div class="col-md-10 col-lg-6 pl-0">
@@ -234,11 +202,11 @@
             <div class="input-group-append">
                 <span class="input-group-text">姓名</span>
             </div>
-            <input type="text" class="form-control directInput_4" id="Name_Di4">
+            <input type="text" class="form-control directInput_4" id="Name_Di4" data-input="1">
             <div class="input-group-append">
                 <span class="input-group-text">身分證</span>
             </div>
-            <input type="text" class="form-control inputIDnumber directInput_4" id="IDnumber_Di4" data-index="4" data-order="4" pattern="^[A-Z]\d{9}$">
+            <input type="text" class="form-control inputIDnumber directInput_4" id="IDnumber_Di4" data-index="4" data-order="4" pattern="^[A-Z]\d{9}$" data-input="2">
         </div>
     </div>
     <div class="form-group pt-3">
@@ -248,15 +216,15 @@
                 <div class="input-group-append">
                     <span class="input-group-text">民國</span>
                 </div>
-                <input type="number" class="form-control directInput_4" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_4">
+                <input type="number" class="form-control directInput_4" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_4" data-input="3">
                 <div class="input-group-append">
                     <span class="input-group-text">年</span>
                 </div>
-                <input type="number" class="form-control birthdayMonth directInput_4" max="12" min="1" id="birthdayMonth_4" data-index="4">
+                <input type="number" class="form-control birthdayMonth directInput_4" max="12" min="1" id="birthdayMonth_4" data-index="4" data-input="4">
                 <div class="input-group-append">
                     <span class="input-group-text">月</span>
                 </div>
-                <input type="number" class="form-control birthdayDay directInput_4" max="31" min="1" id="birthdayDay_4" data-index="4">
+                <input type="number" class="form-control birthdayDay directInput_4" max="31" min="1" id="birthdayDay_4" data-index="4" data-input="5">
                 <div class="input-group-append">
                     <span class="input-group-text">日</span>
                 </div>
@@ -272,7 +240,7 @@
 <div class="form-group directformgroup" data-order="5">
     <div class="row">
         <div class="col-6 col-md-4 pt-3">
-            <select class="custom-select form-control select_direct directInput_5" id="shipSelect_5" data-order="5">
+            <select class="custom-select form-control select_direct directInput_5" id="shipSelect_5" data-order="5" data-input="0">
                 <option value="" selected=""></option>
             </select>
             <div class="invalid-feedback">
@@ -285,14 +253,6 @@
                 <label class="custom-control-label" for="international_Direct_IDnumber5">外籍</label>
             </div>
         </div>
-        @*<div class="col-6 col-md-4 pt-3">
-                <div class="input-group">
-                    <input id="separatenumber" name="separatenumber" type="text" placeholder="填寫親屬關係" class="form-control elseship" data-order="5" disabled>
-                    <div class="invalid-feedback">
-                        請填寫親屬關係
-                    </div>
-                </div>
-            </div>*@
     </div>
     <label class="form-label pt-3" for="Name_Di5">基本資料</label>
     <div class="col-md-10 col-lg-6 pl-0">
@@ -300,11 +260,11 @@
             <div class="input-group-append">
                 <span class="input-group-text">姓名</span>
             </div>
-            <input type="text" class="form-control directInput_5" id="Name_Di5">
+            <input type="text" class="form-control directInput_5" id="Name_Di5" data-input="1">
             <div class="input-group-append">
                 <span class="input-group-text">身分證</span>
             </div>
-            <input type="text" class="form-control inputIDnumber directInput_5" id="IDnumber_Di5" data-index="5" data-order="5" pattern="^[A-Z]\d{9}$">
+            <input type="text" class="form-control inputIDnumber directInput_5" id="IDnumber_Di5" data-index="5" data-order="5" pattern="^[A-Z]\d{9}$" data-input="2">
         </div>
     </div>
     <div class="form-group pt-3">
@@ -314,15 +274,15 @@
                 <div class="input-group-append">
                     <span class="input-group-text">民國</span>
                 </div>
-                <input type="number" class="form-control directInput_5" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_5">
+                <input type="number" class="form-control directInput_5" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_5" data-input="3">
                 <div class="input-group-append">
                     <span class="input-group-text">年</span>
                 </div>
-                <input type="number" class="form-control birthdayMonth directInput_5" max="12" min="1" id="birthdayMonth_5" data-index="5">
+                <input type="number" class="form-control birthdayMonth directInput_5" max="12" min="1" id="birthdayMonth_5" data-index="5" data-input="4">
                 <div class="input-group-append">
                     <span class="input-group-text">月</span>
                 </div>
-                <input type="number" class="form-control birthdayDay directInput_5" max="31" min="1" id="birthdayDay_5" data-index="5">
+                <input type="number" class="form-control birthdayDay directInput_5" max="31" min="1" id="birthdayDay_5" data-index="5" data-input="5">
                 <div class="input-group-append">
                     <span class="input-group-text">日</span>
                 </div>
@@ -338,7 +298,7 @@
 <div class="form-group directformgroup" data-order="6">
     <div class="row">
         <div class="col-6 col-md-4 pt-3">
-            <select class="custom-select form-control select_direct directInput_6" id="shipSelect_6" data-order="6">
+            <select class="custom-select form-control select_direct directInput_6" id="shipSelect_6" data-order="6" data-input="0">
                 <option value="" selected=""></option>
             </select>
             <div class="invalid-feedback">
@@ -351,14 +311,6 @@
                 <label class="custom-control-label" for="international_Direct_IDnumber6">外籍</label>
             </div>
         </div>
-        @*<div class="col-6 col-md-4 pt-3">
-                <div class="input-group">
-                    <input id="separatenumber" name="separatenumber" type="text" placeholder="填寫親屬關係" class="form-control elseship" data-order="6" disabled>
-                    <div class="invalid-feedback">
-                        請填寫親屬關係
-                    </div>
-                </div>
-            </div>*@
     </div>
     <label class="form-label pt-3" for="Name_Di6">基本資料</label>
     <div class="col-md-10 col-lg-6 pl-0">
@@ -366,11 +318,11 @@
             <div class="input-group-append">
                 <span class="input-group-text">姓名</span>
             </div>
-            <input type="text" class="form-control directInput_6" id="Name_Di6">
+            <input type="text" class="form-control directInput_6" id="Name_Di6" data-input="1">
             <div class="input-group-append">
                 <span class="input-group-text">身分證</span>
             </div>
-            <input type="text" class="form-control inputIDnumber directInput_6" id="IDnumber_Di6" data-index="6" data-order="6" pattern="^[A-Z]\d{9}$">
+            <input type="text" class="form-control inputIDnumber directInput_6" id="IDnumber_Di6" data-index="6" data-order="6" pattern="^[A-Z]\d{9}$" data-input="2">
         </div>
     </div>
     <div class="form-group pt-3">
@@ -380,15 +332,15 @@
                 <div class="input-group-append">
                     <span class="input-group-text">民國</span>
                 </div>
-                <input type="number" class="form-control directInput_6" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_6">
+                <input type="number" class="form-control directInput_6" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_6" data-input="3">
                 <div class="input-group-append">
                     <span class="input-group-text">年</span>
                 </div>
-                <input type="number" class="form-control birthdayMonth directInput_6" max="12" min="1" id="birthdayMonth_6" data-index="6">
+                <input type="number" class="form-control birthdayMonth directInput_6" max="12" min="1" id="birthdayMonth_6" data-index="6" data-input="4">
                 <div class="input-group-append">
                     <span class="input-group-text">月</span>
                 </div>
-                <input type="number" class="form-control birthdayDay directInput_6" max="31" min="1" id="birthdayDay_6" data-index="6">
+                <input type="number" class="form-control birthdayDay directInput_6" max="31" min="1" id="birthdayDay_6" data-index="6" data-input="5">
                 <div class="input-group-append">
                     <span class="input-group-text">日</span>
                 </div>
@@ -404,7 +356,7 @@
 <div class="form-group directformgroup" data-order="7">
     <div class="row">
         <div class="col-6 col-md-4 pt-3">
-            <select class="custom-select form-control select_direct directInput_7" id="shipSelect_7" data-order="7">
+            <select class="custom-select form-control select_direct directInput_7" id="shipSelect_7" data-order="7" data-input="0">
                 <option value="" selected=""></option>
             </select>
             <div class="invalid-feedback">
@@ -417,14 +369,6 @@
                 <label class="custom-control-label" for="international_Direct_IDnumber7">外籍</label>
             </div>
         </div>
-        @*<div class="col-6 col-md-4 pt-3">
-                <div class="input-group">
-                    <input id="separatenumber" name="separatenumber" type="text" placeholder="填寫親屬關係" class="form-control elseship" data-order="7" disabled>
-                    <div class="invalid-feedback">
-                        請填寫親屬關係
-                    </div>
-                </div>
-            </div>*@
     </div>
     <label class="form-label pt-3" for="Name_Di7">基本資料</label>
     <div class="col-md-10 col-lg-6 pl-0">
@@ -432,11 +376,11 @@
             <div class="input-group-append">
                 <span class="input-group-text">姓名</span>
             </div>
-            <input type="text" class="form-control directInput_7" id="Name_Di7">
+            <input type="text" class="form-control directInput_7" id="Name_Di7" data-input="1">
             <div class="input-group-append">
                 <span class="input-group-text">身分證</span>
             </div>
-            <input type="text" class="form-control inputIDnumber directInput_7" id="IDnumber_Di7" data-index="7" data-order="7" pattern="^[A-Z]\d{9}$">
+            <input type="text" class="form-control inputIDnumber directInput_7" id="IDnumber_Di7" data-index="7" data-order="7" pattern="^[A-Z]\d{9}$" data-input="2">
         </div>
     </div>
     <div class="form-group pt-3">
@@ -446,15 +390,15 @@
                 <div class="input-group-append">
                     <span class="input-group-text">民國</span>
                 </div>
-                <input type="number" class="form-control directInput_7" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_7">
+                <input type="number" class="form-control directInput_7" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_7" data-input="3">
                 <div class="input-group-append">
                     <span class="input-group-text">年</span>
                 </div>
-                <input type="number" class="form-control birthdayMonth directInput_7" max="12" min="1" id="birthdayMonth_7" data-index="7">
+                <input type="number" class="form-control birthdayMonth directInput_7" max="12" min="1" id="birthdayMonth_7" data-index="7" data-input="4">
                 <div class="input-group-append">
                     <span class="input-group-text">月</span>
                 </div>
-                <input type="number" class="form-control birthdayDay directInput_7" max="31" min="1" id="birthdayDay_7" data-index="7">
+                <input type="number" class="form-control birthdayDay directInput_7" max="31" min="1" id="birthdayDay_7" data-index="7" data-input="5">
                 <div class="input-group-append">
                     <span class="input-group-text">日</span>
                 </div>
@@ -471,7 +415,7 @@
 
     <div class="row">
         <div class="col-6 col-md-4 pt-3">
-            <select class="custom-select form-control select_direct directInput_8" id="shipSelect_8" data-order="8">
+            <select class="custom-select form-control select_direct directInput_8" id="shipSelect_8" data-order="8" data-input="0">
                 <option value="" selected=""></option>
             </select>
             <div class="invalid-feedback">
@@ -484,14 +428,6 @@
                 <label class="custom-control-label" for="international_Direct_IDnumber8">外籍</label>
             </div>
         </div>
-        @*<div class="col-6 col-md-4 pt-3">
-                <div class="input-group">
-                    <input id="separatenumber" name="separatenumber" type="text" placeholder="填寫親屬關係" class="form-control elseship" data-order="8" disabled>
-                    <div class="invalid-feedback">
-                        請填寫親屬關係
-                    </div>
-                </div>
-            </div>*@
     </div>
     <label class="form-label pt-3" for="Name_Di8">基本資料</label>
     <div class="col-md-10 col-lg-6 pl-0">
@@ -499,11 +435,11 @@
             <div class="input-group-append">
                 <span class="input-group-text">姓名</span>
             </div>
-            <input type="text" class="form-control directInput_8" id="Name_Di8">
+            <input type="text" class="form-control directInput_8" id="Name_Di8" data-input="1">
             <div class="input-group-append">
                 <span class="input-group-text">身分證</span>
             </div>
-            <input type="text" class="form-control inputIDnumber directInput_8" id="IDnumber_Di8" data-index="8" data-order="8" pattern="^[A-Z]\d{9}$">
+            <input type="text" class="form-control inputIDnumber directInput_8" id="IDnumber_Di8" data-index="8" data-order="8" pattern="^[A-Z]\d{9}$" data-input="2">
         </div>
     </div>
     <div class="form-group pt-3">
@@ -513,15 +449,15 @@
                 <div class="input-group-append">
                     <span class="input-group-text">民國</span>
                 </div>
-                <input type="number" class="form-control directInput_8" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_8">
+                <input type="number" class="form-control directInput_8" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_8" data-input="3">
                 <div class="input-group-append">
                     <span class="input-group-text">年</span>
                 </div>
-                <input type="number" class="form-control birthdayMonth directInput_8" max="12" min="1" id="birthdayMonth_8" data-index="8">
+                <input type="number" class="form-control birthdayMonth directInput_8" max="12" min="1" id="birthdayMonth_8" data-index="8" data-input="4">
                 <div class="input-group-append">
                     <span class="input-group-text">月</span>
                 </div>
-                <input type="number" class="form-control birthdayDay directInput_8" max="31" min="1" id="birthdayDay_8" data-index="8">
+                <input type="number" class="form-control birthdayDay directInput_8" max="31" min="1" id="birthdayDay_8" data-index="8" data-input="5">
                 <div class="input-group-append">
                     <span class="input-group-text">日</span>
                 </div>
@@ -538,7 +474,7 @@
 
     <div class="row">
         <div class="col-6 col-md-4 pt-3">
-            <select class="custom-select form-control select_direct directInput_9" id="shipSelect_9" data-order="9">
+            <select class="custom-select form-control select_direct directInput_9" id="shipSelect_9" data-order="9" data-input="0">
                 <option value="" selected=""></option>
             </select>
             <div class="invalid-feedback">
@@ -551,14 +487,6 @@
                 <label class="custom-control-label" for="international_Direct_IDnumber9">外籍</label>
             </div>
         </div>
-        @*<div class="col-6 col-md-4 pt-3">
-                <div class="input-group">
-                    <input id="separatenumber" name="separatenumber" type="text" placeholder="填寫親屬關係" class="form-control elseship" data-order="9" disabled>
-                    <div class="invalid-feedback">
-                        請填寫親屬關係
-                    </div>
-                </div>
-            </div>*@
     </div>
     <label class="form-label pt-3" for="Name_Di9">基本資料</label>
     <div class="col-md-10 col-lg-6 pl-0">
@@ -566,11 +494,11 @@
             <div class="input-group-append">
                 <span class="input-group-text">姓名</span>
             </div>
-            <input type="text" class="form-control directInput_9" id="Name_Di9">
+            <input type="text" class="form-control directInput_9" id="Name_Di9" data-input="1">
             <div class="input-group-append">
                 <span class="input-group-text">身分證</span>
             </div>
-            <input type="text" class="form-control inputIDnumber directInput_9" id="IDnumber_Di9" data-index="9" data-order="9" pattern="^[A-Z]\d{9}$">
+            <input type="text" class="form-control inputIDnumber directInput_9" id="IDnumber_Di9" data-index="9" data-order="9" pattern="^[A-Z]\d{9}$" data-input="2">
         </div>
     </div>
     <div class="form-group pt-3">
@@ -580,15 +508,15 @@
                 <div class="input-group-append">
                     <span class="input-group-text">民國</span>
                 </div>
-                <input type="number" class="form-control directInput_9" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_9">
+                <input type="number" class="form-control directInput_9" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_9" data-input="3">
                 <div class="input-group-append">
                     <span class="input-group-text">年</span>
                 </div>
-                <input type="number" class="form-control birthdayMonth directInput_9" max="12" min="1" id="birthdayMonth_9" data-index="9">
+                <input type="number" class="form-control birthdayMonth directInput_9" max="12" min="1" id="birthdayMonth_9" data-index="9" data-input="4">
                 <div class="input-group-append">
                     <span class="input-group-text">月</span>
                 </div>
-                <input type="number" class="form-control birthdayDay directInput_9" max="31" min="1" id="birthdayDay_9" data-index="9">
+                <input type="number" class="form-control birthdayDay directInput_9" max="31" min="1" id="birthdayDay_9" data-index="9" data-input="5">
                 <div class="input-group-append">
                     <span class="input-group-text">日</span>
                 </div>
@@ -605,7 +533,7 @@
 
     <div class="row">
         <div class="col-6 col-md-4 pt-3">
-            <select class="custom-select form-control select_direct directInput_10" id="shipSelect_10" data-order="10">
+            <select class="custom-select form-control select_direct directInput_10" id="shipSelect_10" data-order="10" data-input="0">
                 <option value="" selected=""></option>
             </select>
             <div class="invalid-feedback">
@@ -618,14 +546,6 @@
                 <label class="custom-control-label" for="international_Direct_IDnumber10">外籍</label>
             </div>
         </div>
-        @*<div class="col-6 col-md-4 pt-3">
-                <div class="input-group">
-                    <input id="separatenumber" name="separatenumber" type="text" placeholder="填寫親屬關係" class="form-control elseship" data-order="10" disabled>
-                    <div class="invalid-feedback">
-                        請填寫親屬關係
-                    </div>
-                </div>
-            </div>*@
     </div>
     <label class="form-label pt-3" for="Name_Di10">基本資料</label>
     <div class="col-md-10 col-lg-6 pl-0">
@@ -633,11 +553,11 @@
             <div class="input-group-append">
                 <span class="input-group-text">姓名</span>
             </div>
-            <input type="text" class="form-control directInput_10" id="Name_Di10">
+            <input type="text" class="form-control directInput_10" id="Name_Di10" data-input="1">
             <div class="input-group-append">
                 <span class="input-group-text">身分證</span>
             </div>
-            <input type="text" class="form-control inputIDnumber directInput_10" id="IDnumber_Di10" data-index="10" data-order="10" pattern="^[A-Z]\d{9}$">
+            <input type="text" class="form-control inputIDnumber directInput_10" id="IDnumber_Di10" data-index="10" data-order="10" pattern="^[A-Z]\d{9}$" data-input="2">
         </div>
     </div>
     <div class="form-group pt-3">
@@ -647,15 +567,15 @@
                 <div class="input-group-append">
                     <span class="input-group-text">民國</span>
                 </div>
-                <input type="number" class="form-control directInput_10" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_10">
+                <input type="number" class="form-control directInput_10" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_10" data-input="3">
                 <div class="input-group-append">
                     <span class="input-group-text">年</span>
                 </div>
-                <input type="number" class="form-control birthdayMonth directInput_10" max="12" min="1" id="birthdayMonth_10" data-index="10">
+                <input type="number" class="form-control birthdayMonth directInput_10" max="12" min="1" id="birthdayMonth_10" data-index="10" data-input="4">
                 <div class="input-group-append">
                     <span class="input-group-text">月</span>
                 </div>
-                <input type="number" class="form-control birthdayDay directInput_10" max="31" min="1" id="birthdayDay_10" data-index="10">
+                <input type="number" class="form-control birthdayDay directInput_10" max="31" min="1" id="birthdayDay_10" data-index="10" data-input="5">
                 <div class="input-group-append">
                     <span class="input-group-text">日</span>
                 </div>
