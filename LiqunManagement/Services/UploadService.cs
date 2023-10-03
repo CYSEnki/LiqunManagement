@@ -54,7 +54,6 @@ namespace LiqunManagement.Services
         }
         #endregion
 
-
         #region 匯入陣列資料_臺灣地址
         public void InsertBank(BankViewModel BaankData)
         {

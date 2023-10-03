@@ -1,0 +1,168 @@
+2023-09-22 00:12:37.5660 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-22 00:13:11.4922 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-22 00:13:25.6517 INFO 房屋物件資料頁面送出編輯，ControllerName:Sales
+2023-09-22 00:13:26.1649 INFO 開始存檔
+2023-09-22 00:13:26.1649 INFO 進入Service
+2023-09-22 00:13:29.1480 INFO 找到檔案資料 fileName : Gryffindor.jpg
+2023-09-22 00:13:31.5831 INFO 合成路徑 FilePath : Form
+2023-09-22 00:13:33.2898 INFO 存檔完成，執行變更FileLog
+2023-09-22 00:13:49.8074 INFO 找到檔案資料 fileName : Hufflepuff.jpg
+2023-09-22 00:13:59.9379 INFO 合成路徑 FilePath : Form
+2023-09-22 00:14:01.5549 INFO 存檔完成，執行變更FileLog
+2023-09-22 00:14:02.7573 INFO 回傳filemodel
+2023-09-22 00:14:02.7573 INFO 存檔成功 filemodelLiqunManagement.ViewModels.FileViewMode
+2023-09-22 00:37:37.6364 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-22 00:37:52.8173 INFO 房屋物件資料頁面送出編輯，ControllerName:Sales
+2023-09-22 00:37:53.3254 INFO 開始存檔
+2023-09-22 00:37:53.3254 INFO 進入Service
+2023-09-22 00:37:57.1557 INFO 找到檔案資料 fileName : Gryffindor.jpg
+2023-09-22 00:37:57.1557 INFO 合成路徑 FilePath : Form
+2023-09-22 00:37:57.1597 INFO 存檔完成，執行變更FileLog
+2023-09-22 00:37:57.6157 INFO 找到檔案資料 fileName : Hufflepuff.jpg
+2023-09-22 00:37:57.6157 INFO 合成路徑 FilePath : Form
+2023-09-22 00:37:57.6157 INFO 存檔完成，執行變更FileLog
+2023-09-22 00:37:58.0534 INFO 找到檔案資料 fileName : Ravenclaw.jpg
+2023-09-22 00:37:58.0534 INFO 合成路徑 FilePath : Form
+2023-09-22 00:37:58.0534 INFO 存檔完成，執行變更FileLog
+2023-09-22 00:37:58.4976 INFO 找到檔案資料 fileName : Slytherin.jpg
+2023-09-22 00:37:58.4976 INFO 合成路徑 FilePath : Form
+2023-09-22 00:37:58.4976 INFO 存檔完成，執行變更FileLog
+2023-09-22 00:37:58.9506 INFO 回傳filemodel
+2023-09-22 00:37:58.9506 INFO 存檔成功 filemodelLiqunManagement.ViewModels.FileViewMode
+2023-09-22 00:38:06.2424 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-22 00:39:34.8198 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-22 00:40:13.7528 INFO 房屋物件資料頁面送出編輯，ControllerName:Sales
+2023-09-22 00:40:14.2650 INFO 開始存檔
+2023-09-22 00:40:14.2650 INFO 進入Service
+2023-09-22 00:40:14.4265 INFO 找到檔案資料 fileName : Gryffindor.jpg
+2023-09-22 00:40:14.4265 INFO 合成路徑 FilePath : Form
+2023-09-22 00:40:14.4265 INFO 存檔完成，執行變更FileLog
+2023-09-22 00:40:14.8679 INFO 找到檔案資料 fileName : Hufflepuff.jpg
+2023-09-22 00:40:14.8679 INFO 合成路徑 FilePath : Form
+2023-09-22 00:40:14.8679 INFO 存檔完成，執行變更FileLog
+2023-09-22 00:40:15.3056 INFO 找到檔案資料 fileName : Ravenclaw.jpg
+2023-09-22 00:40:15.3056 INFO 合成路徑 FilePath : Form
+2023-09-22 00:40:15.3056 INFO 存檔完成，執行變更FileLog
+2023-09-22 00:40:15.7422 INFO 找到檔案資料 fileName : Slytherin.jpg
+2023-09-22 00:40:15.7422 INFO 合成路徑 FilePath : Form
+2023-09-22 00:40:15.7422 INFO 存檔完成，執行變更FileLog
+2023-09-22 00:40:16.1785 INFO 回傳filemodel
+2023-09-22 00:40:16.1785 INFO 存檔成功 filemodelLiqunManagement.ViewModels.FileViewMode
+2023-09-22 00:40:21.7688 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-22 02:15:15.0689 INFO 找到檔案資料 fileName : Slytherin.jpg
+2023-09-22 02:15:15.0901 INFO 合成路徑 FilePath : Paperwork
+2023-09-22 02:15:15.0901 INFO 存檔完成，執行變更FileLog
+2023-09-22 02:15:15.6474 INFO 找到檔案資料 fileName : Ravenclaw.jpg
+2023-09-22 02:15:15.6474 INFO 合成路徑 FilePath : Paperwork
+2023-09-22 02:15:15.6474 INFO 存檔完成，執行變更FileLog
+2023-09-22 02:15:16.8195 INFO 找到檔案資料 fileName : Hufflepuff.jpg
+2023-09-22 02:15:16.8195 INFO 合成路徑 FilePath : Paperwork
+2023-09-22 02:15:16.8195 INFO 存檔完成，執行變更FileLog
+2023-09-22 02:43:49.3896 INFO 找到檔案資料 fileName : 1.png
+2023-09-22 02:43:49.4126 INFO 合成路徑 FilePath : Paperwork
+2023-09-22 02:43:49.4126 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:00:46.0660 INFO 找到檔案資料 fileName : 彼岸花.jpg
+2023-09-22 03:00:46.0900 INFO 合成路徑 FilePath : Paperwork
+2023-09-22 03:00:46.0900 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:03:24.4102 INFO 找到檔案資料 fileName : Gryffindor.jpg
+2023-09-22 03:03:24.4102 INFO 合成路徑 FilePath : Paperwork
+2023-09-22 03:03:24.4102 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:03:24.8447 INFO 找到檔案資料 fileName : Hufflepuff.jpg
+2023-09-22 03:03:24.8447 INFO 合成路徑 FilePath : Paperwork
+2023-09-22 03:03:24.8447 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:03:25.3386 INFO 找到檔案資料 fileName : Ravenclaw.jpg
+2023-09-22 03:03:25.3386 INFO 合成路徑 FilePath : Paperwork
+2023-09-22 03:03:25.3386 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:03:25.7793 INFO 找到檔案資料 fileName : Slytherin.jpg
+2023-09-22 03:03:25.7793 INFO 合成路徑 FilePath : Paperwork
+2023-09-22 03:03:25.7793 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:53:03.8724 INFO 找到檔案資料 fileName : 1.png
+2023-09-22 03:53:03.8974 INFO 合成路徑 FilePath : Paperwork
+2023-09-22 03:53:03.8974 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:53:05.4001 INFO 找到檔案資料 fileName : cat.jpg
+2023-09-22 03:53:05.4001 INFO 合成路徑 FilePath : Paperwork
+2023-09-22 03:53:05.4001 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:53:10.5707 INFO 找到檔案資料 fileName : catcat.jpg
+2023-09-22 03:53:10.5707 INFO 合成路徑 FilePath : Paperwork
+2023-09-22 03:53:10.5707 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:53:12.0568 INFO 找到檔案資料 fileName : goast.jpg
+2023-09-22 03:53:12.0568 INFO 合成路徑 FilePath : Paperwork
+2023-09-22 03:53:12.0568 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:53:13.7283 INFO 找到檔案資料 fileName : Gryffindor.jpg
+2023-09-22 03:53:13.7283 INFO 合成路徑 FilePath : Paperwork
+2023-09-22 03:53:13.7283 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:53:15.9754 INFO 找到檔案資料 fileName : Hufflepuff.jpg
+2023-09-22 03:53:15.9754 INFO 合成路徑 FilePath : Paperwork
+2023-09-22 03:53:15.9754 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:53:17.7181 INFO 找到檔案資料 fileName : owl.jpg
+2023-09-22 03:53:17.7181 INFO 合成路徑 FilePath : Paperwork
+2023-09-22 03:53:17.7181 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:53:21.3698 INFO 找到檔案資料 fileName : Ravenclaw.jpg
+2023-09-22 03:53:21.3698 INFO 合成路徑 FilePath : Paperwork
+2023-09-22 03:53:21.3698 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:53:23.4609 INFO 找到檔案資料 fileName : Slytherin.jpg
+2023-09-22 03:53:23.4609 INFO 合成路徑 FilePath : Paperwork
+2023-09-22 03:53:23.4609 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:53:25.0025 INFO 找到檔案資料 fileName : 彼岸花.jpg
+2023-09-22 03:53:25.0025 INFO 合成路徑 FilePath : Paperwork
+2023-09-22 03:53:25.0025 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:53:27.0979 INFO 找到檔案資料 fileName : 1.png
+2023-09-22 03:53:27.0979 INFO 合成路徑 FilePath : House
+2023-09-22 03:53:27.0989 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:53:28.2934 INFO 找到檔案資料 fileName : cat.jpg
+2023-09-22 03:53:28.2934 INFO 合成路徑 FilePath : House
+2023-09-22 03:53:28.2934 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:53:29.3037 INFO 找到檔案資料 fileName : catcat.jpg
+2023-09-22 03:53:29.3037 INFO 合成路徑 FilePath : House
+2023-09-22 03:53:29.3037 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:53:33.6479 INFO 找到檔案資料 fileName : goast.jpg
+2023-09-22 03:53:33.6479 INFO 合成路徑 FilePath : House
+2023-09-22 03:53:33.6479 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:53:34.7781 INFO 找到檔案資料 fileName : Gryffindor.jpg
+2023-09-22 03:53:34.7781 INFO 合成路徑 FilePath : House
+2023-09-22 03:53:34.7781 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:53:36.0249 INFO 找到檔案資料 fileName : Hufflepuff.jpg
+2023-09-22 03:53:36.0249 INFO 合成路徑 FilePath : House
+2023-09-22 03:53:36.0249 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:53:39.3611 INFO 找到檔案資料 fileName : owl.jpg
+2023-09-22 03:53:39.3611 INFO 合成路徑 FilePath : House
+2023-09-22 03:53:39.3611 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:53:40.3990 INFO 找到檔案資料 fileName : Ravenclaw.jpg
+2023-09-22 03:53:40.3990 INFO 合成路徑 FilePath : House
+2023-09-22 03:53:40.3990 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:53:41.7004 INFO 找到檔案資料 fileName : Slytherin.jpg
+2023-09-22 03:53:41.7004 INFO 合成路徑 FilePath : House
+2023-09-22 03:53:41.7004 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:58:35.1286 INFO 找到檔案資料 fileName : Gryffindor.jpg
+2023-09-22 03:58:35.1526 INFO 合成路徑 FilePath : Form
+2023-09-22 03:58:35.1526 INFO 存檔完成，執行變更FileLog
+2023-09-22 03:58:35.6038 INFO 找到檔案資料 fileName : Hufflepuff.jpg
+2023-09-22 03:58:35.6038 INFO 合成路徑 FilePath : Form
+2023-09-22 03:58:35.6038 INFO 存檔完成，執行變更FileLog
+2023-09-22 04:28:32.3092 INFO 找到檔案資料 fileName : cat.jpg
+2023-09-22 04:28:32.3332 INFO 合成路徑 FilePath : Form
+2023-09-22 04:28:32.3332 INFO 存檔完成，執行變更FileLog
+2023-09-22 04:28:32.7841 INFO 找到檔案資料 fileName : catcat.jpg
+2023-09-22 04:28:32.7841 INFO 合成路徑 FilePath : Form
+2023-09-22 04:28:32.7841 INFO 存檔完成，執行變更FileLog
+2023-09-22 04:28:33.2246 INFO 找到檔案資料 fileName : goast.jpg
+2023-09-22 04:28:33.2246 INFO 合成路徑 FilePath : Form
+2023-09-22 04:28:33.2246 INFO 存檔完成，執行變更FileLog
+2023-09-22 04:38:00.5842 INFO 找到檔案資料 fileName : Gryffindor.jpg
+2023-09-22 04:38:00.6052 INFO 合成路徑 FilePath : Form
+2023-09-22 04:38:00.6052 INFO 存檔完成，執行變更FileLog
+2023-09-22 04:38:01.0584 INFO 找到檔案資料 fileName : Hufflepuff.jpg
+2023-09-22 04:38:01.0584 INFO 合成路徑 FilePath : Form
+2023-09-22 04:38:01.0584 INFO 存檔完成，執行變更FileLog
+2023-09-22 04:38:01.4986 INFO 找到檔案資料 fileName : owl.jpg
+2023-09-22 04:38:01.4986 INFO 合成路徑 FilePath : Form
+2023-09-22 04:38:01.4986 INFO 存檔完成，執行變更FileLog
+2023-09-22 04:43:24.6406 INFO 找到檔案資料 fileName : Gryffindor.jpg
+2023-09-22 04:43:24.6636 INFO 合成路徑 FilePath : Form
+2023-09-22 04:43:24.6636 INFO 存檔完成，執行變更FileLog
+2023-09-22 04:43:25.1173 INFO 找到檔案資料 fileName : Hufflepuff.jpg
+2023-09-22 04:43:25.1173 INFO 合成路徑 FilePath : Form
+2023-09-22 04:43:25.1173 INFO 存檔完成，執行變更FileLog
+2023-09-22 04:43:25.5567 INFO 找到檔案資料 fileName : Ravenclaw.jpg
+2023-09-22 04:43:25.5567 INFO 合成路徑 FilePath : Form
+2023-09-22 04:43:25.5567 INFO 存檔完成，執行變更FileLog

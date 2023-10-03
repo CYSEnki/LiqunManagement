@@ -58,7 +58,7 @@ namespace LiqunManagement.Services
         }
         #endregion
 
-        #region 查詢一筆資料
+        #region 查詢一筆職員資料
         private MembersViewModel GetDataByAccount(string Account)
         {
             var AccountData = Memberdb.Members.Where(x => x.Account == Account).FirstOrDefault();
@@ -72,6 +72,7 @@ namespace LiqunManagement.Services
                 Data.Email = AccountData.Email;
                 Data.AuthCode = AccountData.AuthCode;
                 Data.IsAdmin = AccountData.IsAdmin;
+                Data.Role = AccountData.Role;
             }
             else
             {
@@ -192,6 +193,10 @@ namespace LiqunManagement.Services
             if (LoginMember.IsAdmin)
             {
                 Role += ",Admin";
+            }
+            else
+            {
+                Role += "," + LoginMember.Role;
             }
             //回傳最後結果
             return Role;

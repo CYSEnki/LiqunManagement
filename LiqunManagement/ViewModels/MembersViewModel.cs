@@ -40,6 +40,9 @@ namespace LiqunManagement.ViewModels
         //管理者
         public bool IsAdmin { get; set; }
 
+        //角色
+        public string Role { get; set; }
+
         //帳號狀態
         public bool Status { get; set; }
 

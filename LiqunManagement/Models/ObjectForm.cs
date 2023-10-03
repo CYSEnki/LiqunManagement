@@ -28,9 +28,12 @@ namespace LiqunManagement.Models
         [StringLength(30)]
         public string ProcessAccount { get; set; }
 
-        [StringLength(20)]
+        [StringLength(50)]
         public string ProcessName { get; set; }
 
         public int? FormType { get; set; }
+
+        [StringLength(30)]
+        public string AgentAccount { get; set; }
     }
 }

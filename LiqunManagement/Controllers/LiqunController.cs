@@ -38,8 +38,7 @@ namespace LiqunManagement.Controllers
                 ViewBag.Position = EmployeeData.Position;       //使用者職位
             }
             //確認角色
-            var role = User.IsInRole("Admin");
-            //var role2 = User.IsInRole("User");
+            ViewBag.Role = User.IsInRole("Admin") ? "Admin" : User.IsInRole("Agent") ? "Agent" : User.IsInRole("Secretary") ? "Secretary" : "";
             #endregion
 
             return View();

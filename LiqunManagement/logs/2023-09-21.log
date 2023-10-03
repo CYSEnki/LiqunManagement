@@ -1,0 +1,103 @@
+2023-09-21 09:45:16.2129 INFO 匯出Word表單
+2023-09-21 09:45:23.3026 ERROR 匯出失敗 : System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 Xceed.Document.NET.Container.RemoveParagraph(Paragraph paragraph)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 1286
+2023-09-21 09:45:39.4936 INFO 匯出Word表單
+2023-09-21 09:50:08.5159 ERROR 匯出失敗 : System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 Xceed.Document.NET.Container.RemoveParagraph(Paragraph paragraph)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 1286
+2023-09-21 14:01:25.7733 INFO 匯出Word表單
+2023-09-21 14:01:30.6248 ERROR 匯出失敗 : System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 909
+2023-09-21 14:03:25.8738 INFO 匯出Word表單
+2023-09-21 14:04:25.1544 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-09-21 14:04:49.3338 INFO 房屋物件資料頁面送出編輯，ControllerName:Secretary
+2023-09-21 14:04:50.6044 INFO 房屋物件編輯完成，重新導向，ControllerName:Secretary
+2023-09-21 14:04:59.0326 INFO 匯出Word表單
+2023-09-21 14:05:18.1710 INFO 匯出Word表單
+2023-09-21 14:10:24.2496 INFO 匯出Word表單
+2023-09-21 14:11:28.2434 INFO 匯出Word表單
+2023-09-21 14:13:24.6496 INFO 匯出Word表單
+2023-09-21 14:13:28.7468 ERROR 匯出失敗 : System.ArgumentException: '.' (十六進位值 0x00) 是無效的字元。
+   於 System.Xml.XmlEncodedRawTextWriter.WriteElementTextBlock(Char* pSrc, Char* pSrcEnd)
+   於 System.Xml.XmlEncodedRawTextWriter.WriteString(String text)
+   於 System.Xml.XmlWellFormedWriter.WriteString(String text)
+   於 System.Xml.Linq.ElementWriter.WriteElement(XElement e)
+   於 System.Xml.Linq.XElement.WriteTo(XmlWriter writer)
+   於 System.Xml.Linq.XContainer.WriteContentTo(XmlWriter writer)
+   於 System.Xml.Linq.XDocument.WriteTo(XmlWriter writer)
+   於 System.Xml.Linq.XDocument.Save(TextWriter textWriter, SaveOptions options)
+   於 Xceed.Words.NET.DocX.Save(String password)
+   於 Xceed.Document.NET.Document.SaveAs(String filename, String password)
+   於 Xceed.Words.NET.DocX.SaveAs(String filename, String password)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 1364
+2023-09-21 14:15:21.7123 INFO 匯出Word表單
+2023-09-21 14:15:25.8524 ERROR 匯出失敗 : System.ArgumentException: '.' (十六進位值 0x00) 是無效的字元。
+   於 System.Xml.XmlEncodedRawTextWriter.WriteElementTextBlock(Char* pSrc, Char* pSrcEnd)
+   於 System.Xml.XmlEncodedRawTextWriter.WriteString(String text)
+   於 System.Xml.XmlWellFormedWriter.WriteString(String text)
+   於 System.Xml.Linq.ElementWriter.WriteElement(XElement e)
+   於 System.Xml.Linq.XElement.WriteTo(XmlWriter writer)
+   於 System.Xml.Linq.XContainer.WriteContentTo(XmlWriter writer)
+   於 System.Xml.Linq.XDocument.WriteTo(XmlWriter writer)
+   於 System.Xml.Linq.XDocument.Save(TextWriter textWriter, SaveOptions options)
+   於 Xceed.Words.NET.DocX.Save(String password)
+   於 Xceed.Document.NET.Document.SaveAs(String filename, String password)
+   於 Xceed.Words.NET.DocX.SaveAs(String filename, String password)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 1346
+2023-09-21 14:15:34.9346 INFO 匯出Word表單
+2023-09-21 14:15:46.3117 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-09-21 14:17:14.7120 INFO 匯出Word表單
+2023-09-21 14:17:18.3789 ERROR 匯出失敗 : System.ArgumentException: '.' (十六進位值 0x00) 是無效的字元。
+   於 System.Xml.XmlEncodedRawTextWriter.WriteElementTextBlock(Char* pSrc, Char* pSrcEnd)
+   於 System.Xml.XmlEncodedRawTextWriter.WriteString(String text)
+   於 System.Xml.XmlWellFormedWriter.WriteString(String text)
+   於 System.Xml.Linq.ElementWriter.WriteElement(XElement e)
+   於 System.Xml.Linq.XElement.WriteTo(XmlWriter writer)
+   於 System.Xml.Linq.XContainer.WriteContentTo(XmlWriter writer)
+   於 System.Xml.Linq.XDocument.WriteTo(XmlWriter writer)
+   於 System.Xml.Linq.XDocument.Save(TextWriter textWriter, SaveOptions options)
+   於 Xceed.Words.NET.DocX.Save(String password)
+   於 Xceed.Document.NET.Document.SaveAs(String filename, String password)
+   於 Xceed.Words.NET.DocX.SaveAs(String filename, String password)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 1346
+2023-09-21 14:31:40.1062 INFO 匯出Word表單
+2023-09-21 18:56:37.0332 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 18:57:28.5359 INFO 房屋物件資料頁面送出編輯，ControllerName:Sales
+2023-09-21 18:57:29.8320 INFO 房屋物件編輯完成，重新導向，ControllerName:Sales
+2023-09-21 18:58:15.8467 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 18:58:35.6632 INFO 房屋物件資料頁面送出編輯，ControllerName:Sales
+2023-09-21 19:01:48.6049 INFO 房屋物件資料頁面送出編輯，ControllerName:Sales
+2023-09-21 19:02:33.4710 INFO 房屋物件編輯完成，重新導向，ControllerName:Sales
+2023-09-21 19:02:42.1015 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 19:03:11.8146 INFO 房屋物件資料頁面送出編輯，ControllerName:Sales
+2023-09-21 21:08:25.5407 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-09-21 21:08:48.1790 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-09-21 21:09:21.9122 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-09-21 21:09:37.0875 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-09-21 21:10:38.5840 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 21:10:50.9280 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 21:11:05.0843 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 21:13:27.1022 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 21:14:04.0907 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 21:16:57.4854 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 21:17:09.2546 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 21:19:21.3538 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 22:05:13.9422 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 22:07:56.6938 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 22:08:19.7082 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 22:08:45.7506 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 22:09:00.1487 INFO 房屋物件資料頁面送出編輯，ControllerName:Sales
+2023-09-21 22:09:09.3897 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 22:10:18.3342 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 22:13:47.7972 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 22:14:27.3242 INFO 房屋物件資料頁面送出編輯，ControllerName:Sales
+2023-09-21 22:14:33.2833 INFO 房屋物件編輯錯誤，返回initial頁面:
+2023-09-21 22:15:04.2912 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 22:18:31.6836 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 22:19:49.8075 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 22:20:04.3527 INFO 房屋物件資料頁面送出編輯，ControllerName:Sales
+2023-09-21 22:20:13.8088 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 22:24:33.4093 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 22:31:59.3071 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-21 22:52:55.8218 INFO 進入房屋物件資料頁面，ControllerName:Sales

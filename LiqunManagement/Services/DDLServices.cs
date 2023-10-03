@@ -70,11 +70,12 @@ namespace LiqunManagement.Services
                                }).Distinct();
                     break;
                 case "branches":
+                    ///20231003修正，中華郵政的分布代碼全部皆為0021，為了可以區分不同支部，將所有0021加上-Number做區分
                     bankDDL = (from bank in formdb.Bank.Where(x => x.RootCheck == true && x.BankCode == bankcode)
                                select new DDLViewModel
                                {
                                    order = null,
-                                   text = bank.BranchName + bank.BranchCode,
+                                   text = bank.BranchName + (bankcode != "700" ? bank.BranchCode : "0021"),
                                    id = bank.BranchCode,
                                }).Distinct();
                     break;

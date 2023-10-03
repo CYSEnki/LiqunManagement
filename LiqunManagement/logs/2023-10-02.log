@@ -1,0 +1,82 @@
+2023-10-02 20:29:52.2396 INFO 匯出Word表單
+2023-10-02 20:29:56.3370 ERROR 匯出失敗 : System.ArgumentException: '.' (十六進位值 0x00) 是無效的字元。
+   於 System.Xml.XmlEncodedRawTextWriter.InvalidXmlChar(Int32 ch, Char* pDst, Boolean entitize)
+   於 System.Xml.XmlEncodedRawTextWriter.WriteElementTextBlock(Char* pSrc, Char* pSrcEnd)
+   於 System.Xml.XmlEncodedRawTextWriter.WriteString(String text)
+   於 System.Xml.XmlEncodedRawTextWriterIndent.WriteString(String text)
+   於 System.Xml.XmlWellFormedWriter.WriteString(String text)
+   於 System.Xml.Linq.ElementWriter.WriteElement(XElement e)
+   於 System.Xml.Linq.XElement.WriteTo(XmlWriter writer)
+   於 System.Xml.Linq.XContainer.WriteContentTo(XmlWriter writer)
+   於 System.Xml.Linq.XDocument.WriteTo(XmlWriter writer)
+   於 System.Xml.Linq.XDocument.Save(TextWriter textWriter, SaveOptions options)
+   於 Xceed.Words.NET.DocX.Save(String password)
+   於 Xceed.Words.NET.DocX.SaveAs(String filename, String password)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 1423
+2023-10-02 20:30:35.5225 INFO 匯出Word表單
+2023-10-02 20:30:39.5286 ERROR 匯出失敗 : System.ArgumentException: '.' (十六進位值 0x00) 是無效的字元。
+   於 System.Xml.XmlEncodedRawTextWriter.InvalidXmlChar(Int32 ch, Char* pDst, Boolean entitize)
+   於 System.Xml.XmlEncodedRawTextWriter.WriteElementTextBlock(Char* pSrc, Char* pSrcEnd)
+   於 System.Xml.XmlEncodedRawTextWriter.WriteString(String text)
+   於 System.Xml.XmlEncodedRawTextWriterIndent.WriteString(String text)
+   於 System.Xml.XmlWellFormedWriter.WriteString(String text)
+   於 System.Xml.Linq.ElementWriter.WriteElement(XElement e)
+   於 System.Xml.Linq.XElement.WriteTo(XmlWriter writer)
+   於 System.Xml.Linq.XContainer.WriteContentTo(XmlWriter writer)
+   於 System.Xml.Linq.XDocument.WriteTo(XmlWriter writer)
+   於 System.Xml.Linq.XDocument.Save(TextWriter textWriter, SaveOptions options)
+   於 Xceed.Words.NET.DocX.Save(String password)
+   於 Xceed.Words.NET.DocX.SaveAs(String filename, String password)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 1423
+2023-10-02 20:31:03.9222 INFO 匯出Word表單
+2023-10-02 20:31:15.4605 ERROR 匯出失敗 : System.ArgumentException: '.' (十六進位值 0x00) 是無效的字元。
+   於 System.Xml.XmlEncodedRawTextWriter.InvalidXmlChar(Int32 ch, Char* pDst, Boolean entitize)
+   於 System.Xml.XmlEncodedRawTextWriter.WriteElementTextBlock(Char* pSrc, Char* pSrcEnd)
+   於 System.Xml.XmlEncodedRawTextWriter.WriteString(String text)
+   於 System.Xml.XmlEncodedRawTextWriterIndent.WriteString(String text)
+   於 System.Xml.XmlWellFormedWriter.WriteString(String text)
+   於 System.Xml.Linq.ElementWriter.WriteElement(XElement e)
+   於 System.Xml.Linq.XElement.WriteTo(XmlWriter writer)
+   於 System.Xml.Linq.XContainer.WriteContentTo(XmlWriter writer)
+   於 System.Xml.Linq.XDocument.WriteTo(XmlWriter writer)
+   於 System.Xml.Linq.XDocument.Save(TextWriter textWriter, SaveOptions options)
+   於 Xceed.Words.NET.DocX.Save(String password)
+   於 Xceed.Words.NET.DocX.SaveAs(String filename, String password)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 1423
+2023-10-02 20:31:32.1683 INFO 匯出Word表單
+2023-10-02 20:37:53.5676 INFO 匯出Word表單
+2023-10-02 20:38:00.7699 INFO 匯出Word表單
+2023-10-02 20:39:39.7610 ERROR 匯出失敗 : System.ArgumentException: '.' (十六進位值 0x00) 是無效的字元。
+   於 System.Xml.XmlEncodedRawTextWriter.InvalidXmlChar(Int32 ch, Char* pDst, Boolean entitize)
+   於 System.Xml.XmlEncodedRawTextWriter.WriteElementTextBlock(Char* pSrc, Char* pSrcEnd)
+   於 System.Xml.XmlEncodedRawTextWriter.WriteString(String text)
+   於 System.Xml.XmlEncodedRawTextWriterIndent.WriteString(String text)
+   於 System.Xml.XmlWellFormedWriter.WriteString(String text)
+   於 System.Xml.Linq.ElementWriter.WriteElement(XElement e)
+   於 System.Xml.Linq.XElement.WriteTo(XmlWriter writer)
+   於 System.Xml.Linq.XContainer.WriteContentTo(XmlWriter writer)
+   於 System.Xml.Linq.XDocument.WriteTo(XmlWriter writer)
+   於 System.Xml.Linq.XDocument.Save(TextWriter textWriter, SaveOptions options)
+   於 Xceed.Words.NET.DocX.Save(String password)
+   於 Xceed.Words.NET.DocX.SaveAs(String filename, String password)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 1408
+2023-10-02 20:40:30.0369 INFO 匯出Word表單
+2023-10-02 20:40:40.8589 ERROR 匯出失敗 : System.ArgumentException: '.' (十六進位值 0x00) 是無效的字元。
+   於 System.Xml.XmlEncodedRawTextWriter.InvalidXmlChar(Int32 ch, Char* pDst, Boolean entitize)
+   於 System.Xml.XmlEncodedRawTextWriter.WriteElementTextBlock(Char* pSrc, Char* pSrcEnd)
+   於 System.Xml.XmlEncodedRawTextWriter.WriteString(String text)
+   於 System.Xml.XmlEncodedRawTextWriterIndent.WriteString(String text)
+   於 System.Xml.XmlWellFormedWriter.WriteString(String text)
+   於 System.Xml.Linq.ElementWriter.WriteElement(XElement e)
+   於 System.Xml.Linq.XElement.WriteTo(XmlWriter writer)
+   於 System.Xml.Linq.XContainer.WriteContentTo(XmlWriter writer)
+   於 System.Xml.Linq.XDocument.WriteTo(XmlWriter writer)
+   於 System.Xml.Linq.XDocument.Save(TextWriter textWriter, SaveOptions options)
+   於 Xceed.Words.NET.DocX.Save(String password)
+   於 Xceed.Words.NET.DocX.SaveAs(String filename, String password)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID)
+2023-10-02 20:41:03.3914 INFO 匯出Word表單
+2023-10-02 20:41:34.8226 INFO 匯出Word表單
+2023-10-02 20:42:11.2807 INFO 匯出Word表單
+2023-10-02 20:42:34.5064 INFO 匯出Word表單
+2023-10-02 20:45:44.7725 INFO 匯出Word表單

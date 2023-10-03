@@ -17,7 +17,9 @@ namespace LiqunManagement.Models
         public virtual DbSet<LandLord> LandLord { get; set; }
         public virtual DbSet<ObjectForm> ObjectForm { get; set; }
         public virtual DbSet<Region> Region { get; set; }
+        public virtual DbSet<Secretary> Secretary { get; set; }
         public virtual DbSet<Tenant> Tenant { get; set; }
+        public virtual DbSet<FileLog> FileLog { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -73,6 +75,14 @@ namespace LiqunManagement.Models
                 .Property(e => e.Accessory)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<HomeObject>()
+                .Property(e => e.CreateAccount)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<HomeObject>()
+                .Property(e => e.UpdateAccount)
+                .IsUnicode(false);
+
             modelBuilder.Entity<LandLord>()
                 .Property(e => e.FormID)
                 .IsUnicode(false);
@@ -101,6 +111,14 @@ namespace LiqunManagement.Models
                 .Property(e => e.MemberArray)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<LandLord>()
+                .Property(e => e.CreateAccount)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<LandLord>()
+                .Property(e => e.UpdateAccount)
+                .IsUnicode(false);
+
             modelBuilder.Entity<ObjectForm>()
                 .Property(e => e.FormID)
                 .IsUnicode(false);
@@ -117,6 +135,10 @@ namespace LiqunManagement.Models
                 .Property(e => e.ProcessAccount)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<ObjectForm>()
+                .Property(e => e.AgentAccount)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Region>()
                 .Property(e => e.CityCode)
                 .IsUnicode(false);
@@ -127,6 +149,26 @@ namespace LiqunManagement.Models
 
             modelBuilder.Entity<Region>()
                 .Property(e => e.RoadCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Secretary>()
+                .Property(e => e.FormID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Secretary>()
+                .Property(e => e.buildNo)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Secretary>()
+                .Property(e => e.placeNo)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Secretary>()
+                .Property(e => e.CreateAccount)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Secretary>()
+                .Property(e => e.UpdateAccount)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Tenant>()
@@ -167,6 +209,50 @@ namespace LiqunManagement.Models
 
             modelBuilder.Entity<Tenant>()
                 .Property(e => e.MemberArray)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Tenant>()
+                .Property(e => e.CreateAccount)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Tenant>()
+                .Property(e => e.UpdateAccount)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<FileLog>()
+                .Property(e => e.FormID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<FileLog>()
+                .Property(e => e.FileNames)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<FileLog>()
+                .Property(e => e.FileAlias)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<FileLog>()
+                .Property(e => e.FileExtension)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<FileLog>()
+                .Property(e => e.FilePath)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<FileLog>()
+                .Property(e => e.FileNames)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<FileLog>()
+                .Property(e => e.FileNames)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<FileLog>()
+                .Property(e => e.CreateAccount)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<FileLog>()
+                .Property(e => e.UpdateAccount)
                 .IsUnicode(false);
         }
     }

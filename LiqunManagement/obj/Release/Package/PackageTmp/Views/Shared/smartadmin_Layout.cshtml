@@ -17,7 +17,7 @@
     <!-- base css -->
     <link id="vendorsbundle" rel="stylesheet" media="screen, print" href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/vendors.bundle.css">
     @*<link id="appbundle" rel="stylesheet" media="screen, print" href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/app.bundle.css">*@
-    <link id="appbundle" rel="stylesheet" href="https://localhost:44370/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/app.bundle.css">
+    <link id="appbundle" rel="stylesheet" href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/app.bundle.css">
 
     <link id="myskin" rel="stylesheet" media="screen, print" href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/skins/skin-master.css">
 
@@ -66,7 +66,7 @@
 
     >>> more settings are described inside documentation page >>>
 -->
-<body class="mod-bg-1 mod-nav-link header-function-fixed info-card">
+<body class="mod-bg-1 mod-nav-link header-function-fixed info-card nav-function-fixed">
 
     <!-- DOC: script to save and load page settings -->
     <script>
@@ -86,8 +86,8 @@
             themeURL = themeSettings.themeURL || '',
             themeOptions = themeSettings.themeOptions || '';
 
-        console.log("%c初次進入頁面。themeURL: " + themeURL, "color: #ff6600");
-        console.log("%c初次進入頁面。themeOptions: " + themeOptions, "color: #ff6600");
+        //console.log("%c初次進入頁面。themeURL: " + themeURL, "color: #ff6600");
+        //console.log("%c初次進入頁面。themeOptions: " + themeOptions, "color: #ff6600");
 
         /**
          * Load theme options
@@ -120,7 +120,7 @@
         //設定樣式
         console.log("目前使用樣式" + themeSettings.themeURL);
         if (themeSettings.themeURL && !document.getElementById('mytheme')) {
-            console.log("%c重建樣式<link>", "color: #9900ff");
+            //console.log("%c重建樣式<link>", "color: #9900ff");
             var cssfile = document.createElement('link');
             cssfile.id = 'mytheme';
             cssfile.rel = 'stylesheet';

@@ -1,0 +1,104 @@
+2023-09-28 00:00:43.5239 INFO 找到檔案資料 fileName : 日期.xlsx
+2023-09-28 00:00:43.5439 INFO 合成路徑 FilePath : Form
+2023-09-28 00:00:43.5439 INFO 存檔完成，執行變更FileLog
+2023-09-28 00:00:44.0098 INFO 找到檔案資料 fileName : 上傳檔案整理.xlsx
+2023-09-28 00:00:44.0098 INFO 合成路徑 FilePath : Form
+2023-09-28 00:00:44.0098 INFO 存檔完成，執行變更FileLog
+2023-09-28 00:00:57.2097 INFO 找到檔案資料 fileName : 職員職稱資料.xlsx
+2023-09-28 00:00:57.2097 INFO 合成路徑 FilePath : Form
+2023-09-28 00:00:57.2097 INFO 存檔完成，執行變更FileLog
+2023-09-28 00:00:57.6701 INFO 找到檔案資料 fileName : 組織樹.xlsx
+2023-09-28 00:00:57.6701 INFO 合成路徑 FilePath : Form
+2023-09-28 00:00:57.6701 INFO 存檔完成，執行變更FileLog
+2023-09-28 01:21:35.1564 INFO 找到檔案資料 fileName : 表單匯出規則.xlsx
+2023-09-28 01:21:35.1773 INFO 合成路徑 FilePath : Paperwork
+2023-09-28 01:21:35.1773 INFO 存檔完成，執行變更FileLog
+2023-09-28 01:23:03.0740 INFO 找到檔案資料 fileName : 表單匯出規則.xlsx
+2023-09-28 01:23:03.0740 INFO 合成路徑 FilePath : Paperwork
+2023-09-28 01:23:03.0740 INFO 存檔完成，執行變更FileLog
+2023-09-28 01:23:31.6214 INFO 找到檔案資料 fileName : 日期.xlsx
+2023-09-28 01:23:31.6214 INFO 合成路徑 FilePath : House
+2023-09-28 01:23:31.6214 INFO 存檔完成，執行變更FileLog
+2023-09-28 09:20:46.7816 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-28 09:22:18.8630 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-28 09:22:36.4483 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-28 09:23:22.1747 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-28 09:37:08.5775 INFO 匯出Word表單
+2023-09-28 09:39:05.0184 INFO 匯出Word表單
+2023-09-28 09:48:51.9317 INFO 匯出Word表單
+2023-09-28 09:48:58.1151 ERROR 匯出失敗 : System.IO.IOException: 由於另一個處理序正在使用檔案 'D:\SideProject\Liqun\LiqunManagement\LiqunManagement\WordSample\4.社會住宅-包租契約書範本-任.docx'，所以無法存取該檔案。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   於 Xceed.Document.NET.Document.Load(String filename, Document document, DocumentTypes documentType)
+   於 Xceed.Words.NET.DocX.Load(String filename)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 D:\SideProject\Liqun\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 702
+2023-09-28 09:49:15.1633 INFO 匯出Word表單
+2023-09-28 11:34:51.1601 INFO 匯出Word表單
+2023-09-28 11:50:55.5773 INFO 找到檔案資料 fileName : 1.png
+2023-09-28 11:50:55.6002 INFO 合成路徑 FilePath : Paperwork
+2023-09-28 11:50:55.6002 INFO 存檔完成，執行變更FileLog
+2023-09-28 15:48:18.2747 INFO 匯出Word表單
+2023-09-28 15:48:58.0831 ERROR 匯出失敗 : System.ArgumentNullException: 值不能為 null。
+參數名稱: value
+   於 Newtonsoft.Json.Utilities.ValidationUtils.ArgumentNotNull(Object value, String parameterName)
+   於 Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   於 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   於 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 D:\SideProject\Liqun\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 449
+2023-09-28 15:49:00.2702 INFO 匯出Word表單
+2023-09-28 15:50:39.6365 INFO 匯出Word表單
+2023-09-28 16:17:36.7580 INFO 找到檔案資料 fileName : Gryffindor - 複製 - 複製.jpg
+2023-09-28 16:17:36.7929 INFO 合成路徑 FilePath : Paperwork
+2023-09-28 16:17:36.7929 INFO 存檔完成，執行變更FileLog
+2023-09-28 16:17:40.4507 INFO 找到檔案資料 fileName : Hufflepuff - 複製.jpg
+2023-09-28 16:17:40.4507 INFO 合成路徑 FilePath : Paperwork
+2023-09-28 16:17:40.4507 INFO 存檔完成，執行變更FileLog
+2023-09-28 16:17:42.2083 INFO 找到檔案資料 fileName : owl - 複製.jpg
+2023-09-28 16:17:42.2083 INFO 合成路徑 FilePath : Paperwork
+2023-09-28 16:17:42.2083 INFO 存檔完成，執行變更FileLog
+2023-09-28 16:17:44.1932 INFO 找到檔案資料 fileName : Ravenclaw - 複製.jpg
+2023-09-28 16:17:44.1932 INFO 合成路徑 FilePath : Paperwork
+2023-09-28 16:17:44.1932 INFO 存檔完成，執行變更FileLog
+2023-09-28 16:17:45.5959 INFO 找到檔案資料 fileName : Ravenclaw.jpg
+2023-09-28 16:17:45.5959 INFO 合成路徑 FilePath : Paperwork
+2023-09-28 16:17:45.5959 INFO 存檔完成，執行變更FileLog
+2023-09-28 16:17:47.4938 INFO 找到檔案資料 fileName : catcat.jpg
+2023-09-28 16:17:47.4938 INFO 合成路徑 FilePath : Paperwork
+2023-09-28 16:17:47.4938 INFO 存檔完成，執行變更FileLog
+2023-09-28 16:17:50.4142 INFO 找到檔案資料 fileName : 1.png
+2023-09-28 16:17:50.4142 INFO 合成路徑 FilePath : Paperwork
+2023-09-28 16:17:50.4142 INFO 存檔完成，執行變更FileLog
+2023-09-28 16:17:52.6309 INFO 找到檔案資料 fileName : cat.jpg
+2023-09-28 16:17:52.6309 INFO 合成路徑 FilePath : Paperwork
+2023-09-28 16:17:52.6309 INFO 存檔完成，執行變更FileLog
+2023-09-28 16:17:54.4524 INFO 找到檔案資料 fileName : goast.jpg
+2023-09-28 16:17:54.4524 INFO 合成路徑 FilePath : Paperwork
+2023-09-28 16:17:54.4524 INFO 存檔完成，執行變更FileLog
+2023-09-28 16:18:01.1839 INFO 匯出Word表單
+2023-09-28 16:18:10.2998 ERROR 匯出失敗 : System.IO.DirectoryNotFoundException: 找不到路徑 'D:\SideProject\Liqun\LiqunManagement\LiqunManagement\Uploads\Paperwork \d4eacc71-d8e6-42a9-bebc-de524b2d979b.jpg' 的一部分。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.File.InternalCopy(String sourceFileName, String destFileName, Boolean overwrite, Boolean checkHost)
+   於 System.IO.FileInfo.CopyTo(String destFileName)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 D:\SideProject\Liqun\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 1476
+2023-09-28 16:19:37.8282 INFO 匯出Word表單
+2023-09-28 16:21:56.6632 INFO 找到檔案資料 fileName : catcat.jpg
+2023-09-28 16:21:56.6632 INFO 合成路徑 FilePath : Paperwork
+2023-09-28 16:21:56.6632 INFO 存檔完成，執行變更FileLog
+2023-09-28 16:22:08.4276 INFO 匯出Word表單
+2023-09-28 16:28:12.2051 INFO 匯出Word表單
+2023-09-28 16:28:24.8875 ERROR 匯出失敗 : System.ArgumentException: 路徑中有不合法的字元。
+   於 System.Security.Permissions.FileIOPermission.EmulateFileIOPermissionChecks(String fullPath)
+   於 System.Security.Permissions.FileIOPermission.QuickDemand(FileIOPermissionAccess access, String fullPath, Boolean checkForDuplicates, Boolean needFullPath)
+   於 System.IO.File.InternalCopy(String sourceFileName, String destFileName, Boolean overwrite, Boolean checkHost)
+   於 System.IO.FileInfo.CopyTo(String destFileName)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 D:\SideProject\Liqun\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 1471
+2023-09-28 16:28:37.1460 INFO 匯出Word表單
+2023-09-28 16:30:56.2926 ERROR 匯出失敗 : System.ArgumentException: 路徑中有不合法的字元。
+   於 System.Security.Permissions.FileIOPermission.EmulateFileIOPermissionChecks(String fullPath)
+   於 System.Security.Permissions.FileIOPermission.QuickDemand(FileIOPermissionAccess access, String fullPath, Boolean checkForDuplicates, Boolean needFullPath)
+   於 System.IO.File.InternalCopy(String sourceFileName, String destFileName, Boolean overwrite, Boolean checkHost)
+   於 System.IO.FileInfo.CopyTo(String destFileName)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 D:\SideProject\Liqun\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 1471
+2023-09-28 17:06:33.0522 INFO 匯出Word表單
+2023-09-28 17:08:29.2751 INFO 匯出Word表單

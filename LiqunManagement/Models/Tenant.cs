@@ -17,16 +17,16 @@ namespace LiqunManagement.Models
 
         public int? TenantType { get; set; }
 
-        [StringLength(200)]
+        [StringLength(500)]
         public string vulnerablefile_Name { get; set; }
 
-        [StringLength(300)]
+        [StringLength(1000)]
         public string vulnerablefile_Alias { get; set; }
 
-        [StringLength(200)]
+        [StringLength(500)]
         public string sheetfile_Name { get; set; }
 
-        [StringLength(300)]
+        [StringLength(1000)]
         public string sheetfile_Alias { get; set; }
 
         [StringLength(50)]
@@ -122,13 +122,13 @@ namespace LiqunManagement.Models
 
         public DateTime? CreateTime { get; set; }
 
-        [StringLength(50)]
-        public string CreateUser { get; set; }
+        [StringLength(30)]
+        public string CreateAccount { get; set; }
 
         public DateTime? UpdateTime { get; set; }
 
-        [StringLength(50)]
-        public string UpdateUser { get; set; }
+        [StringLength(30)]
+        public string UpdateAccount { get; set; }
 
         [StringLength(300)]
         public string Memo { get; set; }

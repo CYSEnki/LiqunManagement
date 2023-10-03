@@ -50,10 +50,10 @@ namespace LiqunManagement.Models
         [StringLength(100)]
         public string useforelse { get; set; }
 
-        [StringLength(300)]
+        [StringLength(500)]
         public string taxfile_name { get; set; }
 
-        [StringLength(300)]
+        [StringLength(1000)]
         public string taxfile_alias { get; set; }
 
         public int? rent { get; set; }
@@ -105,13 +105,13 @@ namespace LiqunManagement.Models
 
         public DateTime? CreateTime { get; set; }
 
-        [StringLength(50)]
-        public string CreateUser { get; set; }
+        [StringLength(30)]
+        public string CreateAccount { get; set; }
 
         public DateTime? UpdateTime { get; set; }
 
-        [StringLength(50)]
-        public string UpdateUser { get; set; }
+        [StringLength(30)]
+        public string UpdateAccount { get; set; }
 
         [StringLength(300)]
         public string Memo { get; set; }

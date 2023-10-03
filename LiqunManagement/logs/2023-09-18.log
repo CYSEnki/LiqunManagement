@@ -1,0 +1,342 @@
+2023-09-18 01:18:30.5733 INFO 匯出Word表單
+2023-09-18 01:18:32.4875 INFO 找到是否都有填寫完成
+2023-09-18 01:18:33.1214 INFO 處理資料
+2023-09-18 01:18:33.4834 INFO 完成處理資料，開始匯出表單
+2023-09-18 01:18:33.4834 INFO 創建一個唯一的臨時文件夾
+2023-09-18 01:18:33.4834 INFO 轉換文字
+2023-09-18 01:18:41.3722 INFO 轉換文字成功
+2023-09-18 01:18:41.3722 INFO 開始壓縮檔案
+2023-09-18 01:18:41.4032 INFO 壓縮成功
+2023-09-18 01:18:41.4032 INFO 輸出資料
+2023-09-18 01:40:40.6345 INFO 匯出Word表單
+2023-09-18 01:40:40.6505 INFO 創建一個 Word.Application 對象
+2023-09-18 01:40:42.5447 INFO 找到是否都有填寫完成
+2023-09-18 01:40:43.1959 INFO 處理資料
+2023-09-18 01:40:43.5653 INFO 完成處理資料，開始匯出表單
+2023-09-18 01:40:43.5653 INFO 創建一個唯一的臨時文件夾
+2023-09-18 01:40:43.5653 INFO 轉換文字
+2023-09-18 01:40:51.4593 INFO 轉換文字成功
+2023-09-18 01:40:51.4593 INFO 開始壓縮檔案
+2023-09-18 01:40:51.4902 INFO 壓縮成功
+2023-09-18 01:40:51.4902 INFO 輸出資料
+2023-09-18 01:50:32.9452 INFO 匯出Word表單
+2023-09-18 01:50:32.9612 INFO 創建一個 Word.Application 對象
+2023-09-18 01:50:34.8701 INFO 找到是否都有填寫完成
+2023-09-18 01:50:35.5443 INFO 處理資料
+2023-09-18 01:50:35.9151 INFO 完成處理資料，開始匯出表單
+2023-09-18 01:50:35.9151 INFO 創建一個唯一的臨時文件夾
+2023-09-18 01:50:35.9151 INFO 轉換文字
+2023-09-18 01:50:43.9516 INFO 轉換文字成功
+2023-09-18 01:50:43.9516 INFO 開始壓縮檔案
+2023-09-18 01:50:43.9837 INFO 壓縮成功
+2023-09-18 01:50:43.9837 INFO 輸出資料
+2023-09-18 02:09:27.1274 INFO 匯出Word表單
+2023-09-18 02:09:27.1423 INFO 創建一個 Word.Application 對象
+2023-09-18 02:09:29.0423 INFO 找到是否都有填寫完成
+2023-09-18 02:09:29.7169 INFO 處理資料
+2023-09-18 02:09:30.0951 INFO 完成處理資料，開始匯出表單
+2023-09-18 02:09:30.0951 INFO 創建一個唯一的臨時文件夾
+2023-09-18 02:09:30.0961 INFO 轉換文字
+2023-09-18 02:09:38.0821 INFO 轉換文字成功
+2023-09-18 02:09:38.0821 INFO 開始壓縮檔案
+2023-09-18 02:09:38.1170 INFO 壓縮成功
+2023-09-18 02:09:38.1170 INFO 輸出資料
+2023-09-18 02:09:46.8273 INFO 匯出Word表單
+2023-09-18 02:09:49.7423 INFO 創建一個 Word.Application 對象
+2023-09-18 02:09:52.7050 INFO 找到是否都有填寫完成
+2023-09-18 02:10:01.1729 INFO 處理資料
+2023-09-18 02:10:01.4755 INFO 完成處理資料，開始匯出表單
+2023-09-18 02:10:01.4755 INFO 創建一個唯一的臨時文件夾
+2023-09-18 02:10:01.4755 INFO 轉換文字
+2023-09-18 02:10:10.5490 INFO 轉換文字成功
+2023-09-18 02:10:10.5490 INFO 開始壓縮檔案
+2023-09-18 02:10:10.5490 INFO 壓縮成功
+2023-09-18 02:10:10.5490 INFO 輸出資料
+2023-09-18 02:10:14.5211 INFO 匯出Word表單
+2023-09-18 02:10:15.3779 INFO 創建一個 Word.Application 對象
+2023-09-18 02:10:17.2569 INFO 找到是否都有填寫完成
+2023-09-18 02:10:17.8792 INFO 處理資料
+2023-09-18 02:10:18.1823 INFO 完成處理資料，開始匯出表單
+2023-09-18 02:10:18.1823 INFO 創建一個唯一的臨時文件夾
+2023-09-18 02:10:18.1823 INFO 轉換文字
+2023-09-18 02:10:26.2217 INFO 轉換文字成功
+2023-09-18 02:10:26.2217 INFO 開始壓縮檔案
+2023-09-18 02:10:26.2406 ERROR 匯出失敗 : System.IO.IOException: 檔案 'C:\Users\xu870\AppData\Local\Temp\WordFiles2309180210.zip' 已經存在。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   於 System.IO.Compression.ZipFile.Open(String archiveFileName, ZipArchiveMode mode, Encoding entryNameEncoding)
+   於 System.IO.Compression.ZipFile.DoCreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName, Nullable`1 compressionLevel, Boolean includeBaseDirectory, Encoding entryNameEncoding)
+   於 System.IO.Compression.ZipFile.CreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 358
+2023-09-18 02:12:22.4475 INFO 匯出Word表單
+2023-09-18 02:12:22.4475 INFO 創建一個 Word.Application 對象
+2023-09-18 02:12:24.3346 INFO 找到是否都有填寫完成
+2023-09-18 02:12:24.9550 INFO 處理資料
+2023-09-18 02:12:25.2552 INFO 完成處理資料，開始匯出表單
+2023-09-18 02:12:25.2552 INFO 創建一個唯一的臨時文件夾
+2023-09-18 02:12:25.2552 INFO 轉換文字
+2023-09-18 02:12:33.1489 INFO 轉換文字成功
+2023-09-18 02:12:33.1489 INFO 開始壓縮檔案
+2023-09-18 02:12:33.1489 INFO 壓縮成功
+2023-09-18 02:12:33.1489 INFO 輸出資料
+2023-09-18 02:16:24.3881 INFO 匯出Word表單
+2023-09-18 02:16:24.3881 INFO 創建一個 Word.Application 對象
+2023-09-18 02:16:26.2707 INFO 找到是否都有填寫完成
+2023-09-18 02:16:26.9049 INFO 未填寫完成
+2023-09-18 02:16:57.0400 INFO 匯出Word表單
+2023-09-18 02:16:57.0400 INFO 創建一個 Word.Application 對象
+2023-09-18 02:16:58.9149 INFO 找到是否都有填寫完成
+2023-09-18 02:16:59.5428 INFO 未填寫完成
+2023-09-18 02:17:16.8845 INFO 匯出Word表單
+2023-09-18 02:17:16.8845 INFO 創建一個 Word.Application 對象
+2023-09-18 02:17:18.7763 INFO 找到是否都有填寫完成
+2023-09-18 02:17:19.4029 INFO 處理資料
+2023-09-18 02:17:19.7087 INFO 完成處理資料，開始匯出表單
+2023-09-18 02:17:19.7087 INFO 創建一個唯一的臨時文件夾
+2023-09-18 02:17:19.7087 INFO 轉換文字
+2023-09-18 02:17:27.5552 INFO 轉換文字成功
+2023-09-18 02:17:27.5552 INFO 開始壓縮檔案
+2023-09-18 02:17:27.5552 INFO 壓縮成功
+2023-09-18 02:17:27.5552 INFO 輸出資料
+2023-09-18 03:15:19.1635 INFO 匯出Word表單
+2023-09-18 03:15:19.8239 INFO 處理資料
+2023-09-18 03:15:49.0948 INFO 開始壓縮檔案
+2023-09-18 03:15:49.1048 INFO 壓縮成功
+2023-09-18 03:15:49.1048 INFO 輸出資料
+2023-09-18 03:17:00.4235 INFO 匯出Word表單
+2023-09-18 03:17:01.2420 INFO 處理資料
+2023-09-18 03:17:40.5006 INFO 開始壓縮檔案
+2023-09-18 03:17:50.8215 INFO 壓縮成功
+2023-09-18 03:17:50.8215 INFO 輸出資料
+2023-09-18 03:21:21.1893 INFO 匯出Word表單
+2023-09-18 03:21:21.8157 INFO 處理資料
+2023-09-18 03:21:22.4246 INFO 開始壓縮檔案
+2023-09-18 03:21:29.6667 ERROR 匯出失敗 : System.IO.IOException: 由於另一個處理序正在使用檔案 'C:\Users\xu870\AppData\Local\Temp\3cc7d536-4c11-44ca-b197-da5765db224e\Processed_表單1.出租人出租住宅申請書.docx'，所以無法存取該檔案。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   於 System.IO.Compression.ZipFileExtensions.DoCreateEntryFromFile(ZipArchive destination, String sourceFileName, String entryName, Nullable`1 compressionLevel)
+   於 System.IO.Compression.ZipFile.DoCreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName, Nullable`1 compressionLevel, Boolean includeBaseDirectory, Encoding entryNameEncoding)
+   於 System.IO.Compression.ZipFile.CreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID)
+2023-09-18 03:22:02.7858 INFO 匯出Word表單
+2023-09-18 03:22:03.4081 INFO 處理資料
+2023-09-18 03:22:04.0093 INFO 開始壓縮檔案
+2023-09-18 03:22:04.7854 ERROR 匯出失敗 : System.IO.IOException: 由於另一個處理序正在使用檔案 'C:\Users\xu870\AppData\Local\Temp\3e7a229f-290b-46be-895f-68cb911cef3b\Processed_表單1.出租人出租住宅申請書.docx'，所以無法存取該檔案。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   於 System.IO.Compression.ZipFileExtensions.DoCreateEntryFromFile(ZipArchive destination, String sourceFileName, String entryName, Nullable`1 compressionLevel)
+   於 System.IO.Compression.ZipFile.DoCreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName, Nullable`1 compressionLevel, Boolean includeBaseDirectory, Encoding entryNameEncoding)
+   於 System.IO.Compression.ZipFile.CreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID)
+2023-09-18 03:23:04.4892 INFO 匯出Word表單
+2023-09-18 03:23:05.1497 INFO 處理資料
+2023-09-18 03:23:14.2801 INFO 開始壓縮檔案
+2023-09-18 03:23:21.5907 ERROR 匯出失敗 : System.IO.IOException: 由於另一個處理序正在使用檔案 'C:\Users\xu870\AppData\Local\Temp\1c68e73d-e3cc-47bd-b2fc-266b78d3ebbe\Processed_表單1.出租人出租住宅申請書.docx'，所以無法存取該檔案。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   於 System.IO.Compression.ZipFileExtensions.DoCreateEntryFromFile(ZipArchive destination, String sourceFileName, String entryName, Nullable`1 compressionLevel)
+   於 System.IO.Compression.ZipFile.DoCreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName, Nullable`1 compressionLevel, Boolean includeBaseDirectory, Encoding entryNameEncoding)
+   於 System.IO.Compression.ZipFile.CreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 534
+2023-09-18 03:25:59.0438 INFO 匯出Word表單
+2023-09-18 03:25:59.6971 INFO 處理資料
+2023-09-18 03:26:01.3151 INFO 開始壓縮檔案
+2023-09-18 03:26:01.3815 ERROR 匯出失敗 : System.IO.IOException: 由於另一個處理序正在使用檔案 'C:\Users\xu870\AppData\Local\Temp\5937e968-8b39-488e-bb7f-b8263eaff942\Processed_表單1.出租人出租住宅申請書.docx'，所以無法存取該檔案。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   於 System.IO.Compression.ZipFileExtensions.DoCreateEntryFromFile(ZipArchive destination, String sourceFileName, String entryName, Nullable`1 compressionLevel)
+   於 System.IO.Compression.ZipFile.DoCreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName, Nullable`1 compressionLevel, Boolean includeBaseDirectory, Encoding entryNameEncoding)
+   於 System.IO.Compression.ZipFile.CreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 534
+2023-09-18 03:31:37.0122 INFO 匯出Word表單
+2023-09-18 03:31:37.6631 INFO 處理資料
+2023-09-18 03:31:39.1574 INFO 開始壓縮檔案
+2023-09-18 03:31:45.1604 ERROR 匯出失敗 : System.IO.IOException: 由於另一個處理序正在使用檔案 'C:\Users\xu870\AppData\Local\Temp\88039cf0-3a05-48ca-a9eb-898eab122898\Processed_表單1.出租人出租住宅申請書.docx'，所以無法存取該檔案。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   於 System.IO.Compression.ZipFileExtensions.DoCreateEntryFromFile(ZipArchive destination, String sourceFileName, String entryName, Nullable`1 compressionLevel)
+   於 System.IO.Compression.ZipFile.DoCreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName, Nullable`1 compressionLevel, Boolean includeBaseDirectory, Encoding entryNameEncoding)
+   於 System.IO.Compression.ZipFile.CreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 534
+2023-09-18 03:36:29.9251 INFO 匯出Word表單
+2023-09-18 03:36:30.6139 INFO 處理資料
+2023-09-18 03:36:36.2375 ERROR 匯出失敗 : System.IO.IOException: 由於另一個處理序正在使用檔案 'C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\WordSample\表單1.出租人出租住宅申請書.docx'，所以無法存取該檔案。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   於 System.IO.File.ReadAllBytes(String path)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID)
+2023-09-18 03:37:45.3980 INFO 匯出Word表單
+2023-09-18 03:37:46.0123 INFO 處理資料
+2023-09-18 03:45:32.9858 INFO 匯出Word表單
+2023-09-18 03:45:33.6713 INFO 處理資料
+2023-09-18 03:46:25.5795 INFO 匯出Word表單
+2023-09-18 03:46:26.2028 INFO 處理資料
+2023-09-18 03:47:15.5774 INFO 匯出Word表單
+2023-09-18 03:47:16.1970 INFO 處理資料
+2023-09-18 03:49:40.3397 INFO 匯出Word表單
+2023-09-18 03:49:40.9620 INFO 處理資料
+2023-09-18 03:52:00.5564 INFO 匯出Word表單
+2023-09-18 03:52:01.1814 INFO 處理資料
+2023-09-18 03:52:10.7171 ERROR 匯出失敗 : System.IO.IOException: 由於另一個處理序正在使用檔案 'C:\Users\xu870\AppData\Local\Temp\67db8009-fd7e-4e14-8c61-d9c3d121b944\Processed_表單1.出租人出租住宅申請書.docx'，所以無法存取該檔案。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   於 System.IO.File.ReadAllBytes(String path)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID)
+2023-09-18 03:55:09.8588 INFO 匯出Word表單
+2023-09-18 03:55:10.4888 INFO 處理資料
+2023-09-18 03:55:23.3568 ERROR 匯出失敗 : System.UnauthorizedAccessException: 拒絕存取路徑 'C:\Users\xu870\AppData\Local\Temp\eae57c09-54d1-4684-89dd-ebdeff4e836f'。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   於 System.IO.File.ReadAllBytes(String path)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID)
+2023-09-18 03:58:23.0823 INFO 匯出Word表單
+2023-09-18 03:58:23.7561 INFO 處理資料
+2023-09-18 03:58:35.9032 ERROR 匯出失敗 : System.UnauthorizedAccessException: 拒絕存取路徑 'C:\Users\xu870\AppData\Local\Temp\765a83a0-c1c8-40b3-a027-fbe7828a4d6c'。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   於 System.IO.File.ReadAllBytes(String path)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 573
+2023-09-18 04:00:33.2866 INFO 匯出Word表單
+2023-09-18 04:00:33.9119 INFO 處理資料
+2023-09-18 04:00:39.0416 ERROR 匯出失敗 : System.IO.IOException: 由於另一個處理序正在使用檔案 'Processed_表單1.出租人出租住宅申請書.docx'，所以無法存取該檔案。
+   於 System.IO.Directory.DeleteHelper(String fullPath, String userPath, Boolean recursive, Boolean throwOnTopLevelDirectoryNotFound, WIN32_FIND_DATA& data)
+   於 System.IO.Directory.Delete(String fullPath, String userPath, Boolean recursive, Boolean checkHost)
+   於 System.IO.Directory.Delete(String path, Boolean recursive)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID)
+2023-09-18 04:04:11.2949 INFO 匯出Word表單
+2023-09-18 04:04:11.9490 INFO 處理資料
+2023-09-18 04:04:12.8026 ERROR 匯出失敗 : System.IO.IOException: 由於另一個處理序正在使用檔案 'Processed_表單1.出租人出租住宅申請書.docx'，所以無法存取該檔案。
+   於 System.IO.Directory.DeleteHelper(String fullPath, String userPath, Boolean recursive, Boolean throwOnTopLevelDirectoryNotFound, WIN32_FIND_DATA& data)
+   於 System.IO.Directory.Delete(String fullPath, String userPath, Boolean recursive, Boolean checkHost)
+   於 System.IO.Directory.Delete(String path, Boolean recursive)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 573
+2023-09-18 04:05:32.3684 INFO 匯出Word表單
+2023-09-18 04:05:33.0315 INFO 處理資料
+2023-09-18 04:05:44.3485 ERROR 匯出失敗 : System.IO.IOException: 目錄名稱無效。
+
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.Directory.DeleteHelper(String fullPath, String userPath, Boolean recursive, Boolean throwOnTopLevelDirectoryNotFound, WIN32_FIND_DATA& data)
+   於 System.IO.Directory.Delete(String fullPath, String userPath, Boolean recursive, Boolean checkHost)
+   於 System.IO.Directory.Delete(String path, Boolean recursive)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 574
+2023-09-18 04:06:19.3142 INFO 匯出Word表單
+2023-09-18 04:06:19.9307 INFO 處理資料
+2023-09-18 04:06:23.1599 ERROR 匯出失敗 : System.IO.IOException: 目錄名稱無效。
+
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.Directory.DeleteHelper(String fullPath, String userPath, Boolean recursive, Boolean throwOnTopLevelDirectoryNotFound, WIN32_FIND_DATA& data)
+   於 System.IO.Directory.Delete(String fullPath, String userPath, Boolean recursive, Boolean checkHost)
+   於 System.IO.Directory.Delete(String path, Boolean recursive)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID)
+2023-09-18 04:06:33.1522 INFO 匯出Word表單
+2023-09-18 04:06:33.7708 INFO 處理資料
+2023-09-18 04:06:37.4767 ERROR 匯出失敗 : System.IO.IOException: 由於另一個處理序正在使用檔案 'C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\WordSample\表單1.出租人出租住宅申請書.docx'，所以無法存取該檔案。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   於 System.IO.File.ReadAllBytes(String path)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID)
+2023-09-18 04:06:53.3583 INFO 匯出Word表單
+2023-09-18 04:06:53.9823 INFO 處理資料
+2023-09-18 04:08:09.9184 INFO 匯出Word表單
+2023-09-18 04:08:10.5423 INFO 處理資料
+2023-09-18 04:08:28.6811 ERROR 匯出失敗 : System.IO.IOException: 由於另一個處理序正在使用檔案 'C:\Users\xu870\AppData\Local\Temp\0f2566dc-2645-407f-859f-a8c6d3adabbf\Processed_表單1.出租人出租住宅申請書.docx'，所以無法存取該檔案。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   於 System.IO.File.ReadAllBytes(String path)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID)
+2023-09-18 04:09:02.6394 INFO 匯出Word表單
+2023-09-18 04:09:03.2568 INFO 處理資料
+2023-09-18 04:09:11.8598 ERROR 匯出失敗 : System.UnauthorizedAccessException: 拒絕存取路徑 'C:\Users\xu870\AppData\Local\Temp\f9aa1669-70f7-452f-94bd-c6b23700fac9'。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   於 System.IO.File.ReadAllBytes(String path)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID)
+2023-09-18 04:10:48.5995 INFO 匯出Word表單
+2023-09-18 04:10:49.4050 INFO 處理資料
+2023-09-18 04:11:05.3513 ERROR 匯出失敗 : System.IO.IOException: 由於另一個處理序正在使用檔案 'C:\Users\xu870\AppData\Local\Temp\e7ab5101-15f0-4cf7-bc02-05f61be8bace\Processed_表單1.出租人出租住宅申請書.docx'，所以無法存取該檔案。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   於 System.IO.Compression.ZipFileExtensions.DoCreateEntryFromFile(ZipArchive destination, String sourceFileName, String entryName, Nullable`1 compressionLevel)
+   於 System.IO.Compression.ZipFile.DoCreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName, Nullable`1 compressionLevel, Boolean includeBaseDirectory, Encoding entryNameEncoding)
+   於 System.IO.Compression.ZipFile.CreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID)
+2023-09-18 04:12:01.0201 INFO 匯出Word表單
+2023-09-18 04:12:01.6487 INFO 處理資料
+2023-09-18 04:12:07.3228 ERROR 匯出失敗 : System.IO.IOException: 由於另一個處理序正在使用檔案 'C:\Users\xu870\AppData\Local\Temp\f8b3810a-b93e-401e-8271-b2ca2c5a3eda\Processed_表單1.出租人出租住宅申請書.docx'，所以無法存取該檔案。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   於 System.IO.Compression.ZipFileExtensions.DoCreateEntryFromFile(ZipArchive destination, String sourceFileName, String entryName, Nullable`1 compressionLevel)
+   於 System.IO.Compression.ZipFile.DoCreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName, Nullable`1 compressionLevel, Boolean includeBaseDirectory, Encoding entryNameEncoding)
+   於 System.IO.Compression.ZipFile.CreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID)
+2023-09-18 19:31:10.1124 INFO 匯出Word表單
+2023-09-18 19:31:10.7571 INFO 處理資料
+2023-09-18 19:31:11.9315 ERROR 匯出失敗 : System.IO.IOException: 由於另一個處理序正在使用檔案 'C:\Users\ZA5771\AppData\Local\Temp\57f957f7-00d2-4067-b632-534a0abcd878\Processed_表單1.出租人出租住宅申請書.docx'，所以無法存取該檔案。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   於 System.IO.File.Open(String path, FileMode mode, FileAccess access, FileShare share)
+   於 System.IO.Compression.ZipFileExtensions.DoCreateEntryFromFile(ZipArchive destination, String sourceFileName, String entryName, Nullable`1 compressionLevel)
+   於 System.IO.Compression.ZipFile.DoCreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName, Nullable`1 compressionLevel, Boolean includeBaseDirectory, Encoding entryNameEncoding)
+   於 System.IO.Compression.ZipFile.CreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 580
+2023-09-18 19:35:50.4437 INFO 匯出Word表單
+2023-09-18 19:35:51.0758 INFO 處理資料
+2023-09-18 19:35:52.1860 ERROR 匯出失敗 : System.IO.IOException: 由於另一個處理序正在使用檔案 'C:\Users\ZA5771\AppData\Local\Temp\5b8bba08-7aa4-4f7b-8f26-f0b1fec693c9\Processed_表單1.出租人出租住宅申請書.docx'，所以無法存取該檔案。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   於 System.IO.File.Open(String path, FileMode mode, FileAccess access, FileShare share)
+   於 System.IO.Compression.ZipFileExtensions.DoCreateEntryFromFile(ZipArchive destination, String sourceFileName, String entryName, Nullable`1 compressionLevel)
+   於 System.IO.Compression.ZipFile.DoCreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName, Nullable`1 compressionLevel, Boolean includeBaseDirectory, Encoding entryNameEncoding)
+   於 System.IO.Compression.ZipFile.CreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 581
+2023-09-18 19:37:08.4724 INFO 匯出Word表單
+2023-09-18 19:37:09.0901 INFO 處理資料
+2023-09-18 19:37:09.6179 ERROR 匯出失敗 : System.IO.IOException: 由於另一個處理序正在使用檔案 'C:\Users\ZA5771\AppData\Local\Temp\6a204624-1674-4db8-9f94-a95fc9bc3008\Processed_表單1.出租人出租住宅申請書.docx'，所以無法存取該檔案。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   於 System.IO.File.Open(String path, FileMode mode, FileAccess access, FileShare share)
+   於 System.IO.Compression.ZipFileExtensions.DoCreateEntryFromFile(ZipArchive destination, String sourceFileName, String entryName, Nullable`1 compressionLevel)
+   於 System.IO.Compression.ZipFile.DoCreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName, Nullable`1 compressionLevel, Boolean includeBaseDirectory, Encoding entryNameEncoding)
+   於 System.IO.Compression.ZipFile.CreateFromDirectory(String sourceDirectoryName, String destinationArchiveFileName)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 581
+2023-09-18 20:46:47.5818 INFO 匯出Word表單
+2023-09-18 20:46:48.2222 INFO 處理資料
+2023-09-18 20:47:07.3743 ERROR 匯出失敗 : System.UnauthorizedAccessException: 拒絕存取路徑 'C:\Users\ZA5771\AppData\Local\Temp\d1b8ae8a-474a-4f27-bcb4-a2385a946768'。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 552
+2023-09-18 20:52:17.0099 INFO 匯出Word表單
+2023-09-18 20:52:17.6592 INFO 處理資料
+2023-09-18 21:30:44.9286 INFO 匯出Word表單
+2023-09-18 21:30:45.5745 INFO 處理資料
+2023-09-18 21:31:38.3086 INFO 匯出Word表單
+2023-09-18 21:31:38.8914 INFO 處理資料
+2023-09-18 22:23:24.7116 INFO 匯出Word表單
+2023-09-18 22:23:25.3477 INFO 處理資料

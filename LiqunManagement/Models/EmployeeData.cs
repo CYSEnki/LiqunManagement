@@ -28,5 +28,8 @@ namespace LiqunManagement.Models
 
         [StringLength(10)]
         public string JobTitle { get; set; }
+
+        [StringLength(30)]
+        public string AssistantAccount { get; set; }
     }
 }

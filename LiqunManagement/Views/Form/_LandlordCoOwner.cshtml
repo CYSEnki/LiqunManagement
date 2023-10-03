@@ -24,10 +24,10 @@
             <input type="radio" class="custom-control-input" id="jqCoOwnerRadio_4" name="CoOwnerRadio" value="4">
             <label class="custom-control-label" for="jqCoOwnerRadio_4">4人</label>
         </div>
-        <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="jqCoOwnerRadio_5" name="CoOwnerRadio" value="5">
-            <label class="custom-control-label" for="jqCoOwnerRadio_5">5人</label>
-        </div>
+        @*<div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="jqCoOwnerRadio_5" name="CoOwnerRadio" value="5">
+                <label class="custom-control-label" for="jqCoOwnerRadio_5">5人</label>
+            </div>*@
     </div>
 </div>
 
@@ -42,28 +42,28 @@
         請輸入共有人姓名
     </div>
 </div>
-<div class="form-group getco1">
-    <label class="form-label" for="birthday">生日</label>
-    <div class="col-md-8 col-lg-6 mb-3 pl-0">
-        <div class="input-group w-100">
-            <div class="input-group-append">
-                <span class="input-group-text">民國</span>
-            </div>
-            <input type="number" class="form-control CoInput_1" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" data-input="1" id="birthdayYear_Co1">
-            <div class="input-group-append">
-                <span class="input-group-text">年</span>
-            </div>
-            <input type="number" class="form-control birthdayMonth CoInput_1" max="12" min="1" id="birthdayMonth_Co1" data-input="2" data-index="11">
-            <div class="input-group-append">
-                <span class="input-group-text">月</span>
-            </div>
-            <input type="number" class="form-control birthdayDay CoInput_1" max="31" min="1" id="birthdayDay_Co1" data-input="3" data-index="11">
-            <div class="input-group-append">
-                <span class="input-group-text">日</span>
+@*<div class="form-group getco1">
+        <label class="form-label" for="birthday">生日</label>
+        <div class="col-md-8 col-lg-6 mb-3 pl-0">
+            <div class="input-group w-100">
+                <div class="input-group-append">
+                    <span class="input-group-text">民國</span>
+                </div>
+                <input type="number" class="form-control CoInput_1" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" data-input="1" id="birthdayYear_Co1">
+                <div class="input-group-append">
+                    <span class="input-group-text">年</span>
+                </div>
+                <input type="number" class="form-control birthdayMonth CoInput_1" max="12" min="1" id="birthdayMonth_Co1" data-input="2" data-index="11">
+                <div class="input-group-append">
+                    <span class="input-group-text">月</span>
+                </div>
+                <input type="number" class="form-control birthdayDay CoInput_1" max="31" min="1" id="birthdayDay_Co1" data-input="3" data-index="11">
+                <div class="input-group-append">
+                    <span class="input-group-text">日</span>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </div>*@
 @*身分證字號*@
 <div class="form-group getco1">
     <label class="form-label" for="IDnumber_Co1">身分證字號</label>
@@ -83,7 +83,7 @@
 @*連絡電話*@
 <div class="form-group getco1">
     <label class="form-label" for="Phone_Co1">連絡電話</label>
-    <input type="text" class="form-control inputPhoneNumber CoInput_1" id="Phone_Co1"data-index="1" data-input="5" pattern="^\d{10}$">
+    <input type="text" class="form-control inputPhoneNumber CoInput_1" id="Phone_Co1" data-index="1" data-input="5" pattern="^\d{10}$">
     <div class="invalid-feedback">
         請輸入連絡電話，並確認格式為【10個數字】
     </div>
@@ -168,7 +168,7 @@
         </div>
     </div>
 </div>
-<input type="text" id="CoOwnerInput1" name="CoOwnerInput1" hidden/>
+<input type="text" id="CoOwnerInput1" name="CoOwnerInput1" hidden />
 @*共有人2*@
 <div class="panel-tag getco2">
     共有人2
@@ -180,28 +180,28 @@
         請輸入共有人姓名
     </div>
 </div>
-<div class="form-group getco2">
-    <label class="form-label" for="birthday">生日</label>
-    <div class="col-md-8 col-lg-6 mb-3 pl-0">
-        <div class="input-group w-100">
-            <div class="input-group-append">
-                <span class="input-group-text">民國</span>
-            </div>
-            <input type="number" class="form-control CoInput_2" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_Co2" data-input="1">
-            <div class="input-group-append">
-                <span class="input-group-text">年</span>
-            </div>
-            <input type="number" class="form-control birthdayMonth CoInput_2" max="12" min="1" id="birthdayMonth_Co2" data-index="12" data-input="2">
-            <div class="input-group-append">
-                <span class="input-group-text">月</span>
-            </div>
-            <input type="number" class="form-control birthdayDay CoInput_2" max="31" min="1" id="birthdayDay_Co2" data-index="12" data-input="3">
-            <div class="input-group-append">
-                <span class="input-group-text">日</span>
+@*<div class="form-group getco2">
+        <label class="form-label" for="birthday">生日</label>
+        <div class="col-md-8 col-lg-6 mb-3 pl-0">
+            <div class="input-group w-100">
+                <div class="input-group-append">
+                    <span class="input-group-text">民國</span>
+                </div>
+                <input type="number" class="form-control CoInput_2" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_Co2" data-input="1">
+                <div class="input-group-append">
+                    <span class="input-group-text">年</span>
+                </div>
+                <input type="number" class="form-control birthdayMonth CoInput_2" max="12" min="1" id="birthdayMonth_Co2" data-index="12" data-input="2">
+                <div class="input-group-append">
+                    <span class="input-group-text">月</span>
+                </div>
+                <input type="number" class="form-control birthdayDay CoInput_2" max="31" min="1" id="birthdayDay_Co2" data-index="12" data-input="3">
+                <div class="input-group-append">
+                    <span class="input-group-text">日</span>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </div>*@
 @*身分證字號*@
 <div class="form-group getco2">
     <label class="form-label" for="IDnumber_Co2">身分證字號</label>
@@ -258,7 +258,7 @@
     </div>
     <div class="row pt-2">
         <div class="col-12">
-            <input type="text" class="form-control CoInput_2" id="AddressDetail_Co2" placeholder="ex.108號1樓"  data-input="9">
+            <input type="text" class="form-control CoInput_2" id="AddressDetail_Co2" placeholder="ex.108號1樓" data-input="9">
         </div>
     </div>
 </div>
@@ -306,7 +306,7 @@
         </div>
     </div>
 </div>
-<input type="text" id="CoOwnerInput2" name="CoOwnerInput2" hidden/>
+<input type="text" id="CoOwnerInput2" name="CoOwnerInput2" hidden />
 
 @*共有人3*@
 <div class="panel-tag getco3">
@@ -319,28 +319,28 @@
         請輸入共有人姓名
     </div>
 </div>
-<div class="form-group getco3">
-    <label class="form-label" for="birthday">生日</label>
-    <div class="col-md-8 col-lg-6 mb-3 pl-0">
-        <div class="input-group w-100">
-            <div class="input-group-append">
-                <span class="input-group-text">民國</span>
-            </div>
-            <input type="number" class="form-control CoInput_3" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_Co3" data-input="1">
-            <div class="input-group-append">
-                <span class="input-group-text">年</span>
-            </div>
-            <input type="number" class="form-control birthdayMonth CoInput_3" max="12" min="1" id="birthdayMonth_Co3" data-index="13" data-input="2">
-            <div class="input-group-append">
-                <span class="input-group-text">月</span>
-            </div>
-            <input type="number" class="form-control birthdayDay CoInput_3" max="31" min="1" id="birthdayDay_Co3" data-index="13" data-input="3">
-            <div class="input-group-append">
-                <span class="input-group-text">日</span>
+@*<div class="form-group getco3">
+        <label class="form-label" for="birthday">生日</label>
+        <div class="col-md-8 col-lg-6 mb-3 pl-0">
+            <div class="input-group w-100">
+                <div class="input-group-append">
+                    <span class="input-group-text">民國</span>
+                </div>
+                <input type="number" class="form-control CoInput_3" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_Co3" data-input="1">
+                <div class="input-group-append">
+                    <span class="input-group-text">年</span>
+                </div>
+                <input type="number" class="form-control birthdayMonth CoInput_3" max="12" min="1" id="birthdayMonth_Co3" data-index="13" data-input="2">
+                <div class="input-group-append">
+                    <span class="input-group-text">月</span>
+                </div>
+                <input type="number" class="form-control birthdayDay CoInput_3" max="31" min="1" id="birthdayDay_Co3" data-index="13" data-input="3">
+                <div class="input-group-append">
+                    <span class="input-group-text">日</span>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </div>*@
 @*身分證字號*@
 <div class="form-group getco3">
     <label class="form-label" for="IDnumber_Co3">身分證字號</label>
@@ -445,7 +445,7 @@
         </div>
     </div>
 </div>
-<input type="text" id="CoOwnerInput3" name="CoOwnerInput3" hidden/>
+<input type="text" id="CoOwnerInput3" name="CoOwnerInput3" hidden />
 
 @*共有人4*@
 <div class="panel-tag getco4">
@@ -458,28 +458,28 @@
         請輸入共有人姓名
     </div>
 </div>
-<div class="form-group getco4">
-    <label class="form-label" for="birthday">生日</label>
-    <div class="col-md-8 col-lg-6 mb-3 pl-0">
-        <div class="input-group w-100">
-            <div class="input-group-append">
-                <span class="input-group-text">民國</span>
-            </div>
-            <input type="number" class="form-control CoInput_4" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_Co4" data-input="1">
-            <div class="input-group-append">
-                <span class="input-group-text">年</span>
-            </div>
-            <input type="number" class="form-control birthdayMonth CoInput_4" max="12" min="1" id="birthdayMonth_Co4" data-index="14" data-input="2">
-            <div class="input-group-append">
-                <span class="input-group-text">月</span>
-            </div>
-            <input type="number" class="form-control birthdayDay CoInput_4" max="31" min="1" id="birthdayDay_Co4" data-index="14" data-input="3">
-            <div class="input-group-append">
-                <span class="input-group-text">日</span>
+@*<div class="form-group getco4">
+        <label class="form-label" for="birthday">生日</label>
+        <div class="col-md-8 col-lg-6 mb-3 pl-0">
+            <div class="input-group w-100">
+                <div class="input-group-append">
+                    <span class="input-group-text">民國</span>
+                </div>
+                <input type="number" class="form-control CoInput_4" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_Co4" data-input="1">
+                <div class="input-group-append">
+                    <span class="input-group-text">年</span>
+                </div>
+                <input type="number" class="form-control birthdayMonth CoInput_4" max="12" min="1" id="birthdayMonth_Co4" data-index="14" data-input="2">
+                <div class="input-group-append">
+                    <span class="input-group-text">月</span>
+                </div>
+                <input type="number" class="form-control birthdayDay CoInput_4" max="31" min="1" id="birthdayDay_Co4" data-index="14" data-input="3">
+                <div class="input-group-append">
+                    <span class="input-group-text">日</span>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </div>*@
 @*身分證字號*@
 <div class="form-group getco4">
     <label class="form-label" for="IDnumber_Co4">身分證字號</label>
@@ -584,7 +584,7 @@
         </div>
     </div>
 </div>
-<input type="text" id="CoOwnerInput4" name="CoOwnerInput4" hidden/>
+<input type="text" id="CoOwnerInput4" name="CoOwnerInput4" hidden />
 
 @*共有人5*@
 <div class="panel-tag getco5">
@@ -597,28 +597,28 @@
         請輸入共有人姓名
     </div>
 </div>
-<div class="form-group getco5">
-    <label class="form-label" for="birthday">生日</label>
-    <div class="col-md-8 col-lg-6 mb-3 pl-0">
-        <div class="input-group w-100">
-            <div class="input-group-append">
-                <span class="input-group-text">民國</span>
-            </div>
-            <input type="number" class="form-control CoInput_5" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_Co5" data-input="1">
-            <div class="input-group-append">
-                <span class="input-group-text">年</span>
-            </div>
-            <input type="number" class="form-control birthdayMonth CoInput_5" max="12" min="1" id="birthdayMonth_Co5" data-index="15" data-input="2">
-            <div class="input-group-append">
-                <span class="input-group-text">月</span>
-            </div>
-            <input type="number" class="form-control birthdayDay CoInput_5" max="31" min="1" id="birthdayDay_Co5" data-index="15" data-input="3">
-            <div class="input-group-append">
-                <span class="input-group-text">日</span>
+@*<div class="form-group getco5">
+        <label class="form-label" for="birthday">生日</label>
+        <div class="col-md-8 col-lg-6 mb-3 pl-0">
+            <div class="input-group w-100">
+                <div class="input-group-append">
+                    <span class="input-group-text">民國</span>
+                </div>
+                <input type="number" class="form-control CoInput_5" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_Co5" data-input="1">
+                <div class="input-group-append">
+                    <span class="input-group-text">年</span>
+                </div>
+                <input type="number" class="form-control birthdayMonth CoInput_5" max="12" min="1" id="birthdayMonth_Co5" data-index="15" data-input="2">
+                <div class="input-group-append">
+                    <span class="input-group-text">月</span>
+                </div>
+                <input type="number" class="form-control birthdayDay CoInput_5" max="31" min="1" id="birthdayDay_Co5" data-index="15" data-input="3">
+                <div class="input-group-append">
+                    <span class="input-group-text">日</span>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </div>*@
 @*身分證字號*@
 <div class="form-group getco5">
     <label class="form-label" for="IDnumber">身分證字號</label>

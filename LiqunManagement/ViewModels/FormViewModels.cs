@@ -11,14 +11,19 @@ namespace LiqunManagement.ViewModels
     public class FormViewModels
     {
         public IEnumerable<DDLViewModel> ddllist { get; set; }
-        public IEnumerable<objectForm> objectformlist { get; set; }
+        public IEnumerable<objectFormViewModel> objectformlist { get; set; }
 
         //表單編號
         public string FormID { get; set; }
+
         //房屋物件
         public HomeObjectViewModel homeobjectviewmodel { get; set; }
         public LandLordViewModel landlordviewmodel { get; set; }
         public TenantViewModel tenantviewmodel { get; set; }
+        public SecretaryViewModel secretaryviewmodel { get; set; }
+
+        //上傳區資料
+        public Uploads Uploads { get; set; }
     }
 
     public class DDLViewModel
@@ -28,15 +33,19 @@ namespace LiqunManagement.ViewModels
         public string text { get; set; }
     }
 
-    public class objectForm
+    public class objectFormViewModel
     {
-        public string FormId { get; set; }
+        public string FormID { get; set; }
         public DateTime CreateTime { get; set; }
+        public string ProcessAccount { get; set; }
         public string ProcessName { get; set; }
         public string Address { get; set; }
         public DateTime SignDate { get; set; }
         public string Landlord { get; set; }
         public string Tenant { get; set; }
+        public string AgentAccount { get; set; }
+        public string AgentName { get; set; }
+        public string AssistantAccount { get; set; }
     }
 
     #region FormGet資料
@@ -127,11 +136,11 @@ namespace LiqunManagement.ViewModels
 
         public DateTime? CreateTime { get; set; }
 
-        public string CreateUser { get; set; }
+        public string CreateAccount { get; set; }
 
         public DateTime? UpdateTime { get; set; }
 
-        public string UpdateUser { get; set; }
+        public string UpdateAccount { get; set; }
 
         public string Memo { get; set; }
 
@@ -175,9 +184,9 @@ namespace LiqunManagement.ViewModels
         public string CoOwner5 { get; set; }
         public string Agent { get; set; }
         public DateTime? CreateTime { get; set; }
-        public string CreateUser { get; set; }
+        public string CreateAccount { get; set; }
         public DateTime? UpdateTime { get; set; }
-        public string UpdateUser { get; set; }
+        public string UpdateAccount { get; set; }
         public string Memo { get; set; }
 
         //下拉選單
@@ -265,9 +274,9 @@ namespace LiqunManagement.ViewModels
         public string Guarantor2 { get; set; }
         public string Guarantor3 { get; set; }
         public DateTime? CreateTime { get; set; }
-        public string CreateUser { get; set; }
+        public string CreateAccount { get; set; }
         public DateTime? UpdateTime { get; set; }
-        public string UpdateUser { get; set; }
+        public string UpdateAccount { get; set; }
         public string Memo { get; set; }
 
 
@@ -309,6 +318,49 @@ namespace LiqunManagement.ViewModels
         public string GuAddress3_Road { get; set; }
         public string GuContact3_District { get; set; }
         public string GuContact3_Road { get; set; }
+    }
+    //秘書填寫
+    public class SecretaryViewModel
+    {
+        [Required]
+        [StringLength(50)]
+        public string FormID { get; set; }
+
+        public int qualifyRadio { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        public string excerpt { get; set; }
+
+        [StringLength(20)]
+        public string excerptShort { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        public string buildNo { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string placeNo { get; set; }
+
+        public string buildCreateDate { get; set; }
+
+        public int floorAmount { get; set; }
+
+        public int floorNo { get; set; }
+
+        public double squareAmount { get; set; }
+
+        public double pinAmount { get; set; }
+
+        public int notarizationFeeRadio { get; set; }
+
+        public int rentMarket { get; set; }
+
+        public int rentAgent { get; set; }
+
+        public int depositAgent { get; set; }
+        public string Memo { get; set; }
     }
     #endregion
 
@@ -511,5 +563,113 @@ namespace LiqunManagement.ViewModels
 
         public string memo { get; set; }
     }
+    //秘書填寫
+    public class SecretaryInputViewModel
+    {
+        [Required]
+        [StringLength(50)]
+        public string FormID { get; set; }
+
+        public int qualifyRadio { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        public string excerpt { get; set; }
+
+        [StringLength(20)]
+        public string excerptShort { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        public string buildNo { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string placeNo { get; set; }
+
+        public string buildCreatedate { get; set; }
+
+        public int floorAmount { get; set; }
+
+        public int floorNo { get; set; }
+
+        public double squareAmount { get; set; }
+
+        public double pinAmount { get; set; }
+
+        public int notarizationFeeRadio { get; set; }
+
+        public int rentMarket { get; set; }
+
+        public int rentAgent { get; set; }
+
+        public int depositAgent { get; set; }
+
+        public string memo { get; set; }
+    }
+    #endregion
+
+    #region 存取檔案命名
+    public class FileViewMode
+    {
+        public string FileName { get; set; }
+        public string FileAlias { get; set; }
+        public string Path { get; set; }
+    }
+    #endregion
+
+    #region 附件上傳(上傳區資料)
+    //證件上船區
+    //房東身分證正面
+    public class Uploads
+    {
+        #region 證件上傳區
+        //正面身分證(房東)
+        public IEnumerable<FileViewMode> frontIdentityCardLandlord { get; set; }
+        //反面身分證(房東)
+        public IEnumerable<FileViewMode> reverseIdentityCardLandlord { get; set; }
+        //存摺(房東)
+        public IEnumerable<FileViewMode> passbookLandlord { get; set; }
+        
+        //正面身分證(房客)
+        public IEnumerable<FileViewMode> frontIdentityCardTenant { get; set; }
+        //反面身分證(房客)
+        public IEnumerable<FileViewMode> reverseIdentityCardTenant { get; set; }
+        //存摺(房客)
+        public IEnumerable<FileViewMode> passbookTenant { get; set; }
+        //戶籍謄本(房客)
+        public IEnumerable<FileViewMode> householdTenant { get; set; }
+        //財產清單(房客)
+        public IEnumerable<FileViewMode> propertyTenant { get; set; }
+        //所得清單(房客)
+        public IEnumerable<FileViewMode> incomeTenant { get; set; }
+        
+        //證件補充資料
+        public IEnumerable<FileViewMode> documentSupplement { get; set; }
+        #endregion
+
+        #region 屋況上傳區
+        //門牌
+        public IEnumerable<FileViewMode> housenumber { get; set; }
+        //大門
+        public IEnumerable<FileViewMode> door { get; set; }
+        //衛浴設備
+        public IEnumerable<FileViewMode> bath { get; set; }
+        //物件大門
+        public IEnumerable<FileViewMode> objectdoor { get; set; }
+        //樓梯照
+        public IEnumerable<FileViewMode> stairs { get; set; }
+        //滅火器
+        public IEnumerable<FileViewMode> fire { get; set; }
+        //偵煙器
+        public IEnumerable<FileViewMode> smoke { get; set; }
+        //熱水器
+        public IEnumerable<FileViewMode> water { get; set; }
+        //補充資料
+        public IEnumerable<FileViewMode> additional { get; set; }
+
+        #endregion
+    }
+
     #endregion
 }
