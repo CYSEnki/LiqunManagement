@@ -3,8 +3,10 @@
 @{
     ViewBag.Title = "案件管理";
     ViewBag.Controller = "Case";
-    ViewBag.Branches = "CaseManage";
+    ViewBag.Branches = "CaseManage_Sales";
     Layout = "~/Views/Shared/smartadmin_Layout.cshtml";
+
+    var ErrorMessage = ViewBag.ErrorMessage != null ? ViewBag.ErrorMessage : "";
 }
 <link href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/datagrid/datatables/datatables.bundle.css" rel="stylesheet" />
 <main id="js-page-content" role="main" class="page-content">
@@ -49,47 +51,56 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-
-                                            @foreach (var item in Model.objectformlist)
+                                            @if (Model.objectformlist != null)
                                             {
-                                                <tr role="row" class="odd">
-                                                    <td class="sorting_1 dtr-control">@item.FormId</td>
-                                                    <td>@item.ProcessName</td>
-                                                    <td>@item.Address</td>
-                                                    <td>@item.SignDate.AddYears(-1911).ToString("yyy年MM月dd日")</td>
-                                                    <td style="display: none;">@item.Landlord</td>
-                                                    <td style="display: none;">@item.Tenant</td>
-                                                    <td style="display: none;">
-                                                        @*<a href="javascript:void(0);" class="btn btn-sm btn-icon btn-outline-danger rounded-circle mr-1" title="Delete Record">
-                                                            <i class="fal fa-times"></i>
-                                                        </a>*@
-                                                        <div class="dropdown d-inline-block dropleft">
-                                                            <a href="#" class="btn btn-sm btn-icon btn-outline-primary rounded-circle shadow-0" data-toggle="dropdown" aria-expanded="true" title="More options">
-                                                                <i class="fal fa-ellipsis-v"></i>
-                                                            </a>
-                                                            <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="@Url.Action("HomeObject", "Form", new { FormID = item.FormId})">物件資料</a>
-                                                                <a class="dropdown-item" href="@Url.Action("Landlord", "Form", new { FormID = item.FormId})">房東資料</a>
-                                                                <a class="dropdown-item" href="@Url.Action("Tenant", "Form", new { FormID = item.FormId})">房客資料</a>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                if (Model.objectformlist.Count() > 0)
+                                                {
+                                                    foreach (var item in Model.objectformlist)
+                                                    {
+                                                        <tr role="row" class="odd">
+                                                            <td class="sorting_1 dtr-control">@item.FormID</td>
+                                                            <td>@item.ProcessName</td>
+                                                            <td>@item.Address</td>
+                                                            <td>@item.SignDate.AddYears(-1911).ToString("yyy年MM月dd日")</td>
+                                                            <td style="display: none;">@item.Landlord</td>
+                                                            <td style="display: none;">@item.Tenant</td>
+                                                            <td style="display: none;">
+                                                                @*<a href="javascript:void(0);" class="btn btn-sm btn-icon btn-outline-danger rounded-circle mr-1" title="Delete Record">
+                                                                        <i class="fal fa-times"></i>
+                                                                    </a>*@
+                                                                <div class="dropdown d-inline-block dropleft">
+                                                                    <a href="#" class="btn btn-sm btn-icon btn-outline-primary rounded-circle shadow-0" data-toggle="dropdown" aria-expanded="true" title="More options">
+                                                                        <i class="fal fa-ellipsis-v"></i>
+                                                                    </a>
+                                                                    <div class="dropdown-menu">
+                                                                        <a class="dropdown-item" href="@Url.Action("HomeObject", "Form", new { FormID = item.FormID})">物件資料</a>
+                                                                        <a class="dropdown-item" href="@Url.Action("Landlord", "Form", new { FormID = item.FormID})">房東資料</a>
+                                                                        <a class="dropdown-item" href="@Url.Action("Tenant", "Form", new { FormID = item.FormID})">房客資料</a>
+                                                                        <a class="dropdown-item" href="@Url.Action("Uploads", "Form", new { FormID = item.FormID, ControllerName = "Sales"})">附件上傳</a>
+                                                                        <a class="dropdown-item" onclick="submit('@(String.IsNullOrEmpty(@item.Landlord) || String.IsNullOrEmpty(@item.Tenant) ? "Nosubmit" : @item.FormID)')">提交表單</a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
 
+                                                    }
+
+                                                }
                                             }
+
                                         </tbody>
                                         @*<tfoot>
-                                            <tr>
-                                                <th rowspan="1" colspan="1">CustomerID</th>
-                                                <th rowspan="1" colspan="1">Name</th>
-                                                <th rowspan="1" colspan="1">PurchaseDate</th>
-                                                <th rowspan="1" colspan="1">CustomerEmail</th>
-                                                <th rowspan="1" colspan="1">CustomerCVV</th>
-                                                <th rowspan="1" colspan="1" style="display: none;">Country</th>
-                                                <th rowspan="1" colspan="1" style="display: none;">InvoiceAmount</th>
-                                                <th rowspan="1" colspan="1" style="display: none;">Controls</th>
-                                            </tr>
-                                        </tfoot>*@
+                                                <tr>
+                                                    <th rowspan="1" colspan="1">CustomerID</th>
+                                                    <th rowspan="1" colspan="1">Name</th>
+                                                    <th rowspan="1" colspan="1">PurchaseDate</th>
+                                                    <th rowspan="1" colspan="1">CustomerEmail</th>
+                                                    <th rowspan="1" colspan="1">CustomerCVV</th>
+                                                    <th rowspan="1" colspan="1" style="display: none;">Country</th>
+                                                    <th rowspan="1" colspan="1" style="display: none;">InvoiceAmount</th>
+                                                    <th rowspan="1" colspan="1" style="display: none;">Controls</th>
+                                                </tr>
+                                            </tfoot>*@
                                     </table>
                                 </div>
                             </div>
@@ -107,6 +118,10 @@
     <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/datagrid/datatables/datatables.bundle.js"></script>
     <script>
         $(document).ready(function () {
+            //ErrorMessage
+            if ('@ErrorMessage' !== '') {
+                alert("錯誤訊息:" + '@ErrorMessage');
+            }
 
             /* init datatables */
             $('#dt-basic-example').dataTable(
@@ -159,7 +174,7 @@
                     //        ///刪除按鈕允許用戶刪除紀錄，更多選項按鈕則打開一個下拉選單，其中包含一些額外的操作選項，如更換狀態和生成報告
                     //        render: function (data, type, full, meta) {
 
-                                
+
                     //            //-- ES6
                     //            //-- convert using https://babeljs.io online transpiler
                     //            return `
@@ -178,7 +193,7 @@
 
                     //            //ES5 example below:
 
-                                
+
                     //            //return "\n\t\t\t\t\t\t<a href='javascript:void(0);' class='btn btn-sm btn-icon btn-outline-danger rounded-circle mr-1' title='Delete Record'>\n\t\t\t\t\t\t\t<i class=\"fal fa-times\"></i>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t\t<div class='dropdown d-inline-block dropleft'>\n\t\t\t\t\t\t\t<a href='#'' class='btn btn-sm btn-icon btn-outline-primary rounded-circle shadow-0' data-toggle='dropdown' aria-expanded='true' title='More options'>\n\t\t\t\t\t\t\t\t<i class=\"fal fa-ellipsis-v\"></i>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<div class='dropdown-menu'>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>編輯表單</a>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>匯出Word表單</a>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>";
                     //        },
                     //    },
@@ -188,5 +203,26 @@
                 });
         });
 
+        function submit(FormID) {
+            console.log('%c' + FormID, 'color: orange; font-size:24px');
+            if (FormID == 'Nosubmit') {
+                alert('表單尚未完成');
+                return;
+            }
+            if (confirm('確認將案件 : ' + FormID + ' 提交至秘書處理?')) {
+                $.ajax({
+                    type: "POST",
+                    data: { FormID: FormID },
+                    url: '@Url.Content("~/Sales/CaseManage")',
+                }).done(function (result){
+                    if (result == 'successed') {
+                        if (confirm(result)) {
+                            location.reload();
+                        };
+                    };
+                });
+            }
+            return;
+        }
     </script>
 }

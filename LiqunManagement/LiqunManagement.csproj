@@ -47,6 +47,9 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
       <HintPath>..\packages\Portable.BouncyCastle.1.8.9\lib\net40\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.20.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.20.0\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -63,8 +66,12 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Word.15.0.4420.1017\lib\net20\Microsoft.Office.Interop.Word.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.5.2.0\lib\net46\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.5.2.4\lib\net46\NLog.dll</HintPath>
     </Reference>
     <Reference Include="NPOI, Version=2.5.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <HintPath>..\packages\NPOI.2.5.6\lib\net45\NPOI.dll</HintPath>
@@ -82,6 +89,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -137,6 +145,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="TemplateEngine.Docx, Version=1.1.5.0, Culture=neutral, PublicKeyToken=04d12e71ab4342c2, processorArchitecture=MSIL">
+      <HintPath>..\packages\TemplateEngine.Docx.1.1.5\lib\netstandard2.0\TemplateEngine.Docx.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -144,6 +155,13 @@
     <Reference Include="Antlr3.Runtime">
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="Xceed.Document.NET, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.2.5.0\lib\net40\Xceed.Document.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Words.NET, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.2.5.0\lib\net40\Xceed.Words.NET.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -157,12 +175,14 @@
     <Compile Include="Controllers\LiqunController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\SalesController.cs" />
+    <Compile Include="Controllers\SecretaryController.cs" />
     <Compile Include="Controllers\UpLoadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\EmployeeData.cs" />
+    <Compile Include="Models\FileLog.cs" />
     <Compile Include="Models\ObjectForm.cs" />
     <Compile Include="Models\Bank.cs" />
     <Compile Include="Models\FormModels.cs" />
@@ -170,6 +190,7 @@
     <Compile Include="Models\LandLord.cs" />
     <Compile Include="Models\MembersModel.cs" />
     <Compile Include="Models\Region.cs" />
+    <Compile Include="Models\Secretary.cs" />
     <Compile Include="Models\Tenant.cs" />
     <Compile Include="Security\JwtObject.cs" />
     <Compile Include="Security\JwtService.cs" />
@@ -177,6 +198,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\DDLServices.cs" />
+    <Compile Include="Services\FileService.cs" />
+    <Compile Include="Services\FormService.cs" />
     <Compile Include="Services\MailService.cs" />
     <Compile Include="Services\MembersDBService.cs" />
     <Compile Include="Services\UploadService.cs" />
@@ -2008,6 +2031,7 @@
     <Content Include="Content\plugins\moment\locales.min.js.map" />
     <Content Include="Content\plugins\moment\moment-with-locales.min.js.map" />
     <Content Include="Content\plugins\moment\moment.min.js.map" />
+    <Content Include="NLog.Config" />
     <None Include="Properties\PublishProfiles\LiqunManage - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\LiqunManage - FTP1.pubxml" />
     <None Include="Properties\PublishProfiles\LiqunManage - Web Deploy.pubxml" />
@@ -2091,6 +2115,9 @@
     <Content Include="Views\Form\_TenantGuarantor.cshtml" />
     <Content Include="Views\Sales\CaseManage.cshtml" />
     <Content Include="Views\Members\DeptManage.cshtml" />
+    <Content Include="Views\Sales\CaseProcess.cshtml" />
+    <Content Include="Views\Secretary\CaseManage.cshtml" />
+    <Content Include="Views\Form\Uploads.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2108,6 +2135,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

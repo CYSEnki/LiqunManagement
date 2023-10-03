@@ -75,13 +75,13 @@ namespace LiqunManagement.Models
 
         public DateTime? CreateTime { get; set; }
 
-        [StringLength(50)]
-        public string CreateUser { get; set; }
+        [StringLength(30)]
+        public string CreateAccount { get; set; }
 
         public DateTime? UpdateTime { get; set; }
 
-        [StringLength(50)]
-        public string UpdateUser { get; set; }
+        [StringLength(30)]
+        public string UpdateAccount { get; set; }
 
         [StringLength(300)]
         public string Memo { get; set; }

@@ -30,6 +30,10 @@ namespace LiqunManagement.Models
                 .Property(e => e.ManageAccount)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Department>()
+                .Property(e => e.Role)
+                .IsUnicode(false);
+
             modelBuilder.Entity<EmployeeData>()
                 .Property(e => e.Account)
                 .IsUnicode(false);
@@ -44,6 +48,10 @@ namespace LiqunManagement.Models
 
             modelBuilder.Entity<EmployeeData>()
                 .Property(e => e.UpdateAccount)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<EmployeeData>()
+                .Property(e => e.AssistantAccount)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Members>()
@@ -61,6 +69,10 @@ namespace LiqunManagement.Models
             modelBuilder.Entity<Members>()
                 .Property(e => e.AuthCode)
                 .IsFixedLength();
+
+            modelBuilder.Entity<Members>()
+                .Property(e => e.Role)
+                .IsUnicode(false);
         }
     }
 }

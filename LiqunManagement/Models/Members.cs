@@ -17,7 +17,7 @@ namespace LiqunManagement.Models
         public string Password { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [StringLength(50)]
         public string Name { get; set; }
 
         [StringLength(200)]
@@ -29,5 +29,8 @@ namespace LiqunManagement.Models
         public bool IsAdmin { get; set; }
 
         public bool Status { get; set; }
+
+        [StringLength(10)]
+        public string Role { get; set; }
     }
 }

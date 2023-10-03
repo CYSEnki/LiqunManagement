@@ -1,0 +1,35 @@
+2023-09-27 21:39:34.5849 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-27 21:56:39.4077 INFO 匯出Word表單
+2023-09-27 23:30:02.2841 INFO 匯出Word表單
+2023-09-27 23:41:27.5520 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-09-27 23:41:28.8027 ERROR 取得房屋物件資料錯誤 : System.ArgumentNullException: 值不能為 null。
+參數名稱: value
+   於 Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   於 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   於 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   於 LiqunManagement.Controllers.FormController.HomeObject(String FormID, String ControllerName) 於 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\Controllers\FormController.cs: 行 151
+2023-09-27 23:42:09.5765 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-09-27 23:49:56.5450 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-09-27 23:50:40.8112 INFO 房屋物件資料頁面送出編輯，ControllerName:Secretary
+2023-09-27 23:50:41.1352 INFO 開始存檔
+2023-09-27 23:55:32.0235 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-09-27 23:55:50.5762 INFO 房屋物件資料頁面送出編輯，ControllerName:Secretary
+2023-09-27 23:55:50.8870 INFO 開始存檔
+2023-09-27 23:56:07.8167 INFO 找到檔案資料 fileName : 職員職稱資料.xlsx
+2023-09-27 23:56:07.8167 INFO 合成路徑 FilePath : Form
+2023-09-27 23:56:07.8167 INFO 存檔完成，執行變更FileLog
+2023-09-27 23:56:08.2879 INFO 找到檔案資料 fileName : 組織樹.xlsx
+2023-09-27 23:56:08.2879 INFO 合成路徑 FilePath : Form
+2023-09-27 23:56:08.2879 INFO 存檔完成，執行變更FileLog
+2023-09-27 23:56:08.7409 INFO 存檔成功 filemodelLiqunManagement.ViewModels.FileViewMode
+2023-09-27 23:56:13.8800 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-09-27 23:56:36.6430 INFO 房屋物件資料頁面送出編輯，ControllerName:Secretary
+2023-09-27 23:56:36.9510 INFO 開始存檔
+2023-09-27 23:56:45.5040 INFO 找到檔案資料 fileName : 表單匯出規則.xlsx
+2023-09-27 23:56:45.5040 INFO 合成路徑 FilePath : Form
+2023-09-27 23:56:45.5040 INFO 存檔完成，執行變更FileLog
+2023-09-27 23:56:45.9626 INFO 找到檔案資料 fileName : 日期.xlsx
+2023-09-27 23:56:45.9626 INFO 合成路徑 FilePath : Form
+2023-09-27 23:56:45.9626 INFO 存檔完成，執行變更FileLog
+2023-09-27 23:56:46.4127 INFO 存檔成功 filemodelLiqunManagement.ViewModels.FileViewMode
+2023-09-27 23:56:51.7819 INFO 進入房屋物件資料頁面，ControllerName:Secretary

@@ -7,6 +7,8 @@
 
     //表單編號
     var FormID = Model.FormID != null ? Model.FormID : "";
+    var ErrorMessage = ViewBag.ErrorMessage != null ? ViewBag.ErrorMessage : "";
+    var ControllerName = @ViewBag.ControllerName;
     //房客類別
     var TenantType = Model.tenantviewmodel != null ? Model.tenantviewmodel.TenantType.ToString() : "";
     //房東姓名
@@ -35,7 +37,7 @@
     var accountNo = Model.tenantviewmodel != null ? Model.tenantviewmodel.accountNo : "";
     //配偶
     var CoupleCount = Model.tenantviewmodel != null ? Model.tenantviewmodel.CoupleCount : "";
-    var Couple = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.Couple.ToString() : "");
+    var Couple = @Html.Raw(Model.tenantviewmodel != null && int.Parse(CoupleCount) > 0 ? Model.tenantviewmodel.Couple.ToString() : "");
     //直系親屬
     var DirectCount = Model.tenantviewmodel != null ? Model.tenantviewmodel.DirectCount : "";
     var Family1 = @Html.Raw(Model.tenantviewmodel != null ? Model.tenantviewmodel.Family1.ToString() : "");
@@ -159,7 +161,8 @@
                         @using (Html.BeginForm("Tenant", "Form", FormMethod.Post, new { @class = "needs-validation", @enctype = "multipart/form-data", @novalidate = "" }))
                         {
                             @*表單編號*@
-                            <input type="text" value="@ViewBag.FormID" name="FormID" hidden />
+                            <input type="text" value="@FormID" name="FormID" hidden />
+                            <input type="text" name="ControllerName" hidden />
                             @*租客身分*@
                             <div class="panel-tag">
                                 一般戶
@@ -293,6 +296,39 @@
                                 <span class="help-block pl-2">*<code>&lt;上傳弱勢戶佐證文件&gt;</code></span>
                             </div>
 
+                            <div class="form-group" id="filenameSpace1">
+                                @if (ViewBag.vulnerablefile_NameList != null)
+                                {
+                                    if (ViewBag.vulnerablefile_NameList.Count > 0)
+                                    {
+                                        <table class="table table-hover text-nowrap table-bordered">
+                                            <thead>
+                                                <tr style="text-align:center; vertical-align:middle; background-color:#99ccff;">
+                                                    <th style=" width:60px;">編號</th>
+                                                    <th>檔案名稱</th>
+                                                    <th style="text-align:center; vertical-align:middle; width:60px;">操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @for (var i = 0; i < ViewBag.vulnerablefile_NameList.Count; i++)
+                                                {
+                                                    <tr>
+                                                        <td style="text-align:center; vertical-align:middle;">@i</td>
+                                                        <td style="text-align:left; vertical-align:middle;">
+                                                            @ViewBag.vulnerablefile_NameList[i]<button class="btn btn-light btn-sm" type="button" onclick="downloadfile('@ViewBag.vulnerablefile_AliasList[i]')"><i class="fa fa-download"></i></button>
+                                                        </td>
+                                                        <td style="text-align:center; vertical-align:middle;">
+                                                            <button type="button" class="btn btn-danger waves-effect waves-themed" onclick="deletefile('@FormID', '@ViewBag.vulnerablefile_AliasList[i]', 'filenameSpace1')">刪除</button>
+                                                        </td>
+                                                    </tr>
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    }
+                                }
+                            </div>
+
                             @*上傳300E試算表的截圖*@
                             <div class="form-group">
                                 <label class="form-label">上傳300億試算表截圖</label>
@@ -306,6 +342,38 @@
                                 <span class="help-block pl-2">*<code>&lt;上傳300億試算表截圖&gt;</code></span>
                             </div>
 
+                            <div class="form-group" id="filenameSpace2">
+                                @if (ViewBag.sheetfile_NameList != null)
+                                {
+                                    if (ViewBag.sheetfile_NameList.Count > 0)
+                                    {
+                                        <table class="table table-hover text-nowrap table-bordered">
+                                            <thead>
+                                                <tr style="text-align:center; vertical-align:middle; background-color:#99ccff;">
+                                                    <th style=" width:60px;">編號</th>
+                                                    <th>檔案名稱</th>
+                                                    <th style="text-align:center; vertical-align:middle; width:60px;">操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @for (var i = 0; i < ViewBag.sheetfile_NameList.Count; i++)
+                                                {
+                                                    <tr>
+                                                        <td style="text-align:center; vertical-align:middle;">@i</td>
+                                                        <td style="text-align:left; vertical-align:middle;">
+                                                            @ViewBag.sheetfile_NameList[i]<button class="btn btn-light btn-sm" type="button" onclick="downloadfile('@ViewBag.sheetfile_AliasList[i]')"><i class="fa fa-download"></i></button>
+                                                        </td>
+                                                        <td style="text-align:center; vertical-align:middle;">
+                                                            <button type="button" class="btn btn-danger waves-effect waves-themed" onclick="deletefile('@FormID', '@ViewBag.sheetfile_AliasList[i]', 'filenameSpace2')">刪除</button>
+                                                        </td>
+                                                    </tr>
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    }
+                                }
+                            </div>
                             @*房客姓名*@
                             <div class="form-group">
                                 <label class="form-label" for="Name_0">房客姓名</label>
@@ -423,9 +491,9 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text">戶號</span>
+                                        <span class="input-group-text">戶口名簿戶號</span>
                                     </div>
-                                    <input type="text" placeholder="" class="form-control" id="accountnumber" name="accountnumber" required>
+                                    <input type="text" placeholder="" class="form-control" id="accountnumber" name="accountnumber" pattern="[a-zA-Z0-9]{8}" required>
                                     <div class="invalid-feedback">
                                         請填寫戶號
                                     </div>
@@ -594,7 +662,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">分戶戶號</span>
                                             </div>
-                                            <input type="text" class="form-control" id="saparatenumber" name="saparatenumber" disabled>
+                                            <input type="text" class="form-control" id="saparatenumber" name="saparatenumber" pattern="[a-zA-Z0-9]{8}" disabled>
                                             <div class="invalid-feedback">
                                                 請填寫分戶戶號
                                             </div>
@@ -660,7 +728,7 @@
     @*inputmask*@
     @*<script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/inputmask/inputmask.bundle.js"></script>*@
 
-<script type="text/javascript">
+    <script type="text/javascript">
         //validation
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function () {
@@ -752,19 +820,19 @@
                                 //姓名
                                 const Name = document.getElementById(`Name_Ag` + strindex).value;
                                 //性別
-                                var genderRadioElement = document.getElementsByName("genderRadio_Ag" + strindex);
-                                var genderValue;
-                                for (var j = 0; j < genderRadioElement.length; j++) {
-                                    if (genderRadioElement[j].checked) {
-                                        genderValue = genderRadioElement[j].value;
-                                        break;  //找到選中的值，跳出循環
-                                    }
-                                }
+                                //var genderRadioElement = document.getElementsByName("genderRadio_Ag" + strindex);
+                                //var genderValue;
+                                //for (var j = 0; j < genderRadioElement.length; j++) {
+                                //    if (genderRadioElement[j].checked) {
+                                //        genderValue = genderRadioElement[j].value;
+                                //        break;  //找到選中的值，跳出循環
+                                //    }
+                                //}
                                 //生日
-                                const Year = parseInt(document.getElementById(`birthdayYear_` + strindex).value) + 1911;
-                                const Month = document.getElementById(`birthdayMonth_` + strindex).value;
-                                const Day = document.getElementById(`birthdayDay_` + strindex).value;
-                                const Birthday = Year.toString() + '-' + Month + '-' + Day;
+                                //const Year = parseInt(document.getElementById(`birthdayYear_` + strindex).value) + 1911;
+                                //const Month = document.getElementById(`birthdayMonth_` + strindex).value;
+                                //const Day = document.getElementById(`birthdayDay_` + strindex).value;
+                                //const Birthday = Year.toString() + '-' + Month + '-' + Day;
                                 //身分證
                                 const IDNumber = document.getElementById(`IDnumber_Ag` + strindex).value;
                                 //電話
@@ -783,8 +851,8 @@
                                     }
                                 }
                                 dataArray.push(Name);
-                                dataArray.push(genderValue);
-                                dataArray.push(Birthday);
+                                //dataArray.push(genderValue);
+                                //dataArray.push(Birthday);
                                 dataArray.push(IDNumber);
                                 dataArray.push(Phone);
                                 dataArray.push(Road);
@@ -812,19 +880,19 @@
                                  //姓名
                                 const Name = document.getElementById(`Name_Gu` + strindex).value;
                                 //性別
-                                var genderRadioElement = document.getElementsByName("genderRadio_Gu" + strindex);
-                                var genderValue;
-                                for (j = 0; j < genderRadioElement.length; j++) {
-                                    if (genderRadioElement[j].checked) {
-                                        genderValue = genderRadioElement[j].value;
-                                        break;  //找到選中的值，跳出循環
-                                    }
-                                }
+                                //var genderRadioElement = document.getElementsByName("genderRadio_Gu" + strindex);
+                                //var genderValue;
+                                //for (j = 0; j < genderRadioElement.length; j++) {
+                                //    if (genderRadioElement[j].checked) {
+                                //        genderValue = genderRadioElement[j].value;
+                                //        break;  //找到選中的值，跳出循環
+                                //    }
+                                //}
                                 //生日
-                                const Year = parseInt(document.getElementById(`birthdayYear_` + strindex).value) + 1911;
-                                const Month = document.getElementById(`birthdayMonth_` + strindex).value;
-                                const Day = document.getElementById(`birthdayDay_` + strindex).value;
-                                const Birthday = Year.toString() + '-' + Month + '-' + Day;
+                                //const Year = parseInt(document.getElementById(`birthdayYear_` + strindex).value) + 1911;
+                                //const Month = document.getElementById(`birthdayMonth_` + strindex).value;
+                                //const Day = document.getElementById(`birthdayDay_` + strindex).value;
+                                //const Birthday = Year.toString() + '-' + Month + '-' + Day;
                                 //身分證
                                 const IDNumber = document.getElementById(`IDnumber_Gu` + strindex).value;
                                 //電話
@@ -843,8 +911,8 @@
                                     }
                                 }
                                 dataArray.push(Name);
-                                dataArray.push(genderValue);
-                                dataArray.push(Birthday);
+                                //dataArray.push(genderValue);
+                                //dataArray.push(Birthday);
                                 dataArray.push(IDNumber);
                                 dataArray.push(Phone);
                                 dataArray.push(Road);
@@ -863,8 +931,13 @@
                 });
             }, false);
         })();
-
         $(function () {
+            //ErrorMessage
+            if ('@ErrorMessage' !== '') {
+                alert("存取資料錯誤，請重新選單，若問題未解決請回報系統管理員。錯誤訊息:" + '@ErrorMessage');
+            }
+            var ControllerName = '@ControllerName';
+            $('input[name="ControllerName"]').val(ControllerName);
             //inputmask
             //$(":input").inputmask();
 
@@ -1298,11 +1371,13 @@
             // 編輯模式
             //------------------
             var formid = '@FormID'
-            if (formid !== '') {
+            if (formid !== '' && '@ViewBag.Exist' == 'exist') {
                 $('input[name="FormID"]').val(formid);
                 //房客類別
                 var TenantType = '@TenantType';
-                $('input[name="typeRadio"][value="' + TenantType + '"]').prop('checked', true).trigger('change');;
+                $('input[name="typeRadio"][value="' + TenantType + '"]').prop('checked', true).trigger('change');
+                $('#vulnerablefile').prop('required', false);
+                $('#sheetfile').prop('required', false);
                 //房東姓名
                 var Name = '@Name';
                 $('input[name="Name_0"]').val(Name);
@@ -1450,12 +1525,6 @@
                     $('.directInput_' + DiInput + '[data-input="4"]').val(parseInt(birthparts[1]));
                     $('.directInput_' + DiInput + '[data-input="5"]').val(parseInt(birthparts[2]));
                 }
-
-
-
-
-
-
                 //代理人
                 $('input[name="AgentRadio"][value="' + AgentCount + '"]').prop('checked', true).trigger('change');;
 
@@ -1472,18 +1541,25 @@
                 for (var AgInput = 1; AgInput <= AgentCount; AgInput++) {
                     var Agent = agentArray[AgInput - 1];
                     var anotherInputNo = AgInput + 10;      //代理人代碼為(10起跳)
-                    var birthparts = Agent[2].split('-');
-                    var agIDNumber = Agent[3];
-                    $('.AgInput_' + AgInput + '[data-input="0"]').val(Agent[0]);   //姓名
-                    $('input[name="genderRadio_Ag' + anotherInputNo + '"][value="' + Agent[1] + '"]').prop('checked', true).trigger('change');;     //性別
-                    $('.AgInput_' + AgInput + '[data-input="1"]').val(parseInt(birthparts[0]) - 1911);    //生日
-                    $('.AgInput_' + AgInput + '[data-input="2"]').val(parseInt(birthparts[1]));
-                    $('.AgInput_' + AgInput + '[data-input="3"]').val(parseInt(birthparts[2]));
-                    $('.AgInput_' + AgInput + '[data-input="4"]').val(Agent[3]);   //身分證
+                    //var birthparts = Agent[2].split('-');
+                    var agName = Agent[0];
+                    var agIDNumber = Agent[1];
+                    var agPhone = Agent[2];
+                    var agAddressCode = Agent[3];
+                    var agAddressDetail = Agent[4];
+                    var agContactCode = Agent[5];
+                    var agContactDetail = Agent[6];
+
+                    $('.AgInput_' + AgInput + '[data-input="0"]').val(agName);   //姓名
+                    //$('input[name="genderRadio_Ag' + anotherInputNo + '"][value="' + Agent[1] + '"]').prop('checked', true).trigger('change');;     //性別
+                    //$('.AgInput_' + AgInput + '[data-input="1"]').val(parseInt(birthparts[0]) - 1911);    //生日
+                    //$('.AgInput_' + AgInput + '[data-input="2"]').val(parseInt(birthparts[1]));
+                    //$('.AgInput_' + AgInput + '[data-input="3"]').val(parseInt(birthparts[2]));
+                    $('.AgInput_' + AgInput + '[data-input="4"]').val(agIDNumber);   //身分證
                     if (!IDNumberpattern.test(agIDNumber)) {
                         $('.national_check[data-index="' + anotherInputNo + '"]').prop('checked', true).trigger('change');
                     }
-                    $('.AgInput_' + AgInput + '[data-input="5"]').val(Agent[4]);   //號碼
+                    $('.AgInput_' + AgInput + '[data-input="5"]').val(agPhone);   //號碼
 
                     //地址DDL
                     var AgAddress_District;
@@ -1518,16 +1594,14 @@
                     $('.AgInput_' + AgInput + '[data-input="11"]').empty().select2({ data: AgContact_District });   //通訊地址_鄉鎮市區
                     $('.AgInput_' + AgInput + '[data-input="12"]').empty().select2({ data: AgContact_Road });       //通訊地址_道路名稱
                     //寫進地址
-                    var Agaddress_code = Agent[5];
-                    var Agcontact_code = Agent[7];
-                    $('.AgInput_' + AgInput + '[data-input="6"]').val(Agaddress_code.substring(0, 2)).trigger('change');
-                    $('.AgInput_' + AgInput + '[data-input="7"]').val(Agaddress_code.substring(0, 4)).trigger('change');
-                    $('.AgInput_' + AgInput + '[data-input="8"]').val(Agaddress_code).trigger('change');
-                    $('.AgInput_' + AgInput + '[data-input="9"]').val(Agent[6]);      //戶籍地址_詳細地址
-                    $('.AgInput_' + AgInput + '[data-input="10"]').val(Agcontact_code.substring(0, 2)).trigger('change');
-                    $('.AgInput_' + AgInput + '[data-input="11"]').val(Agcontact_code.substring(0, 4)).trigger('change');
-                    $('.AgInput_' + AgInput + '[data-input="12"]').val(Agcontact_code).trigger('change');
-                    $('.AgInput_' + AgInput + '[data-input="13"]').val(Agent[8]);      //通訊地址_詳細地址
+                    $('.AgInput_' + AgInput + '[data-input="6"]').val(agAddressCode.substring(0, 2)).trigger('change');
+                    $('.AgInput_' + AgInput + '[data-input="7"]').val(agAddressCode.substring(0, 4)).trigger('change');
+                    $('.AgInput_' + AgInput + '[data-input="8"]').val(agAddressCode).trigger('change');
+                    $('.AgInput_' + AgInput + '[data-input="9"]').val(agAddressDetail);      //戶籍地址_詳細地址
+                    $('.AgInput_' + AgInput + '[data-input="10"]').val(agContactCode.substring(0, 2)).trigger('change');
+                    $('.AgInput_' + AgInput + '[data-input="11"]').val(agContactCode.substring(0, 4)).trigger('change');
+                    $('.AgInput_' + AgInput + '[data-input="12"]').val(agContactCode).trigger('change');
+                    $('.AgInput_' + AgInput + '[data-input="13"]').val(agContactDetail);      //通訊地址_詳細地址
                 }
 
 
@@ -1545,18 +1619,24 @@
                 for (var GuInput = 1; GuInput <= GuarantorCount; GuInput++) {
                     var Guarantor = GuarantorArray[GuInput - 1];
                     var anotherInputNo = GuInput + 20;      //保證人代碼為(10起跳)
-                    var birthparts = Guarantor[2].split('-');
-                    var GuIDNumber = Guarantor[3];
-                    $('.GuInput_' + GuInput + '[data-input="0"]').val(Guarantor[0]);   //姓名
-                    $('input[name="genderRadio_Gu' + anotherInputNo + '"][value="' + Guarantor[1] + '"]').prop('checked', true).trigger('change');;     //性別
-                    $('.GuInput_' + GuInput + '[data-input="1"]').val(parseInt(birthparts[0]) - 1911);    //生日
-                    $('.GuInput_' + GuInput + '[data-input="2"]').val(parseInt(birthparts[1]));
-                    $('.GuInput_' + GuInput + '[data-input="3"]').val(parseInt(birthparts[2]));
-                    $('.GuInput_' + GuInput + '[data-input="4"]').val(Guarantor[3]);   //身分證
-                    if (!IDNumberpattern.test(GuIDNumber)) {
+                    //var birthparts = Guarantor[2].split('-');
+                    var guName = Guarantor[0];
+                    var guIDNumber = Guarantor[1];
+                    var guPhone = Guarantor[2];
+                    var guAddressCode = Guarantor[3];
+                    var guAddressDetail = Guarantor[4];
+                    var guContactCode = Guarantor[5];
+                    var guContactDetail = Guarantor[6];
+                    $('.GuInput_' + GuInput + '[data-input="0"]').val(guName);   //姓名
+                    //$('input[name="genderRadio_Gu' + anotherInputNo + '"][value="' + Guarantor[1] + '"]').prop('checked', true).trigger('change');;     //性別
+                    //$('.GuInput_' + GuInput + '[data-input="1"]').val(parseInt(birthparts[0]) - 1911);    //生日
+                    //$('.GuInput_' + GuInput + '[data-input="2"]').val(parseInt(birthparts[1]));
+                    //$('.GuInput_' + GuInput + '[data-input="3"]').val(parseInt(birthparts[2]));
+                    $('.GuInput_' + GuInput + '[data-input="4"]').val(guIDNumber);   //身分證
+                    if (!IDNumberpattern.test(guIDNumber)) {
                         $('.national_check[data-index="' + anotherInputNo + '"]').prop('checked', true).trigger('change');
                     }
-                    $('.GuInput_' + GuInput + '[data-input="5"]').val(Guarantor[4]);   //號碼
+                    $('.GuInput_' + GuInput + '[data-input="5"]').val(guPhone);   //號碼
 
                     //地址DDL
                     var GuAddress_District;
@@ -1593,18 +1673,16 @@
                     //寫進地址
                     var Guaddress_code = Guarantor[5];
                     var Gucontact_code = Guarantor[7];
-                    $('.GuInput_' + GuInput + '[data-input="6"]').val(Guaddress_code.substring(0, 2)).trigger('change');
-                    $('.GuInput_' + GuInput + '[data-input="7"]').val(Guaddress_code.substring(0, 4)).trigger('change');
-                    $('.GuInput_' + GuInput + '[data-input="8"]').val(Guaddress_code).trigger('change');
-                    $('.GuInput_' + GuInput + '[data-input="9"]').val(Guarantor[6]);      //戶籍地址_詳細地址
-                    $('.GuInput_' + GuInput + '[data-input="10"]').val(Gucontact_code.substring(0, 2)).trigger('change');
-                    $('.GuInput_' + GuInput + '[data-input="11"]').val(Gucontact_code.substring(0, 4)).trigger('change');
-                    $('.GuInput_' + GuInput + '[data-input="12"]').val(Gucontact_code).trigger('change');
-                    $('.GuInput_' + GuInput + '[data-input="13"]').val(Guarantor[8]);      //通訊地址_詳細地址
+                    $('.GuInput_' + GuInput + '[data-input="6"]').val(guAddressCode.substring(0, 2)).trigger('change');
+                    $('.GuInput_' + GuInput + '[data-input="7"]').val(guAddressCode.substring(0, 4)).trigger('change');
+                    $('.GuInput_' + GuInput + '[data-input="8"]').val(guAddressCode).trigger('change');
+                    $('.GuInput_' + GuInput + '[data-input="9"]').val(guAddressDetail);      //戶籍地址_詳細地址
+                    $('.GuInput_' + GuInput + '[data-input="10"]').val(guContactCode.substring(0, 2)).trigger('change');
+                    $('.GuInput_' + GuInput + '[data-input="11"]').val(guContactCode.substring(0, 4)).trigger('change');
+                    $('.GuInput_' + GuInput + '[data-input="12"]').val(guContactCode).trigger('change');
+                    $('.GuInput_' + GuInput + '[data-input="13"]').val(guContactDetail);      //通訊地址_詳細地址
                 }
-
             }
-
 
             //當下拉選單發生改變事件(change)，執行
             $('body').on('change', '.select2_city', function () {
@@ -1689,7 +1767,7 @@
         function changeship(button, active) {
             var intselectorder = parseInt($(button).attr('data-order'));
             if (active == 'create') {
-                if (intselectorder < 10) {
+                if (intselectorder < 9) {
                     intselectorder = intselectorder + 1;
                     //顯示輸入欄位
                     $('.directformgroup[data-order="' + intselectorder + '"]').show();
@@ -1730,6 +1808,81 @@
                 templates: controls
             });
 
+        //下載檔案
+        function downloadfile(filealias) {
+            $('#hidfilealias').val(filealias);
+            $('#HiddenDownloadFile').submit();
+        };
 
-</script>
+        //刪除檔案
+        function deletefile(formid, filealias, filenameSpace) {
+            if (confirm('確認刪除檔案?')) {
+                        $.ajax({
+                            url: '@Url.Action("DeleteFile", "Form")',                        // url位置
+                            type: 'post',                   // post/get
+                            dataType: 'json',
+                            data: {
+                                FormID: formid,
+                                FileAlias: filealias,
+                                FileType: filenameSpace,
+                            },       // 輸入的資料
+                            error: function (xhr) {
+                                console.log(xhr.responseText);
+                            },      // 錯誤後執行的函數
+                            success: function (response) {
+                                if (response !== 'nodata1' && response !== 'nodata2') {
+                                    var tableHtml = '<table class="table table-hover text-nowrap table-bordered">';
+                                    tableHtml += '<thead><tr style="text-align:center; vertical-align:middle; background-color:#99ccff;"><th style=" width:60px;">編號</th> <th>檔案名稱</th> <th style="text-align:center; vertical-align:middle; width:60px;">操作</th></tr></thead>';
+                                    tableHtml += '<tbody>';
+                                    var IsAdmin = '@ViewBag.IsAdmin';
+                                    var ISstoreManager = '@ViewBag.ISstoreManager';
+
+                                    var fileNameList = JSON.parse(response.FileName);
+                                    var fileAliasList = JSON.parse(response.File_Name_Alias);
+                                    for (var i = 0; i < fileNameList.length; i++) {
+                                        var filename = fileNameList[i];
+                                        var filealias = fileAliasList[i];
+                                        var serialnumber = i + 1;
+
+                                        var buttonstring = '';
+                                        buttonstring = '</td><td style="text-align:center; vertical-align:middle;"><button type="button" class="btn btn-danger waves-effect waves-themed" onclick="deletefile(\'' + formid + '\', \'' + filealias + '\', \'' + filenameSpace + '\')")>刪除</button></td></tr>';
+
+                                        tableHtml += '<tr><td style="text-align:center; vertical-align:middle;">' + serialnumber + '<td>'
+                                            + filename
+                                            + '&nbsp;<button class="btn btn-light btn-sm" type="button" onclick="downloadfile(\'' + filealias + '\')"><i class="fa fa-download"></i></button>'
+                                            + buttonstring;
+
+                                    }
+                                    tableHtml += '</tbody></table>';
+
+                                    document.getElementById(filenameSpace).innerHTML = tableHtml;
+
+                                    var button = document.getElementById('modalleave'); // 将 'your-button-id' 替换为按钮的实际 ID
+                                    button.onclick = function () {
+                                        location.reload();
+                                    };
+                                }
+                                else if (response == 'nodata1') {
+                                    $('input[name="typeRadio"]').trigger('change');
+                                    document.getElementById(filenameSpace).innerHTML = "";
+                                }
+                                else if (response == 'nodata2') {
+                                    $('#sheetfile').prop('required', true);
+                                    document.getElementById(filenameSpace).innerHTML = "";
+                                }
+                            }// 成功後要執行的函數
+                        });
+            }
+        };
+
+    </script>
+}
+
+
+@*Hidden form for Downlod(Download.onclick)*@
+@using (Html.BeginForm("Download", "Form", FormMethod.Post, new { @id = "HiddenDownloadFile" }))
+{
+    @Html.Hidden("FileName", "-1", new { @id = "hidfilename" })
+    @Html.Hidden("FileAlias", "-1", new { @id = "hidfilealias" })
+    @Html.Hidden("Path", "Form")
 }

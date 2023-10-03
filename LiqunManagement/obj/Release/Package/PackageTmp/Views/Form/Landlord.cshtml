@@ -6,7 +6,10 @@
     Layout = "~/Views/Shared/smartadmin_Layout.cshtml";
 
     //表單編號
-    var FormID = Model.FormID != null ? Model.FormID : "";
+    var FormID = Model.FormID;
+    var ErrorMessage = ViewBag.ErrorMessage != null ? ViewBag.ErrorMessage : "";
+    var ControllerName = @ViewBag.ControllerName;
+
     //房東姓名
     var Name = Model.landlordviewmodel != null ? Model.landlordviewmodel.Name : "";
     //(法人)負責人
@@ -146,7 +149,8 @@
                         @using (Html.BeginForm("Landlord", "Form", FormMethod.Post, new { @class = "needs-validation", @enctype = "multipart/form-data", @novalidate = "" }))
                         {
                             @*表單編號*@
-                            <input type="text" value="@ViewBag.FormID" name="FormID" hidden />
+                            <input type="text" value="@FormID" name="FormID" hidden />
+                            <input type="text" name="ControllerName" hidden />
 
                             @*自然人或法人*@
                             <div class="form-group">
@@ -236,7 +240,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="text" id="IDnumber_0" name="IDnumber_0" class="form-control inputIDnumber" data-index="0"  pattern="^[A-Z]\d{9}$" required>
+                                <input type="text" id="IDnumber_0" name="IDnumber_0" class="form-control inputIDnumber" data-index="0" pattern="^[A-Z]\d{9}$" required>
                                 <div class="invalid-feedback">
                                     請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
                                 </div>
@@ -244,7 +248,7 @@
                             @*連絡電話*@
                             <div class="form-group">
                                 <label class="form-label" for="phonenumber">連絡電話</label>
-                                <input type="text" id="Phone_0" name="Phone_0" class="form-control inputPhoneNumber" data-index="0"  pattern="^\d{10}$" required>
+                                <input type="text" id="Phone_0" name="Phone_0" class="form-control inputPhoneNumber" data-index="0" pattern="^\d{10}$" required>
                                 <div class="invalid-feedback">
                                     請輸入連絡電話，並確認格式為【10個數字】
                                 </div>
@@ -391,49 +395,49 @@
                                 </div>
                             </div>
                             @*性別*@
-                            <div class="form-group getagent">
-                                <label class="form-label">
-                                    性別:
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <div class="frame-wrap padding-top-ten">
-                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input agentrequired" id="genderRadio_11_1" name="genderRadio_11" value="1">
-                                        <label class="custom-control-label" for="genderRadio_11_1">男</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-                                        <input type="radio" class="custom-control-input agentrequired" id="genderRadio_11_0" name="genderRadio_11" value="0">
-                                        <label class="custom-control-label" for="genderRadio_11_0">女</label>
-                                        <div class="invalid-feedback">
-                                            請選擇代理人性別
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @*<div class="form-group getagent">
+                <label class="form-label">
+                    性別:
+                    <span class="text-danger">*</span>
+                </label>
+                <div class="frame-wrap padding-top-ten">
+                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+                        <input type="radio" class="custom-control-input agentrequired" id="genderRadio_11_1" name="genderRadio_11" value="1">
+                        <label class="custom-control-label" for="genderRadio_11_1">男</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+                        <input type="radio" class="custom-control-input agentrequired" id="genderRadio_11_0" name="genderRadio_11" value="0">
+                        <label class="custom-control-label" for="genderRadio_11_0">女</label>
+                        <div class="invalid-feedback">
+                            請選擇代理人性別
+                        </div>
+                    </div>
+                </div>
+            </div>*@
                             @*出生年月日*@
-                            <div class="form-group getagent">
-                                <label class="form-label" for="birthday">生日</label>
-                                <div class="col-md-8 col-lg-6 getagent mb-3 pl-0">
-                                    <div class="input-group w-100">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">民國</span>
-                                        </div>
-                                        <input type="number" class="form-control agentrequired" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_11" name="birthdayYear_11">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">年</span>
-                                        </div>
-                                        <input type="number" class="form-control birthdayMonth agentrequired" max="12" min="1" id="birthdayMonth_11" name="birthdayMonth_11" data-index="11">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">月</span>
-                                        </div>
-                                        <input type="number" class="form-control agentrequired" max="31" min="1" id="birthdayDay_11" name="birthdayDay_11">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">日</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                @*<input type="text" id="birthday_11" name="birthday_11" hidden>*@
-                            </div>
+                            <!--<div class="form-group getagent">
+        <label class="form-label" for="birthday">生日</label>
+        <div class="col-md-8 col-lg-6 getagent mb-3 pl-0">
+            <div class="input-group w-100">
+                <div class="input-group-append">
+                    <span class="input-group-text">民國</span>
+                </div>
+                <input type="number" class="form-control agentrequired" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_11" name="birthdayYear_11">
+                <div class="input-group-append">
+                    <span class="input-group-text">年</span>
+                </div>
+                <input type="number" class="form-control birthdayMonth agentrequired" max="12" min="1" id="birthdayMonth_11" name="birthdayMonth_11" data-index="11">
+                <div class="input-group-append">
+                    <span class="input-group-text">月</span>
+                </div>
+                <input type="number" class="form-control agentrequired" max="31" min="1" id="birthdayDay_11" name="birthdayDay_11">
+                <div class="input-group-append">
+                    <span class="input-group-text">日</span>
+                </div>
+            </div>
+        </div>-->
+                            @*<input type="text" id="birthday_11" name="birthday_11" hidden>*@
+                            <!--</div>-->
                             @*身分證字號*@
                             <div class="form-group getagent">
                                 <label class="form-label" for="IDNumber_10">身分證字號</label>
@@ -445,7 +449,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control inputIDnumber agentrequired" id="IDNumber_11" name="IDNumber_11" data-index="11"  pattern="^[A-Z]\d{9}$">
+                                <input type="text" class="form-control inputIDnumber agentrequired" id="IDNumber_11" name="IDNumber_11" data-index="11" pattern="^[A-Z]\d{9}$">
                                 <div class="invalid-feedback">
                                     請輸入身分證字號，並確認格式為【1個英文字母+9個數字】 (ex.A123456789)
                                 </div>
@@ -453,7 +457,7 @@
                             @*連絡電話*@
                             <div class="form-group getagent">
                                 <label class="form-label" for="phonenumber">連絡電話</label>
-                                <input type="text" id="Phone_11" name="Phone_11" class="form-control inputPhoneNumber agentrequired" data-index="11"  pattern="^\d{10}$">
+                                <input type="text" id="Phone_11" name="Phone_11" class="form-control inputPhoneNumber agentrequired" data-index="11" pattern="^\d{10}$">
                                 <div class="invalid-feedback">
                                     請輸入連絡電話，並確認格式為【10個數字】
                                 </div>
@@ -575,8 +579,8 @@
     @*inputmask*@
     @*<script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/inputmask/inputmask.bundle.js"></script>*@
     @*datetimepicker*@
-    <script src="~/Content/plugins/moment/moment.min.js"></script>
-    <script src="~/Content/plugins/moment/moment-with-locales.js"></script>
+    @*<script src="~/Content/plugins/moment/moment.min.js"></script>
+    <script src="~/Content/plugins/moment/moment-with-locales.js"></script>*@
     @*<script src="~/Scripts/datepicker-zh-TW.js"></script>*@
     @*<script src="~/Content/plugins/fullcalendar/locales-all.min.js"></script>*@
 
@@ -630,10 +634,10 @@
                             if (selectedValue >= 1) {
                                 const dataArray = [];
                                 const Name = document.getElementById(`Name_Co1`).value;
-                                const Year = parseInt(document.getElementById(`birthdayYear_Co1`).value) + 1911;
-                                const Month = document.getElementById(`birthdayMonth_Co1`).value;
-                                const Day = document.getElementById(`birthdayDay_Co1`).value;
-                                const Birthday = Year.toString() + '-' + Month + '-' + Day;
+                                //const Year = parseInt(document.getElementById(`birthdayYear_Co1`).value) + 1911;
+                                //const Month = document.getElementById(`birthdayMonth_Co1`).value;
+                                //const Day = document.getElementById(`birthdayDay_Co1`).value;
+                                //const Birthday = Year.toString() + '-' + Month + '-' + Day;
                                 const IDNumber = document.getElementById(`IDnumber_Co1`).value;
                                 const Phone = document.getElementById(`Phone_Co1`).value;
                                 const Road = document.getElementById(`road_Co1`).value;
@@ -648,7 +652,7 @@
                                     }
                                 }
                                 dataArray.push(Name);
-                                dataArray.push(Birthday);
+                                //dataArray.push(Birthday);
                                 dataArray.push(IDNumber);
                                 dataArray.push(Phone);
                                 dataArray.push(Road);
@@ -661,10 +665,10 @@
                             if (selectedValue >= 2) {
                                 const dataArray = [];
                                 const Name = document.getElementById(`Name_Co2`).value;
-                                const Year = parseInt(document.getElementById(`birthdayYear_Co2`).value) + 1911;
-                                const Month = document.getElementById(`birthdayMonth_Co2`).value;
-                                const Day = document.getElementById(`birthdayDay_Co2`).value;
-                                const Birthday = Year.toString() + '-' + Month + '-' + Day;
+                                //const Year = parseInt(document.getElementById(`birthdayYear_Co2`).value) + 1911;
+                                //const Month = document.getElementById(`birthdayMonth_Co2`).value;
+                                //const Day = document.getElementById(`birthdayDay_Co2`).value;
+                                //const Birthday = Year.toString() + '-' + Month + '-' + Day;
                                 const IDNumber = document.getElementById(`IDnumber_Co2`).value;
                                 const Phone = document.getElementById(`Phone_Co2`).value;
                                 const Road = document.getElementById(`road_Co2`).value;
@@ -679,7 +683,7 @@
                                     }
                                 }
                                 dataArray.push(Name);
-                                dataArray.push(Birthday);
+                                //dataArray.push(Birthday);
                                 dataArray.push(IDNumber);
                                 dataArray.push(Phone);
                                 dataArray.push(Road);
@@ -692,10 +696,10 @@
                             if (selectedValue >= 3) {
                                 const dataArray = [];
                                 const Name = document.getElementById(`Name_Co3`).value;
-                                const Year = parseInt(document.getElementById(`birthdayYear_Co3`).value) + 1911;
-                                const Month = document.getElementById(`birthdayMonth_Co3`).value;
-                                const Day = document.getElementById(`birthdayDay_Co3`).value;
-                                const Birthday = Year.toString() + '-' + Month + '-' + Day;
+                                //const Year = parseInt(document.getElementById(`birthdayYear_Co3`).value) + 1911;
+                                //const Month = document.getElementById(`birthdayMonth_Co3`).value;
+                                //const Day = document.getElementById(`birthdayDay_Co3`).value;
+                                //const Birthday = Year.toString() + '-' + Month + '-' + Day;
                                 const IDNumber = document.getElementById(`IDnumber_Co3`).value;
                                 const Phone = document.getElementById(`Phone_Co3`).value;
                                 const Road = document.getElementById(`road_Co3`).value;
@@ -710,7 +714,7 @@
                                     }
                                 }
                                 dataArray.push(Name);
-                                dataArray.push(Birthday);
+                                //dataArray.push(Birthday);
                                 dataArray.push(IDNumber);
                                 dataArray.push(Phone);
                                 dataArray.push(Road);
@@ -723,10 +727,10 @@
                             if (selectedValue >= 4) {
                                 const dataArray = [];
                                 const Name = document.getElementById(`Name_Co4`).value;
-                                const Year = parseInt(document.getElementById(`birthdayYear_Co4`).value) + 1911;
-                                const Month = document.getElementById(`birthdayMonth_Co4`).value;
-                                const Day = document.getElementById(`birthdayDay_Co4`).value;
-                                const Birthday = Year.toString() + '-' + Month + '-' + Day;
+                                //const Year = parseInt(document.getElementById(`birthdayYear_Co4`).value) + 1911;
+                                //const Month = document.getElementById(`birthdayMonth_Co4`).value;
+                                //const Day = document.getElementById(`birthdayDay_Co4`).value;
+                                //const Birthday = Year.toString() + '-' + Month + '-' + Day;
                                 const IDNumber = document.getElementById(`IDnumber_Co4`).value;
                                 const Phone = document.getElementById(`Phone_Co4`).value;
                                 const Road = document.getElementById(`road_Co4`).value;
@@ -742,7 +746,7 @@
                                 }
 
                                 dataArray.push(Name);
-                                dataArray.push(Birthday);
+                                //dataArray.push(Birthday);
                                 dataArray.push(IDNumber);
                                 dataArray.push(Phone);
                                 dataArray.push(Road);
@@ -755,10 +759,10 @@
                             if (selectedValue >= 5) {
                                 const dataArray = [];
                                 const Name = document.getElementById(`Name_Co5`).value;
-                                const Year = parseInt(document.getElementById(`birthdayYear_Co5`).value) + 1911;
-                                const Month = document.getElementById(`birthdayMonth_Co5`).value;
-                                const Day = document.getElementById(`birthdayDay_Co5`).value;
-                                const Birthday = Year.toString() + '-' + Month + '-' + Day;
+                                //const Year = parseInt(document.getElementById(`birthdayYear_Co5`).value) + 1911;
+                                //const Month = document.getElementById(`birthdayMonth_Co5`).value;
+                                //const Day = document.getElementById(`birthdayDay_Co5`).value;
+                                //const Birthday = Year.toString() + '-' + Month + '-' + Day;
                                 const IDNumber = document.getElementById(`IDnumber_Co5`).value;
                                 const Phone = document.getElementById(`Phone_Co5`).value;
                                 const Road = document.getElementById(`road_Co5`).value;
@@ -774,7 +778,7 @@
                                 }
 
                                 dataArray.push(Name);
-                                dataArray.push(Birthday);
+                                //dataArray.push(Birthday);
                                 dataArray.push(IDNumber);
                                 dataArray.push(Phone);
                                 dataArray.push(Road);
@@ -794,16 +798,16 @@
                                 if (agentCheckbox.checked) {
                                     const Name = document.getElementById(`Name_11`).value;
                                     //性別
-                                    var genderRadioElement = document.getElementsByName("genderRadio_11");
-                                    // 定义变量来存储选中的值
-                                    var selectgender = '1'; //預設男性
-                                    if (!genderRadioElement[0].checked) {
-                                        selectgender = '0'  //女性
-                                    }
-                                    const Year = parseInt(document.getElementById(`birthdayYear_11`).value) + 1911;
-                                    const Month = document.getElementById(`birthdayMonth_11`).value;
-                                    const Day = document.getElementById(`birthdayDay_11`).value;
-                                    const Birthday = Year.toString() + '-' + Month + '-' + Day;
+                                    //var genderRadioElement = document.getElementsByName("genderRadio_11");
+                                    //// 定义变量来存储选中的值
+                                    //var selectgender = '1'; //預設男性
+                                    //if (!genderRadioElement[0].checked) {
+                                    //    selectgender = '0'  //女性
+                                    //}
+                                    //const Year = parseInt(document.getElementById(`birthdayYear_11`).value) + 1911;
+                                    //const Month = document.getElementById(`birthdayMonth_11`).value;
+                                    //const Day = document.getElementById(`birthdayDay_11`).value;
+                                    //const Birthday = Year.toString() + '-' + Month + '-' + Day;
                                     const IDNumber = document.getElementById(`IDNumber_11`).value;
                                     const Phone = document.getElementById(`Phone_11`).value;
                                     const Road = document.getElementById(`addressroad_11`).value;
@@ -818,8 +822,8 @@
                                         }
                                     }
                                     agentdataArray.push(Name);
-                                    agentdataArray.push(selectgender);
-                                    agentdataArray.push(Birthday);
+                                    //agentdataArray.push(selectgender);
+                                    //agentdataArray.push(Birthday);
                                     agentdataArray.push(IDNumber);
                                     agentdataArray.push(Phone);
                                     agentdataArray.push(Road);
@@ -840,8 +844,12 @@
         })();
 
         $(function () {
-            //inputmask
-            //$(":input").inputmask();
+            //ErrorMessage
+            if ('@ErrorMessage' !== '') {
+                alert("存取資料錯誤，請重新選單，若問題未解決請回報系統管理員。錯誤訊息:" + '@ErrorMessage');
+            }
+            var ControllerName = '@ControllerName';
+            $('input[name="ControllerName"]').val(ControllerName);
 
             //將不需填寫的資料先隱藏(共有人)
             $('.getagent').hide();
@@ -1230,7 +1238,7 @@
             // 編輯模式
             //------------------
             var formid = '@FormID';
-            if (formid !== '') {
+            if (formid !== '' && '@ViewBag.Exist' == 'exist') {
                 $('input[name="FormID"]').val(formid);
                 //房東姓名
                 var Name = '@Name';
@@ -1325,19 +1333,25 @@
 
                 var coCount = parseInt(CoOwnerCount);       //共有人人數
                 for (var coInput = 1; coInput <= coCount; coInput++) {
-                    var CoOwner = coOwnerArray[coInput-1];
-                    var birthparts = CoOwner[1].split('-');
-                    var coIDNumber = CoOwner[2];
-                    $('.CoInput_' + coInput + '[data-input="0"]').val(CoOwner[0]);   //姓名
-                    $('.CoInput_' + coInput + '[data-input="1"]').val(parseInt(birthparts[0]) - 1911);    //生日
-                    $('.CoInput_' + coInput + '[data-input="2"]').val(parseInt(birthparts[1]));
-                    $('.CoInput_' + coInput + '[data-input="3"]').val(parseInt(birthparts[2]));
+                    var CoOwner = coOwnerArray[coInput - 1];
+                    var coName = CoOwner[0];
+                    //var birthparts = CoOwner[1].split('-');
+                    var coIDNumber = CoOwner[1];
+                    var coPhone = CoOwner[2];
+                    var coAddressCode = CoOwner[3];
+                    var coAddressDetail = CoOwner[4];
+                    var coContactCode = CoOwner[5];
+                    var coContactDetail = CoOwner[6];
+                    $('.CoInput_' + coInput + '[data-input="0"]').val(coName);   //姓名
+                    //$('.CoInput_' + coInput + '[data-input="1"]').val(parseInt(birthparts[0]) - 1911);    //生日
+                    //$('.CoInput_' + coInput + '[data-input="2"]').val(parseInt(birthparts[1]));
+                    //$('.CoInput_' + coInput + '[data-input="3"]').val(parseInt(birthparts[2]));
                     $('.CoInput_' + coInput + '[data-input="4"]').val(coIDNumber);   //身分證
                     if (!IDNumberpattern.test(coIDNumber)) {
+                        //是否外籍
                         $('.national_check[data-index="' + coInput + '"]').prop('checked', true).trigger('change');
                     }
-                    $('.CoInput_' + coInput + '[data-input="5"]').val(CoOwner[3]);   //號碼
-
+                    $('.CoInput_' + coInput + '[data-input="5"]').val(coPhone);   //號碼
 
                     //地址DDL
                     var CoAddress_District;
@@ -1387,40 +1401,48 @@
                     $('.CoInput_' + coInput + '[data-input="11"]').empty().select2({ data: CoContact_District });   //通訊地址_鄉鎮市區
                     $('.CoInput_' + coInput + '[data-input="12"]').empty().select2({ data: CoContact_Road });       //通訊地址_道路名稱
                     //寫進地址
-                    var Coaddress_code = CoOwner[4];
-                    var Cocontact_code = CoOwner[6];
-                    $('.CoInput_' + coInput + '[data-input="6"]').val(Coaddress_code.substring(0, 2)).trigger('change');
-                    $('.CoInput_' + coInput + '[data-input="7"]').val(Coaddress_code.substring(0, 4)).trigger('change');
-                    $('.CoInput_' + coInput + '[data-input="8"]').val(Coaddress_code).trigger('change');
-                    $('.CoInput_' + coInput + '[data-input="9"]').val(CoOwner[5]);      //戶籍地址_詳細地址
-                    $('.CoInput_' + coInput + '[data-input="10"]').val(Cocontact_code.substring(0, 2)).trigger('change');
-                    $('.CoInput_' + coInput + '[data-input="11"]').val(Cocontact_code.substring(0, 4)).trigger('change');
-                    $('.CoInput_' + coInput + '[data-input="12"]').val(Cocontact_code).trigger('change');
-                    $('.CoInput_' + coInput + '[data-input="13"]').val(CoOwner[7]);      //通訊地址_詳細地址
+                    $('.CoInput_' + coInput + '[data-input="6"]').val(coAddressCode.substring(0, 2)).trigger('change');
+                    $('.CoInput_' + coInput + '[data-input="7"]').val(coAddressCode.substring(0, 4)).trigger('change');
+                    $('.CoInput_' + coInput + '[data-input="8"]').val(coAddressCode).trigger('change');
+                    $('.CoInput_' + coInput + '[data-input="9"]').val(coAddressDetail);      //戶籍地址_詳細地址
+                    $('.CoInput_' + coInput + '[data-input="10"]').val(coContactCode.substring(0, 2)).trigger('change');
+                    $('.CoInput_' + coInput + '[data-input="11"]').val(coContactCode.substring(0, 4)).trigger('change');
+                    $('.CoInput_' + coInput + '[data-input="12"]').val(coContactCode).trigger('change');
+                    $('.CoInput_' + coInput + '[data-input="13"]').val(coContactDetail);      //通訊地址_詳細地址
                 }
                 //代理人
                 var AgentCount = '@AgentCount';
                 var Agent = JSON.parse('@Agent');
                 if (AgentCount !== '0') {
                     $('input[name="agentCheckbox"]').prop('checked', true).trigger('change');;
-                    $('input[name="Name_11"]').val(Agent[0]);
-                    $('input[name="genderRadio_11"][value="' + Agent[1] + '"]').prop('checked', true);
+
+                    var agName = Agent[0];
+                    var agIDNumber = Agent[1];
+                    var agPhone = Agent[2];
+                    var agAddressCode = Agent[3];
+                    var agAddressDetail = Agent[4];
+                    var agContactCode = Agent[5];
+                    var agContactDetail = Agent[6];
+
+                    $('input[name="Name_11"]').val(agName);
+                    //$('input[name="genderRadio_11"][value="' + Agent[1] + '"]').prop('checked', true);
                     //生日
-                    var birthdaystr_Ag = Agent[2];
-                    var birthpart_Ag = birthdaystr_Ag.split('-');
-                    var birthyear_Ag = parseInt(parseInt(birthpart_Ag[0])-1911);
-                    var birthmonth_Ag = parseInt(birthpart_Ag[1]);
-                    var biirthday_Ag = parseInt(birthpart_Ag[2]);
-                    $('#birthdayYear_11').val(birthyear_Ag);
-                    $('#birthdayMonth_11').val(birthmonth_Ag);
-                    $('#birthdayDay_11').val(biirthday_Ag);
+                    //var birthdaystr_Ag = Agent[2];
+                    //var birthpart_Ag = birthdaystr_Ag.split('-');
+                    //var birthyear_Ag = parseInt(parseInt(birthpart_Ag[0])-1911);
+                    //var birthmonth_Ag = parseInt(birthpart_Ag[1]);
+                    //var biirthday_Ag = parseInt(birthpart_Ag[2]);
+                    //$('#birthdayYear_11').val(birthyear_Ag);
+                    //$('#birthdayMonth_11').val(birthmonth_Ag);
+                    //$('#birthdayDay_11').val(biirthday_Ag);
                     //身分證
-                    if (!IDNumberpattern.test(Agent[3])) {
+                    $('#IDNumber_11').val(agIDNumber);
+                    if (!IDNumberpattern.test(agIDNumber)) {
+                        //是否為外籍
                         $('#international_IDnumber_11').prop('checked', true).trigger('change');
                     }
-                    $('#IDNumber_11').val(Agent[3]);
                     //電話
-                    $('input[name="Phone_11"]').val(Agent[4]);
+                    $('input[name="Phone_11"]').val(agPhone);
 
                     //地址
                     AgAddress_District = JSON.parse('@AgAddress_District');
@@ -1433,21 +1455,15 @@
                     $('.select2_road[data-index="4"]').empty().select2({ data: AgContact_Road });       //通訊地址_道路名稱
 
                     //寫進地址
-                    var Agaddress_code = Agent[5];
-                    var Agcontact_code = Agent[7];
-                    $('.select2_city[data-index="3"]').val(Agaddress_code.substring(0, 2)).trigger('change');
-                    $('.select2_district[data-index="3"]').val(Agaddress_code.substring(0, 4)).trigger('change');
-                    $('.select2_road[data-index="3"]').val(Agaddress_code).trigger('change');
-                    $('#AddressDetail_11').val(Agent[6]);      //戶籍地址_詳細地址
-                    $('.select2_city[data-index="4"]').val(Agcontact_code.substring(0, 2)).trigger('change');
-                    $('.select2_district[data-index="4"]').val(Agcontact_code.substring(0, 4)).trigger('change');
-                    $('.select2_road[data-index="4"]').val(Agcontact_code).trigger('change');
-                    $('#detailcontact_11').val(Agent[8]);      //通訊地址_詳細地址
-
-
+                    $('.select2_city[data-index="3"]').val(agAddressCode.substring(0, 2)).trigger('change');
+                    $('.select2_district[data-index="3"]').val(agAddressCode.substring(0, 4)).trigger('change');
+                    $('.select2_road[data-index="3"]').val(agAddressCode).trigger('change');
+                    $('#AddressDetail_11').val(agAddressDetail);      //戶籍地址_詳細地址
+                    $('.select2_city[data-index="4"]').val(agContactCode.substring(0, 2)).trigger('change');
+                    $('.select2_district[data-index="4"]').val(agContactCode.substring(0, 4)).trigger('change');
+                    $('.select2_road[data-index="4"]').val(agContactCode).trigger('change');
+                    $('#detailcontact_11').val(agContactDetail);      //通訊地址_詳細地址
                 }
-
-
             }
 
             //臺灣地址下拉選單(change事件)

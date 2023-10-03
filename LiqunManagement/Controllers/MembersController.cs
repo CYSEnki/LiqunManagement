@@ -30,7 +30,7 @@ namespace LiqunManagement.Controllers
         }
 
         [Authorize]
-        #region 註冊
+        #region 帳號設定(註冊)
         public ActionResult Register()
         {
             //判斷使用者是否已經過登入驗證
@@ -57,7 +57,7 @@ namespace LiqunManagement.Controllers
             }
             //確認角色
             var role = User.IsInRole("Admin");
-            //var role2 = User.IsInRole("User");
+            ViewBag.Role = User.IsInRole("Admin") ? "Admin" : User.IsInRole("Agent") ? "Agent" : User.IsInRole("Secretary") ? "Secretary" : "";
 
             if (!role)
                 return RedirectToAction("Index", "Liqun");
@@ -243,6 +243,13 @@ namespace LiqunManagement.Controllers
                     memberdb.SaveChanges();
                 }
 
+                //將角色存入職員資料中
+                var membersData = memberdb.Members.Where(x => x.Account == Account).FirstOrDefault();
+                if(membersData != null)
+                {
+                    membersData.Role = deptdata.Role;
+                    memberdb.SaveChanges();
+                }
             }
             catch(Exception ex)
             {
@@ -423,7 +430,7 @@ namespace LiqunManagement.Controllers
             }
             //確認角色
             var role = User.IsInRole("Admin");
-            //var role2 = User.IsInRole("User");
+            ViewBag.Role = User.IsInRole("Admin") ? "Admin" : User.IsInRole("Agent") ? "Agent" : User.IsInRole("Secretary") ? "Secretary" : "";
 
             if (!role)
                 return RedirectToAction("Index", "Liqun");
@@ -509,7 +516,6 @@ namespace LiqunManagement.Controllers
             return RedirectToAction("DeptManage");
         }
         #endregion
-
 
     }
 }

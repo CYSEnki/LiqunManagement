@@ -17,10 +17,12 @@ using LiqunManagement.ViewModels;
 using NPOI.SS.Formula.Functions;
 using System.Data.SqlClient;
 using System.Configuration;
+using LiqunManagement.Attributes;
 
 namespace LiqunManagement.Controllers
 {
-    public class UpLoadController : Controller
+    [AdminAuthorize]
+    public class UpLoadController : BaseController
     {
         //建立與資料庫的連線字串
         private readonly static string cnstr = ConfigurationManager.ConnectionStrings["FormModels"].ConnectionString;
@@ -40,11 +42,38 @@ namespace LiqunManagement.Controllers
         [HttpGet]
         public ActionResult UploadRegion()
         {
-            var UserName = User.Identity.Name;
+            logger.Info("UploadRegion Get");
+            logger.Info("取得使用者資料");
+            #region 使用者資料
+            var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
+                                join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
+                                from empdb0 in temp.DefaultIfEmpty()
+                                join deptdb in memberdb.Department on empdb0.DivCode equals deptdb.DivCode into temp2
+                                from deptdb0 in temp2.DefaultIfEmpty()
+                                select new MembersViewModel
+                                {
+                                    Name = db.Name,
+                                    Department = empdb0 != null ? deptdb0.DivFullName : null,
+                                    Position = empdb0 != null ? empdb0.JobTitle : null,
+                                }).FirstOrDefault();
+            if (EmployeeData != null)
+            {
+                ViewBag.UserName = EmployeeData.Name;                 //使用者名稱
+                ViewBag.Department = EmployeeData.Department;   //使用者部門
+                ViewBag.Position = EmployeeData.Position;       //使用者職位
+                logger.Info("姓名:" + EmployeeData.Name + "部門:" + EmployeeData.Department);
+            }
+            //確認角色
+            var IsAdmin = User.IsInRole("Admin");
+            ViewBag.Role = User.IsInRole("Admin") ? "Admin" : User.IsInRole("Agent") ? "Agent" : User.IsInRole("Secretary") ? "Secretary" : "";
+            #endregion
+
             ViewBag.Message = "Initial";
+
             //UploadService uploadservice = new UploadService();
             //var model = uploadservice.GetRegionData();
 
+            logger.Info("回傳Views");
             return View();
         }
         [HttpPost]
@@ -449,12 +478,32 @@ namespace LiqunManagement.Controllers
         #endregion
         #endregion
 
-
-        
         #region 上傳銀行(Bank)資料
         [HttpGet]
         public ActionResult UploadBank()
         {
+            #region 使用者資料
+            var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
+                                join empdb in memberdb.EmployeeData on db.Account equals empdb.Account into temp
+                                from empdb0 in temp.DefaultIfEmpty()
+                                join deptdb in memberdb.Department on empdb0.DivCode equals deptdb.DivCode into temp2
+                                from deptdb0 in temp2.DefaultIfEmpty()
+                                select new MembersViewModel
+                                {
+                                    Name = db.Name,
+                                    Department = empdb0 != null ? deptdb0.DivFullName : null,
+                                    Position = empdb0 != null ? empdb0.JobTitle : null,
+                                }).FirstOrDefault();
+            if (EmployeeData != null)
+            {
+                ViewBag.UserName = EmployeeData.Name;                 //使用者名稱
+                ViewBag.Department = EmployeeData.Department;   //使用者部門
+                ViewBag.Position = EmployeeData.Position;       //使用者職位
+            }
+            //確認角色
+            var IsAdmin = User.IsInRole("Admin");
+            ViewBag.Role = User.IsInRole("Admin") ? "Admin" : User.IsInRole("Agent") ? "Agent" : User.IsInRole("Secretary") ? "Secretary" : "";
+            #endregion
             var UserName = User.Identity.Name;
             ViewBag.Message = "Initial";
             //UploadService uploadservice = new UploadService();
@@ -793,8 +842,6 @@ namespace LiqunManagement.Controllers
         }
         #endregion
         #endregion
-
-
 
         #region 判斷此列是否第一欄未輸入資料
         //將列數(rowcell)、欄位內容(checkcolumn)、單元格總數(cellCount)、此列內容(row)參數傳入後，判斷此列是否只有第一欄未輸入資料，若整列無資料則匯入此列以上的Excel表格，若僅第一欄未輸入資料則顯示錯誤訊息

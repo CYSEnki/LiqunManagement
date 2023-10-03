@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using NLog.LayoutRenderers;
 
 namespace LiqunManagement.ViewModels
 {
@@ -11,7 +12,7 @@ namespace LiqunManagement.ViewModels
     {
         public IEnumerable<RegionViewModel> RegionIEnumerable { get; set; }
     }
-
+    //地址
     public class RegionViewModel
     {
         public int CityOrder { get; set; }
@@ -27,7 +28,7 @@ namespace LiqunManagement.ViewModels
 
         public string RoadCode { get; set; }
     }
-
+    //銀行
     public class BankViewModel
     {
         public string BankRegion { get; set; }
@@ -40,4 +41,5 @@ namespace LiqunManagement.ViewModels
         public string CodeMinlength { get; set; }
         public string CodeMaxlength { get; set; }
     }
+
 }

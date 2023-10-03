@@ -38,5 +38,8 @@ namespace LiqunManagement.Models
         public DateTime? Createdate { get; set; }
 
         public DateTime? Enddate { get; set; }
+
+        [StringLength(10)]
+        public string Role { get; set; }
     }
 }

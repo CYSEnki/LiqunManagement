@@ -32,47 +32,48 @@
     </div>
 </div>
 @*性別*@
-<div class="form-group getgu1">
-    <label class="form-label">
-        性別:
-        <span class="text-danger">*</span>
-    </label>
-    <div class="frame-wrap padding-top-ten">
-        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-            <input type="radio" class="custom-control-input GuInput_1" id="genderRadio_Gu21_1" name="genderRadio_Gu21" value="1">
-            <label class="custom-control-label" for="genderRadio_Gu21_1">男</label>
-        </div>
-        <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
-            <input type="radio" class="custom-control-input GuInput_1" id="genderRadio_Gu21_0" name="genderRadio_Gu21" value="0">
-            <label class="custom-control-label" for="genderRadio_Gu21_0">女</label>
-            <div class="invalid-feedback">
-                請選擇保證人性別
+@*<div class="form-group getgu1">
+        <label class="form-label">
+            性別:
+            <span class="text-danger">*</span>
+        </label>
+        <div class="frame-wrap padding-top-ten">
+            <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+                <input type="radio" class="custom-control-input GuInput_1" id="genderRadio_Gu21_1" name="genderRadio_Gu21" value="1">
+                <label class="custom-control-label" for="genderRadio_Gu21_1">男</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+                <input type="radio" class="custom-control-input GuInput_1" id="genderRadio_Gu21_0" name="genderRadio_Gu21" value="0">
+                <label class="custom-control-label" for="genderRadio_Gu21_0">女</label>
+                <div class="invalid-feedback">
+                    請選擇保證人性別
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="form-group getgu1">
-    <label class="form-label" for="birthday">生日</label>
-    <div class="col-md-8 col-lg-6 mb-3 pl-0">
-        <div class="input-group w-100">
-            <div class="input-group-append">
-                <span class="input-group-text">民國</span>
-            </div>
-            <input type="number" class="form-control GuInput_1" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_21" data-input="1">
-            <div class="input-group-append">
-                <span class="input-group-text">年</span>
-            </div>
-            <input type="number" class="form-control birthdayMonth GuInput_1" max="12" min="1" id="birthdayMonth_21" data-index="21" data-input="2">
-            <div class="input-group-append">
-                <span class="input-group-text">月</span>
-            </div>
-            <input type="number" class="form-control birthdayDay GuInput_1" max="31" min="1" id="birthdayDay_21" data-index="21" data-input="3">
-            <div class="input-group-append">
-                <span class="input-group-text">日</span>
+    </div>*@
+@*出生年月日*@
+@*<div class="form-group getgu1">
+        <label class="form-label" for="birthday">生日</label>
+        <div class="col-md-8 col-lg-6 mb-3 pl-0">
+            <div class="input-group w-100">
+                <div class="input-group-append">
+                    <span class="input-group-text">民國</span>
+                </div>
+                <input type="number" class="form-control GuInput_1" max="@(Convert.ToInt32(DateTime.Now.Year)-1911)" min="1" id="birthdayYear_21" data-input="1">
+                <div class="input-group-append">
+                    <span class="input-group-text">年</span>
+                </div>
+                <input type="number" class="form-control birthdayMonth GuInput_1" max="12" min="1" id="birthdayMonth_21" data-index="21" data-input="2">
+                <div class="input-group-append">
+                    <span class="input-group-text">月</span>
+                </div>
+                <input type="number" class="form-control birthdayDay GuInput_1" max="31" min="1" id="birthdayDay_21" data-index="21" data-input="3">
+                <div class="input-group-append">
+                    <span class="input-group-text">日</span>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </div>*@
 @*身分證字號*@
 <div class="form-group getgu1">
     <label class="form-label" for="IDnumber">身分證字號</label>
@@ -191,7 +192,7 @@
     </div>
 </div>
 @*性別*@
-<div class="form-group getgu2">
+@*<div class="form-group getgu2">
     <label class="form-label">
         性別:
         <span class="text-danger">*</span>
@@ -209,8 +210,9 @@
             </div>
         </div>
     </div>
-</div>
-<div class="form-group getgu2">
+</div>*@
+@*出生年月日*@
+@*<div class="form-group getgu2">
     <label class="form-label" for="birthday">生日</label>
     <div class="col-md-8 col-lg-6 mb-3 pl-0">
         <div class="input-group w-100">
@@ -231,7 +233,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 @*身分證字號*@
 <div class="form-group getgu2">
     <label class="form-label" for="IDnumber">身分證字號</label>
@@ -322,7 +324,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road select_contact_24 GuInput_2" id="road_contact_Gu21" data-index="24" data-input="12">
+            <select class="custom-select form-control select2_road select_contact_24 GuInput_2" id="road_contact_Gu22" data-index="24" data-input="12">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">
@@ -350,7 +352,7 @@
     </div>
 </div>
 @*性別*@
-<div class="form-group getgu3">
+@*<div class="form-group getgu3">
     <label class="form-label">
         性別:
         <span class="text-danger">*</span>
@@ -390,7 +392,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 @*身分證字號*@
 <div class="form-group getgu3">
     <label class="form-label" for="IDnumber">身分證字號</label>
@@ -481,7 +483,7 @@
             </div>
         </div>
         <div class="col-lg-4 pt-3">
-            <select class="custom-select form-control select2_road select_contact_26 GuInput_3" id="road_contact_Gu23" data-index="12">
+            <select class="custom-select form-control select2_road select_contact_26 GuInput_3" id="road_contact_Gu23" data-index="26" data-input="12">
                 <option value="" selected></option>
             </select>
             <div class="invalid-feedback">

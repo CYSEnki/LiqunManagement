@@ -1,0 +1,130 @@
+2023-09-19 00:49:52.4543 INFO 匯出Word表單
+2023-09-19 00:49:53.0985 INFO 處理資料
+2023-09-19 01:03:28.0570 INFO 匯出Word表單
+2023-09-19 01:03:28.6949 INFO 處理資料
+2023-09-19 01:03:56.6702 INFO 匯出Word表單
+2023-09-19 01:03:57.2553 INFO 處理資料
+2023-09-19 01:04:27.6633 INFO 匯出Word表單
+2023-09-19 01:04:28.2484 INFO 處理資料
+2023-09-19 01:16:22.8299 INFO 匯出Word表單
+2023-09-19 01:16:23.4176 INFO 處理資料
+2023-09-19 01:41:43.5850 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-09-19 01:42:14.8041 INFO 房屋物件資料頁面送出編輯，ControllerName:'Secretary'
+2023-09-19 01:42:16.0864 INFO 房屋物件編輯完成，重新導向，ControllerName:'Secretary'
+2023-09-19 01:43:53.0822 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-09-19 01:44:16.7346 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-09-19 01:56:25.3516 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-09-19 01:56:34.6367 INFO 房屋物件資料頁面送出編輯，ControllerName:Secretary
+2023-09-19 01:56:35.9045 INFO 房屋物件編輯完成，重新導向，ControllerName:Secretary
+2023-09-19 02:35:18.1133 INFO 匯出Word表單
+2023-09-19 02:35:18.7531 INFO 處理資料
+2023-09-19 02:35:30.6338 ERROR 匯出失敗 : System.UnauthorizedAccessException: 拒絕存取路徑 'C:\Users\ZA5771\AppData\Local\Temp\eb9668f4-c31b-4483-bb96-6305421edb5f'。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 586
+2023-09-19 02:41:42.2775 INFO 匯出Word表單
+2023-09-19 02:41:42.9139 INFO 處理資料
+2023-09-19 02:41:58.9099 ERROR 匯出失敗 : System.UnauthorizedAccessException: 拒絕存取路徑 'C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Temp\bd750554-712c-442e-bc91-cbf55c694ff7'。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 585
+2023-09-19 02:45:43.9593 INFO 匯出Word表單
+2023-09-19 02:45:44.5923 INFO 處理資料
+2023-09-19 02:45:53.3987 ERROR 匯出失敗 : System.IO.FileNotFoundException: 找不到檔案 'C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Temp\9ea6269f-558f-46a3-b39b-f880e53c5436'。
+檔案名稱: 'C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Temp\9ea6269f-558f-46a3-b39b-f880e53c5436'
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 594
+2023-09-19 02:46:36.4161 INFO 匯出Word表單
+2023-09-19 02:46:37.0618 INFO 處理資料
+2023-09-19 02:46:53.1620 ERROR 匯出失敗 : System.IO.FileNotFoundException: 找不到檔案 'C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Temp\6b3c78a8-3b18-4b33-b47d-16c0d4cdc8b1'。
+檔案名稱: 'C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Temp\6b3c78a8-3b18-4b33-b47d-16c0d4cdc8b1'
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 600
+2023-09-19 02:47:47.2194 INFO 匯出Word表單
+2023-09-19 02:47:47.8546 INFO 處理資料
+2023-09-19 02:48:40.2098 ERROR 匯出失敗 : System.IO.FileNotFoundException: 找不到檔案 'C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Temp\c851e73f-c8f4-46dc-8c45-3cd1847ce9c9'。
+檔案名稱: 'C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Temp\c851e73f-c8f4-46dc-8c45-3cd1847ce9c9'
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 599
+2023-09-19 02:49:20.4433 INFO 匯出Word表單
+2023-09-19 02:49:21.0745 INFO 處理資料
+2023-09-19 04:27:09.6346 INFO 匯出Word表單
+2023-09-19 04:27:10.2662 INFO 處理資料
+2023-09-19 04:33:47.5852 INFO 匯出Word表單
+2023-09-19 04:33:48.9175 INFO 處理資料
+2023-09-19 04:33:49.6514 ERROR 匯出失敗 : System.IO.IOException: 由於另一個處理序正在使用檔案 'C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\WordSample\表單2.屋況及租屋安全檢核表(租賃標的現況確認書)-代租.docx'，所以無法存取該檔案。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   於 Xceed.Document.NET.Document.Load(String filename, Document document, DocumentTypes documentType)
+   於 Xceed.Words.NET.DocX.Load(String filename)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 548
+2023-09-19 04:34:45.0994 INFO 匯出Word表單
+2023-09-19 04:34:45.7339 INFO 處理資料
+2023-09-19 04:36:10.6470 INFO 匯出Word表單
+2023-09-19 04:36:11.2330 INFO 處理資料
+2023-09-19 04:38:21.2316 INFO 匯出Word表單
+2023-09-19 04:38:21.8670 INFO 處理資料
+2023-09-19 04:40:37.9145 INFO 匯出Word表單
+2023-09-19 04:40:38.5482 INFO 處理資料
+2023-09-19 04:42:42.3008 INFO 匯出Word表單
+2023-09-19 04:42:42.8988 INFO 處理資料
+2023-09-19 04:43:53.1037 INFO 匯出Word表單
+2023-09-19 04:43:53.7432 INFO 處理資料
+2023-09-19 20:32:33.2596 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-09-19 22:04:21.5153 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-09-19 22:04:37.1032 INFO 房屋物件資料頁面送出編輯，ControllerName:Secretary
+2023-09-19 22:04:38.3519 INFO 房屋物件編輯完成，重新導向，ControllerName:Secretary
+2023-09-19 22:04:43.7086 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-09-19 22:04:58.8721 INFO 房屋物件資料頁面送出編輯，ControllerName:Secretary
+2023-09-19 22:04:59.9132 INFO 房屋物件編輯完成，重新導向，ControllerName:Secretary
+2023-09-19 22:05:04.8701 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-09-19 22:14:26.1104 INFO 匯出Word表單
+2023-09-19 22:14:26.7534 INFO 處理資料
+2023-09-19 22:14:27.4180 ERROR 匯出失敗 : System.ArgumentException: newValue cannot be null.
+參數名稱: newValue
+   於 Xceed.Document.NET.Container.ReplaceText(StringReplaceTextOptions replaceTextOptions)
+   於 Xceed.Document.NET.Document.ReplaceText(String searchValue, String newValue, Boolean trackChanges, RegexOptions options, Formatting newFormatting, Formatting matchFormatting, MatchFormattingOptions fo, Boolean escapeRegEx, Boolean useRegExSubstitutions, Boolean removeEmptyParagraph)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 625
+2023-09-19 22:15:47.8192 INFO 匯出Word表單
+2023-09-19 22:15:48.4718 INFO 處理資料
+2023-09-19 22:15:49.1784 ERROR 匯出失敗 : System.ArgumentException: newValue cannot be null.
+參數名稱: newValue
+   於 Xceed.Document.NET.Container.ReplaceText(StringReplaceTextOptions replaceTextOptions)
+   於 Xceed.Document.NET.Document.ReplaceText(String searchValue, String newValue, Boolean trackChanges, RegexOptions options, Formatting newFormatting, Formatting matchFormatting, MatchFormattingOptions fo, Boolean escapeRegEx, Boolean useRegExSubstitutions, Boolean removeEmptyParagraph)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 625
+2023-09-19 22:16:34.2934 INFO 匯出Word表單
+2023-09-19 22:16:34.8807 INFO 處理資料
+2023-09-19 22:16:35.3524 ERROR 匯出失敗 : System.ArgumentException: newValue cannot be null.
+參數名稱: newValue
+   於 Xceed.Document.NET.Container.ReplaceText(StringReplaceTextOptions replaceTextOptions)
+   於 Xceed.Document.NET.Document.ReplaceText(String searchValue, String newValue, Boolean trackChanges, RegexOptions options, Formatting newFormatting, Formatting matchFormatting, MatchFormattingOptions fo, Boolean escapeRegEx, Boolean useRegExSubstitutions, Boolean removeEmptyParagraph)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 625
+2023-09-19 22:17:13.4376 INFO 匯出Word表單
+2023-09-19 22:17:14.0742 INFO 處理資料
+2023-09-19 22:17:14.8048 ERROR 匯出失敗 : System.ArgumentException: newValue cannot be null.
+參數名稱: newValue
+   於 Xceed.Document.NET.Container.ReplaceText(StringReplaceTextOptions replaceTextOptions)
+   於 Xceed.Document.NET.Document.ReplaceText(String searchValue, String newValue, Boolean trackChanges, RegexOptions options, Formatting newFormatting, Formatting matchFormatting, MatchFormattingOptions fo, Boolean escapeRegEx, Boolean useRegExSubstitutions, Boolean removeEmptyParagraph)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 625
+2023-09-19 22:19:07.6433 INFO 匯出Word表單
+2023-09-19 22:19:08.2840 INFO 處理資料
+2023-09-19 22:20:30.1646 INFO 匯出Word表單
+2023-09-19 22:20:30.8023 INFO 處理資料
+2023-09-19 22:23:05.3840 INFO 匯出Word表單
+2023-09-19 22:23:06.0239 INFO 處理資料
+2023-09-19 22:24:38.9933 INFO 匯出Word表單
+2023-09-19 22:24:39.5780 INFO 處理資料
