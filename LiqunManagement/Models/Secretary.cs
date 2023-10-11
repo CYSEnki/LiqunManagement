@@ -15,24 +15,24 @@ namespace LiqunManagement.Models
         [Required]
         [StringLength(50)]
         public string FormID { get; set; }
-        //4期租客資格備註
+
         public int qualifyRadio { get; set; }
-        //段
+
         [Required]
         [StringLength(20)]
         public string excerpt { get; set; }
-        //小段
+
         [StringLength(20)]
         public string excerptShort { get; set; }
-        //建號
+
         [Required]
         [StringLength(20)]
         public string buildNo { get; set; }
-        //地號
+
         [Required]
         [StringLength(100)]
         public string placeNo { get; set; }
-        //建築完成日
+
         public DateTime buildCreateDate { get; set; }
 
         public int floorAmount { get; set; }

@@ -13,13 +13,14 @@ namespace LiqunManagement.Models
         }
 
         public virtual DbSet<Bank> Bank { get; set; }
+        public virtual DbSet<Excerpt> Excerpt { get; set; }
+        public virtual DbSet<FileLog> FileLog { get; set; }
         public virtual DbSet<HomeObject> HomeObject { get; set; }
         public virtual DbSet<LandLord> LandLord { get; set; }
         public virtual DbSet<ObjectForm> ObjectForm { get; set; }
         public virtual DbSet<Region> Region { get; set; }
         public virtual DbSet<Secretary> Secretary { get; set; }
         public virtual DbSet<Tenant> Tenant { get; set; }
-        public virtual DbSet<FileLog> FileLog { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -38,6 +39,46 @@ namespace LiqunManagement.Models
             modelBuilder.Entity<Bank>()
                 .Property(e => e.CodeMaxlength)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Excerpt>()
+                .Property(e => e.CityCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Excerpt>()
+                .Property(e => e.DistrictCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Excerpt>()
+                .Property(e => e.OfficeCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Excerpt>()
+                .Property(e => e.ExcerptCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<FileLog>()
+                .Property(e => e.FormID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<FileLog>()
+                .Property(e => e.FileAlias)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<FileLog>()
+                .Property(e => e.FileExtension)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<FileLog>()
+                .Property(e => e.CreateAccount)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<FileLog>()
+                .Property(e => e.UpdateAccount)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<FileLog>()
+                .Property(e => e.FilePath)
+                .IsFixedLength();
 
             modelBuilder.Entity<HomeObject>()
                 .Property(e => e.FormID)
@@ -216,42 +257,6 @@ namespace LiqunManagement.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Tenant>()
-                .Property(e => e.UpdateAccount)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<FileLog>()
-                .Property(e => e.FormID)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<FileLog>()
-                .Property(e => e.FileNames)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<FileLog>()
-                .Property(e => e.FileAlias)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<FileLog>()
-                .Property(e => e.FileExtension)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<FileLog>()
-                .Property(e => e.FilePath)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<FileLog>()
-                .Property(e => e.FileNames)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<FileLog>()
-                .Property(e => e.FileNames)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<FileLog>()
-                .Property(e => e.CreateAccount)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<FileLog>()
                 .Property(e => e.UpdateAccount)
                 .IsUnicode(false);
         }

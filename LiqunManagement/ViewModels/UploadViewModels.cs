@@ -42,4 +42,17 @@ namespace LiqunManagement.ViewModels
         public string CodeMaxlength { get; set; }
     }
 
+    //事務所 & 段
+    public class ExcerptViewModel
+    {
+        public string CityCode { get; set; }
+        public string CityName { get; set; }
+        public string DistrictCode { get; set; }
+        public string DistrictName { get; set; }
+        public string OfficeCode { get; set; }
+        public string OfficeName { get; set; }
+        public string Excerpt1 { get; set; }
+        public string ExcerptShort { get; set; }
+        public string ExcerptCode { get; set; }
+    }
 }

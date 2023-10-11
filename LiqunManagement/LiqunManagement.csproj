@@ -182,6 +182,7 @@
     </Compile>
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\EmployeeData.cs" />
+    <Compile Include="Models\Excerpt.cs" />
     <Compile Include="Models\FileLog.cs" />
     <Compile Include="Models\ObjectForm.cs" />
     <Compile Include="Models\Bank.cs" />
@@ -2118,6 +2119,7 @@
     <Content Include="Views\Sales\CaseProcess.cshtml" />
     <Content Include="Views\Secretary\CaseManage.cshtml" />
     <Content Include="Views\Form\Uploads.cshtml" />
+    <Content Include="Views\UpLoad\UploadExcerpt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
