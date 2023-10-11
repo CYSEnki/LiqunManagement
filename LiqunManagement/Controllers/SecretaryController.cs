@@ -89,9 +89,6 @@ namespace LiqunManagement.Controllers
                                       AssistantAccount = emp0 != null ? emp0.AssistantAccount != null ? emp0.AssistantAccount : objform.ProcessAccount : objform.ProcessAccount,
                                   }).Where(x => x.AssistantAccount == User.Identity.Name).AsEnumerable();
             }
-            var ddd = ObjectFormData.ToList();
-
-
             var Formlist = from form in ObjectFormData
                            join obj in formdb.HomeObject on form.FormID equals obj.FormID
                            join lan in formdb.LandLord on form.FormID equals lan.FormID into temp1
@@ -110,7 +107,6 @@ namespace LiqunManagement.Controllers
                                Landlord = land != null ? land.Name : null,
                                Tenant = tena != null ? tena.Name : null,
                            };
-            var dddd = Formlist.ToList();
             //ViewBag.Formlist = Formlist;
             var model = new FormViewModels
             {
@@ -482,6 +478,7 @@ namespace LiqunManagement.Controllers
                     buildtype3 = HomeObject.buildtype == 3 ? unicodeBlackSquare : unicodeSquare,    //電梯大樓
                     //建物現有格局
                     roomtype = HomeObject.roomtype == 0 ? unicodeBlackSquare : unicodeSquare,     //為整層出租，有隔間
+
                     roomAmount = roomAmountArray[0] == 0 && roomAmountArray[1] == 0 && roomAmountArray[2] == 0 ? "套" : roomAmountArray[0].ToString(),   //房
                     rubyAmount = roomAmountArray[0] == 0 && roomAmountArray[1] == 0 && roomAmountArray[2] == 0 ? "X" : roomAmountArray[1].ToString(),   //房
                     bathAmount = roomAmountArray[0] == 0 && roomAmountArray[1] == 0 && roomAmountArray[2] == 0 ? "X" : roomAmountArray[2].ToString(),   //房
@@ -722,6 +719,7 @@ namespace LiqunManagement.Controllers
                     var filefoldername = HomeObject.city == "臺北市" ? "WordSampleTaipei" : "WordSampleNewTaipei";
 
                     string filePath = Path.Combine(Server.MapPath("~/" + filefoldername), file);
+                    //string filePath = Path.Combine(Server.MapPath("~/WordSample"), file);
                     // 打開現有的Word文檔
                     using (DocX doc = DocX.Load(filePath))
                     {
@@ -1477,8 +1475,6 @@ namespace LiqunManagement.Controllers
                 }
 
                 #endregion
-
-
 
                 #region 檔案壓縮下載
                 string zipFileName = HomeObject.fulladdress + "_" + formagentName + "_" + DateTime.Now.ToString("_yyMMddHHmmsss") + ".zip";

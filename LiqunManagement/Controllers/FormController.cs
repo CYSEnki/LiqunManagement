@@ -1261,6 +1261,80 @@ namespace LiqunManagement.Controllers
             }
             #endregion
 
+<<<<<<< HEAD
+=======
+
+            #region 存檔(弱勢戶)(過時)
+            ////取得檔名與檔案GUID
+            //List<string> vulnerablefileNameArray = new List<string>();
+            //List<string> vulnerablefileAliasArray = new List<string>();
+            ////存檔
+            //if (inputmodel.vulnerablefile != null && inputmodel.vulnerablefile.Any())
+            //{
+            //    try
+            //    {
+            //        foreach (var file in inputmodel.vulnerablefile)
+            //        {
+            //            if (file != null && file.ContentLength > 0)
+            //            {
+            //                string name = Path.GetFileName(file.FileName);
+            //                vulnerablefileNameArray.Add(name);
+            //                string alias = Guid.NewGuid().ToString() + Path.GetExtension(name);
+            //                vulnerablefileAliasArray.Add(alias);
+
+            //                string path = Path.Combine(Server.MapPath("~/Uploads/TaxFile"), alias);
+            //                file.SaveAs(path);
+            //            }
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MailService mailService = new MailService();
+            //        mailService.SendMail("【力群管理系統】房客資料(弱勢戶)存檔錯誤", ex.ToString(), "cys.enki@gmail.com");
+            //        ViewBag.ErrorMessage = ex.Message;
+            //        return View(initmodel);
+            //    }
+            //}
+            //string vulnerablefileNames = JsonConvert.SerializeObject(vulnerablefileNameArray);
+            //string vulnerablefileAlias = JsonConvert.SerializeObject(vulnerablefileAliasArray);
+            #endregion
+
+            #region 存檔(300E)(過時)
+            ////取得檔名與檔案GUID
+            //List<string> sheetfileNameArray = new List<string>();
+            //List<string> sheetfileAliasArray = new List<string>();
+            ////存檔
+            //if (inputmodel.sheetfile != null && inputmodel.sheetfile.Any())
+            //{
+            //    try
+            //    {
+            //        foreach (var file in inputmodel.sheetfile)
+            //        {
+            //            if (file != null && file.ContentLength > 0)
+            //            {
+            //                string name = Path.GetFileName(file.FileName);
+            //                sheetfileNameArray.Add(name);
+            //                string alias = Guid.NewGuid().ToString() + Path.GetExtension(name);
+            //                sheetfileAliasArray.Add(alias);
+
+            //                string path = Path.Combine(Server.MapPath("~/Uploads/TaxFile"), alias);
+            //                file.SaveAs(path);
+            //            }
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MailService mailService = new MailService();
+            //        mailService.SendMail("【力群管理系統】房客資料(300E)存檔錯誤", ex.ToString(), "cys.enki@gmail.com");
+            //        ViewBag.ErrorMessage = ex.Message;
+            //        return View(initmodel);
+            //    }
+            //}
+            //string sheetfileNames = JsonConvert.SerializeObject(sheetfileNameArray);
+            //string sheetfileAlias = JsonConvert.SerializeObject(sheetfileAliasArray);
+            #endregion
+
+>>>>>>> 18655414c38c45def05cddf5cf82eb31f1c682b9
             #region 轉換資料
             //轉換地址
             var addressdata = formdb.Region.Where(x => x.RoadCode == inputmodel.addressroad_0).FirstOrDefault();
