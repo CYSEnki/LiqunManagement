@@ -1261,9 +1261,6 @@ namespace LiqunManagement.Controllers
             }
             #endregion
 
-<<<<<<< HEAD
-=======
-
             #region 存檔(弱勢戶)(過時)
             ////取得檔名與檔案GUID
             //List<string> vulnerablefileNameArray = new List<string>();
@@ -1334,7 +1331,6 @@ namespace LiqunManagement.Controllers
             //string sheetfileAlias = JsonConvert.SerializeObject(sheetfileAliasArray);
             #endregion
 
->>>>>>> 18655414c38c45def05cddf5cf82eb31f1c682b9
             #region 轉換資料
             //轉換地址
             var addressdata = formdb.Region.Where(x => x.RoadCode == inputmodel.addressroad_0).FirstOrDefault();

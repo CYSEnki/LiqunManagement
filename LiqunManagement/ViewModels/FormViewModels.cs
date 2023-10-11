@@ -44,10 +44,7 @@ namespace LiqunManagement.ViewModels
         public string Landlord { get; set; }
         public string Tenant { get; set; }
         public string AgentAccount { get; set; }
-<<<<<<< HEAD
         public string AgentName { get; set; }
-=======
->>>>>>> 18655414c38c45def05cddf5cf82eb31f1c682b9
         public string AssistantAccount { get; set; }
     }
 
