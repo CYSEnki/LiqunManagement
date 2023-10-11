@@ -3,22 +3,11 @@ using LiqunManagement.Models;
 using LiqunManagement.Services;
 using LiqunManagement.ViewModels;
 using Newtonsoft.Json;
-using NPOI.SS.Formula.Functions;
-using NPOI.SS.Util;
-using NPOI.Util;
-using Org.BouncyCastle.Bcpg.Sig;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core.Metadata.Edm;
-using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.Remoting.Messaging;
-using System.Security.Policy;
 using System.Web;
-using System.Web.ApplicationServices;
 using System.Web.Mvc;
 
 namespace LiqunManagement.Controllers
@@ -26,6 +15,8 @@ namespace LiqunManagement.Controllers
     [AdminAuthorize]
     public class FormController : BaseController
     {
+        DDLServices ddlservices = new DDLServices();
+
         // Initial Model
         public FormViewModels InitialModel()
         {
@@ -924,7 +915,6 @@ namespace LiqunManagement.Controllers
             var IsAdmin = User.IsInRole("Admin");
             ViewBag.Role = User.IsInRole("Admin") ? "Admin" : User.IsInRole("Agent") ? "Agent" : User.IsInRole("Secretary") ? "Secretary" : "";
             #endregion
-            DDLServices ddlservices = new DDLServices();
             ViewBag.citylist = JsonConvert.SerializeObject(ddlservices.GetRegionDDL("").ddllist.ToList());
             ViewBag.banklist = JsonConvert.SerializeObject(ddlservices.GetBankDDL("", "bank").ddllist.ToList());
 
@@ -1245,7 +1235,6 @@ namespace LiqunManagement.Controllers
             }
             #endregion
 
-
             FileViewMode filemodel_sheetfile = new FileViewMode()
             {
                 FileName = "[]",
@@ -1259,76 +1248,6 @@ namespace LiqunManagement.Controllers
                 if (filemodel_sheetfile == null)
                     return Content("上傳檔案錯誤，請重新選擇檔案，若問題未解決，請尋求系統管理員協助。");
             }
-            #endregion
-
-            #region 存檔(弱勢戶)(過時)
-            ////取得檔名與檔案GUID
-            //List<string> vulnerablefileNameArray = new List<string>();
-            //List<string> vulnerablefileAliasArray = new List<string>();
-            ////存檔
-            //if (inputmodel.vulnerablefile != null && inputmodel.vulnerablefile.Any())
-            //{
-            //    try
-            //    {
-            //        foreach (var file in inputmodel.vulnerablefile)
-            //        {
-            //            if (file != null && file.ContentLength > 0)
-            //            {
-            //                string name = Path.GetFileName(file.FileName);
-            //                vulnerablefileNameArray.Add(name);
-            //                string alias = Guid.NewGuid().ToString() + Path.GetExtension(name);
-            //                vulnerablefileAliasArray.Add(alias);
-
-            //                string path = Path.Combine(Server.MapPath("~/Uploads/TaxFile"), alias);
-            //                file.SaveAs(path);
-            //            }
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MailService mailService = new MailService();
-            //        mailService.SendMail("【力群管理系統】房客資料(弱勢戶)存檔錯誤", ex.ToString(), "cys.enki@gmail.com");
-            //        ViewBag.ErrorMessage = ex.Message;
-            //        return View(initmodel);
-            //    }
-            //}
-            //string vulnerablefileNames = JsonConvert.SerializeObject(vulnerablefileNameArray);
-            //string vulnerablefileAlias = JsonConvert.SerializeObject(vulnerablefileAliasArray);
-            #endregion
-
-            #region 存檔(300E)(過時)
-            ////取得檔名與檔案GUID
-            //List<string> sheetfileNameArray = new List<string>();
-            //List<string> sheetfileAliasArray = new List<string>();
-            ////存檔
-            //if (inputmodel.sheetfile != null && inputmodel.sheetfile.Any())
-            //{
-            //    try
-            //    {
-            //        foreach (var file in inputmodel.sheetfile)
-            //        {
-            //            if (file != null && file.ContentLength > 0)
-            //            {
-            //                string name = Path.GetFileName(file.FileName);
-            //                sheetfileNameArray.Add(name);
-            //                string alias = Guid.NewGuid().ToString() + Path.GetExtension(name);
-            //                sheetfileAliasArray.Add(alias);
-
-            //                string path = Path.Combine(Server.MapPath("~/Uploads/TaxFile"), alias);
-            //                file.SaveAs(path);
-            //            }
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MailService mailService = new MailService();
-            //        mailService.SendMail("【力群管理系統】房客資料(300E)存檔錯誤", ex.ToString(), "cys.enki@gmail.com");
-            //        ViewBag.ErrorMessage = ex.Message;
-            //        return View(initmodel);
-            //    }
-            //}
-            //string sheetfileNames = JsonConvert.SerializeObject(sheetfileNameArray);
-            //string sheetfileAlias = JsonConvert.SerializeObject(sheetfileAliasArray);
             #endregion
 
             #region 轉換資料
@@ -1604,7 +1523,9 @@ namespace LiqunManagement.Controllers
             #region 存在表單資料
             if (!String.IsNullOrEmpty(FormID))
             {
-                var notarization = formdb.HomeObject.Where(x => x.FormID == FormID).FirstOrDefault().notarization;
+                var HomeData = formdb.HomeObject.Where(x => x.FormID == FormID).FirstOrDefault();
+                var notarization = HomeData.notarization;
+                ViewBag.excerpt = JsonConvert.SerializeObject(ddlservices.GetExcerptDDL(HomeData.city, HomeData.district, "", "Excerpt").ddllist.ToList());
                 try
                 {
                     var CaseData = formdb.ObjectForm.Where(x => x.FormID == FormID).FirstOrDefault();
@@ -1791,8 +1712,14 @@ namespace LiqunManagement.Controllers
                 bankJson = bankJson
             };
 
-
             return Json(result);
+        }
+        //段
+        public ActionResult DDLExcerpt(string FormID, string ExcerptName)
+        {
+            var HomeData = formdb.HomeObject.Where(x => x.FormID == FormID).FirstOrDefault();
+            var excerptshortJson = JsonConvert.SerializeObject(ddlservices.GetExcerptDDL(HomeData.city, HomeData.district, ExcerptName, "ExcerptShort").ddllist.ToList());
+            return Json(excerptshortJson);
         }
         #endregion
 

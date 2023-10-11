@@ -92,13 +92,13 @@ namespace LiqunManagement.Services
                 var newData = new Excerpt
                 {
                     CityCode = ExcerptData.CityCode,
-                    CityName = ExcerptData.CityName,
+                    CityName = ExcerptData.CityName.Trim(),
                     DistrictCode = ExcerptData.DistrictCode,
-                    DistrictName = ExcerptData.DistrictName,
+                    DistrictName = ExcerptData.DistrictName.Trim(),
                     OfficeCode = ExcerptData.OfficeCode,
-                    OfficeName = ExcerptData.OfficeName,
-                    Excerpt1 = ExcerptData.Excerpt1,
-                    ExcerptShort = ExcerptData.ExcerptShort,
+                    OfficeName = ExcerptData.OfficeName.Trim(),
+                    Excerpt1 = ExcerptData.Excerpt1.Trim(),
+                    ExcerptShort = ExcerptData.ExcerptShort.Trim(),
                     ExcerptCode = ExcerptData.ExcerptCode,
                 };
                 // 使用資料上下文插入資料物件

@@ -132,5 +132,49 @@ namespace LiqunManagement.Services
         }
         #endregion
 
+        #region 找到段/小段下拉選單
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="CityName">縣市名稱</param>
+        /// <param name="DistrictName">鄉鎮市區名稱</param>
+        /// <param name="ExcerptName">段/小段名稱</param>
+        /// <param name="ExcerptCode">段名代碼</param>
+        /// <returns></returns>
+        public FormViewModels GetExcerptDDL(string CityName, string DistrictName, string ExcerptName, string ExcerptType)
+        {
+            //var citycodelist = formdb.Region.Select(x => x.CityCode).Distinct();
+            IEnumerable<DDLViewModel> ddl = new List<DDLViewModel>();
+
+            switch (ExcerptType)
+            {
+                case "Excerpt":
+                    //段
+                    ddl = (from ex in formdb.Excerpt.Where(x => x.CityName.Trim() == CityName && x.DistrictName.Trim() == DistrictName)
+                           select new DDLViewModel
+                           {
+                               text = ex.Excerpt1,
+                               id = ex.Excerpt1,
+                           }).Distinct().OrderBy(x => x.id);
+                    break;
+
+                default:
+                    //小段
+                    ddl = (from ex in formdb.Excerpt.Where(x => x.CityName.Trim() == CityName && x.DistrictName.Trim() == DistrictName && x.Excerpt1.Trim() == ExcerptName)
+                           select new DDLViewModel
+                           {
+                               text = String.IsNullOrEmpty(ex.ExcerptShort) ? "" : ex.ExcerptShort,
+                               id = String.IsNullOrEmpty(ex.ExcerptShort) ? "" : ex.ExcerptShort,
+                           }).Distinct().OrderBy(x => x.id);
+                    break;
+            }
+            var ddd = ddl.ToList();
+
+            var formmodel = new FormViewModels();
+            formmodel.ddllist = ddl;
+            return formmodel;
+        }
+        #endregion
+
     }
 }

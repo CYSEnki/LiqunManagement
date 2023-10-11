@@ -1,0 +1,679 @@
+﻿<!--屋況附屬設備-->
+<div class="form-group">
+    <label class="form-label col-12">屋況附屬設備</label>
+    <!--設備-->
+    <div class="row">
+        <div class="panel-tag col-12 mb-2 mt-3 p-4">
+            設備
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    天然瓦斯
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio10_Y" name="dRadio10" class="custom-control-input accessory_option" data-index="10" data-option="1" data-edit="0">
+                            <label class="custom-control-label" for="dRadio10_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio10_N" name="dRadio10" class="custom-control-input accessory_option" data-index="10" data-option="0" data-edit="0" checked="checked">
+                            <label class="custom-control-label" for="dRadio10_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input class="form-control accessoryInput" id="accessory_amount_10" type="number" value="0" readonly data-edit="0">
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    第四台
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio11_Y" name="dRadio11" class="custom-control-input accessory_option" data-index="11" data-option="1" data-edit="1">
+                            <label class="custom-control-label" for="dRadio11_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio11_N" name="dRadio11" class="custom-control-input accessory_option" data-index="11" data-option="0" data-edit="1" checked="checked">
+                            <label class="custom-control-label" for="dRadio11_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_11" data-edit="1">
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    無線網路
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio12_Y" name="dRadio12" class="custom-control-input accessory_option" data-index="12" data-option="1" data-edit="2">
+                            <label class="custom-control-label" for="dRadio12_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio12_N" name="dRadio12" class="custom-control-input accessory_option" data-index="12" data-option="0" data-edit="2" checked="checked">
+                            <label class="custom-control-label" for="dRadio12_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_12" data-edit="2">
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    電熱水器
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio13_A" name="dRadio13" class="custom-control-input accessory_option" data-index="13" data-option="1" data-edit="3" required>
+                            <label class="custom-control-label" for="dRadio13_A">有</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_13" data-edit="3">
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    瓦斯熱水器
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio13_B" name="dRadio13" class="custom-control-input accessory_option" data-index="14" data-option="1" data-edit="4" required>
+                            <label class="custom-control-label" for="dRadio13_B">室內</label>
+                        </div>
+                    </div>
+                    <input type="number" class="form-control accessoryInput" id="accessory_amount_14" value="0" data-edit="4" hidden readonly>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio13_C" name="dRadio13" class="custom-control-input accessory_option" data-index="15" data-option="1" data-edit="5" required>
+                            <label class="custom-control-label" for="dRadio13_C">室外</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" class="form-control accessoryInput" id="accessory_amount_15" value="0" data-edit="5" hidden readonly >
+                <input type="number" class="form-control accessoryInput" id="accessory_amount_16" value="0" data-edit="45" readonly>
+            </div>
+        </div>
+    </div>
+    <!--家電-->
+    <div class="row">
+        <div class="panel-tag col-12 mb-2 mt-3 p-4">
+            家電
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    電視
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio1_Y" name="dRadio1" class="custom-control-input accessory_option" data-index="1" data-option="1" data-edit="6">
+                            <label class="custom-control-label" for="dRadio1_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio1_N" name="dRadio1" class="custom-control-input accessory_option" data-index="1" data-option="0" data-edit="6" checked="checked">
+                            <label class="custom-control-label" for="dRadio1_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_1" data-edit="6">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">臺</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    冷氣
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio2_Y" name="dRadio2" class="custom-control-input accessory_option" data-index="2" data-option="1" data-edit="7">
+                            <label class="custom-control-label" for="dRadio2_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio2_N" name="dRadio2" class="custom-control-input accessory_option" data-index="2" data-option="0" data-edit="7" checked="checked">
+                            <label class="custom-control-label" for="dRadio2_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_2" data-edit="7">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">臺</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    冰箱
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio3_Y" name="dRadio3" class="custom-control-input accessory_option" data-index="3" data-option="1" data-edit="8">
+                            <label class="custom-control-label" for="dRadio3_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio3_N" name="dRadio3" class="custom-control-input accessory_option" data-index="3" data-option="0" data-edit="8" checked="checked">
+                            <label class="custom-control-label" for="dRadio3_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_3" data-edit="8">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">個</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    熱水器
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio4_Y" name="dRadio4" class="custom-control-input accessory_option" data-index="4" data-option="1" data-edit="9" checked="checked">
+                            <label class="custom-control-label" for="dRadio4_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio4_N" name="dRadio4" class="custom-control-input accessory_option" data-index="4" data-option="0" data-edit="9">
+                            <label class="custom-control-label" for="dRadio4_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="1" class="form-control accessoryInput" id="accessory_amount_4" data-edit="9">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">臺</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    洗衣機
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio5_Y" name="dRadio5" class="custom-control-input accessory_option" data-index="5" data-option="1" data-edit="10">
+                            <label class="custom-control-label" for="dRadio5_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio5_N" name="dRadio5" class="custom-control-input accessory_option" data-index="5" data-option="0" data-edit="10" checked="checked">
+                            <label class="custom-control-label" for="dRadio5_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_5" data-edit="10">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">臺</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    微波爐
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio6_Y" name="dRadio6" class="custom-control-input accessory_option" data-index="6" data-option="1" data-edit="11">
+                            <label class="custom-control-label" for="dRadio6_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio6_N" name="dRadio6" class="custom-control-input accessory_option" data-index="6" data-option="0" data-edit="11" checked="checked">
+                            <label class="custom-control-label" for="dRadio6_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_6" data-edit="11">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">個</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    洗碗機
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio7_Y" name="dRadio7" class="custom-control-input accessory_option" data-index="7" data-option="1" data-edit="12">
+                            <label class="custom-control-label" for="dRadio7_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio7_N" name="dRadio7" class="custom-control-input accessory_option" data-index="7" data-option="0" data-edit="12" checked="checked">
+                            <label class="custom-control-label" for="dRadio7_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_7" data-edit="12">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">個</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    排油煙機
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio8_Y" name="dRadio8" class="custom-control-input accessory_option" data-index="8" data-option="1" data-edit="13">
+                            <label class="custom-control-label" for="dRadio8_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio8_N" name="dRadio8" class="custom-control-input accessory_option" data-index="8" data-option="0" data-edit="13" checked="checked">
+                            <label class="custom-control-label" for="dRadio8_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_8" data-edit="13">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">個</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    瓦斯爐
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio9_Y" name="dRadio9" class="custom-control-input accessory_option" data-index="9" data-option="1" data-edit="14">
+                            <label class="custom-control-label" for="dRadio9_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio9_N" name="dRadio9" class="custom-control-input accessory_option" data-index="9" data-option="0" data-edit="14" checked="checked">
+                            <label class="custom-control-label" for="dRadio9_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_9" data-edit="14">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">個</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="panel-tag col-12 mb-2 mt-3 p-4">
+            家具
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    鞋櫃
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio21_Y" name="dRadio21" class="custom-control-input accessory_option" data-index="21" data-option="1" data-edit="15">
+                            <label class="custom-control-label" for="dRadio21_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio21_N" name="dRadio21" class="custom-control-input accessory_option" data-index="21" data-option="0" data-edit="15" checked="checked">
+                            <label class="custom-control-label" for="dRadio21_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_21" data-edit="15">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">件</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    餐桌
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio22_Y" name="dRadio22" class="custom-control-input accessory_option" data-index="22" data-option="1" data-edit="16">
+                            <label class="custom-control-label" for="dRadio22_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio22_N" name="dRadio22" class="custom-control-input accessory_option" data-index="22" data-option="0" data-edit="16" checked="checked">
+                            <label class="custom-control-label" for="dRadio22_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_22" data-edit="16">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">件</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    餐桌椅
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio23_Y" name="dRadio23" class="custom-control-input accessory_option" data-index="23" data-option="1" data-edit="17">
+                            <label class="custom-control-label" for="dRadio23_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio23_N" name="dRadio23" class="custom-control-input accessory_option" data-index="23" data-option="0" data-edit="17" checked="checked">
+                            <label class="custom-control-label" for="dRadio23_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_23" data-edit="17">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">件</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    沙發
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio24_Y" name="dRadio24" class="custom-control-input accessory_option" data-index="24" data-option="1" data-edit="18">
+                            <label class="custom-control-label" for="dRadio24_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio24_N" name="dRadio24" class="custom-control-input accessory_option" data-index="24" data-option="0" data-edit="18" checked="checked">
+                            <label class="custom-control-label" for="dRadio24_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_24" data-edit="18">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">件</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    電視櫃
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio25_Y" name="dRadio25" class="custom-control-input accessory_option" data-index="25" data-option="1" data-edit="19">
+                            <label class="custom-control-label" for="dRadio25_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio25_N" name="dRadio25" class="custom-control-input accessory_option" data-index="25" data-option="0" data-edit="19" checked="checked">
+                            <label class="custom-control-label" for="dRadio25_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_25" data-edit="19">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">個</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    茶几
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio26_Y" name="dRadio26" class="custom-control-input accessory_option" data-index="26" data-option="1" data-edit="20">
+                            <label class="custom-control-label" for="dRadio26_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio26_N" name="dRadio26" class="custom-control-input accessory_option" data-index="26" data-option="0" data-edit="20" checked="checked">
+                            <label class="custom-control-label" for="dRadio26_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_26" data-edit="20">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">件</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    床組(頭)
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio27_Y" name="dRadio27" class="custom-control-input accessory_option" data-index="27" data-option="1" data-edit="21">
+                            <label class="custom-control-label" for="dRadio27_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio27_N" name="dRadio27" class="custom-control-input accessory_option" data-index="27" data-option="0" data-edit="21" checked="checked">
+                            <label class="custom-control-label" for="dRadio27_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_27" data-edit="21">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">件</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    衣櫃
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio28_Y" name="dRadio28" class="custom-control-input accessory_option" data-index="28" data-option="1" data-edit="22">
+                            <label class="custom-control-label" for="dRadio28_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio28_N" name="dRadio28" class="custom-control-input accessory_option" data-index="28" data-option="0" data-edit="22" checked="checked">
+                            <label class="custom-control-label" for="dRadio28_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_28" data-edit="22">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">組</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    置物櫃
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio29_Y" name="dRadio29" class="custom-control-input accessory_option" data-index="29" data-option="1" data-edit="23">
+                            <label class="custom-control-label" for="dRadio29_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio29_N" name="dRadio29" class="custom-control-input accessory_option" data-index="29" data-option="0" data-edit="23" checked="checked">
+                            <label class="custom-control-label" for="dRadio29_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_29" data-edit="23">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">件</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    梳妝台
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio30_Y" name="dRadio30" class="custom-control-input accessory_option" data-index="30" data-option="1" data-edit="24">
+                            <label class="custom-control-label" for="dRadio30_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio30_N" name="dRadio30" class="custom-control-input accessory_option" data-index="30" data-option="0" data-edit="24" checked="checked">
+                            <label class="custom-control-label" for="dRadio30_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_30" data-edit="24">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">件</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    書櫃
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio31_Y" name="dRadio31" class="custom-control-input accessory_option" data-index="31" data-option="1" data-edit="25">
+                            <label class="custom-control-label" for="dRadio31_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio31_N" name="dRadio31" class="custom-control-input accessory_option" data-index="31" data-option="0" data-edit="25" checked="checked">
+                            <label class="custom-control-label" for="dRadio31_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_31" data-edit="25">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">件</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    書桌
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio32_Y" name="dRadio32" class="custom-control-input accessory_option" data-index="32" data-option="1" data-edit="26">
+                            <label class="custom-control-label" for="dRadio32_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio32_N" name="dRadio32" class="custom-control-input accessory_option" data-index="32" data-option="0" data-edit="26" checked="checked">
+                            <label class="custom-control-label" for="dRadio32_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_32" data-edit="26">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">個</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-4">
+            <div class="input-group mt-2">
+                <span class="input-group-text" style="width:80px;">
+                    書桌椅
+                </span>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio33_Y" name="dRadio33" class="custom-control-input accessory_option" data-index="33" data-option="1" data-edit="27">
+                            <label class="custom-control-label" for="dRadio33_Y">有</label>
+                        </div>
+                    </div>
+                    <div class="input-group-text">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="dRadio33_N" name="dRadio33" class="custom-control-input accessory_option" data-index="33" data-option="0" data-edit="27" checked="checked">
+                            <label class="custom-control-label" for="dRadio33_N">無</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="number" value="0" readonly class="form-control accessoryInput" id="accessory_amount_33" data-edit="27">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">個</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="text" id="JsonHomeObjectAccessory" name="JsonHomeObjectAccessory" hidden>

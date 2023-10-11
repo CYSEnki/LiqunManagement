@@ -1,0 +1,1299 @@
+﻿@model LiqunManagement.ViewModels.FormViewModels
+@{
+    ViewBag.Title = "表單四期";
+    ViewBag.Controller = "Form";
+    Layout = "~/Views/Shared/smartadmin_Layout.cshtml";
+
+    var FormID = Model.FormID != null ? Model.FormID : "";
+    var ErrorMessage = ViewBag.ErrorMessage != null ? ViewBag.ErrorMessage : "";
+    var ControllerName = @ViewBag.ControllerName;
+
+    //包租:1; 代管:0
+    var objecttypeValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.objecttype.ToString() : "";
+    //[是否公證]0:無公證; 1:是公證
+    var notarizationValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.notarization.ToString() : "";
+    //簽約日
+    var signdate = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.signdateStr : "";
+    //[是否簽估價師] 0:無估價師; 1:簽估價師
+    var appraiserValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.appraiser.ToString() : "";
+    //特色
+    var feature = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.feature : "";
+    //物件地址(縣市)
+    var citycodeValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.citycode : "";
+    //物件地址(鄉鎮市區)
+    //var jsonDistrict = @Html.Raw(Json.Encode(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.distirctJsonDDL : ""));
+    var jsonDistrict = @Html.Raw(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.distirctJsonDDL : "");
+    var districtcodeValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.districtcode : "";
+    //物件地址(道路)
+    //var jsonRoad = @Html.Raw(Json.Encode(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.roadJsonDDL : ""));
+    var jsonRoad = @Html.Raw(Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.roadJsonDDL : "");
+    var roadcodeValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.roadcode : "";
+    //物件地址(詳細地址)
+    var AddressDetail = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.AddressDetail : "";
+    //[主要用途]0:住家用; 1:商業用; 2:辦公室; 3:一般事務所 4: 其他
+    var useforValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.usefor.ToString() : "";
+    //[主要用途]其他
+    var useforelse = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.useforelse : "";
+    //[租金](int)
+    var rent = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.rent : 0;
+    //[押金](int)
+    var deposit = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.deposit : 0;
+    //[管理費](int)
+    var management_fee = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.management_fee : 0;
+    //[起租日]
+    var startdate = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.startdateStr : "";
+    //[結束日]
+    var enddate = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.enddateStr : "";
+    //[繳租日]
+    var paydate = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.paydate : -1;
+
+    //[建物型態]0:透天厝; 1:公寓; 2:華夏; 3:電梯大樓
+    var buildtypeValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.buildtype.ToString() : "";
+    //[房型]0:整層出租; 1:獨立套房
+    var roomtypeValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.roomtype.ToString() : "";
+    var roomamount = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.roomamount.ToString() : "";
+
+    //是否有車位
+    var havepark = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.havepark.ToString() : "";
+
+    //[汽車車位樣式]0:坡道平面; 1:坡道機械; 2: 機械平面; 3:機械機械
+    var parktypeValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.parktype.ToString() : "";
+    //[車位位於]: 陣列[(地上:1; 地下:0;),  (樓數)]
+    var parkfloor = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.parkfloor : "";
+    //[車位編號]
+    var carpositionnumber = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.carpositionnumber : "";
+    //[汽車月租金](int)
+    var carmonthrentValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.carmonthrent : 0;
+    //[汽車停車管理費](int)
+    var carparkmanagefeeValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.carparkmanagefee : 0;
+
+    //[機車位位於]: 陣列[(地上:1; 地下:0;),  (樓數)]
+    var scooterparkfloor = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.scooterparkfloor : "";
+    //[機車位編號]
+    var scooterpositionnumber = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.scooterpositionnumber : "";
+    //[機車位月租金]
+    var scootermonthrent = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.scootermonthrent : 0;
+    //[機車停車管理費]
+    var scootermanagefee = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.scootermanagefee : 0;
+
+    //房屋附屬物件
+    var Accessory = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.Accessory : "";
+
+    //備註
+    var memo = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.Memo : "";
+}
+<style>
+    .padding-top-ten {
+        padding-top: 10px !important;
+    }
+
+    .panel .panel-toolbar {
+        display: none;
+    }
+
+    .panel.panel-locked:not(.panel-fullscreen) .panel-hdr h2:before {
+        display: none;
+    }
+
+    .form-label {
+        font-weight: 600 !important;
+    }
+</style>
+@*select2*@
+@*<link href="~/Content/select2/css/select2.min.css" rel="stylesheet" />*@
+<link href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/formplugins/select2/select2.bundle.css" rel="stylesheet" />
+@*datepicker*@
+<link href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/formplugins/bootstrap-datepicker/bootstrap-datepicker.css" rel="stylesheet" />
+@*sweetalert2*@
+<link href="~/Content/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+
+<main id="js-page-content" role="main" class="page-content">
+    <ol class="breadcrumb page-breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="javascript:void(0);">後臺管理系統</a>
+        </li>
+        <li class="breadcrumb-item">填寫表單</li>
+        <li class="breadcrumb-item">四期</li>
+        <li class="breadcrumb-item active">物件資料</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block">
+            <span class="js-get-date"></span>
+        </li>
+    </ol>
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class="subheader-icon fal fa-edit"></i>
+            <span class="font-weight-bold" style="padding-top:5px;">物件資料</span>
+            <small>
+
+            </small>
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel panel-locked">
+                <div class="panel-hdr">
+                    <h2>
+                        物件資料
+                    </h2>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+
+                        @using (Html.BeginForm("HomeObject", "Form", FormMethod.Post, new { @class = "needs-validation", @enctype = "multipart/form-data", @novalidate = "" }))
+                        {
+                            @*表單編號*@
+                            <input type="text" name="FormID" hidden />
+                            <input type="text" name="ControllerName" hidden />
+                            @*包租或代管*@
+                            <div class="form-group">
+                                <label class="form-label">
+                                    類別:
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="frame-wrap padding-top-ten">
+                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="objecttypeRadio_0" name="objecttypeRadio" value="0" required="">
+                                        <label class="custom-control-label" for="objecttypeRadio_0">包租包管</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="objecttypeRadio_1" name="objecttypeRadio" value="1" required="" checked>
+                                        <label class="custom-control-label" for="objecttypeRadio_1">代租代管</label>
+                                        <div class="invalid-feedback">
+                                            請選擇包租或代管
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*是否為公證*@
+                            <div class="form-group">
+                                <label class="form-label">
+                                    是否為公證:
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="frame-wrap padding-top-ten">
+                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="notarizationRadio_1" name="notarizationRadio" value="1" required="">
+                                        <label class="custom-control-label" for="notarizationRadio_1">是</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="notarizationRadio_0" name="notarizationRadio" value="0" required="">
+                                        <label class="custom-control-label" for="notarizationRadio_0">否</label>
+                                        <div class="invalid-feedback">
+                                            請選擇是否為公證
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*簽約日*@
+                            <div class="form-group">
+                                <label class="form-label" for="signdate">
+                                    簽約日
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" autocomplete="off" placeholder="請選擇簽約日" id="signdate" name="signdate" required>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text fs-xl">
+                                            <i class="fal fa-calendar-check"></i>
+                                        </span>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        請選擇簽約日
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    是否簽估價師/特色：
+                                </label>
+                                <span class="text-danger">*</span>
+                                <div class="frame-wrap">
+                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="appraiserRadio_1" name="appraiserRadio" value="1" required>
+                                        <label class="custom-control-label" for="appraiserRadio_1">是</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="appraiserRadio_0" name="appraiserRadio" value="0" required>
+                                        <label class="custom-control-label" for="appraiserRadio_0">否</label>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        請選擇是否簽估價師
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="jqfeature">特色</label>
+                                <input type="text" id="jqfeature" name="feature" class="form-control">
+                                <span class="help-block pl-2">*建議填寫，以免提交資料時臨時需要</span>
+                            </div>
+                            @*物件地址*@
+                            <div class="form-group">
+                                <label class="form-label">物件地址</label>
+                                <span class="text-danger">*</span>
+                                <div class="row">
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_city" id="selectcity" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇縣/市
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_district" id="selectdistrict" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇鄉/鎮/市/區
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control select2_road" id="selectroad" name="selectroad" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇街/路
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" placeholder="ex.108號1樓" name="AddressDetail" required>
+                                    </div>
+                                </div>
+                            </div>
+                            @*主要用途*@
+                            <div class="form-group">
+                                <label class="form-label">
+                                    主要用途
+                                </label>
+                                <span class="text-danger">*</span>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="frame-wrap padding-top-ten pl-2">
+                                            <div class="custom-control custom-radio custom-radio-rounded">
+                                                <input type="radio" class="custom-control-input" id="useforRadio_0" name="useforRadio" value="0" required>
+                                                <label class="custom-control-label" for="useforRadio_0">住家用</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-radio-rounded">
+                                                <input type="radio" class="custom-control-input" id="useforRadio_1" name="useforRadio" value="1" required>
+                                                <label class="custom-control-label" for="useforRadio_1">商業用</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-radio-rounded">
+                                                <input type="radio" class="custom-control-input" id="useforRadio_2" name="useforRadio" value="2" required>
+                                                <label class="custom-control-label" for="useforRadio_2">辦公室</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-radio-rounded">
+                                                <input type="radio" class="custom-control-input" id="useforRadio_3" name="useforRadio" value="3" required>
+                                                <label class="custom-control-label" for="useforRadio_3">一般事務所</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-radio-rounded">
+                                                <input type="radio" class="custom-control-input" id="useforRadio_4" name="useforRadio" value="4" required>
+                                                <label class="custom-control-label" for="useforRadio_4">其他:</label>
+                                            </div>
+                                            <input type="text" id="elsemainuse" class="form-control mt-2" placeholder="請填寫其他選項" name="useforelse" disabled>
+                                            <div class="invalid-feedback">
+                                                請選擇主要用途
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*上傳稅單*@
+                            <div class="form-group">
+                                <label class="form-label">上傳稅單</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="taxFile" name="taxfile" multiple disabled>
+                                    <label id="taxFileLable" class="custom-file-label" for="customFile">選擇檔案</label>
+                                    <div class="invalid-feedback">
+                                        請上傳稅單
+                                    </div>
+                                </div>
+                                <span class="help-block pl-2">*除了住家用以外，都要<code>&lt;上傳稅單&gt;</code></span>
+                            </div>
+                            <div class="form-group" id="filenameSpace">
+                                @if (ViewBag.FileNameList != null)
+                                {
+                                    if (ViewBag.FileNameList.Count > 0)
+                                    {
+                                        <table class="table table-hover text-nowrap table-bordered">
+                                            <thead>
+                                                <tr style="text-align:center; vertical-align:middle; background-color:#99ccff;">
+                                                    <th style=" width:60px;">編號</th>
+                                                    <th>檔案名稱</th>
+                                                    <th style="text-align:center; vertical-align:middle; width:60px;">操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @for (var i = 0; i < ViewBag.FileNameList.Count; i++)
+                                                {
+                                                    <tr>
+                                                        <td style="text-align:center; vertical-align:middle;">@i</td>
+                                                        <td style="text-align:left; vertical-align:middle;">
+                                                            @ViewBag.FileNameList[i]<button class="btn btn-light btn-sm" type="button" onclick="downloadfile('@ViewBag.FileAliasList[i]')"><i class="fa fa-download"></i></button>
+                                                        </td>
+                                                        <td style="text-align:center; vertical-align:middle;">
+                                                            <button type="button" class="btn btn-danger waves-effect waves-themed" onclick="deletefile('@FormID', '@ViewBag.FileAliasList[i]')">刪除</button>
+                                                        </td>
+                                                    </tr>
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    }
+                                }
+                            </div>
+                            @*租金/押金*@
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="basic-url">租金</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">$</span>
+                                            </div>
+                                            <input class="form-control" id="rent" name="rent" type="number" data-inputmask="'alias': 'currency', 'digits': 0" placeholder="0" required>
+                                            <div class="invalid-feedback">
+                                                請填寫租金
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="form-label" for="basic-url">押金</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">$</span>
+                                        </div>
+                                        <input class="form-control" id="deposit" name="deposit" type="number" placeholder="0" data-inputmask="'alias': 'currency', 'digits': 0" required>
+                                        <div class="invalid-feedback">
+                                            請填寫押金
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*管理費*@
+                            <div class="form-group">
+                                <label class="form-label" for="basic-url">管理費</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <input type="number" class="form-control" id="management_fee" name="management_fee" data-inputmask="'alias': 'currency', 'digits': 0" placeholder="0" required>
+                                    <div class="invalid-feedback">
+                                        請填寫管理費
+                                    </div>
+                                </div>
+                                <span class="help-block pl-2">*要含在租金內就寫<code>&lt;0&gt;</code>元</span>
+                            </div>
+                            @*起租日&結束日&繳租日*@
+                            <div class="row p-0">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label class="form-label" for="example-date">起租日</label>
+                                        <input type="text" class="form-control" autocomplete="off" placeholder="請選擇起租日" id="startdate" name="startdate" required>
+                                        <div class="invalid-feedback">
+                                            請選擇起租日
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label class="form-label" for="example-date">結束日</label>
+                                        <input type="text" class="form-control" autocomplete="off" placeholder="請選擇起租日" id="enddate" name="enddate" required>
+                                        <div class="invalid-feedback">
+                                            請選擇結束日
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="form-label">繳租日</label>
+                                        <select id="paydate" name="paydate" class="custom-select form-control" required>
+                                            <option value="" selected="" disabled>繳租日</option>
+                                            @foreach (var item in ViewBag.Payment_date)
+                                            {
+                                                <option value="@item">@item</option>
+                                            }
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇繳租日
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*建物型態*@
+                            <div class="form-group mt-3">
+                                <label class="form-label">
+                                    建物型態
+                                </label>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="frame-wrap padding-top-ten pl-2">
+                                            <div class="custom-control custom-radio custom-radio-rounded">
+                                                <input type="radio" class="custom-control-input" id="buildtypeRadio_0" name="buildtypeRadio" value="0" required>
+                                                <label class="custom-control-label" for="buildtypeRadio_0">透天厝</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-radio-rounded">
+                                                <input type="radio" class="custom-control-input" id="buildtypeRadio_1" name="buildtypeRadio" value="1" required>
+                                                <label class="custom-control-label" for="buildtypeRadio_1">公寓</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-radio-rounded">
+                                                <input type="radio" class="custom-control-input" id="buildtypeRadio_2" name="buildtypeRadio" value="2" required>
+                                                <label class="custom-control-label" for="buildtypeRadio_2">華夏</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-radio-rounded">
+                                                <input type="radio" class="custom-control-input" id="buildtypeRadio_3" name="buildtypeRadio" value="3" required>
+                                                <label class="custom-control-label" for="buildtypeRadio_3">電梯大樓</label>
+                                                <div class="invalid-feedback">
+                                                    請選擇建物型態
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*房/廳/衛*@
+                            <div class="form-group mt-3">
+                                <label class="form-label">
+                                    房/廳/衛
+                                </label>
+                                <div class="frame-wrap padding-top-ten pl-2">
+                                    <div class="custom-control custom-radio custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="roomtypeRadio_0" name="roomtypeRadio" value="0" required>
+                                        <label class="custom-control-label" for="roomtypeRadio_0">整層出租</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-radio-rounded">
+                                        <input type="radio" class="custom-control-input" id="roomtypeRadio_1" name="roomtypeRadio" value="1" required>
+                                        <label class="custom-control-label" for="roomtypeRadio_1">獨立套房</label>
+                                        <div class="invalid-feedback">
+                                            請選擇房型
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10 col-lg-8 col-xl-6 ">
+                                    <div class="input-group input-group-multi-transition w-100">
+                                        <input name="roomamount" id="jqroomamount" type="text" class="form-control roomtypeamount" data-index="0" required>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">房</span>
+                                        </div>
+                                        <input name="hallamount" id="jqhallamount" type="text" class="form-control roomtypeamount" data-index="1" required>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">廳</span>
+                                        </div>
+                                        <input name="bathamount" id="jqbathamount" type="text" class="form-control roomtypeamount" data-index="2" required>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">衛</span>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            請選擇房型
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*屋況附屬設備*@
+                            @Html.Partial("_HomeObjectAccessory", "Form")
+                            @*是否有車位*@
+                            @Html.Partial("_HomeObjectPark", "Form")
+
+                            <!--備註欄-->
+                            <div class="form-group">
+                                <label class="form-label" for="example-textarea">備註</label>
+                                <textarea class="form-control" id="momo" name="memo" rows="5" style="height: 122px;"></textarea>
+                            </div>
+                            <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row align-items-center">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="invalidCheck" required="">
+                                    <label class="custom-control-label" for="invalidCheck">確認填寫完成 <span class="text-danger">*</span></label>
+                                    <div class="invalid-feedback">
+                                        您必須選擇此區塊以確認完成填寫
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary ml-auto waves-effect waves-themed" type="submit">送出</button>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section scripts
+{
+    @*select2*@
+    @*<script src="~/Content/select2/js/select2.min.js"></script>*@
+    <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/select2/select2.bundle.js"></script>
+    @*sweetalert2*@
+    <script src="~/Content/sweetalert2/sweetalert2.min.js"></script>
+    @*datepicker*@
+    <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+    @*inputmask*@
+    <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/inputmask/inputmask.bundle.js"></script>
+
+    <script type="text/javascript">
+        //----------------
+        //  validation
+        //----------------
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+
+                        //將屋況附屬設備存成[]陣列
+                        const dataArray = [];
+                        for (let i = 10; i <= 15; i++) {
+                            const inputValue = document.getElementById(`accessory_amount_${i}`).value;
+                            dataArray.push(parseInt(inputValue));
+                        }
+                        for (let i = 1; i <= 9; i++) {
+                            const inputValue = document.getElementById(`accessory_amount_${i}`).value;
+                            dataArray.push(parseInt(inputValue));
+                        }
+                        for (let i = 21; i <= 33; i++) {
+                            const inputValue = document.getElementById(`accessory_amount_${i}`).value;
+                            dataArray.push(parseInt(inputValue));
+                        }
+                        const jsonResult = JSON.stringify(dataArray);
+                        $('#JsonHomeObjectAccessory').val(jsonResult);
+
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
+        //-------------------
+        //  日期選擇器格式設定
+        //-------------------
+        !function (a) {
+            a.fn.datepicker.dates["zh-TW"] = {
+                days: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
+                daysShort: ["週日", "週一", "週二", "週三", "週四", "週五", "週六"],
+                daysMin: ["日", "一", "二", "三", "四", "五", "六"],
+                months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+                monthsShort: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                today: "今天",
+                monthsTitle: "月份",
+                weekStart: 0,
+                clear: "清除",
+                format: "-mm-dd",
+                titleFormat: "年MM月",
+            };
+
+            // 覆蓋原本的日期格式化函式，讓日期選擇器上的年份顯示為民國年
+            a.fn.datepicker.DPGlobal.formatDate = function (date, format, language) {
+                var year = date.getFullYear() - 1911; // 將年份減去1911，轉換為民國年
+                var month = date.getMonth() + 1;
+                var day = date.getDate();
+                return year + format.replace(/mm/i, (month < 10 ? "0" : "") + month).replace(/dd/i, (day < 10 ? "0" : "") + day);
+            };
+        }(jQuery);
+
+        $(function () {
+            //ErrorMessage
+            if ('@ErrorMessage' !== '') {
+                alert("存取資料錯誤，請重新選單，若問題未解決請回報系統管理員。錯誤訊息:" + '@ErrorMessage');
+            }
+
+            var ControllerName = '@ControllerName';
+            $('input[name="ControllerName"]').val(ControllerName);
+            /*Initial inputmask*/
+            $(":input").inputmask();
+
+            //隱藏
+            //隱藏車位類型欄位
+            $('.park_carclass').hide();
+            $('.park_morclass').hide();
+
+            //------------------
+            // 物件地址下拉選單  *
+            //------------------
+            var cityarray = @Html.Raw(@ViewBag.citylist);
+            $('.select2_city').select2({
+                data: cityarray,
+                placeholder: '縣/市'
+            });
+            $('.select2_district').select2({
+                //data: data_district,
+                placeholder: '鄉/鎮/市/區',
+            });
+            $('.select2_road').select2({
+                //data: data_road,
+                placeholder: '街道',
+            });
+
+            //------------------
+            // 是否要上傳稅單  *
+            //------------------
+            //除了住宅用，都要上傳
+            $('input[name="useforRadio"]').change(function () {
+                // 獲取被點選的 radio 按鈕的值
+                var selectedValue = $(this).val();
+                $('input[name="useforRadio"]').each(function () {
+                    var radioId = $(this).attr('id');
+                    // 檢查是否被點選
+                    if ($(this).is(':checked')) {
+                        // 根據不同的 id 做相應的處理
+                        if (radioId === 'useforRadio_0') {
+                            //住宅用; 不用上傳稅單
+                            var fileInput = document.getElementById('taxFile');
+                            var filelable = document.getElementById('taxFileLable');
+                            fileInput.value = '';
+                            filelable.innerHTML = '';
+                            $('#taxFile').prop('required', false);
+                            $('#taxFile').prop('disabled', true);
+                            $('#taxFile').prop('readonly', true);
+                            //其他
+                            $('#elsemainuse').prop('required', false);
+                            $('#elsemainuse').prop('disabled', true);
+                            $('#elsemainuse').prop('readonly', true);
+
+                        } else if (radioId === 'useforRadio_4') {
+                            //其他; 要填寫欄位
+                            $('#taxFile').prop('required', true);
+                            $('#taxFile').prop('disabled', false);
+                            $('#taxFile').prop('readonly', false);
+                            $('#elsemainuse').prop('required', true);
+                            $('#elsemainuse').prop('disabled', false);
+                            $('#elsemainuse').prop('readonly', false);
+
+                        } else {
+                            $('#taxFile').prop('required', true);
+                            $('#taxFile').prop('disabled', false);
+                            $('#taxFile').prop('readonly', false);
+                            $('#elsemainuse').prop('required', false);
+                            $('#elsemainuse').prop('disabled', true);
+                            $('#elsemainuse').prop('readonly', true);
+                            $('#elsemainuse').innerHTML = '';
+                        }
+                    }
+                })
+            });
+
+            //------------------
+            // 是否填寫房/廳/衛數量  *
+            //------------------
+            //2023-07-25 需求: 套房不需填寫(房/廳/衛)數量
+            $('input[name="roomtypeRadio"]').change(function () {
+                // 獲取被點選的 radio 按鈕的值
+                $('input[name="roomtypeRadio"]').each(function () {
+                    var radioId = $(this).attr('id');
+                    // 檢查是否被點選
+                    if ($(this).is(':checked')) {
+                        var roomamount = document.getElementById('jqroomamount');
+                        var hallamount = document.getElementById('jqhallamount');
+                        var bathamount = document.getElementById('jqbathamount');
+                        // 根據不同的 id 做相應的處理
+                        if (radioId === 'roomtypeRadio_0') {
+                            //整層出租
+                            roomamount.value = '';
+                            hallamount.value = '';
+                            bathamount.value = '';
+                            $('.roomtypeamount').prop('required', true);
+                            $('.roomtypeamount').prop('disabled', false);
+                            $('.roomtypeamount').prop('readonly', false);
+                        } else {
+                            //獨立套房
+                            roomamount.value = '套';
+                            hallamount.value = 'X';
+                            bathamount.value = 'X';
+                            $('.roomtypeamount').prop('required', false);
+                            $('.roomtypeamount').prop('disabled', true);
+                            $('.roomtypeamount').prop('readonly', true);
+                        }
+                    }
+                })
+            });
+
+            //------------------
+            // 附屬物件  *
+            //------------------
+            // 获取所有具有"radio-option"类的单选按钮以及目标input元素
+            const radioOptions = document.querySelectorAll(".accessory_option");
+            radioOptions.forEach(radio => {
+                radio.addEventListener("click", function () {
+                    const index = this.getAttribute("data-index");
+                    const option = this.getAttribute("data-option");
+
+                    var object = document.getElementById('accessory_amount_' + index);
+                    //object.value = 0;
+                    switch (index) {
+                        case "10":
+                        case "11":
+                        case "12":
+                            $('#accessory_amount_' + index).prop('required', true);
+                            if (option == '1') {
+                                object.value = 1;
+                            }
+                            else {
+                                object.value = 0;
+                            }
+                            break;
+                        case "13":
+                            $('#accessory_amount_' + index).prop('required', true);
+                            object.value = 1;
+                            //將14disable
+                            newindex = parseInt(index) + 1;
+                            var newobject = document.getElementById('accessory_amount_' + newindex);
+                            newobject.value = 0;
+                            $('#accessory_amount_' + newindex).prop('required', false);
+                            $('#accessory_amount_' + newindex).prop('readonly', true);
+                            //將15disable
+                            newindex = newindex + 1;
+                            newobject = document.getElementById('accessory_amount_' + newindex);
+                            newobject.value = 0;
+                            $('#accessory_amount_' + newindex).prop('required', false);
+                            $('#accessory_amount_' + newindex).prop('readonly', true);
+                            //將16disable
+                            newindex = newindex + 1;
+                            newobject = document.getElementById('accessory_amount_' + newindex);
+                            newobject.value = 0;
+                            $('#accessory_amount_' + newindex).prop('required', false);
+                            $('#accessory_amount_' + newindex).prop('readonly', true);
+                            break;
+
+                        case "14":
+                            $('#accessory_amount_' + index).prop('required', true);
+                            object.value = 1;
+                            //將13disable
+                            newindex = 13;
+                            var newobject = document.getElementById('accessory_amount_' + newindex);
+                            newobject.value = 0;
+                            $('#accessory_amount_' + newindex).prop('required', false);
+                            $('#accessory_amount_' + newindex).prop('readonly', true);
+                            //將15disable
+                            newindex = 15;
+                            newobject = document.getElementById('accessory_amount_' + newindex);
+                            newobject.value = 0;
+                            $('#accessory_amount_' + newindex).prop('required', false);
+                            $('#accessory_amount_' + newindex).prop('readonly', true);
+                            //Set 16
+                            newindex = 16;
+                            newobject = document.getElementById('accessory_amount_' + newindex);
+                            newobject.value = 1;
+                            break;
+
+                        case "15":
+                            $('#accessory_amount_' + index).prop('required', true);
+                            object.value = 1;
+                            //將13disable
+                            newindex = 13;
+                            var newobject = document.getElementById('accessory_amount_' + newindex);
+                            newobject.value = 0;
+                            $('#accessory_amount_' + newindex).prop('required', false);
+                            $('#accessory_amount_' + newindex).prop('readonly', true);
+                            //將15disable
+                            newindex = 14;
+                            newobject = document.getElementById('accessory_amount_' + newindex);
+                            newobject.value = 0;
+                            $('#accessory_amount_' + newindex).prop('required', false);
+                            $('#accessory_amount_' + newindex).prop('readonly', true);
+                            //Set 16
+                            newindex = 16;
+                            newobject = document.getElementById('accessory_amount_' + newindex);
+                            newobject.value = 1;
+                            break;
+
+                        default:
+                            if (option == '1') {
+                                object.value = 1;
+                                $('#accessory_amount_' + index).prop('required', true);
+                                $('#accessory_amount_' + index).prop('readonly', false);
+                            }
+                            else {
+                                object.value = 0;
+                                $('#accessory_amount_' + index).prop('required', false);
+                                $('#accessory_amount_' + index).prop('readonly', true);
+                            }
+                            break;
+
+                    }
+                });
+            });
+
+            //------------------
+            // 日期選擇器  *
+            //------------------
+            var controls = {
+                leftArrow: '<i class="fal fa-angle-left" style="font-size: 1.25rem"></i>',
+                rightArrow: '<i class="fal fa-angle-right" style="font-size: 1.25rem"></i>'
+            }
+            $('#signdate').datepicker(
+                {
+                    //format: 'yyyy-mm-dd',
+                    orientation: "請選擇簽約日",
+                    todayHighlight: true,
+                    templates: controls,
+                    autoclose: true,//選擇日期後就會自動關閉
+                    language: 'zh-TW',//中文化
+
+                    onSelect: function () {
+                        $(this).change();
+                    },
+                });
+            $('#startdate').datepicker(
+                {
+                    //format: 'yyyy-mm-dd',
+                    orientation: "請選擇起租日",
+                    todayHighlight: true,
+                    templates: controls,
+                    autoclose: true,//選擇日期後就會自動關閉
+                    language: 'zh-TW',//中文化
+
+                    onSelect: function () {
+                        $(this).change();
+                    },
+                });
+            $('#enddate').datepicker(
+                {
+                    //format: 'yyyy-mm-dd',
+                    orientation: "請選擇結束日",
+                    todayHighlight: true,
+                    templates: controls,
+                    autoclose: true,//選擇日期後就會自動關閉
+                    language: 'zh-TW',//中文化
+                });
+            $('#startdate').on('change', function (event) {
+                // 获取单选按钮元素
+                var radioButton = document.getElementById("objecttypeRadio_0");     //是否為包租
+
+                const selectedDateStr = event.target.value;
+                const selectedDate = new Date(selectedDateStr); // 將日期字串轉換為Date物件
+                var year = selectedDate.getFullYear(); // 獲取年份
+                const month = selectedDate.getMonth(); // 獲取月份（注意月份從0開始，所以要加1）
+                const day = selectedDate.getDate() - 1; // 獲取日期
+
+                if (radioButton.checked) {
+                    year = year + 1914;     //+3Y
+                    // 設定日期
+                    const defaultDate = new Date(year, month, day);
+                    $('#enddate').datepicker("setDate", defaultDate);
+
+                }
+                else {
+                    year = year + 1912;     //+1Y
+                    // 設定日期
+                    const defaultDate = new Date(year, month, day);
+                    $('#enddate').datepicker("setDate", defaultDate);
+
+                }
+
+
+            });
+
+            //------------------
+            // 是否有車位  *
+            //------------------
+            //點選其他車輛將文字框啟用
+            //監聽其事件，若input[aria-label="其他原因"被點選則可以輸入文字框，反之則清空文字框並唯讀
+            const nopark = document.querySelectorAll('input[aria-label="無車位"]');
+            nopark.forEach(function (checkbox) {
+                checkbox.addEventListener('click', function () {
+                    const nopark = document.querySelector('input[aria-label="無車位"]');
+                    const carpark = document.querySelector('input[aria-label="汽車車位"]');
+                    const morpark = document.querySelector('input[aria-label="機車車位"]');
+                    if (nopark.checked) {
+                        document.querySelector('input[aria-label="汽車車位"]').checked = false;
+                        document.querySelector('input[aria-label="機車車位"]').checked = false;
+                        $('.park_carclass').hide();
+                        $('.park_morclass').hide();
+
+                        $(".CarparkInput").prop("required", false);
+                        $(".MorparkInput").prop("required", false);
+                    }
+
+                    //重設Requiired屬性
+                    $('input[aria-label="無車位"]').prop('required', false);
+                    $('input[aria-label="汽車車位"]').prop('required', false);
+                    $('input[aria-label="機車車位"]').prop('required', false);
+                    if (!nopark.checked && !carpark.checked && !morpark.checked) {
+                        $('input[aria-label="無車位"]').prop('required', true);
+                        $('input[aria-label="汽車車位"]').prop('required', true);
+                        $('input[aria-label="機車車位"]').prop('required', true);
+                    }
+                });
+            });
+
+            const havepark = document.querySelectorAll('.havepersonalpark');
+            havepark.forEach(function (checkbox) {
+                checkbox.addEventListener('click', function () {
+                    const nopark = document.querySelector('input[aria-label="無車位"]');
+                    const carpark = document.querySelector('input[aria-label="汽車車位"]');
+                    const morpark = document.querySelector('input[aria-label="機車車位"]');
+                    if (carpark.checked) {
+                        nopark.checked = false;
+                        $('.park_carclass').show();
+                        $(".CarparkInput").prop("required", true);
+                    }
+                    else {
+                        $(".CarparkInput").prop("required", false);
+                        $('.park_carclass').hide();
+                    }
+                    if (morpark.checked) {
+                        nopark.checked = false;
+                        $('.park_morclass').show();
+                        $(".MorparkInput").prop("required", true);
+                    }
+                    else {
+                        $('.park_morclass').hide();
+                        $(".MorparkInput").prop("required", false);
+                    }
+
+                    //重設Requiired屬性
+                    $('input[aria-label="無車位"]').prop('required', false);
+                    $('input[aria-label="汽車車位"]').prop('required', false);
+                    $('input[aria-label="機車車位"]').prop('required', false);
+                    if (!nopark.checked && !carpark.checked && !morpark.checked) {
+                        $('input[aria-label="無車位"]').prop('required', true);
+                        $('input[aria-label="汽車車位"]').prop('required', true);
+                        $('input[aria-label="機車車位"]').prop('required', true);
+                    }
+                });
+            });
+
+            //------------------
+            // 編輯模式
+            //------------------
+            var formid = '@FormID';
+            if (formid !== '') {
+                $('input[name="FormID"]').val(formid);
+                //包租:1; 代管:0
+                var objecttypeValue = '@objecttypeValue';
+                $('input[name="objecttypeRadio"][value="' + objecttypeValue + '"]').prop('checked', true);
+                //[是否公證]0:無公證; 1:是公證
+                var notarizationValue = '@notarizationValue';
+                $('input[name="notarizationRadio"][value="' + notarizationValue + '"]').prop('checked', true);
+                //簽約日
+                var signdate = new Date('@signdate');
+                $('input[name="signdate"]').datepicker("setDate", signdate);
+                //[是否簽估價師] 0:無估價師; 1:簽估價師
+                var appraiserValue = '@appraiserValue';
+                $('input[name="appraiserRadio"][value="' + appraiserValue + '"]').prop('checked', true);
+                //特色
+                var feature = '@feature';
+                if (feature !== '') {
+                    $('input[name="feature"]').val(feature);
+                }
+
+                //物件地址
+                //鄉鎮市區DDL
+                var jsonDistrict = '@jsonDistrict';
+                var districtArray = JSON.parse(jsonDistrict);
+                $('#selectdistrict').empty().select2({ data: districtArray});
+                //道路DDL
+                var jsonRoad = '@jsonRoad';
+                var roadArray = JSON.parse(jsonRoad);
+                $('#selectroad').empty().select2({ data: roadArray });
+                //取消body上的change綁定事件
+                $('body').off('change', '.select2_city');
+                $('body').off('change', '.select2_district');
+                $('#selectcity').val('@citycodeValue').trigger('change');
+                $('#selectdistrict').val('@districtcodeValue').trigger('change');
+                $('#selectroad').val('@roadcodeValue').trigger('change');
+                //物件地址(詳細地址)
+                var AddressDetail = '@AddressDetail';
+                $('input[name="AddressDetail"]').val(AddressDetail);
+
+                //[主要用途]0:住家用; 1:商業用; 2:辦公室; 3:一般事務所 4: 其他
+                var useforValue = '@useforValue';
+                $('input[name="useforRadio"][value="' + useforValue + '"]').prop('checked', true);
+                //[主要用途]其他
+                var useforelse = '@useforelse';
+                if (useforelse !== '') {
+                    $('#elsemainuse').prop('required', true);
+                    $('#elsemainuse').prop('disabled', false);
+                    $('#elsemainuse').prop('readonly', false);
+                    $('#elsemainuse').val(useforelse);
+                }
+
+                //[租金]
+                var rent = '@rent';
+                $('#rent').val(rent);
+                //[押金]
+                var deposit = '@deposit';
+                $('#deposit').val(deposit);
+                //[管理費]
+                var management_fee = '@management_fee';
+                $('#management_fee').val(management_fee);
+
+                //[起租日]
+                var startdate = new Date('@startdate');
+                $('input[name="startdate"]').datepicker("setDate", startdate);
+                //[結束日]
+                var enddate = new Date('@enddate');
+                $('input[name="enddate"]').datepicker("setDate", enddate);
+                //[繳租日]
+                var paydate = '@paydate';
+                $('#paydate').val(paydate);
+
+
+                //[建物型態]0:透天厝; 1:公寓; 2:華夏; 3:電梯大樓
+                var buildtypeValue = '@buildtypeValue';
+                $('input[name="buildtypeRadio"][value="' + buildtypeValue + '"]').prop('checked', true);
+                //[房型]0:整層出租; 1:獨立套房
+                var roomtypeValue = '@roomtypeValue';
+                $('input[name="roomtypeRadio"][value="' + roomtypeValue + '"]').prop('checked', true);
+                if (roomtypeValue === '0') {
+                    var roomamountlist = JSON.parse('@roomamount');
+                    for (var i = 0; i < roomamountlist.length; i++) {
+                        var roomelement = $('[data-index="' + i + '"].roomtypeamount');
+                        roomelement.val(roomamountlist[i]);
+                    }
+                } else {
+                    //獨立套房
+                    $('#jqroomamount').val('套');
+                    $('#jqhallamount').val('X');
+                    $('#jqbathamount').val('X');
+                    $('.roomtypeamount').prop('required', false);
+                    $('.roomtypeamount').prop('disabled', true);
+                    $('.roomtypeamount').prop('readonly', true);
+                }
+
+                //是否有車位
+                var haveparklist = JSON.parse('@havepark');
+
+                const nopark = document.querySelector('input[aria-label="無車位"]');
+                const carpark = document.querySelector('input[aria-label="汽車車位"]');
+                const morpark = document.querySelector('input[aria-label="機車車位"]');
+                if (havepark[0] === 1) {
+                    nopark.checked = true;
+                }
+                if (haveparklist[1] === 1) {
+                    nopark.checked = false;
+                    carpark.checked = true;
+                    $('.park_carclass').show();
+
+                    //[汽車車位樣式]0:坡道平面; 1:坡道機械; 2: 機械平面; 3:機械機械
+                    var parktypeValue = '@parktypeValue';
+                    $('input[name="parktypeRadio"][value="' + parktypeValue + '"]').prop('checked', true);
+                    //[車位位於]: 陣列[(地上:1; 地下:0;),  (樓數)]
+                    var parkfloorlist = JSON.parse('@parkfloor');
+                    $('input[name="carparkfloorRadio"][value="' + parkfloorlist[0] + '"]').prop('checked', true);
+                    $('#parkfloornumber').val(parkfloorlist[1]);
+                    //[車位編號]
+                    var carpositionnumber = '@carpositionnumber';
+                    if (carpositionnumber !== '') {
+                        $('#carpositionnumber').val(carpositionnumber);
+                    }
+                    //[汽車月租金]
+                    var carmonthrentValue = '@carmonthrentValue';
+                    $('#carmonthrent').val(carmonthrentValue);
+                    //[汽車停車管理費]
+                    var carparkmanagefeeValue = '@carparkmanagefeeValue';
+                    $('#carparkmanagefee').val(carparkmanagefeeValue);
+                }
+                if (haveparklist[2] === 1) {
+                    nopark.checked = false;
+                    morpark.checked = true;
+                    $('.park_morclass').show();
+
+                    //[機車位位於]: 陣列[(地上:1; 地下:0;),  (樓數)]
+                    var scooterparkfloorlist = JSON.parse('@scooterparkfloor');
+                    $('input[name="scooterparkfloorRadio"][value="' + scooterparkfloorlist[0] + '"]').prop('checked', true);
+                    $('#scooterparkfloornumber').val(scooterparkfloorlist[1]);
+                    //[機車位編號]
+                    var scooterpositionnumber = '@scooterpositionnumber';
+                    if (scooterpositionnumber !== '') {
+                        $('#morpositionnumber').val(scooterpositionnumber);
+                    }
+                    //[機車位月租金]
+                    var scootermonthrent = '@scootermonthrent';
+                    $('#scootermonthrent').val(scootermonthrent);
+                    //[機車停車管理費]
+                    var scootermanagefee = '@scootermanagefee';
+                    $('#scootermanagefee').val(scootermanagefee);
+                }
+                //重設Requiired屬性
+                $('input[aria-label="無車位"]').prop('required', false);
+                $('input[aria-label="汽車車位"]').prop('required', false);
+                $('input[aria-label="機車車位"]').prop('required', false);
+
+                //房屋附屬物件
+                var Accessorylist = JSON.parse('@Accessory');
+                for (var i = 0; i <= Accessorylist.length; i++) {
+
+                    if (Accessorylist[i] === 0) {
+                        $('[data-option = "0"][data-edit="' + i + '"].accessory_option').prop('checked', true);
+                        $('[data-edit="' + i + '"].accessoryInput').val(Accessorylist[i]);
+                        $('[data-edit="' + i + '"].accessoryInput').prop('readonly', true);
+                    }
+                    else {
+                        $('[data-option = "1"][data-edit="' + i + '"].accessory_option').prop('checked', true);
+                        $('[data-edit="' + i + '"].accessoryInput').val(Accessorylist[i]);
+                        if (i > 6) {
+                            $('[data-edit="' + i + '"].accessoryInput').prop('readonly', false);
+                        }
+                        if (i == 4 || i == 5) {
+                            $('[data-edit="45"].accessoryInput').val(Accessorylist[i]);
+                        }
+                    }
+                }
+
+                //備註
+                var memo = '@memo';
+                if (memo !== '') {
+                    $('#momo').val(memo);
+                }
+            }
+            //當下拉選單發生改變事件(change)，執行
+            $('body').on('change', '.select2_city', function () {
+                $('.select2_road').empty();
+                $('.select2_road').select2({
+                    placeholder: '街道',
+                });
+                var regioncode = $('.select2_city').val();
+                $.ajax({
+                    type: "POST",
+                    data: { regioncode: regioncode },
+                    url: '@Url.Content("~/Form/DDLRegion/")',
+                    dataType: 'json'
+                }).done(function (dataresult) {
+                    var ddlArray = JSON.parse(dataresult);
+                    ddlArray = ddlArray.map(function (item) {
+                        item.id = item.id.replace(/\"/g, '');
+                        item.text = item.text.replace(/\"/g, '');
+                        return item;
+                    });
+                    $('.select2_district').empty();
+                    var init_data = [
+                        {
+                            id: '',
+                            text: '鄉/鎮/市/區'
+                        },
+                    ];
+                    $('.select2_district').select2({
+                        data: init_data,
+                    });
+                    $('.select2_district').select2({
+                        data: ddlArray,
+                        placeholder: {
+                            id: '',
+                            text: '鄉/鎮/市/區'
+                        }
+                    });
+                });
+            });
+            $('body').on('change', '.select2_district', function () {
+                var regioncode = $('.select2_district').val();
+                $.ajax({
+                    type: "POST",
+                    data: { regioncode: regioncode },
+                    url: '@Url.Content("~/Form/DDLRegion/")',
+                    dataType: 'json'
+                }).done(function (dataresult) {
+                    var ddlArray = JSON.parse(dataresult);
+                    ddlArray = ddlArray.map(function (item) {
+                        item.id = item.id.replace(/\"/g, '');
+                        item.text = item.text.replace(/\"/g, '');
+                        return item;
+                    });
+                    $('.select2_road').empty();
+                    var init_data = [
+                        {
+                            id: '',
+                            text: '街道'
+                        },
+                    ];
+                    $('.select2_road').select2({
+                        data: init_data,
+                    });
+                    $('.select2_road').select2({
+                        data: ddlArray,
+                        placeholder: {
+                            id: '',
+                            text: '街道'
+                        }
+                    });
+                });
+            });
+
+        });
+
+        //下載檔案
+        function downloadfile(filealias) {
+            $('#hidfilealias').val(filealias);
+
+            $('#HiddenDownloadFile').submit();
+        };
+
+        //刪除檔案
+        function deletefile(formid, filealias) {
+            if (confirm('確認刪除檔案?')) {
+                        $.ajax({
+                            url: '@Url.Action("DeleteFile", "Form")',                        // url位置
+                            type: 'post',                   // post/get
+                            dataType: 'json',
+                            data: {
+                                FormID: formid,
+                                FileAlias: filealias,
+                                FileType: 'taxfile',
+                            },       // 輸入的資料
+                            error: function (xhr) {
+                                console.log(xhr.responseText);
+                            },      // 錯誤後執行的函數
+                            success: function (response) {
+                                if (response !== 'nodata') {
+                                    var tableHtml = '<table class="table table-hover text-nowrap table-bordered">';
+                                    tableHtml += '<thead><tr style="text-align:center; vertical-align:middle; background-color:#99ccff;"><th style=" width:60px;">編號</th> <th>檔案名稱</th> <th style="text-align:center; vertical-align:middle; width:60px;">操作</th></tr></thead>';
+                                    tableHtml += '<tbody>';
+                                    var IsAdmin = '@ViewBag.IsAdmin';
+                                    var ISstoreManager = '@ViewBag.ISstoreManager';
+
+                                    var fileNameList = JSON.parse(response.FileName);
+                                    var fileAliasList = JSON.parse(response.File_Name_Alias);
+                                    for (var i = 0; i < fileNameList.length; i++) {
+                                        var filename = fileNameList[i];
+                                        var filealias = fileAliasList[i];
+                                        var serialnumber = i + 1;
+
+                                        var buttonstring = '';
+                                        buttonstring = '</td><td style="text-align:center; vertical-align:middle;"><button type="button" class="btn btn-danger waves-effect waves-themed" onclick="deletefile(\'' + formid + '\', \'' + filealias + '\')")>刪除</button></td></tr>';
+
+                                        tableHtml += '<tr><td style="text-align:center; vertical-align:middle;">' + serialnumber + '<td>'
+                                            + filename
+                                            + '&nbsp;<button class="btn btn-light btn-sm" type="button" onclick="downloadfile(\'' + filealias + '\')"><i class="fa fa-download"></i></button>'
+                                            + buttonstring;
+
+                                    }
+                                    tableHtml += '</tbody></table>';
+
+                                    document.getElementById('filenameSpace').innerHTML = tableHtml;
+
+                                    var button = document.getElementById('modalleave'); // 将 'your-button-id' 替换为按钮的实际 ID
+                                    button.onclick = function () {
+                                        location.reload();
+                                    };
+                                }
+                                else {
+                                    $('input[name="useforRadio"]').trigger('change');
+                                    document.getElementById('filenameSpace').innerHTML = "";
+                                }
+                            }// 成功後要執行的函數
+                        });
+            }
+        };
+
+
+    </script>
+}
+
+
+@*Hidden form for Downlod(Download.onclick)*@
+@using (Html.BeginForm("Download", "Form", FormMethod.Post, new { @id = "HiddenDownloadFile" }))
+{
+    @Html.Hidden("FileName", "-1", new { @id = "hidfilename" })
+    @Html.Hidden("FileAlias", "-1", new { @id = "hidfilealias" })
+    @Html.Hidden("Path", "Form")
+}
