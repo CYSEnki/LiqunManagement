@@ -165,6 +165,7 @@ namespace LiqunManagement.Controllers
         {
             FormService formService = new FormService();
             FileService fileService = new FileService();
+
             var initmodel = InitialModel();
             ControllerName = ControllerName != null ? ControllerName : "Sales";     //是否秘書端進入
             logger.Info("房屋物件資料頁面送出編輯，ControllerName:" + ControllerName);
@@ -391,6 +392,7 @@ namespace LiqunManagement.Controllers
                 return View(initmodel);
             }
             #endregion
+            TempData["ErrorMessage"] = "Successed";
             return RedirectToAction("CaseManage", ControllerName);
         }
         #endregion
@@ -870,6 +872,8 @@ namespace LiqunManagement.Controllers
                             context.SaveChanges();
                         }
                     }
+
+                    TempData["ErrorMessage"] = "Successed";
                 }
                 catch (Exception ex)
                 {
@@ -878,7 +882,6 @@ namespace LiqunManagement.Controllers
                     ViewBag.ErrorMessage = ex.Message;
                     return View(initmodel);
                 }
-
             }
             #endregion
 
@@ -1477,6 +1480,8 @@ namespace LiqunManagement.Controllers
                             context.SaveChanges();
                         }
                     }
+
+                    TempData["ErrorMessage"] = "Successed";
                 }
                 catch (Exception ex)
                 {
@@ -1661,6 +1666,8 @@ namespace LiqunManagement.Controllers
                         context.SaveChanges();
                     }
                 }
+
+                TempData["ErrorMessage"] = "Successed";
             }
             catch (Exception ex)
             {

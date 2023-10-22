@@ -391,6 +391,7 @@ namespace LiqunManagement.Controllers
         #endregion
 
         #region 登出
+        [AllowAnonymous]
         public ActionResult Logout()
         {
             //使用者登出

@@ -15,7 +15,7 @@ namespace LiqunManagement.ViewModels
         public string Account { get; set; }
 
         [DisplayName("會員密碼")]
-        [Required(ErrorMessage ="請輸入密碼")]
+        [Required(ErrorMessage = "請輸入密碼")]
         public string Password { get; set; }
 
     }

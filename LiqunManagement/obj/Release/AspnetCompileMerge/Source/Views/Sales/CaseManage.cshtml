@@ -8,6 +8,9 @@
 
     var ErrorMessage = ViewBag.ErrorMessage != null ? ViewBag.ErrorMessage : "";
 }
+@*sweetalert2*@
+<link href="~/Content/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+@*datatables*@
 <link href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/datagrid/datatables/datatables.bundle.css" rel="stylesheet" />
 <main id="js-page-content" role="main" class="page-content">
     <ol class="breadcrumb page-breadcrumb">
@@ -116,12 +119,35 @@
 
 @section scripts
 {
+    @*sweetalert2*@
+    <script src="~/Content/sweetalert2/sweetalert2.min.js"></script>
+    @*datatables*@
     <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/datagrid/datatables/datatables.bundle.js"></script>
     <script>
         $(document).ready(function () {
             //ErrorMessage
             if ('@ErrorMessage' !== '') {
+                if ('@ErrorMessage' == 'Successed') {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 6000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: '表單儲存成功'
+                    })
+                }
+                else {
                 alert("錯誤訊息:" + '@ErrorMessage');
+                }
             }
 
             /* init datatables */
@@ -159,7 +185,6 @@
                             titleAttr: 'Print Table',
                             className: 'btn-outline-default'
                         }
-
                     ],
                     //定義每列的屬性和操作
                     //columnDefs: [

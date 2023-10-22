@@ -98,6 +98,8 @@ namespace LiqunManagement.Controllers
                            from land in temp1.DefaultIfEmpty()
                            join ten in formdb.Tenant on form.FormID equals ten.FormID into temp2
                            from tena in temp2.DefaultIfEmpty()
+                           join sec in formdb.Secretary on form.FormID equals sec.FormID into temp3
+                           from seca in temp3.DefaultIfEmpty()
                            join mem in membersdata on form.AgentAccount equals mem.Account
                            select new objectFormViewModel
                            {
@@ -109,6 +111,7 @@ namespace LiqunManagement.Controllers
                                SignDate = (DateTime)obj.signdate,
                                Landlord = land != null ? land.Name : null,
                                Tenant = tena != null ? tena.Name : null,
+                               ExistSecretaryForm = seca != null ? true : false,
                            };
 
             //ViewBag.Formlist = Formlist;

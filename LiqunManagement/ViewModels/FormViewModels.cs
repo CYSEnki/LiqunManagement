@@ -46,6 +46,7 @@ namespace LiqunManagement.ViewModels
         public string AgentAccount { get; set; }
         public string AgentName { get; set; }
         public string AssistantAccount { get; set; }
+        public bool ExistSecretaryForm { get; set; }
     }
 
     #region FormGet資料

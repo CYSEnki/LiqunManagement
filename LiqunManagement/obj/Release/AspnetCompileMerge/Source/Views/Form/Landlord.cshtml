@@ -108,7 +108,7 @@
 @*<link href="~/Content/select2/css/select2.min.css" rel="stylesheet" />*@
 <link href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/formplugins/select2/select2.bundle.css" rel="stylesheet" />
 @*datepicker*@
-<link href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/formplugins/bootstrap-datepicker/bootstrap-datepicker.css" rel="stylesheet" />
+@*<link href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/formplugins/bootstrap-datepicker/bootstrap-datepicker.css" rel="stylesheet" />*@
 @*sweetalert2*@
 <link href="~/Content/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
 
@@ -146,7 +146,7 @@
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-                        @using (Html.BeginForm("Landlord", "Form", FormMethod.Post, new { @class = "needs-validation", @enctype = "multipart/form-data", @novalidate = "" }))
+                        @using (Html.BeginForm("Landlord", "Form", FormMethod.Post, new {@id="jqform", @class = "needs-validation", @enctype = "multipart/form-data", @novalidate = "" }))
                         {
                             @*表單編號*@
                             <input type="text" value="@FormID" name="FormID" hidden />
@@ -207,7 +207,7 @@
                             </div>
                             @*出生年月日*@
                             <div class="form-group legal_formtype">
-                                <label class="form-label" for="birthday">生日</label>
+                                <label class="form-label" for="birthdayYear_0">生日</label>
                                 <div class="col-md-8 col-lg-6 mb-3 pl-0">
                                     <div class="input-group w-100">
                                         <div class="input-group-append">
@@ -557,7 +557,7 @@
                                         您必須選擇此區塊以確認完成填寫
                                     </div>
                                 </div>
-                                <button class="btn btn-primary ml-auto waves-effect waves-themed" type="submit">送出</button>
+                                <button class="btn btn-primary ml-auto waves-effect waves-themed" type="button" onclick="submitform()">送出</button>
                             </div>
                         }
                     </div>
@@ -1541,36 +1541,290 @@
             });
         });
 
-        //datepicker
-        var controls = {
-            leftArrow: '<i class="fal fa-angle-left" style="font-size: 1.25rem"></i>',
-            rightArrow: '<i class="fal fa-angle-right" style="font-size: 1.25rem"></i>'
-        }
+    //表單送出事件
+    function submitform() {
+        Swal.fire({
+            title: '確定上傳?',
+            //text: "你可能會覆蓋系統中的檔案!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '確認',
+            cancelButtonText: '取消',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                //提交上傳
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    if (form.checkValidity() === false) {
+                        form.classList.add('was-validated');
+                    }
+                    else {
+                        //打包房東生日
+                        var persontypeRadioElement = document.getElementsByName("persontypeRadio");
+                        var typevalue;
+                        for (var i = 0; i < persontypeRadioElement.length; i++) {
+                            if (persontypeRadioElement[i].checked) {
+                                typevalue = persontypeRadioElement[i].value;
+                                break; // 如果找到选中的值，就跳出循环
+                            }
+                        }
+                        if (typevalue === '0') {
+                            const Year = parseInt($("#birthdayYear_0").val()) + 1911;
+                            var Month = $("#birthdayMonth_0").val();
+                            var Day = $("#birthdayDay_0").val();
+                            const birth = Year.toString() + '-' + Month + '-' + Day;
+                            $("#birthday_0").val(birth)
+                        } else {
+                            $("#birthday_0").val('')
+                        }
 
-        $('.birthday').datepicker(
-            {
-                format: 'yyyy-mm-dd',
-                orientation: "請選擇出生年月日",
-                todayHighlight: true,
-                templates: controls
-            });
-            //$('.datepicker').datepicker({
-            //    format: 'yyyy-mm-dd',
-            //    maxDate: moment(),
-            //    viewMode: 'months',
-            //    locale: 'zh-cn',
-            //    orientation: "請選擇起租日",
-            //    todayHighlight: true,
-            //    templates: controls
-            //});
+                        //將共有人資料打包
+                        //取得幾位共有人
+                        var CoRadioElement = document.getElementsByName("CoOwnerRadio");
+                        // 存儲選中的值
+                        var selectedValue;
+                        // 循环遍历单选按钮，找到选中的值
+                        for (var i = 0; i < CoRadioElement.length; i++) {
+                            if (CoRadioElement[i].checked) {
+                                selectedValue = CoRadioElement[i].value;
+                                break; // 如果找到选中的值，就跳出循环
+                            }
+                        }
+                        //共有人1
+                        if (selectedValue >= 1) {
+                            const dataArray = [];
+                            const Name = document.getElementById(`Name_Co1`).value;
+                            //const Year = parseInt(document.getElementById(`birthdayYear_Co1`).value) + 1911;
+                            //const Month = document.getElementById(`birthdayMonth_Co1`).value;
+                            //const Day = document.getElementById(`birthdayDay_Co1`).value;
+                            //const Birthday = Year.toString() + '-' + Month + '-' + Day;
+                            const IDNumber = document.getElementById(`IDnumber_Co1`).value;
+                            const Phone = document.getElementById(`Phone_Co1`).value;
+                            const Road = document.getElementById(`road_Co1`).value;
+                            const AddressDetail = document.getElementById(`AddressDetail_Co1`).value;
+                            const sameaddresscheck = document.getElementById('sameaddress_Co1');
+                            var Contact = Road;
+                            var detailContact = AddressDetail;
+                            if (sameaddresscheck) {
+                                if (!sameaddresscheck.checked) {
+                                    Contact = document.getElementById(`road_contact_Co1`).value;
+                                    detailContact = document.getElementById(`detailcontact_Co1`).value;
+                                }
+                            }
+                            dataArray.push(Name);
+                            //dataArray.push(Birthday);
+                            dataArray.push(IDNumber);
+                            dataArray.push(Phone);
+                            dataArray.push(Road);
+                            dataArray.push(AddressDetail);
+                            dataArray.push(Contact);
+                            dataArray.push(detailContact);
+                            const jsonResult = JSON.stringify(dataArray);
+                            $('#CoOwnerInput1').val(jsonResult);
+                        }
+                        if (selectedValue >= 2) {
+                            const dataArray = [];
+                            const Name = document.getElementById(`Name_Co2`).value;
+                            //const Year = parseInt(document.getElementById(`birthdayYear_Co2`).value) + 1911;
+                            //const Month = document.getElementById(`birthdayMonth_Co2`).value;
+                            //const Day = document.getElementById(`birthdayDay_Co2`).value;
+                            //const Birthday = Year.toString() + '-' + Month + '-' + Day;
+                            const IDNumber = document.getElementById(`IDnumber_Co2`).value;
+                            const Phone = document.getElementById(`Phone_Co2`).value;
+                            const Road = document.getElementById(`road_Co2`).value;
+                            const AddressDetail = document.getElementById(`AddressDetail_Co2`).value;
+                            const sameaddresscheck = document.getElementById('sameaddress_Co2');
+                            var Contact = Road;
+                            var detailContact = AddressDetail;
+                            if (sameaddresscheck) {
+                                if (!sameaddresscheck.checked) {
+                                    Contact = document.getElementById(`road_contact_Co2`).value;
+                                    detailContact = document.getElementById(`detailcontact_Co2`).value;
+                                }
+                            }
+                            dataArray.push(Name);
+                            //dataArray.push(Birthday);
+                            dataArray.push(IDNumber);
+                            dataArray.push(Phone);
+                            dataArray.push(Road);
+                            dataArray.push(AddressDetail);
+                            dataArray.push(Contact);
+                            dataArray.push(detailContact);
+                            const jsonResult = JSON.stringify(dataArray);
+                            $('#CoOwnerInput2').val(jsonResult);
+                        }
+                        if (selectedValue >= 3) {
+                            const dataArray = [];
+                            const Name = document.getElementById(`Name_Co3`).value;
+                            //const Year = parseInt(document.getElementById(`birthdayYear_Co3`).value) + 1911;
+                            //const Month = document.getElementById(`birthdayMonth_Co3`).value;
+                            //const Day = document.getElementById(`birthdayDay_Co3`).value;
+                            //const Birthday = Year.toString() + '-' + Month + '-' + Day;
+                            const IDNumber = document.getElementById(`IDnumber_Co3`).value;
+                            const Phone = document.getElementById(`Phone_Co3`).value;
+                            const Road = document.getElementById(`road_Co3`).value;
+                            const AddressDetail = document.getElementById(`AddressDetail_Co3`).value;
+                            const sameaddresscheck = document.getElementById('sameaddress_Co3');
+                            var Contact = Road;
+                            var detailContact = AddressDetail;
+                            if (sameaddresscheck) {
+                                if (!sameaddresscheck.checked) {
+                                    Contact = document.getElementById(`road_contact_Co3`).value;
+                                    detailContact = document.getElementById(`detailcontact_Co3`).value;
+                                }
+                            }
+                            dataArray.push(Name);
+                            //dataArray.push(Birthday);
+                            dataArray.push(IDNumber);
+                            dataArray.push(Phone);
+                            dataArray.push(Road);
+                            dataArray.push(AddressDetail);
+                            dataArray.push(Contact);
+                            dataArray.push(detailContact);
+                            const jsonResult = JSON.stringify(dataArray);
+                            $('#CoOwnerInput3').val(jsonResult);
+                        }
+                        if (selectedValue >= 4) {
+                            const dataArray = [];
+                            const Name = document.getElementById(`Name_Co4`).value;
+                            //const Year = parseInt(document.getElementById(`birthdayYear_Co4`).value) + 1911;
+                            //const Month = document.getElementById(`birthdayMonth_Co4`).value;
+                            //const Day = document.getElementById(`birthdayDay_Co4`).value;
+                            //const Birthday = Year.toString() + '-' + Month + '-' + Day;
+                            const IDNumber = document.getElementById(`IDnumber_Co4`).value;
+                            const Phone = document.getElementById(`Phone_Co4`).value;
+                            const Road = document.getElementById(`road_Co4`).value;
+                            const AddressDetail = document.getElementById(`AddressDetail_Co4`).value;
+                            const sameaddresscheck = document.getElementById('sameaddress_Co4');
+                            var Contact = Road;
+                            var detailContact = AddressDetail;
+                            if (sameaddresscheck) {
+                                if (!sameaddresscheck.checked) {
+                                    Contact = document.getElementById(`road_contact_Co4`).value;
+                                    detailContact = document.getElementById(`detailcontact_Co4`).value;
+                                }
+                            }
 
-        $(function () {
-            $(".datepicker").datepicker({
-                format: 'YYYY年MM月',
-                //maxDate: moment(),
-                //viewMode: 'months',
-                locale: 'zh-cn'
-});
-        });
+                            dataArray.push(Name);
+                            //dataArray.push(Birthday);
+                            dataArray.push(IDNumber);
+                            dataArray.push(Phone);
+                            dataArray.push(Road);
+                            dataArray.push(AddressDetail);
+                            dataArray.push(Contact);
+                            dataArray.push(detailContact);
+                            const jsonResult = JSON.stringify(dataArray);
+                            $('#CoOwnerInput4').val(jsonResult);
+                        }
+                        if (selectedValue >= 5) {
+                            const dataArray = [];
+                            const Name = document.getElementById(`Name_Co5`).value;
+                            //const Year = parseInt(document.getElementById(`birthdayYear_Co5`).value) + 1911;
+                            //const Month = document.getElementById(`birthdayMonth_Co5`).value;
+                            //const Day = document.getElementById(`birthdayDay_Co5`).value;
+                            //const Birthday = Year.toString() + '-' + Month + '-' + Day;
+                            const IDNumber = document.getElementById(`IDnumber_Co5`).value;
+                            const Phone = document.getElementById(`Phone_Co5`).value;
+                            const Road = document.getElementById(`road_Co5`).value;
+                            const AddressDetail = document.getElementById(`AddressDetail_Co5`).value;
+                            const sameaddresscheck = document.getElementById('sameaddress_Co5');
+                            var Contact = Road;
+                            var detailContact = AddressDetail;
+                            if (sameaddresscheck) {
+                                if (!sameaddresscheck.checked) {
+                                    Contact = document.getElementById(`road_contact_Co5`).value;
+                                    detailContact = document.getElementById(`detailcontact_Co5`).value;
+                                }
+                            }
+
+                            dataArray.push(Name);
+                            //dataArray.push(Birthday);
+                            dataArray.push(IDNumber);
+                            dataArray.push(Phone);
+                            dataArray.push(Road);
+                            dataArray.push(AddressDetail);
+                            dataArray.push(Contact);
+                            dataArray.push(detailContact);
+                            const jsonResult = JSON.stringify(dataArray);
+                            $('#CoOwnerInput5').val(jsonResult);
+                        }
+
+
+                        //將代理人資料打包
+                        //取得幾位共有人
+                        const agentCheckbox = document.getElementById('agentCheckbox');
+                        const agentdataArray = [];
+                        if (agentCheckbox) {
+                            if (agentCheckbox.checked) {
+                                const Name = document.getElementById(`Name_11`).value;
+                                //性別
+                                //var genderRadioElement = document.getElementsByName("genderRadio_11");
+                                //// 定义变量来存储选中的值
+                                //var selectgender = '1'; //預設男性
+                                //if (!genderRadioElement[0].checked) {
+                                //    selectgender = '0'  //女性
+                                //}
+                                //const Year = parseInt(document.getElementById(`birthdayYear_11`).value) + 1911;
+                                //const Month = document.getElementById(`birthdayMonth_11`).value;
+                                //const Day = document.getElementById(`birthdayDay_11`).value;
+                                //const Birthday = Year.toString() + '-' + Month + '-' + Day;
+                                const IDNumber = document.getElementById(`IDNumber_11`).value;
+                                const Phone = document.getElementById(`Phone_11`).value;
+                                const Road = document.getElementById(`addressroad_11`).value;
+                                const AddressDetail = document.getElementById(`AddressDetail_11`).value;
+                                const sameaddresscheck = document.getElementById('sameaddress_check_11');
+                                var Contact = Road;
+                                var detailContact = AddressDetail;
+                                if (sameaddresscheck) {
+                                    if (!sameaddresscheck.checked) {
+                                        Contact = document.getElementById(`contactroad_11`).value;
+                                        detailContact = document.getElementById(`detailcontact_11`).value;
+                                    }
+                                }
+                                agentdataArray.push(Name);
+                                //agentdataArray.push(selectgender);
+                                //agentdataArray.push(Birthday);
+                                agentdataArray.push(IDNumber);
+                                agentdataArray.push(Phone);
+                                agentdataArray.push(Road);
+                                agentdataArray.push(AddressDetail);
+                                agentdataArray.push(Contact);
+                                agentdataArray.push(detailContact);
+                                const jsonResult = JSON.stringify(agentdataArray);
+                                $('#AgentInput').val(jsonResult);
+                            }
+                        }
+
+                        $('#jqform').submit();
+                        Swal.fire({
+                            title: '請稍後!',
+                            html: '系統完成上傳動作之前請勿關閉視窗',
+                            //timer: 2000,
+                            timerProgressBar: true,
+                            didOpen: () => {
+                                Swal.showLoading()
+                                const b = Swal.getHtmlContainer().querySelector('b')
+                                timerInterval = setInterval(() => {
+                                    b.textContent = Swal.getTimerLeft()
+                                }, 100)
+                            },
+                            willClose: () => {
+                                clearInterval(timerInterval)
+                            }
+                        }).then((result) => {
+                            /* Read more about handling dismissals below */
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                console.log('I was closed by the timer')
+                            }
+                        })
+                    }
+                });
+            }
+        })
+    }
+
 </script>
 }
