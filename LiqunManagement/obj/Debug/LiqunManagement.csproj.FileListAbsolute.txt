@@ -512,6 +512,7 @@ C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\roslyn\VBCSCo
 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\Antlr3.Runtime.dll
 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\BouncyCastle.Crypto.dll
+C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\DocumentFormat.OpenXml.dll
 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\EntityFramework.dll
 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\EntityFramework.SqlServer.dll
 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\ICSharpCode.SharpZipLib.dll
@@ -531,8 +532,12 @@ C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\System.Web.Ra
 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\System.Web.WebPages.Deployment.dll
 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\System.Web.WebPages.dll
 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\System.Web.WebPages.Razor.dll
+C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\TemplateEngine.Docx.dll
 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\WebGrease.dll
+C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\Xceed.Document.NET.dll
+C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\Xceed.Words.NET.dll
 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\BouncyCastle.Crypto.xml
+C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\DocumentFormat.OpenXml.xml
 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\EntityFramework.xml
 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\EntityFramework.SqlServer.xml
 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\ICSharpCode.SharpZipLib.pdb
@@ -568,9 +573,3 @@ C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\obj\Debug\LiqunMa
 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\obj\Debug\LiqunManagement.csproj.CopyComplete
 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\obj\Debug\LiqunManagement.dll
 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\obj\Debug\LiqunManagement.pdb
-C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\obj\Debug\LiqunManagement.csproj.AssemblyReference.cache
-C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\DocumentFormat.OpenXml.dll
-C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\Xceed.Document.NET.dll
-C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\Xceed.Words.NET.dll
-C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\DocumentFormat.OpenXml.xml
-C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\bin\TemplateEngine.Docx.dll

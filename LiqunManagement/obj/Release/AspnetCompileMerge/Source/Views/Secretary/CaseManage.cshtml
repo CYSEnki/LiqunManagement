@@ -81,7 +81,9 @@
                                                                         <a class="dropdown-item" href="@Url.Action("Tenant", "Form", new { FormID = item.FormID, ControllerName = "Secretary"})">房客資料</a>
                                                                         <a class="dropdown-item" href="@Url.Action("Secretary", "Form", new { FormID = item.FormID, ControllerName = "Secretary"})">秘書填寫</a>
                                                                         <a class="dropdown-item" href="@Url.Action("Uploads", "Form", new { FormID = item.FormID, ControllerName = "Secretary"})">附件上傳</a>
+                                                                        <a class="dropdown-item" href="@Url.Action("ReadForm", "Form", new { FormID = item.FormID, ControllerName = "Secretary"})" target="_blank">表單閱覽</a>
                                                                         <a class="dropdown-item" onclick="exportfile('@item.FormID')">文件匯出</a>
+                                                                        <a class="dropdown-item" onclick="exportjson('@item.FormID')">匯出實價登入</a>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -222,8 +224,12 @@
 
             $('#jqform').val(FormID);
             $('#hiddenForm').submit();
+            return;
+        }
 
-
+        function exportjson(FormID) {
+            $('#jqform2').val(FormID);
+            $('#hiddenForm2').submit();
             return;
         }
     </script>
@@ -232,5 +238,11 @@
 @using (Html.BeginForm("ExportWord", "Secretary", FormMethod.Post, new { id = "hiddenForm", style = "display:none;" }))
 {
     @Html.Hidden("FormID", "0", new { id = "jqform" })
+    <!-- 添加更多的隐藏字段 -->
+}
+
+@using (Html.BeginForm("ExportJson", "Secretary", FormMethod.Post, new { id = "hiddenForm2", style = "display:none;" }))
+{
+    @Html.Hidden("FormID", "0", new { id = "jqform2" })
     <!-- 添加更多的隐藏字段 -->
 }

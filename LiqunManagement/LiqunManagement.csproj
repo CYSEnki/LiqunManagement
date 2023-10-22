@@ -205,6 +205,7 @@
     <Compile Include="Services\MembersDBService.cs" />
     <Compile Include="Services\UploadService.cs" />
     <Compile Include="ViewModels\FormViewModels.cs" />
+    <Compile Include="ViewModels\JsonViewModel.cs" />
     <Compile Include="ViewModels\MembersLoginViewModel.cs" />
     <Compile Include="ViewModels\MembersRegisterViewModel.cs" />
     <Compile Include="ViewModels\MembersViewModel.cs" />
@@ -2120,6 +2121,7 @@
     <Content Include="Views\Secretary\CaseManage.cshtml" />
     <Content Include="Views\Form\Uploads.cshtml" />
     <Content Include="Views\UpLoad\UploadExcerpt.cshtml" />
+    <Content Include="Views\Form\ReadForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

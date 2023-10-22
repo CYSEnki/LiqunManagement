@@ -57,6 +57,7 @@ namespace LiqunManagement.ViewModels
         public string CaseId { get; set; }
 
         public int? objecttype { get; set; }
+        public string objecttypeStr { get; set; }
 
         public int? notarization { get; set; }
 
@@ -81,6 +82,7 @@ namespace LiqunManagement.ViewModels
         public string fulladdress { get; set; }
 
         public int? usefor { get; set; }
+        public string useforStr { get; set; }
 
         public string useforelse { get; set; }
 
@@ -89,10 +91,13 @@ namespace LiqunManagement.ViewModels
         public string taxfile_alias { get; set; }
 
         public int? rent { get; set; }
+        public string rentStr { get; set; }
 
         public int? deposit { get; set; }
+        public string depositStr { get; set; }
 
         public int? management_fee { get; set; }
+        public string management_feeStr { get; set; }
 
         public DateTime? startdate { get; set; }
         public string startdateStr { get; set; }
@@ -103,8 +108,10 @@ namespace LiqunManagement.ViewModels
         public int? paydate { get; set; }
 
         public int? buildtype { get; set; }
+        public string buildtypeStr { get; set; }
 
         public int? roomtype { get; set; }
+        public string roomtypeStr { get; set; }
 
         public string roomamount { get; set; }
         public List<int> roomamountlist { get; set; }
@@ -113,6 +120,7 @@ namespace LiqunManagement.ViewModels
         public List<int> haveparklist { get; set; }
 
         public int? parktype { get; set; }
+        public string parktypeStr { get; set; }
 
         public string parkfloor { get; set; }
         public List<int> parkfloorlist { get; set; }
@@ -182,7 +190,13 @@ namespace LiqunManagement.ViewModels
         public string CoOwner3 { get; set; }
         public string CoOwner4 { get; set; }
         public string CoOwner5 { get; set; }
+        public string[] CoOwner1List { get; set; }
+        public string[] CoOwner2List { get; set; }
+        public string[] CoOwner3List { get; set; }
+        public string[] CoOwner4List { get; set; }
+        public string[] CoOwner5List { get; set; }
         public string Agent { get; set; }
+        public string[] AgentList { get; set; }
         public DateTime? CreateTime { get; set; }
         public string CreateAccount { get; set; }
         public DateTime? UpdateTime { get; set; }
@@ -231,6 +245,7 @@ namespace LiqunManagement.ViewModels
     {
         public string FormID { get; set; }
         public int? TenantType { get; set; }
+        public string TenantTypeName { get; set; }
         public string vulnerablefile_Name { get; set; }
         public string vulnerablefile_Alias { get; set; }
         public string sheetfile_Name { get; set; }
@@ -254,6 +269,7 @@ namespace LiqunManagement.ViewModels
         public string MemberArray { get; set; }         //人數陣列[配偶, 直系, 代理人, 保證人]
         public string CoupleCount { get; set; }
         public string Couple { get; set; }
+        public string[] CoupleArray { get; set; }
         public string DirectCount { get; set; }
         public string Family1 { get; set; }
         public string Family2 { get; set; }
@@ -265,14 +281,30 @@ namespace LiqunManagement.ViewModels
         public string Family8 { get; set; }
         public string Family9 { get; set; }
         public string Family10 { get; set; }
+        public string[] Family1Array { get; set; }
+        public string[] Family2Array { get; set; }
+        public string[] Family3Array { get; set; }
+        public string[] Family4Array { get; set; }
+        public string[] Family5Array { get; set; }
+        public string[] Family6Array { get; set; }
+        public string[] Family7Array { get; set; }
+        public string[] Family8Array { get; set; }
+        public string[] Family9Array { get; set; }
+        public string[] Family10Array { get; set; }
         public string AgentCount { get; set; }
         public string Agent1 { get; set; }
         public string Agent2 { get; set; }
         public string Agent3 { get; set; }
+        public string[] Agent1Array { get; set; }
+        public string[] Agent2Array { get; set; }
+        public string[] Agent3Array { get; set; }
         public string GuarantorCount { get; set; }
         public string Guarantor1 { get; set; }
         public string Guarantor2 { get; set; }
         public string Guarantor3 { get; set; }
+        public string[] Guarantor1Array { get; set; }
+        public string[] Guarantor2Array { get; set; }
+        public string[] Guarantor3Array { get; set; }
         public DateTime? CreateTime { get; set; }
         public string CreateAccount { get; set; }
         public DateTime? UpdateTime { get; set; }
@@ -327,6 +359,7 @@ namespace LiqunManagement.ViewModels
         public string FormID { get; set; }
 
         public int qualifyRadio { get; set; }
+        public string qualifyRadioStr { get; set; }
 
         [Required]
         [StringLength(20)]

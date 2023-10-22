@@ -74,6 +74,8 @@ namespace LiqunManagement.Controllers
                                       ProcessAccount = objform.ProcessAccount,
                                       AgentAccount = objform.AgentAccount,
                                   }).AsEnumerable();
+
+
             if (!role)
             {
                 //非系統管理員，找出該業務員的專門秘書(助理)為業務員
@@ -89,6 +91,7 @@ namespace LiqunManagement.Controllers
                                       AssistantAccount = emp0 != null ? emp0.AssistantAccount != null ? emp0.AssistantAccount : objform.ProcessAccount : objform.ProcessAccount,
                                   }).Where(x => x.AssistantAccount == User.Identity.Name).AsEnumerable();
             }
+
             var Formlist = from form in ObjectFormData
                            join obj in formdb.HomeObject on form.FormID equals obj.FormID
                            join lan in formdb.LandLord on form.FormID equals lan.FormID into temp1
@@ -107,6 +110,7 @@ namespace LiqunManagement.Controllers
                                Landlord = land != null ? land.Name : null,
                                Tenant = tena != null ? tena.Name : null,
                            };
+
             //ViewBag.Formlist = Formlist;
             var model = new FormViewModels
             {
@@ -138,256 +142,6 @@ namespace LiqunManagement.Controllers
             }
             return Json("successed");
         }
-        #endregion
-
-        //[HttpPost]
-        #region 匯出(過時/因雲端無法使用Window office套件)
-        //public ActionResult ExportWord(string FormID)
-        //{
-        //    logger.Info("匯出Word表單");
-
-        //    try
-        //    {
-        //        logger.Info("創建一個 Word.Application 對象");
-        //        // 創建一個 Word.Application 對象
-        //        Application wordApp = new Application();
-
-        //        logger.Info("找到是否都有填寫完成");
-        //        var HomeObject = formdb.HomeObject.Where(x => x.FormID == FormID).FirstOrDefault();
-        //        var Landlord = formdb.LandLord.Where(x => x.FormID == FormID).FirstOrDefault();
-        //        var Tenant = formdb.Tenant.Where(x => x.FormID == FormID).FirstOrDefault();
-        //        var Secretary = formdb.Secretary.Where(x => x.FormID == FormID).FirstOrDefault();
-        //        if (HomeObject == null || Landlord == null || Tenant == null || Secretary == null)
-        //        {
-        //            logger.Info("未填寫完成");
-        //            TempData["DownLoadMessage"] = "檔案未填寫完成，請填寫完成後再執行匯出。";
-        //            return RedirectToAction("CaseManage", "Secretary");
-        //        }
-
-        //        //劃選
-        //        string unicodeSquare = Char.ConvertFromUtf32(0x25A1); // □
-        //        string unicodeBlackSquare = Char.ConvertFromUtf32(0x25A0); // ■
-
-        //        // 要處理的Word文件列表
-        //        List<string> wordFilesToProcess = new List<string>
-        //        {
-        //            "表單1.出租人出租住宅申請書.docx",
-        //            "表單2.屋況及租屋安全檢核表(租賃標的現況確認書)-代租.docx",
-        //            "表單3.出租人補助費用申請書.docx",
-        //            "表單5.民眾(房客)承租住宅申請書.docx"
-        //        };
-        //        #region 處理資料
-        //        //將需要替換的文字全部寫入
-        //        //物件資料
-        //        var signdatetime = Convert.ToDateTime(HomeObject.signdate);
-
-        //        logger.Info("處理資料");
-        //        //房東資料
-        //        var naturepeople = Landlord.Gender != 2 ? true : false;     //自然人/法人
-        //        var birthLandlord = Convert.ToDateTime(Landlord.Birthday);
-        //        var sameaddressLandlord = (Landlord.Address + Landlord.AddressDetail) == (Landlord.ContactAddress + Landlord.ContactAddressDetail) ? true : false;
-        //        var MemberArray = JsonConvert.DeserializeObject<List<int>>(Landlord.MemberArray);
-        //        var CoOwnerCount = MemberArray[0];
-        //        var AgentCount = MemberArray[1];
-        //        var AgentArray = AgentCount > 0 ? JsonConvert.DeserializeObject<List<string>>(Landlord.Agent) : new List<string>();
-        //        var BankName = formdb.Bank.Where(x => x.BankCode == Landlord.BankNo).Select(x => x.BankName).FirstOrDefault();
-        //        var BranchName = formdb.Bank.Where(x => x.BranchCode == Landlord.BrancheNo).Select(x => x.BranchName).FirstOrDefault();
-        //        var FormData = new
-        //        {
-        //            //【物件資料】
-        //            addressObject = HomeObject.fulladdress,
-        //            objecttypeA = HomeObject.objecttype == 0 ? unicodeBlackSquare : unicodeSquare,      //包租
-        //            objecttypeB = HomeObject.objecttype == 1 ? unicodeBlackSquare : unicodeSquare,      //代管
-        //            notarizationA = HomeObject.objecttype == 1 && HomeObject.notarization == 0 ? unicodeBlackSquare : unicodeSquare,  //公證(只有代租才需要)
-        //            notarizationB = HomeObject.objecttype == 1 && HomeObject.notarization == 1 ? unicodeBlackSquare : unicodeSquare,  //無公證(只有代租才需要)
-        //            signdate = (signdatetime.Year - 1911) + signdatetime.ToString("-MM-dd"),                //簽約日
-        //            appraiser = HomeObject.appraiser == 1 ? unicodeBlackSquare : unicodeSquare,       //有簽估價師
-        //            existagentLandlord = AgentCount > 0 ? unicodeBlackSquare : unicodeSquare,                  //有共有人
-        //            existcoownerLandlord = CoOwnerCount > 0 ? unicodeBlackSquare : unicodeSquare,                  //有共有人
-        //            usefor_Home = HomeObject.usefor == 0 ? unicodeBlackSquare : unicodeSquare,
-        //            usefor_Commercial = HomeObject.usefor == 1 ? unicodeBlackSquare : unicodeSquare,
-
-
-
-
-
-        //            //【房東資料】
-        //            //自然人
-        //            nameLandlord = naturepeople ? Landlord.Name : "",          //房東姓名
-        //            genderLandlord = naturepeople ? Landlord.Gender == 0 ? "女性" : "男性" : "",      //房東性別
-        //            idLandlord = naturepeople ? Landlord.IDNumber : "",  //房東身分證
-        //            birthLandlord = naturepeople ? (birthLandlord.Year - 1911) + birthLandlord.ToString("年MM月dd日") : "",     //房東生日
-        //            phoneLandlord = naturepeople ? Landlord.Phone : "",        //房東手機
-        //            addressLandlord = naturepeople ? Landlord.Address + Landlord.AddressDetail : "",                //戶籍地址
-        //            sameaddressLandlord = naturepeople && sameaddressLandlord ? unicodeBlackSquare : unicodeSquare,
-        //            contactLandlord = naturepeople ? sameaddressLandlord ? "" : Landlord.ContactAddress + Landlord.ContactAddressDetail : "",  //通訊地址
-
-        //            BankCode = Landlord.BankNo,         //銀行代碼
-        //            BankName = BankName,                //銀行名稱
-        //            BranchCode = Landlord.BrancheNo,      //分行代碼
-        //            BranchName = BranchName,            //分行明成
-        //            BankAccount = Landlord.BankAccount, //帳戶號碼
-        //                                                //私法人
-        //            nameCompany = !naturepeople ? Landlord.Name : "",          //法人姓名
-        //            namePrincipal = !naturepeople ? Landlord.Principal : "",   //負責人姓名
-        //            idCompany = !naturepeople ? Landlord.IDNumber : "",        //統一編號
-        //            phoneCompany = !naturepeople ? Landlord.Phone : "",        //法人電話號碼
-        //            addressCompany = !naturepeople ? Landlord.Address + Landlord.AddressDetail : "",                //戶籍地址
-        //            nameCompanyAgent = !naturepeople && AgentCount > 0 ? AgentArray[0] : "",    //法人代理人姓名
-        //            idCompanyAgent = !naturepeople && AgentCount > 0 ? AgentArray[1] : "",      //法人代理人身份證字號
-        //            phoneCompanyAgent = !naturepeople && AgentCount > 0 ? AgentArray[2] : "",   //法人代理人電話號碼
-        //            addressCompanyAgent = !naturepeople && AgentCount > 0 ? AgentArray[3] + AgentArray[4] : "",    //法人代理人戶籍地址
-
-        //            //房客資料
-        //            tenantType2 = Tenant.TenantType == 2 ? unicodeBlackSquare : unicodeSquare,     //是否為一般戶最後一項
-
-        //            //秘書填寫
-        //            transition2 = Secretary.qualifyRadio == 2 ? unicodeBlackSquare : unicodeSquare,     //是否為轉軌2
-        //            excerpt = Secretary.excerpt,                //段
-        //            excerptShort = Secretary.excerptShort,      //小段
-        //            buildNo = Secretary.buildNo,                //建號
-        //            floorAmount = Secretary.floorAmount,        //層數
-        //            floorNo = Secretary.floorNo,                //層次
-        //            buildCreateDate = (Secretary.buildCreateDate.Year - 1911) + Secretary.buildCreateDate.ToString("年MM月dd日"),    //建築完成日
-        //            squareAmount = Secretary.squareAmount,
-        //            pinAmount = Secretary.pinAmount,
-        //            rentMarket = Secretary.rentMarket,
-        //            rentAgentA = HomeObject.objecttype == 0 ? Secretary.rentAgent.ToString() : "",
-        //            rentAgentB = HomeObject.objecttype == 1 ? Secretary.rentAgent.ToString() : "",
-        //            depositAgent = Secretary.depositAgent,
-
-
-        //        };
-        //        #endregion
-        //        logger.Info("完成處理資料，開始匯出表單");
-
-
-        //        logger.Info("創建一個唯一的臨時文件夾");
-        //        // 創建一個唯一的臨時文件夾
-        //        string tempFolderPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-        //        Directory.CreateDirectory(tempFolderPath);
-        //        logger.Info("轉換文字");
-
-        //        foreach (string fileName in wordFilesToProcess)
-        //        {
-        //            // 組合Word文件的完整路徑
-        //            string filePath = Path.Combine(Server.MapPath("~/WordSample"), fileName);
-
-        //            // 打開指定的Word文件
-        //            Document doc = wordApp.Documents.Open(filePath);
-
-        //            ///上面的代碼中，
-        //            ///Find 方法用於在 Range 對象中查找指定的文字，
-        //            ///Execute 方法用於執行查找和替換操作。
-        //            ///其中的 FindText 參數用於指定要查找的文字，
-        //            ///ReplaceWith 參數用於指定要替換的新文字，
-        //            ///Replace 參數用於指定替換的類型（例如，是否匹配大小寫等）。
-        //            switch (fileName)
-        //            {
-        //                case "表單1.出租人出租住宅申請書.docx":
-
-        //                    // 遍歷 Range 對象，進行文字替換
-        //                    foreach (Range range in doc.StoryRanges)
-        //                    {
-        //                        range.Find.Execute(FindText: "«房東姓名»", ReplaceWith: FormData.nameLandlord, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«房東身分證字號»", ReplaceWith: FormData.idLandlord, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«房東性別»", ReplaceWith: FormData.genderLandlord, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«房東生日»", ReplaceWith: FormData.birthLandlord, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«房東電話»", ReplaceWith: FormData.phoneLandlord, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«房東戶籍地址»", ReplaceWith: FormData.addressLandlord, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«房東同戶籍地址»", ReplaceWith: FormData.sameaddressLandlord, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«房東通訊地址»", ReplaceWith: FormData.contactLandlord, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«房東金融機構»", ReplaceWith: FormData.BankName, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«房東銀行代碼»", ReplaceWith: FormData.BankCode, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«房東分行戶名»", ReplaceWith: FormData.BranchName, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«房東分行代碼»", ReplaceWith: FormData.BranchCode, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«房東帳號»", ReplaceWith: FormData.bankaccountLandlord, Replace: WdReplace.wdReplaceAll);
-
-        //                        range.Find.Execute(FindText: "«法人姓名»", ReplaceWith: FormData.nameCompany, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«法人負責人»", ReplaceWith: FormData.namePrincipal, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«法人統一編號»", ReplaceWith: FormData.idCompany, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«法人電話»", ReplaceWith: FormData.phoneCompany, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«法人戶籍地址»", ReplaceWith: FormData.addressCompany, Replace: WdReplace.wdReplaceAll);
-
-        //                        range.Find.Execute(FindText: "«法人代理人姓名»", ReplaceWith: FormData.nameCompanyAgent, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«法人代理人身分證»", ReplaceWith: FormData.idCompanyAgent, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«法人代理人戶籍地址»", ReplaceWith: FormData.addressCompanyAgent, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«法人代理人電話»", ReplaceWith: FormData.phoneCompanyAgent, Replace: WdReplace.wdReplaceAll);
-
-        //                        range.Find.Execute(FindText: "«建物門牌»", ReplaceWith: FormData.addressObject, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«段»", ReplaceWith: FormData.excerpt, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«小段»", ReplaceWith: FormData.excerptShort, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«建號»", ReplaceWith: FormData.buildNo, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«層數»", ReplaceWith: FormData.floorAmount, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«層次»", ReplaceWith: FormData.floorNo, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«建築完成日»", ReplaceWith: FormData.buildCreateDate, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«平方»", ReplaceWith: FormData.squareAmount, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«坪»", ReplaceWith: FormData.pinAmount, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«市場租金»", ReplaceWith: FormData.rentMarket, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«待租押金»", ReplaceWith: FormData.depositAgent, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«待租租金A»", ReplaceWith: FormData.rentAgentA, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«待租租金B»", ReplaceWith: FormData.rentAgentB, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«包租»", ReplaceWith: FormData.objecttypeA, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«代租»", ReplaceWith: FormData.objecttypeB, Replace: WdReplace.wdReplaceAll); range.Find.Execute(FindText: "«A»", ReplaceWith: FormData.objecttypeA, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«公證»", ReplaceWith: FormData.notarizationA, Replace: WdReplace.wdReplaceAll); range.Find.Execute(FindText: "«A»", ReplaceWith: FormData.objecttypeA, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«非公證»", ReplaceWith: FormData.notarizationB, Replace: WdReplace.wdReplaceAll);
-
-        //                        range.Find.Execute(FindText: "«appraiser»", ReplaceWith: FormData.appraiser, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«existagentLandlord»", ReplaceWith: FormData.existagentLandlord, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«existcoownerLandlord»", ReplaceWith: FormData.existcoownerLandlord, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«transition2»", ReplaceWith: FormData.transition2, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«tenantType2»", ReplaceWith: FormData.tenantType2, Replace: WdReplace.wdReplaceAll);
-
-
-        //                        range.Find.Execute(FindText: "«住家用»", ReplaceWith: FormData.usefor_Home, Replace: WdReplace.wdReplaceAll);
-        //                        range.Find.Execute(FindText: "«商業用»", ReplaceWith: FormData.usefor_Commercial, Replace: WdReplace.wdReplaceAll);
-        //                    }
-        //                    break;
-        //                case "表單2.屋況及租屋安全檢核表(租賃標的現況確認書)-代租.docx":
-        //                    break;
-        //                case "表單3.出租人補助費用申請書.docx":
-        //                    break;
-        //                case "表單5.民眾(房客)承租住宅申請書.docx":
-        //                    break;
-        //            }
-
-        //            // 決定新的文件名，可以根據需要進行命名
-        //            string newFileName = $"Processed_{fileName}";
-
-        //            // 保存修改後的Word文件到tempFolderPath
-        //            string tempFilePath = Path.Combine(tempFolderPath, newFileName);
-        //            doc.SaveAs2(tempFilePath);
-
-        //            // 關閉Word文件
-        //            doc.Close();
-        //        }
-
-        //        // 關閉 Word.Application 對象
-        //        wordApp.Quit();
-        //        logger.Info("轉換文字成功");
-
-
-        //        logger.Info("開始壓縮檔案");
-        //        string zipFileName = "WordFiles" + DateTime.Now.ToString("yyMMddHHmm") + ".zip";
-        //        // 壓縮暫存文件夾中的所有文件到一個ZIP文件
-        //        string zipFilePath = Path.Combine(Path.GetTempPath(), zipFileName);
-        //        ZipFile.CreateFromDirectory(tempFolderPath, zipFilePath);
-
-        //        logger.Info("壓縮成功");
-        //        // 刪除暫存文件夾
-        //        Directory.Delete(tempFolderPath, true);
-
-        //        logger.Info("輸出資料");
-        //        // 將ZIP文件發送給用戶進行下載
-        //        byte[] zipFileBytes = System.IO.File.ReadAllBytes(zipFilePath);
-        //        return File(zipFileBytes, "application/zip", zipFileName);
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        logger.Error("匯出失敗 : " + ex.ToString());
-        //        return Content(ex.ToString());
-        //    }
-        //}
         #endregion
 
         [HttpPost]
@@ -437,7 +191,7 @@ namespace LiqunManagement.Controllers
                 var AgentCount = MemberLandlordArray[1];    //代理人人數
                 var AgentArray = AgentCount > 0 ? JsonConvert.DeserializeObject<List<string>>(Landlord.Agent) : new List<string>();     //代理人資料(陣列)
                 var banknameLandlord = formdb.Bank.Where(x => x.BankCode == Landlord.BankNo).Select(x => x.BankName).FirstOrDefault();          //銀行名稱
-                var branchLandlord = formdb.Bank.Where(x => x.BranchCode == Landlord.BrancheNo).Select(x => x.BranchName).FirstOrDefault(); //分行名稱
+                var branchLandlord = formdb.Bank.Where(x => x.BankCode == Landlord.BankNo && x.BranchCode == Landlord.BrancheNo).Select(x => x.BranchName).FirstOrDefault(); //分行名稱
                 var addressLandlord = Landlord.Address.Split('-')[0] + Landlord.Address.Split('-')[1] + Landlord.Address.Split('-')[2] + Landlord.AddressDetail; //戶籍地址(自然人/法人)
                 var contactLandlord = Landlord.ContactAddress.Split('-')[0] + Landlord.ContactAddress.Split('-')[1] + Landlord.ContactAddress.Split('-')[2] + Landlord.ContactAddressDetail; //通訊地址(自然人)
                 var addressCompanyAgent = AgentCount > 0 ? AgentArray[3].Split('-')[0] + AgentArray[3].Split('-')[1] + AgentArray[3].Split('-')[2] + AgentArray[4] : "";  //地址(法人代理人)
@@ -536,14 +290,14 @@ namespace LiqunManagement.Controllers
                     parktypeB = ParkArray[1] > 0 && HomeObject.parktype == 1 ? unicodeBlackSquare : unicodeSquare,   //坡道機械
                     parktypeC = ParkArray[1] > 0 && HomeObject.parktype == 2 ? unicodeBlackSquare : unicodeSquare,   //機械平面
                     parktypeD = ParkArray[1] > 0 && HomeObject.parktype == 3 ? unicodeBlackSquare : unicodeSquare,   //機械機械
-                    parkposition = ParkArray[1] > 0 ? ParkPosition[0] == 1 ? "上" : "下" : "",        //位於地(上/下)
+                    parkposition = ParkArray[1] > 0 ? ParkPosition[0] == 1 ? "上" : "下" : "上/下",        //位於地(上/下)
                     parkfloor = ParkArray[1] > 0 ? ParkPosition[1].ToString() : "",     //車位於幾層
                     carpositionnumber = ParkArray[1] > 0 ? HomeObject.carpositionnumber : "",     //車位編號
                     carparkmanagefee = ParkArray[1] > 0 ? string.Format("{0:N0}", HomeObject.carparkmanagefee) : "", //停車管理費
                     //機車車位
                     havemorpark = ParkArray[2] > 0 ? unicodeBlackSquare : unicodeSquare,    //有停車位
                     nomorpark = ParkArray[2] == 0 ? unicodeBlackSquare : unicodeSquare,     //有停車位
-                    morparkposition = ParkArray[2] > 0 ? MorParkPosition[0] == 1 ? "上" : "下" : "",  //位於地(上/下)
+                    morparkposition = ParkArray[2] > 0 ? MorParkPosition[0] == 1 ? "上" : "下" : "上/下",  //位於地(上/下)
                     morparkfloor = ParkArray[2] > 0 ? MorParkPosition[1].ToString() : "",  //位於地(上/下)
                     scooterpositionnumber = ParkArray[2] > 0 ? HomeObject.scooterpositionnumber : "", //機車位編號
                     scootermanagefee = ParkArray[2] > 0 ? string.Format("{0:N0}", HomeObject.scootermanagefee) : "", //停車管理費
@@ -574,7 +328,7 @@ namespace LiqunManagement.Controllers
                     bankcodeLandlord = Landlord.BankNo,             //房東銀行代碼
                     banknameLandlord = banknameLandlord,            //房東銀行名稱
                     branchcodeLandlord = Landlord.BankNo != "700" ? Landlord.BrancheNo : "0021",        //房東分行代碼(當郵局的時候分行代碼全部皆為0021)
-                    branchLandlord = branchLandlord,                //房東分行明成
+                    branchLandlord = branchLandlord,                //房東分行名稱
                     bankaccountLandlord = Landlord.BankAccount,             //房東帳戶號碼
 
                     //私法人
@@ -748,41 +502,46 @@ namespace LiqunManagement.Controllers
                         doc.ReplaceText("«dd1»", newsigndatetime.Day.ToString());
                         //結束日
                         doc.ReplaceText("«結束日»", (enddatetime.Year - 1911).ToString() + enddatetime.ToString("年MM月dd日"));
-                        //簽約日(-2d)
-                        newsigndatetime = signdatetime.AddDays(-2);
+                        //簽約日(-3d)
+                        newsigndatetime = signdatetime.AddDays(-3);
                         doc.ReplaceText("«yyy2»", (newsigndatetime.Year - 1911).ToString());
                         doc.ReplaceText("«MM2»", newsigndatetime.Month.ToString());
                         doc.ReplaceText("«dd2»", newsigndatetime.Day.ToString());
-                        //簽約日(-2d)(-10d) => (-12d)
-                        newsigndatetime = signdatetime.AddDays(-12);
+                        //簽約日(-3d)(-10d) => (-12d)
+                        newsigndatetime = signdatetime.AddDays(-13);
                         doc.ReplaceText("«yyy3»", (newsigndatetime.Year - 1911).ToString());
                         doc.ReplaceText("«MM3»", newsigndatetime.Month.ToString());
                         doc.ReplaceText("«dd3»", newsigndatetime.Day.ToString());
-                        //簽約日(-2d)(-10d)(-10d) => (-22d)
-                        newsigndatetime = signdatetime.AddDays(-22);
+                        //簽約日(-3d)(-10d)(-10d) => (-23d)
+                        newsigndatetime = signdatetime.AddDays(-23);
                         doc.ReplaceText("«yyy4»", (newsigndatetime.Year - 1911).ToString());
                         doc.ReplaceText("«MM4»", newsigndatetime.Month.ToString());
                         doc.ReplaceText("«dd4»", newsigndatetime.Day.ToString());
-                        //簽約日(-2d)(-10d)(-10d)(+2d) => (-20d)
+                        //簽約日(-3d)(-10d)(-10d)(+3d) => (-20d)
                         newsigndatetime = signdatetime.AddDays(-20);
                         doc.ReplaceText("«yyy5»", (newsigndatetime.Year - 1911).ToString());
                         doc.ReplaceText("«MM5»", newsigndatetime.Month.ToString());
                         doc.ReplaceText("«dd5»", newsigndatetime.Day.ToString());
-                        //簽約日(-2d)(-10d)(-10d)(+2d)(+6M)(-1d) => (+6M-21d)
+                        //簽約日(-3d)(-10d)(-10d)(+3d)(+6M)(-1d) => (+6M-21d)
                         newsigndatetime = signdatetime.AddMonths(6).AddDays(-21);
                         doc.ReplaceText("«yyy6»", (newsigndatetime.Year - 1911).ToString());
                         doc.ReplaceText("«MM6»", newsigndatetime.Month.ToString());
                         doc.ReplaceText("«dd6»", newsigndatetime.Day.ToString());
-                        //簽約日(-2d)(-10d)(-10d)(+2d)(+5d) => (-15d)
+                        //簽約日(-3d)(-10d)(-10d)(+3d)(+5d) => (-15d)
                         newsigndatetime = signdatetime.AddDays(-15);
                         doc.ReplaceText("«yyy7»", (newsigndatetime.Year - 1911).ToString());
                         doc.ReplaceText("«MM7»", newsigndatetime.Month.ToString());
                         doc.ReplaceText("«dd7»", newsigndatetime.Day.ToString());
-                        //簽約日(-2d)(-10d)(-10d)(+2d)(+5d)(+1M)(-1d) => (+1M-16d)
+                        //簽約日(-3d)(-10d)(-10d)(+3d)(+5d)(+1M)(-1d) => (+1M-16d)
                         newsigndatetime = signdatetime.AddMonths(1).AddDays(-16);
                         doc.ReplaceText("«yyy8»", (newsigndatetime.Year - 1911).ToString());
                         doc.ReplaceText("«MM8»", newsigndatetime.Month.ToString());
-                        doc.ReplaceText("«dd8»", newsigndatetime.Day.ToString());
+                        doc.ReplaceText("«dd8»", newsigndatetime.Day.ToString());;
+                        //簽約日(-3d)(-10d)(-10d)(+1M)(-1d) => (+1M-24d)
+                        newsigndatetime = signdatetime.AddMonths(1).AddDays(-25);
+                        doc.ReplaceText("«yyy9»", (newsigndatetime.Year - 1911).ToString());
+                        doc.ReplaceText("«MM9»", newsigndatetime.Month.ToString());
+                        doc.ReplaceText("«dd9»", newsigndatetime.Day.ToString());
                         #endregion
 
                         switch (file)
@@ -937,6 +696,7 @@ namespace LiqunManagement.Controllers
                                 doc.ReplaceText("«CC12»", FormData.C12.Amount);        
                                 doc.ReplaceText("«CC13»", FormData.C13.Amount);   
 
+                                doc.ReplaceText("«包租/租賃»", HomeObject.objecttype == 0 ? "包租" : "租賃");   
                                 break;
 
                             case "表單3.出租人補助費用申請書.docx":
@@ -1020,6 +780,23 @@ namespace LiqunManagement.Controllers
                                 doc.ReplaceText("«D11»", (birthTenant.Year - 1911).ToString() + birthTenant.ToString(".MM.dd"));    //房客生日
                                 //(直系)
                                 var initialchar = 'D';
+                                if(coupleTenantCount > 0)
+                                {
+                                    initialchar++;
+                                    doc.ReplaceText($"«{initialchar}0»", coupleTenantArray[1]);
+                                    doc.ReplaceText($"«{initialchar}1»", coupleTenantArray[2].Length >= 1 ? coupleTenantArray[2].ToCharArray()[0].ToString() : "");    //配偶身分證
+                                    doc.ReplaceText($"«{initialchar}2»", coupleTenantArray[2].Length >= 2 ? coupleTenantArray[2].ToCharArray()[1].ToString() : "");    //配偶身分證
+                                    doc.ReplaceText($"«{initialchar}3»", coupleTenantArray[2].Length >= 3 ? coupleTenantArray[2].ToCharArray()[2].ToString() : "");    //配偶身分證
+                                    doc.ReplaceText($"«{initialchar}4»", coupleTenantArray[2].Length >= 4 ? coupleTenantArray[2].ToCharArray()[3].ToString() : "");    //配偶身分證
+                                    doc.ReplaceText($"«{initialchar}5»", coupleTenantArray[2].Length >= 5 ? coupleTenantArray[2].ToCharArray()[4].ToString() : "");    //配偶身分證
+                                    doc.ReplaceText($"«{initialchar}6»", coupleTenantArray[2].Length >= 6 ? coupleTenantArray[2].ToCharArray()[5].ToString() : "");    //配偶身分證
+                                    doc.ReplaceText($"«{initialchar}7»", coupleTenantArray[2].Length >= 7 ? coupleTenantArray[2].ToCharArray()[6].ToString() : "");    //配偶身分證
+                                    doc.ReplaceText($"«{initialchar}8»", coupleTenantArray[2].Length >= 8 ? coupleTenantArray[2].ToCharArray()[7].ToString() : "");    //配偶身分證
+                                    doc.ReplaceText($"«{initialchar}9»", coupleTenantArray[2].Length >= 9 ? coupleTenantArray[2].ToCharArray()[8].ToString() : "");    //配偶身分證
+                                    doc.ReplaceText($"«{initialchar}10»", coupleTenantArray[2].Length >= 10 ? coupleTenantArray[2].ToCharArray()[9].ToString() : "");    //配偶身分證
+                                    doc.ReplaceText($"«{initialchar}11»", (Convert.ToInt32(coupleTenantArray[3].Split('-')[0]) - 1911).ToString() + "." + coupleTenantArray[3].Split('-')[1] + "." + coupleTenantArray[3].Split('-')[2]);    //房客生日
+                                    doc.ReplaceText($"«{initialchar}12»", "配偶");    //房客關係
+                                }
                                 var ChildCount = 0;
                                 for (int i = 1; i <= 9; i++)
                                 {
@@ -1227,7 +1004,7 @@ namespace LiqunManagement.Controllers
                                 doc.ReplaceText("«房客身分證»", FormData.idTenant);          //房客身分證
                                 doc.ReplaceText("«房客電話»", FormData.phoneTenant);            //房客電話
                                 doc.ReplaceText("«房客戶籍地址»", FormData.addressTenant);    //房客戶籍地址
-                                doc.ReplaceText("«房客通訊地址»", FormData.contactTenant);    //房客通訊地址
+                                doc.ReplaceText("«房客通訊地址»", contactTenant);    //房客通訊地址
 
                                 doc.ReplaceText("«房東姓名»", FormData.nameLandlord);
                                 doc.ReplaceText("«房東身分證»", FormData.idLandlord);
@@ -1504,5 +1281,371 @@ namespace LiqunManagement.Controllers
             }
         }
         #endregion
+
+        [HttpPost]
+        #region 實價登入匯出(JSON格式)
+        public ActionResult ExportJson(string FormID)
+        {
+            //資料
+            var FormDetail = formdb.ObjectForm.Where(x => x.FormID == FormID).FirstOrDefault();
+            var HomeObject = formdb.HomeObject.Where(x => x.FormID == FormID).FirstOrDefault();
+            var Landlord = formdb.LandLord.Where(x => x.FormID == FormID).FirstOrDefault();
+            var Tenant = formdb.Tenant.Where(x => x.FormID == FormID).FirstOrDefault();
+            var Secretary = formdb.Secretary.Where(x => x.FormID == FormID).FirstOrDefault();
+
+            //段/小段/事務所資料庫
+            var ExcerptData = formdb.Excerpt.AsEnumerable();
+           
+            if (HomeObject == null || Landlord == null || Tenant == null || Secretary == null)
+            {
+                TempData["DownLoadMessage"] = "檔案未填寫完成，請填寫完成後再執行匯出。";
+                return RedirectToAction("CaseManage", "Secretary");
+            }
+
+            var SecreTaryID = "";
+            #region 處理資料
+            //秘書姓名、身分證
+            switch (FormDetail.ProcessName)
+            {
+                case "李馥任":
+                    SecreTaryID = "A128485075";
+                    break;
+                    
+                case "張冠瑛":
+                    SecreTaryID = "H225226537";
+                    break;
+                    
+                case "蔡青秀":
+                    SecreTaryID = "A225415626";
+                    break;
+                    
+                case "黃新智":
+                    SecreTaryID = "F129762923";
+                    break;
+            }
+
+            //物件資料
+            var Accessory = JsonConvert.DeserializeObject<List<int>>(HomeObject.Accessory);         //房屋附屬物件
+            var ParkArray = JsonConvert.DeserializeObject<List<int>>(HomeObject.havepark);          //停車位
+            var ParkPosition = JsonConvert.DeserializeObject<List<int>>(HomeObject.parkfloor);      //停車位層數
+            var roomAmountArray = JsonConvert.DeserializeObject<List<int>>(HomeObject.roomamount);      //房型
+            var startdatetime = Convert.ToDateTime(HomeObject.startdate);
+            var enddatetime = Convert.ToDateTime(HomeObject.enddate);
+            var signdatetime = Convert.ToDateTime(HomeObject.signdate);
+
+            var FormData = new
+            {
+                #region 物件資料
+                //【物件資料】
+                SignDateTaiwan = (signdatetime.Year - 1911) + signdatetime.ToString("MMdd"),            //簽約日(台灣日期)
+                StartDateTaiwan = (startdatetime.Year - 1911) + startdatetime.ToString("MMdd"),            //簽約日(台灣日期)
+                EndDateTaiwan = (enddatetime.Year - 1911) + enddatetime.ToString("MMdd"),            //簽約日(台灣日期)
+                buildtypeCode = HomeObject.buildtype == 0 ? "2"
+                : HomeObject.buildtype == 1 ? "1"
+                : HomeObject.buildtype == 2 ? "6"
+                : HomeObject.buildtype == 3 ? "5" : "",
+                buildtypeName = HomeObject.buildtype == 0 ? "透天厝"
+                : HomeObject.buildtype == 1 ? "公寓(無電梯)"
+                : HomeObject.buildtype == 2 ? "華廈(10層含以下有電梯)"
+                : HomeObject.buildtype == 3 ? "住宅大樓(11層含以上有電梯)" : "",
+
+                //建物現有格局
+                roomtype = HomeObject.roomtype == 0 ? "1" : "3",     //整層出租(1); 獨立套房(3)
+
+                roomAmount = roomAmountArray[0] == 0 && roomAmountArray[1] == 0 && roomAmountArray[2] == 0 ? "套" : roomAmountArray[0].ToString(),   //房
+                rubyAmount = roomAmountArray[0] == 0 && roomAmountArray[1] == 0 && roomAmountArray[2] == 0 ? "X" : roomAmountArray[1].ToString(),   //房
+                bathAmount = roomAmountArray[0] == 0 && roomAmountArray[1] == 0 && roomAmountArray[2] == 0 ? "X" : roomAmountArray[2].ToString(),   //房
+                         
+                //房屋附屬物件(設備)
+                existGAS = Accessory[0],        //天然瓦斯
+                gaswater = Accessory[3],  //瓦斯熱水器(劃選)
+                existGASwater = Accessory[3],
+                existLineTV = Accessory[1],
+                existNonLineTV = Accessory[2],   //房屋附屬物件(家電)
+                exisTV = Accessory[6],
+                existAir = Accessory[7],       //冷氣
+                existIce = Accessory[8],
+                existhotwater = Accessory[9],
+                existwash = Accessory[10],
+
+                //汽車車位
+                havecarpark = ParkArray[1] > 0 ? true : false,   //有停車位
+                parkTypeCode = HomeObject.parktype == 0 ? "1" : HomeObject.parktype == 1 ? "3" : HomeObject.parktype == 2 ? "2" : "4",
+                parkTypeName = HomeObject.parktype == 0 ? "坡道平面" : HomeObject.parktype == 1 ? "坡道機械" : HomeObject.parktype == 2 ? "機械平面" : "機械機械",
+
+                //車位於幾層
+                parkfloor = ParkArray[1] > 0 ?
+                (ParkPosition[0] == 1 && ParkPosition[1] >= 2) ? "2"
+                : (ParkPosition[0] == 1 && ParkPosition[1] == 1) ? "1"
+                : (ParkPosition[0] != 1 && ParkPosition[1] == 1) ? "B1"
+                : (ParkPosition[0] != 1 && ParkPosition[1] == 2) ? "B2"
+                : (ParkPosition[0] != 1 && ParkPosition[1] == 3) ? "B3"
+                : (ParkPosition[0] != 1 && ParkPosition[1] == 4) ? "B4"
+                : (ParkPosition[0] != 1 && ParkPosition[1] >= 5) ? "B5" : "" : "",
+            
+                //車位於幾層(描述)
+                parkfloorName = ParkArray[1] > 0 ?
+                (ParkPosition[0] == 1 && ParkPosition[1] >= 2) ? "地上2樓含以上"
+                : (ParkPosition[0] == 1 && ParkPosition[1] == 1) ? "地上1樓"
+                : (ParkPosition[0] != 1 && ParkPosition[1] == 1) ? "地下1樓"
+                : (ParkPosition[0] != 1 && ParkPosition[1] == 2) ? "地下2樓"
+                : (ParkPosition[0] != 1 && ParkPosition[1] == 3) ? "地下3樓"
+                : (ParkPosition[0] != 1 && ParkPosition[1] == 4) ? "地下4樓ˊ"
+                : (ParkPosition[0] != 1 && ParkPosition[1] >= 5) ? "地下5樓" : "" : "",
+
+                totalparkManagefee = (HomeObject.carparkmanagefee + HomeObject.scootermanagefee) > 0 ? string.Format("{0:N0}", HomeObject.carparkmanagefee + HomeObject.scootermanagefee) : "",
+                totalparkRent = (HomeObject.carmonthrent + HomeObject.scootermonthrent).ToString(),
+                #endregion
+
+                #region 秘書填寫
+                excerptCode = ExcerptData.Where(x => x.Excerpt1 == Secretary.excerpt && (x.ExcerptShort == Secretary.excerptShort)).Select(x => x.ExcerptCode).FirstOrDefault(),
+                District_excerptName = HomeObject.district + Secretary.excerpt + Secretary.excerptShort,
+                cityCode = ExcerptData.Where(x => x.CityName == HomeObject.city).Select(x => x.CityCode).FirstOrDefault(),
+                districtCode = ExcerptData.Where(x => x.DistrictName == HomeObject.district).Select(x => x.DistrictCode).FirstOrDefault(),
+                buildNo = Secretary.buildNo,                            //建號
+                squareAmount = Secretary.squareAmount.ToString(),       //平方公尺
+                #endregion
+            };
+            #endregion
+
+            JsonViewModel jsonviewmodel = new JsonViewModel();
+
+            var myData = new JsonViewModel.MyData();
+            var tenantcityname = Tenant.ContactAddress.Split('-')[0];
+            var tenantdistrictname = Tenant.ContactAddress.Split('-')[1];
+            var RightX45 = formdb.Excerpt.Where(x => x.CityName == tenantcityname).Select(x => x.CityCode).FirstOrDefault();
+            var RightX45c = Tenant.ContactAddress.Split('-')[0];
+            var RightX46 = formdb.Excerpt.Where(x => x.DistrictName == tenantdistrictname).Select(x => x.DistrictCode).FirstOrDefault();
+            var RightX46c = Tenant.ContactAddress.Split('-')[1];
+            var RightAddr = Tenant.ContactAddress.Split('-')[2] + Tenant.ContactAddressDetail;
+            #region 寫入資料
+            myData = new JsonViewModel.MyData()
+            {
+                CaseContent = new JsonViewModel.CaseContent()
+                {
+                    CaseType = "C",
+                    CaseNo = "",
+                    P1maCaseSeq = "01",
+                    CaseX45 = formdb.Excerpt.Where(x => x.CityName == HomeObject.city).Select(x => x.CityCode).FirstOrDefault(),
+                    CaseX45c = HomeObject.city,
+                    CaseX46 = formdb.Excerpt.Where(x => x.DistrictName == HomeObject.district).Select(x => x.DistrictCode).FirstOrDefault(),
+                    CaseX46c = HomeObject.district,
+                    CaseUnit = formdb.Excerpt.Where(x => x.DistrictName == HomeObject.district).Select(x => x.OfficeCode).FirstOrDefault(),
+                    CaseUnitc = formdb.Excerpt.Where(x => x.DistrictName == HomeObject.district).Select(x => x.OfficeName).FirstOrDefault(),
+                    CaseKind = "17",
+                    CaseFlag3 = "",
+                    CaseFlag5 = "",
+                    ApplyName = "力群不動產經紀有限公司",
+                    ApplyIdNo = "24712704",
+                    ApplyTel = "29871222",
+                    ApplyMail = "",
+                    ApplyX45 = "F",
+                    ApplyX45c = "新北市",
+                    ApplyX46 = "05",
+                    ApplyX46c = "三重區",
+                    ApplyAddr = "正義北路388號",
+                    AgentsName = FormDetail.ProcessName,
+                    AgentsIdNo = SecreTaryID,
+                    AgentsTel = "29871222",
+                    AgentsMail = "",
+                    AgentsX45 = "F",
+                    AgentsX45c = "新北市",
+                    AgentsX46 = "05",
+                    AgentsX46c = "三重區",
+                    AgentsAddr = "正義北路388號",
+                    RightName = Tenant.Name,
+                    RightIdNo = Tenant.IDNumber,
+                    RightTel = Tenant.Phone,
+                    RightMail = "",
+                    RightX45 = RightX45,
+                    RightX45c = RightX45c,
+                    RightX46 = RightX46,
+                    RightX46c = RightX46c,
+                    RightAddr = RightAddr,
+                    P1maBuild7 = "A",
+                    P1maBuild7c = "居住用",
+                    P1maBuildRentType = FormData.roomtype,
+                    P1maBuildRentTypec = FormData.roomtype == "1" ? "整棟(戶)出租" : "獨立套房",
+                    P1maCntalid = "",
+                    P1maCntdbid = "1",
+                    P1maCntroom = "",
+
+                    LandX45 = formdb.Excerpt.Where(x => x.CityName == HomeObject.city).Select(x => x.CityCode).FirstOrDefault(),
+                    LandX45c = HomeObject.city,
+                    LandX46 = formdb.Excerpt.Where(x => x.DistrictName == HomeObject.district).Select(x => x.DistrictCode).FirstOrDefault(),
+                    LandX46c = HomeObject.district,
+                    P1maDd09 = HomeObject.road + HomeObject.detailaddress,
+                    P1maBuild9 = Secretary.floorAmount.ToString(),
+                    P1maBuild10_1 = Secretary.floorAmount.ToString().PadLeft(3, '0'),
+                    P1maBuild10_1c = ConvertToChinese(Secretary.floorNo) + "層",
+                    P1maBuild10_1Text = "",
+                    Build10All = "",
+                    P1maBuild1 = FormData.roomtype == "3" ? "1" : FormData.roomAmount,
+                    P1maBuild2 = FormData.roomtype == "3" ? "1" : FormData.rubyAmount,
+                    P1maBuild3 = FormData.roomtype == "3" ? "1" : FormData.bathAmount,
+                    P1maBuild4 = "",
+                    P1maBuild5 = FormData.buildtypeCode,
+                    P1maBuild5c = FormData.buildtypeName,
+                    P1maBuild5Text = "",
+                    EquipmentA = FormData.existAir == 0 ? "" : "Y",         //冷氣
+                    EquipmentAQty = FormData.existAir.ToString(),           //冷氣數量
+                    EquipmentB = FormData.existhotwater == 0 ? "" : "Y",    //熱水器
+                    EquipmentC = FormData.existwash == 0 ? "" : "Y",        //洗衣機
+                    EquipmentD = FormData.exisTV == 0 ? "" : "Y",           //電視機
+                    EquipmentE = FormData.existIce == 0 ? "" : "Y",         //冰箱
+                    EquipmentF = FormData.existGAS != 0 || FormData.existGASwater != 0 ? "Y" : "",      //瓦斯熱水器
+                    EquipmentG = FormData.existLineTV == 0 ? "" : "Y",      //有線電視
+                    EquipmentH = FormData.existNonLineTV == 0 ? "" : "Y",   //無線電視
+                    EquipmentI = "Y",   //家具
+                    EquipmentZ = "",
+                    RentalDateS = FormData.StartDateTaiwan,     //開始日
+                    RentalDateE = FormData.EndDateTaiwan,       //結束日
+                    P1maDate = HomeObject.notarization == 1 ? FormData.SignDateTaiwan : FormData.StartDateTaiwan,     //"有公證＜簽約日＞／無公證＜起租日＞"
+                    P1maManage = FormData.buildtypeCode == "2" || FormData.buildtypeCode == "1" ? "0" : "1",        //透天厝、公寓 => 0,0,0  華廈、電梯大樓 => 1,1,1
+                    P1maManager = FormData.buildtypeCode == "2" || FormData.buildtypeCode == "1" ? "0" : "1",       
+                    P1maTypec1 = FormData.buildtypeCode == "2" || FormData.buildtypeCode == "1" ? "0" : "1",
+                    RentalService = "4",
+                    RentalServicec = "社會住宅包租轉租",
+                    P1maTotprice = HomeObject.rent.ToString(),
+                    P1maParkflag = FormData.havecarpark ? "01" : "2",          //有汽車位:01&1&0&汽車月租金 (月租金加總大於0)
+                    P1maCntpark = FormData.havecarpark ? "1" : "",           //有汽車位:01&1&1&空白(月租金加總為0)
+                    P1maParkflag2 = FormData.havecarpark ? HomeObject.rent > 0 ? "0" : "1" : "",         //無汽車位:2&空白&空白&空白
+                    P1maParkprice = FormData.totalparkRent,
+                    Note0101 = "",
+                    Price0101 = "",
+                    Note0201 = "",
+                    Note0202 = "",
+                    Note0202A = "",
+                    Note0202B = "",
+                    Note0202C = "",
+                    Note0202D = "",
+                    Note0202E = "",
+                    Note0202F = "",
+                    Desc0202F = "",
+                    Note0301 = "",
+                    Desc0301 = "",
+                    Note0302 = "",
+                    Note0303 = "",
+                    Note0304 = "",
+                    Note0305 = "",
+                    Desc0305 = "",
+                    Note0401 = "",
+                    Note0402 = "",
+                    Note0403 = "",
+                    Note0404 = "",
+                    Note0501 = "",
+                    Note0502 = "",
+                    Note0503 = "",
+                    Note0504 = "",
+                    Note0505 = "",
+                    P1maNote = ""
+                },
+                CaseBuild = new List<JsonViewModel.CaseBuild>()
+                {
+                    new JsonViewModel.CaseBuild()
+                    {
+                        BuildSeq = "1",
+                        BuildX48 = FormData.excerptCode != null ? FormData.excerptCode : "",
+                        BuildX48c = FormData.District_excerptName,
+                        BuildX45 = FormData.cityCode,
+                        BuildX45c = HomeObject.city,
+                        BuildX46 = FormData.districtCode,
+                        BuildX46c = HomeObject.district,
+                        BuildNo = FormData.buildNo,
+                        BuildArea = FormData.squareAmount,
+                    }
+                },
+                CaseCar = new List<JsonViewModel.CaseCar>
+                {
+                    new JsonViewModel.CaseCar()
+                    {
+                        CarSeq = "1",
+                        CarType = FormData.parkTypeCode,
+                        CarTypec = FormData.parkTypeName,
+                        CarTypeText = "",
+                        CarPrice = FormData.totalparkRent,
+                        CarArea = "",
+                        CarFloor = FormData.parkTypeCode,//地上下代碼
+                        CarFloorc = FormData.parkTypeName,  //地上下名稱
+                    }
+                }
+            };
+            #endregion
+            if (!FormData.havecarpark)
+                myData.CaseCar = null;
+
+
+            string json = JsonConvert.SerializeObject(myData, Formatting.Indented);
+
+            // 将 JSON 数据写入内存流
+            var memoryStream = new MemoryStream();
+            var writer = new StreamWriter(memoryStream);
+            writer.Write(json);
+            writer.Flush();
+            memoryStream.Position = 0;
+
+            //創建臨時文件夾
+            string tempFolderPath = Path.Combine(Path.GetTempPath(), "TempFolder");
+            Directory.CreateDirectory(tempFolderPath);
+
+            //將JSON檔寫入臨時文件夾
+            string jsonFilePath = Path.Combine(tempFolderPath, HomeObject.fulladdress + "_實價登入.json");
+            System.IO.File.WriteAllText(jsonFilePath, json);
+
+            //壓縮臨時文件夾的JSON文件
+            string zipFileName0 = HomeObject.fulladdress + "_實價登入" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".zip";
+            string zipFileName = HomeObject.fulladdress + ".zip";
+            string zipFilePath = Path.Combine(Path.GetTempPath(), zipFileName0);
+            ZipFile.CreateFromDirectory(tempFolderPath, zipFilePath);
+
+            // 刪除臨時文件夾和JSON文件
+            Directory.Delete(tempFolderPath, true);
+
+            // 讀取Zip檔的數據
+            byte[] zipFileBytes = System.IO.File.ReadAllBytes(zipFilePath);
+
+            // 返還Zip文件(下載)
+            return File(zipFileBytes, "application/zip", zipFileName);
+
+            // 返回文件响应
+            //return File(memoryStream, "application/json", HomeObject.fulladdress + "_實價登入JSON檔.json");
+        }
+        #endregion
+        
+    public static string ConvertToChinese(int number)
+        {
+            Dictionary<int, string> numberToChineseMap = new Dictionary<int, string>
+            {
+                {1, "一"},
+                {2, "二"},
+                {3, "三"},
+                {4, "四"},
+                {5, "五"},
+                {6, "六"},
+                {7, "七"},
+                {8, "八"},
+                {9, "九"},
+                {10, "十"},
+                {20, "二十"},
+                {30, "三十"},
+                {40, "四十"},
+                {50, "五十"}
+            };
+            if (numberToChineseMap.ContainsKey(number))
+        {
+            return numberToChineseMap[number];
+        }
+        else if (number < 100)
+        {
+            int tens = number / 10 * 10;
+            int ones = number % 10;
+            return numberToChineseMap[tens] + (ones > 0 ? numberToChineseMap[ones] : "");
+        }
+        else
+        {
+            // 处理其他范围的数字
+            return "超出范围";
+        }
+    }
     }
 }

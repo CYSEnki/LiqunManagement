@@ -1767,7 +1767,7 @@
         function changeship(button, active) {
             var intselectorder = parseInt($(button).attr('data-order'));
             if (active == 'create') {
-                if (intselectorder < 9) {
+                if (intselectorder < 8) {
                     intselectorder = intselectorder + 1;
                     //顯示輸入欄位
                     $('.directformgroup[data-order="' + intselectorder + '"]').show();

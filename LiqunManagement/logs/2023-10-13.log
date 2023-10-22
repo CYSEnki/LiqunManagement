@@ -1,0 +1,34 @@
+2023-10-13 00:24:58.4332 INFO 匯出Word表單
+2023-10-13 00:25:00.1920 ERROR 匯出失敗 : System.IO.FileNotFoundException: File could not be found C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\WordSampleNewTaipei\表單1.出租人出租住宅申請書.docx
+   於 Xceed.Document.NET.Document.Load(String filename, Document document, DocumentTypes documentType)
+   於 Xceed.Words.NET.DocX.Load(String filename)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 724
+2023-10-13 00:25:07.3842 INFO 匯出Word表單
+2023-10-13 00:25:08.9439 ERROR 匯出失敗 : System.IO.FileNotFoundException: File could not be found C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\WordSampleNewTaipei\表單1.出租人出租住宅申請書.docx
+   於 Xceed.Document.NET.Document.Load(String filename, Document document, DocumentTypes documentType)
+   於 Xceed.Words.NET.DocX.Load(String filename)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 724
+2023-10-13 00:25:16.1727 INFO 匯出Word表單
+2023-10-13 00:25:17.7579 ERROR 匯出失敗 : System.IO.FileNotFoundException: File could not be found C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\WordSampleNewTaipei\表單1.出租人出租住宅申請書.docx
+   於 Xceed.Document.NET.Document.Load(String filename, Document document, DocumentTypes documentType)
+   於 Xceed.Words.NET.DocX.Load(String filename)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 724
+2023-10-13 00:25:47.8152 INFO 匯出Word表單
+2023-10-13 00:25:49.5638 ERROR 匯出失敗 : System.ArgumentException: newValue cannot be null.
+參數名稱: newValue
+   於 Xceed.Document.NET.Container.ReplaceText(StringReplaceTextOptions replaceTextOptions)
+   於 Xceed.Document.NET.Document.ReplaceText(String searchValue, String newValue, Boolean trackChanges, RegexOptions options, Formatting newFormatting, Formatting matchFormatting, MatchFormattingOptions fo, Boolean escapeRegEx, Boolean useRegExSubstitutions, Boolean removeEmptyParagraph)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 807
+2023-10-13 00:26:50.5893 INFO 匯出Word表單
+2023-10-13 00:26:58.8627 ERROR 匯出失敗 : System.ArgumentException: newValue cannot be null.
+參數名稱: newValue
+   於 Xceed.Document.NET.Container.ReplaceText(StringReplaceTextOptions replaceTextOptions)
+   於 Xceed.Document.NET.Document.ReplaceText(String searchValue, String newValue, Boolean trackChanges, RegexOptions options, Formatting newFormatting, Formatting matchFormatting, MatchFormattingOptions fo, Boolean escapeRegEx, Boolean useRegExSubstitutions, Boolean removeEmptyParagraph)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 807
+2023-10-13 00:27:12.3757 INFO 匯出Word表單
+2023-10-13 00:27:44.0345 ERROR 匯出失敗 : System.ArgumentException: newValue cannot be null.
+參數名稱: newValue
+   於 Xceed.Document.NET.Container.ReplaceText(StringReplaceTextOptions replaceTextOptions)
+   於 Xceed.Document.NET.Document.ReplaceText(String searchValue, String newValue, Boolean trackChanges, RegexOptions options, Formatting newFormatting, Formatting matchFormatting, MatchFormattingOptions fo, Boolean escapeRegEx, Boolean useRegExSubstitutions, Boolean removeEmptyParagraph)
+   於 LiqunManagement.Controllers.SecretaryController.ExportWord(String FormID) 於 C:\Users\xu870\OneDrive\桌面\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 807
+2023-10-13 00:28:21.3738 INFO 匯出Word表單
