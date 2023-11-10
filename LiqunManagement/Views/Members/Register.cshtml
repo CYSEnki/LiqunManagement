@@ -240,7 +240,7 @@
                 });
 
             /* init select2 */
-            var jsonddl = @Html.Raw(Json.Encode(ViewBag.ddl));
+            var jsonddl = @Html.Raw(Json.Encode(Model.ddldept));
             var jsonArray = JSON.parse(jsonddl);
             for (var i = 0; i < jsonArray.length; i++) {
                 jsonArray[i].id = jsonArray[i].id.replace(/\"/g, '');
@@ -250,6 +250,18 @@
             $('#deptddl').select2({
                 data: jsonArray,
                 placeholder: '選擇部門'
+            });
+
+            var jsonddlsecre = @Html.Raw(Json.Encode(Model.ddlsecretary));
+            var jsonArraysecre = JSON.parse(jsonddlsecre);
+            for (var i = 0; i < jsonArraysecre.length; i++) {
+                jsonArraysecre[i].id = jsonArraysecre[i].id.replace(/\"/g, '');
+                jsonArraysecre[i].text = jsonArraysecre[i].text.replace(/\"/g, '');
+            }
+            //var data_city = jsonArray;
+            $('#secretaryddl').select2({
+                data: jsonArraysecre,
+                placeholder: '選擇秘書'
             });
 
             //Modal
@@ -288,6 +300,8 @@
                             if (firstData.divcode.trim() !== "")
                                 $('#deptddl').val(firstData.divcode).trigger('change');
 
+                            if (firstData.AssistAccount.trim() !== "")
+                                $('#secretaryddl').val(firstData.AssistAccount).trigger('change');
 
                         }
                     },
@@ -310,7 +324,7 @@
                 modal.find('#ResetName').val(name)
                 modal.find('#ResetAccount').val(account)
             })
-
+            
             //重設密碼表單送出事件
 
             $("#ResetForm").submit(function (event) {
@@ -376,6 +390,13 @@
                         <label class="form-label" for="Position">職務名稱</label>
                         <input type="text" id="Position" name="Position" class="form-control" value="" readonly>
                     </div>
+                    @*專屬祕書*@
+                <div class="form-group">
+                    <label class="form-label" for="Position">協作秘書</label>
+                    <select id="secretaryddl" class="custom-select form-control " name="SecretaryAccount" required>
+                        <option value="" selected=""></option>
+                    </select>
+                </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">離開</button>

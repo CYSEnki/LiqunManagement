@@ -16,8 +16,12 @@ namespace LiqunManagement.Models
         [StringLength(10)]
         public string FormID { get; set; }
 
-        [StringLength(10)]
-        public string CaseId { get; set; }
+        [StringLength(100)]
+        public string CaseID { get; set; }
+
+        public int? CaseType { get; set; }
+
+        public int? Phase { get; set; }
 
         public int? objecttype { get; set; }
 

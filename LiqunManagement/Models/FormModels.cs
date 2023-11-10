@@ -85,10 +85,6 @@ namespace LiqunManagement.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<HomeObject>()
-                .Property(e => e.CaseId)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<HomeObject>()
                 .Property(e => e.roomamount)
                 .IsUnicode(false);
 

@@ -1,0 +1,93 @@
+2023-11-10 00:06:45.2272 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 00:07:09.7043 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 00:11:26.0604 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 00:15:47.6896 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 00:15:49.8278 ERROR 取得房屋物件資料錯誤 : System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 LiqunManagement.Controllers.FormController.HomeObject(String FormID, String ControllerName) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\FormController.cs: 行 93
+2023-11-10 00:16:11.2101 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 00:16:11.4140 ERROR 取得房屋物件資料錯誤 : System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 LiqunManagement.Controllers.FormController.HomeObject(String FormID, String ControllerName) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\FormController.cs: 行 93
+2023-11-10 00:18:50.5390 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 00:18:52.6970 ERROR 取得房屋物件資料錯誤 : System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 LiqunManagement.Controllers.FormController.HomeObject(String FormID, String ControllerName) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\FormController.cs: 行 93
+2023-11-10 00:19:34.9006 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 00:19:35.0952 ERROR 取得房屋物件資料錯誤 : System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 LiqunManagement.Controllers.FormController.HomeObject(String FormID, String ControllerName) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\FormController.cs: 行 93
+2023-11-10 00:19:47.3757 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 00:19:47.5681 ERROR 取得房屋物件資料錯誤 : System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 LiqunManagement.Controllers.FormController.HomeObject(String FormID, String ControllerName) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\FormController.cs: 行 93
+2023-11-10 00:19:54.3998 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 00:19:54.5914 ERROR 取得房屋物件資料錯誤 : System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 LiqunManagement.Controllers.FormController.HomeObject(String FormID, String ControllerName) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\FormController.cs: 行 93
+2023-11-10 00:19:57.0260 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 00:19:57.2190 ERROR 取得房屋物件資料錯誤 : System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 LiqunManagement.Controllers.FormController.HomeObject(String FormID, String ControllerName) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\FormController.cs: 行 93
+2023-11-10 00:21:14.4266 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 00:21:14.6320 ERROR 取得房屋物件資料錯誤 : System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 LiqunManagement.Controllers.FormController.HomeObject(String FormID, String ControllerName) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\FormController.cs: 行 93
+2023-11-10 00:21:39.3642 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 00:21:59.0843 ERROR 取得房屋物件資料錯誤 : System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 LiqunManagement.Controllers.FormController.HomeObject(String FormID, String ControllerName) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\FormController.cs: 行 93
+2023-11-10 00:22:16.0893 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 00:28:02.0210 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 00:29:19.1896 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 00:42:44.5488 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 00:51:12.9440 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 00:52:11.3739 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 01:06:52.2744 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 01:13:57.2011 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 01:21:14.0528 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 01:21:45.8896 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 01:25:31.7161 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 01:26:06.3737 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 01:26:56.9993 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 01:27:37.7455 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 01:39:32.2020 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 01:40:35.6729 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 01:41:20.1077 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 02:06:21.2444 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 02:07:21.5606 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 02:29:07.9168 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 02:30:05.3004 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 02:35:56.2946 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 02:37:39.8031 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 02:40:45.0648 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 02:41:26.8169 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 02:48:13.8465 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 02:54:31.4661 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 03:04:19.2374 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 03:04:42.2414 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 03:06:43.8962 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 03:07:00.5919 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 03:08:03.6631 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 03:10:09.0234 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 03:13:30.3136 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 03:15:46.5572 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 03:16:05.5257 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 03:16:57.6097 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 08:25:04.7754 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 08:29:34.4441 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 08:29:55.4577 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 08:34:36.4293 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 08:40:02.1224 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 08:40:42.9517 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 08:42:36.0647 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 08:46:03.3470 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 08:50:20.3612 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 08:51:24.9907 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 08:52:44.6747 INFO 姓名:蘇家潁部門:開發者
+2023-11-10 09:32:54.0110 INFO 進入房屋物件資料頁面，ControllerName:Secretary
+2023-11-10 15:17:58.8609 INFO 進入房屋物件資料頁面，ControllerName:Sales
+2023-11-10 15:19:24.6808 INFO 房屋物件資料頁面送出編輯，ControllerName:Sales
+2023-11-10 15:23:57.1280 INFO 找到檔案資料 fileName : 1.png
+2023-11-10 15:23:57.1280 INFO 合成路徑 FilePath : Form
+2023-11-10 15:23:57.1280 INFO 存檔完成，執行變更FileLog
+2023-11-10 17:27:44.6693 INFO 匯出Word表單
+2023-11-10 18:47:38.1034 INFO 匯出Word表單
+2023-11-10 18:48:02.7690 INFO 匯出Word表單
+2023-11-10 18:48:33.7054 INFO 匯出Word表單
+2023-11-10 18:50:27.4555 INFO 匯出Word表單
+2023-11-10 18:58:47.9375 ERROR 結案時發生錯誤:System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 LiqunManagement.Controllers.SecretaryController.CaseManage(String oldCaseID, String CaseID, String LandlordID, String TenantID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 179
+2023-11-10 19:04:53.1036 ERROR 結案時發生錯誤:System.NullReferenceException: 並未將物件參考設定為物件的執行個體。
+   於 LiqunManagement.Controllers.SecretaryController.CaseManage(String oldCaseID, String CaseID, String LandlordID, String TenantID) 於 C:\Users\ZA5771\Desktop\LiqunManagement\LiqunManagement\Controllers\SecretaryController.cs: 行 179

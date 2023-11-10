@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/smartadmin_Layout.cshtml";
 
     //表單編號
-    var FormID = Model.FormID;
+    var CaseID = Model.CaseID;
     var ErrorMessage = ViewBag.ErrorMessage != null ? ViewBag.ErrorMessage : "";
     var ControllerName = @ViewBag.ControllerName;
 
@@ -149,7 +149,7 @@
                         @using (Html.BeginForm("Landlord", "Form", FormMethod.Post, new {@id="jqform", @class = "needs-validation", @enctype = "multipart/form-data", @novalidate = "" }))
                         {
                             @*表單編號*@
-                            <input type="text" value="@FormID" name="FormID" hidden />
+                            <input type="text" value="@CaseID" name="CaseID" hidden />
                             <input type="text" name="ControllerName" hidden />
 
                             @*自然人或法人*@
@@ -942,7 +942,7 @@
                     //------------------
                     // 編輯模式
                     //------------------
-                    if ('@FormID' !== '') {
+                    if ('@CaseID' !== '') {
                         if (isFirstLoad_Bank) {
                             //分行代碼
                             var BrancheNo = '@BrancheNo';
@@ -1235,9 +1235,9 @@
             //------------------
             // 編輯模式
             //------------------
-            var formid = '@FormID';
+            var formid = '@CaseID';
             if (formid !== '' && '@ViewBag.Exist' == 'exist') {
-                $('input[name="FormID"]').val(formid);
+                $('input[name="CaseID"]').val(formid);
                 //房東姓名
                 var Name = '@Name';
                 $('input[name="Name_0"]').val(Name);
@@ -1251,13 +1251,15 @@
 
                     //生日
                     var birthdaystr = '@BirthdayStr';
-                    var birthpart = birthdaystr.split('-');
-                    var birthyear = parseInt(parseInt(birthpart[0])-1911);
-                    var birthmonth = parseInt(birthpart[1]);
-                    var biirthday = parseInt(birthpart[2]);
-                    $('#birthdayYear_0').val(birthyear);
-                    $('#birthdayMonth_0').val(birthmonth);
-                    $('#birthdayDay_0').val(biirthday);
+                    if (birthdaystr !== '') {
+                        var birthpart = birthdaystr.split('-');
+                        var birthyear = parseInt(parseInt(birthpart[0]) - 1911);
+                        var birthmonth = parseInt(birthpart[1]);
+                        var biirthday = parseInt(birthpart[2]);
+                        $('#birthdayYear_0').val(birthyear);
+                        $('#birthdayMonth_0').val(birthmonth);
+                        $('#birthdayDay_0').val(biirthday);
+                    }
                 }
                 else {
                     $('input[name="persontypeRadio"][value="1"]').prop('checked', true).trigger('change');
@@ -1288,29 +1290,31 @@
 
                 //地址代碼
                 //房東地址(下拉選單)
-                var LaAddress_District = JSON.parse('@LaAddress_District');
-                var LaAddress_Road = JSON.parse('@LaAddress_Road');
-                var LaContact_District = JSON.parse('@LaContact_District');
-                var LaContact_Road = JSON.parse('@LaContact_Road');
-                $('.select2_district[data-index="1"]').empty().select2({ data: LaAddress_District });
-                $('.select2_road[data-index="1"]').empty().select2({ data: LaAddress_Road });
-                $('.select2_district[data-index="2"]').empty().select2({ data: LaContact_District });
-                $('.select2_road[data-index="2"]').empty().select2({ data: LaContact_Road });
+                var LaAddress_Districtstring = '@LaAddress_District';
+                if (LaAddress_Districtstring !== '') {
+                    var LaAddress_District = JSON.parse('@LaAddress_District');
+                    var LaAddress_Road = JSON.parse('@LaAddress_Road');
+                    var LaContact_District = JSON.parse('@LaContact_District');
+                    var LaContact_Road = JSON.parse('@LaContact_Road');
+                    $('.select2_district[data-index="1"]').empty().select2({ data: LaAddress_District });
+                    $('.select2_road[data-index="1"]').empty().select2({ data: LaAddress_Road });
+                    $('.select2_district[data-index="2"]').empty().select2({ data: LaContact_District });
+                    $('.select2_road[data-index="2"]').empty().select2({ data: LaContact_Road });
 
-                //寫進地址
-                var AddressCode = '@AddressCode';
-                var AddressDetail = '@AddressDetail';
-                $('.select2_city[data-index="1"]').val(AddressCode.substring(0, 2)).trigger('change');
-                $('.select2_district[data-index="1"]').val(AddressCode.substring(0, 4)).trigger('change');
-                $('.select2_road[data-index="1"]').val(AddressCode).trigger('change');
-                $('input[name="AddressDetail_0"]').val(AddressDetail);
-                var ContactCode = '@ContactCode';
-                var ContactAddressDetail = '@ContactAddressDetail';
-                $('.select2_city[data-index="2"]').val(ContactCode.substring(0, 2)).trigger('change');
-                $('.select2_district[data-index="2"]').val(ContactCode.substring(0, 4)).trigger('change');
-                $('.select2_road[data-index="2"]').val(ContactCode).trigger('change');
-                $('input[name="detailcontact_0"]').val(ContactAddressDetail);
-
+                    //寫進地址
+                    var AddressCode = '@AddressCode';
+                    var AddressDetail = '@AddressDetail';
+                    $('.select2_city[data-index="1"]').val(AddressCode.substring(0, 2)).trigger('change');
+                    $('.select2_district[data-index="1"]').val(AddressCode.substring(0, 4)).trigger('change');
+                    $('.select2_road[data-index="1"]').val(AddressCode).trigger('change');
+                    $('input[name="AddressDetail_0"]').val(AddressDetail);
+                    var ContactCode = '@ContactCode';
+                    var ContactAddressDetail = '@ContactAddressDetail';
+                    $('.select2_city[data-index="2"]').val(ContactCode.substring(0, 2)).trigger('change');
+                    $('.select2_district[data-index="2"]').val(ContactCode.substring(0, 4)).trigger('change');
+                    $('.select2_road[data-index="2"]').val(ContactCode).trigger('change');
+                    $('input[name="detailcontact_0"]').val(ContactAddressDetail);
+                }
                 //共有人
                 var CoOwnerCount = '@CoOwnerCount';
                 $('input[name="CoOwnerRadio"][value="' + CoOwnerCount + '"]').prop('checked', true).trigger('change');;

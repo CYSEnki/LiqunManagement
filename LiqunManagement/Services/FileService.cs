@@ -30,6 +30,7 @@ namespace LiqunManagement.Services
         {
             var existHomeObject = formdb.HomeObject.Where(x => x.FormID == FormID).FirstOrDefault();
             var existTenant = formdb.Tenant.Where(x => x.FormID == FormID).FirstOrDefault();
+            var exisSecretary = formdb.Secretary.Where(x => x.FormID == FormID).FirstOrDefault();
             //若已有資料存在
             // 使用 JsonConvert.DeserializeObject 将 JSON 字符串转换为 List<string>
             //取得檔名與檔案GUID
@@ -94,7 +95,6 @@ namespace LiqunManagement.Services
                             file.SaveAs(path);
 
                             logger.Info("存檔完成，執行變更FileLog");
-
                             //儲存資料
                             using (var context = new FormModels())
                             {
@@ -116,8 +116,6 @@ namespace LiqunManagement.Services
                                 context.SaveChanges();
                             }
                         }
-
-
                     }
                 }
             }

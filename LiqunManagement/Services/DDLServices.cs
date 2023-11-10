@@ -1,8 +1,10 @@
-﻿using LiqunManagement.ViewModels;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using LiqunManagement.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace LiqunManagement.Services
 {
@@ -110,6 +112,28 @@ namespace LiqunManagement.Services
         }
         #endregion
         
+        #region 找到秘書下拉選單
+        public MemberRegisterViewModel GetSecretaryDDL(string secretaryAccount)
+        {
+            IEnumerable<DDLViewModel> secretaryDDL = new List<DDLViewModel>();
+
+            secretaryDDL = (from secredb in Memberdb.EmployeeData.Where(x => x.DivCode.StartsWith("LQ1"))
+                            join member in Memberdb.Members on secredb.AssistantAccount equals member.Account 
+                       select new DDLViewModel
+                       {
+                           order = null,
+                           text = member.Name,
+                           id = member.Account,
+                       }).Distinct();
+            var model = new MemberRegisterViewModel
+            {
+                ddllist = secretaryDDL,
+            };
+
+            return model;
+        }
+        #endregion
+        
         #region 找到主管下拉選單
         public MemberRegisterViewModel GetManager(string divcode)
         {
@@ -170,6 +194,32 @@ namespace LiqunManagement.Services
             }
             var ddd = ddl.ToList();
 
+            var formmodel = new FormViewModels();
+            formmodel.ddllist = ddl;
+            return formmodel;
+        }
+        #endregion
+
+        #region 找到期數下拉選單
+        public FormViewModels GetPhaseDDL(string regioncode)
+        {
+            //var citycodelist = formdb.Region.Select(x => x.CityCode).Distinct();
+            List<SelectListItem> phasedll = new List<SelectListItem>();
+            phasedll.Insert(0, new SelectListItem { Text = "2期", Value = "1"});
+            phasedll.Insert(1, new SelectListItem { Text = "3期", Value = "2"});
+            phasedll.Insert(2, new SelectListItem { Text = "3.1期", Value = "3"});
+            phasedll.Insert(3, new SelectListItem { Text = "4期", Value = "4"});
+
+            List<DDLViewModel> ddl = new List<DDLViewModel>();
+            var order = 0;
+            foreach (var item in phasedll)
+            {
+                var ddlitem = new DDLViewModel();
+                ddlitem.id = item.Value;
+                ddlitem.text = item.Text;
+                ddlitem.order = order++;
+                ddl.Add(ddlitem);
+            }
             var formmodel = new FormViewModels();
             formmodel.ddllist = ddl;
             return formmodel;

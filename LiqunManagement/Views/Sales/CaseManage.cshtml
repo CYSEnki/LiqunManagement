@@ -56,7 +56,7 @@
                                         <tbody>
                                             @if (Model.objectformlist != null)
                                             {
-                                                if (Model.objectformlist.Count() > 0)
+                                                if (Model.objectformlist.Any())
                                                 {
                                                     foreach (var item in Model.objectformlist)
                                                     {
@@ -76,12 +76,12 @@
                                                                         <i class="fal fa-ellipsis-v"></i>
                                                                     </a>
                                                                     <div class="dropdown-menu">
-                                                                        <a class="dropdown-item" href="@Url.Action("HomeObject", "Form", new { FormID = item.FormID})">物件資料</a>
-                                                                        <a class="dropdown-item" href="@Url.Action("Landlord", "Form", new { FormID = item.FormID})">房東資料</a>
-                                                                        <a class="dropdown-item" href="@Url.Action("Tenant", "Form", new { FormID = item.FormID})">房客資料</a>
+                                                                        <a class="dropdown-item" href="@Url.Action("HomeObject", "Form", new { CaseID = item.CaseID})">物件資料</a>
+                                                                        <a class="dropdown-item" href="@Url.Action("Landlord", "Form", new { CaseID = item.CaseID})">房東資料</a>
+                                                                        <a class="dropdown-item" href="@Url.Action("Tenant", "Form", new { CaseID = item.CaseID})">房客資料</a>
                                                                         <a class="dropdown-item" href="@Url.Action("Uploads", "Form", new { FormID = item.FormID, ControllerName = "Sales"})">附件上傳</a>
-                                                                        <a class="dropdown-item" href="@Url.Action("ReadForm", "Form", new { FormID = item.FormID, ControllerName = "Sales"})" target="_blank">表單閱覽</a>
-                                                                        <a class="dropdown-item" onclick="submit('@(String.IsNullOrEmpty(@item.Landlord) || String.IsNullOrEmpty(@item.Tenant) ? "Nosubmit" : @item.FormID)')">提交表單</a>
+                                                                        <a class="dropdown-item" href="@Url.Action("ReadForm", "Form", new { CaseID = item.CaseID, ControllerName = "Sales"})" target="_blank">表單閱覽</a>
+                                                                        <a class="dropdown-item" onclick="submit('@(String.IsNullOrEmpty(@item.Landlord) || String.IsNullOrEmpty(@item.Tenant) ? "Nosubmit" : @item.CaseID)')">提交表單</a>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -154,6 +154,7 @@
             $('#dt-basic-example').dataTable(
                 {
                     //響應式設計
+                    "pageLength": 100,
                     responsive: true,
                     //定義工具欄和元素的布局結構
                     dom: "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'B>>" +
@@ -186,6 +187,9 @@
                             className: 'btn-outline-default'
                         }
                     ],
+                    "language": {
+                        "emptyTable": "查無資料",
+                    },
                     //定義每列的屬性和操作
                     //columnDefs: [
                     //    {
@@ -229,16 +233,16 @@
                 });
         });
 
-        function submit(FormID) {
-            console.log('%c' + FormID, 'color: orange; font-size:24px');
-            if (FormID == 'Nosubmit') {
+        function submit(CaseID) {
+            console.log('%c' + CaseID, 'color: orange; font-size:24px');
+            if (CaseID == 'Nosubmit') {
                 alert('表單尚未完成');
                 return;
             }
-            if (confirm('確認將案件 : ' + FormID + ' 提交至秘書處理?')) {
+            if (confirm('確認將案件 : ' + CaseID + ' 提交至秘書處理?')) {
                 $.ajax({
                     type: "POST",
-                    data: { FormID: FormID },
+                    data: { CaseID: CaseID },
                     url: '@Url.Content("~/Sales/CaseManage")',
                 }).done(function (result){
                     if (result == 'successed') {

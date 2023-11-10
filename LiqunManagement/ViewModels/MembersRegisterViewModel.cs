@@ -19,6 +19,8 @@ namespace LiqunManagement.ViewModels
 
         //下拉選單
         public IEnumerable<DDLViewModel> ddllist { get; set; }
+        public string ddldept { get; set; }
+        public string ddlsecretary { get; set; }
 
         [DisplayName("密碼")]
         [Required(ErrorMessage = "請輸入密碼")]

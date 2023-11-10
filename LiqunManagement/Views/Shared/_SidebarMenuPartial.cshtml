@@ -121,16 +121,16 @@
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("CaseManage", "Secretary")" title="Manage" data-filter-tags="application intel introduction">
-                            <span class="nav-link-text" data-i18n="nav.theme_settings">新增續約</span>
+                        <a href="@Url.Action("CaseManage", "Secretary", new { formtype = 3, casetype = 0})" title="Manage" data-filter-tags="application intel introduction">
+                            <span class="nav-link-text" data-i18n="nav.theme_settings">續約專區</span>
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("CaseManage", "Secretary")" title="Process" data-filter-tags="application intel introduction">
+                        <a href="@Url.Action("CaseManage", "Secretary", new { formtype = 2})" title="Process" data-filter-tags="application intel introduction">
                             <span class="nav-link-text" data-i18n="nav.theme_settings">總表</span>
                         </a>
                     </li>
-                    <li>
+                    @*<li>
                         <a href="@Url.Action("CaseManage", "Secretary")" title="Search" data-filter-tags="application intel privacy">
                             <span class="nav-link-text" data-i18n="nav.theme_settings">新增修繕</span>
                         </a>
@@ -154,7 +154,7 @@
                         <a href="@Url.Action("CaseManage", "Secretary")" title="Search" data-filter-tags="application intel privacy">
                             <span class="nav-link-text" data-i18n="nav.theme_settings">客訴追蹤表</span>
                         </a>
-                    </li>
+                    </li>*@
                 </ul>
             </li>
         }
@@ -221,6 +221,11 @@
                     <li data-branches="UploadBank">
                         <a href="@Url.Action("UploadBank", "UpLoad")" title="UploadBank" data-filter-tags="application intel introduction">
                             <span class="nav-link-text" data-i18n="nav.theme_settings">銀行代碼</span>
+                        </a>
+                    </li>
+                    <li data-branches="UploadObjectForm">
+                        <a href="@Url.Action("UploadObjectForm", "UpLoad")" title="UploadObjectForm" data-filter-tags="application intel introduction">
+                            <span class="nav-link-text" data-i18n="nav.theme_settings">表單資料</span>
                         </a>
                     </li>
                     <li data-branches="UploadBank">

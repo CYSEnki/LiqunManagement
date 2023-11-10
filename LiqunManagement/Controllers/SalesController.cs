@@ -17,8 +17,14 @@ namespace LiqunManagement.Controllers
         }
 
         #region 管理案件(業務)
+        /// <summary>
+        /// 業務起單中，擬稿中
+        /// </summary>
+        /// <param name="formtype">-1(解約) 0(業務起單中) 1(秘書審查中) 2(結案，合約履行中) 3(續約中)</param>
+        /// <param name="casetype">0(擬稿中) 1(完稿)</param>
+        /// <returns></returns>
         [HttpGet]
-        public ActionResult CaseManage()
+        public ActionResult CaseManage(int formtype = 0, int casetype = 0)
         {
             var ErrorMessage = TempData["ErrorMessage"];
             ViewBag.ErrorMessage = ErrorMessage != null ? ErrorMessage.ToString() : "";
@@ -42,25 +48,26 @@ namespace LiqunManagement.Controllers
                 ViewBag.Position = EmployeeData.Position;       //使用者職位
             }
             //確認角色
-            var role = User.IsInRole("Admin");
+            var admin = User.IsInRole("Admin");
             ViewBag.Role = User.IsInRole("Admin") ? "Admin" : User.IsInRole("Agent") ? "Agent" : User.IsInRole("Secretary") ? "Secretary" : "";
             #endregion
-            var ObjectFormData = formdb.ObjectForm.Where(x => x.FormType == 0).AsEnumerable();
-            if (!role)
+            var ObjectFormData = formdb.ObjectForm.Where(x => x.FormType == formtype).AsEnumerable();
+            if (!admin)
             {
                 //非系統管理員
                 ObjectFormData = ObjectFormData.Where(x => x.AgentAccount == User.Identity.Name);
             }
 
             var Formlist = from form in ObjectFormData
-                           join obj in formdb.HomeObject on form.FormID equals obj.FormID
-                           join lan in formdb.LandLord on form.FormID equals lan.FormID into temp1
+                           join obj in formdb.HomeObject.Where(x => x.CaseType == casetype) on form.FormID equals obj.FormID
+                           join lan in formdb.LandLord on obj.CaseID equals lan.CaseID into temp1
                            from land in temp1.DefaultIfEmpty()
-                           join ten in formdb.Tenant on form.FormID equals ten.FormID into temp2
+                           join ten in formdb.Tenant on obj.CaseID equals ten.CaseID into temp2
                            from tena in temp2.DefaultIfEmpty()
                            select new objectFormViewModel
                            {
                                FormID = (string)form.FormID,
+                               CaseID = (string)obj.CaseID,
                                CreateTime = (DateTime)form.CreateTime,
                                ProcessName = (string)form.ProcessName,
                                Address = (string)obj.fulladdress,
@@ -77,11 +84,18 @@ namespace LiqunManagement.Controllers
 
             return View(model);
         }
+        
+        /// <summary>
+        /// 送出簽核(提交至秘書端)
+        /// </summary>
+        /// <param name="CaseID">媒合編號</param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult CaseManage(string FormID)
+        public ActionResult CaseManage(string CaseID)
         {
             var IsAdmin = User.IsInRole("Admin");
 
+            var FormID = formdb.HomeObject.Where(x => x.CaseID == CaseID).Select(x => x.FormID).FirstOrDefault();
             var AgentAccount = formdb.ObjectForm.Where(x => x.FormID == FormID).Select(x => x.AgentAccount).FirstOrDefault();
             var AssistantAccount = memberdb.EmployeeData.Where(x => x.Account == AgentAccount).Select(x => x.AssistantAccount).FirstOrDefault();
             var AssistantData = memberdb.Members.Where(x => x.Account == AssistantAccount).FirstOrDefault();
@@ -99,6 +113,9 @@ namespace LiqunManagement.Controllers
                         existform.ProcessAccount = AssistantAccount;
                         existform.ProcessName = AssistantData.Name;
                         existform.FormType = 1;
+
+                        var existHomeObject = context.HomeObject.Where(x => x.CaseID == CaseID).FirstOrDefault();
+                        existHomeObject.CaseType = 1;
 
                         context.SaveChanges();
                     }
@@ -126,8 +143,14 @@ namespace LiqunManagement.Controllers
         #endregion
 
         #region 待結案區
+        /// <summary>
+        /// 已完稿的所有表單
+        /// </summary>
+        /// <param name="formtype">-1(解約) 0(業務起單中) 1(秘書審查中) 2(結案，合約履行中) 3(續約中)</param>
+        /// <param name="casetype">0(擬稿中) 1(完稿)</param>
+        /// <returns></returns>
         [HttpGet]
-        public ActionResult CaseProcess()
+        public ActionResult CaseProcess(int formtype = 1, int casetype = 1)
         {
             #region 使用者資料
             var EmployeeData = (from db in memberdb.Members.Where(x => x.Account == User.Identity.Name)
@@ -151,7 +174,9 @@ namespace LiqunManagement.Controllers
             var role = User.IsInRole("Admin");
             ViewBag.Role = User.IsInRole("Admin") ? "Admin" : User.IsInRole("Agent") ? "Agent" : User.IsInRole("Secretary") ? "Secretary" : "";
             #endregion
-            var ObjectFormData = formdb.ObjectForm.Where(x => x.FormType == 1 || x.FormType == 2).AsEnumerable();
+
+            var ObjectFormData = formdb.ObjectForm.Where(x => x.FormType == formtype).AsEnumerable();
+                
             if (!role)
             {
                 //非系統管理員
@@ -159,7 +184,7 @@ namespace LiqunManagement.Controllers
             }
 
             var Formlist = from form in ObjectFormData
-                           join obj in formdb.HomeObject on form.FormID equals obj.FormID
+                           join obj in formdb.HomeObject.Where(x => x.CaseType == casetype) on form.FormID equals obj.FormID
                            join lan in formdb.LandLord on form.FormID equals lan.FormID into temp1
                            from land in temp1.DefaultIfEmpty()
                            join ten in formdb.Tenant on form.FormID equals ten.FormID into temp2

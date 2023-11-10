@@ -15,6 +15,7 @@ namespace LiqunManagement.ViewModels
 
         //表單編號
         public string FormID { get; set; }
+        public string CaseID { get; set; }
 
         //房屋物件
         public HomeObjectViewModel homeobjectviewmodel { get; set; }
@@ -35,18 +36,38 @@ namespace LiqunManagement.ViewModels
 
     public class objectFormViewModel
     {
+        //表單編號
         public string FormID { get; set; }
+        //媒合編號
+        public string CaseID { get; set; }
+        //建表時間
         public DateTime CreateTime { get; set; }
+        //處理人員帳號
         public string ProcessAccount { get; set; }
+        //處理人員姓名
         public string ProcessName { get; set; }
+        //物件地址
         public string Address { get; set; }
+        //簽約日
         public DateTime SignDate { get; set; }
+        //房東姓名
         public string Landlord { get; set; }
+        //房客姓名
         public string Tenant { get; set; }
+        //業務帳號
         public string AgentAccount { get; set; }
+        //業務姓名
         public string AgentName { get; set; }
+        //秘書帳號(指定協助業務人員)
         public string AssistantAccount { get; set; }
+        //是否存在秘書填寫
         public bool ExistSecretaryForm { get; set; }
+
+        //表單簽核狀態
+        public int? FormType { get; set; }
+        //表單狀態
+        public int? CaseType { get; set; }
+
     }
 
     #region FormGet資料
@@ -55,7 +76,9 @@ namespace LiqunManagement.ViewModels
     {
         public string FormID { get; set; }
 
-        public string CaseId { get; set; }
+        public string Phase { get; set; }
+
+        public string CaseID { get; set; }
 
         public int? objecttype { get; set; }
         public string objecttypeStr { get; set; }
@@ -162,6 +185,7 @@ namespace LiqunManagement.ViewModels
     public partial class LandLordViewModel
     {
         public string FormID { get; set; }
+        public string CaseID { get; set; }
         //房東資料
         public string Name { get; set; }
         public string Principal { get; set; }
@@ -245,6 +269,7 @@ namespace LiqunManagement.ViewModels
     public class TenantViewModel
     {
         public string FormID { get; set; }
+        public string CaseID { get; set; }
         public int? TenantType { get; set; }
         public string TenantTypeName { get; set; }
         public string vulnerablefile_Name { get; set; }
@@ -359,7 +384,7 @@ namespace LiqunManagement.ViewModels
         [StringLength(50)]
         public string FormID { get; set; }
 
-        public int qualifyRadio { get; set; }
+        public int? qualifyRadio { get; set; }
         public string qualifyRadioStr { get; set; }
 
         [Required]
@@ -379,21 +404,21 @@ namespace LiqunManagement.ViewModels
 
         public string buildCreateDate { get; set; }
 
-        public int floorAmount { get; set; }
+        public int? floorAmount { get; set; }
 
-        public int floorNo { get; set; }
+        public int? floorNo { get; set; }
 
-        public double squareAmount { get; set; }
+        public double? squareAmount { get; set; }
 
-        public double pinAmount { get; set; }
+        public double? pinAmount { get; set; }
 
-        public int notarizationFeeRadio { get; set; }
+        public int? notarizationFeeRadio { get; set; }
 
-        public int rentMarket { get; set; }
+        public int? rentMarket { get; set; }
 
-        public int rentAgent { get; set; }
+        public int? rentAgent { get; set; }
 
-        public int depositAgent { get; set; }
+        public int? depositAgent { get; set; }
         public string Memo { get; set; }
     }
     #endregion
@@ -404,6 +429,10 @@ namespace LiqunManagement.ViewModels
     {
         // 表單編號
         public string FormID { get; set; }
+        // 媒合編號
+        public string CaseID { get; set; }
+        //合約期數
+        public string Phase { get; set; }
 
         // 物件類型 (radio)包租:1; 代管:0
         public string objecttypeRadio { get; set; }
@@ -520,6 +549,7 @@ namespace LiqunManagement.ViewModels
     public class LandlordInputViewModel
     {
         public string FormID { get; set; }
+        public string CaseID { get; set; }
         public string persontypeRadio { get; set; }
         public string Name_0 { get; set; }
         public string Principal { get; set; }
@@ -549,6 +579,7 @@ namespace LiqunManagement.ViewModels
     public class TenantInputViewModel
     {
         public string FormID { get; set; }
+        public string CaseID { get; set; }
         public string typeRadio { get; set; }
         public IEnumerable<HttpPostedFileBase> vulnerablefile { get; set; }
         public IEnumerable<HttpPostedFileBase> sheetfile { get; set; }
@@ -603,6 +634,7 @@ namespace LiqunManagement.ViewModels
         [Required]
         [StringLength(50)]
         public string FormID { get; set; }
+        public string CaseID { get; set; }
 
         public int qualifyRadio { get; set; }
 

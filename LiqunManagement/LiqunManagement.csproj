@@ -2122,6 +2122,7 @@
     <Content Include="Views\Form\Uploads.cshtml" />
     <Content Include="Views\UpLoad\UploadExcerpt.cshtml" />
     <Content Include="Views\Form\ReadForm.cshtml" />
+    <Content Include="Views\UpLoad\UploadObjectForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

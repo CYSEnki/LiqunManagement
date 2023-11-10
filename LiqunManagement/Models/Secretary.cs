@@ -16,40 +16,46 @@ namespace LiqunManagement.Models
         [StringLength(50)]
         public string FormID { get; set; }
 
-        public int qualifyRadio { get; set; }
+        [StringLength(100)]
+        public string CaseID { get; set; }
 
-        [Required]
+        [StringLength(50)]
+        public string LandlordID { get; set; }
+
+        [StringLength(50)]
+        public string TenantID { get; set; }
+
+        public int? qualifyRadio { get; set; }
+
         [StringLength(20)]
         public string excerpt { get; set; }
 
         [StringLength(20)]
         public string excerptShort { get; set; }
 
-        [Required]
         [StringLength(20)]
         public string buildNo { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string placeNo { get; set; }
 
-        public DateTime buildCreateDate { get; set; }
+        public DateTime? buildCreateDate { get; set; }
 
-        public int floorAmount { get; set; }
+        public int? floorAmount { get; set; }
 
-        public int floorNo { get; set; }
+        public int? floorNo { get; set; }
 
-        public double squareAmount { get; set; }
+        public double? squareAmount { get; set; }
 
-        public double pinAmount { get; set; }
+        public double? pinAmount { get; set; }
 
-        public int notarizationFeeRadio { get; set; }
+        public int? notarizationFeeRadio { get; set; }
 
-        public int rentMarket { get; set; }
+        public int? rentMarket { get; set; }
 
-        public int rentAgent { get; set; }
+        public int? rentAgent { get; set; }
 
-        public int depositAgent { get; set; }
+        public int? depositAgent { get; set; }
 
         [StringLength(300)]
         public string Memo { get; set; }

@@ -128,9 +128,6 @@
                                                     @ViewBag.FileNameList[i]
                                                     <button class="btn btn-light btn-sm" type="button" onclick="downloadfile('@ViewBag.FileAliasList[i]')"><i class="fa fa-download"></i></button>
                                                 </td>
-                                                @*<td style="text-align:center; vertical-align:middle;">
-                                        <button type="button" class="btn btn-danger waves-effect waves-themed" onclick="deletefile('@FormID', '@ViewBag.FileAliasList[i]')">刪除</button>
-                                    </td>*@
                                             </tr>
                                         }
 
@@ -199,6 +196,12 @@
                         <p> 機車位月租金 : $ @(string.Format("{0:N0}", Model.homeobjectviewmodel.scootermonthrent)) </p>
                         <p> 機車位管理費 : $ @(string.Format("{0:N0}", Model.homeobjectviewmodel.scootermanagefee)) </p>
                     }
+                    <!--備註欄-->
+                    <div class="form-group">
+                        <label class="form-label" for="example-textarea">備註</label>
+                        <textarea class="form-control" rows="5" style="height: 122px;">@Model.homeobjectviewmodel.Memo</textarea>
+                    </div>
+
 
                     <!--房東資料-->
                     <h2 id="item-2" class="fw-500 pt-2 font-weight-bolder" style="">房東資料</h2>
@@ -289,6 +292,11 @@
                                     break;
                             }
                         }
+                        <!--備註欄-->
+                        <div class="form-group">
+                            <label class="form-label" for="example-textarea">備註</label>
+                            <textarea class="form-control" rows="5" style="height: 122px;">@Model.landlordviewmodel.Memo</textarea>
+                        </div>
                     }
 
                     <!--房客資料-->
@@ -484,6 +492,11 @@
                             }
                         }
 
+                        <!--備註欄-->
+                        <div class="form-group">
+                            <label class="form-label" for="example-textarea">備註</label>
+                            <textarea class="form-control" rows="5" style="height: 122px;">@Model.tenantviewmodel.Memo</textarea>
+                        </div>
                     }
 
                     <!--秘書填寫-->
@@ -503,6 +516,11 @@
                         <p>市場租金 : $ @(string.Format("{0:N0}", Model.secretaryviewmodel.rentMarket))</p>
                         <p>代租租金: $ @(string.Format("{0:N0}", Model.secretaryviewmodel.rentAgent))</p>
                         <p>代租押金: $ @(string.Format("{0:N0}", Model.secretaryviewmodel.depositAgent))</p>
+                        <!--備註欄-->
+                        <div class="form-group">
+                            <label class="form-label" for="example-textarea">備註</label>
+                            <textarea class="form-control" rows="5" style="height: 122px;">@Model.secretaryviewmodel.Memo</textarea>
+                        </div>
                     }
                 </div>
             </div>

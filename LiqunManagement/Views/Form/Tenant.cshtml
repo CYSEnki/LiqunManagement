@@ -7,6 +7,7 @@
 
     //表單編號
     var FormID = Model.FormID != null ? Model.FormID : "";
+    var CaseID = Model.CaseID != null ? Model.CaseID : "";
     var ErrorMessage = ViewBag.ErrorMessage != null ? ViewBag.ErrorMessage : "";
     var ControllerName = @ViewBag.ControllerName;
     //房客類別
@@ -161,7 +162,7 @@
                         @using (Html.BeginForm("Tenant", "Form", FormMethod.Post, new {@id = "jqform", @class = "needs-validation", @enctype = "multipart/form-data", @novalidate = "" }))
                         {
                             @*表單編號*@
-                            <input type="text" value="@FormID" name="FormID" hidden />
+                            <input type="text" value="@CaseID" name="CaseID" hidden />
                             <input type="text" name="ControllerName" hidden />
                             @*租客身分*@
                             <div class="panel-tag">
@@ -322,7 +323,6 @@
                                                         </td>
                                                     </tr>
                                                 }
-
                                             </tbody>
                                         </table>
                                     }
@@ -728,7 +728,7 @@
     @*inputmask*@
     @*<script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/inputmask/inputmask.bundle.js"></script>*@
 
-    <script type="text/javascript">
+<script type="text/javascript">
         //validation
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function () {
@@ -1039,7 +1039,7 @@
                     //------------------
                     // 編輯模式
                     //------------------
-                    if ('@FormID' !== '') {
+                    if ('@CaseID' !== '') {
                         if (isFirstLoad_Bank) {
                             //分行代碼
                             var BrancheNo = '@BrancheNo';
@@ -1370,9 +1370,9 @@
             //------------------
             // 編輯模式
             //------------------
-            var formid = '@FormID'
+            var formid = '@CaseID'
             if (formid !== '' && '@ViewBag.Exist' == 'exist') {
-                $('input[name="FormID"]').val(formid);
+                $('input[name="CaseID"]').val(formid);
                 //房客類別
                 var TenantType = '@TenantType';
                 $('input[name="typeRadio"][value="' + TenantType + '"]').prop('checked', true).trigger('change');
@@ -1385,14 +1385,16 @@
                 var Gender = '@Gender';
                 $('input[name="genderRadio_0"][value="' + Gender + '"]').prop('checked', true).trigger('change');;
                     //生日
-                    var birthdaystr = '@BirthdayStr';
+                var birthdaystr = '@BirthdayStr';
+                if (birthdaystr !== '') {
                     var birthpart = birthdaystr.split('-');
-                    var birthyear = parseInt(parseInt(birthpart[0])-1911);
+                    var birthyear = parseInt(parseInt(birthpart[0]) - 1911);
                     var birthmonth = parseInt(birthpart[1]);
                     var biirthday = parseInt(birthpart[2]);
                     $('#birthdayYear_0').val(birthyear);
                     $('#birthdayMonth_0').val(birthmonth);
                     $('#birthdayDay_0').val(biirthday);
+                }
                 //身分證字號(法人-統一編號)
                 const IDNumberpattern = /^[A-Z]\d{9}$/;
                 var IDNumber = '@IDNumber';
@@ -1421,29 +1423,31 @@
 
                 //地址代碼
                 //房客地址(下拉選單)
-                var TeAddress_District = JSON.parse('@TeAddress_District');
-                var TeAddress_Road = JSON.parse('@TeAddress_Road');
-                var TeContact_District = JSON.parse('@TeContact_District');
-                var TeContact_Road = JSON.parse('@TeContact_Road');
-                $('.select2_district[data-index="0"]').empty().select2({ data: TeAddress_District });
-                $('.select2_road[data-index="0"]').empty().select2({ data: TeAddress_Road });
-                $('.select2_district[data-index="1"]').empty().select2({ data: TeContact_District });
-                $('.select2_road[data-index="1"]').empty().select2({ data: TeContact_Road });
+                var TeAddress_Districtstring = '@TeAddress_District';
+                if (TeAddress_Districtstring !== '') {
+                    var TeAddress_District = JSON.parse('@TeAddress_District');
+                    var TeAddress_Road = JSON.parse('@TeAddress_Road');
+                    var TeContact_District = JSON.parse('@TeContact_District');
+                    var TeContact_Road = JSON.parse('@TeContact_Road');
+                    $('.select2_district[data-index="0"]').empty().select2({ data: TeAddress_District });
+                    $('.select2_road[data-index="0"]').empty().select2({ data: TeAddress_Road });
+                    $('.select2_district[data-index="1"]').empty().select2({ data: TeContact_District });
+                    $('.select2_road[data-index="1"]').empty().select2({ data: TeContact_Road });
 
-                //寫進地址
-                var AddressCode = '@AddressCode';
-                var AddressDetail = '@AddressDetail';
-                $('.select2_city[data-index="0"]').val(AddressCode.substring(0, 2)).trigger('change');
-                $('.select2_district[data-index="0"]').val(AddressCode.substring(0, 4)).trigger('change');
-                $('.select2_road[data-index="0"]').val(AddressCode).trigger('change');
-                $('input[name="AddressDetail_0"]').val(AddressDetail);
-                var ContactCode = '@ContactCode';
-                var ContactAddressDetail = '@ContactAddressDetail';
-                $('.select2_city[data-index="1"]').val(ContactCode.substring(0, 2)).trigger('change');
-                $('.select2_district[data-index="1"]').val(ContactCode.substring(0, 4)).trigger('change');
-                $('.select2_road[data-index="1"]').val(ContactCode).trigger('change');
-                $('input[name="detailcontact_0"]').val(ContactAddressDetail);
-
+                    //寫進地址
+                    var AddressCode = '@AddressCode';
+                    var AddressDetail = '@AddressDetail';
+                    $('.select2_city[data-index="0"]').val(AddressCode.substring(0, 2)).trigger('change');
+                    $('.select2_district[data-index="0"]').val(AddressCode.substring(0, 4)).trigger('change');
+                    $('.select2_road[data-index="0"]').val(AddressCode).trigger('change');
+                    $('input[name="AddressDetail_0"]').val(AddressDetail);
+                    var ContactCode = '@ContactCode';
+                    var ContactAddressDetail = '@ContactAddressDetail';
+                    $('.select2_city[data-index="1"]').val(ContactCode.substring(0, 2)).trigger('change');
+                    $('.select2_district[data-index="1"]').val(ContactCode.substring(0, 4)).trigger('change');
+                    $('.select2_road[data-index="1"]').val(ContactCode).trigger('change');
+                    $('input[name="detailcontact_0"]').val(ContactAddressDetail);
+                }
                 //配偶
                 var CoupleCount = parseInt('@CoupleCount');
                 if (CoupleCount > 0) {
@@ -2031,7 +2035,7 @@
                                     console.log('I was closed by the timer')
                                 }
                             })
-                         
+
                         }
                     });
                 }
@@ -2105,8 +2109,7 @@
                         });
             }
         };
-
-    </script>
+</script>
 }
 
 

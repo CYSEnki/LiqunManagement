@@ -1,13 +1,15 @@
 ﻿@model LiqunManagement.ViewModels.FormViewModels
 
 @{
-    ViewBag.Title = "案件管理";
+    ViewBag.Title = "審查案件";
     ViewBag.Controller = "Secretary";
     ViewBag.Branches = "CaseManage_Secretary";
     Layout = "~/Views/Shared/smartadmin_Layout.cshtml";
 
     var ErrorMessage = ViewBag.ErrorMessage != null ? ViewBag.ErrorMessage : "";
 }
+@*select2*@
+<link href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/formplugins/select2/select2.bundle.css" rel="stylesheet" />
 @*sweetalert2*@
 <link href="~/Content/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
 @*datatables*@
@@ -17,10 +19,10 @@
         <li class="breadcrumb-item">
             <a href="javascript:void(0);">後臺管理系統</a>
         </li>
-        <li class="breadcrumb-item">業務區</li>
-        <li class="breadcrumb-item active">案件管理</li>
+        <li class="breadcrumb-item">秘書區</li>
+        <li class="breadcrumb-item active">@(ViewBag.FormType == 1 ? "審查案件" : "總表")</li>
         <li class="position-absolute pos-top pos-right d-none d-sm-block">
-            <span class="js-get-date">Monday, June 12, 2023</span>
+            <span class="js-get-date"></span>
         </li>
     </ol>
     <div class="row">
@@ -40,11 +42,36 @@
                     <div class="panel-content">
                         <div id="dt-basic-example_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <div class="row">
+                                <h5 class="frame-heading ml-4 mr-4">表單狀態</h5>
+                                @using (Html.BeginForm("CaseManage", "Secretary", FormMethod.Get, new { @id = "formtypeSelect", @casetype = 2 }))
+                                {
+                                    {
+                                        if (ViewBag.FormType != 1)
+                                        {
+                                            <div class="frame-wrap">
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" class="custom-control-input" id="formtype_0" name="formtype" value="2" @(ViewBag.FormType == 2 ? "checked" : "")>
+                                                    <label class="custom-control-label" for="formtype_0">履行中</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" class="custom-control-input" id="formtype_1" name="formtype" value="3" @(ViewBag.FormType == 3 ? "checked" : "")>
+                                                    <label class="custom-control-label" for="formtype_1">續約中</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" class="custom-control-input" id="formtype_2" name="formtype" value="-1" @(ViewBag.FormType == -1 ? "checked" : "")>
+                                                    <label class="custom-control-label" for="formtype_2">已解約</label>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                }
+                            </div>
+                            <div class="row">
                                 <div class="col-sm-12">
                                     <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100 dataTable dtr-inline collapsed" role="grid" aria-describedby="dt-basic-example_info" style="width: 876px;">
                                         <thead class="bg-warning-200">
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 76.2px;" aria-sort="ascending" aria-label="CustomerID: activate to sort column descending">表單編號</th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 76.2px;" aria-sort="ascending" aria-label="CustomerID: activate to sort column descending">@(ViewBag.FormType == 1 ? "表單編號" : "媒合編號")</th>
                                                 <th class="sorting" tabindex="0" aria-controls="dt-basic-example" aria-label="Name: activate to sort column ascending">表單處理人員</th>
                                                 <th class="sorting" tabindex="0" aria-controls="dt-basic-example" aria-label="Name: activate to sort column ascending">業務姓名</th>
                                                 <th class="sorting" tabindex="0" aria-controls="dt-basic-example" aria-label="CustomerEmail: activate to sort column ascending">物件地址</th>
@@ -63,7 +90,7 @@
                                                     foreach (var item in Model.objectformlist)
                                                     {
                                                         <tr role="row" class="odd">
-                                                            <td class="sorting_1 dtr-control @(item.ExistSecretaryForm ? "" : "text-danger")">@item.FormID</td>
+                                                            <td class="sorting_1 dtr-control @(item.ExistSecretaryForm ? "" : "text-danger")">@(ViewBag.FormType == 1 ? item.FormID : item.CaseID)</td>
                                                             <td>@item.ProcessName</td>
                                                             <td>@item.AgentName</td>
                                                             <td>@item.Address</td>
@@ -79,14 +106,26 @@
                                                                         <i class="fal fa-ellipsis-v"></i>
                                                                     </a>
                                                                     <div class="dropdown-menu">
-                                                                        <a class="dropdown-item" href="@Url.Action("HomeObject", "Form", new { FormID = item.FormID, ControllerName = "Secretary"})">物件資料</a>
-                                                                        <a class="dropdown-item" href="@Url.Action("Landlord", "Form", new { FormID = item.FormID, ControllerName = "Secretary"})">房東資料</a>
-                                                                        <a class="dropdown-item" href="@Url.Action("Tenant", "Form", new { FormID = item.FormID, ControllerName = "Secretary"})">房客資料</a>
-                                                                        <a class="dropdown-item" href="@Url.Action("Secretary", "Form", new { FormID = item.FormID, ControllerName = "Secretary"})">秘書填寫</a>
+                                                                        <a class="dropdown-item" href="@Url.Action("HomeObject", "Form", new { CaseID = item.CaseID, ControllerName = "Secretary"})">物件資料</a>
+                                                                        <a class="dropdown-item" href="@Url.Action("Landlord", "Form", new { CaseID = item.CaseID, ControllerName = "Secretary"})">房東資料</a>
+                                                                        <a class="dropdown-item" href="@Url.Action("Tenant", "Form", new { CaseID = item.CaseID, ControllerName = "Secretary"})">房客資料</a>
+                                                                        <a class="dropdown-item" href="@Url.Action("Secretary", "Form", new { CaseID = item.CaseID, ControllerName = "Secretary"})">秘書填寫</a>
                                                                         <a class="dropdown-item" href="@Url.Action("Uploads", "Form", new { FormID = item.FormID, ControllerName = "Secretary"})">附件上傳</a>
-                                                                        <a class="dropdown-item" href="@Url.Action("ReadForm", "Form", new { FormID = item.FormID, ControllerName = "Secretary"})" target="_blank">表單閱覽</a>
-                                                                        <a class="dropdown-item" onclick="exportfile('@item.FormID')">文件匯出</a>
-                                                                        <a class="dropdown-item" onclick="exportjson('@item.FormID')">匯出實價登入</a>
+                                                                        <a class="dropdown-item" href="@Url.Action("ReadForm", "Form", new { CaseID = item.CaseID, ControllerName = "Secretary"})" target="_blank">表單閱覽</a>
+                                                                        @if (item.FormType == 1 || item.FormType == 3)
+                                                                        {
+                                                                            @*秘書處理中*@
+                                                                            <a class="dropdown-item" onclick="exportfile('@item.CaseID')">文件匯出</a>
+                                                                            <a class="dropdown-item" onclick="exportjson('@item.CaseID')">匯出實價登入</a>
+                                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#FinishModal" data-caseid="@item.CaseID">結案</a>
+                                                                        }
+                                                                        else if (item.FormType == 2 || item.FormType == -1)
+                                                                        {
+                                                                            @*已結案(總表)*@
+                                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UploadScanModal" data-formid="@item.FormID">上傳掃描檔案</a>
+                                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#RenewModal" data-caseid="@item.CaseID" data-renewtype="renew">新增續約</a>
+                                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#RenewModal" data-caseid="@item.CaseID" data-renewtype="new">產生新表單</a>
+                                                                        }
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -110,6 +149,8 @@
 
 @section scripts
 {
+    @*select2*@
+    <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/select2/select2.bundle.js"></script>
     @*sweetalert2*@
     <script src="~/Content/sweetalert2/sweetalert2.min.js"></script>
     <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/datagrid/datatables/datatables.bundle.js"></script>
@@ -146,7 +187,7 @@
             $('#dt-basic-example').dataTable(
                 {
                     //響應式設計
-                    //"pageLength" : 50,
+                    "pageLength" : 100,
                     responsive: true,
                     //定義工具欄和元素的布局結構
                     dom: "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'B>>" +
@@ -160,12 +201,6 @@
                             titleAttr: 'Col visibility',
                             className: 'btn-outline-default'
                         },
-                        //{
-                        //    extend: 'csvHtml5',
-                        //    text: 'CSV',
-                        //    titleAttr: 'Generate CSV',
-                        //    className: 'btn-outline-default'
-                        //},
                         {
                             extend: 'copyHtml5',
                             text: 'Copy',
@@ -182,91 +217,364 @@
                     ],
                     "language": {
                         "emptyTable": "查無資料",
-                        //"info": "顯示 _START_ 到 _END_ 共 _TOTAL_ 筆資料", // 自定义的数据信息文本
-                        // 其他语言选项...
                     }
-                    //定義每列的屬性和操作
-                    //columnDefs: [
-                    //    {
-                    //        //目標列為倒數第一列
-                    //        targets: -1,
-                    //        //空的標題
-                    //        title: '',
-                    //        //不可排序
-                    //        orderable: false,
-                    //        //自定義內容
-                    //        ///在渲染函數中，通過字符串產生了一段HTML碼，其中包刮"刪除"和"更多選項"的按鈕，
-                    //        ///刪除按鈕允許用戶刪除紀錄，更多選項按鈕則打開一個下拉選單，其中包含一些額外的操作選項，如更換狀態和生成報告
-                    //        render: function (data, type, full, meta) {
-
-
-                    //            //-- ES6
-                    //            //-- convert using https://babeljs.io online transpiler
-                    //            return `
-                    //            <a href='javascript:void(0);' class='btn btn-sm btn-icon btn-outline-danger rounded-circle mr-1' title='Delete Record'>
-                    //                <i class="fal fa-times"></i>
-                    //            </a>
-                    //            <div class='dropdown d-inline-block dropleft '>
-                    //                <a href='#'' class='btn btn-sm btn-icon btn-outline-primary rounded-circle shadow-0' data-toggle='dropdown' aria-expanded='true' title='More options'>
-                    //                    <i class="fal fa-ellipsis-v"></i>
-                    //                </a>
-                    //                <div class='dropdown-menu'>
-                    //                    <a class='dropdown-item' href='javascript:void(0);'>編輯表單</a>
-                    //                    <a class='dropdown-item' href='javascript:void(0);'>匯出Word表單</a>
-                    //                </div>
-                    //            </div>`;
-
-                    //            //ES5 example below:
-
-
-                    //            //return "\n\t\t\t\t\t\t<a href='javascript:void(0);' class='btn btn-sm btn-icon btn-outline-danger rounded-circle mr-1' title='Delete Record'>\n\t\t\t\t\t\t\t<i class=\"fal fa-times\"></i>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t\t<div class='dropdown d-inline-block dropleft'>\n\t\t\t\t\t\t\t<a href='#'' class='btn btn-sm btn-icon btn-outline-primary rounded-circle shadow-0' data-toggle='dropdown' aria-expanded='true' title='More options'>\n\t\t\t\t\t\t\t\t<i class=\"fal fa-ellipsis-v\"></i>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<div class='dropdown-menu'>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>編輯表單</a>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>匯出Word表單</a>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>";
-                    //        },
-                    //    },
-
-                    //]
-
                 });
+
+            var radioElement = document.querySelectorAll('input[name="formtype"]');
+            radioElement.forEach(function (radio) {
+                radio.addEventListener('change', function () {
+                    $('#formtypeSelect').submit();
+                })
+            })
+
         });
-
+        //匯出Word檔
         function exportfile(FormID) {
-            console.log('%c' + FormID, 'color: orange; font-size:24px');
-            @*if (confirm('確認將案件 : ' + FormID + ' 取回處理?')) {
-                $.ajax({
-                    type: "POST",
-                    data: { FormID: FormID },
-                    url: '@Url.Content("~/Secretary/ExportWord")',
-                }).done(function (result){
-                    // 触发文件下载
-                    var a = document.createElement('a');
-                    a.href = result.fileUrl; // result.fileUrl 是后端返回的文件URL
-                    a.download = result.fileName; // result.fileName 是后端返回的文件名
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                });
-            }*@
-
             $('#jqform').val(FormID);
             $('#hiddenForm').submit();
             return;
         }
-
+        //匯出實價登入Json
         function exportjson(FormID) {
             $('#jqform2').val(FormID);
             $('#hiddenForm2').submit();
             return;
         }
+
+        //結案
+        $('#FinishModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var caseid = button.data('caseid')
+
+            var modal = $(this)
+            modal.find('#ModalCaseID').val(caseid)
+        })
+
+        //新增續約
+        $('#RenewModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var caseid = button.data('caseid')
+            var type = button.data('renewtype');
+            
+            // 取得所有帶有 "myCheckbox" 類別的 checkbox
+            var checkboxes = document.querySelectorAll('.renewcheckbox');
+            if (type == 'renew') {
+
+                // 迭代所有 checkbox，設置為 checked 並 readonly
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = true;
+                    checkbox.setAttribute('readonly', 'readonly');
+                });
+            }
+            else {
+                // 迭代所有 checkbox，設置為 checked 並 readonly
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = false;
+                    checkbox.removeAttribute('readonly');
+                });
+            }
+
+            var modal = $(this)
+            modal.find('#RenewCaseID').val(caseid)
+            modal.find('#renewtype').val(type)
+        })
+
+        //上傳檔案
+        $('#UploadScanModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var formid = button.data('formid')
+
+            var modal = $(this)
+            modal.find('#UploadFormID').val(caseid)
+
+            //查詢檔案
+            $.ajax({
+                url: '@Url.Action("SearchFile", "Form")',                        // url位置
+                type: 'post',                   // post/get
+                dataType: 'json',
+                data: {
+                    FormID: formid,
+                },       // 輸入的資料
+                error: function (xhr) {
+                    console.log(xhr.responseText);
+                },      // 錯誤後執行的函數
+                success: function (response) {
+                    if (response !== 'nodata') {
+                        var tableHtml = '<table class="table table-hover text-nowrap table-bordered">';
+                        tableHtml += '<thead><tr style="text-align:center; vertical-align:middle; background-color:#99ccff;"><th style=" width:60px;">編號</th> <th>檔案名稱</th> <th style="text-align:center; vertical-align:middle; width:60px;">操作</th></tr></thead>';
+                        tableHtml += '<tbody>';
+                        var fileNameList = JSON.parse(response.FileName);
+                        var fileAliasList = JSON.parse(response.File_Name_Alias);
+                        for (var i = 0; i < fileNameList.length; i++) {
+                            var filename = fileNameList[i];
+                            var filealias = fileAliasList[i];
+                            var serialnumber = i + 1;
+
+                            var buttonstring = '';
+                            buttonstring = '</td><td style="text-align:center; vertical-align:middle;"><button type="button" class="btn btn-danger waves-effect waves-themed" onclick="deletefile(\'' + caseid + '\', \'' + filealias + '\')")>刪除</button></td></tr>';
+
+                            tableHtml += '<tr><td style="text-align:center; vertical-align:middle;">' + serialnumber + '<td>'
+                                + filename
+                                + '&nbsp;<button class="btn btn-light btn-sm" type="button" onclick="downloadfile(\'' + filealias + '\')"><i class="fa fa-download"></i></button>'
+                                + buttonstring;
+
+                        }
+                        tableHtml += '</tbody></table>';
+
+                        document.getElementById('filenameSpace').innerHTML = tableHtml;
+
+                        var button = document.getElementById('modalleave'); // 将 'your-button-id' 替换为按钮的实际 ID
+                        button.onclick = function () {
+                            location.reload();
+                        };
+                    }
+                    else {
+                        $('input[name="useforRadio"]').trigger('change');
+                        document.getElementById('filenameSpace').innerHTML = "";
+                    }
+                }// 成功後要執行的函數
+            });
+        })
+
+        //刪除檔案
+        function deletefile(caseid, filealias) {
+            if (confirm('確認刪除檔案?')) {
+                        $.ajax({
+                            url: '@Url.Action("DeleteFile", "Form")',                        // url位置
+                            type: 'post',                   // post/get
+                            dataType: 'json',
+                            data: {
+                                FormID: caseid,
+                                FileAlias: filealias,
+                                FileType: 'scanfile',
+                            },       // 輸入的資料
+                            error: function (xhr) {
+                                console.log(xhr.responseText);
+                            },      // 錯誤後執行的函數
+                            success: function (response) {
+                                if (response !== 'nodata') {
+                                    var tableHtml = '<table class="table table-hover text-nowrap table-bordered">';
+                                    tableHtml += '<thead><tr style="text-align:center; vertical-align:middle; background-color:#99ccff;"><th style=" width:60px;">編號</th> <th>檔案名稱</th> <th style="text-align:center; vertical-align:middle; width:60px;">操作</th></tr></thead>';
+                                    tableHtml += '<tbody>';
+
+                                    var fileNameList = JSON.parse(response.FileName);
+                                    var fileAliasList = JSON.parse(response.File_Name_Alias);
+                                    for (var i = 0; i < fileNameList.length; i++) {
+                                        var filename = fileNameList[i];
+                                        var filealias = fileAliasList[i];
+                                        var serialnumber = i + 1;
+
+                                        var buttonstring = '';
+                                        buttonstring = '</td><td style="text-align:center; vertical-align:middle;"><button type="button" class="btn btn-danger waves-effect waves-themed" onclick="deletefile(\'' + caseid + '\', \'' + filealias + '\')")>刪除</button></td></tr>';
+
+                                        tableHtml += '<tr><td style="text-align:center; vertical-align:middle;">' + serialnumber + '<td>'
+                                            + filename
+                                            + '&nbsp;<button class="btn btn-light btn-sm" type="button" onclick="downloadfile(\'' + filealias + '\')"><i class="fa fa-download"></i></button>'
+                                            + buttonstring;
+
+                                    }
+                                    tableHtml += '</tbody></table>';
+
+                                    document.getElementById('filenameSpace').innerHTML = tableHtml;
+
+                                    var button = document.getElementById('modalleave'); // 将 'your-button-id' 替换为按钮的实际 ID
+                                    button.onclick = function () {
+                                        location.reload();
+                                    };
+                                }
+                                else {
+                                    $('input[name="useforRadio"]').trigger('change');
+                                    document.getElementById('filenameSpace').innerHTML = "";
+                                }
+                            }// 成功後要執行的函數
+                        });
+            }
+        };
+
+        //下載檔案
+        function downloadfile(filealias) {
+            $('#hidfilealias').val(filealias);
+            $('#hidpath').val('Form');
+
+            $('#HiddenDownloadFile').submit();
+        };
+
     </script>
 }
-
+<!--匯出Word檔-->
 @using (Html.BeginForm("ExportWord", "Secretary", FormMethod.Post, new { id = "hiddenForm", style = "display:none;" }))
 {
-    @Html.Hidden("FormID", "0", new { id = "jqform" })
+    @Html.Hidden("CaseID", "0", new { id = "jqform" })
+}
+
+<!--匯出實價登入-->
+@using (Html.BeginForm("ExportJson", "Secretary", FormMethod.Post, new { id = "hiddenForm2", style = "display:none;" }))
+{
+    @Html.Hidden("CaseID", "0", new { id = "jqform2" })
     <!-- 添加更多的隐藏字段 -->
 }
 
-@using (Html.BeginForm("ExportJson", "Secretary", FormMethod.Post, new { id = "hiddenForm2", style = "display:none;" }))
+@*Hidden form for Downlod(Download.onclick)*@
+@using (Html.BeginForm("Download", "Form", FormMethod.Post, new { @id = "HiddenDownloadFile" }))
 {
-    @Html.Hidden("FormID", "0", new { id = "jqform2" })
-    <!-- 添加更多的隐藏字段 -->
+    @Html.Hidden("FileName", "-1", new { @id = "hidfilename" })
+    @Html.Hidden("FileAlias", "-1", new { @id = "hidfilealias" })
+    @Html.Hidden("Path", "-1", new { @id = "hidpath" })
 }
+
+
+<!-- Close the Case -->
+<div class="modal fade" id="FinishModal" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span class="font-weight-bolder">結案資料填寫</span>
+                    <small class="m-0 text-muted">
+                        提交前請再次檢查填寫是否正確。
+                    </small>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                </button>
+            </div>
+            @using (Html.BeginForm("CaseManage", "Secretary", FormMethod.Post, new { @formtype = ViewBag.FormType, @casetype = ViewBag.CaseType }))
+            {
+                <div class="modal-body">
+                    @*表單編號*@
+                    <div class="form-group">
+                        <label class="form-label" for="Name">表單編號</label>
+                        <input type="text" id="ModalCaseID" name="oldCaseID" class="form-control" value="" readonly required>
+                    </div>
+                    @*媒合編號*@
+                    <div class="form-group">
+                        <label class="form-label" for="Account">媒合編號</label>
+                        <input type="text" id="CaseID" name="CaseID" class="form-control" value="" required>
+                    </div>
+                    @*房東編號*@
+                    <div class="form-group">
+                        <label class="form-label" for="Department">房東編號</label>
+                        <input type="text" id="LandlordID" name="LandlordID" class="form-control" value="" required>
+                    </div>
+                    @*房客編號*@
+                    <div class="form-group">
+                        <label class="form-label" for="Position">房客編號</label>
+                        <input type="text" id="TenantID" name="TenantID" class="form-control" value="" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">離開</button>
+                    <button type="submit" class="btn btn-primary">提交結案</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Upload CloseCase PDF -->
+<div class="modal fade" id="UploadScanModal" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span class="font-weight-bolder">結案資料填寫</span>
+                    <small class="m-0 text-muted">
+                        提交前請再次檢查填寫是否正確。
+                    </small>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                </button>
+            </div>
+            @using (Html.BeginForm("UploadPDF", "Secretary", FormMethod.Post, new { @class = "needs-validation", @enctype = "multipart/form-data" }))
+            {
+                <div class="modal-body">
+                    @*表單編號*@
+                    <div class="form-group">
+                        <label class="form-label">表單編號</label>
+                        <input type="text" id="UploadFormID" name="FormID" class="form-control" value="" readonly required>
+                    </div>
+                    @*上傳掃描檔*@
+                    <div class="form-group mt-3" id="modalfile">
+                        <label for="InputFile">上傳掃描檔</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="PDFFile" name="PDFFile" multiple accept=".pdf" required>
+                                <label class="custom-file-label" for="InputFile">請選擇附件</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">離開</button>
+                    <button type="submit" class="btn btn-primary">上傳</button>
+                </div>
+                <div class="form-group" id="filenameSpace">
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+<!-- Renew Contract -->
+<div class="modal fade" id="RenewModal" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span class="font-weight-bolder">結案資料填寫</span>
+                    <small class="m-0 text-muted">
+                        提交前請再次檢查填寫是否正確。
+                    </small>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                </button>
+            </div>
+            @using (Html.BeginForm("RenewContract", "Secretary", FormMethod.Post))
+            {
+                <div class="modal-body">
+                    @*表單編號*@
+                    <div class="form-group">
+                        <label class="form-label">媒合編號</label>
+                        <input type="text" id="RenewCaseID" name="CaseID" class="form-control" value="" readonly required>
+                    </div>
+                    @*表單編號*@
+                    <div class="form-group">
+                        <input type="text" id="renewtype" name="renewType" class="form-control" value="" hidden>
+                    </div>
+                    @*選擇要建立的資料*@
+                    <div class="frame-wrap">
+                        <div class="demo">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="selectObjectForm" value="true"  name="selectObjectForm" checked >
+                                <label class="custom-control-label" for="selectObjectForm">物件資料</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input renewcheckbox" value="true" id="selectlandlord" name="selectlandlord">
+                                <label class="custom-control-label" for="selectlandlord">房東資料</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input renewcheckbox" value="true"  id="selecttenant" name="selecttenant">
+                                <label class="custom-control-label" for="selecttenant">房客資料</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input renewcheckbox" value="true"  id="selectsecretary" name="selectsecretary">
+                                <label class="custom-control-label" for="selectsecretary">秘書填寫</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">離開</button>
+                    <button type="submit" class="btn btn-primary">上傳</button>
+                </div>
+                <div class="form-group" id="filenameSpace">
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+

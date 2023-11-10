@@ -1,8 +1,0 @@
-.list-group-item {
-  border: $list-group-border-width solid rgba(var(--theme-rgb-primary), 0.15);
-  &.active {
-    background-color: $primary-500;
-    border-color: $primary-500;
-  }
-
-}

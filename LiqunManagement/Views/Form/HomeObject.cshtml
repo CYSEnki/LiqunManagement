@@ -8,6 +8,8 @@
     var ErrorMessage = ViewBag.ErrorMessage != null ? ViewBag.ErrorMessage : "";
     var ControllerName = @ViewBag.ControllerName;
 
+    //合約期數
+    var phase = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.Phase.ToString() : "";
     //包租:1; 代管:0
     var objecttypeValue = Model.homeobjectviewmodel != null ? Model.homeobjectviewmodel.objecttype.ToString() : "";
     //[是否公證]0:無公證; 1:是公證
@@ -139,11 +141,26 @@
                 <div class="panel-container show">
                     <div class="panel-content">
 
-                        @using (Html.BeginForm("HomeObject", "Form", FormMethod.Post, new {@id="jqform", @class = "needs-validation", @enctype = "multipart/form-data", @novalidate = "" }))
+                        @using (Html.BeginForm("HomeObject", "Form", FormMethod.Post, new { @id = "jqform", @class = "needs-validation", @enctype = "multipart/form-data", @novalidate = "" }))
                         {
                             @*表單編號*@
                             <input type="text" name="FormID" hidden />
                             <input type="text" name="ControllerName" hidden />
+                            @*期數*@
+                            <div class="form-group">
+                                <label class="form-label">案件期數</label>
+                                <span class="text-danger">*</span>
+                                <div class="row">
+                                    <div class="col-lg-4 pt-3">
+                                        <select class="custom-select form-control" id="selectphase" name="Phase" required>
+                                            <option value="" selected=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            請選擇期數
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             @*包租或代管*@
                             <div class="form-group">
                                 <label class="form-label">
@@ -617,6 +634,16 @@
             $('.park_morclass').hide();
 
             //------------------
+            // 期數下拉選單  *
+            //------------------
+            var phasearray = @Html.Raw(ViewBag.phaselist);
+            $('#selectphase').select2({
+                data: phasearray,
+                placeholder: '選擇期數'
+            });
+
+
+            //------------------
             // 物件地址下拉選單  *
             //------------------
             var cityarray = @Html.Raw(@ViewBag.citylist);
@@ -968,18 +995,29 @@
             var formid = '@FormID';
             if (formid !== '') {
                 $('input[name="FormID"]').val(formid);
+                //表單期數
+                var phase = '@phase';
+                if (phase !== '') {
+                    $('#selectphase').val('@phase').trigger('change');
+                }
                 //包租:1; 代管:0
                 var objecttypeValue = '@objecttypeValue';
-                $('input[name="objecttypeRadio"][value="' + objecttypeValue + '"]').prop('checked', true);
+                if (objecttypeValue !== '') {
+                    $('input[name="objecttypeRadio"][value="' + objecttypeValue + '"]').prop('checked', true);
+                }
                 //[是否公證]0:無公證; 1:是公證
                 var notarizationValue = '@notarizationValue';
-                $('input[name="notarizationRadio"][value="' + notarizationValue + '"]').prop('checked', true);
+                if (notarizationValue !== '') {
+                    $('input[name="notarizationRadio"][value="' + notarizationValue + '"]').prop('checked', true);
+                }
                 //簽約日
                 var signdate = new Date('@signdate');
                 $('input[name="signdate"]').datepicker("setDate", signdate);
                 //[是否簽估價師] 0:無估價師; 1:簽估價師
                 var appraiserValue = '@appraiserValue';
-                $('input[name="appraiserRadio"][value="' + appraiserValue + '"]').prop('checked', true);
+                if (appraiserValue !== '') {
+                    $('input[name="appraiserRadio"][value="' + appraiserValue + '"]').prop('checked', true);
+                }
                 //特色
                 var feature = '@feature';
                 if (feature !== '') {
@@ -989,25 +1027,33 @@
                 //物件地址
                 //鄉鎮市區DDL
                 var jsonDistrict = '@jsonDistrict';
-                var districtArray = JSON.parse(jsonDistrict);
-                $('#selectdistrict').empty().select2({ data: districtArray});
+                if (jsonDistrict !== '') {
+                    var districtArray = JSON.parse(jsonDistrict);
+                    $('#selectdistrict').empty().select2({ data: districtArray });
+                }
                 //道路DDL
                 var jsonRoad = '@jsonRoad';
-                var roadArray = JSON.parse(jsonRoad);
-                $('#selectroad').empty().select2({ data: roadArray });
-                //取消body上的change綁定事件
-                $('body').off('change', '.select2_city');
-                $('body').off('change', '.select2_district');
-                $('#selectcity').val('@citycodeValue').trigger('change');
-                $('#selectdistrict').val('@districtcodeValue').trigger('change');
-                $('#selectroad').val('@roadcodeValue').trigger('change');
+                if (jsonRoad !== '') {
+                    var roadArray = JSON.parse(jsonRoad);
+                    $('#selectroad').empty().select2({ data: roadArray });
+                    //取消body上的change綁定事件
+                    $('body').off('change', '.select2_city');
+                    $('body').off('change', '.select2_district');
+                    $('#selectcity').val('@citycodeValue').trigger('change');
+                    $('#selectdistrict').val('@districtcodeValue').trigger('change');
+                    $('#selectroad').val('@roadcodeValue').trigger('change');
+                }
                 //物件地址(詳細地址)
                 var AddressDetail = '@AddressDetail';
-                $('input[name="AddressDetail"]').val(AddressDetail);
+                if (AddressDetail !== '') {
+                    $('input[name="AddressDetail"]').val(AddressDetail);
+                }
 
                 //[主要用途]0:住家用; 1:商業用; 2:辦公室; 3:一般事務所 4: 其他
                 var useforValue = '@useforValue';
-                $('input[name="useforRadio"][value="' + useforValue + '"]').prop('checked', true);
+                if (useforValue !== '') {
+                    $('input[name="useforRadio"][value="' + useforValue + '"]').prop('checked', true);
+                }
                 //[主要用途]其他
                 var useforelse = '@useforelse';
                 if (useforelse !== '') {
@@ -1040,79 +1086,85 @@
 
                 //[建物型態]0:透天厝; 1:公寓; 2:華夏; 3:電梯大樓
                 var buildtypeValue = '@buildtypeValue';
-                $('input[name="buildtypeRadio"][value="' + buildtypeValue + '"]').prop('checked', true);
+                if (buildtypeValue !== '') {
+                    $('input[name="buildtypeRadio"][value="' + buildtypeValue + '"]').prop('checked', true);
+                }
                 //[房型]0:整層出租; 1:獨立套房
                 var roomtypeValue = '@roomtypeValue';
-                $('input[name="roomtypeRadio"][value="' + roomtypeValue + '"]').prop('checked', true);
-                if (roomtypeValue === '0') {
-                    var roomamountlist = JSON.parse('@roomamount');
-                    for (var i = 0; i < roomamountlist.length; i++) {
-                        var roomelement = $('[data-index="' + i + '"].roomtypeamount');
-                        roomelement.val(roomamountlist[i]);
+                if (roomtypeValue !== '') {
+                    $('input[name="roomtypeRadio"][value="' + roomtypeValue + '"]').prop('checked', true);
+                    if (roomtypeValue === '0') {
+                        var roomamountlist = JSON.parse('@roomamount');
+                        for (var i = 0; i < roomamountlist.length; i++) {
+                            var roomelement = $('[data-index="' + i + '"].roomtypeamount');
+                            roomelement.val(roomamountlist[i]);
+                        }
+                    } else {
+                        //獨立套房
+                        $('#jqroomamount').val('套');
+                        $('#jqhallamount').val('X');
+                        $('#jqbathamount').val('X');
+                        $('.roomtypeamount').prop('required', false);
+                        $('.roomtypeamount').prop('disabled', true);
+                        $('.roomtypeamount').prop('readonly', true);
                     }
-                } else {
-                    //獨立套房
-                    $('#jqroomamount').val('套');
-                    $('#jqhallamount').val('X');
-                    $('#jqbathamount').val('X');
-                    $('.roomtypeamount').prop('required', false);
-                    $('.roomtypeamount').prop('disabled', true);
-                    $('.roomtypeamount').prop('readonly', true);
                 }
 
                 //是否有車位
-                var haveparklist = JSON.parse('@havepark');
-
-                const nopark = document.querySelector('input[aria-label="無車位"]');
-                const carpark = document.querySelector('input[aria-label="汽車車位"]');
-                const morpark = document.querySelector('input[aria-label="機車車位"]');
-                if (havepark[0] === 1) {
-                    nopark.checked = true;
-                }
-                if (haveparklist[1] === 1) {
-                    nopark.checked = false;
-                    carpark.checked = true;
-                    $('.park_carclass').show();
-
-                    //[汽車車位樣式]0:坡道平面; 1:坡道機械; 2: 機械平面; 3:機械機械
-                    var parktypeValue = '@parktypeValue';
-                    $('input[name="parktypeRadio"][value="' + parktypeValue + '"]').prop('checked', true);
-                    //[車位位於]: 陣列[(地上:1; 地下:0;),  (樓數)]
-                    var parkfloorlist = JSON.parse('@parkfloor');
-                    $('input[name="carparkfloorRadio"][value="' + parkfloorlist[0] + '"]').prop('checked', true);
-                    $('#parkfloornumber').val(parkfloorlist[1]);
-                    //[車位編號]
-                    var carpositionnumber = '@carpositionnumber';
-                    if (carpositionnumber !== '') {
-                        $('#carpositionnumber').val(carpositionnumber);
+                var haveparkstring = '@havepark';
+                if (haveparkstring !== '') {
+                    var haveparklist = JSON.parse('@havepark');
+                    const nopark = document.querySelector('input[aria-label="無車位"]');
+                    const carpark = document.querySelector('input[aria-label="汽車車位"]');
+                    const morpark = document.querySelector('input[aria-label="機車車位"]');
+                    if (havepark[0] === 1) {
+                        nopark.checked = true;
                     }
-                    //[汽車月租金]
-                    var carmonthrentValue = '@carmonthrentValue';
-                    $('#carmonthrent').val(carmonthrentValue);
-                    //[汽車停車管理費]
-                    var carparkmanagefeeValue = '@carparkmanagefeeValue';
-                    $('#carparkmanagefee').val(carparkmanagefeeValue);
-                }
-                if (haveparklist[2] === 1) {
-                    nopark.checked = false;
-                    morpark.checked = true;
-                    $('.park_morclass').show();
+                    if (haveparklist[1] === 1) {
+                        nopark.checked = false;
+                        carpark.checked = true;
+                        $('.park_carclass').show();
 
-                    //[機車位位於]: 陣列[(地上:1; 地下:0;),  (樓數)]
-                    var scooterparkfloorlist = JSON.parse('@scooterparkfloor');
-                    $('input[name="scooterparkfloorRadio"][value="' + scooterparkfloorlist[0] + '"]').prop('checked', true);
-                    $('#scooterparkfloornumber').val(scooterparkfloorlist[1]);
-                    //[機車位編號]
-                    var scooterpositionnumber = '@scooterpositionnumber';
-                    if (scooterpositionnumber !== '') {
-                        $('#morpositionnumber').val(scooterpositionnumber);
+                        //[汽車車位樣式]0:坡道平面; 1:坡道機械; 2: 機械平面; 3:機械機械
+                        var parktypeValue = '@parktypeValue';
+                        $('input[name="parktypeRadio"][value="' + parktypeValue + '"]').prop('checked', true);
+                        //[車位位於]: 陣列[(地上:1; 地下:0;),  (樓數)]
+                        var parkfloorlist = JSON.parse('@parkfloor');
+                        $('input[name="carparkfloorRadio"][value="' + parkfloorlist[0] + '"]').prop('checked', true);
+                        $('#parkfloornumber').val(parkfloorlist[1]);
+                        //[車位編號]
+                        var carpositionnumber = '@carpositionnumber';
+                        if (carpositionnumber !== '') {
+                            $('#carpositionnumber').val(carpositionnumber);
+                        }
+                        //[汽車月租金]
+                        var carmonthrentValue = '@carmonthrentValue';
+                        $('#carmonthrent').val(carmonthrentValue);
+                        //[汽車停車管理費]
+                        var carparkmanagefeeValue = '@carparkmanagefeeValue';
+                        $('#carparkmanagefee').val(carparkmanagefeeValue);
                     }
-                    //[機車位月租金]
-                    var scootermonthrent = '@scootermonthrent';
-                    $('#scootermonthrent').val(scootermonthrent);
-                    //[機車停車管理費]
-                    var scootermanagefee = '@scootermanagefee';
-                    $('#scootermanagefee').val(scootermanagefee);
+                    if (haveparklist[2] === 1) {
+                        nopark.checked = false;
+                        morpark.checked = true;
+                        $('.park_morclass').show();
+
+                        //[機車位位於]: 陣列[(地上:1; 地下:0;),  (樓數)]
+                        var scooterparkfloorlist = JSON.parse('@scooterparkfloor');
+                        $('input[name="scooterparkfloorRadio"][value="' + scooterparkfloorlist[0] + '"]').prop('checked', true);
+                        $('#scooterparkfloornumber').val(scooterparkfloorlist[1]);
+                        //[機車位編號]
+                        var scooterpositionnumber = '@scooterpositionnumber';
+                        if (scooterpositionnumber !== '') {
+                            $('#morpositionnumber').val(scooterpositionnumber);
+                        }
+                        //[機車位月租金]
+                        var scootermonthrent = '@scootermonthrent';
+                        $('#scootermonthrent').val(scootermonthrent);
+                        //[機車停車管理費]
+                        var scootermanagefee = '@scootermanagefee';
+                        $('#scootermanagefee').val(scootermanagefee);
+                    }
                 }
                 //重設Requiired屬性
                 $('input[aria-label="無車位"]').prop('required', false);
@@ -1120,26 +1172,29 @@
                 $('input[aria-label="機車車位"]').prop('required', false);
 
                 //房屋附屬物件
-                var Accessorylist = JSON.parse('@Accessory');
-                for (var i = 0; i <= Accessorylist.length; i++) {
+                var Accessoryliststring = '@Accessory';
+                if (Accessoryliststring !== '') {
+                    var Accessorylist = JSON.parse('@Accessory');
+                    for (var i = 0; i <= Accessorylist.length; i++) {
 
-                    if (Accessorylist[i] === 0) {
-                        $('[data-option = "0"][data-edit="' + i + '"].accessory_option').prop('checked', true);
-                        $('[data-edit="' + i + '"].accessoryInput').val(Accessorylist[i]);
-                        $('[data-edit="' + i + '"].accessoryInput').prop('readonly', true);
-                    }
-                    else {
-                        $('[data-option = "1"][data-edit="' + i + '"].accessory_option').prop('checked', true);
-                        $('[data-edit="' + i + '"].accessoryInput').val(Accessorylist[i]);
-                        if (i > 6) {
-                            $('[data-edit="' + i + '"].accessoryInput').prop('readonly', false);
+                        if (Accessorylist[i] === 0) {
+                            $('[data-option = "0"][data-edit="' + i + '"].accessory_option').prop('checked', true);
+                            $('[data-edit="' + i + '"].accessoryInput').val(Accessorylist[i]);
+                            $('[data-edit="' + i + '"].accessoryInput').prop('readonly', true);
                         }
-                        if (i == 4 || i == 5) {
-                            $('[data-edit="45"].accessoryInput').val(Accessorylist[i]);
+                        else {
+                            $('[data-option = "1"][data-edit="' + i + '"].accessory_option').prop('checked', true);
+                            $('[data-edit="' + i + '"].accessoryInput').val(Accessorylist[i]);
+                            if (i > 6) {
+                                $('[data-edit="' + i + '"].accessoryInput').prop('readonly', false);
+                            }
+                            if (i == 4 || i == 5) {
+                                $('[data-edit="45"].accessoryInput').val(Accessorylist[i]);
+                            }
                         }
                     }
+
                 }
-
                 //備註
                 var memo = '@memo';
                 if (memo !== '') {

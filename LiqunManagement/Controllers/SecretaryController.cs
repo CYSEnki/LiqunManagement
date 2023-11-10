@@ -17,6 +17,9 @@ using NPOI.Util;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using static System.Net.WebRequestMethods;
+using LiqunManagement.Services;
+using DocumentFormat.OpenXml.Drawing.Charts;
+using System.Web.Services.Description;
 
 namespace LiqunManagement.Controllers
 {
@@ -29,8 +32,14 @@ namespace LiqunManagement.Controllers
         }
 
         #region 管理案件(秘書)
+        /// <summary>
+        /// 秘書審查中，完搞
+        /// </summary>
+        /// <param name="formtype">-1(解約) 0(業務起單中) 1(秘書審查中) 2(結案，合約履行中) 3(續約中)</param>
+        /// <param name="casetype">0(擬稿中) 1(完稿)</param>
+        /// <returns></returns>
         [HttpGet]
-        public ActionResult CaseManage()
+        public ActionResult CaseManage(int formtype = 1, int casetype = 1)
         {
             var ErrorMessage = TempData["ErrorMessage"];
             ViewBag.ErrorMessage = ErrorMessage != null ? ErrorMessage.ToString() : "";
@@ -54,10 +63,10 @@ namespace LiqunManagement.Controllers
                 ViewBag.Position = EmployeeData.Position;       //使用者職位
             }
             //確認角色
-            var role = User.IsInRole("Admin");
+            var admin = User.IsInRole("Admin");
             ViewBag.Role = User.IsInRole("Admin") ? "Admin" : User.IsInRole("Agent") ? "Agent" : User.IsInRole("Secretary") ? "Secretary" : "";
             #endregion
-
+            ViewBag.FormType = formtype;
             var membersdata = (from mem in memberdb.Members
                                select new
                                {
@@ -65,7 +74,7 @@ namespace LiqunManagement.Controllers
                                    Name = mem.Name,
                                }).ToList();
 
-            var ObjectFormData = (from objform in formdb.ObjectForm.Where(x => x.FormType == 1)
+            var ObjectFormData = (from objform in formdb.ObjectForm.Where(x => x.FormType == formtype)
                                   select new objectFormViewModel
                                   {
                                       FormID = objform.FormID,
@@ -73,10 +82,10 @@ namespace LiqunManagement.Controllers
                                       ProcessName = objform.ProcessName,
                                       ProcessAccount = objform.ProcessAccount,
                                       AgentAccount = objform.AgentAccount,
+                                      FormType = objform.FormType,
                                   }).AsEnumerable();
 
-
-            if (!role)
+            if (!admin && formtype == 1)
             {
                 //非系統管理員，找出該業務員的專門秘書(助理)為業務員
                 ObjectFormData = (from objform in ObjectFormData.Where(x => x.ProcessAccount == User.Identity.Name)
@@ -88,52 +97,111 @@ namespace LiqunManagement.Controllers
                                       AgentAccount = objform.AgentAccount,
                                       CreateTime = (DateTime)objform.CreateTime,
                                       ProcessName = (string)objform.ProcessName,
+                                      FormType = objform.FormType,
                                       AssistantAccount = emp0 != null ? emp0.AssistantAccount != null ? emp0.AssistantAccount : objform.ProcessAccount : objform.ProcessAccount,
                                   }).Where(x => x.AssistantAccount == User.Identity.Name).AsEnumerable();
             }
 
             var Formlist = from form in ObjectFormData
-                           join obj in formdb.HomeObject on form.FormID equals obj.FormID
-                           join lan in formdb.LandLord on form.FormID equals lan.FormID into temp1
+                           join obj in formdb.HomeObject.Where(x => x.CaseType == casetype) on form.FormID equals obj.FormID
+                           join lan in formdb.LandLord on obj.CaseID equals lan.CaseID into temp1
                            from land in temp1.DefaultIfEmpty()
-                           join ten in formdb.Tenant on form.FormID equals ten.FormID into temp2
+                           join ten in formdb.Tenant on obj.CaseID equals ten.CaseID into temp2
                            from tena in temp2.DefaultIfEmpty()
-                           join sec in formdb.Secretary on form.FormID equals sec.FormID into temp3
+                           join sec in formdb.Secretary on obj.CaseID equals sec.CaseID into temp3
                            from seca in temp3.DefaultIfEmpty()
                            join mem in membersdata on form.AgentAccount equals mem.Account
                            select new objectFormViewModel
                            {
-                               FormID = (string)form.FormID,
-                               CreateTime = (DateTime)form.CreateTime,
-                               AgentName = (string)mem.Name,
-                               ProcessName = (string)form.ProcessName,
-                               Address = (string)obj.fulladdress,
-                               SignDate = (DateTime)obj.signdate,
-                               Landlord = land != null ? land.Name : null,
-                               Tenant = tena != null ? tena.Name : null,
-                               ExistSecretaryForm = seca != null ? true : false,
+                               FormID = (string)form.FormID,                //表單編號
+                               CaseID = (string)obj.CaseID,                //媒合編號
+                               CreateTime = (DateTime)form.CreateTime,      //表單建立時間
+                               AgentName = (string)mem.Name,                //業務姓名
+                               ProcessName = (string)form.ProcessName,      //處理人員姓名(秘書姓名)
+                               Address = (string)obj.fulladdress,           //物件地址
+                               SignDate = (DateTime)obj.signdate,           //簽約日
+                               //SignDate = DateTime.Now,           //簽約日
+                               Landlord = land != null ? land.Name : null,  //房東姓名
+                               Tenant = tena != null ? tena.Name : null,    //房客姓名
+                               ExistSecretaryForm = seca != null ? true : false,    //是否已完成秘書填寫
+
+                               FormType = form.FormType,
+                               CaseType = obj.CaseType,
                            };
+            ViewBag.FormType = formtype;
+            ViewBag.CaseType = casetype;
 
             //ViewBag.Formlist = Formlist;
             var model = new FormViewModels
             {
                 objectformlist = Formlist,
             };
+            
 
             return View(model);
         }
+        //結案
+        /// <summary>
+        /// 以下編號為表單結案時，政府會配發編碼。
+        /// </summary>
+        /// <param name="FormID">表單編號</param>
+        /// <param name="CaseID">媒合編號</param>
+        /// <param name="LandlordID">房東編號</param>
+        /// <param name="TenantID">房客編號</param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult CaseManage(string FormID)
+        public ActionResult CaseManage(string oldCaseID, string CaseID, string LandlordID, string TenantID)
         {
+            var IsAdmin = User.IsInRole("Admin");
+
+            var FormID = formdb.HomeObject.Where(x => x.CaseID == oldCaseID).Select(x => x.FormID).FirstOrDefault();
+            var FormData = formdb.ObjectForm.Where(x => x.FormID == FormID).FirstOrDefault();
+            if (FormData == null || (FormData.ProcessAccount != User.Identity.Name && !IsAdmin))
+            {
+                TempData["ErrorMessage"] = "操作失敗，無操作權限或查無此表單資料，若重複發生請聯繫系統管理員。";
+                return RedirectToAction("CaseManage", "Secretary");
+            }
+
+            //變更表單狀態
             try
             {
-                //變更表單狀態
                 using (var context = new FormModels())
                 {
-                    //秘書領取表單
+                    //表單資料(設為結案)
                     var existform = context.ObjectForm.Where(x => x.FormID == FormID).FirstOrDefault();
-                    existform.AgentAccount = User.Identity.Name;
+                    var existhomeobject = context.HomeObject.Where(x => x.CaseID == oldCaseID).FirstOrDefault();
+                    var existlandlord = context.LandLord.Where(x => x.CaseID == oldCaseID).FirstOrDefault();
+                    var existtenant = context.Tenant.Where(x => x.CaseID == oldCaseID).FirstOrDefault();
+                    var existSecretary = context.Secretary.Where(x => x.CaseID == oldCaseID).FirstOrDefault();
+                    if(existform == null || existhomeobject == null || existlandlord == null || existtenant == null || existSecretary == null)
+                    {
+                        TempData["ErrorMessage"] = "資料未填寫完成，請檢查資料是否正確填寫。";
+                        return RedirectToAction("CaseManage", "Secretary");
+                    }
+
                     existform.FormType = 2;
+
+                    //物件資料(變更媒合編號)
+                    existhomeobject.CaseID = CaseID;
+                    existhomeobject.CaseType = 1;
+
+                    //房東資料(變更媒合編號)
+                    existlandlord.CaseID = CaseID;
+
+                    //房客資料(變更媒合編號)
+                    existtenant.CaseID = CaseID;
+
+
+                    //房東編號
+                    //房客編號
+                    if (existSecretary == null)
+                    {
+                        TempData["ErrorMessage"] = "操作失敗，請確認秘書資料已填寫完成。";
+                        return RedirectToAction("CaseManage", "Secretary");
+                    }
+                    existSecretary.LandlordID = LandlordID;
+                    existSecretary.TenantID = TenantID;
+                    existSecretary.CaseID = CaseID;
 
                     context.SaveChanges();
                 }
@@ -141,16 +209,126 @@ namespace LiqunManagement.Controllers
             }
             catch (Exception ex)
             {
-                var error = ex.ToString();
+                logger.Error("結案時發生錯誤:" + ex.ToString());
+                TempData["ErrorMessage"] = "操作失敗，儲存資料時系統錯誤，請告知系統管理員。";
+                return RedirectToAction("CaseManage", "Secretary", new { @formtype = 2, @casetype = 1 });
             }
-            return Json("successed");
+
+            //TempData["ErrorMessage"] = "完成結案。";
+            return RedirectToAction("CaseManage", "Secretary", new { @formtype = 2, @casetype = 1 });
+        }
+
+        //【總表】上傳掃描檔
+        [HttpPost]
+        public ActionResult UploadPDF(string FormID, IEnumerable<HttpPostedFileBase> PDFFile)
+        {
+            var IsAdmin = User.IsInRole("Admin");
+
+            var FormData = formdb.ObjectForm.Where(x => x.FormID == FormID).FirstOrDefault();
+            if (FormData == null || (FormData.ProcessAccount != User.Identity.Name && !IsAdmin))
+            {
+                TempData["ErrorMessage"] = "操作失敗，無操作權限或查無此表單資料，若重複發生請聯繫系統管理員。";
+                return RedirectToAction("CaseManage", "Secretary", new { @formtype = 2});
+            }
+
+            FileViewMode filemodel = new FileViewMode();
+            #region 存檔
+            FileService fileService = new FileService();
+            if (PDFFile != null && PDFFile.Any())
+            {
+                filemodel = fileService.SaveFile(FormID, "結案掃描檔", PDFFile, "Form", User.Identity.Name);
+                if (filemodel == null)
+                {
+                    TempData["ErrorMessage"] = "上傳檔案錯誤，請重新選擇檔案，若問題未解決，請尋求系統管理員協助。";
+                }
+            }
+            #endregion
+            return RedirectToAction("CaseManage", "Secretary", new { @formtype = 2 });
+        }
+
+        //【總表】新增續約
+        public ActionResult RenewContract(string CaseID, string renewType, string selectObjectForm, string selectlandlord, string selecttenant, string selectsecretary)
+        {
+            var HomeObject = formdb.HomeObject.Where(x => x.CaseID == CaseID).FirstOrDefault();
+            var Landlord = formdb.LandLord.Where(x => x.CaseID == CaseID).FirstOrDefault();
+            var TenantData = formdb.Tenant.Where(x => x.CaseID == CaseID).FirstOrDefault();
+            var Secretary = formdb.Secretary.Where(x => x.CaseID == CaseID).FirstOrDefault();
+
+            //var ObjectForm = formdb.ObjectForm.Where(x => x.FormID == HomeObject.FormID).FirstOrDefault();
+
+            //FormService formService = new FormService();
+            //var newformid = formService.GetNewFormID();
+            var guid = Guid.NewGuid().ToString();
+
+            var formtype = 0;
+            var casetype = 0;
+            using (var context = new FormModels())
+            {
+                if (renewType == "renew")
+                {
+                    var existobjectform = context.ObjectForm.Where(x => x.FormID == HomeObject.FormID).FirstOrDefault();
+                    existobjectform.FormType = 3;
+
+                    HomeObject.CaseType = 0;    //草稿
+                    HomeObject.CaseID = guid;
+                    context.HomeObject.Add(HomeObject);
+
+                    Landlord.CaseID = guid;
+                    context.LandLord.Add(Landlord);
+
+                    TenantData.CaseID = guid;
+                    context.Tenant.Add(TenantData);
+
+                    Secretary.CaseID = guid;
+                    Secretary.TenantID = "";
+                    context.Secretary.Add(Secretary);
+
+                    formtype = 3;
+                    casetype = 0;
+                }
+                else
+                {
+
+                    if (selectObjectForm != null)
+                    {
+                        var ObjectForm = formdb.ObjectForm.Where(x => x.FormID == HomeObject.FormID).FirstOrDefault();
+                        ObjectForm.FormType = 1;
+                        context.ObjectForm.Add(ObjectForm);
+
+                        HomeObject.CaseType = 1;    //草稿
+                        HomeObject.CaseID = guid;
+                        context.HomeObject.Add(HomeObject);
+                    }
+                    if (selectlandlord != null)
+                    {
+                        Landlord.CaseID = guid;
+                        context.LandLord.Add(Landlord);
+                    }
+                    if (selecttenant != null)
+                    {
+                        TenantData.CaseID = guid;
+                        context.Tenant.Add(TenantData);
+                    }
+                    if (selectsecretary != null)
+                    {
+                        Secretary.CaseID = guid;
+                        Secretary.TenantID = "";
+                        context.Secretary.Add(Secretary);
+                    }
+                    formtype = 1;
+                    casetype = 1;
+                }
+
+                context.SaveChanges();
+            }
+            return RedirectToAction("CaseManage","Secretary", new {@formtype = 3, @casetype = 0});
         }
         #endregion
 
         [HttpPost]
         [Obsolete]
         #region 匯出
-        public ActionResult ExportWord(string FormID)
+        public ActionResult ExportWord(string CaseID)
         {
             logger.Info("匯出Word表單");
 
@@ -161,10 +339,10 @@ namespace LiqunManagement.Controllers
                 string unicodeBlackSquare = Char.ConvertFromUtf32(0x25A0);  // ■
                 string unicodeCheck = Char.ConvertFromUtf32(0x2713);        // ✓
 
-                var HomeObject = formdb.HomeObject.Where(x => x.FormID == FormID).FirstOrDefault();
-                var Landlord = formdb.LandLord.Where(x => x.FormID == FormID).FirstOrDefault();
-                var Tenant = formdb.Tenant.Where(x => x.FormID == FormID).FirstOrDefault();
-                var Secretary = formdb.Secretary.Where(x => x.FormID == FormID).FirstOrDefault();
+                var HomeObject = formdb.HomeObject.Where(x => x.CaseID == CaseID).FirstOrDefault();
+                var Landlord = formdb.LandLord.Where(x => x.CaseID == CaseID).FirstOrDefault();
+                var Tenant = formdb.Tenant.Where(x => x.CaseID == CaseID).FirstOrDefault();
+                var Secretary = formdb.Secretary.Where(x => x.CaseID == CaseID).FirstOrDefault();
                 if (HomeObject == null || Landlord == null || Tenant == null || Secretary == null)
                 {
                     TempData["DownLoadMessage"] = "檔案未填寫完成，請填寫完成後再執行匯出。";
@@ -172,7 +350,7 @@ namespace LiqunManagement.Controllers
                 }
 
                 //表單業務員
-                var agentaccount = formdb.ObjectForm.Where(x => x.FormID == FormID).Select(x => x.AgentAccount).FirstOrDefault();
+                var agentaccount = formdb.ObjectForm.Where(x => x.FormID == HomeObject.FormID).Select(x => x.AgentAccount).FirstOrDefault();
                 var formagentName = memberdb.Members.Where(x => x.Account == agentaccount).Select(x => x.Name).FirstOrDefault();
                
                 #region 處理資料
@@ -205,7 +383,7 @@ namespace LiqunManagement.Controllers
                 var contactTenant = Tenant.ContactAddress.Split('-')[0] + Tenant.ContactAddress.Split('-')[1] + Tenant.ContactAddress.Split('-')[2] + Tenant.ContactAddressDetail; //通訊地址(房客)
                 var sameaddressTenant = (Tenant.Address + Tenant.AddressDetail) == (Tenant.ContactAddress + Tenant.ContactAddressDetail) ? true : false;  //是否同戶籍地(房客)
                 var banknameTenant = formdb.Bank.Where(x => x.BankCode == Tenant.BankNo).Select(x => x.BankName).FirstOrDefault();          //銀行名稱(房客)
-                var branchTenant = formdb.Bank.Where(x => x.BranchCode == Tenant.BrancheNo).Select(x => x.BranchName).FirstOrDefault();     //分行名稱(房客)
+                var branchTenant = formdb.Bank.Where(x => x.BankCode == Tenant.BankNo && x.BranchCode == Tenant.BrancheNo).Select(x => x.BranchName).FirstOrDefault();     //分行名稱(房客)
 
                 var memberTenantArray = JsonConvert.DeserializeObject<List<int>>(Tenant.MemberArray);   //成員人數資料(陣列)[配偶,直系,代理人,共有人]
                 var coupleTenantCount = memberTenantArray[0];
@@ -411,7 +589,7 @@ namespace LiqunManagement.Controllers
                     placeNo = Secretary.placeNo,                            //地號
                     floorAmount = Secretary.floorAmount.ToString(),         //層數
                     floorNo = Secretary.floorNo.ToString(),                 //層次
-                    buildCreateDate = (Secretary.buildCreateDate.Year - 1911) + Secretary.buildCreateDate.ToString("年MM月dd日"),    //建築完成日
+                    buildCreateDate = (Secretary.buildCreateDate?.Year - 1911) + Secretary.buildCreateDate?.ToString("年MM月dd日"),    //建築完成日
                     squareAmount = Secretary.squareAmount.ToString(),       //平方公尺
                     pinAmount = Secretary.pinAmount.ToString(),             //坪數
                     rentMarket = string.Format("{0:N0}", Secretary.rentMarket),           //市場租金
@@ -433,7 +611,7 @@ namespace LiqunManagement.Controllers
                     "表單2.屋況及租屋安全檢核表(租賃標的現況確認書)-代租-1.docx",
                     "表單2.屋況及租屋安全檢核表(租賃標的現況確認書)-代租-2.docx",
                     "表單3.出租人補助費用申請書.docx",
-                    directTenantCount <= 2 ? "表單5.民眾(房客)承租住宅申請書.docx" : directTenantCount <= 7 ? "表單5.民眾(房客)承租住宅申請書-8人.docx" :"表單5.民眾(房客)承租住宅申請書-10人.docx"
+                    (directTenantCount + coupleTenantCount) <= 2 ? "表單5.民眾(房客)承租住宅申請書.docx" : (directTenantCount + coupleTenantCount) <= 7 ? "表單5.民眾(房客)承租住宅申請書-8人.docx" :"表單5.民眾(房客)承租住宅申請書-10人.docx"
                 };
                 if (FormData.existappraiser)    //有估價師
                     wordFilesToProcess.Add("附表單1.估價師租金簽註意見書.docx");
@@ -975,7 +1153,8 @@ namespace LiqunManagement.Controllers
                                 doc.ReplaceText("«無公證»", HomeObject.notarization == 0 ? "雙方時間無法配合" : "");
                                 doc.ReplaceText("«租金»", FormData.rent);
                                 doc.ReplaceText("«押金»", FormData.deposit);
-                                doc.ReplaceText("«押金/租金»", FormData.depositPerMonth);       //押金為 *** 個月的租金
+                                float depositpeerMonth = ((float)HomeObject.deposit /(float)HomeObject.rent);
+                                doc.ReplaceText("«押金/租金»", depositpeerMonth.ToString("F2"));       //押金為 *** 個月的租金
                                 doc.ReplaceText("«繳租日»", FormData.paydate);
                                 doc.ReplaceText("«繳租日»", FormData.managecommitteeA);
                                 doc.ReplaceText("«Y0»", HomeObject.management_fee > 0 ? "V" : "");  //有無管理費
@@ -1212,7 +1391,7 @@ namespace LiqunManagement.Controllers
                 #endregion
 
                 #region 附件下載檔
-                var existfilelist = formdb.FileLog.Where(x => x.FormID == FormID).OrderBy(x => x.Category).AsEnumerable();
+                var existfilelist = formdb.FileLog.Where(x => x.FormID == HomeObject.FormID).OrderBy(x => x.Category).AsEnumerable();
 
                 // 創建名為"證件資料"的子文件夾
                 string documentsFolderPath = Path.Combine(tempFolderPath, "證件資料");
@@ -1287,14 +1466,14 @@ namespace LiqunManagement.Controllers
 
         [HttpPost]
         #region 實價登入匯出(JSON格式)
-        public ActionResult ExportJson(string FormID)
+        public ActionResult ExportJson(string CaseID)
         {
             //資料
-            var FormDetail = formdb.ObjectForm.Where(x => x.FormID == FormID).FirstOrDefault();
-            var HomeObject = formdb.HomeObject.Where(x => x.FormID == FormID).FirstOrDefault();
-            var Landlord = formdb.LandLord.Where(x => x.FormID == FormID).FirstOrDefault();
-            var Tenant = formdb.Tenant.Where(x => x.FormID == FormID).FirstOrDefault();
-            var Secretary = formdb.Secretary.Where(x => x.FormID == FormID).FirstOrDefault();
+            var HomeObject = formdb.HomeObject.Where(x => x.CaseID == CaseID).FirstOrDefault();
+            var Landlord = formdb.LandLord.Where(x => x.CaseID == CaseID).FirstOrDefault();
+            var Tenant = formdb.Tenant.Where(x => x.CaseID == CaseID).FirstOrDefault();
+            var Secretary = formdb.Secretary.Where(x => x.CaseID == CaseID).FirstOrDefault();
+            var FormDetail = formdb.ObjectForm.Where(x => x.FormID == HomeObject.FormID).FirstOrDefault();
 
             //段/小段/事務所資料庫
             var ExcerptData = formdb.Excerpt.AsEnumerable();
@@ -1480,7 +1659,7 @@ namespace LiqunManagement.Controllers
                     P1maDd09 = HomeObject.road + HomeObject.detailaddress,
                     P1maBuild9 = Secretary.floorAmount.ToString(),
                     P1maBuild10_1 = Secretary.floorAmount.ToString().PadLeft(3, '0'),
-                    P1maBuild10_1c = ConvertToChinese(Secretary.floorNo) + "層",
+                    P1maBuild10_1c = ConvertToChinese(Convert.ToInt32(Secretary.floorNo)) + "層",
                     P1maBuild10_1Text = "",
                     Build10All = "",
                     P1maBuild1 = FormData.roomtype == "3" ? "1" : FormData.roomAmount,
@@ -1509,7 +1688,7 @@ namespace LiqunManagement.Controllers
                     P1maTypec1 = FormData.buildtypeCode == "2" || FormData.buildtypeCode == "1" ? "0" : "1",
                     RentalService = "4",
                     RentalServicec = "社會住宅包租轉租",
-                    P1maTotprice = HomeObject.rent.ToString(),
+                    P1maTotprice = (HomeObject.rent + HomeObject.carmonthrent).ToString(),
                     P1maParkflag = FormData.havecarpark ? "01" : "2",          //有汽車位:01&1&0&汽車月租金 (月租金加總大於0)
                     P1maCntpark = FormData.havecarpark ? "1" : "",           //有汽車位:01&1&1&空白(月租金加總為0)
                     P1maParkflag2 = FormData.havecarpark ? HomeObject.rent > 0 ? "0" : "1" : "",         //無汽車位:2&空白&空白&空白
@@ -1578,7 +1757,7 @@ namespace LiqunManagement.Controllers
                 myData.CaseCar = null;
 
 
-            string json = JsonConvert.SerializeObject(myData, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(myData, Newtonsoft.Json.Formatting.Indented);
 
             // 将 JSON 数据写入内存流
             var memoryStream = new MemoryStream();
@@ -1614,8 +1793,8 @@ namespace LiqunManagement.Controllers
             //return File(memoryStream, "application/json", HomeObject.fulladdress + "_實價登入JSON檔.json");
         }
         #endregion
-        
-    public static string ConvertToChinese(int number)
+
+        public static string ConvertToChinese(int number)
         {
             Dictionary<int, string> numberToChineseMap = new Dictionary<int, string>
             {

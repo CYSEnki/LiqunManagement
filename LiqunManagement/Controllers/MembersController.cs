@@ -78,11 +78,14 @@ namespace LiqunManagement.Controllers
                           };
 
             DDLServices ddlServices = new DDLServices();
-            var ddl = JsonConvert.SerializeObject(ddlServices.GetDeptDDL("").ddllist.ToList());
-            @ViewBag.ddl = ddl;
+            var DDLJson_Dept = JsonConvert.SerializeObject(ddlServices.GetDeptDDL("").ddllist.ToList());
+            var DDLJson_Secretary = JsonConvert.SerializeObject(ddlServices.GetSecretaryDDL("").ddllist.ToList());
+
             MemberRegisterViewModel model = new MemberRegisterViewModel()
             {
                 MemberList = members,
+                ddldept = DDLJson_Dept,
+                ddlsecretary = DDLJson_Secretary,
             };
 
             return View(model);
@@ -195,7 +198,9 @@ namespace LiqunManagement.Controllers
                                        //Department = deptdb0.DivFullName,
                                        JobTitle = db.JobTitle,
                                        divcode = divcodeIsnull ? "" : deptdb.DivCode,
+                                       AssistAccount = String.IsNullOrEmpty(db.AssistantAccount) ? "" : db.AssistantAccount,
                                    };
+                var ddd = EmployeeData.FirstOrDefault();
                 return Json(EmployeeData);
             }
 
@@ -204,7 +209,7 @@ namespace LiqunManagement.Controllers
         //編輯職員資料
         [Authorize]
         [HttpPost]
-        public ActionResult UpdateMemberData(string Account, string Name, string DivCode)
+        public ActionResult UpdateMemberData(string Account, string Name, string DivCode, string SecretaryAccount)
         {
             var empdata = memberdb.EmployeeData.Where(x => x.Account == Account).FirstOrDefault();
 
@@ -219,7 +224,7 @@ namespace LiqunManagement.Controllers
                     empdata.JobTitle = deptdata.GeneralTitle;
                     empdata.UpdateTime = DateTime.Now;
                     empdata.UpdateAccount = User.Identity.Name;
-
+                    empdata.AssistantAccount = SecretaryAccount;
 
                     // 提交更改到資料庫
                     memberdb.SaveChanges();
@@ -236,6 +241,7 @@ namespace LiqunManagement.Controllers
                         CreateAccount = User.Identity.Name,
                         UpdateTime = DateTime.Now,
                         UpdateAccount = User.Identity.Name,
+                        AssistantAccount = SecretaryAccount,
                     };
 
                     // 使用 Entity Framework 將新員工新增到資料庫
@@ -462,7 +468,6 @@ namespace LiqunManagement.Controllers
             var result = "nodata";
             DDLServices ddlServices = new DDLServices();
             var ddl = ddlServices.GetManager(divcode).ddllist;
-            var ddd = ddl.ToList();
             var jsonddl = JsonConvert.SerializeObject(ddlServices.GetManager(divcode).ddllist.ToList());
 
             if (ddl.Count() == 0)
