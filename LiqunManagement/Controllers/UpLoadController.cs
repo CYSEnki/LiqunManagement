@@ -1463,12 +1463,13 @@ namespace LiqunManagement.Controllers
                     UploadService uploadservice = new UploadService();
                     var formid = dr["FormID"].ToString();
                     var caseid = dr["CaseID"].ToString();
-                    bool existObjectForm = formdb.ObjectForm.Where(x => x.FormID == formid).FirstOrDefault() != null ? true : false;
-                    bool existHomeobject = formdb.HomeObject.Where(x => x.CaseID == caseid).FirstOrDefault() != null ? true : false;
+                    var existObjectForm = formdb.ObjectForm.Where(x => x.FormID == formid).FirstOrDefault();
+                    var existHomeobject = formdb.HomeObject.Where(x => x.CaseID == caseid).FirstOrDefault();
+                    var existSameForm_CaseID = formdb.HomeObject.Where(x => x.FormID == formid).Select(x => x.CaseID).FirstOrDefault();  //找到是否此匯入資料為系統正常寫入之資料，若已存在之Form之CaseID為LQ開頭則跳過
 
                     try
                     {
-                        if (!existObjectForm)
+                        if (existObjectForm == null)
                         {
                             var AgentAccount = dr["AgentAccount"].ToString();
                             var AssistantAccount = memberdb.EmployeeData.Where(x => x.Account == AgentAccount).Select(x => x.AssistantAccount).FirstOrDefault();
@@ -1496,71 +1497,81 @@ namespace LiqunManagement.Controllers
                                 context.SaveChanges();
                             }
                         }
-                        if (!existHomeobject)
+                        if (existHomeobject == null)
                         {
-                            //起租日
-                            var startdateArray = dr["startdate"].ToString().Split('-');
-                            var startdateDateTime = Convert.ToDateTime((Convert.ToInt32(startdateArray[0]) + 1911).ToString() + "-" + startdateArray[1] + "-" + startdateArray[2]);
-                            //結束日
-                            var enddateArray = dr["enddate"].ToString().Split('-');
-                            var enddateDateTime = Convert.ToDateTime((Convert.ToInt32(enddateArray[0]) + 1911).ToString() + "-" + enddateArray[1] + "-" + enddateArray[2]);
-
-
-                            var insertdata = new HomeObject()
+                            bool DoInsert = true;
+                            //存在相同之表單編號
+                            if (existSameForm_CaseID != null)
                             {
-                                FormID = formid,
-                                Phase = Convert.ToInt32(dr["Phase"]),
-                                CaseID = dr["CaseID"].ToString(),
-                                CaseType = 1,
-                                objecttype = Convert.ToInt32(dr["objecttype"]),
-                                notarization = null,
-                                signdate = startdateDateTime,
-                                appraiser = null,
-                                feature = null,
-                                city = null,
-                                district = null,
-                                road = null,
-                                detailaddress = null,
-                                fulladdress = dr["fulladdress"].ToString(),
-                                usefor = Convert.ToInt32(dr["usefor"]),
-                                useforelse = null,
-                                rent = Convert.ToInt32(dr["rent"]),
-                                deposit = null,
-                                management_fee = null,
-                                startdate = startdateDateTime,
-                                enddate = enddateDateTime,
-                                paydate = Convert.ToInt32(dr["paydate"]),
-                                buildtype = null,
-                                roomtype = null,
-                                roomamount = null,
-                                havepark = null,
-                                parktype = null,
-                                parkfloor = null,
-                                carpositionnumber = null,
-                                carmonthrent = null,
-                                carparkmanagefee = null,
-                                scooterparkfloor = null,
-                                scooterpositionnumber = null,
-                                scootermonthrent = null,
-                                scootermanagefee = null,
-                                Accessory = null,
-                                CreateTime = DateTime.Now,
-                                CreateAccount = User.Identity.Name,
-                                UpdateTime = DateTime.Now,
-                                UpdateAccount = User.Identity.Name,
-                                Memo = dr["Memo"].ToString(),
-                            };
-                            //uploadservice.InsertHombObject(insertdata);
-
-                            // 建立資料上下文（Data Context）
-                            using (var context = new FormModels())
-                            {
-                                // 使用資料上下文插入資料物件
-                                context.HomeObject.Add(insertdata);
-                                // 儲存更改到資料庫
-                                context.SaveChanges();
+                                //此表單編號之媒合編號為LQ開頭，則不執行輸入
+                                DoInsert = existSameForm_CaseID.StartsWith("LQ") ? false : true;
                             }
+                            if (DoInsert)
+                            {
+                                //起租日
+                                var startdateArray = dr["startdate"].ToString().Split('-');
+                                var startdateDateTime = Convert.ToDateTime((Convert.ToInt32(startdateArray[0]) + 1911).ToString() + "-" + startdateArray[1] + "-" + startdateArray[2]);
+                                //結束日
+                                var enddateArray = dr["enddate"].ToString().Split('-');
+                                var enddateDateTime = Convert.ToDateTime((Convert.ToInt32(enddateArray[0]) + 1911).ToString() + "-" + enddateArray[1] + "-" + enddateArray[2]);
 
+
+                                var insertdata = new HomeObject()
+                                {
+                                    FormID = formid,
+                                    Phase = Convert.ToInt32(dr["Phase"]),
+                                    CaseID = dr["CaseID"].ToString(),
+                                    CaseType = 1,
+                                    objecttype = Convert.ToInt32(dr["objecttype"]),
+                                    notarization = null,
+                                    signdate = startdateDateTime,
+                                    appraiser = null,
+                                    feature = null,
+                                    city = null,
+                                    district = null,
+                                    road = null,
+                                    detailaddress = null,
+                                    fulladdress = dr["fulladdress"].ToString(),
+                                    usefor = Convert.ToInt32(dr["usefor"]),
+                                    useforelse = null,
+                                    rent = Convert.ToInt32(dr["rent"]),
+                                    deposit = null,
+                                    management_fee = null,
+                                    startdate = startdateDateTime,
+                                    enddate = enddateDateTime,
+                                    paydate = Convert.ToInt32(dr["paydate"]),
+                                    buildtype = null,
+                                    roomtype = null,
+                                    roomamount = null,
+                                    havepark = null,
+                                    parktype = null,
+                                    parkfloor = null,
+                                    carpositionnumber = null,
+                                    carmonthrent = null,
+                                    carparkmanagefee = null,
+                                    scooterparkfloor = null,
+                                    scooterpositionnumber = null,
+                                    scootermonthrent = null,
+                                    scootermanagefee = null,
+                                    Accessory = null,
+                                    CreateTime = DateTime.Now,
+                                    CreateAccount = User.Identity.Name,
+                                    UpdateTime = DateTime.Now,
+                                    UpdateAccount = User.Identity.Name,
+                                    Memo = dr["Memo"].ToString(),
+                                };
+                                //uploadservice.InsertHombObject(insertdata);
+
+                                // 建立資料上下文（Data Context）
+                                using (var context = new FormModels())
+                                {
+                                    // 使用資料上下文插入資料物件
+                                    context.HomeObject.Add(insertdata);
+                                    // 儲存更改到資料庫
+                                    context.SaveChanges();
+                                }
+
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -1753,40 +1764,52 @@ namespace LiqunManagement.Controllers
                     {
                         UploadService uploadservice = new UploadService();
                         var formid = dr["FormID"].ToString();
-                        bool existlandlord = formdb.LandLord.Where(x => x.FormID == formid).FirstOrDefault() != null ? true : false;
-                        if (!existlandlord)
+                        var caseid = dr["CaseID"].ToString();
+                        var existlandlord = formdb.LandLord.Where(x => x.CaseID == caseid).FirstOrDefault();
+                        var existSameForm_CaseID = formdb.LandLord.Where(x => x.FormID == formid).Select(x => x.CaseID).FirstOrDefault();
+                        if (existlandlord == null)
                         {
-                            var insertdata = new LandLord()
+                            bool DoInsert = true;
+                            //存在相同之表單編號
+                            if (existSameForm_CaseID != null)
                             {
-                                FormID = dr["FormID"].ToString(),
-                                CaseID = dr["CaseID"].ToString(),
-                                Name = dr["Name"].ToString(),
-                                Principal = dr["Principal"].ToString(),
-                                Gender = Convert.ToInt32(dr["Gender"]),
-                                Birthday = null,
-                                IDNumber = dr["IDNumber"].ToString(),
-                                Phone = dr["Phone"].ToString(),
-                                BankNo = dr["BankNo"].ToString(),
-                                BrancheNo = dr["BrancheNo"].ToString(),
-                                BankAccount = dr["BankAccount"].ToString(),
-                                Address = null,
-                                AddressDetail = null,
-                                ContactAddress = null,
-                                ContactAddressDetail = null,
-                                MemberArray = null,
-                                CoOwner1 = null,
-                                CoOwner2 = null,
-                                CoOwner3 = null,
-                                CoOwner4 = null,
-                                CoOwner5 = null,
-                                Agent = null,
-                                CreateTime = DateTime.Now,
-                                CreateAccount = User.Identity.Name,
-                                UpdateTime = DateTime.Now,
-                                UpdateAccount = User.Identity.Name,
-                                Memo = dr["Memo"].ToString(),
-                            };
-                            uploadservice.InsertLandlord(insertdata);
+                                //此表單編號之媒合編號為LQ開頭，則不執行輸入
+                                DoInsert = existSameForm_CaseID.StartsWith("LQ") ? false : true;
+                            }
+                            if (DoInsert)
+                            {
+                                var insertdata = new LandLord()
+                                {
+                                    FormID = dr["FormID"].ToString(),
+                                    CaseID = dr["CaseID"].ToString(),
+                                    Name = dr["Name"].ToString(),
+                                    Principal = dr["Principal"].ToString(),
+                                    Gender = Convert.ToInt32(dr["Gender"]),
+                                    Birthday = null,
+                                    IDNumber = dr["IDNumber"].ToString(),
+                                    Phone = dr["Phone"].ToString(),
+                                    BankNo = dr["BankNo"].ToString(),
+                                    BrancheNo = dr["BrancheNo"].ToString(),
+                                    BankAccount = dr["BankAccount"].ToString(),
+                                    Address = null,
+                                    AddressDetail = null,
+                                    ContactAddress = null,
+                                    ContactAddressDetail = null,
+                                    MemberArray = null,
+                                    CoOwner1 = null,
+                                    CoOwner2 = null,
+                                    CoOwner3 = null,
+                                    CoOwner4 = null,
+                                    CoOwner5 = null,
+                                    Agent = null,
+                                    CreateTime = DateTime.Now,
+                                    CreateAccount = User.Identity.Name,
+                                    UpdateTime = DateTime.Now,
+                                    UpdateAccount = User.Identity.Name,
+                                    Memo = dr["Memo"].ToString(),
+                                };
+                                uploadservice.InsertLandlord(insertdata);
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -1975,54 +1998,66 @@ namespace LiqunManagement.Controllers
                 {
                     UploadService uploadservice = new UploadService();
                     var formid = dr["FormID"].ToString();
-                    bool existtenant = formdb.Tenant.Where(x => x.FormID == formid).FirstOrDefault() != null ? true : false;
+                    var caseid = dr["CaseID"].ToString();
+                    var existtenant = formdb.Tenant.Where(x => x.CaseID == caseid).FirstOrDefault();
+                    var existSameForm_CaseID = formdb.Tenant.Where(x => x.FormID == formid).Select(x=>x.CaseID).FirstOrDefault();
                     try
                     {
-                        if (!existtenant)
+                        if (existtenant == null)
                         {
-                            var insertdata = new Tenant()
+                            bool DoInsert = true;
+                            //存在相同之表單編號
+                            if (existSameForm_CaseID != null)
                             {
-                                FormID = dr["FormID"].ToString(),
-                                CaseID = dr["CaseID"].ToString(),
-                                TenantType = null,
-                                Name = dr["Name"].ToString(),
-                                Gender = Convert.ToInt32(dr["Gender"]),
-                                Birthday = null,
-                                IDNumber = dr["IDNumber"].ToString(),
-                                Phone = dr["Phone"].ToString(),
-                                Address = null,
-                                AddressDetail = null,
-                                ContactAddress = null,
-                                ContactAddressDetail = null,
-                                accountNo = null,
-                                BankNo = dr["BankNo"].ToString(),
-                                BrancheNo = dr["BrancheNo"].ToString(),
-                                BankAccount = dr["BankAccount"].ToString(),
-                                MemberArray = null,
-                                Couple = null,
-                                Family1 = null,
-                                Family2 = null,
-                                Family3 = null,
-                                Family4 = null,
-                                Family5 = null,
-                                Family6 = null,
-                                Family7 = null,
-                                Family8 = null,
-                                Family9 = null,
-                                Family10 = null,
-                                Agent1 = null,
-                                Agent2 = null,
-                                Agent3 = null,
-                                Guarantor1 = null,
-                                Guarantor2 = null,
-                                Guarantor3 = null,
-                                CreateTime = DateTime.Now,
-                                CreateAccount = User.Identity.Name,
-                                UpdateTime = DateTime.Now,
-                                UpdateAccount = User.Identity.Name,
-                                Memo = dr["Memo"].ToString(),
-                            };
-                            uploadservice.InsertTenant(insertdata);
+                                //此表單編號之媒合編號為LQ開頭，則不執行輸入
+                                DoInsert = existSameForm_CaseID.StartsWith("LQ") ? false : true;
+                            }
+                            if (DoInsert)
+                            {
+                                var insertdata = new Tenant()
+                                {
+                                    FormID = dr["FormID"].ToString(),
+                                    CaseID = dr["CaseID"].ToString(),
+                                    TenantType = null,
+                                    Name = dr["Name"].ToString(),
+                                    Gender = Convert.ToInt32(dr["Gender"]),
+                                    Birthday = null,
+                                    IDNumber = dr["IDNumber"].ToString(),
+                                    Phone = dr["Phone"].ToString(),
+                                    Address = null,
+                                    AddressDetail = null,
+                                    ContactAddress = null,
+                                    ContactAddressDetail = null,
+                                    accountNo = null,
+                                    BankNo = dr["BankNo"].ToString(),
+                                    BrancheNo = dr["BrancheNo"].ToString(),
+                                    BankAccount = dr["BankAccount"].ToString(),
+                                    MemberArray = null,
+                                    Couple = null,
+                                    Family1 = null,
+                                    Family2 = null,
+                                    Family3 = null,
+                                    Family4 = null,
+                                    Family5 = null,
+                                    Family6 = null,
+                                    Family7 = null,
+                                    Family8 = null,
+                                    Family9 = null,
+                                    Family10 = null,
+                                    Agent1 = null,
+                                    Agent2 = null,
+                                    Agent3 = null,
+                                    Guarantor1 = null,
+                                    Guarantor2 = null,
+                                    Guarantor3 = null,
+                                    CreateTime = DateTime.Now,
+                                    CreateAccount = User.Identity.Name,
+                                    UpdateTime = DateTime.Now,
+                                    UpdateAccount = User.Identity.Name,
+                                    Memo = dr["Memo"].ToString(),
+                                };
+                                uploadservice.InsertTenant(insertdata);
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -2217,37 +2252,49 @@ namespace LiqunManagement.Controllers
 
                         UploadService uploadservice = new UploadService();
                         var formid = dr["FormID"].ToString();
-                        bool existsecretary = formdb.Secretary.Where(x => x.FormID == formid).FirstOrDefault() != null ? true : false;
+                        var caseid = dr["CaseID"].ToString();
+                        var existsecretary = formdb.Secretary.Where(x => x.CaseID == caseid).FirstOrDefault();
+                        var existSameForm_CaseID = formdb.Secretary.Where(x => x.FormID == formid).Select(x => x.CaseID).FirstOrDefault();
                       
-                        if (!existsecretary)
+                        if (existsecretary == null)
                         {
-                            var insertdata = new Secretary()
+                            bool DoInsert = true;
+                            //存在相同之表單編號
+                            if (existSameForm_CaseID != null)
                             {
-                                FormID = dr["FormID"].ToString(),
-                                CaseID = dr["CaseID"].ToString(),
-                                LandlordID = dr["LandlordID"].ToString(),
-                                TenantID = dr["TenantID"].ToString(),
-                                qualifyRadio = null,
-                                excerpt = dr["excerpt"].ToString(),
-                                excerptShort = dr["excerptShort"].ToString(),
-                                buildNo = null,
-                                placeNo = dr["placeNo"].ToString(),
-                                buildCreateDate = null,
-                                floorAmount = null,
-                                floorNo = null,
-                                squareAmount = !String.IsNullOrEmpty(dr["squareAmount"].ToString()) ? Convert.ToDouble(dr["squareAmount"]) : 0,
-                                pinAmount = !String.IsNullOrEmpty(dr["pinAmount"].ToString()) ? Convert.ToDouble(dr["pinAmount"]) : 0,
-                                notarizationFeeRadio = null,
-                                rentMarket = null,
-                                rentAgent = null,
-                                depositAgent = null,
-                                CreateTime = DateTime.Now,
-                                CreateAccount = User.Identity.Name,
-                                UpdateTime = DateTime.Now,
-                                UpdateAccount = User.Identity.Name,
-                                Memo = dr["Memo"].ToString(),
-                            };
-                            uploadservice.InsertSecretary(insertdata);
+                                //此表單編號之媒合編號為LQ開頭，則不執行輸入
+                                DoInsert = existSameForm_CaseID.StartsWith("LQ") ? false : true;
+                            }
+                            if (DoInsert)
+                            {
+                                var insertdata = new Secretary()
+                                {
+                                    FormID = dr["FormID"].ToString(),
+                                    CaseID = dr["CaseID"].ToString(),
+                                    LandlordID = dr["LandlordID"].ToString(),
+                                    TenantID = dr["TenantID"].ToString(),
+                                    qualifyRadio = null,
+                                    excerpt = dr["excerpt"].ToString(),
+                                    excerptShort = dr["excerptShort"].ToString(),
+                                    buildNo = null,
+                                    placeNo = dr["placeNo"].ToString(),
+                                    buildCreateDate = null,
+                                    floorAmount = null,
+                                    floorNo = null,
+                                    squareAmount = !String.IsNullOrEmpty(dr["squareAmount"].ToString()) ? Convert.ToDouble(dr["squareAmount"]) : 0,
+                                    pinAmount = !String.IsNullOrEmpty(dr["pinAmount"].ToString()) ? Convert.ToDouble(dr["pinAmount"]) : 0,
+                                    notarizationFeeRadio = null,
+                                    rentMarket = null,
+                                    rentAgent = null,
+                                    depositAgent = null,
+                                    CreateTime = DateTime.Now,
+                                    CreateAccount = User.Identity.Name,
+                                    UpdateTime = DateTime.Now,
+                                    UpdateAccount = User.Identity.Name,
+                                    Memo = dr["Memo"].ToString(),
+                                };
+                                uploadservice.InsertSecretary(insertdata);
+                            }
                         }
                     }
                     catch (Exception ex)

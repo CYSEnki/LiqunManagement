@@ -1,0 +1,158 @@
+﻿@{
+    ViewBag.Title = "測試Post";
+    Layout = "~/Views/Shared/smartadmin_Layout.cshtml";
+
+}
+<link href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/formplugins/bootstrap-datepicker/bootstrap-datepicker.css" rel="stylesheet" />
+<main id="js-page-content" role="main" class="page-content">
+
+    <div class="flex-1" style="background: url(img/svg/pattern-1.svg) no-repeat center bottom fixed; background-size: cover;">
+        <div class="container py-4 py-lg-5 my-lg-5 px-4 px-sm-0">
+            <div class="row">
+                <div class="col col-md-6 col-lg-7 hidden-sm-down">
+                    <h2 class="fs-xxl fw-500 mt-4 text-white">
+                        The simplest UI toolkit for developers &amp; programmers
+                        <small class="h3 fw-300 mt-3 mb-5 text-white opacity-60">
+                            Presenting you with the next level of innovative UX design and engineering. The most modular toolkit available with over 600+ layout permutations. Experience the simplicity of SmartAdmin, everywhere you go!
+                        </small>
+                    </h2>
+                    <a href="#" class="fs-lg fw-500 text-white opacity-70">Learn more &gt;&gt;</a>
+                    <div class="d-sm-flex flex-column align-items-center justify-content-center d-md-block">
+                        <div class="px-0 py-1 mt-5 text-white fs-nano opacity-50">
+                            Find us on social media
+                        </div>
+                        <div class="d-flex flex-row opacity-70">
+                            <a href="#" class="mr-2 fs-xxl text-white">
+                                <i class="fab fa-facebook-square"></i>
+                            </a>
+                            <a href="#" class="mr-2 fs-xxl text-white">
+                                <i class="fab fa-twitter-square"></i>
+                            </a>
+                            <a href="#" class="mr-2 fs-xxl text-white">
+                                <i class="fab fa-google-plus-square"></i>
+                            </a>
+                            <a href="#" class="mr-2 fs-xxl text-white">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-5 col-xl-4 ml-auto">
+                    <h1 class="text-white fw-300 mb-3 d-sm-block d-md-none">
+                        Secure login
+                    </h1>
+                    <div class="card p-4 rounded-plus bg-faded">
+
+                        @using (Html.BeginForm("Login", "FormStuff", FormMethod.Post, new { @id = "js-login", }))
+                        {
+                            //建立登入畫面用的表格
+                            <table style="width:100%;">
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="form-label">帳號</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <input type="text" name="Account" class="form-control form-control-lg" />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="form-label">密碼</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <input type="password" name="Password" class="form-control form-control-lg" />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            @Html.ValidationSummary()
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:100%;">
+                                        <div class="row no-gutters">
+                                            <div class="col-lg-6 pr-lg-1 my-2">
+                                                <button type="submit" class="btn btn-success btn-block btn-lg waves-effect waves-themed" style="height:60px; font-size:32px;"><i class="fab fa-line fa-lg"></i></button>
+                                                @*<button id="js-login-btn" type="button" class="btn btn-info btn-block btn-lg waves-effect waves-themed" style="height:60px;" onclick="register()">註冊</button>*@
+                                            </div>
+                                            <div class="col-lg-6 pl-lg-1 my-2">
+                                                <button id="js-login-btn" type="submit" class="btn btn-info btn-block btn-lg waves-effect waves-ripple" style="height:60px;">登入</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="position-absolute pos-bottom pos-left pos-right p-3 text-center text-white">
+                2020 © SmartAdmin by&nbsp;<a href="https://www.gotbootstrap.com" class="text-white opacity-40 fw-500" title="gotbootstrap.com" target="_blank">gotbootstrap.com</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section scripts
+{
+    <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+
+        var controls = {
+            leftArrow: '<i class="fal fa-angle-left" style="font-size: 1.25rem"></i>',
+            rightArrow: '<i class="fal fa-angle-right" style="font-size: 1.25rem"></i>'
+        }
+
+        //validation
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+
+        var example_gridsize = $("#example-gridsize");
+
+        $("#gridrange").on("input change", function () {
+            //do something
+            example_gridsize.attr("placeholder", ".col-" + $(this).val());
+            example_gridsize.parent().removeClass().addClass("col-" + $(this).val())
+            console.log("col-" + $(this).val());
+        });
+
+
+        // datepicker
+        // orientation
+        $('#datepicker-4-1').datepicker(
+            {
+                format: 'yyyy-mm-dd',
+                orientation: "請選擇簽約日",
+                todayHighlight: true,
+                templates: controls
+            });
+    </script>
+}

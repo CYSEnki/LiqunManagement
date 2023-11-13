@@ -246,18 +246,22 @@ namespace LiqunManagement.Controllers
             return RedirectToAction("CaseManage", "Secretary", new { @formtype = 2 });
         }
 
+        #endregion
+
         //【總表】新增續約
         public ActionResult RenewContract(string CaseID, string renewType, string selectObjectForm, string selectlandlord, string selecttenant, string selectsecretary)
         {
             var HomeObject = formdb.HomeObject.Where(x => x.CaseID == CaseID).FirstOrDefault();
+            var ObjectForm = formdb.ObjectForm.Where(x => x.FormID == HomeObject.FormID).FirstOrDefault();
             var Landlord = formdb.LandLord.Where(x => x.CaseID == CaseID).FirstOrDefault();
             var TenantData = formdb.Tenant.Where(x => x.CaseID == CaseID).FirstOrDefault();
             var Secretary = formdb.Secretary.Where(x => x.CaseID == CaseID).FirstOrDefault();
 
-            //var ObjectForm = formdb.ObjectForm.Where(x => x.FormID == HomeObject.FormID).FirstOrDefault();
-
-            //FormService formService = new FormService();
-            //var newformid = formService.GetNewFormID();
+            if(ObjectForm.FormType == 3)
+            {
+                TempData["ErrorMessage"] = "此表單已在續約中，請勿重複操作。";
+                return RedirectToAction("CaseManage", "Secretary", new { @formtype = 3, @casetype = 0 });
+            }
             var guid = Guid.NewGuid().ToString();
 
             var formtype = 0;
@@ -267,19 +271,21 @@ namespace LiqunManagement.Controllers
                 if (renewType == "renew")
                 {
                     var existobjectform = context.ObjectForm.Where(x => x.FormID == HomeObject.FormID).FirstOrDefault();
-                    existobjectform.FormType = 3;
+                    existobjectform.FormType = 3;       //續約中
+
+                    var newCaseID = HomeObject.CaseID + "(續約中)";
 
                     HomeObject.CaseType = 0;    //草稿
-                    HomeObject.CaseID = guid;
+                    HomeObject.CaseID = newCaseID;
                     context.HomeObject.Add(HomeObject);
 
-                    Landlord.CaseID = guid;
+                    Landlord.CaseID = newCaseID;
                     context.LandLord.Add(Landlord);
 
-                    TenantData.CaseID = guid;
+                    TenantData.CaseID = newCaseID;
                     context.Tenant.Add(TenantData);
 
-                    Secretary.CaseID = guid;
+                    Secretary.CaseID = newCaseID;
                     Secretary.TenantID = "";
                     context.Secretary.Add(Secretary);
 
@@ -288,30 +294,31 @@ namespace LiqunManagement.Controllers
                 }
                 else
                 {
-
+                    FormService formService = new FormService();
+                    var newFormID = formService.GetNewFormID();
                     if (selectObjectForm != null)
                     {
-                        var ObjectForm = formdb.ObjectForm.Where(x => x.FormID == HomeObject.FormID).FirstOrDefault();
                         ObjectForm.FormType = 1;
+                        ObjectForm.FormID = newFormID;
                         context.ObjectForm.Add(ObjectForm);
 
                         HomeObject.CaseType = 1;    //草稿
-                        HomeObject.CaseID = guid;
+                        HomeObject.CaseID = newFormID;
                         context.HomeObject.Add(HomeObject);
                     }
                     if (selectlandlord != null)
                     {
-                        Landlord.CaseID = guid;
+                        Landlord.CaseID = newFormID;
                         context.LandLord.Add(Landlord);
                     }
                     if (selecttenant != null)
                     {
-                        TenantData.CaseID = guid;
+                        TenantData.CaseID = newFormID;
                         context.Tenant.Add(TenantData);
                     }
                     if (selectsecretary != null)
                     {
-                        Secretary.CaseID = guid;
+                        Secretary.CaseID = newFormID;
                         Secretary.TenantID = "";
                         context.Secretary.Add(Secretary);
                     }
@@ -321,10 +328,8 @@ namespace LiqunManagement.Controllers
 
                 context.SaveChanges();
             }
-            return RedirectToAction("CaseManage","Secretary", new {@formtype = 3, @casetype = 0});
+            return RedirectToAction("CaseManage", "Secretary", new { @formtype = 3, @casetype = 0 });
         }
-        #endregion
-
         [HttpPost]
         [Obsolete]
         #region 匯出

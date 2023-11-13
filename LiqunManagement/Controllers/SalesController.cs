@@ -58,6 +58,10 @@ namespace LiqunManagement.Controllers
                 ObjectFormData = ObjectFormData.Where(x => x.AgentAccount == User.Identity.Name);
             }
 
+            //因目前系統內casetype都等於1
+            if (casetype == 0)
+                casetype = 1;
+
             var Formlist = from form in ObjectFormData
                            join obj in formdb.HomeObject.Where(x => x.CaseType == casetype) on form.FormID equals obj.FormID
                            join lan in formdb.LandLord on obj.CaseID equals lan.CaseID into temp1
@@ -74,9 +78,14 @@ namespace LiqunManagement.Controllers
                                SignDate = (DateTime)obj.signdate,
                                Landlord = land != null ? land.Name : null,
                                Tenant = tena != null ? tena.Name : null,
+
+                               FormType = form.FormType,
+                               CaseType = obj.CaseType,
                            };
             //ViewBag.Formlist = Formlist;
 
+            ViewBag.FormType = formtype;
+            ViewBag.CaseType = casetype;
             var model = new FormViewModels
             {
                 objectformlist = Formlist,
@@ -183,11 +192,11 @@ namespace LiqunManagement.Controllers
                 ObjectFormData = ObjectFormData.Where(x => x.AgentAccount == User.Identity.Name);
             }
 
-            var Formlist = from form in ObjectFormData
+            var Formlist = (from form in ObjectFormData
                            join obj in formdb.HomeObject.Where(x => x.CaseType == casetype) on form.FormID equals obj.FormID
-                           join lan in formdb.LandLord on form.FormID equals lan.FormID into temp1
+                           join lan in formdb.LandLord on obj.CaseID equals lan.CaseID into temp1
                            from land in temp1.DefaultIfEmpty()
-                           join ten in formdb.Tenant on form.FormID equals ten.FormID into temp2
+                           join ten in formdb.Tenant on obj.CaseID equals ten.CaseID into temp2
                            from tena in temp2.DefaultIfEmpty()
                            select new objectFormViewModel
                            {
@@ -198,7 +207,7 @@ namespace LiqunManagement.Controllers
                                SignDate = (DateTime)obj.signdate,
                                Landlord = land != null ? land.Name : null,
                                Tenant = tena != null ? tena.Name : null,
-                           };
+                           }).ToList();
             //ViewBag.Formlist = Formlist;
 
             var model = new FormViewModels

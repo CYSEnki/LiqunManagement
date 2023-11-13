@@ -84,6 +84,7 @@ namespace LiqunManagement.ViewModels
         public string objecttypeStr { get; set; }
 
         public int? notarization { get; set; }
+        public DateTime notarizationTime { get; set; }
 
         public DateTime? signdate { get; set; }
         public string signdateStr { get; set; }
@@ -439,6 +440,9 @@ namespace LiqunManagement.ViewModels
 
         // 公證 (radio)公證:1; 非公證:0
         public string notarizationRadio { get; set; }
+
+        //公證時間
+        public string notarizationTime { get; set; }
 
         // 簽約日 (datetime)簽約日
         public string signdate { get; set; }
