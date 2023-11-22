@@ -116,8 +116,8 @@
                                                                             case 2:
                                                                                 @*已結案(總表)*@
                                                                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UploadScanModal" data-formid="@item.FormID">上傳掃描檔案</a>
-                                                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#RenewModal" data-caseid="@item.CaseID" data-renewtype="renew">新增續約</a>
-                                                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#RenewModal" data-caseid="@item.CaseID" data-renewtype="new">產生新表單</a>
+                                                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ContractModal" data-caseid="@item.CaseID" data-renewtype="renew">新增續約</a>
+                                                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ContractModal" data-caseid="@item.CaseID" data-renewtype="new">產生新表單</a>
                                                                                 break;
                                                                             case 3:
                                                                                 @*續約中(總表)*@
@@ -125,7 +125,7 @@
                                                                             case -1:
                                                                                 @*已結案(總表)(停效)*@
                                                                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UploadScanModal" data-formid="@item.FormID">上傳掃描檔案</a>
-                                                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#RenewModal" data-caseid="@item.CaseID" data-renewtype="new">產生新表單</a>
+                                                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ContractModal" data-caseid="@item.CaseID" data-renewtype="new">產生新表單</a>
                                                                                 break;
                                                                         }
                                                                     </div>
@@ -287,7 +287,7 @@
             })
 
             //新增續約
-            $('#RenewModal').on('show.bs.modal', function (event) {
+            $('#ContractModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget)
                 var caseid = button.data('caseid')
                 var type = button.data('renewtype');
@@ -311,7 +311,7 @@
                 }
 
                 var modal = $(this)
-                modal.find('#RenewCaseID').val(caseid)
+                modal.find('#ContractCaseID').val(caseid)
                 modal.find('#renewtype').val(type)
             })
 
@@ -519,7 +519,7 @@
 </div>
 
 <!-- Renew Contract -->
-<div class="modal fade" id="RenewModal" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="ContractModal" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -533,17 +533,17 @@
                     <span aria-hidden="true"><i class="fal fa-times"></i></span>
                 </button>
             </div>
-            @using (Html.BeginForm("RenewContract", "Secretary", FormMethod.Post))
+            @using (Html.BeginForm("CreateNewCase", "Secretary", FormMethod.Post))
             {
                 <div class="modal-body">
                     @*表單編號*@
                     <div class="form-group">
                         <label class="form-label">媒合編號</label>
-                        <input type="text" id="RenewCaseID" name="CaseID" class="form-control" value="" readonly required>
+                        <input type="text" id="ContractCaseID" name="CaseID" class="form-control" value="" readonly required>
                     </div>
                     @*表單編號*@
                     <div class="form-group">
-                        <input type="text" id="renewtype" name="renewType" class="form-control" value="" hidden>
+                        <input type="text" id="renewtype" name="operateType" class="form-control" value="" hidden>
                     </div>
                     @*選擇要建立的資料*@
                     <div class="frame-wrap">

@@ -35,8 +35,8 @@ namespace LiqunManagement.Controllers
         /// <summary>
         /// 秘書審查中，完搞
         /// </summary>
-        /// <param name="formtype">-1(解約) 0(業務起單中) 1(秘書審查中) 2(結案，合約履行中) 3(續約中)</param>
-        /// <param name="casetype">0(擬稿中) 1(完稿)</param>
+        /// <param name="formtype">-1(解約)   0(業務起單中)  1(秘書審查中)   2(結案，合約履行中) 3(續約中)</param>
+        /// <param name="casetype">-1(作廢)   0(未完成)      1(業務完成)    2(秘書完成) </param>
         /// <returns></returns>
         [HttpGet]
         public ActionResult CaseManage(int formtype = 1, int casetype = 1)
@@ -67,14 +67,39 @@ namespace LiqunManagement.Controllers
             ViewBag.Role = User.IsInRole("Admin") ? "Admin" : User.IsInRole("Agent") ? "Agent" : User.IsInRole("Secretary") ? "Secretary" : "";
             #endregion
             ViewBag.FormType = formtype;
+            ViewBag.CaseType = casetype;
             var membersdata = (from mem in memberdb.Members
                                select new
                                {
                                    Account = mem.Account,
                                    Name = mem.Name,
                                }).ToList();
+            var objectformDB = formdb.ObjectForm.AsEnumerable();
+            var HomeObjectDB = formdb.HomeObject.AsEnumerable();
 
-            var ObjectFormData = (from objform in formdb.ObjectForm.Where(x => x.FormType == formtype)
+            switch (formtype)
+            {
+                case -1:
+                    //查詢解約表單則查找合約狀態為(履約中2或解約中 - 1)並且表單狀態為(作廢 -1)
+                    objectformDB = objectformDB.Where(x => x.FormType == 2 ||  x.FormType == 3 || x.FormType == -1);
+                    casetype = -1;
+                    break;
+                case 2:
+                    //查詢履約中則合約狀態為(秘書審核完成 2 + 續約中 3)並且表單狀態為(秘書完成 2)
+                    objectformDB = objectformDB.Where(x => x.FormType == 2 || x.FormType == 3);
+                    casetype = 2;
+                    break;
+                case 3:
+                    //查詢續約中表單
+                    objectformDB = objectformDB.Where(x => x.FormType == 3);
+                    break;
+                default:
+                    objectformDB = objectformDB.Where(x => x.FormType == formtype);
+                    break;
+            }
+
+
+            var ObjectFormData = (from objform in objectformDB
                                   select new objectFormViewModel
                                   {
                                       FormID = objform.FormID,
@@ -85,7 +110,7 @@ namespace LiqunManagement.Controllers
                                       FormType = objform.FormType,
                                   }).AsEnumerable();
 
-            if (!admin && formtype == 1)
+            if (!admin && formtype == 1)    //秘書審查中
             {
                 //非系統管理員，找出該業務員的專門秘書(助理)為業務員
                 ObjectFormData = (from objform in ObjectFormData.Where(x => x.ProcessAccount == User.Identity.Name)
@@ -102,8 +127,9 @@ namespace LiqunManagement.Controllers
                                   }).Where(x => x.AssistantAccount == User.Identity.Name).AsEnumerable();
             }
 
+
             var Formlist = from form in ObjectFormData
-                           join obj in formdb.HomeObject.Where(x => x.CaseType == casetype) on form.FormID equals obj.FormID
+                           join obj in HomeObjectDB.Where(x => x.CaseType == casetype) on form.FormID equals obj.FormID
                            join lan in formdb.LandLord on obj.CaseID equals lan.CaseID into temp1
                            from land in temp1.DefaultIfEmpty()
                            join ten in formdb.Tenant on obj.CaseID equals ten.CaseID into temp2
@@ -140,83 +166,6 @@ namespace LiqunManagement.Controllers
 
             return View(model);
         }
-        //結案
-        /// <summary>
-        /// 以下編號為表單結案時，政府會配發編碼。
-        /// </summary>
-        /// <param name="FormID">表單編號</param>
-        /// <param name="CaseID">媒合編號</param>
-        /// <param name="LandlordID">房東編號</param>
-        /// <param name="TenantID">房客編號</param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult CaseManage(string oldCaseID, string CaseID, string LandlordID, string TenantID)
-        {
-            var IsAdmin = User.IsInRole("Admin");
-
-            var FormID = formdb.HomeObject.Where(x => x.CaseID == oldCaseID).Select(x => x.FormID).FirstOrDefault();
-            var FormData = formdb.ObjectForm.Where(x => x.FormID == FormID).FirstOrDefault();
-            if (FormData == null || (FormData.ProcessAccount != User.Identity.Name && !IsAdmin))
-            {
-                TempData["ErrorMessage"] = "操作失敗，無操作權限或查無此表單資料，若重複發生請聯繫系統管理員。";
-                return RedirectToAction("CaseManage", "Secretary");
-            }
-
-            //變更表單狀態
-            try
-            {
-                using (var context = new FormModels())
-                {
-                    //表單資料(設為結案)
-                    var existform = context.ObjectForm.Where(x => x.FormID == FormID).FirstOrDefault();
-                    var existhomeobject = context.HomeObject.Where(x => x.CaseID == oldCaseID).FirstOrDefault();
-                    var existlandlord = context.LandLord.Where(x => x.CaseID == oldCaseID).FirstOrDefault();
-                    var existtenant = context.Tenant.Where(x => x.CaseID == oldCaseID).FirstOrDefault();
-                    var existSecretary = context.Secretary.Where(x => x.CaseID == oldCaseID).FirstOrDefault();
-                    if(existform == null || existhomeobject == null || existlandlord == null || existtenant == null || existSecretary == null)
-                    {
-                        TempData["ErrorMessage"] = "資料未填寫完成，請檢查資料是否正確填寫。";
-                        return RedirectToAction("CaseManage", "Secretary");
-                    }
-
-                    existform.FormType = 2;
-
-                    //物件資料(變更媒合編號)
-                    existhomeobject.CaseID = CaseID;
-                    existhomeobject.CaseType = 1;
-
-                    //房東資料(變更媒合編號)
-                    existlandlord.CaseID = CaseID;
-
-                    //房客資料(變更媒合編號)
-                    existtenant.CaseID = CaseID;
-
-
-                    //房東編號
-                    //房客編號
-                    if (existSecretary == null)
-                    {
-                        TempData["ErrorMessage"] = "操作失敗，請確認秘書資料已填寫完成。";
-                        return RedirectToAction("CaseManage", "Secretary");
-                    }
-                    existSecretary.LandlordID = LandlordID;
-                    existSecretary.TenantID = TenantID;
-                    existSecretary.CaseID = CaseID;
-
-                    context.SaveChanges();
-                }
-
-            }
-            catch (Exception ex)
-            {
-                logger.Error("結案時發生錯誤:" + ex.ToString());
-                TempData["ErrorMessage"] = "操作失敗，儲存資料時系統錯誤，請告知系統管理員。";
-                return RedirectToAction("CaseManage", "Secretary", new { @formtype = 2, @casetype = 1 });
-            }
-
-            //TempData["ErrorMessage"] = "完成結案。";
-            return RedirectToAction("CaseManage", "Secretary", new { @formtype = 2, @casetype = 1 });
-        }
 
         //【總表】上傳掃描檔
         [HttpPost]
@@ -248,8 +197,19 @@ namespace LiqunManagement.Controllers
 
         #endregion
 
-        //【總表】新增續約
-        public ActionResult RenewContract(string CaseID, string renewType, string selectObjectForm, string selectlandlord, string selecttenant, string selectsecretary)
+        #region 合約動作
+
+        /// <summary>
+        /// 以下編號為表單結案時，政府會配發編碼。
+        /// </summary>
+        /// <param name="FormID">表單編號</param>
+        /// <param name="CaseID">媒合編號</param>
+        /// <param name="LandlordID">房東編號</param>
+        /// <param name="TenantID">房客編號</param>
+        /// <returns></returns>
+        //【操作合約】產生合約、續約 / 解約 / 作廢
+        [HttpPost]
+        public ActionResult CaseOperating(string CaseID, string createType, string selectObjectForm, string selectlandlord, string selecttenant, string selectsecretary)
         {
             var HomeObject = formdb.HomeObject.Where(x => x.CaseID == CaseID).FirstOrDefault();
             var ObjectForm = formdb.ObjectForm.Where(x => x.FormID == HomeObject.FormID).FirstOrDefault();
@@ -257,79 +217,186 @@ namespace LiqunManagement.Controllers
             var TenantData = formdb.Tenant.Where(x => x.CaseID == CaseID).FirstOrDefault();
             var Secretary = formdb.Secretary.Where(x => x.CaseID == CaseID).FirstOrDefault();
 
-            if(ObjectForm.FormType == 3)
-            {
-                TempData["ErrorMessage"] = "此表單已在續約中，請勿重複操作。";
-                return RedirectToAction("CaseManage", "Secretary", new { @formtype = 3, @casetype = 0 });
-            }
-            var guid = Guid.NewGuid().ToString();
-
             var formtype = 0;
             var casetype = 0;
             using (var context = new FormModels())
             {
-                if (renewType == "renew")
+                var existobjectform = context.ObjectForm.Where(x => x.FormID == HomeObject.FormID).FirstOrDefault();
+                var existhomeobject = context.HomeObject.Where(x => x.CaseID == HomeObject.CaseID).FirstOrDefault();
+                switch (createType)
                 {
-                    var existobjectform = context.ObjectForm.Where(x => x.FormID == HomeObject.FormID).FirstOrDefault();
-                    existobjectform.FormType = 3;       //續約中
+                    case "renew":
+                        if (ObjectForm.FormType == 3)
+                        {
+                            TempData["ErrorMessage"] = "此表單已在續約中，請勿重複操作。";
+                            return RedirectToAction("CaseManage", "Secretary", new { @formtype = 3, @casetype = 0 });
+                        }
+                        existobjectform.FormType = 3;    //0(業務填單中) 1(秘書審核中) 2(秘書審核完成) 3(續約中) -1(解約)
 
-                    var newCaseID = HomeObject.CaseID + "(續約中)";
-
-                    HomeObject.CaseType = 0;    //草稿
-                    HomeObject.CaseID = newCaseID;
-                    context.HomeObject.Add(HomeObject);
-
-                    Landlord.CaseID = newCaseID;
-                    context.LandLord.Add(Landlord);
-
-                    TenantData.CaseID = newCaseID;
-                    context.Tenant.Add(TenantData);
-
-                    Secretary.CaseID = newCaseID;
-                    Secretary.TenantID = "";
-                    context.Secretary.Add(Secretary);
-
-                    formtype = 3;
-                    casetype = 0;
-                }
-                else
-                {
-                    FormService formService = new FormService();
-                    var newFormID = formService.GetNewFormID();
-                    if (selectObjectForm != null)
-                    {
-                        ObjectForm.FormType = 1;
-                        ObjectForm.FormID = newFormID;
-                        context.ObjectForm.Add(ObjectForm);
+                        var newCaseID = HomeObject.CaseID + "(續約中)";        //(預設)媒合編號
 
                         HomeObject.CaseType = 1;    //草稿
-                        HomeObject.CaseID = newFormID;
+                        HomeObject.CaseID = newCaseID;
                         context.HomeObject.Add(HomeObject);
-                    }
-                    if (selectlandlord != null)
-                    {
-                        Landlord.CaseID = newFormID;
+
+                        Landlord.CaseID = newCaseID;
                         context.LandLord.Add(Landlord);
-                    }
-                    if (selecttenant != null)
-                    {
-                        TenantData.CaseID = newFormID;
+
+                        TenantData.CaseID = newCaseID;
                         context.Tenant.Add(TenantData);
-                    }
-                    if (selectsecretary != null)
-                    {
-                        Secretary.CaseID = newFormID;
+
+                        Secretary.CaseID = newCaseID;
                         Secretary.TenantID = "";
                         context.Secretary.Add(Secretary);
-                    }
-                    formtype = 1;
-                    casetype = 1;
-                }
 
+                        formtype = 3;
+                        casetype = 1;
+                        break;
+                    case "createnew":
+                        FormService formService = new FormService();
+                        var newFormID = formService.GetNewFormID();
+                        if (selectObjectForm != null)
+                        {
+                            ObjectForm.FormType = 1;    //0(業務填單中) 1(秘書審核中) 2(秘書審核完成) 3(續約中) -1(解約)
+                            ObjectForm.FormID = newFormID;
+                            context.ObjectForm.Add(ObjectForm);
+
+                            HomeObject.CaseType = 1;    //草稿
+                            HomeObject.CaseID = newFormID;
+                            context.HomeObject.Add(HomeObject);
+                        }
+                        if (selectlandlord != null)
+                        {
+                            Landlord.CaseID = newFormID;
+                            context.LandLord.Add(Landlord);
+                        }
+                        if (selecttenant != null)
+                        {
+                            TenantData.CaseID = newFormID;
+                            context.Tenant.Add(TenantData);
+                        }
+                        if (selectsecretary != null)
+                        {
+                            Secretary.CaseID = newFormID;
+                            Secretary.TenantID = "";
+                            context.Secretary.Add(Secretary);
+                        }
+                        formtype = 1;
+                        casetype = 1;
+                        break;
+                    case "terminate":
+                        ///解約
+                        existobjectform.FormType = -1;    //0(業務填單中) 1(秘書審核中) 2(秘書審核完成) 3(續約中) -1(解約)
+                        formtype = 2;   //已完成
+                        casetype = 1;   //已完成
+                        break;
+                    case "cancelnew":
+                        //作廢表單 
+                        existhomeobject.CaseType = -1;      //0(未完成)  1(完成物件房東房客) 2(完成整份合約) 3(續約中) -1(解約)
+                        existobjectform.FormType = -1;      //0(業務填單中) 1(秘書審核中) 2(秘書審核完成) 3(續約中) -1(解約)
+                        formtype = 2;   //已完成
+                        casetype = 1;   //已完成
+                        break;
+                    case "cancelrenew":
+                        //取消續約
+                        var renewals = existhomeobject.Renewals;
+                        existhomeobject.CaseType = -1;      //0(未完成)  1(完成物件房東房客) 2(完成整份合約) 3(續約中) -1(解約)
+                        existobjectform.FormType = renewals > 0 ? 3 : 2;      //0(業務填單中) 1(秘書審核中) 2(秘書審核完成) 3(續約中) -1(解約)
+                        formtype = 2;   //已完成
+                        casetype = 1;   //已完成
+                        break;
+                }
                 context.SaveChanges();
             }
-            return RedirectToAction("CaseManage", "Secretary", new { @formtype = 3, @casetype = 0 });
+            return RedirectToAction("CaseManage", "Secretary", new { @formtype = formtype, @casetype = casetype });
         }
+
+        [HttpPost]
+        //【結案】 新合約/續約待完成
+        public ActionResult FinishCase(string oldCaseID, string CompleteType, string CaseID, string LandlordID, string TenantID)
+        {
+            var IsAdmin = User.IsInRole("Admin");
+
+            var FormID = formdb.HomeObject.Where(x => x.CaseID == oldCaseID).Select(x => x.FormID).FirstOrDefault();
+            var FormData = formdb.ObjectForm.Where(x => x.FormID == FormID).FirstOrDefault();
+            if (FormData == null || (FormData.ProcessAccount != User.Identity.Name && !IsAdmin))
+            {
+                TempData["ErrorMessage"] = "操作失敗，無操作權限或查無此表單資料，若重複發生請聯繫系統管理員。";
+                return RedirectToAction("CaseManage", "Secretary");
+            }
+
+            //變更表單狀態
+            try
+            {
+                using (var context = new FormModels())
+                {
+                    //表單資料(設為結案)
+                    var existform = context.ObjectForm.Where(x => x.FormID == FormID).FirstOrDefault();
+                    var existhomeobject = context.HomeObject.Where(x => x.CaseID == oldCaseID).FirstOrDefault();
+                    var existlandlord = context.LandLord.Where(x => x.CaseID == oldCaseID).FirstOrDefault();
+                    var existtenant = context.Tenant.Where(x => x.CaseID == oldCaseID).FirstOrDefault();
+                    var existSecretary = context.Secretary.Where(x => x.CaseID == oldCaseID).FirstOrDefault();
+                    if (existform == null || existhomeobject == null || existlandlord == null || existtenant == null || existSecretary == null)
+                    {
+                        TempData["ErrorMessage"] = "資料未填寫完成，請檢查資料是否正確填寫。";
+                        return RedirectToAction("CaseManage", "Secretary");
+                    }
+
+                    //物件資料(變更媒合編號)
+                    existhomeobject.CaseID = CaseID;
+                    existhomeobject.CaseType = 2;
+
+                    //房東資料(變更媒合編號)
+                    existlandlord.CaseID = CaseID;
+
+                    //房客資料(變更媒合編號)
+                    existtenant.CaseID = CaseID;
+
+
+                    //房東編號
+                    //房客編號
+                    if (existSecretary == null)
+                    {
+                        TempData["ErrorMessage"] = "操作失敗，請確認秘書資料已填寫完成。";
+                        return RedirectToAction("CaseManage", "Secretary");
+                    }
+                    existSecretary.LandlordID = LandlordID;
+                    existSecretary.TenantID = TenantID;
+                    existSecretary.CaseID = CaseID;
+
+                    if (CompleteType == "new")
+                    {
+                        //完成新合約
+                        existform.FormType = 2;
+                    }
+                    else if (CompleteType == "renew")
+                    {
+                        //完成續約
+                        existform.FormType = 3;
+
+                        //找到舊【表單】，設為作廢
+                        var oldexisthomeobject = context.HomeObject.Where(x => x.FormID == FormID && x.CaseType > -1).FirstOrDefault();
+                        oldexisthomeobject.CaseType = -1;
+                    }
+
+
+                    context.SaveChanges();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                logger.Error("結案時發生錯誤:" + ex.ToString());
+                TempData["ErrorMessage"] = "操作失敗，儲存資料時系統錯誤，請告知系統管理員。";
+                return RedirectToAction("CaseManage", "Secretary", new { @formtype = 2, @casetype = 1 });
+            }
+
+            //TempData["ErrorMessage"] = "完成結案。";
+            return RedirectToAction("CaseManage", "Secretary", new { @formtype = 2, @casetype = 1 });
+        }
+
+        #endregion
+
         [HttpPost]
         [Obsolete]
         #region 匯出

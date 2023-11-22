@@ -19,10 +19,10 @@ namespace LiqunManagement.Models
         [StringLength(100)]
         public string CaseID { get; set; }
 
-        [StringLength(50)]
+        [StringLength(100)]
         public string LandlordID { get; set; }
 
-        [StringLength(50)]
+        [StringLength(100)]
         public string TenantID { get; set; }
 
         public int? qualifyRadio { get; set; }

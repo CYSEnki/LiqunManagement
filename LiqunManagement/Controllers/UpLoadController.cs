@@ -1497,6 +1497,22 @@ namespace LiqunManagement.Controllers
                                 context.SaveChanges();
                             }
                         }
+                        else
+                        {
+                            //表單已存在
+                            using (var context = new FormModels())
+                            {
+                                var exist = context.ObjectForm.Where(x => x.FormID == formid).FirstOrDefault();
+                                bool formactive = dr["FormActive"].ToString() == "1" ? true : false;    //是否為履約中
+                                var period = dr["ContractPeriod"].ToString();
+
+                                exist.FormType = (exist.FormType == 3 || period == "1" || period == "2") && formactive ? 3 : exist.FormType == 2 && formactive ? 2 : formactive ? 2 : -1;   //結案
+
+                                // 儲存更改到資料庫
+                                context.SaveChanges();
+                            }
+                        }
+
                         if (existHomeobject == null)
                         {
                             bool DoInsert = true;
@@ -1519,6 +1535,7 @@ namespace LiqunManagement.Controllers
                                 var insertdata = new HomeObject()
                                 {
                                     FormID = formid,
+                                    Renewals = Convert.ToInt32(dr["ContractPeriod"]),
                                     Phase = Convert.ToInt32(dr["Phase"]),
                                     CaseID = dr["CaseID"].ToString(),
                                     CaseType = 1,
@@ -1571,6 +1588,18 @@ namespace LiqunManagement.Controllers
                                     context.SaveChanges();
                                 }
 
+                            }
+                        }
+                        else
+                        {
+                            //房屋物件已存在
+                            using (var context = new FormModels())
+                            {
+                                var exist = context.HomeObject.Where(x => x.CaseID == caseid).FirstOrDefault();
+                                exist.Renewals = Convert.ToInt32(dr["ContractPeriod"]);
+                                exist.CaseType = dr["FormActive"].ToString() == "0" ? -1 : 2;   //結案
+                                // 儲存更改到資料庫
+                                context.SaveChanges();
                             }
                         }
                     }

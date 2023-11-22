@@ -1,12 +1,16 @@
-﻿@model LiqunManagement.ViewModels.FormViewModels
+﻿<!--審查案件(秘書)-->
+@model LiqunManagement.ViewModels.FormViewModels
 
 @{
-    ViewBag.Title = "審查案件";
+    ViewBag.Title = "秘書-審查案件";
     ViewBag.Controller = "Secretary";
     ViewBag.Branches = "CaseManage_Secretary";
     Layout = "~/Views/Shared/smartadmin_Layout.cshtml";
 
     var ErrorMessage = ViewBag.ErrorMessage != null ? ViewBag.ErrorMessage : "";
+
+    var FormType = ViewBag.FormType;    //合約狀態
+    var CaseType = ViewBag.CaseType;    //表單狀態
 }
 @*select2*@
 <link href="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/css/formplugins/select2/select2.bundle.css" rel="stylesheet" />
@@ -43,25 +47,30 @@
                         <div id="dt-basic-example_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <div class="row">
                                 <h5 class="frame-heading ml-4 mr-4">表單狀態</h5>
-                                @using (Html.BeginForm("CaseManage", "Secretary", FormMethod.Get, new { @id = "formtypeSelect", @casetype = 2 }))
+                                @using (Html.BeginForm("CaseManage", "Secretary", FormMethod.Get, new { @id = "formtypeSelect" }))
                                 {
                                     {
-                                        if (ViewBag.FormType != 1)
+                                        if (CaseType != 1)
                                         {
                                             <div class="frame-wrap">
+                                                <!--formtype = 2 (合約狀態:秘書審核完成)-->
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" class="custom-control-input" id="formtype_0" name="formtype" value="2" @(ViewBag.FormType == 2 ? "checked" : "")>
+                                                    <input type="radio" class="custom-control-input radiochange" id="formtype_0" name="formtype" value="2" @(ViewBag.FormType == 2 ? "checked" : "")>
                                                     <label class="custom-control-label" for="formtype_0">履行中</label>
                                                 </div>
+                                                <!--formtype = 3 (合約狀態:續約中)-->
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" class="custom-control-input" id="formtype_1" name="formtype" value="3" @(ViewBag.FormType == 3 ? "checked" : "")>
+                                                    <input type="radio" class="custom-control-input radiochange" id="formtype_1" name="formtype" value="3" @(ViewBag.FormType == 3 ? "checked" : "")>
                                                     <label class="custom-control-label" for="formtype_1">續約中</label>
                                                 </div>
+                                                <!--formtype = -1 (合約狀態:解約)-->
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" class="custom-control-input" id="formtype_2" name="formtype" value="-1" @(ViewBag.FormType == -1 ? "checked" : "")>
+                                                    <input type="radio" class="custom-control-input radiochange" id="formtype_2" name="formtype" value="-1" @(ViewBag.FormType == -1 ? "checked" : "")>
                                                     <label class="custom-control-label" for="formtype_2">已解約</label>
                                                 </div>
                                             </div>
+                                            <!--casetype = 2 (表單狀態:已完成)-->
+                                            <input type="number" name="casetype" value="2" hidden />
                                         }
                                     }
                                 }
@@ -72,7 +81,10 @@
                                         <thead class="bg-warning-200">
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 76.2px;" aria-sort="ascending" aria-label="CustomerID: activate to sort column descending">@(ViewBag.FormType == 1 ? "表單編號" : "媒合編號")</th>
-                                                <th class="sorting" tabindex="0" aria-controls="dt-basic-example" aria-label="Name: activate to sort column ascending">表單處理人員</th>
+                                                @if (ViewBag.Role == "Admin")
+                                                {
+                                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" aria-label="Name: activate to sort column ascending">表單處理人員</th>
+                                                }
                                                 <th class="sorting" tabindex="0" aria-controls="dt-basic-example" aria-label="Name: activate to sort column ascending">業務姓名</th>
                                                 <th class="sorting" tabindex="0" aria-controls="dt-basic-example" aria-label="CustomerEmail: activate to sort column ascending">物件地址</th>
                                                 <th class="sorting" tabindex="0" aria-controls="dt-basic-example" aria-label="CustomerCVV: activate to sort column ascending">簽約日</th>
@@ -91,7 +103,10 @@
                                                     {
                                                         <tr role="row" class="odd">
                                                             <td class="sorting_1 dtr-control @(item.ExistSecretaryForm ? "" : "text-danger")">@(ViewBag.FormType == 1 ? item.FormID : item.CaseID)</td>
-                                                            <td>@item.ProcessName</td>
+                                                            @if (ViewBag.Role == "Admin")
+                                                            {
+                                                                <td>@item.ProcessName</td>
+                                                            }
                                                             <td>@item.AgentName</td>
                                                             <td>@item.Address</td>
                                                             <td>@item.SignDate.AddYears(-1911).ToString("yyy年MM月dd日")</td>
@@ -115,22 +130,46 @@
                                                                         @switch (item.FormType)
                                                                         {
                                                                             case 1:
-                                                                            case 3:
-                                                                                @*秘書處理中*@
+                                                                                <!--formtype = 1 (合約狀態:秘書審核中)-->
+                                                                                @*秘書審核中(待完成)*@
                                                                                 <a class="dropdown-item" onclick="exportfile('@item.CaseID')">文件匯出</a>
                                                                                 <a class="dropdown-item" onclick="exportjson('@item.CaseID')">匯出實價登入</a>
-                                                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#FinishModal" data-caseid="@item.CaseID">結案</a>
+                                                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#FinishModal" data-caseid="@item.CaseID" data-type="new" data>結案</a>
+                                                                                <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#RenewModal" data-caseid="@item.CaseID" data-type="cancelnew">作廢表單</a>
                                                                                 break;
                                                                             case 2:
+                                                                                <!--formtype = 2 (合約狀態:秘書審核完成)-->
                                                                                 @*已結案(總表)*@
                                                                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UploadScanModal" data-formid="@item.FormID">上傳掃描檔案</a>
-                                                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#RenewModal" data-caseid="@item.CaseID" data-renewtype="renew">新增續約</a>
-                                                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#RenewModal" data-caseid="@item.CaseID" data-renewtype="new">產生新表單</a>
+                                                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#RenewModal" data-caseid="@item.CaseID" data-type="renew">新增續約</a>
+                                                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#RenewModal" data-caseid="@item.CaseID" data-type="createnew">產生新表單</a>
+                                                                                <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#RenewModal" data-caseid="@item.CaseID" data-type="terminate">解約</a>
+                                                                                break;
+                                                                            case 3:
+                                                                                <!--formtype = 3 (合約狀態:續約中)-->
+                                                                                @*秘書審核中(續約中)*@
+                                                                                if (item.CaseType == 1)
+                                                                                {
+                                                                                    <!--待續約完成-->
+                                                                                    <a class="dropdown-item" onclick="exportfile('@item.CaseID')">文件匯出</a>
+                                                                                    <a class="dropdown-item" onclick="exportjson('@item.CaseID')">匯出實價登入</a>
+                                                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#FinishModal" data-caseid="@item.CaseID" data-type="renew">完成續約</a>
+                                                                                    <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#RenewModal" data-caseid="@item.CaseID" data-type="cancelrenew">取消續約</a>
+                                                                                }
+                                                                                else if (item.CaseType == 2)
+                                                                                {
+                                                                                    <!--續約中-->
+                                                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UploadScanModal" data-formid="@item.FormID">上傳掃描檔案</a>
+                                                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#RenewModal" data-caseid="@item.CaseID" data-type="renew">新增續約</a>
+                                                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#RenewModal" data-caseid="@item.CaseID" data-type="createnew">產生新表單</a>
+                                                                                    <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#RenewModal" data-caseid="@item.CaseID" data-type="terminate">解約</a>
+                                                                                }
                                                                                 break;
                                                                             case -1:
+                                                                                <!--formtype = -1 (合約狀態:已解約)-->
                                                                                 @*已結案(總表)(停效)*@
                                                                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UploadScanModal" data-formid="@item.FormID">上傳掃描檔案</a>
-                                                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#RenewModal" data-caseid="@item.CaseID" data-renewtype="new">產生新表單</a>
+                                                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#RenewModal" data-caseid="@item.CaseID" data-type="createnew">產生新表單</a>
                                                                                 break;
                                                                         }
                                                                     </div>
@@ -158,33 +197,33 @@
                                                                         {
     @*select2*@
     <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/formplugins/select2/select2.bundle.js"></script>
-                                                                            @*sweetalert2*@
+    @*sweetalert2*@
     <script src="~/Content/sweetalert2/sweetalert2.min.js"></script>
     <script src="~/Content/smartadmin-package-4.5.1/smartadmin-html-full/dist/js/datagrid/datatables/datatables.bundle.js"></script>
     <script>
-                                                                                $(document).ready(function () {
-                                                                                //ErrorMessage
-                                                                                if ('@ErrorMessage' !== '') {
-                                                                                    if ('@ErrorMessage' == 'Successed') {
-                                                                                        const Toast = Swal.mixin({
-                                                                                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 6000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                                                                                        })
-                    Toast.fire({
-                        icon: 'success',
-                        title: '表單儲存成功'
-                    })
-                }
-                else {
-                alert("錯誤訊息:" + '@ErrorMessage');
-                }
+        $(document).ready(function () {
+            //ErrorMessage
+            if ('@ErrorMessage' !== '') {
+                if ('@ErrorMessage' == 'Successed') {
+                    const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 6000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                                                                                    })
+                Toast.fire({
+                    icon: 'success',
+                    title: '表單儲存成功'
+                })
+            }
+            else {
+            alert("錯誤訊息:" + '@ErrorMessage');
+            }
             }
             if ('@ViewBag.DownLoadMessage' !== '') {
                 alert("錯誤訊息:" + '@ViewBag.DownLoadMessage');
@@ -227,7 +266,7 @@
                     }
                 });
 
-            var radioElement = document.querySelectorAll('input[name="formtype"]');
+            var radioElement = document.querySelectorAll('.radiochange');
             radioElement.forEach(function (radio) {
                 radio.addEventListener('change', function () {
                     $('#formtypeSelect').submit();
@@ -252,38 +291,56 @@
         $('#FinishModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget)
             var caseid = button.data('caseid')
+            var type = button.data('type');
 
             var modal = $(this)
             modal.find('#ModalCaseID').val(caseid)
+            modal.find('#CompleteType').val(type)
         })
 
         //新增續約
         $('#RenewModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget)
             var caseid = button.data('caseid')
-            var type = button.data('renewtype');
-            
+            var type = button.data('type');
+            var modal = $(this)
             // 取得所有帶有 "myCheckbox" 類別的 checkbox
             var checkboxes = document.querySelectorAll('.renewcheckbox');
             if (type == 'renew') {
-
-                // 迭代所有 checkbox，設置為 checked 並 readonly
+                modal.find('#RenewModalTitle').text('新增續約')
+                modal.find('#RenewModalTitle').removeClass('text-danger');
+                modal.find('#modalformselect').show();
                 checkboxes.forEach(function (checkbox) {
                     checkbox.checked = true;
-                    checkbox.setAttribute('readonly', 'readonly');
+                    checkbox.disabled = true;
                 });
             }
-            else {
-                // 迭代所有 checkbox，設置為 checked 並 readonly
+            else if (type == 'createnew') {
+                modal.find('#RenewModalTitle').text('創建新表單')
+                modal.find('#RenewModalTitle').removeClass('text-danger');
+                modal.find('#modalformselect').show();
                 checkboxes.forEach(function (checkbox) {
                     checkbox.checked = false;
-                    checkbox.removeAttribute('readonly');
+                    checkbox.disabled = false;
                 });
             }
-
-            var modal = $(this)
+            else if (type == 'terminate') {
+                modal.find('#RenewModalTitle').text('解約')
+                modal.find('#RenewModalTitle').addClass('text-danger');
+                modal.find('#modalformselect').hide();
+            }
+            else if (type == 'cancelnew') {
+                modal.find('#RenewModalTitle').text('作廢表單')
+                modal.find('#RenewModalTitle').addClass('text-danger');
+                modal.find('#modalformselect').hide();
+            }
+            else if (type == 'cancelrenew') {
+                modal.find('#RenewModalTitle').text('取消續約')
+                modal.find('#RenewModalTitle').addClass('text-danger');
+                modal.find('#modalformselect').hide();
+            }
             modal.find('#RenewCaseID').val(caseid)
-            modal.find('#renewtype').val(type)
+            modal.find('#createType').val(type)
         })
 
         //上傳檔案
@@ -429,8 +486,15 @@
     @Html.Hidden("Path", "-1", new { @id = "hidpath" })
 }
 
+@*【作廢】取消新合約/取消續約*@
+@using (Html.BeginForm("Download", "Secretary", FormMethod.Post, new { @id = "HiddenCancelForm", @formtype = FormType, @casetype = CaseType }))
+{
+    @Html.Hidden("CaseID", "-1", new { @id = "jqCaseID" })
+    @Html.Hidden("FileAlias", "-1", new { @id = "hidfilealias" })
+}
 
-<!-- Close the Case -->
+
+<!--完成合約/完成續約 (結案)-->
 <div class="modal fade" id="FinishModal" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -445,8 +509,9 @@
                     <span aria-hidden="true"><i class="fal fa-times"></i></span>
                 </button>
             </div>
-            @using (Html.BeginForm("CaseManage", "Secretary", FormMethod.Post, new { @formtype = ViewBag.FormType, @casetype = ViewBag.CaseType }))
+            @using (Html.BeginForm("FinishCase", "Secretary", FormMethod.Post, new { @formtype = FormType, @casetype = CaseType }))
             {
+                <input type="text" id="CompleteType" name="CompleteType" class="form-control" value="" hidden>
                 <div class="modal-body">
                     @*表單編號*@
                     <div class="form-group">
@@ -530,7 +595,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">
-                    <span class="font-weight-bolder">結案資料填寫</span>
+                    <span class="font-weight-bolder" id="RenewModalTitle">結案資料填寫</span>
                     <small class="m-0 text-muted">
                         提交前請再次檢查填寫是否正確。
                     </small>
@@ -539,7 +604,7 @@
                     <span aria-hidden="true"><i class="fal fa-times"></i></span>
                 </button>
             </div>
-            @using (Html.BeginForm("RenewContract", "Secretary", FormMethod.Post))
+            @using (Html.BeginForm("CaseOperating", "Secretary", FormMethod.Post))
             {
                 <div class="modal-body">
                     @*表單編號*@
@@ -549,13 +614,13 @@
                     </div>
                     @*表單編號*@
                     <div class="form-group">
-                        <input type="text" id="renewtype" name="renewType" class="form-control" value="" hidden>
+                        <input type="text" id="createType" name="createType" class="form-control" value="" hidden>
                     </div>
                     @*選擇要建立的資料*@
-                    <div class="frame-wrap">
+                    <div id="modalformselect" class="frame-wrap">
                         <div class="demo">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="selectObjectForm" value="true"  name="selectObjectForm" checked >
+                                <input type="checkbox" class="custom-control-input renewcheckbox" id="selectObjectForm" value="true" name="selectObjectForm" checked>
                                 <label class="custom-control-label" for="selectObjectForm">物件資料</label>
                             </div>
                             <div class="custom-control custom-checkbox">
@@ -563,11 +628,11 @@
                                 <label class="custom-control-label" for="selectlandlord">房東資料</label>
                             </div>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input renewcheckbox" value="true"  id="selecttenant" name="selecttenant">
+                                <input type="checkbox" class="custom-control-input renewcheckbox" value="true" id="selecttenant" name="selecttenant">
                                 <label class="custom-control-label" for="selecttenant">房客資料</label>
                             </div>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input renewcheckbox" value="true"  id="selectsecretary" name="selectsecretary">
+                                <input type="checkbox" class="custom-control-input renewcheckbox" value="true" id="selectsecretary" name="selectsecretary">
                                 <label class="custom-control-label" for="selectsecretary">秘書填寫</label>
                             </div>
                         </div>
@@ -575,7 +640,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">離開</button>
-                    <button type="submit" class="btn btn-primary">上傳</button>
+                    <button type="submit" class="btn btn-primary">提交</button>
                 </div>
                 <div class="form-group" id="filenameSpace">
                 </div>

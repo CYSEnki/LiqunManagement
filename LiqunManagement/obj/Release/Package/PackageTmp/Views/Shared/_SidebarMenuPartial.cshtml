@@ -94,12 +94,12 @@
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("CaseProcess", "Sales")" title="Process" data-filter-tags="application intel introduction">
+                        <a href="@Url.Action("CaseProcess", "Sales", new { formtype = 1, casetype = 1})" title="Process" data-filter-tags="application intel introduction">
                             <span class="nav-link-text">待結案區</span>
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("CaseManage", "Sales", new { formtype = 2, casetype = 0})" title="CaseManage_Sales" data-filter-tags="application intel privacy">
+                        <a href="@Url.Action("CaseManage", "Sales", new { formtype = 2, casetype = 2})" title="CaseManage_Sales" data-filter-tags="application intel privacy">
                             <span class="nav-link-text">查詢案件</span>
                         </a>
                     </li>
@@ -121,12 +121,12 @@
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("CaseManage", "Secretary", new { formtype = 3, casetype = 0})" title="Manage" data-filter-tags="application intel introduction">
+                        <a href="@Url.Action("CaseManage", "Secretary", new { formtype = 3, casetype = 1})" title="Manage" data-filter-tags="application intel introduction">
                             <span class="nav-link-text" data-i18n="nav.theme_settings">續約專區</span>
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("CaseManage", "Secretary", new { formtype = 2})" title="Process" data-filter-tags="application intel introduction">
+                        <a href="@Url.Action("CaseManage", "Secretary", new { formtype = 2, casetype = 2})" title="Process" data-filter-tags="application intel introduction">
                             <span class="nav-link-text" data-i18n="nav.theme_settings">總表</span>
                         </a>
                     </li>

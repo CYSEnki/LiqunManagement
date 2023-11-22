@@ -21,6 +21,8 @@ namespace LiqunManagement.Models
 
         public int? CaseType { get; set; }
 
+        public int? Renewals { get; set; }
+
         public int? Phase { get; set; }
 
         public int? objecttype { get; set; }

@@ -264,7 +264,6 @@ E:\力群\LiqunManagement\LiqunManagement\bin\zh-Hant\System.Web.Razor.resources
 E:\力群\LiqunManagement\LiqunManagement\bin\zh-Hant\System.Web.WebPages.resources.dll
 E:\力群\LiqunManagement\LiqunManagement\bin\zh-Hant\System.Web.WebPages.Deployment.resources.dll
 E:\力群\LiqunManagement\LiqunManagement\bin\zh-Hant\System.Web.WebPages.Razor.resources.dll
-E:\力群\LiqunManagement\LiqunManagement\obj\Debug\LiqunManagement.csproj.AssemblyReference.cache
 E:\力群\LiqunManagement\LiqunManagement\obj\Debug\LiqunManagement.csproj.CoreCompileInputs.cache
 E:\力群\LiqunManagement\LiqunManagement\obj\Debug\LiqunManagement.csproj.CopyComplete
 E:\力群\Liqun\LiqunManagement\LiqunManagement\obj\Debug\LiqunManagement.csproj.CoreCompileInputs.cache

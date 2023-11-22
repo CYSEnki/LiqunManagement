@@ -59,8 +59,8 @@ namespace LiqunManagement.Controllers
             }
 
             //因目前系統內casetype都等於1
-            if (casetype == 0)
-                casetype = 1;
+            //if (casetype == 0)
+            //    casetype = 1;
 
             var Formlist = from form in ObjectFormData
                            join obj in formdb.HomeObject.Where(x => x.CaseType == casetype) on form.FormID equals obj.FormID
@@ -192,7 +192,7 @@ namespace LiqunManagement.Controllers
                 ObjectFormData = ObjectFormData.Where(x => x.AgentAccount == User.Identity.Name);
             }
 
-            var Formlist = (from form in ObjectFormData
+            var Formlist = from form in ObjectFormData
                            join obj in formdb.HomeObject.Where(x => x.CaseType == casetype) on form.FormID equals obj.FormID
                            join lan in formdb.LandLord on obj.CaseID equals lan.CaseID into temp1
                            from land in temp1.DefaultIfEmpty()
@@ -207,7 +207,9 @@ namespace LiqunManagement.Controllers
                                SignDate = (DateTime)obj.signdate,
                                Landlord = land != null ? land.Name : null,
                                Tenant = tena != null ? tena.Name : null,
-                           }).ToList();
+
+                               CaseID = (string)obj.CaseID,
+                           };
             //ViewBag.Formlist = Formlist;
 
             var model = new FormViewModels
